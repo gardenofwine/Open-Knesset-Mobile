@@ -1,3 +1,16 @@
 .x-list-item {
   direction :rtl;
 }
+
+.partySize {
+	text-align:left;
+	left : 0;
+}
+
+.partyName{
+	width : 100%;
+}
+
+.partyName div{
+	display : inline;
+}

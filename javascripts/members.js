@@ -1,3 +1,4 @@
+/*
 var initialMembers = [
     {
         "discipline": 100.0,
@@ -5030,3 +5031,4 @@ var initialMembers = [
         "bills_approved": 3
     }
 ];
+*/

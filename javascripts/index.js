@@ -4,9 +4,11 @@ ListDemo = new Ext.Application({
     launch: function() {
 
         ListDemo.detailToolbar = new Ext.Toolbar({
-            items: [{
+            items: [
+				{xtype: 'spacer'},
+				{
                 text: 'back',
-                ui: 'back',
+                ui: 'forward',
                 handler: function() {
                     ListDemo.Viewport.setActiveItem('listwrapper', {type:'slide', direction:'right'});
                 }
@@ -15,30 +17,22 @@ ListDemo = new Ext.Application({
 
         ListDemo.detailPanel = new Ext.Panel({
             id: 'detailpanel',
-            tpl: 'Hello, {firstName}!',
+            tpl: 'Hello, {name}!',
             dockedItems: [ListDemo.detailToolbar]
         });
 
         ListDemo.listPanel = new Ext.List({
             id: 'indexlist',
             store: ListDemo.PartyStore,
-            itemTpl: '<div class="contact" dir="rtl">{name}</div>',
-            grouped: true,
+            itemTpl: '<div class="partyName"><div>{name}</div><div class="partySize">{members.length}</div></div>',
+//            grouped: true,
 			listeners:{
 				itemtap: function( that, index, item, e) {
 					var record = that.store.getAt(index);
-	                var name = record.data.name;
-    	            ListDemo.detailToolbar.setTitle(name);
-        	        ListDemo.detailPanel.update(record.data);
-            	    ListDemo.Viewport.setActiveItem('detailpanel');
+					gotoParty(record);
 	            }
             },
-            onItemDisclosure: function(record) {
-	                var name = record.data.name;
-    	            ListDemo.detailToolbar.setTitle(name);
-        	        ListDemo.detailPanel.update(record.data);
-            	    ListDemo.Viewport.setActiveItem('detailpanel');
-            }
+            onItemDisclosure: gotoParty
         });
 
         ListDemo.listWrapper = new Ext.Panel({
@@ -47,7 +41,7 @@ ListDemo = new Ext.Application({
             items: [ListDemo.listPanel],
             dockedItems: [{
                 xtype: 'toolbar',
-                title: 'Bond girls'
+                title: 'מפלגות'
             }]
         });
 
@@ -61,4 +55,11 @@ ListDemo = new Ext.Application({
     }
 });
 
+
+function gotoParty(record){
+    var name = record.data.name;
+    ListDemo.detailToolbar.setTitle(name);
+    ListDemo.detailPanel.update(record.data);
+    ListDemo.Viewport.setActiveItem('detailpanel');
+}
 
