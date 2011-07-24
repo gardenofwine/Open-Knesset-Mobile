@@ -1,8 +1,16 @@
+
 OKnesset = new Ext.Application({
     name: "OKnesset",
 
     launch: function() {
-
+        this.launched = true;
+        this.mainLaunch();
+	},
+    mainLaunch: function() {
+        if (navigator.platform != "MacIntel" && !this.launched) {
+			return;
+		}
+        console.log('mainLaunch');
         OKnesset.memberListToolbar = new Ext.Toolbar({
             items: [
 				{xtype: 'spacer'},
@@ -10,7 +18,7 @@ OKnesset = new Ext.Application({
                 text: 'back',
                 ui: 'forward',
                 handler: function() {
-                    OKnesset.Viewport.setActiveItem('partyListWrapper', {type:'slide', direction:'right'});
+                    OKnesset.Viewport.setActiveItem('partyListWrapper', {type:'slide', direction:'left'});
                 }
             }]
         });
@@ -22,13 +30,13 @@ OKnesset = new Ext.Application({
 			store: OKnesset.MemberStore
         });
 
+
 	 	OKnesset.memberListWrapper = new Ext.Panel({
             id: 'memberListWrapper',
             layout: 'fit',
             items: [OKnesset.memberList],
             dockedItems: OKnesset.memberListToolbar
         });
-
 
         OKnesset.listPanel = new Ext.List({
             id: 'indexlist',
@@ -60,16 +68,16 @@ OKnesset = new Ext.Application({
             cardSwitchAnimation: 'slide',
             items: [OKnesset.partyListWrapper, OKnesset.memberListWrapper]
         });
-
     }
 });
 
 
 function gotoParty(record){
-	console.log(JSON.stringify(record.data));
+	//console.log(JSON.stringify(record.data));
     var name = record.data.name;
     OKnesset.memberListToolbar.setTitle(name);
 	OKnesset.MemberStore.loadData(record.data.members,false);
-    OKnesset.Viewport.setActiveItem('memberListWrapper');
+    OKnesset.Viewport.setActiveItem('memberListWrapper', {type:'slide', direction:'right'});
 }
 
+document.addEventListener("deviceready", OKnesset.mainLaunch, false);

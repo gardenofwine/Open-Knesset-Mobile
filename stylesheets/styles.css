@@ -2,6 +2,9 @@
   direction :rtl;
 }
 
+body{
+	background-color: red;
+}
 .partySize {
 	float : left;
 	padding-left : 1em;
