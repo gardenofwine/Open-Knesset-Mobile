@@ -34,10 +34,10 @@ var partyNameArray;
 })(jQuery);
 
 Ext.regModel('Party', {
-    fields: ['id']
+    fields: ['name']
 });
 
-ListDemo.PartyStore = new Ext.data.Store({
+OKnesset.PartyStore = new Ext.data.Store({
     model: 'Party',
     //sorters: 'name',
 	sorters: [
@@ -52,3 +52,12 @@ ListDemo.PartyStore = new Ext.data.Store({
     data: initialData
 });
 
+Ext.regModel('Member', {
+    fields: ['name']
+});
+
+OKnesset.MemberStore = new Ext.data.Store({
+    model: 'Member',
+//    data: initialData,
+    sorters: 'name'
+});

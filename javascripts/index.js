@@ -1,29 +1,38 @@
-ListDemo = new Ext.Application({
-    name: "ListDemo",
+OKnesset = new Ext.Application({
+    name: "OKnesset",
 
     launch: function() {
 
-        ListDemo.detailToolbar = new Ext.Toolbar({
+        OKnesset.memberListToolbar = new Ext.Toolbar({
             items: [
 				{xtype: 'spacer'},
 				{
                 text: 'back',
                 ui: 'forward',
                 handler: function() {
-                    ListDemo.Viewport.setActiveItem('listwrapper', {type:'slide', direction:'right'});
+                    OKnesset.Viewport.setActiveItem('partyListWrapper', {type:'slide', direction:'right'});
                 }
             }]
         });
 
-        ListDemo.detailPanel = new Ext.Panel({
-            id: 'detailpanel',
+        OKnesset.memberList = new Ext.List({
+            id: 'memberList',
             tpl: 'Hello, {name}!',
-            dockedItems: [ListDemo.detailToolbar]
+            itemTpl: '<div>{name}</div>',
+			store: OKnesset.MemberStore
         });
 
-        ListDemo.listPanel = new Ext.List({
+	 	OKnesset.memberListWrapper = new Ext.Panel({
+            id: 'memberListWrapper',
+            layout: 'fit',
+            items: [OKnesset.memberList],
+            dockedItems: OKnesset.memberListToolbar
+        });
+
+
+        OKnesset.listPanel = new Ext.List({
             id: 'indexlist',
-            store: ListDemo.PartyStore,
+            store: OKnesset.PartyStore,
             itemTpl: '<div class="partyName"><div>{name}</div><div class="partySize">{members.length}</div></div>',
 //            grouped: true,
 			listeners:{
@@ -35,21 +44,21 @@ ListDemo = new Ext.Application({
             onItemDisclosure: gotoParty
         });
 
-        ListDemo.listWrapper = new Ext.Panel({
-            id: 'listwrapper',
+        OKnesset.partyListWrapper = new Ext.Panel({
+            id: 'partyListWrapper',
             layout: 'fit',
-            items: [ListDemo.listPanel],
+            items: [OKnesset.listPanel],
             dockedItems: [{
                 xtype: 'toolbar',
                 title: 'מפלגות'
             }]
         });
 
-        ListDemo.Viewport = new Ext.Panel ({
+        OKnesset.Viewport = new Ext.Panel ({
             fullscreen: true,
             layout: 'card',
             cardSwitchAnimation: 'slide',
-            items: [ListDemo.listWrapper, ListDemo.detailPanel]
+            items: [OKnesset.partyListWrapper, OKnesset.memberListWrapper]
         });
 
     }
@@ -57,9 +66,10 @@ ListDemo = new Ext.Application({
 
 
 function gotoParty(record){
+	console.log(JSON.stringify(record.data));
     var name = record.data.name;
-    ListDemo.detailToolbar.setTitle(name);
-    ListDemo.detailPanel.update(record.data);
-    ListDemo.Viewport.setActiveItem('detailpanel');
+    OKnesset.memberListToolbar.setTitle(name);
+	OKnesset.MemberStore.loadData(record.data.members,false);
+    OKnesset.Viewport.setActiveItem('memberListWrapper');
 }
 

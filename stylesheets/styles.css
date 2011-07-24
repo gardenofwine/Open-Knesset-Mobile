@@ -3,14 +3,12 @@
 }
 
 .partySize {
-	text-align:left;
-	left : 0;
-}
-
-.partyName{
-	width : 100%;
+	float : left;
+	padding-left : 1em;
 }
 
 .partyName div{
 	display : inline;
 }
+
+
