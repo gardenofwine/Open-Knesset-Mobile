@@ -11,6 +11,7 @@ OKnesset = new Ext.Application({
 			return;
 		}
         console.log('mainLaunch');
+
         OKnesset.memberListToolbar = new Ext.Toolbar({
             items: [
 				{xtype: 'spacer'},
@@ -23,11 +24,25 @@ OKnesset = new Ext.Application({
             }]
         });
 
+		OKnesset.memberPanel = new Ext.Panel({
+			id: 'memberPanel',
+            layout: 'fit',
+            tpl: memberPageHtml,
+            dockedItems: OKnesset.memberListToolbar
+		});
+
         OKnesset.memberList = new Ext.List({
             id: 'memberList',
             tpl: 'Hello, {name}!',
             itemTpl: '<div>{name}</div>',
-			store: OKnesset.MemberStore
+			store: OKnesset.MemberStore,
+			listeners:{
+				itemtap: function( that, index, item, e) {
+					var record = that.store.getAt(index);
+					gotoMember(record);
+	            }
+            },
+            onItemDisclosure: gotoMember
         });
 
 
@@ -42,7 +57,6 @@ OKnesset = new Ext.Application({
             id: 'indexlist',
             store: OKnesset.PartyStore,
             itemTpl: '<div class="partyName"><div>{name}</div><div class="partySize">{members.length}</div></div>',
-//            grouped: true,
 			listeners:{
 				itemtap: function( that, index, item, e) {
 					var record = that.store.getAt(index);
@@ -66,7 +80,7 @@ OKnesset = new Ext.Application({
             fullscreen: true,
             layout: 'card',
             cardSwitchAnimation: 'slide',
-            items: [OKnesset.partyListWrapper, OKnesset.memberListWrapper]
+            items: [OKnesset.partyListWrapper, OKnesset.memberListWrapper, OKnesset.memberPanel]
         });
     }
 });
@@ -78,6 +92,12 @@ function gotoParty(record){
     OKnesset.memberListToolbar.setTitle(name);
 	OKnesset.MemberStore.loadData(record.data.members,false);
     OKnesset.Viewport.setActiveItem('memberListWrapper', {type:'slide', direction:'right'});
+}
+
+function gotoMember(record){
+    var member = record.data;
+	OKnesset.memberPanel.update(member);
+    OKnesset.Viewport.setActiveItem('memberPanel', {type:'slide', direction:'right'});
 }
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);
