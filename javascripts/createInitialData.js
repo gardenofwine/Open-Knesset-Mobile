@@ -12,6 +12,7 @@ var slimDataMap;
 	    memberIdArray = new Array();
 
 	    $.each(members, function(index, value){
+			// TODO - do not add memebers that are not "current"
 	        if (typeof value == "undefined") {
 	            console.log("member index " + index + " is undefined.");
 	            return;

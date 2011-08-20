@@ -10,7 +10,16 @@ OKnesset = new Ext.Application({
         if (navigator.platform != "MacIntel" && !this.launched) {
 			return;
 		}
-        console.log('mainLaunch');
+
+	   	mainLaunchTime = new Date();
+		function printLoadingTimes(){
+			console.log('mainLaunch (' + mainLaunchTime.toString()+ ').  Phonegap load time ' + (phonegapEnd.getTime() - phonegapStart.getTime()) / 1000 + ' total scripts load time' + (scriptLoadEndTime.getTime() - scriptLoadStartTime.getTime()) / 1000);
+			console.log('### jquery ('+ jqueryLoadEndTime.toString()+') load time ' + (jqueryLoadEndTime.getTime() - jqueryLoadStartTime.getTime())/1000);
+			console.log('### sencha ('+ senchaLoadEndTime.toString() +')load time ' + (senchaLoadEndTime.getTime() - senchaLoadStartTime.getTime())/1000);
+			console.log('### oknesset ('+ oknessetLoadEndTime.toString() +')load time ' + (oknessetLoadEndTime.getTime() - oknessetLoadStartTime.getTime())/1000);
+		}
+		printLoadingTimes();
+
 
         OKnesset.memberListToolbar = new Ext.Toolbar({
             items: [
@@ -40,7 +49,7 @@ OKnesset = new Ext.Application({
 			id: 'memberPanel',
             layout: 'fit',
             tpl: memberPageHtml,
-            dockedItems: OKnesset.memberPanelToolbar
+            dockedItems: [OKnesset.memberPanelToolbar]
 		});
 
         OKnesset.memberList = new Ext.List({
@@ -68,7 +77,7 @@ OKnesset = new Ext.Application({
         OKnesset.listPanel = new Ext.List({
             id: 'indexlist',
             store: OKnesset.PartyStore,
-            itemTpl: '<div class="partyName"><div>{name}</div><div class="partySize">{members.length}</div></div>',
+            itemTpl: '<div class="partyName">{name}<div class="partySize">{members.length}</div></div>',
 			listeners:{
 				itemtap: function( that, index, item, e) {
 					var record = that.store.getAt(index);
@@ -95,11 +104,15 @@ OKnesset = new Ext.Application({
             items: [OKnesset.partyListWrapper, OKnesset.memberListWrapper, OKnesset.memberPanel]
         });
 
+	   mainLaunchTimeEnd = new Date();
+	   console.log('sencha touch load time ' + (mainLaunchTimeEnd.getTime() - mainLaunchTime.getTime()) / 1000);
+
 
 		// load full data
 		$.getScript('javascripts/partyData.js', function(data, textStatus){
    			if (textStatus == 'success'){
-	   			console.log('Load was performed.');
+			   loadTime = new Date();
+	   			console.log('Full data load was performed in ' + (loadTime.getTime() - mainLaunchTimeEnd.getTime()) / 1000);
 				OKnesset.PartyStore.loadData(partyData,false);
 				OKnesset.Viewport.getActiveItem().items.getAt(0).refresh();
 			} else {
@@ -127,5 +140,6 @@ function gotoMember(record){
     OKnesset.memberPanelToolbar.items.getAt(1).setText(OKnesset.memberListToolbar.title);
     OKnesset.Viewport.setActiveItem('memberPanel', {type:'slide', direction:'right'});
 }
+
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);
