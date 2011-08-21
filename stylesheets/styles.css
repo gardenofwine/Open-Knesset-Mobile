@@ -17,7 +17,17 @@
 	padding-left : 1em;
 }
 
+#memberImagePanel div{
+	 direction :rtl;
+}
+
 .memberImage td, .memberInfo td{
 	text-align : right;
+	vertical-align: top;
+}
+
+.memberInfo .justify{
+	direction : rtl;
+	text-align: justify;
 }
 

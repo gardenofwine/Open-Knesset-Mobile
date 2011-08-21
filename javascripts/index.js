@@ -49,6 +49,8 @@ OKnesset = new Ext.Application({
             id: 'memberBillList',
             itemTpl: '<div>{title}</div>',
 			store: OKnesset.MemberBillsStore,
+			layout : 'fit',
+			flex : 3,
 			listeners:{
 				itemtap: function( that, index, item, e) {
 					var record = that.store.getAt(index);
@@ -58,19 +60,37 @@ OKnesset = new Ext.Application({
             onItemDisclosure: gotoMember
         });
 
-
-		OKnesset.memberPanel = new Ext.Panel({
-			id: 'memberPanel',
+		OKnesset.memberImagePanel = new Ext.Panel({
+			id: 'memberImagePanel',
             layout: 'fit',
+			flex : 1.5,
+            tpl: '<img src={img_url} width="75px" height="110px"></img>'
+		});
+
+		OKnesset.memberInfoPanel = new Ext.Panel({
+			id: 'memberInfoPanel',
+			flex : 4,
+			scroll : 'vertical',
             tpl: memberPageHtml
 		});
 
+		OKnesset.memberPanel = new Ext.Panel({
+			id: 'memberPanel',
+            layout: 'hbox',
+			flex :1,
+			items: [OKnesset.memberInfoPanel, OKnesset.memberImagePanel]
+		});
+
+
 		OKnesset.memberPanelWrapper = new Ext.Panel({
 			id: 'memberPanelWrapper',
-            layout: 'fit',
+			layout : {
+     			type: 'vbox',
+        		align: 'stretch'
+    		},
             tpl: "Bills",
-			items: OKnesset.memberBillList,
-            dockedItems: [OKnesset.memberPanelToolbar, OKnesset.memberPanel]
+			items: [OKnesset.memberPanel, OKnesset.memberBillList],
+            dockedItems: [OKnesset.memberPanelToolbar]
 		});
 
         OKnesset.memberList = new Ext.List({
@@ -132,6 +152,7 @@ OKnesset = new Ext.Application({
 		Ext.Ajax.request({
 			url: 'javascripts/partyData.js',
 			callback: function(options, success, response){
+				// for some reason, Ext.Ajax returns success == false when the local request returns
 				if (response.responseText != null && response.responseText.length > 0) {
 					loadTime = new Date();
 					eval(response.responseText);
@@ -170,8 +191,9 @@ function gotoParty(record){
 
 function gotoMember(record){
     var member = record.data;
-	OKnesset.memberPanel.update(member);
-	console.log(member.bills);
+	OKnesset.memberImagePanel.update(member);
+	OKnesset.memberInfoPanel.update(member);
+//	console.log(member.bills);
 	OKnesset.MemberBillsStore.loadData(member.bills);
     OKnesset.memberPanelToolbar.setTitle(member.name);
 	// back button
