@@ -11,52 +11,13 @@
 	display : inline;
 }
 
-/* Design */
-img.center {   display: block;   margin-left: auto;   margin-right: auto; }
-
-h3[class="billsTitle"]{
-	-webkit-margin-before: 0.2em;
-	-webkit-margin-after: -0.5em;
-	margin-top: 0.2em;
-	margin-bottom: -0.5em;
+/* Member page Design */
+.memberImage, .memberInfo {
+	float : right;
+	padding-left : 1em;
 }
 
-.billsPyramid {
-	float :left;
+.memberImage td, .memberInfo td{
+	text-align : right;
 }
-
-.billsLabels {
-	height : 209px;
-	float:right;
-}
-.billsPyramid span {
-   position: absolute;
-   right: 0;
-   width: 100%;
-   text-align: center;
-}
-.pyramid1 {
-   top: 80%;
-}
-.pyramid2 {
-   top: 60%;
-}
-.pyramid3 {
-   top: 35%;
-}
-.pyramid4 {
-   top: 15%;
-}
-
-.billsLabels span{
-   position: absolute;
-   text-align: right;
-   right:0px;
-}
-
-.aParent div {
-	position: relative;
-}
-
-
 

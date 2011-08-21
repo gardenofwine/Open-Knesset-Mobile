@@ -4,16 +4,12 @@ Ext.regModel('Party', {
 
 OKnesset.PartyStore = new Ext.data.Store({
     model: 'Party',
-    //sorters: 'name',
 	sorters: [
 		 	{
 			property: 'members.length',
 			direction: 'ASC'
 			}
 	],
-//	getGroupString : function(record) {
-//        return record.get('name')[0];
-//    },
     data: slimData
 });
 
@@ -23,6 +19,15 @@ Ext.regModel('Member', {
 
 OKnesset.MemberStore = new Ext.data.Store({
     model: 'Member',
-//    data: initialData,
     sorters: 'name'
 });
+
+Ext.regModel('MemberBills', {
+    fields: ['title']
+});
+
+OKnesset.MemberBillsStore = new Ext.data.Store({
+    model: 'MemberBills',
+    sorters: 'title'
+});
+
