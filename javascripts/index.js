@@ -45,13 +45,19 @@ OKnesset = new Ext.Application({
             }]
         });
 
+		OKnesset.memberEmptyBillList = {
+            id: 'memberEmptyBillList',
+			html : "אין הצעות חוק פרטיות",
+			dock : "bottom"
+		};
+//        OKnesset.memberEmptyBillList = new Ext.Panel(memberEmptyBillList);
+
         OKnesset.memberBillList = new Ext.List({
             id: 'memberBillList',
             itemTpl: '<div>{title}</div>',
 			store: OKnesset.MemberBillsStore,
 			layout : 'fit',
 			grouped : true,
-			flex : 2,
 			listeners:{
 				itemtap: function( that, index, item, e) {
 //					OKnesset.memberInfoPanel.flex = 2;
@@ -62,6 +68,14 @@ OKnesset = new Ext.Application({
             },
             onItemDisclosure: gotoMember
         });
+
+		OKnesset.memberBillListWrapper = new Ext.Panel({
+			id: 'memberBillListWrapper',
+			flex : 2,
+		    layout: 'card',
+//            cardSwitchAnimation: 'slide',
+            items: [OKnesset.memberBillList, OKnesset.memberEmptyBillList]
+		});
 
 		OKnesset.memberImagePanel = new Ext.Panel({
 			id: 'memberImagePanel',
@@ -102,7 +116,14 @@ OKnesset = new Ext.Application({
             tpl: "Bills",
 			listeners: {
 				afterlayout : {
-					fn: function(){
+					fn: function(comp){
+
+						if (OKnesset.MemberBillsStore.getCount() == 0) {
+							OKnesset.memberBillListWrapper.setActiveItem('memberEmptyBillList');
+						} else {
+							OKnesset.memberBillListWrapper.setActiveItem('memberBillList');
+						}
+
 //						console.log("*** memberPanelAfterLAyout memberPanel height" + OKnesset.memberPanel.getHeight());
 //						console.log("** image width " + OKnesset.memberImagePanel.getWidth() + "image height " + OKnesset.memberImagePanel.getHeight() + " member panel width" + Ext.DomQuery.select("#memberPanel")[0].style.width + "(" + OKnesset.memberPanel.getWidth() +" element.scrollHeight="+Ext.DomQuery.select("#memberPanel")[0].scrollHeight +
 //						" element.clientHeight=" + Ext.DomQuery.select("#memberPanel")[0].clientHeight);
@@ -110,8 +131,6 @@ OKnesset = new Ext.Application({
 						var realImageHeight = OKnesset.memberPanel.getHeight();
 						var realImageWidth = 75/110 * realImageHeight;
 //						realHeight = realHeight.replace("px","");
-//						/,/g
-//						OKnesset.memberInfoPanel.setHeight(realHeight);
 						// Set the member image height to the actual panel height (rescaling if necessary)
 						OKnesset.memberInfoPanel.setWidth(OKnesset.memberPanel.getWidth() - realImageWidth);
 						OKnesset.memberImagePanel.setHeight(realImageHeight);
@@ -120,7 +139,7 @@ OKnesset = new Ext.Application({
 					}
 				}
 			},
-			items: [OKnesset.memberPanel, OKnesset.memberBillList],
+			items: [OKnesset.memberPanel, OKnesset.memberBillListWrapper],
             dockedItems: [OKnesset.memberPanelToolbar]
 		});
 
@@ -131,12 +150,6 @@ OKnesset = new Ext.Application({
 			listeners:{
 				itemtap: function( that, index, item, e) {
 					var record = that.store.getAt(index);
-					// if there are no bills
-					if (record.data.bills.length == 0){
-						OKnesset.memberPanelWrapper.items.replace(OKnesset.memberPanelWrapper.items.getKey(OKnesset.memberPanelWrapper.items.getAt(1)),new Ext.Panel({html: 'Testing'}));
-					} else {
-
-					}
 					gotoMember(record);
 	            }
             },
@@ -234,9 +247,9 @@ function gotoParty(record){
 
 function gotoMember(record){
     var member = record.data;
+
 	OKnesset.memberImagePanel.update(member);
 	OKnesset.memberInfoPanel.update(member);
-//	console.log(member.bills);
 	OKnesset.MemberBillsStore.loadData(member.bills);
     OKnesset.memberPanelToolbar.setTitle(member.name);
 	// back button
