@@ -50,13 +50,14 @@ OKnesset = new Ext.Application({
             itemTpl: '<div>{title}</div>',
 			store: OKnesset.MemberBillsStore,
 			layout : 'fit',
+			grouped : true,
 			flex : 2,
 			listeners:{
 				itemtap: function( that, index, item, e) {
 //					OKnesset.memberInfoPanel.flex = 2;
-					console.log("** image height " + OKnesset.memberInfoPanel.getHeight() + " dom height" + Ext.DomQuery.select("#memberPanel")[0].style.height);
-					OKnesset.memberInfoPanel.setHeight(117);
-					OKnesset.memberPanel.doLayout();
+//					console.log("** image height " + OKnesset.memberInfoPanel.getHeight() + " dom height" + Ext.DomQuery.select("#memberPanel")[0].style.height);
+//					OKnesset.memberInfoPanel.setHeight(117);
+//					OKnesset.memberPanel.doLayout();
 	            }
             },
             onItemDisclosure: gotoMember
@@ -102,15 +103,16 @@ OKnesset = new Ext.Application({
 			listeners: {
 				afterlayout : {
 					fn: function(){
-						console.log("*** memberPanelAfterLAyout memberPanel height" + OKnesset.memberPanel.getHeight());
-						console.log("** image width " + OKnesset.memberImagePanel.getWidth() + "image height " + OKnesset.memberImagePanel.getHeight() + " member panel width" + Ext.DomQuery.select("#memberPanel")[0].style.width + "(" + OKnesset.memberPanel.getWidth() +" element.scrollHeight="+Ext.DomQuery.select("#memberPanel")[0].scrollHeight +
-						" element.clientHeight=" + Ext.DomQuery.select("#memberPanel")[0].clientHeight);
+//						console.log("*** memberPanelAfterLAyout memberPanel height" + OKnesset.memberPanel.getHeight());
+//						console.log("** image width " + OKnesset.memberImagePanel.getWidth() + "image height " + OKnesset.memberImagePanel.getHeight() + " member panel width" + Ext.DomQuery.select("#memberPanel")[0].style.width + "(" + OKnesset.memberPanel.getWidth() +" element.scrollHeight="+Ext.DomQuery.select("#memberPanel")[0].scrollHeight +
+//						" element.clientHeight=" + Ext.DomQuery.select("#memberPanel")[0].clientHeight);
 						// TODO calculate only once!
 						var realImageHeight = OKnesset.memberPanel.getHeight();
 						var realImageWidth = 75/110 * realImageHeight;
 //						realHeight = realHeight.replace("px","");
-						/,/g
+//						/,/g
 //						OKnesset.memberInfoPanel.setHeight(realHeight);
+						// Set the member image height to the actual panel height (rescaling if necessary)
 						OKnesset.memberInfoPanel.setWidth(OKnesset.memberPanel.getWidth() - realImageWidth);
 						OKnesset.memberImagePanel.setHeight(realImageHeight);
 						OKnesset.memberImagePanel.setWidth(realImageWidth);
@@ -129,6 +131,12 @@ OKnesset = new Ext.Application({
 			listeners:{
 				itemtap: function( that, index, item, e) {
 					var record = that.store.getAt(index);
+					// if there are no bills
+					if (record.data.bills.length == 0){
+						OKnesset.memberPanelWrapper.items.replace(OKnesset.memberPanelWrapper.items.getKey(OKnesset.memberPanelWrapper.items.getAt(1)),new Ext.Panel({html: 'Testing'}));
+					} else {
+
+					}
 					gotoMember(record);
 	            }
             },
@@ -211,9 +219,15 @@ OKnesset = new Ext.Application({
 
 function gotoParty(record){
 	//console.log(JSON.stringify(record.data));
-    var name = record.data.name;
-    OKnesset.memberListToolbar.setTitle(name);
-    OKnesset.memberListToolbar.items.getAt(1).setText("מפלגות");
+	var name = record.data.name;
+	OKnesset.memberListToolbar.setTitle(name);
+	OKnesset.memberListToolbar.items.getAt(1).setText("מפלגות");
+	if (OKnesset.memberList.scroller) {
+		OKnesset.memberList.scroller.scrollTo({
+			x: 0,
+			y: 0
+		});
+	}
 	OKnesset.MemberStore.loadData(record.data.members,false);
     OKnesset.Viewport.setActiveItem('memberListWrapper', {type:'slide', direction:'right'});
 }

@@ -40,3 +40,6 @@
 }
 */
 
+#memberBillList .x-list-header {
+	direction: rtl;
+}
