@@ -45,12 +45,12 @@ OKnesset = new Ext.Application({
             }]
         });
 
-		OKnesset.memberEmptyBillList = {
-            id: 'memberEmptyBillList',
-			html : "אין הצעות חוק פרטיות",
-			dock : "bottom"
-		};
-//        OKnesset.memberEmptyBillList = new Ext.Panel(memberEmptyBillList);
+		OKnesset.memberBillsTitle = new Ext.Panel({
+			id: 'memberBillsTitle',
+            layout: 'fit',
+            tpl: '<tpl if="billNumber &gt; 0"><h2>הצעות חוק פרטיות</h2></tpl>\
+				  <tpl if="billNumber == 0"><h2>אין הצעות חוק פרטיות</h2></tpl>'
+		});
 
         OKnesset.memberBillList = new Ext.List({
             id: 'memberBillList',
@@ -74,7 +74,8 @@ OKnesset = new Ext.Application({
 			flex : 2,
 		    layout: 'card',
 //            cardSwitchAnimation: 'slide',
-            items: [OKnesset.memberBillList, OKnesset.memberEmptyBillList]
+            items: [OKnesset.memberBillList],
+			dockedItems: [OKnesset.memberBillsTitle]
 		});
 
 		OKnesset.memberImagePanel = new Ext.Panel({
@@ -119,9 +120,9 @@ OKnesset = new Ext.Application({
 					fn: function(comp){
 
 						if (OKnesset.MemberBillsStore.getCount() == 0) {
-							OKnesset.memberBillListWrapper.setActiveItem('memberEmptyBillList');
+							OKnesset.memberBillList.setVisible(false);
 						} else {
-							OKnesset.memberBillListWrapper.setActiveItem('memberBillList');
+							OKnesset.memberBillList.setVisible(true);
 						}
 
 //						console.log("*** memberPanelAfterLAyout memberPanel height" + OKnesset.memberPanel.getHeight());
@@ -249,6 +250,7 @@ function gotoMember(record){
     var member = record.data;
 
 	OKnesset.memberImagePanel.update(member);
+	OKnesset.memberBillsTitle.update({billNumber: member.bills.length});
 	OKnesset.memberInfoPanel.update(member);
 	OKnesset.MemberBillsStore.loadData(member.bills);
     OKnesset.memberPanelToolbar.setTitle(member.name);
