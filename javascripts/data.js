@@ -28,7 +28,10 @@ Ext.regModel('MemberBills', {
 
 OKnesset.MemberBillsStore = new Ext.data.Store({
     model: 'MemberBills',
-    sorters: 'stage',
+    sorters: {
+			property: 'stage',
+			direction: 'DESC'
+			},
 	getGroupString : function(record) {
         return record.get('stage_text');
     }

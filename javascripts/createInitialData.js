@@ -4,12 +4,14 @@ var memberIdArray;
 var partyNameArray;
 var slimData;
 var slimDataMap;
+var stringImageListForDownload;
 
 (function($){
 
 	function parseMembers(members){
 	    memberMap = {};
 	    memberIdArray = new Array();
+		stringImageListForDownload = "";
 
 	    $.each(members, function(index, value){
 			// TODO - do not add memebers that are not "current"
@@ -25,6 +27,8 @@ var slimDataMap;
 				name : value.name
 			};
 			slimDataMap[value.party].members.push(slimMember);
+
+			stringImageListForDownload += "-O\nurl = \"" + value.img_url + "\"\n";
 	    });
 	}
 
@@ -42,6 +46,7 @@ var slimDataMap;
 
 		localStorage.setItem("slimData", JSON.stringify(slimData));
 		localStorage.setItem("PartyData", JSON.stringify(partyNameArray));
+		// DEBUG HERE
 	}
 
 // ***

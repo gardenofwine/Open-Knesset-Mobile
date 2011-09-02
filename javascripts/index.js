@@ -48,8 +48,8 @@ OKnesset = new Ext.Application({
 		OKnesset.memberBillsTitle = new Ext.Panel({
 			id: 'memberBillsTitle',
             layout: 'fit',
-            tpl: '<tpl if="billNumber &gt; 0"><h2>הצעות חוק פרטיות</h2></tpl>\
-				  <tpl if="billNumber == 0"><h2>אין הצעות חוק פרטיות</h2></tpl>'
+            tpl: '<tpl if="billNumber &gt; 0"><h2 class="memberBillsTitle x-toolbar-dark">הצעות חוק פרטיות</h2></tpl>\
+				  <tpl if="billNumber == 0"><h2 class="memberBillsTitle x-toolbar-dark">אין הצעות חוק פרטיות</h2></tpl>'
 		});
 
         OKnesset.memberBillList = new Ext.List({
@@ -249,7 +249,9 @@ function gotoParty(record){
 function gotoMember(record){
     var member = record.data;
 
-	OKnesset.memberImagePanel.update(member);
+	OKnesset.memberImagePanel.update({
+		img_url: "images/members/" + member.img_url.substring(member.img_url.lastIndexOf('/')+1)
+	});
 	OKnesset.memberBillsTitle.update({billNumber: member.bills.length});
 	OKnesset.memberInfoPanel.update(member);
 	OKnesset.MemberBillsStore.loadData(member.bills);
@@ -258,6 +260,5 @@ function gotoMember(record){
     OKnesset.memberPanelToolbar.items.getAt(1).setText(OKnesset.memberListToolbar.title);
     OKnesset.Viewport.setActiveItem('memberPanelWrapper', {type:'slide', direction:'right'});
 }
-
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);

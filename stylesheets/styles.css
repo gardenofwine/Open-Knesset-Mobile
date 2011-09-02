@@ -39,6 +39,11 @@
 	text-align: justify;
 }
 */
+.memberBillsTitle {
+	color: white;
+   	text-align: center;
+
+}
 
 #memberBillList .x-list-header {
 	direction: rtl;
