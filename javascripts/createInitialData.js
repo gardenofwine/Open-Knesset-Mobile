@@ -21,6 +21,11 @@ var stringImageListForDownload;
 	        }
 	        memberIdArray.push(value);
 	        memberMap[value.id] = value;
+
+//			$.each(value.bills, function(index, value){
+//				if (parseInt(value.stage) < 4){
+//				}
+//			});
 			partyMap[value.party].members.push(value);
 
 			var slimMember = {
