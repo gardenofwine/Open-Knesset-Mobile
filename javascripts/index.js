@@ -328,6 +328,14 @@ function gotoMember(record){
 	OKnesset.memberInfoPanel.update(member);
 	OKnesset.MemberBillsStore.loadData(member.bills);
     OKnesset.memberPanelToolbar.setTitle(member.name);
+	// scroll bill list up
+	if (OKnesset.memberBillList.scroller) {
+		OKnesset.memberBillList.scroller.scrollTo({
+			x: 0,
+			y: 0
+		});
+	}
+
 	// back button
     OKnesset.memberPanelToolbar.items.getAt(1).setText(OKnesset.memberListToolbar.title);
     OKnesset.Viewport.setActiveItem('memberPanelWrapper', {type:'slide', direction:'right'});
