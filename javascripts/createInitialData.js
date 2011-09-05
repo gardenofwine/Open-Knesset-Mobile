@@ -6,15 +6,16 @@ var slimData;
 var slimDataMap;
 var stringImageListForDownload;
 
-(function($){
+var OKnessetParser = new function(){
+	var callbackFunction = null;
 
 	function parseMembers(members){
 	    memberMap = {};
 	    memberIdArray = new Array();
-		stringImageListForDownload = "";
+	    stringImageListForDownload = "";
 
-	    $.each(members, function(index, value){
-			// TODO - do not add memebers that are not "current"
+	    Ext.each(members, function(value, index){
+	        // TODO - do not add memebers that are not "current"
 	        if (typeof value == "undefined") {
 	            console.log("member index " + index + " is undefined.");
 	            return;
@@ -22,92 +23,93 @@ var stringImageListForDownload;
 	        memberIdArray.push(value);
 	        memberMap[value.id] = value;
 
-//			$.each(value.bills, function(index, value){
-//				if (parseInt(value.stage) < 4){
-//				}
-//			});
-			partyMap[value.party].members.push(value);
+	        //			$.each(value.bills, function(index, value){
+	        //				if (parseInt(value.stage) < 4){
+	        //				}
+	        //			});
+	        partyMap[value.party].members.push(value);
 
-			var slimMember = {
-				name : value.name
-			};
-			slimDataMap[value.party].members.push(slimMember);
+	        var slimMember = {
+	            name: value.name
+	        };
+	        slimDataMap[value.party].members.push(slimMember);
 
-			stringImageListForDownload += "-O\nurl = \"" + value.img_url + "\"\n";
+	        stringImageListForDownload += "-O\nurl = \"" + value.img_url + "\"\n";
 	    });
 	}
 
-	function onMemberComplete(XMLHttpRequest, textStatus){
-		console.log("onMemeberComplete " + textStatus);
+	function onMemberComplete(options, success, response){
+	    console.log("onMemeberComplete " + success);
 	}
 
-	function onMemberFailure(XMLHttpRequest, textStatus, errorThrown){
-		console.warn("onMemberFailure " + textStatus);
+	function onMemberFailure(result, request){
+	    console.warn("onMemberFailure " + result.responseText);
 	}
 
-	function storeMembers(members){
-		console.log("storeMember");
-		parseMembers(JSON.parse(members));
+	function storeMembers(result, request){
+	    console.log("storeMembers");
+	    parseMembers(JSON.parse(result.responseText));
 
-		localStorage.setItem("slimData", JSON.stringify(slimData));
-		localStorage.setItem("PartyData", JSON.stringify(partyNameArray));
-		// DEBUG HERE
+
+		callbackFunction(partyNameArray, slimData);
 	}
 
-// ***
-// Parties
-// ***
+	// ***
+	// Parties
+	// ***
 	function parseParties(parties){
-		partyNameArray = parties;
-		partyMap = {};
-		slimData = new Array();
-		slimDataMap = {};
-	    $.each(parties, function(index, value){
-			var slimParty = {
-				name : value.name,
-				members : []
-			};
-			slimDataMap[""+value.name] = slimParty;
-			slimData.push(slimParty);
-			partyMap[""+value.name] = value;
-			partyMap[""+value.name].members = new Array();
+	    partyNameArray = parties;
+	    partyMap = {};
+	    slimData = new Array();
+	    slimDataMap = {};
+		Ext.each(parties, function(value, index){
+	        var slimParty = {
+	            name: value.name,
+	            members: []
+	        };
+	        slimDataMap["" + value.name] = slimParty;
+	        slimData.push(slimParty);
+	        partyMap["" + value.name] = value;
+	        partyMap["" + value.name].members = new Array();
+	    });
+	}
+
+	function onPartyComplete(options, success, response){
+	    console.log("onPartyComplete " + success);
+	}
+
+	function onPartyFailure(result, request){
+	    console.warn("onPartyFailure");
+	}
+
+	function storeParties( result, request){
+	    console.log("storeParties");
+	    parseParties(JSON.parse(result.responseText));
+
+		Ext.Ajax.request({
+		    url: 'http://www.oknesset.org/api/member/',
+			success : storeMembers,
+			timeout : 60000,
+			failure : onMemberFailure,
+		    callback: onMemberComplete
 		});
 	}
 
-	function onPartyComplete(XMLHttpRequest, textStatus){
-		console.log("onPartyComplete " + textStatus);
-	}
+/*********
+ * API function
+ */
+	this.loadData = function(callback){
 
-	function onPartyFailure(XMLHttpRequest, textStatus, errorThrown){
-		console.warn("onPartyFailure");
-	}
+		callbackFunction = callback;
 
-	function storeParties(parties){
-		console.log("storeParties");
-		parseParties(JSON.parse(parties));
-
-		$.ajax({
-			url: "http://www.oknesset.org/api/member/",
-			timeout: 60000,
-			dataType: "text",
-			cache: false,
-			error: onMemberFailure,
-			complete: onMemberComplete,
-			success: storeMembers
+		Ext.Ajax.request({
+		    url: 'http://www.oknesset.org/api/party/',
+			success : storeParties,
+			failure : onPartyFailure,
+		    callback: onPartyComplete
 		});
+
 	}
 
-	$.ajax({
-		url: "http://www.oknesset.org/api/party/",
-		timeout: 30000,
-		dataType: "text",
-		cache: false,
-		error: onPartyFailure,
-		complete: onPartyComplete,
-		success: storeParties
-	});
+}
 
-
-//	parseParties(initialParties);
-//	parseMembers(initialMembers);
-})(jQuery);

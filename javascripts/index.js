@@ -57,12 +57,12 @@ OKnesset = new Ext.Application({
             }]
         });
 
-		OKnesset.billPanel = new Ext.Panel({
-			id: 'billPanel',
-			layout : 'fit',
-			tpl : billPanelHtml,
-            dockedItems: [OKnesset.billPanelToolbar]
-		});
+//		OKnesset.billPanel = new Ext.Panel({
+//			id: 'billPanel',
+//			layout : 'fit',
+//			tpl : billPanelHtml,
+//            dockedItems: [OKnesset.billPanelToolbar]
+//		});
 
 
 		OKnesset.memberBillsTitle = new Ext.Panel({
@@ -213,9 +213,16 @@ OKnesset = new Ext.Application({
 	   mainLaunchTimeEnd = new Date();
 	   console.log('sencha touch load time ' + (mainLaunchTimeEnd.getTime() - mainLaunchTime.getTime()) / 1000);
 
-
-		// load full data
-		Ext.Ajax.request({
+		if (localStorage.getItem("PartyData") != null){
+			// load data from localstorage (most updated locally)
+			setTimeout(function(){
+							var partyData = JSON.parse(localStorage.getItem("PartyData"));
+							updatePartyData(partyData);
+							updateFullDataFromWeb();
+						}, 0);
+		} else {
+			// load initial data (data shipped with the application)
+			Ext.Ajax.request({
 			url: 'javascripts/partyData.js.jpg',
 			callback: function(options, success, response){
 				// for some reason, Ext.Ajax returns success == false when the local request returns
@@ -223,14 +230,20 @@ OKnesset = new Ext.Application({
 					loadTime = new Date();
 					eval(response.responseText);
 					console.log('Full data load was performed in ' + (loadTime.getTime() - mainLaunchTimeEnd.getTime()) / 1000);
-					OKnesset.PartyStore.loadData(partyData, false);
-					OKnesset.Viewport.getActiveItem().items.getAt(0).refresh();
+					// partyData is evaluated from the
+					var partyDataString = JSON.stringify(partyData);
+					updatePartyData(partyData);
+					localStorage.setItem("PartyDataDate", partyDataDate.getTime());
+					localStorage.setItem("PartyData", partyDataString);
+					updateFullDataFromWeb();
 				}
 				else {
 					console.log('Full data load failure (' + JSON.stringify(response) + ') with status code ' + response.status);
 				}
 			}
 		});
+	}
+
 
 //		$.getScript('javascripts/partyData.js', function(data, textStatus){
 //   			if (textStatus == 'success'){
@@ -245,6 +258,50 @@ OKnesset = new Ext.Application({
     }
 });
 
+function updateFullDataFromWeb(){
+	var partyDataDate = new Date(parseInt(localStorage.getItem("PartyDataDate")));
+	var now = new Date();
+
+	// 24 hours is 1000*60*60*24 = 86,400,000
+	console.log("** now="+now.getTime() + " PartyDataDate= " + partyDataDate.getTime());
+	console.log("** now="+dateToString(now) + " PartyDataDate= " + dateToString(partyDataDate));
+	if (now.getTime() > partyDataDate.getTime() + 86400000) {
+		console.log("Need to load data from Oknesset");
+
+		Ext.Ajax.request({
+			url: 'javascripts/createInitialData.js',
+			callback: function(options, success, response){
+				// for some reason, Ext.Ajax returns success == false when the local request returns
+				if (response.responseText != null && response.responseText.length > 0) {
+//					loadTime = new Date();
+					eval(response.responseText);
+					console.log('Oknesset web parser loaded');
+					OKnessetParser.loadData(updatePartyData);
+					var now = new Date();
+			    	localStorage.setItem("PartyDataDate", now.getTime());
+				}
+				else {
+					console.log('Oknesset web parser failure (' + JSON.stringify(response) + ') with status code ' + response.status);
+				}
+			}
+		});
+
+	}
+}
+
+function dateToString(date){
+	var month = date.getMonth() + 1;
+	var day = date.getDate();
+	var year = date.getFullYear();
+	return "" + month + "/" + day + "/" + year;
+}
+
+// update the party store with the full data (replace the slimData)
+function updatePartyData(fullPartyData) {
+	console.log("-=updatePartyData=-");
+	OKnesset.PartyStore.loadData(fullPartyData, false);
+	OKnesset.Viewport.getActiveItem().items.getAt(0).refresh();
+}
 
 function gotoParty(record){
 	//console.log(JSON.stringify(record.data));

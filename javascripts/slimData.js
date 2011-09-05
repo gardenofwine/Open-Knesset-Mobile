@@ -1,3 +1,4 @@
+var slimDataDate = new Date(2011,8,15);
 var slimData = [{
     "name": "קדימה",
     "members": [{
