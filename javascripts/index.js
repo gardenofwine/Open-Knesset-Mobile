@@ -45,9 +45,30 @@ OKnesset = new Ext.Application({
             }]
         });
 
+        OKnesset.billPanelToolbar = new Ext.Toolbar({
+            items: [
+				{xtype: 'spacer'},
+				{
+                text: 'back',
+                ui: 'forward',
+                handler: function() {
+                    OKnesset.Viewport.setActiveItem('memberPanelWrapper', {type:'slide', direction:'left'});
+                }
+            }]
+        });
+
+		OKnesset.billPanel = new Ext.Panel({
+			id: 'billPanel',
+			layout : 'fit',
+			tpl : billPanelHtml,
+            dockedItems: [OKnesset.billPanelToolbar]
+		});
+
+
 		OKnesset.memberBillsTitle = new Ext.Panel({
 			id: 'memberBillsTitle',
             layout: 'fit',
+			dock: 'bottom',
             tpl: '<tpl if="billNumber &gt; 0"><h2 class="memberBillsTitle x-toolbar-dark">הצעות חוק פרטיות</h2></tpl>\
 				  <tpl if="billNumber == 0"><h2 class="memberBillsTitle x-toolbar-dark">אין הצעות חוק פרטיות</h2></tpl>'
 		});
@@ -58,25 +79,15 @@ OKnesset = new Ext.Application({
 			store: OKnesset.MemberBillsStore,
 			layout : 'fit',
 			grouped : true,
+			flex : 1.5,
 			listeners:{
 				itemtap: function( that, index, item, e) {
-//					OKnesset.memberInfoPanel.flex = 2;
-//					console.log("** image height " + OKnesset.memberInfoPanel.getHeight() + " dom height" + Ext.DomQuery.select("#memberPanel")[0].style.height);
-//					OKnesset.memberInfoPanel.setHeight(117);
-//					OKnesset.memberPanel.doLayout();
+					var record = that.store.getAt(index);
+					gotoBill(record);
 	            }
             },
             onItemDisclosure: gotoMember
         });
-
-		OKnesset.memberBillListWrapper = new Ext.Panel({
-			id: 'memberBillListWrapper',
-			flex : 2,
-		    layout: 'card',
-//            cardSwitchAnimation: 'slide',
-            items: [OKnesset.memberBillList],
-			dockedItems: [OKnesset.memberBillsTitle]
-		});
 
 		OKnesset.memberImagePanel = new Ext.Panel({
 			id: 'memberImagePanel',
@@ -92,7 +103,7 @@ OKnesset = new Ext.Application({
 //			flex : 4,
 //			height : '110',
 //			scroll : 'vertical',
-            tpl: memberPageHtml
+            tpl: memberPanelHtml
 		});
 
 		OKnesset.memberPanel = new Ext.Panel({
@@ -102,6 +113,10 @@ OKnesset = new Ext.Application({
 			flex :1,
 			items: [OKnesset.memberInfoPanel],
 			dockedItems: [{
+        		xtype: 'panel',
+        		dock: 'bottom',
+        		items: [OKnesset.memberBillsTitle]
+    		}, {
         		xtype: 'panel',
         		dock: 'right',
         		items: [OKnesset.memberImagePanel]
@@ -114,7 +129,7 @@ OKnesset = new Ext.Application({
      			type: 'vbox',
         		align: 'stretch'
     		},
-            tpl: "Bills",
+//            tpl: "Bills",
 			listeners: {
 				afterlayout : {
 					fn: function(comp){
@@ -129,7 +144,7 @@ OKnesset = new Ext.Application({
 //						console.log("** image width " + OKnesset.memberImagePanel.getWidth() + "image height " + OKnesset.memberImagePanel.getHeight() + " member panel width" + Ext.DomQuery.select("#memberPanel")[0].style.width + "(" + OKnesset.memberPanel.getWidth() +" element.scrollHeight="+Ext.DomQuery.select("#memberPanel")[0].scrollHeight +
 //						" element.clientHeight=" + Ext.DomQuery.select("#memberPanel")[0].clientHeight);
 						// TODO calculate only once!
-						var realImageHeight = OKnesset.memberPanel.getHeight();
+						var realImageHeight = OKnesset.memberPanel.getHeight() - OKnesset.memberBillsTitle.getHeight();
 						var realImageWidth = 75/110 * realImageHeight;
 //						realHeight = realHeight.replace("px","");
 						// Set the member image height to the actual panel height (rescaling if necessary)
@@ -140,7 +155,7 @@ OKnesset = new Ext.Application({
 					}
 				}
 			},
-			items: [OKnesset.memberPanel, OKnesset.memberBillListWrapper],
+			items: [OKnesset.memberPanel, OKnesset.memberBillList],
             dockedItems: [OKnesset.memberPanelToolbar]
 		});
 
@@ -201,7 +216,7 @@ OKnesset = new Ext.Application({
 
 		// load full data
 		Ext.Ajax.request({
-			url: 'javascripts/partyData.js',
+			url: 'javascripts/partyData.js.jpg',
 			callback: function(options, success, response){
 				// for some reason, Ext.Ajax returns success == false when the local request returns
 				if (response.responseText != null && response.responseText.length > 0) {
@@ -259,6 +274,11 @@ function gotoMember(record){
 	// back button
     OKnesset.memberPanelToolbar.items.getAt(1).setText(OKnesset.memberListToolbar.title);
     OKnesset.Viewport.setActiveItem('memberPanelWrapper', {type:'slide', direction:'right'});
+}
+
+function gotoBill(record){
+	var bill = record.data;
+	console.log("Unsupported yet!");
 }
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);

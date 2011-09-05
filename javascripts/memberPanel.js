@@ -1,4 +1,4 @@
-var memberPageHtml =
+var memberPanelHtml =
 //'	<div class="memberImage"> \
 //		<img src={img_url} width="75px" height="110px"></img> \
 //	</div> \
