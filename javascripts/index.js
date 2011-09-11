@@ -343,7 +343,15 @@ function gotoMember(record){
 
 function gotoBill(record){
 	var bill = record.data;
-	console.log("Unsupported yet!");
+	console.log("Unsupported yet! " + JSON.stringify(bill));
+	var url = 'http://www.oknesset.org' + bill.url;
+	navigator.notification.confirm('הצעת החוק תיפתח בדפדפן', function(idx){gotoBillCallback(idx, url) }, 'לפתוח בדפדפן?', 'ביטול,אישור');
+}
+
+function gotoBillCallback(btnIndex, url){
+	if (btnIndex == 2){
+		window.open(url);
+	}
 }
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);
