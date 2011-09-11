@@ -218,7 +218,7 @@ OKnesset = new Ext.Application({
 			setTimeout(function(){
 							var partyData = JSON.parse(localStorage.getItem("PartyData"));
 							updatePartyData(partyData);
-							updateFullDataFromWeb();
+							checkFullDataFromWeb();
 						}, 0);
 		} else {
 			// load initial data (data shipped with the application)
@@ -235,7 +235,7 @@ OKnesset = new Ext.Application({
 					updatePartyData(partyData);
 					localStorage.setItem("PartyDataDate", partyDataDate.getTime());
 					localStorage.setItem("PartyData", partyDataString);
-					updateFullDataFromWeb();
+					checkFullDataFromWeb();
 				}
 				else {
 					console.log('Full data load failure (' + JSON.stringify(response) + ') with status code ' + response.status);
@@ -258,37 +258,61 @@ OKnesset = new Ext.Application({
     }
 });
 
-function updateFullDataFromWeb(){
+function checkFullDataFromWeb(){
 	var partyDataDate = new Date(parseInt(localStorage.getItem("PartyDataDate")));
 	var now = new Date();
 
 	// 24 hours is 1000*60*60*24 = 86,400,000
 	console.log("** now="+now.getTime() + " PartyDataDate= " + partyDataDate.getTime());
 	console.log("** now="+dateToString(now) + " PartyDataDate= " + dateToString(partyDataDate));
+
 	if (now.getTime() > partyDataDate.getTime() + 86400000) {
-		console.log("Need to load data from Oknesset");
+		// Check internet connection
+		if (navigator.network.connection.type == Connection.ETHERNET ||
+			navigator.network.connection.type == Connection.WIFI) {
 
-		Ext.Ajax.request({
-			url: 'javascripts/createInitialData.js',
-			callback: function(options, success, response){
-				// for some reason, Ext.Ajax returns success == false when the local request returns
-				if (response.responseText != null && response.responseText.length > 0) {
-//					loadTime = new Date();
-					eval(response.responseText);
-					console.log('Oknesset web parser loaded');
-					OKnessetParser.loadData(updatePartyData);
-					var now = new Date();
-			    	localStorage.setItem("PartyDataDate", now.getTime());
-				}
-				else {
-					console.log('Oknesset web parser failure (' + JSON.stringify(response) + ') with status code ' + response.status);
-				}
-			}
-		});
+			console.log("** updating full data by WIFI");
+			fetchFullDataFromWeb();
+		} else if (navigator.network.connection.type == Connection.CELL_2G ||
+    				navigator.network.connection.type == Connection.CELL_3G ||
+    				navigator.network.connection.type == Connection.CELL_4G) {
 
+			console.log("** updating full data by 3G");
+
+			navigator.notification.confirm('מכשירך מחובר לרשת באמצעות חיבור סלולרי. הנתונים הנוכחיים מתאריך' + dateToString(partyDataDate) + '  והורדת הנתונים העדכניים בנפח של כ 1.5 מגה.', checkFullDataFromWebCallback, 'לעדכן נתונים מהאינטרנט?', 'ביטול,אישור');
+		} else {
+			console.log("** not updating full data becuase of no internet");
+
+		}
+	}
+
+}
+
+function checkFullDataFromWebCallback(btnIndex){
+	if (btnIndex == 2){
+		fetchFullDataFromWeb();
 	}
 }
 
+function fetchFullDataFromWeb(){
+	Ext.Ajax.request({
+		url: 'javascripts/createInitialData.js',
+		callback: function(options, success, response){
+			// for some reason, Ext.Ajax returns success == false when the local request returns
+			if (response.responseText != null && response.responseText.length > 0) {
+				//					loadTime = new Date();
+				eval(response.responseText);
+				console.log('Oknesset web parser loaded');
+				OKnessetParser.loadData(updatePartyData);
+				var now = new Date();
+				localStorage.setItem("PartyDataDate", now.getTime());
+			}
+			else {
+				console.log('Oknesset web parser failure (' + JSON.stringify(response) + ') with status code ' + response.status);
+			}
+		}
+	});
+}
 function dateToString(date){
 	var month = date.getMonth() + 1;
 	var day = date.getDate();
