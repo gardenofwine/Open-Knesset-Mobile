@@ -7,9 +7,11 @@ OKnesset = new Ext.Application({
         this.mainLaunch();
 	},
     mainLaunch: function() {
-        if (navigator.platform != "MacIntel" && !this.launched) {
+        if (isPhoneGap() && !this.launched) {
 			return;
 		}
+
+	   googleAnalytics();
 
 	   	mainLaunchTime = new Date();
 		function printLoadingTimes(){
@@ -267,6 +269,11 @@ function checkFullDataFromWeb(){
 	console.log("** now="+dateToString(now) + " PartyDataDate= " + dateToString(partyDataDate));
 
 	if (now.getTime() > partyDataDate.getTime() + 86400000) {
+		if (!isPhoneGap()){
+			fetchFullDataFromWeb();
+			return;
+		}
+
 		// Check internet connection
 		if (navigator.network.connection.type == Connection.ETHERNET ||
 			navigator.network.connection.type == Connection.WIFI) {
@@ -369,6 +376,9 @@ function gotoBill(record){
 	var bill = record.data;
 	console.log("Unsupported yet! " + JSON.stringify(bill));
 	var url = 'http://www.oknesset.org' + bill.url;
+	if (isPhoneGap()){
+
+	}
 	navigator.notification.confirm('הצעת החוק תיפתח בדפדפן', function(idx){gotoBillCallback(idx, url) }, 'לפתוח בדפדפן?', 'ביטול,אישור');
 }
 
@@ -376,6 +386,17 @@ function gotoBillCallback(btnIndex, url){
 	if (btnIndex == 2){
 		window.open(url);
 	}
+}
+
+function isPhoneGap(){
+	return navigator.platform != "MacIntel";
+}
+
+function googleAnalytics(){
+	// do your thing!
+	googleAnalytics = window.plugins.googleAnalyticsPlugin;
+	googleAnalytics.startTrackerWithAccountID("UA-25669619-1");
+	googleAnalytics.trackPageview("/application/launch");
 }
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);
