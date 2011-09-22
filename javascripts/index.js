@@ -381,6 +381,7 @@ function gotoBill(record){
 	var url = 'http://www.oknesset.org' + bill.url;
 	if (isPhoneGap()){
 		if (isiOS()) {
+			GATrackBillClicked(url);
 			navigator.notification.confirm('הצעת החוק תיפתח בדפדפן', function(idx){
 				if (idx == 2) {
 					gotoBillCallback(url, bill.url)
@@ -422,6 +423,10 @@ function GATrackMember(id){
 
 function GATrackParty(id){
 	googleAnalytics.trackPageviewWithCustomVariable("/app/party",1, "party", id);
+}
+
+function GATrackBillClicked(url){
+	googleAnalytics.trackEvent(function(){}, "bills","click", url, undefined, true);
 }
 
 function GATrackBill(url, callback){
