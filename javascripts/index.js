@@ -337,6 +337,8 @@ function updatePartyData(fullPartyData) {
 function gotoParty(record){
 	//console.log(JSON.stringify(record.data));
 	var name = record.data.name;
+
+	GATrackParty(record.data.id);
 	OKnesset.memberListToolbar.setTitle(name);
 	OKnesset.memberListToolbar.items.getAt(1).setText("מפלגות");
 	if (OKnesset.memberList.scroller) {
@@ -351,6 +353,8 @@ function gotoParty(record){
 
 function gotoMember(record){
     var member = record.data;
+
+	GATrackMember(member.id);
 
 	OKnesset.memberImagePanel.update({
 		img_url: "images/members/" + member.img_url.substring(member.img_url.lastIndexOf('/')+1)
@@ -374,29 +378,54 @@ function gotoMember(record){
 
 function gotoBill(record){
 	var bill = record.data;
-	console.log("Unsupported yet! " + JSON.stringify(bill));
 	var url = 'http://www.oknesset.org' + bill.url;
 	if (isPhoneGap()){
-
+		if (isiOS()) {
+			navigator.notification.confirm('הצעת החוק תיפתח בדפדפן', function(idx){
+				if (idx == 2) {
+					gotoBillCallback(url, bill.url)
+				}
+			}, 'לפתוח בדפדפן?', 'ביטול,אישור');
+		}
+		else {//android
+			gotoBillCallback(url, bill.url);
+		}
 	}
-	navigator.notification.confirm('הצעת החוק תיפתח בדפדפן', function(idx){gotoBillCallback(idx, url) }, 'לפתוח בדפדפן?', 'ביטול,אישור');
+
 }
 
-function gotoBillCallback(btnIndex, url){
-	if (btnIndex == 2){
-		window.open(url);
-	}
+function gotoBillCallback(url, billUrl){
+	window.setTimeout(function(){
+					  GATrackBill(billUrl, function(){
+								  window.setTimeout(window.open(url),10);
+								  });
+					  }, 10);
 }
 
 function isPhoneGap(){
 	return navigator.platform != "MacIntel";
 }
 
+function isiOS(){
+	return device.platform.toLowerCase().indexOf('iphone') == 0;
+}
+
 function googleAnalytics(){
-	// do your thing!
 	googleAnalytics = window.plugins.googleAnalyticsPlugin;
+	// The oknesset.mobile google analytics Accoutn ID
 	googleAnalytics.startTrackerWithAccountID("UA-25669619-1");
-	googleAnalytics.trackPageview("/application/launch");
+}
+
+function GATrackMember(id){
+	googleAnalytics.trackPageviewWithCustomVariable("/app/member",1, "member", id);
+}
+
+function GATrackParty(id){
+	googleAnalytics.trackPageviewWithCustomVariable("/app/party",1, "party", id);
+}
+
+function GATrackBill(url, callback){
+	googleAnalytics.trackEvent(callback, "bills","open", url);
 }
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);

@@ -25,29 +25,6 @@
 	<script>var oknessetLoadEndTime = new Date();</script>
 	<script>var scriptLoadEndTime = new Date();</script>
 	<script src="javascripts/GoogleAnalyticsPlugin.js" type="text/javascript"></script>
-<script type="text/javascript" charset="utf-8">
-
-	var googleAnalytics;
-
-	function onBodyLoad()
-	{
-	    document.addEventListener("deviceready",onDeviceReady,false);
-	}
-
-	/* When this function is called, PhoneGap has been initialized and is ready to roll */
-	function onDeviceReady()
-	{
-	    // do your thing!
-	    googleAnalytics = window.plugins.googleAnalyticsPlugin;
-	    googleAnalytics.startTrackerWithAccountID("UA-25669619-1");
-	    googleAnalytics.trackPageview("/application/launch");
-	}
-
-//	// example of tracking an event in your app
-//	googleAnalytics.trackEvent("Videos","Play","Take On Me: Literal Video Version",1);
-
-</script>
-
 </head>
 <body>
 </body>
