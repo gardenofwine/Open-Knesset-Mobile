@@ -19,7 +19,7 @@ Ext.regModel('Member', {
 
 OKnesset.MemberStore = new Ext.data.Store({
     model: 'Member',
-    sorters: 'name'
+	sorters : []
 });
 
 Ext.regModel('MemberBills', {

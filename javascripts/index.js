@@ -215,7 +215,22 @@ OKnesset = new Ext.Application({
 	   mainLaunchTimeEnd = new Date();
 	   console.log('sencha touch load time ' + (mainLaunchTimeEnd.getTime() - mainLaunchTime.getTime()) / 1000);
 
-		if (localStorage.getItem("PartyData") != null){
+		loadInitialData();
+//		$.getScript('javascripts/partyData.js', function(data, textStatus){
+//   			if (textStatus == 'success'){
+//			   loadTime = new Date();
+//	   			console.log('Full data load was performed in ' + (loadTime.getTime() - mainLaunchTimeEnd.getTime()) / 1000);
+//				OKnesset.PartyStore.loadData(partyData,false);
+//				OKnesset.Viewport.getActiveItem().items.getAt(0).refresh();
+//			} else {
+//	   			console.log('Load failed.');
+//			}
+//		});
+    }
+});
+
+function loadInitialData(){
+			if (localStorage.getItem("PartyData") != null){
 			// load data from localstorage (most updated locally)
 			setTimeout(function(){
 							var partyData = JSON.parse(localStorage.getItem("PartyData"));
@@ -231,7 +246,7 @@ OKnesset = new Ext.Application({
 				if (response.responseText != null && response.responseText.length > 0) {
 					loadTime = new Date();
 					eval(response.responseText);
-					console.log('Full data load was performed in ' + (loadTime.getTime() - mainLaunchTimeEnd.getTime()) / 1000);
+					console.log('Initial data load was performed in ' + (loadTime.getTime() - mainLaunchTimeEnd.getTime()) / 1000);
 					// partyData is evaluated from the
 					var partyDataString = JSON.stringify(partyData);
 					updatePartyData(partyData);
@@ -245,20 +260,7 @@ OKnesset = new Ext.Application({
 			}
 		});
 	}
-
-
-//		$.getScript('javascripts/partyData.js', function(data, textStatus){
-//   			if (textStatus == 'success'){
-//			   loadTime = new Date();
-//	   			console.log('Full data load was performed in ' + (loadTime.getTime() - mainLaunchTimeEnd.getTime()) / 1000);
-//				OKnesset.PartyStore.loadData(partyData,false);
-//				OKnesset.Viewport.getActiveItem().items.getAt(0).refresh();
-//			} else {
-//	   			console.log('Load failed.');
-//			}
-//		});
-    }
-});
+}
 
 function checkFullDataFromWeb(){
 	var partyDataDate = new Date(parseInt(localStorage.getItem("PartyDataDate")));
@@ -381,7 +383,7 @@ function gotoBill(record){
 	var url = 'http://www.oknesset.org' + bill.url;
 	if (isPhoneGap()){
 		if (isiOS()) {
-			GATrackBillClicked(url);
+			GATrackBillClicked(bill.url);
 			navigator.notification.confirm('הצעת החוק תיפתח בדפדפן', function(idx){
 				if (idx == 2) {
 					gotoBillCallback(url, bill.url)
