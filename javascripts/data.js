@@ -30,7 +30,7 @@ OKnesset.MemberBillsStore = new Ext.data.Store({
     model: 'MemberBills',
 	filters : {
     filterFn: function(item) {
-    	    return parseInt(item.data.stage) >= 3;
+    	    return parseInt(item.data.stage) >= 2;
  	   }
 	},
     sorters: {

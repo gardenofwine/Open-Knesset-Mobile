@@ -59,20 +59,12 @@ OKnesset = new Ext.Application({
             }]
         });
 
-//		OKnesset.billPanel = new Ext.Panel({
-//			id: 'billPanel',
-//			layout : 'fit',
-//			tpl : billPanelHtml,
-//            dockedItems: [OKnesset.billPanelToolbar]
-//		});
-
-
 		OKnesset.memberBillsTitle = new Ext.Panel({
 			id: 'memberBillsTitle',
             layout: 'fit',
 			dock: 'bottom',
-            tpl: '<tpl if="billNumber &gt; 0"><h2 class="memberBillsTitle x-toolbar-dark">הצעות חוק פרטיות</h2></tpl>\
-				  <tpl if="billNumber == 0"><h2 class="memberBillsTitle x-toolbar-dark">אין הצעות חוק פרטיות</h2></tpl>'
+            tpl: '<tpl if="billNumber &gt; 0"><h2 class="memberBillsTitle x-toolbar-dark">הצעות חוק פרטיות שעברו קריאה טרומית</h2></tpl>\
+				  <tpl if="billNumber == 0"><h2 class="memberBillsTitle x-toolbar-dark">אין הצעות חוק פרטיות שעברו קריאה טרומית</h2></tpl>'
 		});
 
         OKnesset.memberBillList = new Ext.List({
@@ -414,25 +406,36 @@ function isiOS(){
 }
 
 function googleAnalytics(){
-	googleAnalytics = window.plugins.googleAnalyticsPlugin;
-	// The oknesset.mobile google analytics Accoutn ID
-	googleAnalytics.startTrackerWithAccountID("UA-25669619-1");
+	if (isPhoneGap()) {
+		googleAnalytics = window.plugins.googleAnalyticsPlugin;
+		// The oknesset.mobile google analytics Accoutn ID
+		googleAnalytics.startTrackerWithAccountID("UA-25669619-1");
+	}
 }
 
 function GATrackMember(id){
-	googleAnalytics.trackPageviewWithCustomVariable("/app/member",1, "member", id);
+	if (isPhoneGap()) {
+		googleAnalytics.trackPageviewWithCustomVariable("/app/member", 1, "member", id);
+	}
 }
 
 function GATrackParty(id){
-	googleAnalytics.trackPageviewWithCustomVariable("/app/party",1, "party", id);
+	if (isPhoneGap()) {
+		googleAnalytics.trackPageviewWithCustomVariable("/app/party", 1, "party", id);
+	}
 }
 
 function GATrackBillClicked(url){
-	googleAnalytics.trackEvent(function(){}, "bills","click", url, undefined, true);
+	if (isPhoneGap()) {
+		googleAnalytics.trackEvent(function(){
+		}, "bills", "click", url, undefined, true);
+	}
 }
 
 function GATrackBill(url, callback){
-	googleAnalytics.trackEvent(callback, "bills","open", url);
+	if (isPhoneGap()) {
+		googleAnalytics.trackEvent(callback, "bills", "open", url);
+	}
 }
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);

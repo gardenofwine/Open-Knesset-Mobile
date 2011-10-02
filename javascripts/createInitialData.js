@@ -20,13 +20,24 @@ var OKnessetParser = new function(){
 	            console.log("member index " + index + " is undefined.");
 	            return;
 	        }
+
+			// filter out bills with stage 2 or less
+			for (var i = 0; i < value.bills.length; i++) {
+				if (parseInt(value.bills[i].stage) < 2) {
+					value.bills.splice(i,1);
+					i--;
+				}
+
+			}
+
 	        memberIdArray.push(value);
 	        memberMap[value.id] = value;
 
-	        //			$.each(value.bills, function(index, value){
-	        //				if (parseInt(value.stage) < 4){
-	        //				}
-	        //			});
+//			Ext.each(value.bills, function(index, value){
+//				if (parseInt(value.stage) < 2){
+//
+//				}
+//			});
 	        partyMap[value.party].members.push(value);
 
 	        var slimMember = {
