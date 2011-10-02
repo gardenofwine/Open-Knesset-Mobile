@@ -21,6 +21,12 @@ var OKnessetParser = new function(){
 	            return;
 	        }
 
+			// Filter non active members
+			if (value.roles.indexOf('לשעבר') != -1){
+				console.log("excluding " + value.name);
+				return;
+			}
+
 			// filter out bills with stage 2 or less
 			for (var i = 0; i < value.bills.length; i++) {
 				if (parseInt(value.bills[i].stage) < 2) {

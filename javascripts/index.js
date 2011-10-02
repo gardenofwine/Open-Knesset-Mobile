@@ -155,7 +155,7 @@ OKnesset = new Ext.Application({
 
         OKnesset.memberList = new Ext.List({
             id: 'memberList',
-            itemTpl: '<div>{name}</div>',
+            itemTpl: '<div>{#} {name}</div>',
 			store: OKnesset.MemberStore,
 			listeners:{
 				itemtap: function( that, index, item, e) {
@@ -375,10 +375,13 @@ function gotoBill(record){
 	var url = 'http://www.oknesset.org' + bill.url;
 	if (isPhoneGap()){
 		if (isiOS()) {
-			GATrackBillClicked(bill.url);
+			//GATrackBillClicked(bill.url);
 			navigator.notification.confirm('הצעת החוק תיפתח בדפדפן', function(idx){
 				if (idx == 2) {
 					gotoBillCallback(url, bill.url)
+				} else {
+					//  track bill cancel
+					GATrackBillCanceled(bill.url)
 				}
 			}, 'לפתוח בדפדפן?', 'ביטול,אישור');
 		}
@@ -415,27 +418,31 @@ function googleAnalytics(){
 
 function GATrackMember(id){
 	if (isPhoneGap()) {
-		googleAnalytics.trackPageviewWithCustomVariable("/app/member", 1, "member", id);
+		googleAnalytics.trackPageview("/app/member/" + id);
 	}
 }
 
 function GATrackParty(id){
 	if (isPhoneGap()) {
-		googleAnalytics.trackPageviewWithCustomVariable("/app/party", 1, "party", id);
+		googleAnalytics.trackPageview("/app/party/" + id);
 	}
 }
 
-function GATrackBillClicked(url){
+function GATrackBillCanceled(url){
 	if (isPhoneGap()) {
-		googleAnalytics.trackEvent(function(){
-		}, "bills", "click", url, undefined, true);
+		googleAnalytics.trackEvent(function(){}, "bills", "cancelView", url, undefined, true);
 	}
 }
 
 function GATrackBill(url, callback){
 	if (isPhoneGap()) {
-		googleAnalytics.trackEvent(callback, "bills", "open", url);
+		// TODO ad callback to pageview
+		googleAnalytics.trackPageview("/safari/" + url);
+
+//		googleAnalytics.trackEvent(callback, "bills", "open", url);
 	}
+
+	callback();
 }
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);

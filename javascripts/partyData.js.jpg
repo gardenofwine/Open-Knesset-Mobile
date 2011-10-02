@@ -130,53 +130,6 @@ var partyData = [{
         "id": 8,
         "bills_approved": 4
     }, {
-        "discipline": 99.5,
-        "bills_proposed": 13,
-        "service_time": 623,
-        "committees": [
-            ["ועדת הכנסת", "/committee/1/"],
-            ["ועדת העבודה, הרווחה והבריאות", "/committee/10/"],
-            ["ועדה לקידום מעמד האישה", "/committee/11/"],
-            ["ועדת החינוך, התרבות והספורט", "/committee/6/"]
-        ],
-        "name": "צחי הנגבי",
-        "roles": "חבר כנסת לשעבר",
-        "committee_meetings_per_month": 0.53,
-        "url": "/member/45/%D7%A6%D7%97%D7%99-%D7%94%D7%A0%D7%92%D7%91%D7%99/",
-        "gender": "זכר",
-        "bills_passed_first_vote": 4,
-        "bills_passed_pre_vote": 4,
-        "average_weekly_presence": 14.2,
-        "votes_per_month": 26.4,
-        "average_weekly_presence_rank": 3,
-        "is_current": false,
-        "party": "קדימה",
-        "votes_count": 548,
-        "bills": [{
-            "url": "/bill/2849/",
-            "title": "חוק איסור הטלת חרם חוק חדש",
-            "stage_text": "בתיקונים בוועדה",
-            "stage": "5"
-        }, {
-            "url": "/bill/2951/",
-            "title": "חוק הרשות הלאומית לפינוי מוקשים חוק חדש",
-            "stage_text": "אושרה",
-            "stage": "6"
-        }, {
-            "url": "/bill/3610/",
-            "title": "חוק תשלומים לפדויי שבי תיקון מס' 2 ביטול התיישנות",
-            "stage_text": "אושרה",
-            "stage": "6"
-        }, {
-            "url": "/bill/4301/",
-            "title": "חוק שיקום נכי נפש בקהילה תיקון מס' 11 הנחה בארנונה בנכס המשמש למגורי נכה נפש",
-            "stage_text": "אושרה",
-            "stage": "6"
-        }],
-        "img_url": "http://www.knesset.gov.il/mk/images/members/hanegbi_tzahi-s.jpg",
-        "id": 45,
-        "bills_approved": 3
-    }, {
         "discipline": 98.4,
         "bills_proposed": 15,
         "service_time": 950,
@@ -213,34 +166,6 @@ var partyData = [{
         "img_url": "http://www.knesset.gov.il/mk/images/members/baron_roni-s.jpg",
         "id": 735,
         "bills_approved": 1
-    }, {
-        "discipline": 98.8,
-        "bills_proposed": 13,
-        "service_time": 752,
-        "committees": [
-            ["ועדת החינוך, התרבות והספורט", "/committee/6/"],
-            ["ועדת הכנסת", "/committee/1/"],
-            ["ועדת הכלכלה", "/committee/2/"],
-            ["ועדת הכספים", "/committee/9/"],
-            ["ועדת הפנים והגנת הסביבה", "/committee/4/"]
-        ],
-        "name": "זאב בוים",
-        "roles": "חבר כנסת לשעבר",
-        "committee_meetings_per_month": 0.32,
-        "url": "/member/16/%D7%96%D7%90%D7%91-%D7%91%D7%95%D7%99%D7%9D/",
-        "gender": "זכר",
-        "bills_passed_first_vote": 0,
-        "bills_passed_pre_vote": 0,
-        "average_weekly_presence": 6.1,
-        "votes_per_month": 41.5,
-        "average_weekly_presence_rank": 1,
-        "is_current": false,
-        "party": "קדימה",
-        "votes_count": 1040,
-        "bills": [],
-        "img_url": "http://www.knesset.gov.il/mk/images/members/boim_zev-s.jpg",
-        "id": 16,
-        "bills_approved": 0
     }, {
         "discipline": 98,
         "bills_proposed": 76,
@@ -1049,32 +974,6 @@ var partyData = [{
         "img_url": "http://www.knesset.gov.il/mk/images/members/tirosh_ronit-s.jpg",
         "id": 774,
         "bills_approved": 3
-    }, {
-        "discipline": 100,
-        "bills_proposed": 0,
-        "service_time": 128,
-        "committees": [
-            ["ועדת הכנסת", "/committee/1/"],
-            ["ועדה לענייני ביקורת המדינה", "/committee/7/"],
-            ["ועדת החוקה, חוק ומשפט", "/committee/5/"]
-        ],
-        "name": "חיים רמון",
-        "roles": "חבר כנסת לשעבר",
-        "committee_meetings_per_month": 0.7,
-        "url": "/member/115/%D7%97%D7%99%D7%99%D7%9D-%D7%A8%D7%9E%D7%95%D7%9F/",
-        "gender": "זכר",
-        "bills_passed_first_vote": 0,
-        "bills_passed_pre_vote": 0,
-        "average_weekly_presence": null,
-        "votes_per_month": 7.7,
-        "average_weekly_presence_rank": 0,
-        "is_current": false,
-        "party": "קדימה",
-        "votes_count": 33,
-        "bills": [],
-        "img_url": "http://www.knesset.gov.il/mk/images/members/ramon_haim-s.jpg",
-        "id": 115,
-        "bills_approved": 0
     }, {
         "discipline": 99.2,
         "bills_proposed": 49,
@@ -5696,84 +5595,6 @@ var partyData = [{
         "id": 740,
         "bills_approved": 0
     }, {
-        "discipline": 91.8,
-        "bills_proposed": 120,
-        "service_time": 320,
-        "committees": [
-            ["ועדת החוקה, חוק ומשפט", "/committee/5/"],
-            ["ועדה לענייני ביקורת המדינה", "/committee/7/"],
-            ["ועדת העלייה, הקליטה והתפוצות", "/committee/3/"],
-            ["ועדת הפנים והגנת הסביבה", "/committee/4/"],
-            ["ועדת הכספים", "/committee/9/"]
-        ],
-        "name": "אופיר פינס-פז",
-        "roles": "חבר כנסת לשעבר",
-        "committee_meetings_per_month": 15.84,
-        "url": "/member/100/%D7%90%D7%95%D7%A4%D7%99%D7%A8-%D7%A4%D7%99%D7%A0%D7%A1-%D7%A4%D7%96/",
-        "gender": "זכר",
-        "bills_passed_first_vote": 4,
-        "bills_passed_pre_vote": 10,
-        "average_weekly_presence": 11,
-        "votes_per_month": 57.5,
-        "average_weekly_presence_rank": 2,
-        "is_current": false,
-        "party": "העבודה",
-        "votes_count": 613,
-        "bills": [{
-            "url": "/bill/3421/",
-            "title": "חוק הדיור המוגן חוק חדש",
-            "stage_text": "בוועדה",
-            "stage": "3"
-        }, {
-            "url": "/bill/3737/",
-            "title": "חוק הגנת הסביבה שימוש חוזר במי דלוחין - שימוש מושכל במשאבי הטבע",
-            "stage_text": "בוועדה",
-            "stage": "3"
-        }, {
-            "url": "/bill/3870/",
-            "title": "חוק מבקר המדינה תיקון - אי תיקון ליקויים",
-            "stage_text": "אושרה",
-            "stage": "6"
-        }, {
-            "url": "/bill/3977/",
-            "title": "חוק מניעת זיהום קרקע וטיפול בקרקעות מזוהמות חוק חדש",
-            "stage_text": "עברה קריאה טרומית",
-            "stage": "2"
-        }, {
-            "url": "/bill/4349/",
-            "title": "חוק סדר הדין הפלילי תיקון מס' 63 חזקת מסירה לעניין נהיגה בזמן פסילה",
-            "stage_text": "אושרה",
-            "stage": "6"
-        }, {
-            "url": "/bill/4387/",
-            "title": "חוק התייעלות אנרגיה במבני ציבור תיקון הגנת הסביבה – שימוש מושכל במשאבי הטבע – התייעלות‬ אנרגטית",
-            "stage_text": "אושרה",
-            "stage": "6"
-        }, {
-            "url": "/bill/4790/",
-            "title": "חוק-יסוד: החקיקה חוק חדש",
-            "stage_text": "בוועדה",
-            "stage": "3"
-        }, {
-            "url": "/bill/4819/",
-            "title": "חוק לתיקון פקודת העיריות תיקוני חקיקה",
-            "stage_text": "קריאה ראשונה",
-            "stage": "4"
-        }, {
-            "url": "/bill/3137/",
-            "title": "חוק ביטוח בריאות ממלכתי תיקון - רפואת שיניים",
-            "stage_text": "בוועדה",
-            "stage": "3"
-        }, {
-            "url": "/bill/3124/",
-            "title": "חוק הגנת הצרכן תיקון - הגבלת פרסום בבתי מגורים",
-            "stage_text": "בוועדה",
-            "stage": "3"
-        }],
-        "img_url": "http://www.knesset.gov.il/mk/images/members/pinespaz_ofir-s.jpg",
-        "id": 100,
-        "bills_approved": 3
-    }, {
         "discipline": 99.6,
         "bills_proposed": 2,
         "service_time": 950,
@@ -6170,44 +5991,6 @@ var partyData = [{
         "id": 20,
         "bills_approved": 0
     }, {
-        "discipline": 71.2,
-        "bills_proposed": 12,
-        "service_time": 413,
-        "committees": [
-            ["ועדת המדע והטכנולוגיה", "/committee/8/"],
-            ["ועדת החינוך, התרבות והספורט", "/committee/6/"],
-            ["ועדת הכנסת", "/committee/1/"],
-            ["ועדת משנה למאבק בסחר בנשים", "/committee/13/"],
-            ["ועדה לקידום מעמד האישה", "/committee/11/"]
-        ],
-        "name": "יולי תמיר",
-        "roles": "חברת כנסת לשעבר",
-        "committee_meetings_per_month": 1.02,
-        "url": "/member/697/%D7%99%D7%95%D7%9C%D7%99-%D7%AA%D7%9E%D7%99%D7%A8/",
-        "gender": "נקבה",
-        "bills_passed_first_vote": 0,
-        "bills_passed_pre_vote": 2,
-        "average_weekly_presence": 9.9,
-        "votes_per_month": 12.9,
-        "average_weekly_presence_rank": 2,
-        "is_current": false,
-        "party": "העבודה",
-        "votes_count": 177,
-        "bills": [{
-            "url": "/bill/3137/",
-            "title": "חוק ביטוח בריאות ממלכתי תיקון - רפואת שיניים",
-            "stage_text": "בוועדה",
-            "stage": "3"
-        }, {
-            "url": "/bill/3107/",
-            "title": "חוק פיצוי לנפגעי פוליו תיקון - נפגע פוליו שלקה במחלת הפוליו לפני קום המדינה",
-            "stage_text": "עברה קריאה טרומית",
-            "stage": "2"
-        }],
-        "img_url": "http://www.knesset.gov.il/mk/images/members/tamir_yuli-s.jpg",
-        "id": 697,
-        "bills_approved": 0
-    }, {
         "discipline": 74.6,
         "bills_proposed": 37,
         "service_time": 950,
@@ -6578,32 +6361,6 @@ var partyData = [{
         "img_url": "http://www.knesset.gov.il/mk/images/members/gafni_moshe-s.jpg",
         "id": 35,
         "bills_approved": 14
-    }, {
-        "discipline": 100,
-        "bills_proposed": 1,
-        "service_time": 712,
-        "committees": [
-            ["ועדת החינוך, התרבות והספורט", "/committee/6/"],
-            ["ועדת החוקה, חוק ומשפט", "/committee/5/"],
-            ["ועדת העבודה, הרווחה והבריאות", "/committee/10/"]
-        ],
-        "name": "מאיר פרוש",
-        "roles": "חבר כנסת לשעבר",
-        "committee_meetings_per_month": 0.21,
-        "url": "/member/103/%D7%9E%D7%90%D7%99%D7%A8-%D7%A4%D7%A8%D7%95%D7%A9/",
-        "gender": "זכר",
-        "bills_passed_first_vote": 0,
-        "bills_passed_pre_vote": 0,
-        "average_weekly_presence": 5.2,
-        "votes_per_month": 33.3,
-        "average_weekly_presence_rank": 1,
-        "is_current": false,
-        "party": "יהדות התורה",
-        "votes_count": 790,
-        "bills": [],
-        "img_url": "http://www.knesset.gov.il/mk/images/members/porush_meir-s.jpg",
-        "id": 103,
-        "bills_approved": 0
     }, {
         "discipline": 99.9,
         "bills_proposed": 106,
@@ -8340,94 +8097,6 @@ var partyData = [{
     "end_date": "2010-02-03",
     "start_date": "2009-03-09",
     "members": [{
-        "discipline": 99.2,
-        "bills_proposed": 111,
-        "service_time": 759,
-        "committees": [
-            ["ועדת הכספים", "/committee/9/"],
-            ["ועדת הכנסת", "/committee/1/"],
-            ["ועדת העבודה, הרווחה והבריאות", "/committee/10/"],
-            ["ועדת הכלכלה", "/committee/2/"],
-            ["ועדת החוקה, חוק ומשפט", "/committee/5/"]
-        ],
-        "name": "חיים אורון",
-        "roles": "חבר כנסת לשעבר",
-        "committee_meetings_per_month": 20.51,
-        "url": "/member/5/%D7%97%D7%99%D7%99%D7%9D-%D7%90%D7%95%D7%A8%D7%95%D7%9F/",
-        "gender": "זכר",
-        "bills_passed_first_vote": 3,
-        "bills_passed_pre_vote": 12,
-        "average_weekly_presence": 18.9,
-        "votes_per_month": 56.1,
-        "average_weekly_presence_rank": 4,
-        "is_current": false,
-        "party": "מרצ",
-        "votes_count": 1419,
-        "bills": [{
-            "url": "/bill/2889/",
-            "title": "חוק הגנת הצרכן תיקון - איסור התניה בעסקה לתקופה קצובה",
-            "stage_text": "עברה קריאה טרומית",
-            "stage": "2"
-        }, {
-            "url": "/bill/2988/",
-            "title": "חוק חובת המכרזים תיקון - העדפת תוצרת הארץ",
-            "stage_text": "בוועדה",
-            "stage": "3"
-        }, {
-            "url": "/bill/3137/",
-            "title": "חוק ביטוח בריאות ממלכתי תיקון - רפואת שיניים",
-            "stage_text": "בוועדה",
-            "stage": "3"
-        }, {
-            "url": "/bill/3245/",
-            "title": "חוק ביטוח בריאות ממלכתי תיקון מס' 50 איסור פיצול מרשמים",
-            "stage_text": "אושרה",
-            "stage": "6"
-        }, {
-            "url": "/bill/3249/",
-            "title": "חוק ביטוח בריאות ממלכתי תיקון - העברת האשפוז הסיעודי לאחריות קופות החולים",
-            "stage_text": "עברה קריאה טרומית",
-            "stage": "2"
-        }, {
-            "url": "/bill/3421/",
-            "title": "חוק הדיור המוגן חוק חדש",
-            "stage_text": "בוועדה",
-            "stage": "3"
-        }, {
-            "url": "/bill/4776/",
-            "title": "חוק זכויות החולה תיקון מס' 4 איסור הפליה בשל גיל",
-            "stage_text": "אושרה",
-            "stage": "6"
-        }, {
-            "url": "/bill/4777/",
-            "title": "חוק הירושה תיקון - ירושה מכוח אימוץ",
-            "stage_text": "בוועדה",
-            "stage": "3"
-        }, {
-            "url": "/bill/4983/",
-            "title": "חוק חלוקת זכויות פנסיה בין בני זוג חוק חדש",
-            "stage_text": "עברה קריאה טרומית",
-            "stage": "2"
-        }, {
-            "url": "/bill/4857/",
-            "title": "חוק עבודת נשים תיקון מס' 48 הרחבת איסור הפיטורים במהלך טיפולי פוריות",
-            "stage_text": "אושרה",
-            "stage": "6"
-        }, {
-            "url": "/bill/5249/",
-            "title": "חוק גיל פרישה תיקון - ביטול העלאה אוטומטית של גיל הפרישה",
-            "stage_text": "עברה קריאה טרומית",
-            "stage": "2"
-        }, {
-            "url": "/bill/5331/",
-            "title": "חוק קרן לסיוע לעסקים במצוקה חוק חדש",
-            "stage_text": "בוועדה",
-            "stage": "3"
-        }],
-        "img_url": "http://www.knesset.gov.il/mk/images/members/oron_chaim-s.jpg",
-        "id": 5,
-        "bills_approved": 3
-    }, {
         "discipline": 99.9,
         "bills_proposed": 89,
         "service_time": 950,
