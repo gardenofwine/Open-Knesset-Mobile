@@ -11,6 +11,10 @@ OKnesset = new Ext.Application({
 			return;
 		}
 
+		if (isAndroid()){
+			document.addEventListener("backbutton", onBackKey, false);
+		}
+
 	   googleAnalytics();
 
 	   	mainLaunchTime = new Date();
@@ -395,9 +399,32 @@ function gotoBill(record){
 function gotoBillCallback(url, billUrl){
 	window.setTimeout(function(){
 					  GATrackBill(billUrl, function(){
-								  window.setTimeout(window.open(url),10);
-								  });
-					  }, 10);
+					  	if (isAndroid()){
+							window.plugins.webintent.startActivity(
+								{action: WebIntent.ACTION_VIEW, url: url},
+								function() {},
+								function() {alert('לא ניתן לפתוח את הצעת החוק בדפדפן')}
+							);
+ 						} else if (isiOS()){
+							  document.location=url;
+						}
+					  });
+	}, 10);
+}
+
+
+function onBackKey(){
+	var activeItem = OKnesset.Viewport.getActiveItem();
+	var dockedItem = activeItem.getDockedItems()[0];
+	var backButton = dockedItem.items.findBy(function(item){
+		return item.isXType('button');
+	});
+
+	if (backButton !== null){
+		backButton.handler();
+	} else {
+		navigator.app.exitApp();
+	}
 }
 
 function isPhoneGap(){
@@ -407,6 +434,11 @@ function isPhoneGap(){
 function isiOS(){
 	return device.platform.toLowerCase().indexOf('iphone') == 0;
 }
+
+function isAndroid(){
+	return device.platform.toLowerCase().indexOf('android') == 0;
+}
+
 
 function googleAnalytics(){
 	if (isPhoneGap()) {
