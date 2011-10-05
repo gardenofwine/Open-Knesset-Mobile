@@ -11,7 +11,7 @@ OKnesset = new Ext.Application({
 			return;
 		}
 
-		if (isAndroid()){
+		if (isPhoneGap() && isAndroid()){
 			document.addEventListener("backbutton", onBackKey, false);
 		}
 
@@ -67,8 +67,8 @@ OKnesset = new Ext.Application({
 			id: 'memberBillsTitle',
             layout: 'fit',
 			dock: 'bottom',
-            tpl: '<tpl if="billNumber &gt; 0"><h2 class="memberBillsTitle x-toolbar-dark">הצעות חוק פרטיות שעברו קריאה טרומית</h2></tpl>\
-				  <tpl if="billNumber == 0"><h2 class="memberBillsTitle x-toolbar-dark">אין הצעות חוק פרטיות שעברו קריאה טרומית</h2></tpl>'
+            tpl: '<tpl if="billNumber &gt; 0"><h2 class="memberBillsTitle x-toolbar-dark">'+OKnesset.strings.hasBillsTitle+'</h2></tpl>\
+				  <tpl if="billNumber == 0"><h2 class="memberBillsTitle x-toolbar-dark">'+OKnesset.strings.hasNoBillsTitle+'</h2></tpl>'
 		});
 
         OKnesset.memberBillList = new Ext.List({
@@ -197,7 +197,7 @@ OKnesset = new Ext.Application({
             items: [OKnesset.listPanel],
             dockedItems: [{
                 xtype: 'toolbar',
-                title: 'מפלגות'
+                title: OKnesset.strings.partiesTitle
             }]
         });
 
@@ -283,11 +283,10 @@ function checkFullDataFromWeb(){
     				navigator.network.connection.type == Connection.CELL_4G) {
 
 			console.log("** updating full data by 3G");
-
-			navigator.notification.confirm('מכשירך מחובר לרשת באמצעות חיבור סלולרי. הנתונים הנוכחיים מתאריך' + dateToString(partyDataDate) + '  והורדת הנתונים העדכניים בנפח של כ 1.5 מגה.', checkFullDataFromWebCallback, 'לעדכן נתונים מהאינטרנט?', 'ביטול,אישור');
+			var dialogtxt = Ext.String.format(OKnesset.strings.downloadDataText, dateToString(partyDataDate));
+			navigator.notification.confirm(dialogtxt, checkFullDataFromWebCallback, OKnesset.strings.downloadDataTitle, OKnesset.strings.dialogOKCancel);
 		} else {
 			console.log("** not updating full data becuase of no internet");
-
 		}
 	}
 
@@ -338,7 +337,7 @@ function gotoParty(record){
 
 	GATrackParty(record.data.name);
 	OKnesset.memberListToolbar.setTitle(name);
-	OKnesset.memberListToolbar.items.getAt(1).setText("מפלגות");
+	OKnesset.memberListToolbar.items.getAt(1).setText(OKnesset.strings.partiesTitle);
 	if (OKnesset.memberList.scroller) {
 		OKnesset.memberList.scroller.scrollTo({
 			x: 0,
@@ -380,14 +379,14 @@ function gotoBill(record){
 	if (isPhoneGap()){
 		if (isiOS()) {
 			//GATrackBillClicked(bill.url);
-			navigator.notification.confirm('הצעת החוק תיפתח בדפדפן', function(idx){
+			navigator.notification.confirm(OKnesset.strings.openBillTitle, function(idx){
 				if (idx == 2) {
 					gotoBillCallback(url, bill.url)
 				} else {
 					//  track bill cancel
 					GATrackBillCanceled(bill.url)
 				}
-			}, 'לפתוח בדפדפן?', 'ביטול,אישור');
+			}, OKnesset.strings.openBillText, OKnesset.strings.dialogOKCancel);
 		}
 		else {//android
 			gotoBillCallback(url, bill.url);
@@ -403,7 +402,7 @@ function gotoBillCallback(url, billUrl){
 							window.plugins.webintent.startActivity(
 								{action: WebIntent.ACTION_VIEW, url: url},
 								function() {},
-								function() {alert('לא ניתן לפתוח את הצעת החוק בדפדפן')}
+								function() {alert(OKnesset.strings.errorOpenBill)}
 							);
  						} else if (isiOS()){
 							  document.location=url;
