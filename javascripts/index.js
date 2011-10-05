@@ -336,7 +336,7 @@ function gotoParty(record){
 	//console.log(JSON.stringify(record.data));
 	var name = record.data.name;
 
-	GATrackParty(record.data.id);
+	GATrackParty(record.data.name);
 	OKnesset.memberListToolbar.setTitle(name);
 	OKnesset.memberListToolbar.items.getAt(1).setText("מפלגות");
 	if (OKnesset.memberList.scroller) {
@@ -352,7 +352,7 @@ function gotoParty(record){
 function gotoMember(record){
     var member = record.data;
 
-	GATrackMember(member.id);
+	GATrackMember(member.name);
 
 	OKnesset.memberImagePanel.update({
 		img_url: "images/members/" + member.img_url.substring(member.img_url.lastIndexOf('/')+1)
@@ -448,15 +448,15 @@ function googleAnalytics(){
 	}
 }
 
-function GATrackMember(id){
+function GATrackMember(name){
 	if (isPhoneGap()) {
-		googleAnalytics.trackPageview("/app/member/" + id);
+		googleAnalytics.trackPageview("/app/member/" + name);
 	}
 }
 
-function GATrackParty(id){
+function GATrackParty(name){
 	if (isPhoneGap()) {
-		googleAnalytics.trackPageview("/app/party/" + id);
+		googleAnalytics.trackPageview("/app/party/" + name);
 	}
 }
 
