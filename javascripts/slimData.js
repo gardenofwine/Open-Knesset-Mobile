@@ -1,4 +1,4 @@
-var slimDataDate = new Date(2011, 8, 15);
+var slimDataDate = new Date(2011, 10 - 1, 2);
 var slimData = [{
     "name": "קדימה",
     "id": 6,

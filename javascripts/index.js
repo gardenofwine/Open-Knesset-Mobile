@@ -27,20 +27,53 @@ OKnesset = new Ext.Application({
 		printLoadingTimes();
 
 
+        OKnesset.partyListToolbar = new Ext.Toolbar({
+				items: [
+					{
+						ui : 'round',
+						iconMask : true,
+						iconCls : 'info',
+	                	handler: function() {
+							gotoInfo();
+    	            	}
+
+					}],
+                title: OKnesset.strings.partiesTitle
+			});
+
         OKnesset.memberListToolbar = new Ext.Toolbar({
             items: [
+				{
+					ui : 'round',
+					iconMask : true,
+					iconCls : 'info',
+                	handler: function() {
+						gotoInfo();
+	            	}
+
+				},
 				{xtype: 'spacer'},
 				{
-                text: 'back',
-                ui: 'forward',
-                handler: function() {
-                    OKnesset.Viewport.setActiveItem('partyListWrapper', {type:'slide', direction:'left'});
-                }
-            }]
+               		text: 'back',
+                	ui: 'forward',
+                	handler: function() {
+                    	OKnesset.Viewport.setActiveItem('partyListWrapper', {type:'slide', direction:'left'});
+                	}
+            	}
+			]
         });
 
         OKnesset.memberPanelToolbar = new Ext.Toolbar({
             items: [
+				{
+					ui : 'round',
+					iconMask : true,
+					iconCls : 'info',
+                	handler: function() {
+						gotoInfo();
+	            	}
+
+				},
 				{xtype: 'spacer'},
 				{
                 text: 'back',
@@ -62,6 +95,11 @@ OKnesset = new Ext.Application({
                 }
             }]
         });
+
+        OKnesset.infoPanelToolbar = new Ext.Toolbar({
+                title: OKnesset.strings.openKnessetTitle
+			});
+
 
 		OKnesset.memberBillsTitle = new Ext.Panel({
 			id: 'memberBillsTitle',
@@ -195,17 +233,34 @@ OKnesset = new Ext.Application({
             id: 'partyListWrapper',
             layout: 'fit',
             items: [OKnesset.listPanel],
-            dockedItems: [{
-                xtype: 'toolbar',
-                title: OKnesset.strings.partiesTitle
-            }]
+            dockedItems: [OKnesset.partyListToolbar]
+        });
+
+		OKnesset.infoPanel = new Ext.Panel({
+            id: 'infoPanel',
+            layout: 'fit',
+			cls: 'infoPanel',
+			tpl : '{dateString}',
+            items: [],
+            dockedItems: [OKnesset.infoPanelToolbar,
+			       {
+			            dock : 'bottom',
+			            ui   : 'light',
+			            items: [
+			                {
+								xtype : 'button',
+								handler : backFromInfo,
+			                    text: OKnesset.strings.back
+			                }
+			            ]
+			        }]
         });
 
         OKnesset.Viewport = new Ext.Panel ({
             fullscreen: true,
             layout: 'card',
             cardSwitchAnimation: 'slide',
-            items: [OKnesset.partyListWrapper, OKnesset.memberListWrapper, OKnesset.memberPanelWrapper]
+            items: [OKnesset.partyListWrapper, OKnesset.memberListWrapper, OKnesset.memberPanelWrapper, OKnesset.infoPanel]
         });
 
 	   mainLaunchTimeEnd = new Date();
@@ -226,16 +281,18 @@ OKnesset = new Ext.Application({
 });
 
 function loadInitialData(){
-			if (localStorage.getItem("PartyData") != null){
-			// load data from localstorage (most updated locally)
-			setTimeout(function(){
-							var partyData = JSON.parse(localStorage.getItem("PartyData"));
-							updatePartyData(partyData);
-							checkFullDataFromWeb();
-						}, 0);
-		} else {
-			// load initial data (data shipped with the application)
-			Ext.Ajax.request({
+	if (localStorage.getItem("PartyData") != null){
+		// load data from localstorage (most updated locally)
+		setTimeout(function(){
+						var partyData = JSON.parse(localStorage.getItem("PartyData"));
+						updatePartyData(partyData);
+						checkFullDataFromWeb();
+					}, 0);
+	} else {
+		// set the slimData date, it will be overridden once the partData is loaded
+		localStorage.setItem("PartyDataDate", slimDataDate.getTime());
+		// load initial data (data shipped with the application)
+		Ext.Ajax.request({
 			url: 'javascripts/partyData.js.jpg',
 			callback: function(options, success, response){
 				// for some reason, Ext.Ajax returns success == false when the local request returns
@@ -283,7 +340,7 @@ function checkFullDataFromWeb(){
     				navigator.network.connection.type == Connection.CELL_4G) {
 
 			console.log("** updating full data by 3G");
-			var dialogtxt = Ext.String.format(OKnesset.strings.downloadDataText, dateToString(partyDataDate));
+			var dialogtxt = Ext.util.Format.format(OKnesset.strings.downloadDataText, dateToString(partyDataDate));
 			navigator.notification.confirm(dialogtxt, checkFullDataFromWebCallback, OKnesset.strings.downloadDataTitle, OKnesset.strings.dialogOKCancel);
 		} else {
 			console.log("** not updating full data becuase of no internet");
@@ -321,7 +378,7 @@ function dateToString(date){
 	var month = date.getMonth() + 1;
 	var day = date.getDate();
 	var year = date.getFullYear();
-	return "" + month + "/" + day + "/" + year;
+	return "" + day + "/" + month + "/" + year;
 }
 
 // update the party store with the full data (replace the slimData)
@@ -337,7 +394,7 @@ function gotoParty(record){
 
 	GATrackParty(record.data.name);
 	OKnesset.memberListToolbar.setTitle(name);
-	OKnesset.memberListToolbar.items.getAt(1).setText(OKnesset.strings.partiesTitle);
+	OKnesset.memberListToolbar.items.getAt(2).setText(OKnesset.strings.partiesTitle);
 	if (OKnesset.memberList.scroller) {
 		OKnesset.memberList.scroller.scrollTo({
 			x: 0,
@@ -369,7 +426,7 @@ function gotoMember(record){
 	}
 
 	// back button
-    OKnesset.memberPanelToolbar.items.getAt(1).setText(OKnesset.memberListToolbar.title);
+    OKnesset.memberPanelToolbar.items.getAt(2).setText(OKnesset.memberListToolbar.title);
     OKnesset.Viewport.setActiveItem('memberPanelWrapper', {type:'slide', direction:'right'});
 }
 
@@ -409,6 +466,17 @@ function gotoBillCallback(url, billUrl){
 						}
 					  });
 	}, 10);
+}
+
+function gotoInfo(){
+	console.log("** info button clicked");
+	OKnesset.currentPanelId = OKnesset.Viewport.getActiveItem().getId();
+	OKnesset.infoPanel.update({dateString : Ext.util.Format.format(OKnesset.strings.dataDate, dateToString(new Date(parseInt(localStorage.getItem("PartyDataDate")))))});
+   	OKnesset.Viewport.setActiveItem('infoPanel', {type:'flip'});
+}
+
+function backFromInfo(){
+	OKnesset.Viewport.setActiveItem(OKnesset.currentPanelId, {type:'flip'});
 }
 
 
