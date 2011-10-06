@@ -84,21 +84,18 @@ OKnesset = new Ext.Application({
             }]
         });
 
-        OKnesset.billPanelToolbar = new Ext.Toolbar({
+        OKnesset.infoPanelToolbar = new Ext.Toolbar({
             items: [
 				{xtype: 'spacer'},
 				{
                 text: 'back',
                 ui: 'forward',
                 handler: function() {
-                    OKnesset.Viewport.setActiveItem('memberPanelWrapper', {type:'slide', direction:'left'});
+					backFromInfo();
                 }
-            }]
-        });
-
-        OKnesset.infoPanelToolbar = new Ext.Toolbar({
-                title: OKnesset.strings.openKnessetTitle
-			});
+            	}],
+            title: OKnesset.strings.openKnessetTitle
+		});
 
 
 		OKnesset.memberBillsTitle = new Ext.Panel({
@@ -472,11 +469,12 @@ function gotoInfo(){
 	console.log("** info button clicked");
 	OKnesset.currentPanelId = OKnesset.Viewport.getActiveItem().getId();
 	OKnesset.infoPanel.update({dateString : Ext.util.Format.format(OKnesset.strings.dataDate, dateToString(new Date(parseInt(localStorage.getItem("PartyDataDate")))))});
-   	OKnesset.Viewport.setActiveItem('infoPanel', {type:'flip'});
+    OKnesset.infoPanelToolbar.items.getAt(1).setText(OKnesset.Viewport.getActiveItem().getDockedItems()[0].title);
+   	OKnesset.Viewport.setActiveItem('infoPanel', {type:'slide', direction : 'up'});
 }
 
 function backFromInfo(){
-	OKnesset.Viewport.setActiveItem(OKnesset.currentPanelId, {type:'flip'});
+	OKnesset.Viewport.setActiveItem(OKnesset.currentPanelId, {type:'slide', direction : 'down'});
 }
 
 
@@ -484,7 +482,7 @@ function onBackKey(){
 	var activeItem = OKnesset.Viewport.getActiveItem();
 	var dockedItem = activeItem.getDockedItems()[0];
 	var backButton = dockedItem.items.findBy(function(item){
-		return item.isXType('button');
+		return item.ui === 'forward';
 	});
 
 	if (backButton !== null){
