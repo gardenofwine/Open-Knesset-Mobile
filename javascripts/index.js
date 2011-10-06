@@ -192,6 +192,21 @@ OKnesset = new Ext.Application({
             dockedItems: [OKnesset.memberPanelToolbar]
 		});
 
+		OKnesset.memberPanelWrapper.currentMemeber = null;
+
+		OKnesset.memberPanelWrapper.refresh = function(){
+			//get current member data from Party store, which is updated
+			var party = getPartyFromPartyStoreByName(OKnesset.memberPanelWrapper.currentMemeber.party);
+			Ext.iterate(party.data.members, function(value, index) {
+				if (value.id === OKnesset.memberPanelWrapper.currentMemeber.id) {
+					updateMemberData(value);
+					return false;
+				}
+			});
+
+			OKnesset.memberBillList.refresh();
+		}
+
         OKnesset.memberList = new Ext.List({
             id: 'memberList',
             itemTpl: '<div>{#} {name}</div>',
@@ -213,6 +228,14 @@ OKnesset = new Ext.Application({
             dockedItems: OKnesset.memberListToolbar
         });
 
+		OKnesset.memberListWrapper.currentParty = null;
+
+		OKnesset.memberListWrapper.refresh = function() {
+			var party = getPartyFromPartyStoreByName(OKnesset.memberListWrapper.currentParty.name);
+			OKnesset.MemberStore.loadData(party.data.members,false);
+			OKnesset.memberList.refresh();
+		}
+
         OKnesset.listPanel = new Ext.List({
             id: 'indexlist',
             store: OKnesset.PartyStore,
@@ -233,10 +256,14 @@ OKnesset = new Ext.Application({
             dockedItems: [OKnesset.partyListToolbar]
         });
 
+		OKnesset.partyListWrapper.refresh = function(){
+			OKnesset.listPanel.refresh();
+		}
+
 		OKnesset.infoPanel = new Ext.Panel({
             id: 'infoPanel',
             layout: 'fit',
-			cls: 'infoPanel',
+			cls: 'textCenter',
 			tpl : '{dateString}',
             items: [],
             dockedItems: [OKnesset.infoPanelToolbar,
@@ -361,15 +388,45 @@ function fetchFullDataFromWeb(){
 				//					loadTime = new Date();
 				eval(response.responseText);
 				console.log('Oknesset web parser loaded');
-				OKnessetParser.loadData(updatePartyData);
-				var now = new Date();
-				localStorage.setItem("PartyDataDate", now.getTime());
+				OKnessetParser.loadData(function(data){
+					displayFetchCompleteNotification();
+					var partyDataString = JSON.stringify(data);
+					updatePartyData(data);
+					var now = new Date();
+					localStorage.setItem("PartyDataDate", now.getTime());
+					localStorage.setItem("PartyData", partyDataString);
+				});
 			}
 			else {
 				console.log('Oknesset web parser failure (' + JSON.stringify(response) + ') with status code ' + response.status);
 			}
 		}
 	});
+}
+
+function displayFetchCompleteNotification(){
+	console.log("** fetch complete dialog needs to be created? " + (!OKnesset.fetchCompleteOverlay));
+	if (!OKnesset.fetchCompleteOverlay) {
+		OKnesset.fetchCompleteOverlay = new Ext.Panel({
+			floating: true,
+			centered: true,
+			width: 300,
+			height: 200,
+			cls: 'textCenter',
+			styleHtmlContent: true,
+			html: OKnesset.strings.updateComplete,
+			dockedItems: [{
+				dock: 'top',
+				xtype: 'toolbar',
+				title: OKnesset.strings.oknessetName
+			}]
+		});
+	}
+    OKnesset.fetchCompleteOverlay.show('pop');
+
+	Ext.defer(function() {
+	    OKnesset.fetchCompleteOverlay.hide();
+	}, 200000);
 }
 function dateToString(date){
 	var month = date.getMonth() + 1;
@@ -382,7 +439,9 @@ function dateToString(date){
 function updatePartyData(fullPartyData) {
 	console.log("-=updatePartyData=-");
 	OKnesset.PartyStore.loadData(fullPartyData, false);
-	OKnesset.Viewport.getActiveItem().items.getAt(0).refresh();
+//	OKnesset.Viewport.getActiveItem().items.getAt(0).refresh();
+	// A OKnesset that can be refreshed has a refresh function
+	OKnesset.Viewport.getActiveItem().refresh();
 }
 
 function gotoParty(record){
@@ -390,6 +449,8 @@ function gotoParty(record){
 	var name = record.data.name;
 
 	GATrackParty(record.data.name);
+	OKnesset.memberListWrapper.currentParty = record.data;
+
 	OKnesset.memberListToolbar.setTitle(name);
 	OKnesset.memberListToolbar.items.getAt(2).setText(OKnesset.strings.partiesTitle);
 	if (OKnesset.memberList.scroller) {
@@ -410,10 +471,8 @@ function gotoMember(record){
 	OKnesset.memberImagePanel.update({
 		img_url: "images/members/" + member.img_url.substring(member.img_url.lastIndexOf('/')+1)
 	});
-	OKnesset.memberBillsTitle.update({billNumber: member.bills.length});
-	OKnesset.memberInfoPanel.update(member);
-	OKnesset.MemberBillsStore.loadData(member.bills);
-    OKnesset.memberPanelToolbar.setTitle(member.name);
+
+	updateMemberData(member);
 	// scroll bill list up
 	if (OKnesset.memberBillList.scroller) {
 		OKnesset.memberBillList.scroller.scrollTo({
@@ -425,6 +484,14 @@ function gotoMember(record){
 	// back button
     OKnesset.memberPanelToolbar.items.getAt(2).setText(OKnesset.memberListToolbar.title);
     OKnesset.Viewport.setActiveItem('memberPanelWrapper', {type:'slide', direction:'right'});
+}
+
+function updateMemberData(member){
+	OKnesset.memberBillsTitle.update({billNumber: member.bills.length});
+	OKnesset.memberInfoPanel.update(member);
+	OKnesset.MemberBillsStore.loadData(member.bills);
+    OKnesset.memberPanelToolbar.setTitle(member.name);
+	OKnesset.memberPanelWrapper.currentMemeber = member;
 }
 
 function gotoBill(record){
@@ -490,6 +557,12 @@ function onBackKey(){
 	} else {
 		navigator.app.exitApp();
 	}
+}
+
+function getPartyFromPartyStoreByName(name){
+	var partyIndex = OKnesset.PartyStore.findExact('name', name);
+	return OKnesset.PartyStore.getAt(partyIndex);
+
 }
 
 function isPhoneGap(){

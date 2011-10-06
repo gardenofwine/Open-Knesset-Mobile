@@ -10,6 +10,8 @@ OKnesset.strings = {
 	errorOpenBill 		: 'לא ניתן לפתוח את הצעת החוק בדפדפן',
 	openKnessetTitle	: 'כנסת פתוחה',
 	back				: 'חזרה',
-	dataDate			: 'הנתונים מעודכנים לתאריך {0}.'
+	dataDate			: 'הנתונים מעודכנים לתאריך {0}.',
+	updateComplete		: "עדכון נתונים נעשה בהצלחה",
+	oknessetName		: 'כנסת פתוחה'
 };
 
