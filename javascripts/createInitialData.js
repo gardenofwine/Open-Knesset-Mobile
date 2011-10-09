@@ -51,7 +51,7 @@ var OKnessetParser = new function(){
 	        };
 	        slimDataMap[value.party].members.push(slimMember);
 
-	        stringImageListForDownload += "-O\nurl = \"" + value.img_url + "\"\n";
+	       // stringImageListForDownload += "-O\nurl = \"" + value.img_url + "\"\n";
 	    });
 
 		// sort members
