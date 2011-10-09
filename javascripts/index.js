@@ -103,7 +103,8 @@ OKnesset = new Ext.Application({
             layout: 'fit',
 			dock: 'bottom',
             tpl: '<tpl if="billNumber &gt; 0"><h2 class="memberBillsTitle x-toolbar-dark">'+OKnesset.strings.hasBillsTitle+'</h2></tpl>\
-				  <tpl if="billNumber == 0"><h2 class="memberBillsTitle x-toolbar-dark">'+OKnesset.strings.hasNoBillsTitle+'</h2></tpl>'
+				  <tpl if="billNumber == 0 && !isMinister"><h2 class="memberBillsTitle x-toolbar-dark">'+OKnesset.strings.hasNoBillsTitle+'</h2></tpl>\
+				  <tpl if="billNumber == 0 && isMinister"><h2 class="memberBillsTitle x-toolbar-dark">'+OKnesset.strings.ministerHasNoBillsTitle+'</h2></tpl>'
 		});
 
         OKnesset.memberBillList = new Ext.List({
@@ -179,6 +180,12 @@ OKnesset = new Ext.Application({
 						// TODO calculate only once!
 						var realImageHeight = OKnesset.memberPanel.getHeight() - OKnesset.memberBillsTitle.getHeight();
 						var realImageWidth = 75/110 * realImageHeight;
+
+						// apply maximum width
+						if (realImageWidth > OKnesset.memberPanel.getWidth() * (3/7)) {
+							realImageWidth = OKnesset.memberPanel.getWidth() * (3/7);
+							realImageHeight = realImageWidth * 110/75;
+						}
 //						realHeight = realHeight.replace("px","");
 						// Set the member image height to the actual panel height (rescaling if necessary)
 						OKnesset.memberInfoPanel.setWidth(OKnesset.memberPanel.getWidth() - realImageWidth);
@@ -405,13 +412,12 @@ function fetchFullDataFromWeb(){
 }
 
 function displayFetchCompleteNotification(){
-	console.log("** fetch complete dialog needs to be created? " + (!OKnesset.fetchCompleteOverlay));
 	if (!OKnesset.fetchCompleteOverlay) {
 		OKnesset.fetchCompleteOverlay = new Ext.Panel({
 			floating: true,
 			centered: true,
 			width: 300,
-			height: 200,
+			height: 120,
 			cls: 'textCenter',
 			styleHtmlContent: true,
 			html: OKnesset.strings.updateComplete,
@@ -426,7 +432,7 @@ function displayFetchCompleteNotification(){
 
 	Ext.defer(function() {
 	    OKnesset.fetchCompleteOverlay.hide();
-	}, 200000);
+	}, 2000);
 }
 function dateToString(date){
 	var month = date.getMonth() + 1;
@@ -473,6 +479,7 @@ function gotoMember(record){
 	});
 
 	updateMemberData(member);
+
 	// scroll bill list up
 	if (OKnesset.memberBillList.scroller) {
 		OKnesset.memberBillList.scroller.scrollTo({
@@ -483,11 +490,28 @@ function gotoMember(record){
 
 	// back button
     OKnesset.memberPanelToolbar.items.getAt(2).setText(OKnesset.memberListToolbar.title);
+
+	// change layout according if the member is a "minister"
+	if  (isMinister(member)) {
+		if (member.bills.length > 0){
+			OKnesset.memberBillList.flex = 0.5;
+		} else {
+			OKnesset.memberBillList.flex = 0;
+		}
+	} else {
+		OKnesset.memberBillList.flex = 1.5;
+	}
+
+
     OKnesset.Viewport.setActiveItem('memberPanelWrapper', {type:'slide', direction:'right'});
 }
 
+function isMinister(member){
+	return (member.roles.indexOf(OKnesset.strings.ministerIndicator) != -1);
+}
+
 function updateMemberData(member){
-	OKnesset.memberBillsTitle.update({billNumber: member.bills.length});
+	OKnesset.memberBillsTitle.update({billNumber: member.bills.length, isMinister : isMinister(member)});
 	OKnesset.memberInfoPanel.update(member);
 	OKnesset.MemberBillsStore.loadData(member.bills);
     OKnesset.memberPanelToolbar.setTitle(member.name);
