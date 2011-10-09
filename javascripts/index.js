@@ -387,28 +387,51 @@ function checkFullDataFromWebCallback(btnIndex){
 }
 
 function fetchFullDataFromWeb(){
+	// load the update script from the web, as it may change according to api changes in oknesset.org
 	Ext.Ajax.request({
-		url: 'javascripts/createInitialData.js',
-		callback: function(options, success, response){
-			// for some reason, Ext.Ajax returns success == false when the local request returns
-			if (response.responseText != null && response.responseText.length > 0) {
-				//					loadTime = new Date();
-				eval(response.responseText);
-				console.log('Oknesset web parser loaded');
-				OKnessetParser.loadData(function(data){
-					displayFetchCompleteNotification();
-					var partyDataString = JSON.stringify(data);
-					updatePartyData(data);
-					var now = new Date();
-					localStorage.setItem("PartyDataDate", now.getTime());
-					localStorage.setItem("PartyData", partyDataString);
-				});
-			}
-			else {
-				console.log('Oknesset web parser failure (' + JSON.stringify(response) + ') with status code ' + response.status);
-			}
+		url: 'http://oknesset-mobile.appspot.com/static/js/mobile/createInitialData.js',
+		success: function(response, options){
+			eval(response.responseText);
+			console.log('Oknesset web parser loaded from web');
+			OKnessetParser.loadData(function(data){
+				displayFetchCompleteNotification();
+				var partyDataString = JSON.stringify(data);
+				updatePartyData(data);
+				var now = new Date();
+				localStorage.setItem("PartyDataDate", now.getTime());
+				localStorage.setItem("PartyData", partyDataString);
+			});
+		},
+		failure : function(response, options){
+			console.log('Oknesset web parser failed to load from web (' + JSON.stringify(response) + ') with status code ' + response.status + '. Attempting to laod locally');
+			fetchFullDataFromWebByLocalScript();
 		}
 	});
+
+	function fetchFullDataFromWebByLocalScript() {
+		Ext.Ajax.request({
+			url: 'javascripts/createInitialData.js',
+			callback: function(options, success, response){
+				// for some reason, Ext.Ajax returns success == false when the local request returns
+				if (response.responseText != null && response.responseText.length > 0) {
+					eval(response.responseText);
+					console.log('Oknesset web parser loaded locally');
+					OKnessetParser.loadData(function(data){
+						displayFetchCompleteNotification();
+						var partyDataString = JSON.stringify(data);
+						updatePartyData(data);
+						var now = new Date();
+						localStorage.setItem("PartyDataDate", now.getTime());
+						localStorage.setItem("PartyData", partyDataString);
+					});
+				}
+				else {
+					console.log('Oknesset web parser failed to load locally (' + JSON.stringify(response) + ') with status code ' + response.status + '. Aborting content update.');
+				}
+			}
+		});
+	}
+
 }
 
 function displayFetchCompleteNotification(){
