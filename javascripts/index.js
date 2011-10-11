@@ -521,13 +521,10 @@ function gotoParty(record){
 
 function gotoMember(record){
     var member = record.data;
-
     GATrackMember(member.name);
-
     OKnesset.memberImagePanel.update({
         img_url: "images/members/" + member.img_url.substring(member.img_url.lastIndexOf('/') + 1)
     });
-
     updateMemberData(member);
 
     // scroll bill list up
@@ -542,7 +539,7 @@ function gotoMember(record){
     OKnesset.memberPanelToolbar.items.getAt(2).setText(OKnesset.memberListToolbar.title);
 
     // change layout according if the member is a "minister"
-//    if (isMinister(member)) {
+//    if (hasExcuseForNoBills(member)) {
 //        if (member.bills.length > 0) {
 //            OKnesset.memberBillList.flex = 0.5;
 //        }
@@ -562,31 +559,29 @@ function gotoMember(record){
 //		OKnesset.memberBillList.setScrollable(true);
 //	}
 
-	if (isMinister(member)) {
-		OKnesset.memberBillList.emptyText = "<br/><br/><br/>" + OKnesset.strings.ministerHasNoBillsTitle;
+	if (hasExcuseForNoBills(member)) {
+		OKnesset.memberBillList.emptyText = "<br/><br/><br/>" + OKnesset.strings.excuseForNoBills;
 	}
 	else {
 		OKnesset.memberBillList.emptyText = "";
 	}
 
 	OKnesset.memberBillList.refresh();
-
-
-
     OKnesset.Viewport.setActiveItem('memberPanelWrapper', {
         type: 'slide',
         direction: 'right'
     });
 }
 
-function isMinister(member){
-    return (member.roles.indexOf(OKnesset.strings.ministerIndicator) != -1);
+function hasExcuseForNoBills(member){
+
+    return (member.roles.indexOf(OKnesset.strings.ministerIndicator) != -1 || member.roles === OKnesset.strings.knessetChairman);
 }
 
 function updateMemberData(member){
     OKnesset.memberBillsTitle.update({
         billNumber: member.bills.length,
-        isMinister: isMinister(member)
+        hasExcuseForNoBills: hasExcuseForNoBills(member)
     });
     OKnesset.memberInfoPanel.update(member);
     OKnesset.MemberBillsStore.loadData(member.bills);

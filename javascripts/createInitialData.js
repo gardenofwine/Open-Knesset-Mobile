@@ -27,6 +27,10 @@ var OKnessetParser = new function(){
 				return;
 			}
 
+			if (value.roles === "יו\"ר ועדת הפירושים") {
+				value.roles = "יושב ראש הכנסת";
+			}
+
 			// filter out bills with stage 2 or less
 			for (var i = 0; i < value.bills.length; i++) {
 				if (parseInt(value.bills[i].stage) < 2) {

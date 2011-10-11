@@ -1,7 +1,7 @@
 OKnesset.strings = {
 	hasBillsTitle 			: "הצעות חוק פרטיות שעברו קריאה טרומית",
 	hasNoBillsTitle			: "אין הצעות חוק פרטיות שעברו קריאה טרומית",
-	ministerHasNoBillsTitle	: "שרים בממשלה אינם מגישים, ככל, הצעות חוק פרטיות",
+	excuseForNoBills		: 'שרים בממשלה ויו"ר הכנסת אינם מגישים, ככלל, הצעות חוק פרטיות',
 	partiesTitle	 		:'מפלגות',
 	openBillTitle 			:'הצעת החוק תיפתח בדפדפן',
 	openBillText			: 'לפתוח בדפדפן?',
@@ -14,6 +14,7 @@ OKnesset.strings = {
 	dataDate				: 'הנתונים מעודכנים לתאריך {0}.',
 	updateComplete			: "עדכון נתונים נעשה בהצלחה",
 	oknessetName			: 'כנסת פתוחה',
-	ministerIndicator		: "שר"
+	ministerIndicator		: "שר",
+	knessetChairman			: "יושב ראש הכנסת"
 };
 
