@@ -1,5 +1,6 @@
 .x-list-item {
   direction :rtl;
+  background-color: white;
 }
 
 .partySize {
@@ -51,4 +52,13 @@ div.textCenter * {
 
 #memberBillList .x-list-header {
 	direction: rtl;
+}
+
+#memberBillList {
+	background-color: lightgrey;
+}
+
+/* Center empty bill list emptyText*/
+#memberBillList .x-list-parent {
+	text-align: center;
 }
