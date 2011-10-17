@@ -11,10 +11,17 @@ OKnesset.strings = {
 	errorOpenBill 			: 'לא ניתן לפתוח את הצעת החוק בדפדפן',
 	openKnessetTitle		: 'כנסת פתוחה',
 	back					: 'חזרה',
+	cancel					: 'ביטול',
 	dataDate				: 'הנתונים מעודכנים לתאריך {0}.',
 	updateComplete			: "עדכון נתונים נעשה בהצלחה",
 	oknessetName			: 'כנסת פתוחה',
 	ministerIndicator		: "שר",
-	knessetChairman			: "יושב ראש הכנסת"
+	knessetChairman			: "יושב ראש הכנסת",
+	emailDialogTitle		: "שליחת משוב על האפליקציה",
+	emailDialogBody			: "תודה שבחרתם לעזור לנו לשפר את האפליקציה 'כנסת פתוחה'! </br>שלחו מייל בנושא:",
+	emailGeneral			: "משוב כללי",
+	emailPartyList			: "משוב בנוגע למסך מפלגות",
+	emailParty				: "משוב בנוגע למסך מפלגת {0}",
+	emailMember				: 'משוב בנוגע למסך ח"כ {0}'
 };
 

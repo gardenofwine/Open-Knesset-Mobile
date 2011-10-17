@@ -17,6 +17,7 @@
 }
 /* info page design*/
 div.textCenter * {
+	direction : rtl;
 	text-align:center
 }
 
