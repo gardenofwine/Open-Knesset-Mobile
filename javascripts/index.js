@@ -160,21 +160,9 @@ OKnesset = new Ext.Application({
                 type: 'vbox',
                 align: 'stretch'
             },
-            //            tpl: "Bills",
             listeners: {
                 afterlayout: {
                     fn: function(comp){
-
-                        //                        if (OKnesset.MemberBillsStore.getCount() == 0) {
-                        //                            OKnesset.memberBillList.setVisible(false);
-                        //                        }
-                        //                        else {
-                        //                            OKnesset.memberBillList.setVisible(true);
-                        //                        }
-
-                        //						console.log("*** memberPanelAfterLAyout memberPanel height" + OKnesset.memberPanel.getHeight());
-                        //						console.log("** image width " + OKnesset.memberImagePanel.getWidth() + "image height " + OKnesset.memberImagePanel.getHeight() + " member panel width" + Ext.DomQuery.select("#memberPanel")[0].style.width + "(" + OKnesset.memberPanel.getWidth() +" element.scrollHeight="+Ext.DomQuery.select("#memberPanel")[0].scrollHeight +
-                        //						" element.clientHeight=" + Ext.DomQuery.select("#memberPanel")[0].clientHeight);
                         // TODO calculate only once!
                         var realImageHeight = OKnesset.memberPanel.getHeight() - OKnesset.memberBillsTitle.getHeight();
                         var realImageWidth = 75 / 110 * realImageHeight;
@@ -184,7 +172,6 @@ OKnesset = new Ext.Application({
                             realImageWidth = OKnesset.memberPanel.getWidth() * (3 / 7);
                             realImageHeight = realImageWidth * 110 / 75;
                         }
-                        //						realHeight = realHeight.replace("px","");
                         // Set the member image height to the actual panel height (rescaling if necessary)
                         OKnesset.memberInfoPanel.setWidth(OKnesset.memberPanel.getWidth() - realImageWidth);
                         OKnesset.memberImagePanel.setHeight(realImageHeight);
@@ -311,16 +298,6 @@ OKnesset = new Ext.Application({
         console.log('sencha touch load time ' + (mainLaunchTimeEnd.getTime() - mainLaunchTime.getTime()) / 1000);
 
         loadInitialData();
-        //		$.getScript('javascripts/partyData.js', function(data, textStatus){
-        //   			if (textStatus == 'success'){
-        //			   loadTime = new Date();
-        //	   			console.log('Full data load was performed in ' + (loadTime.getTime() - mainLaunchTimeEnd.getTime()) / 1000);
-        //				OKnesset.PartyStore.loadData(partyData,false);
-        //				OKnesset.Viewport.getActiveItem().items.getAt(0).refresh();
-        //			} else {
-        //	   			console.log('Load failed.');
-        //			}
-        //		});
     }
 });
 
@@ -836,10 +813,8 @@ function GATrackBillCanceled(url){
 
 function GATrackBill(url, callback){
     if (isPhoneGap()) {
-        // TODO ad callback to pageview
+        // TODO add callback to pageview
         googleAnalytics.trackPageview("/safari/" + url);
-
-        //		googleAnalytics.trackEvent(callback, "bills", "open", url);
     }
 
     callback();
