@@ -12,6 +12,7 @@ OKnesset.strings = {
 	openKnessetTitle		: 'כנסת פתוחה',
 	back					: 'חזרה',
 	cancel					: 'ביטול',
+	ok						: 'אישור',
 	dataDate				: 'הנתונים מעודכנים לתאריך {0}.',
 	updateComplete			: "עדכון נתונים נעשה בהצלחה",
 	oknessetName			: 'כנסת פתוחה',
@@ -24,6 +25,8 @@ OKnesset.strings = {
 	emailParty				: "משוב למסך מפלגת {0}",
 	emailMember				: 'משוב למסך ח"כ {0}',
 	feedbackEmailAddress	: 'oknesset.mobile@gmail.com',
-	errorAndroidEmail		: 'כשלון בשליחת מייל'
+	errorAndroidEmail		: 'כשלון בשליחת מייל',
+	disclaimerDialogBody	: disclaimerText
+
 };
 

@@ -297,9 +297,55 @@ OKnesset = new Ext.Application({
         mainLaunchTimeEnd = new Date();
         console.log('sencha touch load time ' + (mainLaunchTimeEnd.getTime() - mainLaunchTime.getTime()) / 1000);
 
+        displayDisclaimer();
+
         loadInitialData();
     }
 });
+
+function initDisclaimerDialog(){
+    if (!OKnesset.disclaimerDialog) {
+        OKnesset.disclaimerDialog = new Ext.Panel({
+            floating: true,
+            centered: true,
+            width: OKnesset.Viewport.getWidth() * 0.9,
+            height: OKnesset.Viewport.getHeight() * 0.9,
+            styleHtmlContent: true,
+            style: {
+                direction: 'rtl'
+            },
+            scroll: "vertical",
+            hideOnMaskTap: false,
+            items: [{
+                html: OKnesset.strings.disclaimerDialogBody,
+                height: "5em"
+            }],
+            dockedItems: [{
+                dock: 'top',
+                xtype: 'toolbar',
+                title: OKnesset.strings.oknessetName
+            }, {
+                xtype: 'button',
+                ui: 'confirm',
+                handler: function(){
+                    OKnesset.disclaimerDialog.hide();
+                    localStorage.setItem("disclaimerDismissed", true);
+                },
+                text: OKnesset.strings.ok,
+                dock: 'bottom'
+            }]
+        });
+    }
+}
+
+
+function displayDisclaimer(){
+    var disclaimerDismissed = localStorage.getItem("disclaimerDismissed");
+    //	if (disclaimerDismissed !== 'true'){
+    initDisclaimerDialog();
+    OKnesset.disclaimerDialog.show();
+    //	}
+}
 
 function loadInitialData(){
     if (localStorage.getItem("PartyData") != null) {
