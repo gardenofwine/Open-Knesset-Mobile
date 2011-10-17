@@ -668,7 +668,7 @@ function getMemberListItems(){
         }];
     }
 
-	OKnesset.emailDialog.memberListItems[1].text = Ext.util.Format.format(OKnesset.strings.emailParty, OKnesset.memberListWrapper.currentParty.name);
+    OKnesset.emailDialog.memberListItems[1].text = Ext.util.Format.format(OKnesset.strings.emailParty, OKnesset.memberListWrapper.currentParty.name);
     return OKnesset.emailDialog.memberListItems;
 }
 
@@ -688,7 +688,7 @@ function getMemberPanelItems(){
         }];
     }
 
-	OKnesset.emailDialog.memberPanelItems[1].text = Ext.util.Format.format(OKnesset.strings.emailMember, OKnesset.memberPanelWrapper.currentMemeber.name);
+    OKnesset.emailDialog.memberPanelItems[1].text = Ext.util.Format.format(OKnesset.strings.emailMember, OKnesset.memberPanelWrapper.currentMemeber.name);
     return OKnesset.emailDialog.memberPanelItems;
 }
 
@@ -722,7 +722,30 @@ function displayEmailDialog(){
 }
 
 function sendEmail(subject){
-    console.log("sending email with subject " + subject);
+    console.log("** sending email with subject " + subject);
+    if (isPhoneGap()) {
+        if (isiOS()) {
+            var emailCallback = function(result){
+                if (result != EmailComposer.ComposeResultType.Cancelled) {
+                    OKnesset.emailDialog.hide();
+                }
+            };
+            window.plugins.emailComposer.showEmailComposerWithCB(emailCallback, subject, "", OKnesset.strings.feedbackEmailAddress);
+        } else if (isAndroid) {
+            var extras = {};
+            extras[WebIntent.EXTRA_SUBJECT] = subject;
+            extras[WebIntent.EXTRA_EMAIL] = [OKnesset.strings.feedbackEmailAddress];
+            window.plugins.webintent.startActivity({
+                action: WebIntent.ACTION_SEND,
+                type: 'text/plain',
+                extras: extras
+            }, function(){
+                OKnesset.emailDialog.hide();
+            }, function(){
+                alert(OKnesset.strings.errorAndroidEmail);
+            });
+        }
+    }
 }
 
 function gotoInfo(){
@@ -747,6 +770,11 @@ function backFromInfo(){
 
 
 function onBackKey(){
+    if (OKnesset.emailDialog && OKnesset.emailDialog.isVisible()) {
+        OKnesset.emailDialog.hide();
+        return;
+    }
+
     var activeItem = OKnesset.Viewport.getActiveItem();
     var dockedItem = activeItem.getDockedItems()[0];
     var backButton = dockedItem.items.findBy(function(item){

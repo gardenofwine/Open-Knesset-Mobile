@@ -20,8 +20,10 @@ OKnesset.strings = {
 	emailDialogTitle		: "שליחת משוב על האפליקציה",
 	emailDialogBody			: "תודה שבחרתם לעזור לנו לשפר את האפליקציה 'כנסת פתוחה'! </br>שלחו מייל בנושא:",
 	emailGeneral			: "משוב כללי",
-	emailPartyList			: "משוב בנוגע למסך מפלגות",
-	emailParty				: "משוב בנוגע למסך מפלגת {0}",
-	emailMember				: 'משוב בנוגע למסך ח"כ {0}'
+	emailPartyList			: "משוב למסך מפלגות",
+	emailParty				: "משוב למסך מפלגת {0}",
+	emailMember				: 'משוב למסך ח"כ {0}',
+	feedbackEmailAddress	: 'oknesset.mobile@gmail.com',
+	errorAndroidEmail		: 'כשלון בשליחת מייל'
 };
 
