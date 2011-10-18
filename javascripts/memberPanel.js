@@ -4,10 +4,11 @@ var memberPanelHtml =
 			<tr> \
 				<td class="justify"><b>{roles}</b></td> \
 			</tr> \
-			<tr> \
-				<td class="justify"> \
-				<tpl if="committees.length &gt; 0 && gender == \'זכר\'"><b>חבר ב: </b></tpl> \
-				<tpl if="committees.length &gt; 0 && gender == \'נקבה\'"><b>חברה ב: </b></tpl> \
+			<tr class="textColorFix"> \
+				<td class="justify"><b> \
+				<tpl if="committees.length &gt; 0 && gender == \'זכר\'">חבר ב: </tpl> \
+				<tpl if="committees.length &gt; 0 && gender == \'נקבה\'">חברה ב: </tpl> \
+				</b> \
 				<tpl for="committees">{0}{[xindex == xcount ? "" : ", "]}</tpl></td> \
 			</tr> \
 		</table> \
