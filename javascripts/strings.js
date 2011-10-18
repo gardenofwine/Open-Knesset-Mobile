@@ -14,6 +14,7 @@ OKnesset.strings = {
 	cancel					: 'ביטול',
 	ok						: 'אישור',
 	dataDate				: 'הנתונים מעודכנים לתאריך {0}.',
+	updateNow				: 'עדכון נתונים כעת',
 	updateComplete			: "עדכון נתונים נעשה בהצלחה",
 	oknessetName			: 'כנסת פתוחה',
 	ministerIndicator		: "שר",

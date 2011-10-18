@@ -11,12 +11,6 @@ OKnesset = new Ext.Application({
             return;
         }
 
-        if (isPhoneGap() && isAndroid()) {
-            document.addEventListener("backbutton", onBackKey, false);
-        }
-
-        googleAnalytics();
-
         mainLaunchTime = new Date();
         function printLoadingTimes(){
             console.log('mainLaunch (' + mainLaunchTime.toString() + ').  Phonegap load time ' + (phonegapEnd.getTime() - phonegapStart.getTime()) / 1000 + ' total scripts load time' + (scriptLoadEndTime.getTime() - scriptLoadStartTime.getTime()) / 1000);
@@ -49,185 +43,6 @@ OKnesset = new Ext.Application({
             title: OKnesset.strings.partiesTitle
         });
 
-        OKnesset.memberListToolbar = new Ext.Toolbar({
-            items: [OKnesset.toolbarInfoItem, OKnesset.toolbarMailItem, {
-                xtype: 'spacer'
-            }, {
-                text: 'back',
-                ui: 'forward',
-                handler: function(){
-                    OKnesset.Viewport.setActiveItem('partyListWrapper', {
-                        type: 'slide',
-                        direction: 'left'
-                    });
-                }
-            }]
-        });
-
-        OKnesset.memberPanelToolbar = new Ext.Toolbar({
-            items: [OKnesset.toolbarInfoItem, OKnesset.toolbarMailItem, {
-                xtype: 'spacer'
-            }, {
-                text: 'back',
-                ui: 'forward',
-                handler: function(){
-                    OKnesset.Viewport.setActiveItem('memberListWrapper', {
-                        type: 'slide',
-                        direction: 'left'
-                    });
-                }
-            }]
-        });
-
-        OKnesset.infoPanelToolbar = new Ext.Toolbar({
-            items: [{
-                text: 'back',
-                ui: 'forward',
-                handler: function(){
-                    backFromInfo();
-                }
-            }, {
-                xtype: 'spacer'
-            }],
-            title: OKnesset.strings.openKnessetTitle
-        });
-
-
-        OKnesset.memberBillsTitle = new Ext.Panel({
-            id: 'memberBillsTitle',
-            layout: 'fit',
-            dock: 'bottom',
-            tpl: '<tpl if="billNumber &gt; 0"><h2 class="memberBillsTitle x-toolbar-dark">' + OKnesset.strings.hasBillsTitle + '</h2></tpl>\
-				  <tpl if="billNumber == 0"><h2 class="memberBillsTitle x-toolbar-dark">' +
-            OKnesset.strings.hasNoBillsTitle +
-            '</h2></tpl>'
-        });
-
-        OKnesset.memberBillList = new Ext.List({
-            id: 'memberBillList',
-            itemTpl: '<div>{title}</div>',
-            store: OKnesset.MemberBillsStore,
-            layout: 'fit',
-            deferEmptyText: false,
-            grouped: true,
-            flex: 1.5,
-            listeners: {
-                itemtap: function(that, index, item, e){
-                    var record = that.store.getAt(index);
-                    gotoBill(record);
-                }
-            },
-            onItemDisclosure: gotoMember
-        });
-
-        OKnesset.memberImagePanel = new Ext.Panel({
-            id: 'memberImagePanel',
-            layout: 'fit',
-            //			height : '110',
-            //			flex : 1.5,
-            //            tpl: '<img src={img_url} width="75px" height="110px"></img>
-            tpl: '<img src={img_url} height="100%"></img>'
-        });
-
-        OKnesset.memberInfoPanel = new Ext.Panel({
-            id: 'memberInfoPanel',
-            //			flex : 4,
-            //			height : '110',
-            //			scroll : 'vertical',
-            tpl: memberPanelHtml
-        });
-
-        OKnesset.memberPanel = new Ext.Panel({
-            id: 'memberPanel',
-            //            layout: 'hbox',
-            //			height : '110',
-            flex: 1,
-            items: [OKnesset.memberInfoPanel],
-            dockedItems: [{
-                xtype: 'panel',
-                dock: 'bottom',
-                items: [OKnesset.memberBillsTitle]
-            }, {
-                xtype: 'panel',
-                dock: 'right',
-                items: [OKnesset.memberImagePanel]
-            }]
-        });
-
-        OKnesset.memberPanelWrapper = new Ext.Panel({
-            id: 'memberPanelWrapper',
-            layout: {
-                type: 'vbox',
-                align: 'stretch'
-            },
-            listeners: {
-                afterlayout: {
-                    fn: function(comp){
-                        // TODO calculate only once!
-                        var realImageHeight = OKnesset.memberPanel.getHeight() - OKnesset.memberBillsTitle.getHeight();
-                        var realImageWidth = 75 / 110 * realImageHeight;
-
-                        // apply maximum width
-                        if (realImageWidth > OKnesset.memberPanel.getWidth() * (3 / 7)) {
-                            realImageWidth = OKnesset.memberPanel.getWidth() * (3 / 7);
-                            realImageHeight = realImageWidth * 110 / 75;
-                        }
-                        // Set the member image height to the actual panel height (rescaling if necessary)
-                        OKnesset.memberInfoPanel.setWidth(OKnesset.memberPanel.getWidth() - realImageWidth);
-                        OKnesset.memberImagePanel.setHeight(realImageHeight);
-                        OKnesset.memberImagePanel.setWidth(realImageWidth);
-                        OKnesset.memberPanel.doLayout();
-                    }
-                }
-            },
-            items: [OKnesset.memberPanel, OKnesset.memberBillList],
-            dockedItems: [OKnesset.memberPanelToolbar]
-        });
-
-        OKnesset.memberPanelWrapper.currentMemeber = null;
-
-        OKnesset.memberPanelWrapper.refresh = function(){
-            //get current member data from Party store, which is updated
-            var party = getPartyFromPartyStoreByName(OKnesset.memberPanelWrapper.currentMemeber.party);
-            Ext.iterate(party.data.members, function(value, index){
-                if (value.id === OKnesset.memberPanelWrapper.currentMemeber.id) {
-                    updateMemberData(value);
-                    return false;
-                }
-            });
-
-            OKnesset.memberBillList.refresh();
-        }
-
-        OKnesset.memberList = new Ext.List({
-            id: 'memberList',
-            itemTpl: '<div>{#} {name}</div>',
-            store: OKnesset.MemberStore,
-            listeners: {
-                itemtap: function(that, index, item, e){
-                    var record = that.store.getAt(index);
-                    gotoMember(record);
-                }
-            },
-            onItemDisclosure: gotoMember
-        });
-
-
-        OKnesset.memberListWrapper = new Ext.Panel({
-            id: 'memberListWrapper',
-            layout: 'fit',
-            items: [OKnesset.memberList],
-            dockedItems: OKnesset.memberListToolbar
-        });
-
-        OKnesset.memberListWrapper.currentParty = null;
-
-        OKnesset.memberListWrapper.refresh = function(){
-            var party = getPartyFromPartyStoreByName(OKnesset.memberListWrapper.currentParty.name);
-            OKnesset.MemberStore.loadData(party.data.members, false);
-            OKnesset.memberList.refresh();
-        }
-
         OKnesset.listPanel = new Ext.List({
             id: 'indexlist',
             store: OKnesset.PartyStore,
@@ -252,37 +67,12 @@ OKnesset = new Ext.Application({
             OKnesset.listPanel.refresh();
         }
 
-        OKnesset.infoPanel = new Ext.Panel({
-            id: 'infoPanel',
-            layout: 'fit',
-            cls: 'textCenter',
-            tpl: '{dateString}',
-            items: [],
-            dockedItems: [OKnesset.infoPanelToolbar, {
-                dock: 'bottom',
-                ui: 'light',
-                items: [{
-                    xtype: 'button',
-                    handler: backFromInfo,
-                    text: OKnesset.strings.back
-                }]
-            }]
-        });
-
-        OKnesset.infoPanel.refresh = function(){
-            console.log("** OKnesset.Viewport.items=");
-            console.log(OKnesset.Viewport.items);
-            console.log("** currentPanelId=");
-            console.log(OKnesset.currentPanelId);
-
-            OKnesset.Viewport.items.getByKey(OKnesset.currentPanelId).refresh();
-        }
-
         OKnesset.Viewport = new Ext.Panel({
             fullscreen: true,
             layout: 'card',
             cardSwitchAnimation: 'slide',
-            items: [OKnesset.partyListWrapper, OKnesset.memberListWrapper, OKnesset.memberPanelWrapper, OKnesset.infoPanel]
+            //            items: [OKnesset.partyListWrapper, OKnesset.memberListWrapper, OKnesset.memberPanelWrapper, OKnesset.infoPanel]
+            items: [OKnesset.partyListWrapper]
         });
 
         // hide the native  splash screen
@@ -297,11 +87,241 @@ OKnesset = new Ext.Application({
         mainLaunchTimeEnd = new Date();
         console.log('sencha touch load time ' + (mainLaunchTimeEnd.getTime() - mainLaunchTime.getTime()) / 1000);
 
-        displayDisclaimer();
-
-        loadInitialData();
+        window.setTimeout(secondaryLaunch, 10);
     }
 });
+
+function secondaryLaunch(){
+    secondaryLaunchTimeStart = new Date();
+    console.log("** secondaryLaunch begin " + secondaryLaunchTimeStart.toString());
+
+    displayDisclaimer();
+    googleAnalytics();
+    if (isPhoneGap() && isAndroid()) {
+        document.addEventListener("backbutton", onBackKey, false);
+    }
+
+    OKnesset.infoPanelToolbar = new Ext.Toolbar({
+        items: [{
+            text: 'back',
+            ui: 'forward',
+            handler: function(){
+                backFromInfo();
+            }
+        }, {
+            xtype: 'spacer'
+        }],
+        title: OKnesset.strings.openKnessetTitle
+    });
+
+    OKnesset.infoPanel = new Ext.Panel({
+        id: 'infoPanel',
+        layout: 'vbox',
+        cls: 'textCenter',
+        items: [{
+            tpl: '{dateString}'
+        }, {
+            xtype: 'button',
+            width: "50%",
+            handler: checkFullDataFromWeb,
+            text: OKnesset.strings.updateNow
+        }, {
+            xtype: 'spacer',
+            height: "2em"
+        }, {
+            xtype: 'button',
+            handler: backFromInfo,
+            text: OKnesset.strings.back
+        }],
+        dockedItems: [OKnesset.infoPanelToolbar, {
+            dock: 'bottom',
+            ui: 'light',
+            items: [{
+                xtype: 'button',
+                handler: backFromInfo,
+                text: OKnesset.strings.back
+            }]
+        }]
+    });
+
+    OKnesset.infoPanel.refresh = function(){
+        // TODO refresh date
+        OKnesset.Viewport.items.getByKey(OKnesset.currentPanelId).refresh();
+    }
+
+    OKnesset.memberListToolbar = new Ext.Toolbar({
+        items: [OKnesset.toolbarInfoItem, OKnesset.toolbarMailItem, {
+            xtype: 'spacer'
+        }, {
+            text: 'back',
+            ui: 'forward',
+            handler: function(){
+                OKnesset.Viewport.setActiveItem('partyListWrapper', {
+                    type: 'slide',
+                    direction: 'left'
+                });
+            }
+        }]
+    });
+
+    OKnesset.memberPanelToolbar = new Ext.Toolbar({
+        items: [OKnesset.toolbarInfoItem, OKnesset.toolbarMailItem, {
+            xtype: 'spacer'
+        }, {
+            text: 'back',
+            ui: 'forward',
+            handler: function(){
+                OKnesset.Viewport.setActiveItem('memberListWrapper', {
+                    type: 'slide',
+                    direction: 'left'
+                });
+            }
+        }]
+    });
+
+    OKnesset.memberBillsTitle = new Ext.Panel({
+        id: 'memberBillsTitle',
+        layout: 'fit',
+        dock: 'bottom',
+        tpl: '<tpl if="billNumber &gt; 0"><h2 class="memberBillsTitle x-toolbar-dark">' + OKnesset.strings.hasBillsTitle + '</h2></tpl>\
+				  <tpl if="billNumber == 0"><h2 class="memberBillsTitle x-toolbar-dark">' +
+        OKnesset.strings.hasNoBillsTitle +
+        '</h2></tpl>'
+    });
+
+    OKnesset.memberBillList = new Ext.List({
+        id: 'memberBillList',
+        itemTpl: '<div>{title}</div>',
+        store: OKnesset.MemberBillsStore,
+        layout: 'fit',
+        deferEmptyText: false,
+        grouped: true,
+        flex: 1.5,
+        listeners: {
+            itemtap: function(that, index, item, e){
+                var record = that.store.getAt(index);
+                gotoBill(record);
+            }
+        },
+        onItemDisclosure: gotoMember
+    });
+
+    OKnesset.memberImagePanel = new Ext.Panel({
+        id: 'memberImagePanel',
+        layout: 'fit',
+        //			height : '110',
+        //			flex : 1.5,
+        //            tpl: '<img src={img_url} width="75px" height="110px"></img>
+        tpl: '<img src={img_url} height="100%"></img>'
+    });
+
+    OKnesset.memberInfoPanel = new Ext.Panel({
+        id: 'memberInfoPanel',
+        //			flex : 4,
+        //			height : '110',
+        //			scroll : 'vertical',
+        tpl: memberPanelHtml
+    });
+
+    OKnesset.memberPanel = new Ext.Panel({
+        id: 'memberPanel',
+        //            layout: 'hbox',
+        //			height : '110',
+        flex: 1,
+        items: [OKnesset.memberInfoPanel],
+        dockedItems: [{
+            xtype: 'panel',
+            dock: 'bottom',
+            items: [OKnesset.memberBillsTitle]
+        }, {
+            xtype: 'panel',
+            dock: 'right',
+            items: [OKnesset.memberImagePanel]
+        }]
+    });
+
+    OKnesset.memberPanelWrapper = new Ext.Panel({
+        id: 'memberPanelWrapper',
+        layout: {
+            type: 'vbox',
+            align: 'stretch'
+        },
+        listeners: {
+            afterlayout: {
+                fn: function(comp){
+                    // TODO calculate only once!
+                    var realImageHeight = OKnesset.memberPanel.getHeight() - OKnesset.memberBillsTitle.getHeight();
+                    var realImageWidth = 75 / 110 * realImageHeight;
+
+                    // apply maximum width
+                    if (realImageWidth > OKnesset.memberPanel.getWidth() * (3 / 7)) {
+                        realImageWidth = OKnesset.memberPanel.getWidth() * (3 / 7);
+                        realImageHeight = realImageWidth * 110 / 75;
+                    }
+                    // Set the member image height to the actual panel height (rescaling if necessary)
+                    OKnesset.memberInfoPanel.setWidth(OKnesset.memberPanel.getWidth() - realImageWidth);
+                    OKnesset.memberImagePanel.setHeight(realImageHeight);
+                    OKnesset.memberImagePanel.setWidth(realImageWidth);
+                    OKnesset.memberPanel.doLayout();
+                }
+            }
+        },
+        items: [OKnesset.memberPanel, OKnesset.memberBillList],
+        dockedItems: [OKnesset.memberPanelToolbar]
+    });
+
+    OKnesset.memberPanelWrapper.currentMemeber = null;
+
+    OKnesset.memberPanelWrapper.refresh = function(){
+        //get current member data from Party store, which is updated
+        var party = getPartyFromPartyStoreByName(OKnesset.memberPanelWrapper.currentMemeber.party);
+        Ext.iterate(party.data.members, function(value, index){
+            if (value.id === OKnesset.memberPanelWrapper.currentMemeber.id) {
+                updateMemberData(value);
+                return false;
+            }
+        });
+
+        OKnesset.memberBillList.refresh();
+    }
+
+    OKnesset.memberList = new Ext.List({
+        id: 'memberList',
+        itemTpl: '<div>{#} {name}</div>',
+        store: OKnesset.MemberStore,
+        listeners: {
+            itemtap: function(that, index, item, e){
+                var record = that.store.getAt(index);
+                gotoMember(record);
+            }
+        },
+        onItemDisclosure: gotoMember
+    });
+
+
+    OKnesset.memberListWrapper = new Ext.Panel({
+        id: 'memberListWrapper',
+        layout: 'fit',
+        items: [OKnesset.memberList],
+        dockedItems: OKnesset.memberListToolbar
+    });
+
+    OKnesset.memberListWrapper.currentParty = null;
+
+    OKnesset.memberListWrapper.refresh = function(){
+        var party = getPartyFromPartyStoreByName(OKnesset.memberListWrapper.currentParty.name);
+        OKnesset.MemberStore.loadData(party.data.members, false);
+        OKnesset.memberList.refresh();
+    }
+
+
+    OKnesset.Viewport.add([OKnesset.memberListWrapper, OKnesset.memberPanelWrapper, OKnesset.infoPanel]);
+
+    loadInitialData();
+
+    var secondaryLaunchTimeEnd = new Date();
+    console.log("** secondaryLaunch end. Total time " + (secondaryLaunchTimeEnd.getTime() - secondaryLaunchTimeStart.getTime()) / 1000);
+}
 
 function initDisclaimerDialog(){
     if (!OKnesset.disclaimerDialog) {
@@ -772,9 +792,8 @@ function sendEmail(subject){
 }
 
 function gotoInfo(){
-    console.log("** info button clicked");
     OKnesset.currentPanelId = OKnesset.Viewport.getActiveItem().getId();
-    OKnesset.infoPanel.update({
+    OKnesset.infoPanel.items.getAt(0).update({
         dateString: Ext.util.Format.format(OKnesset.strings.dataDate, dateToString(new Date(parseInt(localStorage.getItem("PartyDataDate")))))
     });
     OKnesset.infoPanelToolbar.items.getAt(0).setText(OKnesset.Viewport.getActiveItem().getDockedItems()[0].title);
