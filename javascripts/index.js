@@ -121,6 +121,9 @@ function secondaryLaunch(){
         items: [{
             tpl: '{dateString}'
         }, {
+            xtype: 'spacer',
+            height: "2em"
+        }, {
             xtype: 'button',
             width: "50%",
             handler: checkFullDataFromWeb,
@@ -128,10 +131,6 @@ function secondaryLaunch(){
         }, {
             xtype: 'spacer',
             height: "2em"
-        }, {
-            xtype: 'button',
-            handler: backFromInfo,
-            text: OKnesset.strings.back
         }],
         dockedItems: [OKnesset.infoPanelToolbar, {
             dock: 'bottom',
