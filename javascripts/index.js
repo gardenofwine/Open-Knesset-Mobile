@@ -95,6 +95,7 @@ function secondaryLaunch(){
     secondaryLaunchTimeStart = new Date();
     console.log("** secondaryLaunch begin " + secondaryLaunchTimeStart.toString());
 
+    OKnesset.appVersion = "1.0.0";
     displayDisclaimer();
     googleAnalytics();
     if (isPhoneGap() && isAndroid()) {
@@ -603,7 +604,6 @@ function gotoBill(record){
     var url = 'http://www.oknesset.org' + bill.url;
     if (isPhoneGap()) {
         if (isiOS()) {
-            //GATrackBillClicked(bill.url);
             navigator.notification.confirm(OKnesset.strings.openBillTitle, function(idx){
                 if (idx == 2) {
                     gotoBillCallback(url, bill.url)
@@ -853,6 +853,8 @@ function googleAnalytics(){
         googleAnalytics = window.plugins.googleAnalyticsPlugin;
         // The oknesset.mobile google analytics Accoutn ID
         googleAnalytics.startTrackerWithAccountID("UA-25669619-1");
+        googleAnalytics.setCustomVariable(1, "appVersion", OKnesset.appVersion, 2);
+        googleAnalytics.trackPageview("/app");
     }
 }
 
@@ -877,11 +879,16 @@ function GATrackBillCanceled(url){
 
 function GATrackBill(url, callback){
     if (isPhoneGap()) {
-        // TODO add callback to pageview
-        googleAnalytics.trackPageview("/safari/" + url);
+        if (isAndroid()) {
+            googleAnalytics.trackPageview("/app/external" + url, {
+                dispatch: true
+            }, callback, callback);
+        } else if (isiOS()) {
+            googleAnalytics.trackPageview("/app/external" + url, callback, {
+                dispatch: true
+            });
+        }
     }
-
-    callback();
 }
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);
