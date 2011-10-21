@@ -94,9 +94,18 @@ OKnesset = new Ext.Application({
 });
 
 function secondaryLaunch(){
+	// For Android. the 'resume' event is fired even when the application launches,
+	// so we need to ignore this first event
+	OKnesset.resumeCount = 0;
     secondaryLaunchTimeStart = new Date();
     console.log("** secondaryLaunch begin " + secondaryLaunchTimeStart.toString());
 
+	document.addEventListener("resume",function(){window.setTimeout(function(){
+		if (isiOS() || isAndroid() && OKnesset.resumeCount != 0){
+			checkFullDataFromWeb();
+		}
+		OKnesset.resumeCount++;
+		}, 0);},false);
     OKnesset.appVersion = "1.0.0";
     googleAnalytics();
     if (isPhoneGap() && isAndroid()) {
