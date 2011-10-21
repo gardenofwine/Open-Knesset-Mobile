@@ -75,6 +75,8 @@ OKnesset = new Ext.Application({
             items: [OKnesset.partyListWrapper]
         });
 
+	    displayDisclaimer();
+
         // hide the native  splash screen
         if (isPhoneGap()) {
             if (isiOS()) {
@@ -96,7 +98,6 @@ function secondaryLaunch(){
     console.log("** secondaryLaunch begin " + secondaryLaunchTimeStart.toString());
 
     OKnesset.appVersion = "1.0.0";
-    displayDisclaimer();
     googleAnalytics();
     if (isPhoneGap() && isAndroid()) {
         document.addEventListener("backbutton", onBackKey, false);
@@ -132,12 +133,23 @@ function secondaryLaunch(){
         }, {
             xtype: 'spacer',
             height: "2em"
+        },{
+            xtype: 'button',
+            width: "50%",
+            handler: function(){
+				displayDisclaimer(true);
+			},
+            text: OKnesset.strings.showDisclaimer
+        }, {
+            xtype: 'spacer',
+            height: "2em"
         }],
         dockedItems: [OKnesset.infoPanelToolbar, {
             dock: 'bottom',
             ui: 'light',
             items: [{
                 xtype: 'button',
+				ui : 'confirm',
                 handler: backFromInfo,
                 text: OKnesset.strings.back
             }]
@@ -359,12 +371,13 @@ function initDisclaimerDialog(){
 }
 
 
-function displayDisclaimer(){
+function displayDisclaimer(forceShow){
     var disclaimerDismissed = localStorage.getItem("disclaimerDismissed");
-    //	if (disclaimerDismissed !== 'true'){
-    initDisclaimerDialog();
-    OKnesset.disclaimerDialog.show();
-    //	}
+    if (disclaimerDismissed !== 'true' || forceShow === true){
+	    initDisclaimerDialog();
+		OKnesset.disclaimerDialog.forceShow = forceShow;
+	    OKnesset.disclaimerDialog.show('pop');
+    }
 }
 
 function loadInitialData(){
@@ -815,6 +828,12 @@ function onBackKey(){
         OKnesset.emailDialog.hide();
         return;
     }
+
+    if (OKnesset.disclaimerDialog && OKnesset.disclaimerDialog.forceShow && OKnesset.disclaimerDialog.isVisible()) {
+        OKnesset.disclaimerDialog.hide();
+        return;
+    }
+
 
     var activeItem = OKnesset.Viewport.getActiveItem();
     var dockedItem = activeItem.getDockedItems()[0];
