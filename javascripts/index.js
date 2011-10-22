@@ -1,6 +1,13 @@
+OKnesset = {};
+OKnesset.debug = false;
+OKnesset.log = function(string){
+	if (OKnesset.debug) {
+		console.log(string);
+	}
+};
 
-OKnesset = new Ext.Application({
-    name: "OKnesset",
+OKnesset.app = new Ext.Application({
+    name: "OKnesset.app",
 
     launch: function(){
         this.launched = true;
@@ -13,10 +20,9 @@ OKnesset = new Ext.Application({
 
         mainLaunchTime = new Date();
         function printLoadingTimes(){
-            console.log('mainLaunch (' + mainLaunchTime.toString() + ').  Phonegap load time ' + (phonegapEnd.getTime() - phonegapStart.getTime()) / 1000 + ' total scripts load time' + (scriptLoadEndTime.getTime() - scriptLoadStartTime.getTime()) / 1000);
-            //			console.log('### jquery ('+ jqueryLoadEndTime.toString()+') load time ' + (jqueryLoadEndTime.getTime() - jqueryLoadStartTime.getTime())/1000);
-            console.log('### sencha (' + senchaLoadEndTime.toString() + ')load time ' + (senchaLoadEndTime.getTime() - senchaLoadStartTime.getTime()) / 1000);
-            console.log('### oknesset (' + oknessetLoadEndTime.toString() + ')load time ' + (oknessetLoadEndTime.getTime() - oknessetLoadStartTime.getTime()) / 1000);
+            OKnesset.log('### mainLaunch (' + mainLaunchTime.toString() + ').  Phonegap load time ' + (phonegapEnd.getTime() - phonegapStart.getTime()) / 1000 + ' total scripts load time' + (scriptLoadEndTime.getTime() - scriptLoadStartTime.getTime()) / 1000);
+            OKnesset.log('### sencha (' + senchaLoadEndTime.toString() + ')load time ' + (senchaLoadEndTime.getTime() - senchaLoadStartTime.getTime()) / 1000);
+            OKnesset.log('### oknesset (' + oknessetLoadEndTime.toString() + ')load time ' + (oknessetLoadEndTime.getTime() - oknessetLoadStartTime.getTime()) / 1000);
         }
         printLoadingTimes();
 
@@ -71,7 +77,6 @@ OKnesset = new Ext.Application({
             fullscreen: true,
             layout: 'card',
             cardSwitchAnimation: 'slide',
-            //            items: [OKnesset.partyListWrapper, OKnesset.memberListWrapper, OKnesset.memberPanelWrapper, OKnesset.infoPanel]
             items: [OKnesset.partyListWrapper]
         });
 
@@ -87,7 +92,7 @@ OKnesset = new Ext.Application({
         }
 
         mainLaunchTimeEnd = new Date();
-        console.log('sencha touch load time ' + (mainLaunchTimeEnd.getTime() - mainLaunchTime.getTime()) / 1000);
+        OKnesset.log('sencha touch load time ' + (mainLaunchTimeEnd.getTime() - mainLaunchTime.getTime()) / 1000);
 
         window.setTimeout(secondaryLaunch, 10);
     }
@@ -98,7 +103,7 @@ function secondaryLaunch(){
     // so we need to ignore this first event
     OKnesset.resumeCount = 0;
     secondaryLaunchTimeStart = new Date();
-    console.log("** secondaryLaunch begin " + secondaryLaunchTimeStart.toString());
+    OKnesset.log("** secondaryLaunch begin " + secondaryLaunchTimeStart.toString());
 
     document.addEventListener("resume", function(){
         window.setTimeout(function(){
@@ -285,7 +290,7 @@ function secondaryLaunch(){
     loadInitialData();
 
     var secondaryLaunchTimeEnd = new Date();
-    console.log("** secondaryLaunch end. Total time " + (secondaryLaunchTimeEnd.getTime() - secondaryLaunchTimeStart.getTime()) / 1000);
+    OKnesset.log("** secondaryLaunch end. Total time " + (secondaryLaunchTimeEnd.getTime() - secondaryLaunchTimeStart.getTime()) / 1000);
 }
 
 function initDisclaimerDialog(){
@@ -352,7 +357,7 @@ function loadInitialData(){
                 if (response.responseText != null && response.responseText.length > 0) {
                     loadTime = new Date();
                     eval(response.responseText);
-                    console.log('Initial data load was performed in ' + (loadTime.getTime() - mainLaunchTimeEnd.getTime()) / 1000);
+                    OKnesset.log('Initial data load was performed in ' + (loadTime.getTime() - mainLaunchTimeEnd.getTime()) / 1000);
                     // partyData is evaluated from the
                     var partyDataString = JSON.stringify(partyData);
                     updatePartyData(partyData);
@@ -360,7 +365,7 @@ function loadInitialData(){
                     localStorage.setItem("PartyData", partyDataString);
                     checkFullDataFromWeb();
                 } else {
-                    console.log('Full data load failure (' + JSON.stringify(response) + ') with status code ' + response.status);
+                    OKnesset.log('Full data load failure (' + JSON.stringify(response) + ') with status code ' + response.status);
                 }
             }
         });
@@ -372,8 +377,8 @@ function checkFullDataFromWeb(){
     var now = new Date();
 
     // 24 hours is 1000*60*60*24 = 86,400,000
-    console.log("** now=" + now.getTime() + " PartyDataDate= " + partyDataDate.getTime());
-    console.log("** now=" + dateToString(now) + " PartyDataDate= " + dateToString(partyDataDate));
+    OKnesset.log("** now=" + now.getTime() + " PartyDataDate= " + partyDataDate.getTime());
+    OKnesset.log("** now=" + dateToString(now) + " PartyDataDate= " + dateToString(partyDataDate));
 
     if (now.getTime() > partyDataDate.getTime() + 86400000) {
         if (!isPhoneGap()) {
@@ -385,17 +390,17 @@ function checkFullDataFromWeb(){
         if (navigator.network.connection.type == Connection.ETHERNET ||
         navigator.network.connection.type == Connection.WIFI) {
 
-            console.log("** updating full data by WIFI");
+            OKnesset.log("** updating full data by WIFI");
             fetchFullDataFromWeb();
         } else if (navigator.network.connection.type == Connection.CELL_2G ||
         navigator.network.connection.type == Connection.CELL_3G ||
         navigator.network.connection.type == Connection.CELL_4G) {
 
-            console.log("** updating full data by 3G");
+            OKnesset.log("** updating full data by 3G");
             var dialogtxt = OKnesset.strings.downloadDataText;
             navigator.notification.confirm(dialogtxt, checkFullDataFromWebCallback, OKnesset.strings.downloadDataTitle, OKnesset.strings.dialogOKCancel);
         } else {
-            console.log("** not updating full data becuase of no internet");
+            OKnesset.log("** not updating full data becuase of no internet");
         }
     }
 
@@ -413,7 +418,7 @@ function fetchFullDataFromWeb(){
         url: 'http://oknesset-mobile.appspot.com/static/js/mobile/createInitialData.js',
         success: function(response, options){
             eval(response.responseText);
-            console.log('Oknesset web parser loaded from web');
+            OKnesset.log('Oknesset web parser loaded from web');
             OKnessetParser.loadData(function(data){
                 displayFetchCompleteNotification();
                 var partyDataString = JSON.stringify(data);
@@ -424,7 +429,7 @@ function fetchFullDataFromWeb(){
             });
         },
         failure: function(response, options){
-            console.log('Oknesset web parser failed to load from web (' + JSON.stringify(response) + ') with status code ' + response.status + '. Attempting to laod locally');
+            OKnesset.log('Oknesset web parser failed to load from web (' + JSON.stringify(response) + ') with status code ' + response.status + '. Attempting to laod locally');
             fetchFullDataFromWebByLocalScript();
         }
     });
@@ -436,7 +441,7 @@ function fetchFullDataFromWeb(){
                 // for some reason, Ext.Ajax returns success == false when the local request returns
                 if (response.responseText != null && response.responseText.length > 0) {
                     eval(response.responseText);
-                    console.log('Oknesset web parser loaded locally');
+                    OKnesset.log('Oknesset web parser loaded locally');
                     OKnessetParser.loadData(function(data){
                         displayFetchCompleteNotification();
                         var partyDataString = JSON.stringify(data);
@@ -446,7 +451,7 @@ function fetchFullDataFromWeb(){
                         localStorage.setItem("PartyData", partyDataString);
                     });
                 } else {
-                    console.log('Oknesset web parser failed to load locally (' + JSON.stringify(response) + ') with status code ' + response.status + '. Aborting content update.');
+                    OKnesset.log('Oknesset web parser failed to load locally (' + JSON.stringify(response) + ') with status code ' + response.status + '. Aborting content update.');
                 }
             }
         });
@@ -487,7 +492,7 @@ function dateToString(date){
 
 // update the party store with the full data (replace the slimData)
 function updatePartyData(fullPartyData){
-    console.log("-=updatePartyData=-");
+    OKnesset.log("-=updatePartyData=-");
     OKnesset.PartyStore.loadData(fullPartyData, false);
     //	OKnesset.Viewport.getActiveItem().items.getAt(0).refresh();
     // A OKnesset that can be refreshed has a refresh function
@@ -495,7 +500,7 @@ function updatePartyData(fullPartyData){
 }
 
 function gotoParty(record){
-    //console.log(JSON.stringify(record.data));
+    //OKnesset.log(JSON.stringify(record.data));
     var name = record.data.name;
 
     GATrackParty(record.data.name);
@@ -730,7 +735,7 @@ function displayEmailDialog(){
 }
 
 function sendEmail(subject){
-    console.log("** sending email with subject " + subject);
+    OKnesset.log("** sending email with subject " + subject);
     if (isPhoneGap()) {
         if (isiOS()) {
             var emailCallback = function(result){
