@@ -774,7 +774,10 @@ function initInfoDialog(){
             }, {
                 xtype: 'button',
                 width: "50%",
-                handler: checkFullDataFromWeb,
+                handler: function(){
+					checkFullDataFromWeb();
+					OKnesset.infoPanel.hide();
+				},
                 text: OKnesset.strings.updateNow
             }, {
                 xtype: 'spacer',
@@ -783,6 +786,7 @@ function initInfoDialog(){
                 xtype: 'button',
                 width: "50%",
                 handler: function(){
+					OKnesset.infoPanel.hide();
                     displayDisclaimer(true);
                 },
                 text: OKnesset.strings.showDisclaimer
