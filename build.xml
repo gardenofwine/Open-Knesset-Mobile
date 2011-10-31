@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Open Knesset" default="development" basedir=".">
+	<property name="HelloText" value="hello" />
+	<property name="GoogleClosureDir" value="compiler-latest" />
+	<property name="source.js.dir" value="../sencha oknesset/src/www/javascripts" />
+	<property name="source.dir" value="src/www" />
+	<property name="target.dir" value="target/web/www/" />
+	<property name="xcodeWWWDir" value="/Users/gardenofwine/dropbox/Oknesset iPhone/OKnesset sencha/www" />
+	<property name="androidWWWDir" value="/Users/gardenofwine/Dropbox/okneset android/Oknesset-sencha/assets/www" />
+
+	<target name="build">
+<!--		<delete dir="${target.dir}">
+		</delete> -->
+		<copy todir="${target.dir}">
+			<fileset dir="${source.dir}">
+				<include name="**"/>
+				<exclude name="javascripts/EmailComposer.js" />
+				<exclude name="javascripts/GoogleAnalyticsPlugin.js" />
+				<exclude name="javascripts/webintent.js" />
+				<exclude name=".settings" />
+				<exclude name=".settings/**" />
+				<exclude name=".git" />
+				<exclude name=".git/*" />
+				<exclude name=".project" />
+				<exclude name=".gitignore" />
+				<exclude name=".rockstarapps" />
+				<exclude name=".DS_Store" />
+				<exclude name="**phonegap*" />
+				<exclude name="createInitialData.html" />
+				<exclude name="sencha-touch-debug-w-comments.js" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="copyToXcode">
+		<copy todir="${xcodeWWWDir}">
+			<fileset dir="${target.dir}">
+				<include name="**"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="copyToAndroid">
+		<copy todir="${androidWWWDir}">
+			<fileset dir="${target.dir}">
+				<include name="**"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="development">
+		<antcall target="build" />
+		<antcall target="copyToXcode" />
+		<antcall target="copyToAndroid" />
+	</target>
+	<target name="production">
+		<antcall target="concat" />
+		<antcall target="minify" />
+	</target>
+
+	<target name="concat">
+		<concat destfile="js/concat.js">
+			<filelist dir="${source.js.dir}">
+				<file name="disclaimer.js" />
+				<file name="memberPanel.js" />
+				<file name="index.js" />
+				<file name="strings.js" />
+				<file name="slimData.js" />
+				<file name="data.js" />
+			</filelist>
+		</concat>
+	</target>
+	<target name="minify">
+		<java jar="${GoogleClosureDir}/compiler.jar" fork="true">
+			<arg line="--js js/concat.js --js_output_file js/concat.min.js" />
+		</java>
+	</target>
+</project>
+

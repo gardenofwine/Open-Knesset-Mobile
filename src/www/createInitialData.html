@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Create Initial Memeber Data</title>
+
+  <script src="sencha-touch-debug-w-comments.js" type="text/javascript" charset="utf-8"></script>
+  <script src="javascripts/createInitialData.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		function storeData(partyNameArray, slimData){
+		    localStorage.setItem("slimData", JSON.stringify(slimData));
+		    localStorage.setItem("PartyData", JSON.stringify(partyNameArray));
+			var now = new Date();
+	    	localStorage.setItem("PartyDataDate", now.getTime());
+	    	// DEBUG HERE
+			console.log("done");
+
+		}
+
+		OKnessetParser.loadData(storeData);
+	</script>
+</head>
+<body>
+</body>
+</html>
