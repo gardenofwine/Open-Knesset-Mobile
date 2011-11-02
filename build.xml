@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Open Knesset" default="development" basedir=".">
 	<property name="GoogleClosureDir" value="compiler-latest" />
-	<property name="source.js.dir" value="../sencha oknesset/src/www/javascripts" />
+	<property name="concat.dir" value="temp/www" />
 
 	<property name="source.web.dir" value="src/web/www" />
-	<property name="source.ios.dir" value="src/ios/www" />
-	<property name="source.android.dir" value="src/android/www" />
 	<property name="target.web.dir" value="target/web/www/" />
-	<property name="target.ios.dir" value="target/ios/www/" />
-	<property name="target.android.dir" value="target/android/www/" />
+
 	<property name="xcodeWWWDir" value="/Users/gardenofwine/dropbox/Oknesset iPhone/OKnesset sencha/www" />
 	<property name="androidWWWDir" value="/Users/gardenofwine/Dropbox/okneset android/Oknesset-sencha/assets/www" />
 
@@ -21,43 +18,75 @@
 		</copy>
 	</target>
 
-	<target name="customizeiOS">
-		<copy todir="${target.ios.dir}">
+	<target name="customize">
+		<copy todir="target/${channel.dir}/www">
 			<fileset dir="${source.web.dir}">
 				<include name="**" />
 			</fileset>
 		</copy>
-		<copy todir="${target.ios.dir}" overwrite="true">
-			<fileset dir="${source.ios.dir}">
+		<copy todir="target/${channel.dir}/www" overwrite="true">
+			<fileset dir="src/${channel.dir}/www">
 				<include name="**" />
 			</fileset>
 		</copy>
 	</target>
 
-	<target name="customizeAndroid">
-		<copy todir="${target.android.dir}">
-			<fileset dir="${source.web.dir}">
-				<include name="**" />
+	<target name="buildProd">
+		<!-- Copy all files except javascripts files that need concatenation -->
+		<copy todir="target_prod/${channel.dir}/www">
+			<fileset dir="target/${channel.dir}/www">
+				<exclude name="**/*.js" />
+				<exclude name="index*.html" />
 			</fileset>
 		</copy>
-		<copy todir="${target.android.dir}" overwrite="true">
-			<fileset dir="${source.android.dir}">
-				<include name="**" />
+
+		<copy todir="target_prod/${channel.dir}/www">
+			<fileset dir="target/${channel.dir}/www">
+				<include name="javascripts/createInitialData.js" />
 			</fileset>
 		</copy>
+
+		<!-- copy all javascript files toa  temp dir for concatenation -->
+		<copy todir="${concat.dir}" overwrite="true">
+			<fileset dir="target/${channel.dir}/www/">
+				<include name="**/*.js" />
+			</fileset>
+		</copy>
+
+		<!-- concatenate the javascript files -->
+		<concat destfile="${concat.dir}/concat.js">
+			<filelist refid="concatFiles" />
+		</concat>
+
+		<echo message="Minifying"/>
+		<!-- minify concatenated file -->
+		<java jar="${GoogleClosureDir}/compiler.jar" fork="true">
+			<arg line="--js ${concat.dir}/concat.js --compilation_level WHITESPACE_ONLY --js_output_file target_prod/${channel.dir}/www/javascripts/concat.min.js" />
+		</java>
+
+		<!-- delete temp directory -->
+		<delete dir="${concat.dir}"/>
+
+		<!-- copy index-prod.html file -->
+		<copy file="target/${channel.dir}/www/index-prod.html" tofile="target_prod/${channel.dir}/www/index.html"/>
 	</target>
+
 
 	<target name="copyToXcode">
+		<delete dir="${xcodeWWWDir}"/>
+
 		<copy todir="${xcodeWWWDir}">
-			<fileset dir="${target.ios.dir}">
+			<fileset dir="${source.dir}">
 				<include name="**" />
 			</fileset>
 		</copy>
 	</target>
 
 	<target name="copyToAndroid">
+		<delete dir="${androidWWWDir}"/>
+
 		<copy todir="${androidWWWDir}">
-			<fileset dir="${target.android.dir}">
+			<fileset dir="${source.dir}">
 				<include name="**" />
 			</fileset>
 		</copy>
@@ -66,43 +95,51 @@
 
 	<target name="development">
 		<antcall target="setup" />
-		<antcall target="buildweb" />
 
-		<antcall target="customizeiOS" />
-		<antcall target="copyToXcode" />
+		<antcall target="copyToXcode">
+			<param name="source.dir" value="target/ios/www" />
+		</antcall>
 
-		<antcall target="customizeAndroid" />
-		<antcall target="copyToAndroid" />
+		<antcall target="copyToAndroid">
+			<param name="source.dir" value="target/android/www" />
+		</antcall>
 	</target>
 
 	<target name="production">
-		<antcall target="concat" />
-		<antcall target="minify" />
+		<antcall target="setup" />
+
+		<antcall target="buildProd">
+			<param name="channel.dir" value="ios" />
+		</antcall>
+		<antcall target="copyToXcode">
+			<param name="source.dir" value="target_prod/ios/www" />
+		</antcall>
+
+
+		<antcall target="buildProd">
+			<param name="channel.dir" value="android" />
+		</antcall>
+		<antcall target="copyToAndroid">
+			<param name="source.dir" value="target_prod/android/www" />
+		</antcall>
 	</target>
 
-	<target name="concat">
-		<concat destfile="js/concat.js">
-			<filelist dir="${source.js.dir}">
-				<file name="disclaimer.js" />
-				<file name="memberPanel.js" />
-				<file name="index.js" />
-				<file name="strings.js" />
-				<file name="slimData.js" />
-				<file name="data.js" />
-			</filelist>
-		</concat>
-	</target>
-	<target name="minify">
-		<java jar="${GoogleClosureDir}/compiler.jar" fork="true">
-			<arg line="--js js/concat.js --js_output_file js/concat.min.js" />
-		</java>
-	</target>
+	<filelist id="concatFiles" dir="${concat.dir}/javascripts">
+		<file name="phonegap-1.0.0.js" />
+		<file name="webintent.js" />
+		<file name="EmailComposer.js" />
+		<file name="GoogleAnalyticsPlugin.js" />
+		<file name="sencha-touch.js" />
+		<file name="customization.js" />
+		<file name="disclaimer.js" />
+		<file name="memberPanel.js" />
+		<file name="index.js" />
+		<file name="strings.js" />
+		<file name="slimData.js" />
+		<file name="data.js" />
+	</filelist>
 
 	<target name="setup">
-		<!--		<defaultexcludes add="javascripts/EmailComposer.js" />
-		<defaultexcludes add="javascripts/GoogleAnalyticsPlugin.js" />
-		<defaultexcludes add="**phonegap*" />
-		<defaultexcludes add="javascripts/webintent.js" /> -->
 		<defaultexcludes add="**/.settings" />
 		<defaultexcludes add="**/.settings/**" />
 		<defaultexcludes add="**/.git" />
@@ -113,6 +150,15 @@
 		<defaultexcludes add=".DS_Store" />
 		<defaultexcludes add="createInitialData.html" />
 		<defaultexcludes add="sencha-touch-debug-w-comments.js" />
+
+		<antcall target="buildweb" />
+
+		<antcall target="customize">
+			<param name="channel.dir" value="ios" />
+		</antcall>
+		<antcall target="customize">
+			<param name="channel.dir" value="android" />
+		</antcall>
 	</target>
 
 </project>

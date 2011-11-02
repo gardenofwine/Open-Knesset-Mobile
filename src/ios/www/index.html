@@ -3,17 +3,22 @@
 <html>
     <head>
         <title>כנסת פתוחה</title>
-        <script>
+        <script type="application/javascript">
+            if (typeof OKnesset === 'undefined') {
+                var OKnesset = {};
+            }
+            OKnesset.debug = true;
+
             var scriptLoadStartTime = new Date();
         </script>
-        <link rel="stylesheet" href="sencha-touch.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="stylesheets/sencha-touch.css" type="text/css" media="screen"/>
         <link rel="stylesheet" href="stylesheets/styles.css" type="text/css" media="screen"/>
-        <script src="phonegap-1.0.0.js"type="application/javascript">
+        <script src="javascripts/phonegap-1.0.0.js"type="application/javascript">
         </script>
         <script>
             var senchaLoadStartTime = new Date();
         </script>
-        <script src="sencha-touch.js" type="text/javascript" charset="utf-8">
+        <script src="javascripts/sencha-touch.js" type="text/javascript" charset="utf-8">
         </script>
         <script>
             var senchaLoadEndTime = new Date();
@@ -26,7 +31,6 @@
         <script>
             var oknessetLoadStartTime = new Date();
         </script>
-<!--
         <script src="javascripts/customization.js" type="text/javascript" charset="utf-8">
         </script>
         <script src="javascripts/disclaimer.js" type="text/javascript" charset="utf-8">
@@ -40,9 +44,6 @@
         <script src="javascripts/slimData.js" type="text/javascript" charset="utf-8">
         </script>
         <script src="javascripts/data.js" type="text/javascript" charset="utf-8">
-        </script>
--->
-        <script src="javascripts/javascripts.all.js.min.js" type="text/javascript" charset="utf-8">
         </script>
         <script>
             var oknessetLoadEndTime = new Date();
