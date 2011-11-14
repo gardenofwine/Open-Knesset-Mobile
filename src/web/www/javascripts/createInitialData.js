@@ -43,11 +43,11 @@ var OKnessetParser = new function(){
 	        memberIdArray.push(value);
 	        memberMap[value.id] = value;
 
-//			Ext.each(value.bills, function(index, value){
-//				if (parseInt(value.stage) < 2){
+// Ext.each(value.bills, function(index, value){
+// if (parseInt(value.stage) < 2){
 //
-//				}
-//			});
+// }
+// });
 	        partyMap[value.party].members.push(value);
 
 	        var slimMember = {
@@ -55,12 +55,14 @@ var OKnessetParser = new function(){
 	        };
 	        slimDataMap[value.party].members.push(slimMember);
 
-	       // stringImageListForDownload += "-O\nurl = \"" + value.img_url + "\"\n";
+	       // stringImageListForDownload += "-O\nurl = \"" + value.img_url +
+			// "\"\n";
 	    });
 
 		// sort members
 		Ext.iterate(partyMap, function(key, value) {
-			// console.log("** party id " + value.id + " for member sort exists? " + (typeof sortedMembers[value.id]));
+			// console.log("** party id " + value.id + " for member sort exists?
+			// " + (typeof sortedMembers[value.id]));
 			if (typeof sortedMembers[value.id] != "undefined") {
 				value.members.sort(function(member1, member2){
 					return compareMembers(member1, member2, value.id);
@@ -69,7 +71,8 @@ var OKnessetParser = new function(){
 		});
 
 		Ext.each(slimData, function(value, index) {
-			// console.log("** slim party id " + value.id + " for member sort exists? " + (typeof sortedMembers[value.id]));
+			// console.log("** slim party id " + value.id + " for member sort
+			// exists? " + (typeof sortedMembers[value.id]));
 			if (typeof sortedMembers[value.id] != "undefined") {
 				value.members.sort(function(member1, member2){
 					return compareMembers(member1, member2, value.id);
@@ -99,7 +102,8 @@ var OKnessetParser = new function(){
 			}
 		}
 
-		// console.log("** member " + str + " cannot be found in sortedMembers array");
+		// console.log("** member " + str + " cannot be found in sortedMembers
+		// array");
 		return -1;
 	}
 
@@ -153,14 +157,12 @@ var OKnessetParser = new function(){
 		Ext.util.JSONP.request({
 		    url: 'http://www.oknesset.org/api/member/',
 			callback : storeMembers,
-			callbackKey : "callback"
-//			timeout : 60000,
-//			failure : onMemberFailure,
-//		    callback: onMemberComplete
+			callbackKey : "callback",
+			onFailure : onMemberFailure
 		});
 	}
 
-/********
+/*******************************************************************************
  * sorted members by party
  */
 
@@ -181,7 +183,7 @@ var sortedMembers =  {
 
 // סיעת העצמאות היא בעצם סיעת העבודה
 sortedMembers["13"] = sortedMembers["3"];
-/*********
+/*******************************************************************************
  * API function
  */
 	this.loadData = function(callback){
@@ -191,10 +193,8 @@ sortedMembers["13"] = sortedMembers["3"];
 		Ext.util.JSONP.request({
 		    url: 'http://www.oknesset.org/api/party/',
 		    callbackKey : "callback",
-			callback : storeParties
-//			,
-//			failure : onPartyFailure,
-//		    callback: onPartyComplete
+			callback : storeParties,
+			onFailure : onPartyFailure
 		});
 
 	}
