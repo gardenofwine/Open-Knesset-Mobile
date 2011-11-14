@@ -58,7 +58,7 @@
 			<filelist refid="concatFiles" />
 		</concat>
 
-		<echo message="Minifying"/>
+		<echo message="Minifying ${channel.dir}"/>
 		<!-- minify concatenated file -->
 		<java jar="${GoogleClosureDir}/compiler.jar" fork="true">
 			<arg line="--js ${concat.dir}/concat.js --compilation_level WHITESPACE_ONLY --js_output_file target_prod/${channel.dir}/www/javascripts/concat.min.js" />

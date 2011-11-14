@@ -111,11 +111,9 @@ var OKnessetParser = new function(){
 	    console.warn("onMemberFailure " + result.responseText);
 	}
 
-	function storeMembers(result, request){
+	function storeMembers(members){
 	    // console.log("** storeMembers");
-	    parseMembers(JSON.parse(result.responseText));
-
-
+	    parseMembers(members);
 		callbackFunction(partyNameArray, slimData);
 	}
 
@@ -148,16 +146,17 @@ var OKnessetParser = new function(){
 	    console.warn("onPartyFailure");
 	}
 
-	function storeParties( result, request){
+	function storeParties( parties){
 	    // console.log("** storeParties");
-	    parseParties(JSON.parse(result.responseText));
+	    parseParties(parties);
 
-		Ext.Ajax.request({
+		Ext.util.JSONP.request({
 		    url: 'http://www.oknesset.org/api/member/',
-			success : storeMembers,
-			timeout : 60000,
-			failure : onMemberFailure,
-		    callback: onMemberComplete
+			callback : storeMembers,
+			callbackKey : "callback"
+//			timeout : 60000,
+//			failure : onMemberFailure,
+//		    callback: onMemberComplete
 		});
 	}
 
@@ -189,11 +188,13 @@ sortedMembers["13"] = sortedMembers["3"];
 
 		callbackFunction = callback;
 
-		Ext.Ajax.request({
+		Ext.util.JSONP.request({
 		    url: 'http://www.oknesset.org/api/party/',
-			success : storeParties,
-			failure : onPartyFailure,
-		    callback: onPartyComplete
+		    callbackKey : "callback",
+			callback : storeParties
+//			,
+//			failure : onPartyFailure,
+//		    callback: onPartyComplete
 		});
 
 	}

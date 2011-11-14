@@ -5,7 +5,7 @@ OKnesset.strings = {
 	partiesTitle	 		:'מפלגות',
 	openBillText			: 'לפתוח בדפדפן?',
 	dialogOKCancel	 		: 'ביטול,אישור',
-	downloadDataText	 	: 'נפח הנתונים הוא כ 1.5 מגה.',
+	downloadDataText	 	: 'נפח הנתונים הוא כ 2 מגה.',
 	downloadDataTitle		: 'לעדכן נתונים מהאינטרנט?',
 	errorOpenBill 			: 'לא ניתן לפתוח את הצעת החוק בדפדפן',
 	openKnessetTitle		: 'כנסת פתוחה',

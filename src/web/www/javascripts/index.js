@@ -375,6 +375,14 @@ function displayDisclaimer(forceShow) {
 	}
 }
 
+function processInitialData(partyData, partyDataDate) {
+	var partyDataString = JSON.stringify(partyData);
+	updatePartyData(partyData);
+	localStorage.setItem("PartyDataDate", partyDataDate.getTime());
+	localStorage.setItem("PartyData", partyDataString);
+	checkFullDataFromWeb();
+}
+
 function loadInitialData() {
 	if (localStorage.getItem("PartyData") != null) {
 		// load data from localstorage (most updated locally)
@@ -388,33 +396,32 @@ function loadInitialData() {
 		// loaded
 		localStorage.setItem("PartyDataDate", slimDataDate.getTime());
 		// load initial data (data shipped with the application)
-		Ext.Ajax.request({
-			url : 'javascripts/partyData.js.jpg',
-			callback : function(options, success, response) {
-				// for some reason, Ext.Ajax returns success == false when the
-				// local request returns
-				if (response.responseText != null
-						&& response.responseText.length > 0) {
-					loadTime = new Date();
-					eval(response.responseText);
-					OKnesset
-							.log('Initial data load was performed in '
-									+ (loadTime.getTime() - mainLaunchTimeEnd
-											.getTime()) / 1000);
-					// partyData is evaluated from the
-					var partyDataString = JSON.stringify(partyData);
-					updatePartyData(partyData);
-					localStorage.setItem("PartyDataDate", partyDataDate
-							.getTime());
-					localStorage.setItem("PartyData", partyDataString);
-					checkFullDataFromWeb();
-				} else {
-					OKnesset.log('Full data load failure ('
-							+ JSON.stringify(response) + ') with status code '
-							+ response.status);
+		if (!isPhoneGap()) {
+			processInitialData(partyData, partyDataDate);
+		} else {
+			Ext.Ajax.request({
+				url : 'javascripts/partyData.js.jpg',
+				callback : function(options, success, response) {
+					// for some reason, Ext.Ajax returns success == false when
+					// the
+					// local request returns
+					if (response.responseText != null
+							&& response.responseText.length > 0) {
+						loadTime = new Date();
+						eval(response.responseText);
+						OKnesset.log('Initial data load was performed in '
+								+ (loadTime.getTime() - mainLaunchTimeEnd
+										.getTime()) / 1000);
+						// partyData is evaluated from the
+						processInitialData(partyData, partyDataDate);
+					} else {
+						OKnesset.log('Full data load failure ('
+								+ JSON.stringify(response)
+								+ ') with status code ' + response.status);
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 }
 
@@ -431,7 +438,8 @@ function checkFullDataFromWeb() {
 
 	if (now.getTime() > partyDataDate.getTime() + 86400000) {
 		if (!isPhoneGap()) {
-			fetchFullDataFromWeb();
+			// fetchFullDataFromWeb();
+			processFullDataFromWebByLocalScript();
 			return;
 		}
 
@@ -462,6 +470,18 @@ function checkFullDataFromWebCallback(btnIndex) {
 	if (btnIndex == 2) {
 		fetchFullDataFromWeb();
 	}
+}
+
+function processFullDataFromWebByLocalScript() {
+	OKnessetParser.loadData(function(data) {
+		displayFetchCompleteNotification();
+		var partyDataString = JSON.stringify(data);
+		updatePartyData(data);
+		var now = new Date();
+		localStorage.setItem("PartyDataDate", now.getTime());
+		localStorage.setItem("PartyData", partyDataString);
+		OKnesset.log("Data fetch from web complete");
+	});
 }
 
 function fetchFullDataFromWeb() {
@@ -503,14 +523,7 @@ function fetchFullDataFromWeb() {
 						&& response.responseText.length > 0) {
 					eval(response.responseText);
 					OKnesset.log('Oknesset web parser loaded locally');
-					OKnessetParser.loadData(function(data) {
-						displayFetchCompleteNotification();
-						var partyDataString = JSON.stringify(data);
-						updatePartyData(data);
-						var now = new Date();
-						localStorage.setItem("PartyDataDate", now.getTime());
-						localStorage.setItem("PartyData", partyDataString);
-					});
+					processFullDataFromWebByLocalScript();
 				} else {
 					OKnesset.log('Oknesset web parser failed to load locally ('
 							+ JSON.stringify(response) + ') with status code '
