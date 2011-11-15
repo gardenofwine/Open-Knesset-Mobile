@@ -105,7 +105,6 @@
         </antcall>
 
         <set.timestamp/>
-        <!--in this example, just echo the timestamp -->
         <echo message="build complete at ${current.time}"/>
 
     </target>
@@ -129,7 +128,6 @@
         </antcall>
 
         <set.timestamp/>
-        <!--in this example, just echo the timestamp -->
         <echo message="build complete at ${current.time}"/>
 
     </target>
@@ -139,7 +137,7 @@
         <file name="webintent.js"/>
         <file name="EmailComposer.js"/>
         <file name="GoogleAnalyticsPlugin.js"/>
-        <file name="sencha-touch.js"/>
+        <file name="sencha-touch/sencha-touch.js"/>
         <file name="sencha-touch-fixes.js"/>
         <file name="customization.js"/>
         <file name="disclaimer.js"/>
@@ -160,7 +158,7 @@
         <defaultexcludes add=".rockstarapps"/>
         <defaultexcludes add=".DS_Store"/>
         <defaultexcludes add="createInitialData.html"/>
-        <defaultexcludes add="sencha-touch-debug-w-comments.js"/>
+        <defaultexcludes add="sencha-touch/sencha-touch-debug-w-comments.js"/>
 
         <antcall target="buildweb"/>
 

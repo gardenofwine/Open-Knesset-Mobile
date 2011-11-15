@@ -2,6 +2,8 @@ if (typeof OKnesset === 'undefined') {
 	var OKnesset = {};
 }
 
+OKnesset.GAID = "Demo-ID-replace-with-real-id";
+
 OKnesset.log = function(string) {
 	if (OKnesset.debug) {
 		console.log(string);
@@ -144,6 +146,7 @@ function secondaryLaunch() {
 	}, false);
 	OKnesset.appVersion = "1.0.0";
 	googleAnalytics();
+
 	if (isPhoneGap() && isAndroid()) {
 		document.addEventListener("backbutton", onBackKey, false);
 	}
@@ -961,7 +964,7 @@ function googleAnalytics() {
 	if (isPhoneGap()) {
 		googleAnalytics = window.plugins.googleAnalyticsPlugin;
 		// The oknesset.mobile google analytics Accoutn ID
-		googleAnalytics.startTrackerWithAccountID("UA-25669619-1");
+		googleAnalytics.startTrackerWithAccountID(OKnesset.GAID);
 		googleAnalytics.setCustomVariable(1, "appVersion", OKnesset.appVersion,
 				2);
 		googleAnalytics.trackPageview("/app");
