@@ -142,7 +142,9 @@
         <file name="customization.js"/>
         <file name="disclaimer.js"/>
         <file name="memberPanel.js"/>
+        <file name="utils.js"/>
         <file name="index.js"/>
+        <file name="private.js"/>
         <file name="strings.js"/>
         <file name="slimData.js"/>
         <file name="data.js"/>

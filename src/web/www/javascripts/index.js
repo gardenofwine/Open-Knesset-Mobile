@@ -1,8 +1,13 @@
+/**
+ * The OKnesset namespace.
+ */
+
 if (typeof OKnesset === 'undefined') {
 	var OKnesset = {};
 }
 
 OKnesset.GAID = "Demo-ID-replace-with-real-id";
+OKnesset.appVersion = "1.0.0";
 
 OKnesset.log = function(string) {
 	if (OKnesset.debug) {
@@ -13,45 +18,26 @@ OKnesset.log = function(string) {
 OKnesset.app = new Ext.Application(
 		{
 			name : "OKnesset.app",
-
 			launch : function() {
+				// Invoked immediately after the OKnesset.app created.
 				this.launched = true;
 				this.mainLaunch();
 			},
 			mainLaunch : function() {
-				if (isPhoneGap() && !this.launched) {
+				// For iOS and Android, we must wait until the devicereay event
+				// is fired.
+				if (isPhoneGap() && (!device || !this.launched)) {
 					return;
 				}
 
-				mainLaunchTime = new Date();
-				function printLoadingTimes() {
-					OKnesset
-							.log('### mainLaunch ('
-									+ mainLaunchTime.toString()
-									+ ').  Phonegap load time '
-									+ (phonegapEnd.getTime() - phonegapStart
-											.getTime())
-									/ 1000
-									+ ' total scripts load time'
-									+ (scriptLoadEndTime.getTime() - scriptLoadStartTime
-											.getTime()) / 1000);
-					OKnesset
-							.log('### sencha ('
-									+ senchaLoadEndTime.toString()
-									+ ')load time '
-									+ (senchaLoadEndTime.getTime() - senchaLoadStartTime
-											.getTime()) / 1000);
-					OKnesset
-							.log('### oknesset ('
-									+ oknessetLoadEndTime.toString()
-									+ ')load time '
-									+ (oknessetLoadEndTime.getTime() - oknessetLoadStartTime
-											.getTime()) / 1000);
-				}
-				if (isPhoneGap() && OKnesset.debug) {
-					printLoadingTimes();
+				if (OKnesset.debug) {
+					mainLaunchTime = new Date();
+					if (isPhoneGap()) {
+						printLoadingTimes();
+					}
 				}
 
+				// The "i" at the top left of the application toolbar
 				OKnesset.toolbarInfoItem = {
 					ui : 'plain',
 					iconMask : true,
@@ -60,6 +46,8 @@ OKnesset.app = new Ext.Application(
 						displayInfoDialog();
 					}
 				};
+
+				// The email icon at the top left of the application toolbar
 				OKnesset.toolbarMailItem = {
 					ui : 'plain',
 					iconMask : true,
@@ -69,6 +57,13 @@ OKnesset.app = new Ext.Application(
 					}
 				};
 
+				// TODO: use ONE toolbar that changes title, buttons, according
+				// to the active panel.
+
+				/**
+				 * The List of parties (קדימה, ליכוד...) The first panel to be
+				 * displayed.
+				 */
 				OKnesset.partyListToolbar = new Ext.Toolbar({
 					items : [ OKnesset.toolbarInfoItem,
 							OKnesset.toolbarMailItem ],
@@ -96,10 +91,23 @@ OKnesset.app = new Ext.Application(
 					dockedItems : [ OKnesset.partyListToolbar ]
 				});
 
+				// TODO: create a subclass of Ext.Panel that has a refresh
+				// function so that there would be a default refresh function
 				OKnesset.partyListWrapper.refresh = function() {
 					OKnesset.listPanel.refresh();
 				}
 
+				/**
+				 * End of The List of parties
+				 */
+
+				/**
+				 * The main view, holds all the panels of the application.
+				 * Initially, it holds only the party list panel, for reasons of
+				 * performance. Once the panel is up and the application is
+				 * displayed to the user, the rest of the panels are loaded (in
+				 * secondaryLaunch)
+				 */
 				OKnesset.Viewport = new Ext.Panel({
 					fullscreen : true,
 					layout : 'card',
@@ -109,8 +117,8 @@ OKnesset.app = new Ext.Application(
 
 				displayDisclaimer();
 
-				// hide the native splash screen
 				if (isPhoneGap()) {
+					// hide the native splash screen
 					if (isiOS()) {
 						navigator.splashscreen.hide();
 					} else if (isAndroid()) {
@@ -118,54 +126,48 @@ OKnesset.app = new Ext.Application(
 					}
 				}
 
-				mainLaunchTimeEnd = new Date();
-				OKnesset.log('sencha touch load time '
-						+ (mainLaunchTimeEnd.getTime() - mainLaunchTime
-								.getTime()) / 1000);
-
+				if (OKnesset.debug) {
+					mainLaunchTimeEnd = new Date();
+					OKnesset.log('sencha touch load time '
+							+ (mainLaunchTimeEnd.getTime() - mainLaunchTime
+									.getTime()) / 1000);
+				}
+				// TODO call secondaryLaunch form the afterDisplay event of
+				// Ext.Panel
 				window.setTimeout(secondaryLaunch, 10);
 			}
 		});
 
 function secondaryLaunch() {
-	// For Android. the 'resume' event is fired even when the application
-	// launches,
-	// so we need to ignore this first event
-	OKnesset.resumeCount = 0;
-	secondaryLaunchTimeStart = new Date();
+	var secondaryLaunchTimeStart = new Date();
 	OKnesset.log("** secondaryLaunch begin "
 			+ secondaryLaunchTimeStart.toString());
 
+	// When the applicaiton comes back from the background state on the iOS or
+	// Android, check if there are any updates from teh oknesset website.
+	OKnesset.resumeCount = 0;
 	document.addEventListener("resume", function() {
 		window.setTimeout(function() {
+			// For Android. the 'resume' event is fired even when the
+			// application launches, so we need to ignore this first event
 			if (isiOS() || isAndroid() && OKnesset.resumeCount != 0) {
 				checkFullDataFromWeb();
 			}
 			OKnesset.resumeCount++;
 		}, 0);
 	}, false);
-	OKnesset.appVersion = "1.0.0";
+
 	googleAnalytics();
 
-	if (isPhoneGap() && isAndroid()) {
+	if (isAndroid()) {
+		// For Android, override the back button functionality
 		document.addEventListener("backbutton", onBackKey, false);
 	}
 
-	OKnesset.memberListToolbar = new Ext.Toolbar({
-		items : [ OKnesset.toolbarInfoItem, OKnesset.toolbarMailItem, {
-			xtype : 'spacer'
-		}, {
-			text : 'back',
-			ui : 'forward',
-			handler : function() {
-				OKnesset.Viewport.setActiveItem('partyListWrapper', {
-					type : 'slide',
-					direction : 'left'
-				});
-			}
-		} ]
-	});
-
+	/**
+	 * The Member panel (בנימין נתניהו, גדעון סער) - displays info on a specific
+	 * member
+	 */
 	OKnesset.memberPanelToolbar = new Ext.Toolbar({
 		items : [ OKnesset.toolbarInfoItem, OKnesset.toolbarMailItem, {
 			xtype : 'spacer'
@@ -173,6 +175,7 @@ function secondaryLaunch() {
 			text : 'back',
 			ui : 'forward',
 			handler : function() {
+				// This is the back button's functionality.
 				OKnesset.Viewport.setActiveItem('memberListWrapper', {
 					type : 'slide',
 					direction : 'left'
@@ -181,11 +184,13 @@ function secondaryLaunch() {
 		} ]
 	});
 
+	// The text that appears below the members picture, "bills proposed"
 	OKnesset.memberBillsTitle = new Ext.Panel(
 			{
 				id : 'memberBillsTitle',
 				layout : 'fit',
 				dock : 'bottom',
+				// some sencha touch magic to decide the title
 				tpl : '<tpl if="billNumber &gt; 0"><h2 class="memberBillsTitle x-toolbar-dark">'
 						+ OKnesset.strings.hasBillsTitle
 						+ '</h2></tpl>\
@@ -213,24 +218,16 @@ function secondaryLaunch() {
 	OKnesset.memberImagePanel = new Ext.Panel({
 		id : 'memberImagePanel',
 		layout : 'fit',
-		// height : '110',
-		// flex : 1.5,
-		// tpl: '<img src={img_url} width="75px" height="110px"></img>
 		tpl : '<img src={img_url} height="100%"></img>'
 	});
 
 	OKnesset.memberInfoPanel = new Ext.Panel({
 		id : 'memberInfoPanel',
-		// flex : 4,
-		// height : '110',
-		// scroll : 'vertical',
 		tpl : memberPanelHtml
 	});
 
 	OKnesset.memberPanel = new Ext.Panel({
 		id : 'memberPanel',
-		// layout: 'hbox',
-		// height : '110',
 		flex : 1,
 		items : [ OKnesset.memberInfoPanel ],
 		dockedItems : [ {
@@ -252,13 +249,19 @@ function secondaryLaunch() {
 		},
 		listeners : {
 			afterlayout : {
+				// For some reason, This is the only way I could layout the
+				// member panel
+				// as I wanted. Using flex and hbox+vbox layouts did not yeild
+				// the desired results
 				fn : function(comp) {
 					// TODO calculate only once!
 					var realImageHeight = OKnesset.memberPanel.getHeight()
 							- OKnesset.memberBillsTitle.getHeight();
 					var realImageWidth = 75 / 110 * realImageHeight;
 
-					// apply maximum width
+					// apply maximum width. The Member image is designed to be
+					// 3/7
+					// of the width of the screen (the width of the memberPanel)
 					if (realImageWidth > OKnesset.memberPanel.getWidth()
 							* (3 / 7)) {
 						realImageWidth = OKnesset.memberPanel.getWidth()
@@ -294,6 +297,29 @@ function secondaryLaunch() {
 
 		OKnesset.memberBillList.refresh();
 	}
+	/**
+	 * End of the Member panel.
+	 */
+
+	/**
+	 * The Member list panel (בנימין נתניהו, גדעון סער) shows a list of members
+	 * of the current selected party
+	 */
+	OKnesset.memberListToolbar = new Ext.Toolbar({
+		items : [ OKnesset.toolbarInfoItem, OKnesset.toolbarMailItem, {
+			xtype : 'spacer'
+		}, {
+			text : 'back',
+			ui : 'forward',
+			handler : function() {
+				// This is the back button's functionality.
+				OKnesset.Viewport.setActiveItem('partyListWrapper', {
+					type : 'slide',
+					direction : 'left'
+				});
+			}
+		} ]
+	});
 
 	OKnesset.memberList = new Ext.List({
 		id : 'memberList',
@@ -322,10 +348,15 @@ function secondaryLaunch() {
 		OKnesset.MemberStore.loadData(party.data.members, false);
 		OKnesset.memberList.refresh();
 	}
+	/**
+	 * End of the Member list panel
+	 */
 
+	// Add the member list and member panel panels to the main panel
 	OKnesset.Viewport.add([ OKnesset.memberListWrapper,
 			OKnesset.memberPanelWrapper ]);
 
+	// Load the full data of the parties and members into the data stores
 	loadInitialData();
 
 	var secondaryLaunchTimeEnd = new Date();
@@ -334,6 +365,9 @@ function secondaryLaunch() {
 					.getTime()) / 1000);
 }
 
+/**
+ * Creates the disclaimer dialog (only once)
+ */
 function initDisclaimerDialog() {
 	if (!OKnesset.disclaimerDialog) {
 		OKnesset.disclaimerDialog = new Ext.Panel({
@@ -369,327 +403,26 @@ function initDisclaimerDialog() {
 	}
 }
 
+/**
+ * Displays the disclaimer dialog if it has not already been displayed.
+ *
+ * @param forceShow -
+ *            if true, the disclaimer dialog is displayed regardless
+ */
 function displayDisclaimer(forceShow) {
 	var disclaimerDismissed = localStorage.getItem("disclaimerDismissed");
 	if (disclaimerDismissed !== 'true' || forceShow === true) {
 		initDisclaimerDialog();
+		// for Android. If the disclaimer dialog was forcly displayed,
+		// it will be dismissed by touching the back button
 		OKnesset.disclaimerDialog.forceShow = forceShow;
 		OKnesset.disclaimerDialog.show('pop');
 	}
 }
 
-function processInitialData(partyData, partyDataDate) {
-	var partyDataString = JSON.stringify(partyData);
-	updatePartyData(partyData);
-	localStorage.setItem("PartyDataDate", partyDataDate.getTime());
-	localStorage.setItem("PartyData", partyDataString);
-	checkFullDataFromWeb();
-}
-
-function loadInitialData() {
-	if (localStorage.getItem("PartyData") != null) {
-		// load data from localstorage (most updated locally)
-		setTimeout(function() {
-			var partyData = JSON.parse(localStorage.getItem("PartyData"));
-			updatePartyData(partyData);
-			checkFullDataFromWeb();
-		}, 0);
-	} else {
-		// set the slimData date, it will be overridden once the partData is
-		// loaded
-		localStorage.setItem("PartyDataDate", slimDataDate.getTime());
-		// load initial data (data shipped with the application)
-		if (!isPhoneGap()) {
-			processInitialData(partyData, partyDataDate);
-		} else {
-			Ext.Ajax.request({
-				url : 'javascripts/partyData.js.jpg',
-				callback : function(options, success, response) {
-					// for some reason, Ext.Ajax returns success == false when
-					// the
-					// local request returns
-					if (response.responseText != null
-							&& response.responseText.length > 0) {
-						loadTime = new Date();
-						eval(response.responseText);
-						OKnesset.log('Initial data load was performed in '
-								+ (loadTime.getTime() - mainLaunchTimeEnd
-										.getTime()) / 1000);
-						// partyData is evaluated from the
-						processInitialData(partyData, partyDataDate);
-					} else {
-						OKnesset.log('Full data load failure ('
-								+ JSON.stringify(response)
-								+ ') with status code ' + response.status);
-					}
-				}
-			});
-		}
-	}
-}
-
-function checkFullDataFromWeb() {
-	var partyDataDate = new Date(
-			parseInt(localStorage.getItem("PartyDataDate")));
-	var now = new Date();
-
-	// 24 hours is 1000*60*60*24 = 86,400,000
-	OKnesset.log("** now=" + now.getTime() + " PartyDataDate= "
-			+ partyDataDate.getTime());
-	OKnesset.log("** now=" + dateToString(now) + " PartyDataDate= "
-			+ dateToString(partyDataDate));
-
-	if (now.getTime() > partyDataDate.getTime() + 86400000) {
-		if (!isPhoneGap()) {
-			// fetchFullDataFromWeb();
-			processFullDataFromWebByLocalScript();
-			return;
-		}
-
-		// Check internet connection
-		if (navigator.network.connection.type == Connection.ETHERNET
-				|| navigator.network.connection.type == Connection.WIFI) {
-
-			OKnesset.log("** updating full data by WIFI");
-			fetchFullDataFromWeb();
-		} else if (navigator.network.connection.type == Connection.CELL_2G
-				|| navigator.network.connection.type == Connection.CELL_3G
-				|| navigator.network.connection.type == Connection.CELL_4G) {
-
-			OKnesset.log("** updating full data by 3G");
-			var dialogtxt = OKnesset.strings.downloadDataText;
-			navigator.notification.confirm(dialogtxt,
-					checkFullDataFromWebCallback,
-					OKnesset.strings.downloadDataTitle,
-					OKnesset.strings.dialogOKCancel);
-		} else {
-			OKnesset.log("** not updating full data becuase of no internet");
-		}
-	}
-
-}
-
-function checkFullDataFromWebCallback(btnIndex) {
-	if (btnIndex == 2) {
-		fetchFullDataFromWeb();
-	}
-}
-
-function processFullDataFromWebByLocalScript() {
-	OKnessetParser.loadData(function(data) {
-		displayFetchCompleteNotification();
-		var partyDataString = JSON.stringify(data);
-		updatePartyData(data);
-		var now = new Date();
-		localStorage.setItem("PartyDataDate", now.getTime());
-		localStorage.setItem("PartyData", partyDataString);
-		OKnesset.log("Data fetch from web complete");
-	});
-}
-
-function fetchFullDataFromWeb() {
-	// load the update script from the web, as it may change according to api
-	// changes in oknesset.org
-	Ext.Ajax
-			.request({
-				url : 'http://oknesset-mobile.appspot.com/static/js/mobile/createInitialData.js',
-				success : function(response, options) {
-					eval(response.responseText);
-					OKnesset.log('Oknesset web parser loaded from web');
-					OKnessetParser.loadData(function(data) {
-						displayFetchCompleteNotification();
-						var partyDataString = JSON.stringify(data);
-						updatePartyData(data);
-						var now = new Date();
-						localStorage.setItem("PartyDataDate", now.getTime());
-						localStorage.setItem("PartyData", partyDataString);
-					});
-				},
-				failure : function(response, options) {
-					OKnesset
-							.log('Oknesset web parser failed to load from web ('
-									+ JSON.stringify(response)
-									+ ') with status code '
-									+ response.status
-									+ '. Attempting to laod locally');
-					fetchFullDataFromWebByLocalScript();
-				}
-			});
-
-	function fetchFullDataFromWebByLocalScript() {
-		Ext.Ajax.request({
-			url : 'javascripts/createInitialData.js',
-			callback : function(options, success, response) {
-				// for some reason, Ext.Ajax returns success == false when the
-				// local request returns
-				if (response.responseText != null
-						&& response.responseText.length > 0) {
-					eval(response.responseText);
-					OKnesset.log('Oknesset web parser loaded locally');
-					processFullDataFromWebByLocalScript();
-				} else {
-					OKnesset.log('Oknesset web parser failed to load locally ('
-							+ JSON.stringify(response) + ') with status code '
-							+ response.status + '. Aborting content update.');
-				}
-			}
-		});
-	}
-
-}
-
-function displayFetchCompleteNotification() {
-	if (!OKnesset.fetchCompleteOverlay) {
-		OKnesset.fetchCompleteOverlay = new Ext.Panel({
-			floating : true,
-			centered : true,
-			width : 300,
-			height : 120,
-			cls : 'textCenter',
-			styleHtmlContent : true,
-			html : OKnesset.strings.updateComplete,
-			dockedItems : [ {
-				dock : 'top',
-				xtype : 'toolbar',
-				title : OKnesset.strings.oknessetName
-			} ]
-		});
-	}
-	OKnesset.fetchCompleteOverlay.show('pop');
-
-	Ext.defer(function() {
-		OKnesset.fetchCompleteOverlay.hide();
-	}, isPhoneGap() && isAndroid() ? 4000 : 2000);
-}
-
-function dateToString(date) {
-	var month = date.getMonth() + 1;
-	var day = date.getDate();
-	var year = date.getFullYear();
-	return "" + day + "/" + month + "/" + year;
-}
-
-// update the party store with the full data (replace the slimData)
-function updatePartyData(fullPartyData) {
-	OKnesset.log("-=updatePartyData=-");
-	OKnesset.PartyStore.loadData(fullPartyData, false);
-	// OKnesset.Viewport.getActiveItem().items.getAt(0).refresh();
-	// A OKnesset that can be refreshed has a refresh function
-	OKnesset.Viewport.getActiveItem().refresh();
-}
-
-function gotoParty(record) {
-	// OKnesset.log(JSON.stringify(record.data));
-	var name = record.data.name;
-
-	GATrackParty(record.data.name);
-	OKnesset.memberListWrapper.currentParty = record.data;
-
-	OKnesset.memberListToolbar.setTitle(name);
-	OKnesset.memberListToolbar.items.getAt(3).setText(
-			OKnesset.strings.partiesTitle);
-	if (OKnesset.memberList.scroller) {
-		OKnesset.memberList.scroller.scrollTo({
-			x : 0,
-			y : 0
-		});
-	}
-	OKnesset.MemberStore.loadData(record.data.members, false);
-	OKnesset.Viewport.setActiveItem('memberListWrapper', {
-		type : 'slide',
-		direction : 'right'
-	});
-}
-
-function gotoMember(record) {
-	var member = record.data;
-	GATrackMember(member.name);
-	OKnesset.memberImagePanel.update({
-		img_url : "images/members/"
-				+ member.img_url.substring(member.img_url.lastIndexOf('/') + 1)
-	});
-	updateMemberData(member);
-
-	// scroll bill list up
-	if (OKnesset.memberBillList.scroller) {
-		OKnesset.memberBillList.scroller.scrollTo({
-			x : 0,
-			y : 0
-		});
-	}
-
-	// back button
-	OKnesset.memberPanelToolbar.items.getAt(3).setText(
-			OKnesset.memberListToolbar.title);
-
-	if (hasExcuseForNoBills(member)) {
-		OKnesset.memberBillList.emptyText = "<br/><br/><br/>"
-				+ OKnesset.strings.excuseForNoBills;
-	} else {
-		OKnesset.memberBillList.emptyText = "";
-	}
-
-	OKnesset.memberBillList.refresh();
-	OKnesset.Viewport.setActiveItem('memberPanelWrapper', {
-		type : 'slide',
-		direction : 'right'
-	});
-}
-
-function hasExcuseForNoBills(member) {
-
-	return (member.roles.indexOf(OKnesset.strings.ministerIndicator) != -1 || member.roles === OKnesset.strings.knessetChairman);
-}
-
-function updateMemberData(member) {
-	OKnesset.memberBillsTitle.update({
-		billNumber : member.bills.length,
-		hasExcuseForNoBills : hasExcuseForNoBills(member)
-	});
-	OKnesset.memberInfoPanel.update(member);
-	OKnesset.MemberBillsStore.loadData(member.bills);
-	OKnesset.memberPanelToolbar.setTitle(member.name);
-	OKnesset.memberPanelWrapper.currentMemeber = member;
-}
-
-function gotoBill(record) {
-	var bill = record.data;
-	var url = 'http://www.oknesset.org' + bill.url;
-	if (isPhoneGap()) {
-		if (isiOS()) {
-			navigator.notification.confirm(null, function(idx) {
-				if (idx == 2) {
-					gotoBillCallback(url, bill.url)
-				} else {
-					// track bill cancel
-					GATrackBillCanceled(bill.url)
-				}
-			}, OKnesset.strings.openBillText, OKnesset.strings.dialogOKCancel);
-		} else {// android
-			gotoBillCallback(url, bill.url);
-		}
-	}
-
-}
-
-function gotoBillCallback(url, billUrl) {
-	window.setTimeout(function() {
-		GATrackBill(billUrl, function() {
-			if (isAndroid()) {
-				window.plugins.webintent.startActivity({
-					action : WebIntent.ACTION_VIEW,
-					url : url
-				}, function() {
-				}, function() {
-					alert(OKnesset.strings.errorOpenBill)
-				});
-			} else if (isiOS()) {
-				document.location = url;
-			}
-		});
-	}, 10);
-}
-
+/**
+ * Creates the email dialog (only once)
+ */
 function initEmailDialog() {
 	if (!OKnesset.emailDialog) {
 		OKnesset.emailDialog = new Ext.Panel({
@@ -726,75 +459,12 @@ function initEmailDialog() {
 	}
 }
 
-function getPartyListItems() {
-	if (!OKnesset.emailDialog.partyListItems) {
-		OKnesset.emailDialog.partyListItems = [ {
-			xtype : 'spacer',
-			height : "2em"
-		}, {
-			xtype : 'button',
-			style : {
-				'font-size' : '115%'
-			},
-			handler : function() {
-				sendEmail(this.text);
-			},
-			text : OKnesset.strings.emailPartyList
-		} ];
-	}
-
-	return OKnesset.emailDialog.partyListItems;
-}
-
-function getMemberListItems() {
-	if (!OKnesset.emailDialog.memberListItems) {
-		OKnesset.emailDialog.memberListItems = [ {
-			xtype : 'spacer',
-			height : "2em"
-		}, {
-			xtype : 'button',
-			style : {
-				'font-size' : '115%'
-			},
-			handler : function() {
-				sendEmail(this.text);
-			}
-		} ];
-	}
-
-	OKnesset.emailDialog.memberListItems[1].text = Ext.util.Format.format(
-			OKnesset.strings.emailParty,
-			OKnesset.memberListWrapper.currentParty.name);
-	return OKnesset.emailDialog.memberListItems;
-}
-
-function getMemberPanelItems() {
-	if (!OKnesset.emailDialog.memberPanelItems) {
-		OKnesset.emailDialog.memberPanelItems = [ {
-			xtype : 'spacer',
-			height : "2em"
-		}, {
-			xtype : 'button',
-			style : {
-				'font-size' : '115%'
-			},
-			handler : function() {
-				sendEmail(this.text);
-			}
-		} ];
-	}
-
-	OKnesset.emailDialog.memberPanelItems[1].text = Ext.util.Format.format(
-			OKnesset.strings.emailMember,
-			OKnesset.memberPanelWrapper.currentMemeber.name);
-	return OKnesset.emailDialog.memberPanelItems;
-}
-
 function displayEmailDialog() {
 	initEmailDialog();
-
 	// change buttons according to current screen
-	// insert()
+
+	// The first 2 items are the text and the first button.
+	// All the other items are context dependant, and should be removed
 	var count = OKnesset.emailDialog.items.getCount();
 	if (count > 2) {
 		for ( var i = count - 1; i >= 2; i--) {
@@ -817,6 +487,69 @@ function displayEmailDialog() {
 		direction : 'up'
 	});
 
+	function getPartyListItems() {
+		if (!OKnesset.emailDialog.partyListItems) {
+			OKnesset.emailDialog.partyListItems = [ {
+				xtype : 'spacer',
+				height : "2em"
+			}, {
+				xtype : 'button',
+				style : {
+					'font-size' : '115%'
+				},
+				handler : function() {
+					sendEmail(this.text);
+				},
+				text : OKnesset.strings.emailPartyList
+			} ];
+		}
+
+		return OKnesset.emailDialog.partyListItems;
+	}
+
+	function getMemberListItems() {
+		if (!OKnesset.emailDialog.memberListItems) {
+			OKnesset.emailDialog.memberListItems = [ {
+				xtype : 'spacer',
+				height : "2em"
+			}, {
+				xtype : 'button',
+				style : {
+					'font-size' : '115%'
+				},
+				handler : function() {
+					sendEmail(this.text);
+				}
+			} ];
+		}
+
+		OKnesset.emailDialog.memberListItems[1].text = Ext.util.Format.format(
+				OKnesset.strings.emailParty,
+				OKnesset.memberListWrapper.currentParty.name);
+		return OKnesset.emailDialog.memberListItems;
+	}
+
+	function getMemberPanelItems() {
+		if (!OKnesset.emailDialog.memberPanelItems) {
+			OKnesset.emailDialog.memberPanelItems = [ {
+				xtype : 'spacer',
+				height : "2em"
+			}, {
+				xtype : 'button',
+				style : {
+					'font-size' : '115%'
+				},
+				handler : function() {
+					sendEmail(this.text);
+				}
+			} ];
+		}
+
+		OKnesset.emailDialog.memberPanelItems[1].text = Ext.util.Format.format(
+				OKnesset.strings.emailMember,
+				OKnesset.memberPanelWrapper.currentMemeber.name);
+		return OKnesset.emailDialog.memberPanelItems;
+	}
 }
 
 function sendEmail(subject) {
@@ -824,6 +557,7 @@ function sendEmail(subject) {
 	if (isPhoneGap()) {
 		if (isiOS()) {
 			var emailCallback = function(result) {
+				// called after email has been sent
 				if (result != EmailComposer.ComposeResultType.Cancelled) {
 					OKnesset.emailDialog.hide();
 				}
@@ -839,14 +573,122 @@ function sendEmail(subject) {
 				type : 'text/plain',
 				extras : extras
 			}, function() {
+				// success callback
 				OKnesset.emailDialog.hide();
 			}, function() {
 				alert(OKnesset.strings.errorAndroidEmail);
 			});
 		}
 	}
+	// TODO - for web, implement a "send email" link
 }
 
+/**
+ * Displays the Party panel (the member list panel)
+ *
+ * @param record
+ */
+function gotoParty(record) {
+	var name = record.data.name;
+
+	GATrackParty(name);
+	OKnesset.memberListWrapper.currentParty = record.data;
+	OKnesset.MemberStore.loadData(record.data.members, false);
+
+	OKnesset.memberListToolbar.setTitle(name);
+	// TODO find a better way to retrieve the back button from teh toolbar
+	OKnesset.memberListToolbar.items.getAt(3).setText(
+			OKnesset.strings.partiesTitle);
+
+	// in case the member list was scrolled down( because the user viewed the
+	// panel for another member)
+	if (OKnesset.memberList.scroller) {
+		OKnesset.memberList.scroller.scrollTo({
+			x : 0,
+			y : 0
+		});
+	}
+
+	OKnesset.Viewport.setActiveItem('memberListWrapper', {
+		type : 'slide',
+		direction : 'right'
+	});
+}
+
+/**
+ * Displays the Member panel
+ *
+ * @param record
+ */
+function gotoMember(record) {
+	var member = record.data;
+	GATrackMember(member.name);
+
+	OKnesset.memberImagePanel.update({
+		img_url : "images/members/"
+				+ member.img_url.substring(member.img_url.lastIndexOf('/') + 1)
+	});
+	updateMemberData(member);
+
+	// scroll bill list up
+	if (OKnesset.memberBillList.scroller) {
+		OKnesset.memberBillList.scroller.scrollTo({
+			x : 0,
+			y : 0
+		});
+	}
+
+	// back button
+	OKnesset.memberPanelToolbar.items.getAt(3).setText(
+			OKnesset.memberListToolbar.title);
+
+	// if there are no bills for the current member, display a text explaining
+	// that.
+	if (hasExcuseForNoBills(member)) {
+		OKnesset.memberBillList.emptyText = "<br/><br/><br/>"
+				+ OKnesset.strings.excuseForNoBills;
+	} else {
+		OKnesset.memberBillList.emptyText = "";
+	}
+	OKnesset.memberBillList.refresh();
+
+	OKnesset.Viewport.setActiveItem('memberPanelWrapper', {
+		type : 'slide',
+		direction : 'right'
+	});
+}
+
+/**
+ * Returns true if the member is a minister, or is the chairperson of the
+ * Knesset.
+ *
+ * @param member
+ * @returns {Boolean}
+ */
+function hasExcuseForNoBills(member) {
+	return (member.roles.indexOf(OKnesset.strings.ministerIndicator) != -1 || member.roles === OKnesset.strings.knessetChairman);
+}
+
+/**
+ * updates the information in the member panel.
+ *
+ * @param member
+ *            the member data to udpate the panel with
+ */
+function updateMemberData(member) {
+	OKnesset.memberBillsTitle.update({
+		billNumber : member.bills.length,
+		hasExcuseForNoBills : hasExcuseForNoBills(member)
+	});
+	OKnesset.memberInfoPanel.update(member);
+	OKnesset.MemberBillsStore.loadData(member.bills);
+	OKnesset.memberPanelToolbar.setTitle(member.name);
+	OKnesset.memberPanelWrapper.currentMemeber = member;
+}
+
+/**
+ * Creates the info dialog (only once)
+ */
 function initInfoDialog() {
 	if (!OKnesset.infoPanel) {
 		OKnesset.infoPanel = new Ext.Panel({
@@ -904,7 +746,7 @@ function initInfoDialog() {
 		});
 
 		OKnesset.infoPanel.refresh = function() {
-			// TODO refresh date
+			// TODO refresh the data date
 			OKnesset.Viewport.items.getByKey(OKnesset.currentPanelId).refresh();
 		}
 
@@ -915,6 +757,7 @@ function initInfoDialog() {
 function displayInfoDialog() {
 	initInfoDialog();
 	OKnesset.currentPanelId = OKnesset.Viewport.getActiveItem().getId();
+	// TODO fetch the text item more elegantly
 	OKnesset.infoPanel.items.getAt(0).update(
 			{
 				dateString : Ext.util.Format.format(OKnesset.strings.dataDate,
@@ -929,18 +772,31 @@ function displayInfoDialog() {
 
 }
 
+/**
+ * For Android only - this function is called when the back button is touched.
+ */
 function onBackKey() {
+	// dismiss email dialog if visible
 	if (OKnesset.emailDialog && OKnesset.emailDialog.isVisible()) {
 		OKnesset.emailDialog.hide();
 		return;
 	}
 
+	// dismiss disclaimer dialog if visible (and if it is not the
+	// first time the application has loaded)
 	if (OKnesset.disclaimerDialog && OKnesset.disclaimerDialog.forceShow
 			&& OKnesset.disclaimerDialog.isVisible()) {
 		OKnesset.disclaimerDialog.hide();
 		return;
 	}
 
+	// dismiss info dialog if visible
+	if (OKnesset.infoPanel && OKnesset.infoPanel.isVisible()){
+		OKnesset.infoPanel.hide();
+		return;
+	}
+
+	// find the back button
 	var activeItem = OKnesset.Viewport.getActiveItem();
 	var dockedItem = activeItem.getDockedItems()[0];
 	var backButton = dockedItem.items.findBy(function(item) {
@@ -950,58 +806,10 @@ function onBackKey() {
 	if (backButton !== null) {
 		backButton.handler();
 	} else {
+		// if there is no back button, it means we are at the initial screen
 		navigator.app.exitApp();
 	}
 }
 
-function getPartyFromPartyStoreByName(name) {
-	var partyIndex = OKnesset.PartyStore.findExact('name', name);
-	return OKnesset.PartyStore.getAt(partyIndex);
-
-}
-
-function googleAnalytics() {
-	if (isPhoneGap()) {
-		googleAnalytics = window.plugins.googleAnalyticsPlugin;
-		// The oknesset.mobile google analytics Accoutn ID
-		googleAnalytics.startTrackerWithAccountID(OKnesset.GAID);
-		googleAnalytics.setCustomVariable(1, "appVersion", OKnesset.appVersion,
-				2);
-		googleAnalytics.trackPageview("/app");
-	}
-}
-
-function GATrackMember(name) {
-	if (isPhoneGap()) {
-		googleAnalytics.trackPageview("/app/member/" + name);
-	}
-}
-
-function GATrackParty(name) {
-	if (isPhoneGap()) {
-		googleAnalytics.trackPageview("/app/party/" + name);
-	}
-}
-
-function GATrackBillCanceled(url) {
-	if (isPhoneGap()) {
-		googleAnalytics.trackEvent(function() {
-		}, "bills", "cancelView", url, undefined, true);
-	}
-}
-
-function GATrackBill(url, callback) {
-	if (isPhoneGap()) {
-		if (isAndroid()) {
-			googleAnalytics.trackPageview("/app/external" + url, {
-				dispatch : true
-			}, callback, callback);
-		} else if (isiOS()) {
-			googleAnalytics.trackPageview("/app/external" + url, callback, {
-				dispatch : true
-			});
-		}
-	}
-}
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);
