@@ -6,21 +6,23 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
-			<name>com.rockstarapps.html.refactoring.WebOptimizer</name>
+			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
+			<triggers>full,incremental,</triggers>
 			<arguments>
 				<dictionary>
-					<key>rockstarapps-build-file</key>
-					<value>.rockstarapps</value>
-				</dictionary>
-				<dictionary>
-					<key>rockstarapps-build-version</key>
-					<value>1.5</value>
+					<key>LaunchConfigHandle</key>
+					<value>&lt;project&gt;/.externalToolBuilders/com.rockstarapps.html.refactoring.WebOptimizer (1).launch</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>com.aptana.ide.core.unifiedBuilder</name>
+			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
+			<triggers>full,incremental,</triggers>
 			<arguments>
+				<dictionary>
+					<key>LaunchConfigHandle</key>
+					<value>&lt;project&gt;/.externalToolBuilders/com.aptana.ide.core.unifiedBuilder (1).launch</value>
+				</dictionary>
 			</arguments>
 		</buildCommand>
 	</buildSpec>

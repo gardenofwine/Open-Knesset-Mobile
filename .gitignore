@@ -1,1 +1,35 @@
 .DS_Store
+
+##########
+# oknesset
+##########
+src/web/www/javascripts/private.js
+
+
+# Android
+##########
+native/Android/OKnesset/assets/www/*
+native/Android/OKnesset/assets/www/javascripts/*
+native/Android/OKnesset/bin/*
+
+#iOS
+##########
+# xcode noise
+native/iOS/OKnesset/build/*
+native/iOS/OKnesset/OKnesset/*.pbxuser
+native/iOS/OKnesset/OKnesset/*.mode1v3
+native/iOS/OKnesset/xcuserdata
+
+# auto git version noise
+native/iOS/OKnesset/InfoPlist.h
+
+# old skool
+native/iOS/OKnesset/.svn
+
+# osx noise
+native/iOS/OKnesset/.DS_Store
+native/iOS/OKnesset/profile
+
+# oknesset
+native/iOS/OKnesset/www/*
+native/iOS/OKnesset/www/javascripts/*

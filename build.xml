@@ -6,8 +6,8 @@
     <property name="source.web.dir" value="src/web/www"/>
     <property name="target.web.dir" value="target/web/www/"/>
 
-    <property name="xcodeWWWDir" value="/Users/gardenofwine/dropbox/Oknesset iPhone/OKnesset sencha/www"/>
-    <property name="androidWWWDir" value="/Users/gardenofwine/Dropbox/okneset android/Oknesset-sencha/assets/www"/>
+    <property name="xcodeWWWDir" value="native/iOS/OKnesset/www"/>
+    <property name="androidWWWDir" value="native/Android/OKnesset/assets/www"/>
 
     <target name="buildweb">
         <delete dir="${target.web.dir}"/>
