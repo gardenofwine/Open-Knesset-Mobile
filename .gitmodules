@@ -1,0 +1,3 @@
+[submodule "native/Android/PhoneGap"]
+	path = native/Android/PhoneGap
+	url = git@github.com:gardenofwine/phonegap-android.git
