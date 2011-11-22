@@ -8,7 +8,6 @@ The purpose of this app is to increase transparency of Knesset activities, and t
 This project is released as Open Source so that everyone can contribute to it.
 Please check our issue [tracking system](https://track.nsa.co.il/projects/oknesset_mobile) for stuff we'd be happy be done :)
 
-
 Prerequisites
 ========
 
@@ -62,5 +61,4 @@ Make a difference!
 
 - When modifying javascript files, please use the 'javascriptFormatting.xml' formatting settings so that file merges and code reviews would be easier.
 - Try to follow These [Guidelines](http://wiki.phonegap.com/w/page/28618504/Git%3A%20Contributor%20Workflow) from PhoneGap's Contributer Workflow on how to make pull requests for the project
-
 
