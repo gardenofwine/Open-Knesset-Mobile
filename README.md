@@ -12,7 +12,8 @@ Prerequisites
 ========
 
 - Git (obviously)
-- Eclipse
+- Java
+- Ant (for the build)
 
 For desktop testing:
 
@@ -25,6 +26,7 @@ For iOS:
 
 For Android: (PhoneGap for Android is included in this git repository)
 
+- Eclipse
 - ADT for Eclipse (Android development Toolkit)
 
 Installation
@@ -32,6 +34,9 @@ Installation
 
 - clone this git repository
     git clone git@github.com:gardenofwine/Open-Knesset-Mobile.git
+
+For the Android version development:
+
 - retrieve the submodules:
     cd 'OKnesset Mobile'
     git submodule init
@@ -40,7 +45,9 @@ Installation
 
 Get started
 ========
-- build the project (Project ==> Build Project)
+- build the project (eclipse) - (Project ==> Build Project)
+- build the project (command-line) - run ant with no arguments form the project root directory
+    ant
 - you now have 3 'executable' versions of the OKnesset Mobile application. Android, iPhone and Web (for testing).
 
 WEB:
