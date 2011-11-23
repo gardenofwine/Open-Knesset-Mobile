@@ -38,6 +38,7 @@ Installation
 For the Android version development:
 
 - retrieve the submodules:
+
     cd 'OKnesset Mobile'
     git submodule init
     git submodule update
@@ -47,6 +48,7 @@ Get started
 ========
 - build the project (eclipse) - (Project ==> Build Project)
 - build the project (command-line) - run ant with no arguments form the project root directory
+
     ant
 - you now have 3 'executable' versions of the OKnesset Mobile application. Android, iPhone and Web (for testing).
 
