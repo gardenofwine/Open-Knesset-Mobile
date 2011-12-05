@@ -32,8 +32,12 @@ For Android: (PhoneGap for Android is included in this git repository)
 Installation
 ========
 
+For Desktop browser testing (Chrome/Safari):
+
 - clone this git repository
     git clone git@github.com:gardenofwine/Open-Knesset-Mobile.git
+
+--------
 
 For the Android version development:
 
@@ -44,13 +48,28 @@ For the Android version development:
     git submodule update
 - import the project directly under 'OKnesset Mobile' to eclipse
 
-Get started
+Get started (Build and Run!)
 ========
-- build the project (eclipse) - (Project ==> Build Project)
-- build the project (command-line) - run ant with no arguments form the project root directory
+
+Eclipse:
+
+- build the project (Project ==> Build Project)
+
+--------
+
+Command Line:
+
+build the project (command-line) - run ant with no arguments form the project root directory.
 
     ant
-- you now have 3 'executable' versions of the OKnesset Mobile application. Android, iPhone and Web (for testing).
+
+--------
+
+--------
+
+--------
+
+you now have 3 'executable' versions of the OKnesset Mobile application. Android, iPhone and Web (for testing).
 
 WEB:
 
@@ -64,6 +83,20 @@ Android:
 
 - import the eclipse project in 'OKnesset Mobile/native/Android/OKnesset/'
 
+
+Troubleshooting
+========
+
+Windows:
+
+--------
+
+1) if you get an Error like this when running ant:
+
+    'ant' is not recognized as an internal or external command,
+    operable program or batch file.
+
+   You need to download and install ANT on your machine.
 
 Make a difference!
 ========
