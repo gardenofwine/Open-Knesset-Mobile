@@ -36,3 +36,4 @@ native/iOS/OKnesset/profile
 # oknesset
 native/iOS/OKnesset/www/*
 native/iOS/OKnesset/www/javascripts/*
+/readme_review.html

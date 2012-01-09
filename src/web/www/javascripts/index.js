@@ -15,6 +15,23 @@ OKnesset.log = function(string) {
 	}
 };
 
+/*
+ * Oknesset default Panel
+ */
+OKnesset.Panel = Ext.extend(Ext.Panel,{
+	constructor: function(config) {
+		OKnesset.Panel.superclass.constructor.call(this, config);
+
+		if (this.refresh == OKnesset.Panel.prototype.refresh){
+			throw "OKnesset.Panel must define a refresh function.";
+		}
+
+	},
+	refresh : function(){
+		throw "OKnesset.Panel must define a refresh function.";
+	}
+});
+
 OKnesset.app = new Ext.Application(
 		{
 			name : "OKnesset.app",
@@ -84,18 +101,16 @@ OKnesset.app = new Ext.Application(
 							onItemDisclosure : gotoParty
 						});
 
-				OKnesset.partyListWrapper = new Ext.Panel({
+				OKnesset.partyListWrapper = new OKnesset.Panel({
 					id : 'partyListWrapper',
 					layout : 'fit',
 					items : [ OKnesset.listPanel ],
-					dockedItems : [ OKnesset.partyListToolbar ]
+					dockedItems : [ OKnesset.partyListToolbar ],
+					refresh : function() {
+						OKnesset.listPanel.refresh();
+					}
 				});
 
-				// TODO: create a subclass of Ext.Panel that has a refresh
-				// function so that there would be a default refresh function
-				OKnesset.partyListWrapper.refresh = function() {
-					OKnesset.listPanel.refresh();
-				}
 
 				/**
 				 * End of The List of parties
@@ -241,7 +256,7 @@ function secondaryLaunch() {
 		} ]
 	});
 
-	OKnesset.memberPanelWrapper = new Ext.Panel({
+	OKnesset.memberPanelWrapper = new OKnesset.Panel({
 		id : 'memberPanelWrapper',
 		layout : {
 			type : 'vbox',
@@ -280,23 +295,22 @@ function secondaryLaunch() {
 			}
 		},
 		items : [ OKnesset.memberPanel, OKnesset.memberBillList ],
-		dockedItems : [ OKnesset.memberPanelToolbar ]
+		dockedItems : [ OKnesset.memberPanelToolbar ],
+		refresh : function() {
+			// get current member data from Party store, which is updated
+			var party = getPartyFromPartyStoreByName(OKnesset.memberPanelWrapper.currentMemeber.party);
+			Ext.iterate(party.data.members, function(value, index) {
+				if (value.id === OKnesset.memberPanelWrapper.currentMemeber.id) {
+					updateMemberData(value);
+					return false;
+				}
+			});
+
+			OKnesset.memberBillList.refresh();
+		}
 	});
 
 	OKnesset.memberPanelWrapper.currentMemeber = null;
-
-	OKnesset.memberPanelWrapper.refresh = function() {
-		// get current member data from Party store, which is updated
-		var party = getPartyFromPartyStoreByName(OKnesset.memberPanelWrapper.currentMemeber.party);
-		Ext.iterate(party.data.members, function(value, index) {
-			if (value.id === OKnesset.memberPanelWrapper.currentMemeber.id) {
-				updateMemberData(value);
-				return false;
-			}
-		});
-
-		OKnesset.memberBillList.refresh();
-	}
 	/**
 	 * End of the Member panel.
 	 */
@@ -334,20 +348,20 @@ function secondaryLaunch() {
 		onItemDisclosure : gotoMember
 	});
 
-	OKnesset.memberListWrapper = new Ext.Panel({
+	OKnesset.memberListWrapper = new OKnesset.Panel({
 		id : 'memberListWrapper',
 		layout : 'fit',
 		items : [ OKnesset.memberList ],
-		dockedItems : OKnesset.memberListToolbar
+		dockedItems : OKnesset.memberListToolbar,
+		refresh : function() {
+			var party = getPartyFromPartyStoreByName(OKnesset.memberListWrapper.currentParty.name);
+			OKnesset.MemberStore.loadData(party.data.members, false);
+			OKnesset.memberList.refresh();
+		}
 	});
 
 	OKnesset.memberListWrapper.currentParty = null;
 
-	OKnesset.memberListWrapper.refresh = function() {
-		var party = getPartyFromPartyStoreByName(OKnesset.memberListWrapper.currentParty.name);
-		OKnesset.MemberStore.loadData(party.data.members, false);
-		OKnesset.memberList.refresh();
-	}
 	/**
 	 * End of the Member list panel
 	 */
