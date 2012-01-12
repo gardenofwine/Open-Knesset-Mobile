@@ -257,9 +257,9 @@ function displayFetchCompleteNotification() {
 function updatePartyData(fullPartyData) {
 	OKnesset.log("-=updatePartyData=-");
 	OKnesset.PartyStore.loadData(fullPartyData, false);
-	// OKnesset.Viewport.getActiveItem().items.getAt(0).refresh();
+	// getViewport().getActiveItem().items.getAt(0).refresh();
 	// A OKnesset that can be refreshed has a refresh function
-	OKnesset.Viewport.getActiveItem().refresh();
+	getViewport().getActiveItem().refresh();
 }
 
 /**
@@ -338,4 +338,8 @@ function getPartyFromPartyStoreByName(name) {
 	var partyIndex = OKnesset.PartyStore.findExact('name', name);
 	return OKnesset.PartyStore.getAt(partyIndex);
 
+}
+
+function getViewport(){
+	return Ext.ApplicationManager.get("oknesset").viewport;
 }

@@ -25,17 +25,40 @@ OKnesset.Panel = Ext.extend(Ext.Panel,{
 		if (this.refresh == OKnesset.Panel.prototype.refresh){
 			throw "OKnesset.Panel must define a refresh function.";
 		}
+		if (this.setTitle == OKnesset.Panel.prototype.setTitle){
+			throw "OKnesset.Panel must define a setTitle function.";
+		}
 
 	},
 	refresh : function(){
 		throw "OKnesset.Panel must define a refresh function.";
+	},
+	setTitle : function(){
+		throw "OKnesset.Panel must define a setTitle function.";
 	}
 });
 
-OKnesset.app = new Ext.Application(
-		{
-			name : "OKnesset.app",
-			launch : function() {
+//Ext.regApplication({
+//    name: 'OKnesset.app',
+//    defaultUrl: 'Home/index',
+//
+//    launch: function()
+//    {
+//        this.viewport = new App.views.Viewport();
+//
+//        this.viewport.query('#searchBtn')[0].setHandler(function(){
+//            Ext.ControllerManager.get('Search').index();
+//        });
+//    },
+//});
+//OKnesset.app = new Ext.Application(
+//		{
+//			name : "OKnesset.app",
+		Ext.regApplication({
+		    name: 'OKnesset.app',
+		    id : "oknesset",
+		    defaultUrl: 'Home/index',
+		    launch : function() {
 				// Invoked immediately after the OKnesset.app created.
 				this.launched = true;
 				this.mainLaunch();
@@ -108,6 +131,9 @@ OKnesset.app = new Ext.Application(
 					dockedItems : [ OKnesset.partyListToolbar ],
 					refresh : function() {
 						OKnesset.listPanel.refresh();
+					},
+					setTitle : function(){
+						// Nothing to do here, the title remains the same
 					}
 				});
 
@@ -123,12 +149,16 @@ OKnesset.app = new Ext.Application(
 				 * displayed to the user, the rest of the panels are loaded (in
 				 * secondaryLaunch)
 				 */
-				OKnesset.Viewport = new Ext.Panel({
-					fullscreen : true,
-					layout : 'card',
-					cardSwitchAnimation : 'slide',
-					items : [ OKnesset.partyListWrapper ]
-				});
+				this.viewport = new OKnesset.app.views.Viewport();
+				this.viewport.add([ OKnesset.partyListWrapper ]);
+				this.viewport.setActiveItem(OKnesset.partyListWrapper);
+
+//				OKnesset.Viewport = new Ext.Panel({
+//					fullscreen : true,
+//					layout : 'card',
+//					cardSwitchAnimation : 'slide',
+//					items : [ OKnesset.partyListWrapper ]
+//				});
 
 				displayDisclaimer();
 
@@ -191,7 +221,7 @@ function secondaryLaunch() {
 			ui : 'forward',
 			handler : function() {
 				// This is the back button's functionality.
-				OKnesset.Viewport.setActiveItem('memberListWrapper', {
+				getViewport().setActiveItem('memberListWrapper', {
 					type : 'slide',
 					direction : 'left'
 				});
@@ -307,6 +337,9 @@ function secondaryLaunch() {
 			});
 
 			OKnesset.memberBillList.refresh();
+		},
+		setTitle : function(){
+
 		}
 	});
 
@@ -327,7 +360,7 @@ function secondaryLaunch() {
 			ui : 'forward',
 			handler : function() {
 				// This is the back button's functionality.
-				OKnesset.Viewport.setActiveItem('partyListWrapper', {
+				getViewport().setActiveItem('partyListWrapper', {
 					type : 'slide',
 					direction : 'left'
 				});
@@ -357,6 +390,9 @@ function secondaryLaunch() {
 			var party = getPartyFromPartyStoreByName(OKnesset.memberListWrapper.currentParty.name);
 			OKnesset.MemberStore.loadData(party.data.members, false);
 			OKnesset.memberList.refresh();
+		},
+		setTitle : function(){
+			console.log("** implement setTitle her")
 		}
 	});
 
@@ -367,7 +403,7 @@ function secondaryLaunch() {
 	 */
 
 	// Add the member list and member panel panels to the main panel
-	OKnesset.Viewport.add([ OKnesset.memberListWrapper,
+	getViewport().add([ OKnesset.memberListWrapper,
 			OKnesset.memberPanelWrapper ]);
 
 	// Load the full data of the parties and members into the data stores
@@ -387,8 +423,8 @@ function initDisclaimerDialog() {
 		OKnesset.disclaimerDialog = new Ext.Panel({
 			floating : true,
 			centered : true,
-			width : OKnesset.Viewport.getWidth() * 0.9,
-			height : OKnesset.Viewport.getHeight() * 0.9,
+			width : getViewport().getWidth() * 0.9,
+			height : getViewport().getHeight() * 0.9,
 			styleHtmlContent : true,
 			style : {
 				direction : 'rtl'
@@ -442,8 +478,8 @@ function initEmailDialog() {
 		OKnesset.emailDialog = new Ext.Panel({
 			floating : true,
 			centered : true,
-			width : OKnesset.Viewport.getWidth() * 0.9,
-			height : OKnesset.Viewport.getHeight() * 0.65,
+			width : getViewport().getWidth() * 0.9,
+			height : getViewport().getHeight() * 0.65,
 			cls : 'textCenter',
 			styleHtmlContent : true,
 			items : [ {
@@ -486,7 +522,7 @@ function displayEmailDialog() {
 		}
 	}
 
-	OKnesset.currentPanelId = OKnesset.Viewport.getActiveItem().getId();
+	OKnesset.currentPanelId = getViewport().getActiveItem().getId();
 	if (OKnesset.currentPanelId == OKnesset.partyListWrapper.getId()) {
 		OKnesset.emailDialog.add(getPartyListItems());
 	} else if (OKnesset.currentPanelId == OKnesset.memberListWrapper.getId()) {
@@ -623,7 +659,7 @@ function gotoParty(record) {
 		});
 	}
 
-	OKnesset.Viewport.setActiveItem('memberListWrapper', {
+	getViewport().setActiveItem('memberListWrapper', {
 		type : 'slide',
 		direction : 'right'
 	});
@@ -666,7 +702,7 @@ function gotoMember(record) {
 	}
 	OKnesset.memberBillList.refresh();
 
-	OKnesset.Viewport.setActiveItem('memberPanelWrapper', {
+	getViewport().setActiveItem('memberPanelWrapper', {
 		type : 'slide',
 		direction : 'right'
 	});
@@ -711,8 +747,8 @@ function initInfoDialog() {
 			cls : 'textCenter',
 			floating : true,
 			centered : true,
-			width : OKnesset.Viewport.getWidth() * 0.9,
-			height : OKnesset.Viewport.getHeight() * 0.65,
+			width : getViewport().getWidth() * 0.9,
+			height : getViewport().getHeight() * 0.65,
 			items : [ {
 				tpl : '{dateString}'
 			}, {
@@ -761,7 +797,7 @@ function initInfoDialog() {
 
 		OKnesset.infoPanel.refresh = function() {
 			// TODO refresh the data date
-			OKnesset.Viewport.items.getByKey(OKnesset.currentPanelId).refresh();
+			getViewport().items.getByKey(OKnesset.currentPanelId).refresh();
 		}
 
 	}
@@ -770,7 +806,7 @@ function initInfoDialog() {
 
 function displayInfoDialog() {
 	initInfoDialog();
-	OKnesset.currentPanelId = OKnesset.Viewport.getActiveItem().getId();
+	OKnesset.currentPanelId = getViewport().getActiveItem().getId();
 	// TODO fetch the text item more elegantly
 	OKnesset.infoPanel.items.getAt(0).update(
 			{
@@ -811,7 +847,7 @@ function onBackKey() {
 	}
 
 	// find the back button
-	var activeItem = OKnesset.Viewport.getActiveItem();
+	var activeItem = getViewport().getActiveItem();
 	var dockedItem = activeItem.getDockedItems()[0];
 	var backButton = dockedItem.items.findBy(function(item) {
 		return item.ui === 'forward';
