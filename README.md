@@ -48,6 +48,14 @@ For the Android version development:
     git submodule update
 - import the project directly under 'OKnesset Mobile' to eclipse
 
+Installation - only for Android
+========
+
+run the following git commands to clone the PhoneGap submodule:
+
+    git submodule init
+    git submodule update
+
 Get started (Build and Run!)
 ========
 
