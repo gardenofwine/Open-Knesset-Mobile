@@ -8,6 +8,12 @@ Ext.regController('PartyList', {
             this.partyListView = this.render({
                 xtype: 'PartyListView',
             });
+            var partyList = this.partyListView.query('#PartyList')[0];
+            partyList.addListener('itemtap',
+            	function(that, index, item, e) {
+					var record = that.store.getAt(index);
+					gotoParty(record);
+				});
         }
 
         this.application.viewport.setActiveItem(this.partyListView, options.animation);
