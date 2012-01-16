@@ -38,22 +38,6 @@ OKnesset.Panel = Ext.extend(Ext.Panel,{
 	}
 });
 
-//Ext.regApplication({
-//    name: 'OKnesset.app',
-//    defaultUrl: 'Home/index',
-//
-//    launch: function()
-//    {
-//        this.viewport = new App.views.Viewport();
-//
-//        this.viewport.query('#searchBtn')[0].setHandler(function(){
-//            Ext.ControllerManager.get('Search').index();
-//        });
-//    },
-//});
-//OKnesset.app = new Ext.Application(
-//		{
-//			name : "OKnesset.app",
 		Ext.regApplication({
 		    name: 'OKnesset.app',
 		    id : "oknesset",
@@ -100,42 +84,42 @@ OKnesset.Panel = Ext.extend(Ext.Panel,{
 				// TODO: use ONE toolbar that changes title, buttons, according
 				// to the active panel.
 
-				/**
-				 * The List of parties (קדימה, ליכוד...) The first panel to be
-				 * displayed.
-				 */
-				OKnesset.partyListToolbar = new Ext.Toolbar({
-					items : [ OKnesset.toolbarInfoItem,
-							OKnesset.toolbarMailItem ],
-					title : OKnesset.strings.partiesTitle
-				});
-
-				OKnesset.listPanel = new Ext.List(
-						{
-							id : 'indexlist',
-							store : OKnesset.PartyStore,
-							itemTpl : '<div class="partyName">{name}<div class="partySize">{members.length}</div></div>',
-							listeners : {
-								itemtap : function(that, index, item, e) {
-									var record = that.store.getAt(index);
-									gotoParty(record);
-								}
-							},
-							onItemDisclosure : gotoParty
-						});
-
-				OKnesset.partyListWrapper = new OKnesset.Panel({
-					id : 'partyListWrapper',
-					layout : 'fit',
-					items : [ OKnesset.listPanel ],
-					dockedItems : [ OKnesset.partyListToolbar ],
-					refresh : function() {
-						OKnesset.listPanel.refresh();
-					},
-					setTitle : function(){
-						// Nothing to do here, the title remains the same
-					}
-				});
+//				/**
+//				 * The List of parties (קדימה, ליכוד...) The first panel to be
+//				 * displayed.
+//				 */
+//				OKnesset.partyListToolbar = new Ext.Toolbar({
+//					items : [ OKnesset.toolbarInfoItem,
+//							OKnesset.toolbarMailItem ],
+//					title : OKnesset.strings.partiesTitle
+//				});
+//
+//				OKnesset.listPanel = new Ext.List(
+//						{
+//							id : 'indexlist',
+//							store : OKnesset.PartyStore,
+//							itemTpl : '<div class="partyName">{name}<div class="partySize">{members.length}</div></div>',
+//							listeners : {
+//								itemtap : function(that, index, item, e) {
+//									var record = that.store.getAt(index);
+//									gotoParty(record);
+//								}
+//							},
+//							onItemDisclosure : gotoParty
+//						});
+//
+//				OKnesset.partyListWrapper = new OKnesset.Panel({
+//					id : 'partyListWrapper',
+//					layout : 'fit',
+//					items : [ OKnesset.listPanel ],
+//					dockedItems : [ OKnesset.partyListToolbar ],
+//					refresh : function() {
+//						OKnesset.listPanel.refresh();
+//					},
+//					setTitle : function(){
+//						// Nothing to do here, the title remains the same
+//					}
+//				});
 
 
 				/**
@@ -150,15 +134,13 @@ OKnesset.Panel = Ext.extend(Ext.Panel,{
 				 * secondaryLaunch)
 				 */
 				this.viewport = new OKnesset.app.views.Viewport();
-				this.viewport.add([ OKnesset.partyListWrapper ]);
-				this.viewport.setActiveItem(OKnesset.partyListWrapper);
+//	            this.partyListView = this.render({
+	            this.partyListView = new Ext.Controller().render({
+	                xtype: 'partyListWrapper',
+	            });
 
-//				OKnesset.Viewport = new Ext.Panel({
-//					fullscreen : true,
-//					layout : 'card',
-//					cardSwitchAnimation : 'slide',
-//					items : [ OKnesset.partyListWrapper ]
-//				});
+//				this.viewport.add([ OKnesset.partyListWrapper ]);
+				this.viewport.setActiveItem(this.partyListView);
 
 				displayDisclaimer();
 
@@ -523,7 +505,9 @@ function displayEmailDialog() {
 	}
 
 	OKnesset.currentPanelId = getViewport().getActiveItem().getId();
-	if (OKnesset.currentPanelId == OKnesset.partyListWrapper.getId()) {
+    var partyListView = getViewport().query('#partyListWrapper')[0];
+
+	if (OKnesset.currentPanelId == partyListView.getId()) {
 		OKnesset.emailDialog.add(getPartyListItems());
 	} else if (OKnesset.currentPanelId == OKnesset.memberListWrapper.getId()) {
 		OKnesset.emailDialog.add(getMemberListItems());
