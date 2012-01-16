@@ -2,11 +2,6 @@
  * The List of parties (קדימה, ליכוד...) The first panel to be
  * displayed.
  */
-//OKnesset.partyListToolbar = new Ext.Toolbar({
-//	items : [ OKnesset.toolbarInfoItem, OKnesset.toolbarMailItem ],
-//	title : OKnesset.strings.partiesTitle
-//});
-
 OKnesset.app.listPanel = new Ext.List(
 		{
 			id : 'indexlist',
@@ -21,10 +16,11 @@ OKnesset.app.listPanel = new Ext.List(
 			onItemDisclosure : gotoParty
 		});
 
-OKnesset.app.views.partyListWrapper = new Ext.extend(Ext.Panel, {
-	id : 'partyListWrapper',
+OKnesset.app.views.PartyListView = new Ext.extend(Ext.Panel, {
+	id : 'PartyListView',
 	layout : 'fit',
 	items : [ OKnesset.app.listPanel ],
+	title : OKnesset.strings.partiesTitle,
 //	dockedItems : [ OKnesset.partyListToolbar ],
 	refresh : function() {
 		OKnesset.app.listPanel.refresh();
@@ -34,4 +30,4 @@ OKnesset.app.views.partyListWrapper = new Ext.extend(Ext.Panel, {
 	}
 });
 
-Ext.reg('partyListWrapper', OKnesset.app.views.partyListWrapper);
+Ext.reg('PartyListView', OKnesset.app.views.PartyListView);

@@ -28,6 +28,7 @@ OKnesset.app.views.Viewport = new Ext.extend(Ext.Panel, {
 	cardSwitchAnimation : 'slide',
     dockedItems: [
                   {
+                	itemId : 'toolbar',
                   	xtype: 'toolbar',
                   	title: '',
                   	items : [ OKnesset.app.toolbarInfoItem, OKnesset.app.toolbarMailItem ],

@@ -41,7 +41,7 @@ OKnesset.Panel = Ext.extend(Ext.Panel,{
 		Ext.regApplication({
 		    name: 'OKnesset.app',
 		    id : "oknesset",
-		    defaultUrl: 'Home/index',
+		    defaultUrl: 'PartyList/Index',
 		    launch : function() {
 				// Invoked immediately after the OKnesset.app created.
 				this.launched = true;
@@ -84,44 +84,6 @@ OKnesset.Panel = Ext.extend(Ext.Panel,{
 				// TODO: use ONE toolbar that changes title, buttons, according
 				// to the active panel.
 
-//				/**
-//				 * The List of parties (קדימה, ליכוד...) The first panel to be
-//				 * displayed.
-//				 */
-//				OKnesset.partyListToolbar = new Ext.Toolbar({
-//					items : [ OKnesset.toolbarInfoItem,
-//							OKnesset.toolbarMailItem ],
-//					title : OKnesset.strings.partiesTitle
-//				});
-//
-//				OKnesset.listPanel = new Ext.List(
-//						{
-//							id : 'indexlist',
-//							store : OKnesset.PartyStore,
-//							itemTpl : '<div class="partyName">{name}<div class="partySize">{members.length}</div></div>',
-//							listeners : {
-//								itemtap : function(that, index, item, e) {
-//									var record = that.store.getAt(index);
-//									gotoParty(record);
-//								}
-//							},
-//							onItemDisclosure : gotoParty
-//						});
-//
-//				OKnesset.partyListWrapper = new OKnesset.Panel({
-//					id : 'partyListWrapper',
-//					layout : 'fit',
-//					items : [ OKnesset.listPanel ],
-//					dockedItems : [ OKnesset.partyListToolbar ],
-//					refresh : function() {
-//						OKnesset.listPanel.refresh();
-//					},
-//					setTitle : function(){
-//						// Nothing to do here, the title remains the same
-//					}
-//				});
-
-
 				/**
 				 * End of The List of parties
 				 */
@@ -134,13 +96,6 @@ OKnesset.Panel = Ext.extend(Ext.Panel,{
 				 * secondaryLaunch)
 				 */
 				this.viewport = new OKnesset.app.views.Viewport();
-//	            this.partyListView = this.render({
-	            this.partyListView = new Ext.Controller().render({
-	                xtype: 'partyListWrapper',
-	            });
-
-//				this.viewport.add([ OKnesset.partyListWrapper ]);
-				this.viewport.setActiveItem(this.partyListView);
 
 				displayDisclaimer();
 
@@ -342,7 +297,7 @@ function secondaryLaunch() {
 			ui : 'forward',
 			handler : function() {
 				// This is the back button's functionality.
-				getViewport().setActiveItem('partyListWrapper', {
+				getViewport().setActiveItem('PartyListView', {
 					type : 'slide',
 					direction : 'left'
 				});
@@ -505,7 +460,7 @@ function displayEmailDialog() {
 	}
 
 	OKnesset.currentPanelId = getViewport().getActiveItem().getId();
-    var partyListView = getViewport().query('#partyListWrapper')[0];
+    var partyListView = getViewport().query('#PartyListView')[0];
 
 	if (OKnesset.currentPanelId == partyListView.getId()) {
 		OKnesset.emailDialog.add(getPartyListItems());
