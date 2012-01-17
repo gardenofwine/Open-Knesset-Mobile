@@ -12,33 +12,22 @@ Ext.regController('PartyList', {
             partyList.addListener('itemtap',
             	function(that, index, item, e) {
 					var record = that.store.getAt(index);
-					gotoParty(record);
+					dispatchPanel('Party/Index', options.historyUrl, record.data);
 				});
         }
 
-        this.application.viewport.setActiveItem(this.partyListView, options.animation);
-        this.application.viewport.query('#toolbar')[0].setTitle(this.partyListView.title);
-    },
-
-    // about action
-    About: function(options)
-    {
-     	console.log(options);
-        if ( ! this.aboutView)
-        {
-            this.aboutView = this.render({
-                xtype: 'HomeAbout',
-            });
-        }
-
         var backBtn = this.application.viewport.query('#backBtn')[0];
-        backBtn.show();
+        if (options.back) {
+            backBtn.setHandler(function() {
+    			dispatchBack(options.back);
+    		});
+        	backBtn.show();
+        } else {
+        	backBtn.hide();
+    	}
 
-        backBtn.setHandler(function()
-		{
-			dispatchBack(options.back);
-		});
 
-        this.application.viewport.setActiveItem(this.aboutView);
+        this.application.viewport.query('#toolbar')[0].setTitle(this.partyListView.title);
+        this.application.viewport.setActiveItem(this.partyListView, options.animation);
     },
 });

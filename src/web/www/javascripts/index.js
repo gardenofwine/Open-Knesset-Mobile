@@ -285,63 +285,64 @@ function secondaryLaunch() {
 	 * End of the Member panel.
 	 */
 
-	/**
-	 * The Member list panel (בנימין נתניהו, גדעון סער) shows a list of members
-	 * of the current selected party
-	 */
-	OKnesset.memberListToolbar = new Ext.Toolbar({
-		items : [ OKnesset.toolbarInfoItem, OKnesset.toolbarMailItem, {
-			xtype : 'spacer'
-		}, {
-			text : 'back',
-			ui : 'forward',
-			handler : function() {
-				// This is the back button's functionality.
-				getViewport().setActiveItem('PartyListView', {
-					type : 'slide',
-					direction : 'left'
-				});
-			}
-		} ]
-	});
-
-	OKnesset.memberList = new Ext.List({
-		id : 'memberList',
-		itemTpl : '<div>{#} {name}</div>',
-		store : OKnesset.MemberStore,
-		listeners : {
-			itemtap : function(that, index, item, e) {
-				var record = that.store.getAt(index);
-				gotoMember(record);
-			}
-		},
-		onItemDisclosure : gotoMember
-	});
-
-	OKnesset.memberListWrapper = new OKnesset.Panel({
-		id : 'memberListWrapper',
-		layout : 'fit',
-		items : [ OKnesset.memberList ],
-		dockedItems : OKnesset.memberListToolbar,
-		refresh : function() {
-			var party = getPartyFromPartyStoreByName(OKnesset.memberListWrapper.currentParty.name);
-			OKnesset.MemberStore.loadData(party.data.members, false);
-			OKnesset.memberList.refresh();
-		},
-		setTitle : function(){
-			console.log("** implement setTitle her")
-		}
-	});
-
-	OKnesset.memberListWrapper.currentParty = null;
+//	/**
+//	 * The Member list panel (בנימין נתניהו, גדעון סער) shows a list of members
+//	 * of the current selected party
+//	 */
+//	OKnesset.memberListToolbar = new Ext.Toolbar({
+//		items : [ OKnesset.toolbarInfoItem, OKnesset.toolbarMailItem, {
+//			xtype : 'spacer'
+//		}, {
+//			text : 'back',
+//			ui : 'forward',
+//			handler : function() {
+//				// This is the back button's functionality.
+//				getViewport().setActiveItem('PartyListView', {
+//					type : 'slide',
+//					direction : 'left'
+//				});
+//			}
+//		} ]
+//	});
+//
+//	OKnesset.memberList = new Ext.List({
+//		id : 'memberList',
+//		itemTpl : '<div>{#} {name}</div>',
+//		store : OKnesset.MemberStore,
+//		listeners : {
+//			itemtap : function(that, index, item, e) {
+//				var record = that.store.getAt(index);
+//				gotoMember(record);
+//			}
+//		},
+//		onItemDisclosure : gotoMember
+//	});
+//
+//	OKnesset.memberListWrapper = new OKnesset.Panel({
+//		id : 'memberListWrapper',
+//		layout : 'fit',
+//		items : [ OKnesset.memberList ],
+//		dockedItems : OKnesset.memberListToolbar,
+//		refresh : function() {
+//			var party = getPartyFromPartyStoreByName(OKnesset.memberListWrapper.currentParty.name);
+//			OKnesset.MemberStore.loadData(party.data.members, false);
+//			OKnesset.memberList.refresh();
+//		},
+//		setTitle : function(){
+//			console.log("** implement setTitle her")
+//		}
+//	});
+//
+//	OKnesset.memberListWrapper.currentParty = null;
 
 	/**
 	 * End of the Member list panel
 	 */
 
 	// Add the member list and member panel panels to the main panel
-	getViewport().add([ OKnesset.memberListWrapper,
-			OKnesset.memberPanelWrapper ]);
+//	getViewport().add([ OKnesset.memberListWrapper,
+//	        			OKnesset.memberPanelWrapper ]);
+	getViewport().add([ OKnesset.memberPanelWrapper ]);
 
 	// Load the full data of the parties and members into the data stores
 	loadInitialData();
@@ -461,10 +462,11 @@ function displayEmailDialog() {
 
 	OKnesset.currentPanelId = getViewport().getActiveItem().getId();
     var partyListView = getViewport().query('#PartyListView')[0];
+    var partyView = getViewport().query('#PartyView')[0];
 
 	if (OKnesset.currentPanelId == partyListView.getId()) {
 		OKnesset.emailDialog.add(getPartyListItems());
-	} else if (OKnesset.currentPanelId == OKnesset.memberListWrapper.getId()) {
+	} else if (OKnesset.currentPanelId == partyView.getId()) {
 		OKnesset.emailDialog.add(getMemberListItems());
 	} else if (OKnesset.currentPanelId == OKnesset.memberPanelWrapper.getId()) {
 		OKnesset.emailDialog.add(getMemberPanelItems());
@@ -578,30 +580,11 @@ function sendEmail(subject) {
  * @param record
  */
 function gotoParty(record) {
-	var name = record.data.name;
 
-	GATrackParty(name);
-	OKnesset.memberListWrapper.currentParty = record.data;
-	OKnesset.MemberStore.loadData(record.data.members, false);
-
-	OKnesset.memberListToolbar.setTitle(name);
-	// TODO find a better way to retrieve the back button from teh toolbar
-	OKnesset.memberListToolbar.items.getAt(3).setText(
-			OKnesset.strings.partiesTitle);
-
-	// in case the member list was scrolled down( because the user viewed the
-	// panel for another member)
-	if (OKnesset.memberList.scroller) {
-		OKnesset.memberList.scroller.scrollTo({
-			x : 0,
-			y : 0
-		});
-	}
-
-	getViewport().setActiveItem('memberListWrapper', {
-		type : 'slide',
-		direction : 'right'
-	});
+//	getViewport().setActiveItem('memberListWrapper', {
+//		type : 'slide',
+//		direction : 'right'
+//	});
 }
 
 /**

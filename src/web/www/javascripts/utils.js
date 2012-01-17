@@ -343,3 +343,42 @@ function getPartyFromPartyStoreByName(name) {
 function getViewport(){
 	return Ext.ApplicationManager.get("oknesset").viewport;
 }
+
+function getController(historyUrl){
+	return historyUrl.substring(0, historyUrl.indexOf("/"));
+}
+
+function getAction(historyUrl){
+	return historyUrl.substring(historyUrl.indexOf("/") + 1);
+}
+
+function dispatchPanel(toUrl, historyUrl, data){
+				    Ext.dispatch({
+        			    controller: getController(toUrl),
+        			    action: getAction(toUrl),
+        			    historyUrl: toUrl,
+        			    back : historyUrl,
+        			    data : data,
+        			    //
+        			    animation: {
+        			        type: 'slide',
+					        direction : 'right'
+        			    },
+		        	});
+}
+
+function dispatchBack(historyUrl){
+			Ext.dispatch({
+        	    controller: getController(historyUrl),
+        	    action: getAction(historyUrl),
+        	    historyUrl: historyUrl,
+        	    //
+        	    animation: {
+        	        type: 'slide',
+        	    },
+        	});
+
+}
+function setBackButtonAction(btn, options){
+
+}
