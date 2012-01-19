@@ -33,7 +33,7 @@ Ext.regController('Member', {
         });
         this.memberView.query('#MemberInfo')[0].update(member);
         OKnesset.MemberBillsStore.loadData(member.bills);
-        this.currentMemeber = member;
+        this.currentMember = member;
 
 
         // scroll bill list up

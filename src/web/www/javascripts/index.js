@@ -467,12 +467,13 @@ function displayEmailDialog() {
 	OKnesset.currentPanelId = getViewport().getActiveItem().getId();
 	var partyListView = getViewport().query('#PartyListView')[0];
 	var partyView = getViewport().query('#PartyView')[0];
+	var memberView = getViewport().query('#MemberView')[0];
 
 	if (OKnesset.currentPanelId == partyListView.getId()) {
 		OKnesset.emailDialog.add(getPartyListItems());
 	} else if (OKnesset.currentPanelId == partyView.getId()) {
 		OKnesset.emailDialog.add(getMemberListItems());
-	} else if (OKnesset.currentPanelId == OKnesset.memberPanelWrapper.getId()) {
+	} else if (OKnesset.currentPanelId == memberView.getId()) {
 		OKnesset.emailDialog.add(getMemberPanelItems());
 	}
 
@@ -520,7 +521,7 @@ function displayEmailDialog() {
 
 		OKnesset.emailDialog.memberListItems[1].text = Ext.util.Format.format(
 				OKnesset.strings.emailParty,
-				OKnesset.memberListWrapper.currentParty.name);
+				Ext.ControllerManager.get('Party').currentParty.name);
 		return OKnesset.emailDialog.memberListItems;
 	}
 
@@ -542,7 +543,7 @@ function displayEmailDialog() {
 
 		OKnesset.emailDialog.memberPanelItems[1].text = Ext.util.Format.format(
 				OKnesset.strings.emailMember,
-				OKnesset.memberPanelWrapper.currentMemeber.name);
+				Ext.ControllerManager.get('Member').currentMember.name);
 		return OKnesset.emailDialog.memberPanelItems;
 	}
 }
