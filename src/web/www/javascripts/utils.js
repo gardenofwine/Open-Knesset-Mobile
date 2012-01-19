@@ -253,13 +253,14 @@ function displayFetchCompleteNotification() {
 }
 
 
-//update the party store with the full data (replace the slimData)
+// update the party store with the full data (replace the slimData)
 function updatePartyData(fullPartyData) {
 	OKnesset.log("-=updatePartyData=-");
 	OKnesset.PartyStore.loadData(fullPartyData, false);
 	// getViewport().getActiveItem().items.getAt(0).refresh();
 	// A OKnesset that can be refreshed has a refresh function
-	getViewport().getActiveItem().refresh();
+	// TODO handle case where there is no active item...
+	// getViewport().getActiveItem().refresh();
 }
 
 /**
@@ -269,8 +270,8 @@ function updatePartyData(fullPartyData) {
 
 
 /**
- * Open Bill in browser.
- * open the browser to display the bill in oknesset.org's website
+ * Open Bill in browser. open the browser to display the bill in oknesset.org's
+ * website
  */
 function gotoBill(record) {
 	var bill = record.data;
@@ -344,41 +345,60 @@ function getViewport(){
 	return Ext.ApplicationManager.get("oknesset").viewport;
 }
 
-function getController(historyUrl){
-	return historyUrl.substring(0, historyUrl.indexOf("/"));
+function historyUrlToObject(historyUrl){
+	var params = historyUrl.split("/");
+//	var obj = {historyUrl : historyUrl};
+	var obj = {};
+	if (params[0]){
+		obj.controller = params[0];
+	}
+	if (params[1]){
+		obj.action = params[1];
+	}
+	if (params[2]){
+		obj.id = params[2];
+	}
+
+	return obj;
 }
 
-function getAction(historyUrl){
-	return historyUrl.substring(historyUrl.indexOf("/") + 1);
+function objectToHistoryUrl(object){
+
 }
 
-function dispatchPanel(toUrl, historyUrl, data){
-				    Ext.dispatch({
-        			    controller: getController(toUrl),
-        			    action: getAction(toUrl),
-        			    historyUrl: toUrl,
-        			    back : historyUrl,
-        			    data : data,
-        			    //
-        			    animation: {
-        			        type: 'slide',
-					        direction : 'right'
-        			    },
-		        	});
+//function getController(historyUrl){
+//	return historyUrl.substring(0, historyUrl.indexOf("/"));
+//}
+//
+//function getAction(historyUrl){
+//	var d = historyUrl.substring(historyUrl.indexOf("/") + 1, historyUrl.indexOf("/", historyUrl.indexOf("/")+1));
+//	return d;
+//}
+
+function dispatchPanel(toUrl, historyUrl){
+	var dispatchParams = {
+	    historyUrl: toUrl,
+	    back : historyUrl,
+	    //
+	    animation: {
+	        type: 'slide',
+	        direction : 'right'
+	    },
+	};
+	Ext.apply(dispatchParams, historyUrlToObject(toUrl));
+	Ext.dispatch(dispatchParams);
 }
 
 function dispatchBack(historyUrl){
-			Ext.dispatch({
-        	    controller: getController(historyUrl),
-        	    action: getAction(historyUrl),
-        	    historyUrl: historyUrl,
-        	    //
-        	    animation: {
-        	        type: 'slide',
-        	    },
-        	});
-
-}
-function setBackButtonAction(btn, options){
-
+	var dispatchParams = {
+//	    controller: getController(historyUrl),
+//	    action: getAction(historyUrl),
+	    historyUrl: historyUrl,
+	    //
+	    animation: {
+	        type: 'slide',
+	    },
+	};
+	Ext.apply(dispatchParams, historyUrlToObject(historyUrl));
+	Ext.dispatch(dispatchParams);
 }

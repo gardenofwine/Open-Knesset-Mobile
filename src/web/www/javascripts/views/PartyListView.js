@@ -2,7 +2,7 @@
  * The List of parties (קדימה, ליכוד...) The first panel to be
  * displayed.
  */
-OKnesset.app.listPanel = new Ext.List(
+OKnesset.app.PartyList = new Ext.List(
 		{
 			id : 'PartyList',
 			store : OKnesset.PartyStore,
@@ -13,11 +13,11 @@ OKnesset.app.listPanel = new Ext.List(
 OKnesset.app.views.PartyListView = new Ext.extend(Ext.Panel, {
 	id : 'PartyListView',
 	layout : 'fit',
-	items : [ OKnesset.app.listPanel ],
+	items : [ OKnesset.app.PartyList ],
 	title : OKnesset.strings.partiesTitle,
 	// TODO move to controller
 	refresh : function() {
-		OKnesset.app.listPanel.refresh();
+		OKnesset.app.PartyList.refresh();
 	}
 });
 

@@ -8,21 +8,29 @@ Ext.regController('Party', {
             this.partyView = this.render({
                 xtype: 'PartyView',
             });
+            var memberList = this.partyView.query('#MemberList')[0];
+            memberList.addListener('itemtap',
+                	function(that, index, item, e) {
+    					var record = that.store.getAt(index);
+    					dispatchPanel('Member/Index/' + record.data.id, options.historyUrl);
+    				});
         }
 
-        var name = options.data.name;
+        var party = OKnesset.PartyStore.findBy(function(r){return r.data.id === parseInt(options.id)});
+        party = OKnesset.PartyStore.getAt(party);
+        var name = party.data.name;
 
         // Analytics
     	GATrackParty(name);
 
     	// Set the page's data
-        OKnesset.MemberStore.loadData(options.data.members, false);
+        OKnesset.MemberStore.loadData(party.data.members, false);
         // TODO currentParty is only needed for the email widget. Find a better way to fetch the current party
-    	this.partyView.currentParty = options.data;
+    	this.currentParty = party.data;
 
     	// in case the member list was scrolled down( because the user viewed the
     	// panel for another member)
-        var memberList = this.partyView.query('#memberList')[0];
+        var memberList = this.partyView.query('#MemberList')[0];
     	if (memberList.scroller) {
     		memberList.scroller.scrollTo({
     			x : 0,

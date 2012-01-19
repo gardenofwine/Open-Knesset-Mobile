@@ -3,6 +3,8 @@ Ext.regController('PartyList', {
     // index action
 	Index: function(options)
     {
+		console.log("** party options");
+		console.log(options)
         if ( ! this.partyListView)
         {
             this.partyListView = this.render({
@@ -12,7 +14,7 @@ Ext.regController('PartyList', {
             partyList.addListener('itemtap',
             	function(that, index, item, e) {
 					var record = that.store.getAt(index);
-					dispatchPanel('Party/Index', options.historyUrl, record.data);
+					dispatchPanel('Party/Index/' + record.data.id, options.historyUrl);
 				});
         }
 
