@@ -72,16 +72,6 @@ OKnesset.app.views.MemberView.InfoWrapper = new Ext.extend(Ext.Panel, {
     //OKnesset.memberPanel = new Ext.Panel({
     id: 'MemberInfoWrapper',
     flex: 1,
-//    items: [OKnesset.memberInfoPanel],
-//    dockedItems: [{
-//        xtype: 'panel',
-//        dock: 'bottom',
-//        items: [OKnesset.memberBillsTitle]
-//    }, {
-//        xtype: 'panel',
-//        dock: 'right',
-//        items: [OKnesset.memberImagePanel]
-//    }],
     initComponent: function(){
         this.info = new OKnesset.app.views.MemberView.Info();
         this.billsTitle = new OKnesset.app.views.MemberView.BillsTitle();
@@ -112,12 +102,6 @@ OKnesset.app.views.MemberView.BillList = new Ext.extend(Ext.List, {
     deferEmptyText: false,
     grouped: true,
     flex: 1.5,
-    listeners: {
-        itemtap: function(that, index, item, e){
-            var record = that.store.getAt(index);
-            gotoBill(record);
-        }
-    },
     onItemDisclosure: true
 });
 
@@ -134,10 +118,10 @@ OKnesset.app.views.MemberView.BillsTitle = new Ext.extend(Ext.Panel, {
     layout: 'fit',
     dock: 'bottom',
     // some sencha touch magic to decide the title
-    tpl: '<tpl if="billNumber &gt; 0"><h2 class="memberBillsTitle x-toolbar-dark">' +
+    tpl: '<tpl if="billNumber &gt; 0"><h2 class="MemberBillsTitle x-toolbar-dark">' +
     OKnesset.strings.hasBillsTitle +
     '</h2></tpl>\
-				  <tpl if="billNumber == 0"><h2 class="memberBillsTitle x-toolbar-dark">' +
+				  <tpl if="billNumber == 0"><h2 class="MemberBillsTitle x-toolbar-dark">' +
     OKnesset.strings.hasNoBillsTitle +
     '</h2></tpl>'
 });

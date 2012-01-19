@@ -18,107 +18,110 @@ OKnesset.log = function(string) {
 /*
  * Oknesset default Panel
  */
-//OKnesset.Panel = Ext.extend(Ext.Panel,{
-//	constructor: function(config) {
-//		OKnesset.Panel.superclass.constructor.call(this, config);
+// OKnesset.Panel = Ext.extend(Ext.Panel,{
+// constructor: function(config) {
+// OKnesset.Panel.superclass.constructor.call(this, config);
 //
-//		if (this.refresh == OKnesset.Panel.prototype.refresh){
-//			throw "OKnesset.Panel must define a refresh function.";
-//		}
-//		if (this.setTitle == OKnesset.Panel.prototype.setTitle){
-//			throw "OKnesset.Panel must define a setTitle function.";
-//		}
+// if (this.refresh == OKnesset.Panel.prototype.refresh){
+// throw "OKnesset.Panel must define a refresh function.";
+// }
+// if (this.setTitle == OKnesset.Panel.prototype.setTitle){
+// throw "OKnesset.Panel must define a setTitle function.";
+// }
 //
-//	},
-//	refresh : function(){
-//		throw "OKnesset.Panel must define a refresh function.";
-//	},
-//	setTitle : function(){
-//		throw "OKnesset.Panel must define a setTitle function.";
-//	}
-//});
+// },
+// refresh : function(){
+// throw "OKnesset.Panel must define a refresh function.";
+// },
+// setTitle : function(){
+// throw "OKnesset.Panel must define a setTitle function.";
+// }
+// });
+Ext.regApplication({
+	name : 'OKnesset.app',
+	id : "oknesset",
+	defaultUrl : 'navigation/push/PartyList/Index',
+	launch : function() {
+		// Invoked immediately after the OKnesset.app created.
+		this.launched = true;
+		this.mainLaunch();
+	},
+	mainLaunch : function() {
+		// For iOS and Android, we must wait until the devicereay event
+		// is fired.
+		if (isPhoneGap() && (!device || !this.launched)) {
+			return;
+		}
 
-		Ext.regApplication({
-		    name: 'OKnesset.app',
-		    id : "oknesset",
-		    defaultUrl: 'PartyList/Index',
-		    launch : function() {
-				// Invoked immediately after the OKnesset.app created.
-				this.launched = true;
-				this.mainLaunch();
-			},
-			mainLaunch : function() {
-				// For iOS and Android, we must wait until the devicereay event
-				// is fired.
-				if (isPhoneGap() && (!device || !this.launched)) {
-					return;
-				}
-
-				if (OKnesset.debug) {
-					mainLaunchTime = new Date();
-					if (isPhoneGap()) {
-						printLoadingTimes();
-					}
-				}
-
-//				// The "i" at the top left of the application toolbar
-//				OKnesset.toolbarInfoItem = {
-//					ui : 'plain',
-//					iconMask : true,
-//					iconCls : 'info',
-//					handler : function() {
-//						displayInfoDialog();
-//					}
-//				};
-//
-//				// The email icon at the top left of the application toolbar
-//				OKnesset.toolbarMailItem = {
-//					ui : 'plain',
-//					iconMask : true,
-//					iconCls : 'mail',
-//					handler : function() {
-//						displayEmailDialog();
-//					}
-//				};
-
-				// TODO: use ONE toolbar that changes title, buttons, according
-				// to the active panel.
-
-				/**
-				 * End of The List of parties
-				 */
-
-				/**
-				 * The main view, holds all the panels of the application.
-				 * Initially, it holds only the party list panel, for reasons of
-				 * performance. Once the panel is up and the application is
-				 * displayed to the user, the rest of the panels are loaded (in
-				 * secondaryLaunch)
-				 */
-				this.viewport = new OKnesset.app.views.Viewport();
-
-				displayDisclaimer();
-
-				if (isPhoneGap()) {
-					// hide the native splash screen
-					if (isiOS()) {
-						navigator.splashscreen.hide();
-					} else if (isAndroid()) {
-						prompt("", "oknesset_init:");
-					}
-				}
-
-				if (OKnesset.debug) {
-					mainLaunchTimeEnd = new Date();
-					OKnesset.log('sencha touch load time '
-							+ (mainLaunchTimeEnd.getTime() - mainLaunchTime
-									.getTime()) / 1000);
-				}
-				// TODO call secondaryLaunch form the afterDisplay event of
-				// Ext.Panel
-				window.setTimeout(secondaryLaunch, 10);
+		if (OKnesset.debug) {
+			mainLaunchTime = new Date();
+			if (isPhoneGap()) {
+				printLoadingTimes();
 			}
+		}
+
+		// // The "i" at the top left of the application toolbar
+		// OKnesset.toolbarInfoItem = {
+		// ui : 'plain',
+		// iconMask : true,
+		// iconCls : 'info',
+		// handler : function() {
+		// displayInfoDialog();
+		// }
+		// };
+		//
+		// // The email icon at the top left of the application toolbar
+		// OKnesset.toolbarMailItem = {
+		// ui : 'plain',
+		// iconMask : true,
+		// iconCls : 'mail',
+		// handler : function() {
+		// displayEmailDialog();
+		// }
+		// };
+
+		// TODO: use ONE toolbar that changes title, buttons, according
+		// to the active panel.
+
+		/**
+		 * End of The List of parties
+		 */
+
+		/**
+		 * The main view, holds all the panels of the application. Initially, it
+		 * holds only the party list panel, for reasons of performance. Once the
+		 * panel is up and the application is displayed to the user, the rest of
+		 * the panels are loaded (in secondaryLaunch)
+		 */
+		this.viewport = new OKnesset.app.views.Viewport();
+        var backBtn = this.viewport.query('#backBtn')[0];
+        backBtn.hide();
+        backBtn.setHandler(function() {
+			dispatchBack();
 		});
+
+		displayDisclaimer();
+
+		if (isPhoneGap()) {
+			// hide the native splash screen
+			if (isiOS()) {
+				navigator.splashscreen.hide();
+			} else if (isAndroid()) {
+				prompt("", "oknesset_init:");
+			}
+		}
+
+		if (OKnesset.debug) {
+			mainLaunchTimeEnd = new Date();
+			OKnesset.log('sencha touch load time '
+					+ (mainLaunchTimeEnd.getTime() - mainLaunchTime.getTime())
+					/ 1000);
+		}
+		// TODO call secondaryLaunch form the afterDisplay event of
+		// Ext.Panel
+		window.setTimeout(secondaryLaunch, 10);
+	}
+});
 
 function secondaryLaunch() {
 	var secondaryLaunchTimeStart = new Date();
@@ -150,200 +153,201 @@ function secondaryLaunch() {
 	 * The Member panel (בנימין נתניהו, גדעון סער) - displays info on a specific
 	 * member
 	 */
-//	OKnesset.memberPanelToolbar = new Ext.Toolbar({
-//		items : [ OKnesset.toolbarInfoItem, OKnesset.toolbarMailItem, {
-//			xtype : 'spacer'
-//		}, {
-//			text : 'back',
-//			ui : 'forward',
-//			handler : function() {
-//				// This is the back button's functionality.
-//				getViewport().setActiveItem('memberListWrapper', {
-//					type : 'slide',
-//					direction : 'left'
-//				});
-//			}
-//		} ]
-//	});
-
-//	// The text that appears below the members picture, "bills proposed"
-//	OKnesset.memberBillsTitle = new Ext.Panel(
-//			{
-//				id : 'memberBillsTitle',
-//				layout : 'fit',
-//				dock : 'bottom',
-//				// some sencha touch magic to decide the title
-//				tpl : '<tpl if="billNumber &gt; 0"><h2 class="memberBillsTitle x-toolbar-dark">'
-//						+ OKnesset.strings.hasBillsTitle
-//						+ '</h2></tpl>\
-//				  <tpl if="billNumber == 0"><h2 class="memberBillsTitle x-toolbar-dark">'
-//						+ OKnesset.strings.hasNoBillsTitle + '</h2></tpl>'
-//			});
-//
-//	OKnesset.memberBillList = new Ext.List({
-//		id : 'memberBillList',
-//		itemTpl : '<div>{title}</div>',
-//		store : OKnesset.MemberBillsStore,
-//		layout : 'fit',
-//		deferEmptyText : false,
-//		grouped : true,
-//		flex : 1.5,
-//		listeners : {
-//			itemtap : function(that, index, item, e) {
-//				var record = that.store.getAt(index);
-//				gotoBill(record);
-//			}
-//		},
-//		onItemDisclosure : gotoMember
-//	});
-//
-//	OKnesset.memberImagePanel = new Ext.Panel({
-//		id : 'memberImagePanel',
-//		layout : 'fit',
-//		tpl : '<img src={img_url} height="100%"></img>'
-//	});
-//
-//	OKnesset.memberInfoPanel = new Ext.Panel({
-//		id : 'memberInfoPanel',
-//		tpl : memberPanelHtml
-//	});
-//
-//	OKnesset.memberPanel = new Ext.Panel({
-//		id : 'memberPanel',
-//		flex : 1,
-//		items : [ OKnesset.memberInfoPanel ],
-//		dockedItems : [ {
-//			xtype : 'panel',
-//			dock : 'bottom',
-//			items : [ OKnesset.memberBillsTitle ]
-//		}, {
-//			xtype : 'panel',
-//			dock : 'right',
-//			items : [ OKnesset.memberImagePanel ]
-//		} ]
-//	});
-//
-//	OKnesset.memberPanelWrapper = new OKnesset.Panel({
-//		id : 'memberPanelWrapper',
-//		layout : {
-//			type : 'vbox',
-//			align : 'stretch'
-//		},
-//		listeners : {
-//			afterlayout : {
-//				// For some reason, This is the only way I could layout the
-//				// member panel
-//				// as I wanted. Using flex and hbox+vbox layouts did not yeild
-//				// the desired results
-//				fn : function(comp) {
-//					// TODO calculate only once!
-//					var realImageHeight = OKnesset.memberPanel.getHeight()
-//							- OKnesset.memberBillsTitle.getHeight();
-//					var realImageWidth = 75 / 110 * realImageHeight;
-//
-//					// apply maximum width. The Member image is designed to be
-//					// 3/7
-//					// of the width of the screen (the width of the memberPanel)
-//					if (realImageWidth > OKnesset.memberPanel.getWidth()
-//							* (3 / 7)) {
-//						realImageWidth = OKnesset.memberPanel.getWidth()
-//								* (3 / 7);
-//						realImageHeight = realImageWidth * 110 / 75;
-//					}
-//					// Set the member image height to the actual panel height
-//					// (rescaling if necessary)
-//					OKnesset.memberInfoPanel.setWidth(OKnesset.memberPanel
-//							.getWidth()
-//							- realImageWidth);
-//					OKnesset.memberImagePanel.setHeight(realImageHeight);
-//					OKnesset.memberImagePanel.setWidth(realImageWidth);
-//					OKnesset.memberPanel.doLayout();
-//				}
-//			}
-//		},
-//		items : [ OKnesset.memberPanel, OKnesset.memberBillList ],
-//		dockedItems : [ OKnesset.memberPanelToolbar ],
-//		refresh : function() {
-//			// get current member data from Party store, which is updated
-//			var party = getPartyFromPartyStoreByName(OKnesset.memberPanelWrapper.currentMemeber.party);
-//			Ext.iterate(party.data.members, function(value, index) {
-//				if (value.id === OKnesset.memberPanelWrapper.currentMemeber.id) {
-//					updateMemberData(value);
-//					return false;
-//				}
-//			});
-//
-//			OKnesset.memberBillList.refresh();
-//		},
-//		setTitle : function(){
-//
-//		}
-//	});
-//
-//	OKnesset.memberPanelWrapper.currentMemeber = null;
+	// OKnesset.memberPanelToolbar = new Ext.Toolbar({
+	// items : [ OKnesset.toolbarInfoItem, OKnesset.toolbarMailItem, {
+	// xtype : 'spacer'
+	// }, {
+	// text : 'back',
+	// ui : 'forward',
+	// handler : function() {
+	// // This is the back button's functionality.
+	// getViewport().setActiveItem('memberListWrapper', {
+	// type : 'slide',
+	// direction : 'left'
+	// });
+	// }
+	// } ]
+	// });
+	// // The text that appears below the members picture, "bills proposed"
+	// OKnesset.memberBillsTitle = new Ext.Panel(
+	// {
+	// id : 'memberBillsTitle',
+	// layout : 'fit',
+	// dock : 'bottom',
+	// // some sencha touch magic to decide the title
+	// tpl : '<tpl if="billNumber &gt; 0"><h2 class="memberBillsTitle
+	// x-toolbar-dark">'
+	// + OKnesset.strings.hasBillsTitle
+	// + '</h2></tpl>\
+	// <tpl if="billNumber == 0"><h2 class="memberBillsTitle x-toolbar-dark">'
+	// + OKnesset.strings.hasNoBillsTitle + '</h2></tpl>'
+	// });
+	//
+	// OKnesset.memberBillList = new Ext.List({
+	// id : 'memberBillList',
+	// itemTpl : '<div>{title}</div>',
+	// store : OKnesset.MemberBillsStore,
+	// layout : 'fit',
+	// deferEmptyText : false,
+	// grouped : true,
+	// flex : 1.5,
+	// listeners : {
+	// itemtap : function(that, index, item, e) {
+	// var record = that.store.getAt(index);
+	// gotoBill(record);
+	// }
+	// },
+	// onItemDisclosure : gotoMember
+	// });
+	//
+	// OKnesset.memberImagePanel = new Ext.Panel({
+	// id : 'memberImagePanel',
+	// layout : 'fit',
+	// tpl : '<img src={img_url} height="100%"></img>'
+	// });
+	//
+	// OKnesset.memberInfoPanel = new Ext.Panel({
+	// id : 'memberInfoPanel',
+	// tpl : memberPanelHtml
+	// });
+	//
+	// OKnesset.memberPanel = new Ext.Panel({
+	// id : 'memberPanel',
+	// flex : 1,
+	// items : [ OKnesset.memberInfoPanel ],
+	// dockedItems : [ {
+	// xtype : 'panel',
+	// dock : 'bottom',
+	// items : [ OKnesset.memberBillsTitle ]
+	// }, {
+	// xtype : 'panel',
+	// dock : 'right',
+	// items : [ OKnesset.memberImagePanel ]
+	// } ]
+	// });
+	//
+	// OKnesset.memberPanelWrapper = new OKnesset.Panel({
+	// id : 'memberPanelWrapper',
+	// layout : {
+	// type : 'vbox',
+	// align : 'stretch'
+	// },
+	// listeners : {
+	// afterlayout : {
+	// // For some reason, This is the only way I could layout the
+	// // member panel
+	// // as I wanted. Using flex and hbox+vbox layouts did not yeild
+	// // the desired results
+	// fn : function(comp) {
+	// // TODO calculate only once!
+	// var realImageHeight = OKnesset.memberPanel.getHeight()
+	// - OKnesset.memberBillsTitle.getHeight();
+	// var realImageWidth = 75 / 110 * realImageHeight;
+	//
+	// // apply maximum width. The Member image is designed to be
+	// // 3/7
+	// // of the width of the screen (the width of the memberPanel)
+	// if (realImageWidth > OKnesset.memberPanel.getWidth()
+	// * (3 / 7)) {
+	// realImageWidth = OKnesset.memberPanel.getWidth()
+	// * (3 / 7);
+	// realImageHeight = realImageWidth * 110 / 75;
+	// }
+	// // Set the member image height to the actual panel height
+	// // (rescaling if necessary)
+	// OKnesset.memberInfoPanel.setWidth(OKnesset.memberPanel
+	// .getWidth()
+	// - realImageWidth);
+	// OKnesset.memberImagePanel.setHeight(realImageHeight);
+	// OKnesset.memberImagePanel.setWidth(realImageWidth);
+	// OKnesset.memberPanel.doLayout();
+	// }
+	// }
+	// },
+	// items : [ OKnesset.memberPanel, OKnesset.memberBillList ],
+	// dockedItems : [ OKnesset.memberPanelToolbar ],
+	// refresh : function() {
+	// // get current member data from Party store, which is updated
+	// var party =
+	// getPartyFromPartyStoreByName(OKnesset.memberPanelWrapper.currentMemeber.party);
+	// Ext.iterate(party.data.members, function(value, index) {
+	// if (value.id === OKnesset.memberPanelWrapper.currentMemeber.id) {
+	// updateMemberData(value);
+	// return false;
+	// }
+	// });
+	//
+	// OKnesset.memberBillList.refresh();
+	// },
+	// setTitle : function(){
+	//
+	// }
+	// });
+	//
+	// OKnesset.memberPanelWrapper.currentMemeber = null;
 	/**
 	 * End of the Member panel.
 	 */
 
-//	/**
-//	 * The Member list panel (בנימין נתניהו, גדעון סער) shows a list of members
-//	 * of the current selected party
-//	 */
-//	OKnesset.memberListToolbar = new Ext.Toolbar({
-//		items : [ OKnesset.toolbarInfoItem, OKnesset.toolbarMailItem, {
-//			xtype : 'spacer'
-//		}, {
-//			text : 'back',
-//			ui : 'forward',
-//			handler : function() {
-//				// This is the back button's functionality.
-//				getViewport().setActiveItem('PartyListView', {
-//					type : 'slide',
-//					direction : 'left'
-//				});
-//			}
-//		} ]
-//	});
-//
-//	OKnesset.memberList = new Ext.List({
-//		id : 'memberList',
-//		itemTpl : '<div>{#} {name}</div>',
-//		store : OKnesset.MemberStore,
-//		listeners : {
-//			itemtap : function(that, index, item, e) {
-//				var record = that.store.getAt(index);
-//				gotoMember(record);
-//			}
-//		},
-//		onItemDisclosure : gotoMember
-//	});
-//
-//	OKnesset.memberListWrapper = new OKnesset.Panel({
-//		id : 'memberListWrapper',
-//		layout : 'fit',
-//		items : [ OKnesset.memberList ],
-//		dockedItems : OKnesset.memberListToolbar,
-//		refresh : function() {
-//			var party = getPartyFromPartyStoreByName(OKnesset.memberListWrapper.currentParty.name);
-//			OKnesset.MemberStore.loadData(party.data.members, false);
-//			OKnesset.memberList.refresh();
-//		},
-//		setTitle : function(){
-//			console.log("** implement setTitle her")
-//		}
-//	});
-//
-//	OKnesset.memberListWrapper.currentParty = null;
-
+	// /**
+	// * The Member list panel (בנימין נתניהו, גדעון סער) shows a list of
+	// members
+	// * of the current selected party
+	// */
+	// OKnesset.memberListToolbar = new Ext.Toolbar({
+	// items : [ OKnesset.toolbarInfoItem, OKnesset.toolbarMailItem, {
+	// xtype : 'spacer'
+	// }, {
+	// text : 'back',
+	// ui : 'forward',
+	// handler : function() {
+	// // This is the back button's functionality.
+	// getViewport().setActiveItem('PartyListView', {
+	// type : 'slide',
+	// direction : 'left'
+	// });
+	// }
+	// } ]
+	// });
+	//
+	// OKnesset.memberList = new Ext.List({
+	// id : 'memberList',
+	// itemTpl : '<div>{#} {name}</div>',
+	// store : OKnesset.MemberStore,
+	// listeners : {
+	// itemtap : function(that, index, item, e) {
+	// var record = that.store.getAt(index);
+	// gotoMember(record);
+	// }
+	// },
+	// onItemDisclosure : gotoMember
+	// });
+	//
+	// OKnesset.memberListWrapper = new OKnesset.Panel({
+	// id : 'memberListWrapper',
+	// layout : 'fit',
+	// items : [ OKnesset.memberList ],
+	// dockedItems : OKnesset.memberListToolbar,
+	// refresh : function() {
+	// var party =
+	// getPartyFromPartyStoreByName(OKnesset.memberListWrapper.currentParty.name);
+	// OKnesset.MemberStore.loadData(party.data.members, false);
+	// OKnesset.memberList.refresh();
+	// },
+	// setTitle : function(){
+	// console.log("** implement setTitle her")
+	// }
+	// });
+	//
+	// OKnesset.memberListWrapper.currentParty = null;
 	/**
 	 * End of the Member list panel
 	 */
 
 	// Add the member list and member panel panels to the main panel
-//	getViewport().add([ OKnesset.memberListWrapper,
-//	        			OKnesset.memberPanelWrapper ]);
-//	getViewport().add([ OKnesset.memberPanelWrapper ]);
-
+	// getViewport().add([ OKnesset.memberListWrapper,
+	// OKnesset.memberPanelWrapper ]);
+	// getViewport().add([ OKnesset.memberPanelWrapper ]);
 	// Load the full data of the parties and members into the data stores
 	loadInitialData();
 
@@ -461,8 +465,8 @@ function displayEmailDialog() {
 	}
 
 	OKnesset.currentPanelId = getViewport().getActiveItem().getId();
-    var partyListView = getViewport().query('#PartyListView')[0];
-    var partyView = getViewport().query('#PartyView')[0];
+	var partyListView = getViewport().query('#PartyListView')[0];
+	var partyView = getViewport().query('#PartyView')[0];
 
 	if (OKnesset.currentPanelId == partyListView.getId()) {
 		OKnesset.emailDialog.add(getPartyListItems());
@@ -574,61 +578,61 @@ function sendEmail(subject) {
 	// TODO - for web, implement a "send email" link
 }
 
-///**
+// /**
 // * Displays the Party panel (the member list panel)
 // *
 // * @param record
 // */
-//function gotoParty(record) {
+// function gotoParty(record) {
 //
-////	getViewport().setActiveItem('memberListWrapper', {
-////		type : 'slide',
-////		direction : 'right'
-////	});
-//}
+// // getViewport().setActiveItem('memberListWrapper', {
+// // type : 'slide',
+// // direction : 'right'
+// // });
+// }
 
-///**
+// /**
 // * Displays the Member panel
 // *
 // * @param record
 // */
-//function gotoMember(record) {
-//	var member = record.data;
-//	GATrackMember(member.name);
+// function gotoMember(record) {
+// var member = record.data;
+// GATrackMember(member.name);
 //
-//	OKnesset.memberImagePanel.update({
-//		img_url : "images/members/"
-//				+ member.img_url.substring(member.img_url.lastIndexOf('/') + 1)
-//	});
-//	updateMemberData(member);
+// OKnesset.memberImagePanel.update({
+// img_url : "images/members/"
+// + member.img_url.substring(member.img_url.lastIndexOf('/') + 1)
+// });
+// updateMemberData(member);
 //
-//	// scroll bill list up
-//	if (OKnesset.memberBillList.scroller) {
-//		OKnesset.memberBillList.scroller.scrollTo({
-//			x : 0,
-//			y : 0
-//		});
-//	}
+// // scroll bill list up
+// if (OKnesset.memberBillList.scroller) {
+// OKnesset.memberBillList.scroller.scrollTo({
+// x : 0,
+// y : 0
+// });
+// }
 //
-//	// back button
-//	OKnesset.memberPanelToolbar.items.getAt(3).setText(
-//			OKnesset.memberListToolbar.title);
+// // back button
+// OKnesset.memberPanelToolbar.items.getAt(3).setText(
+// OKnesset.memberListToolbar.title);
 //
-//	// if there are no bills for the current member, display a text explaining
-//	// that.
-//	if (hasExcuseForNoBills(member)) {
-//		OKnesset.memberBillList.emptyText = "<br/><br/><br/>"
-//				+ OKnesset.strings.excuseForNoBills;
-//	} else {
-//		OKnesset.memberBillList.emptyText = "";
-//	}
-//	OKnesset.memberBillList.refresh();
+// // if there are no bills for the current member, display a text explaining
+// // that.
+// if (hasExcuseForNoBills(member)) {
+// OKnesset.memberBillList.emptyText = "<br/><br/><br/>"
+// + OKnesset.strings.excuseForNoBills;
+// } else {
+// OKnesset.memberBillList.emptyText = "";
+// }
+// OKnesset.memberBillList.refresh();
 //
-//	getViewport().setActiveItem('memberPanelWrapper', {
-//		type : 'slide',
-//		direction : 'right'
-//	});
-//}
+// getViewport().setActiveItem('memberPanelWrapper', {
+// type : 'slide',
+// direction : 'right'
+// });
+// }
 
 /**
  * Returns true if the member is a minister, or is the chairperson of the
@@ -641,22 +645,22 @@ function hasExcuseForNoBills(member) {
 	return (member.roles.indexOf(OKnesset.strings.ministerIndicator) != -1 || member.roles === OKnesset.strings.knessetChairman);
 }
 
-///**
+// /**
 // * updates the information in the member panel.
 // *
 // * @param member
-// *            the member data to udpate the panel with
+// * the member data to udpate the panel with
 // */
-//function updateMemberData(member) {
-//	OKnesset.memberBillsTitle.update({
-//		billNumber : member.bills.length,
-//		hasExcuseForNoBills : hasExcuseForNoBills(member)
-//	});
-//	OKnesset.memberInfoPanel.update(member);
-//	OKnesset.MemberBillsStore.loadData(member.bills);
-//	OKnesset.memberPanelToolbar.setTitle(member.name);
-//	OKnesset.memberPanelWrapper.currentMemeber = member;
-//}
+// function updateMemberData(member) {
+// OKnesset.memberBillsTitle.update({
+// billNumber : member.bills.length,
+// hasExcuseForNoBills : hasExcuseForNoBills(member)
+// });
+// OKnesset.memberInfoPanel.update(member);
+// OKnesset.MemberBillsStore.loadData(member.bills);
+// OKnesset.memberPanelToolbar.setTitle(member.name);
+// OKnesset.memberPanelWrapper.currentMemeber = member;
+// }
 
 /**
  * Creates the info dialog (only once)
@@ -763,7 +767,7 @@ function onBackKey() {
 	}
 
 	// dismiss info dialog if visible
-	if (OKnesset.infoPanel && OKnesset.infoPanel.isVisible()){
+	if (OKnesset.infoPanel && OKnesset.infoPanel.isVisible()) {
 		OKnesset.infoPanel.hide();
 		return;
 	}
@@ -782,6 +786,5 @@ function onBackKey() {
 		navigator.app.exitApp();
 	}
 }
-
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);

@@ -274,6 +274,7 @@ function updatePartyData(fullPartyData) {
  * website
  */
 function gotoBill(record) {
+	console.log("** gotobill");
 	var bill = record.data;
 	var url = 'http://www.oknesset.org' + bill.url;
 	if (isPhoneGap()) {
@@ -347,8 +348,7 @@ function getViewport(){
 
 function historyUrlToObject(historyUrl){
 	var params = historyUrl.split("/");
-//	var obj = {historyUrl : historyUrl};
-	var obj = {};
+	var obj = {historyUrl : historyUrl};
 	if (params[0]){
 		obj.controller = params[0];
 	}
@@ -362,43 +362,27 @@ function historyUrlToObject(historyUrl){
 	return obj;
 }
 
-function objectToHistoryUrl(object){
-
-}
-
-//function getController(historyUrl){
-//	return historyUrl.substring(0, historyUrl.indexOf("/"));
-//}
-//
-//function getAction(historyUrl){
-//	var d = historyUrl.substring(historyUrl.indexOf("/") + 1, historyUrl.indexOf("/", historyUrl.indexOf("/")+1));
-//	return d;
-//}
-
 function dispatchPanel(toUrl, historyUrl){
 	var dispatchParams = {
-	    historyUrl: toUrl,
-	    back : historyUrl,
-	    //
+        controller: 'navigation',
+        action: 'push',
+        to: historyUrlToObject(toUrl),
 	    animation: {
 	        type: 'slide',
 	        direction : 'right'
 	    },
 	};
-	Ext.apply(dispatchParams, historyUrlToObject(toUrl));
 	Ext.dispatch(dispatchParams);
 }
 
-function dispatchBack(historyUrl){
+function dispatchBack(){
+	console.log("** dispatchBack");
 	var dispatchParams = {
-//	    controller: getController(historyUrl),
-//	    action: getAction(historyUrl),
-	    historyUrl: historyUrl,
-	    //
+        controller: 'navigation',
+        action: 'pop',
 	    animation: {
 	        type: 'slide',
 	    },
 	};
-	Ext.apply(dispatchParams, historyUrlToObject(historyUrl));
 	Ext.dispatch(dispatchParams);
 }

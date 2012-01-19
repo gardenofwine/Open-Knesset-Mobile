@@ -3,8 +3,8 @@ Ext.regController('PartyList', {
     // index action
 	Index: function(options)
     {
-		console.log("** party options");
-		console.log(options)
+//		console.log("** party options");
+//		console.log(options)
         if ( ! this.partyListView)
         {
             this.partyListView = this.render({
@@ -17,17 +17,6 @@ Ext.regController('PartyList', {
 					dispatchPanel('Party/Index/' + record.data.id, options.historyUrl);
 				});
         }
-
-        var backBtn = this.application.viewport.query('#backBtn')[0];
-        if (options.back) {
-            backBtn.setHandler(function() {
-    			dispatchBack(options.back);
-    		});
-        	backBtn.show();
-        } else {
-        	backBtn.hide();
-    	}
-
 
         this.application.viewport.query('#toolbar')[0].setTitle(this.partyListView.title);
         this.application.viewport.setActiveItem(this.partyListView, options.animation);

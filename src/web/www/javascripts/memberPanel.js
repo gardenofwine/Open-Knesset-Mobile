@@ -1,5 +1,5 @@
 var memberPanelHtml =
-	'<div class="memberInfo" "> \
+	'<div class="MemberInfo" "> \
 		<table> \
 			<tr> \
 				<td class="justify"><b>{roles}</b></td> \

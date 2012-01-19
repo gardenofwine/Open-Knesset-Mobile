@@ -28,16 +28,16 @@ div.textCenter * {
 }
 
 /* Member page Design */
-.memberImage, .memberInfo {
+.MemberImage, .MemberInfo {
 	float : right;
 	padding-left : 1em;
 }
 
-#memberImagePanel div{
+#MemberImage div{
 	 direction :rtl;
 }
 
-.memberInfo td{
+.MemberInfo td{
 	overflow : hidden;
 }
 
@@ -45,26 +45,26 @@ div.textCenter * {
 	padding-right : 1em;
 }
 
-.memberImage td, .memberInfo td{
+.MemberImage td, .MemberInfo td{
 	text-align : right;
 	vertical-align: top;
 }
 
-.memberBillsTitle {
+.MemberBillsTitle {
 	color: white;
    	text-align: center;
 
 }
 
-#memberBillList .x-list-header {
+#MemberBillList .x-list-header {
 	direction: rtl;
 }
 
-#memberBillList {
+#MemberBillList {
 	background-color: lightgrey;
 }
 
 /* Center empty bill list emptyText*/
-#memberBillList .x-list-parent {
+#MemberBillList .x-list-parent {
 	text-align: center;
 }
