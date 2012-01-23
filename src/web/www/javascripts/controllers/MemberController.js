@@ -59,4 +59,10 @@ Ext.regController('Member', {
         this.application.viewport.query('#toolbar')[0].setTitle(member.name);
         this.application.viewport.setActiveItem(this.memberView, options.animation);
     },
+
+	getReviewButtonText : function(){
+		return Ext.util.Format.format(
+				OKnesset.strings.emailMember,
+				this.currentMember.name);
+	}
 });

@@ -43,4 +43,12 @@ Ext.regController('Party', {
     	this.application.viewport.query('#toolbar')[0].setTitle(name);
     	this.application.viewport.setActiveItem(this.partyView, options.animation);
     },
+
+
+    getReviewButtonText : function(){
+    	return Ext.util.Format.format(
+				OKnesset.strings.emailParty,
+				this.currentParty.name);
+    }
+
 });

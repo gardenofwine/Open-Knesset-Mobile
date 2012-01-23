@@ -412,172 +412,176 @@ function displayDisclaimer(forceShow) {
 	}
 }
 
-/**
- * Creates the email dialog (only once)
- */
-function initEmailDialog() {
-	if (!OKnesset.emailDialog) {
-		OKnesset.emailDialog = new Ext.Panel({
-			floating : true,
-			centered : true,
-			width : getViewport().getWidth() * 0.9,
-			height : getViewport().getHeight() * 0.65,
-			cls : 'textCenter',
-			styleHtmlContent : true,
-			items : [ {
-				html : OKnesset.strings.emailDialogBody,
-				height : "5em"
-			}, {
-				xtype : 'button',
-				handler : function() {
-					sendEmail(this.text);
-				},
-				text : OKnesset.strings.emailGeneral
-			} ],
-			dockedItems : [ {
-				dock : 'top',
-				xtype : 'toolbar',
-				title : OKnesset.strings.emailDialogTitle
-			}, {
-				dock : 'bottom',
-				xtype : 'button',
-				ui : 'decline',
-				handler : function() {
-					OKnesset.emailDialog.hide();
-				},
-				text : OKnesset.strings.cancel
-			} ]
-		});
-	}
-}
+///**
+// * Creates the email dialog (only once)
+// */
+//function initEmailDialog() {
+//	if (!OKnesset.emailDialog) {
+//		OKnesset.emailDialog = new Ext.Panel({
+//			floating : true,
+//			centered : true,
+//			width : getViewport().getWidth() * 0.9,
+//			height : getViewport().getHeight() * 0.65,
+//			cls : 'textCenter',
+//			styleHtmlContent : true,
+//			items : [ {
+//				html : OKnesset.strings.emailDialogBody,
+//				height : "5em"
+//			}, {
+//				xtype : 'button',
+//				handler : function() {
+//					sendEmail(this.text);
+//				},
+//				text : OKnesset.strings.emailGeneral
+//			} ],
+//			dockedItems : [ {
+//				dock : 'top',
+//				xtype : 'toolbar',
+//				title : OKnesset.strings.emailDialogTitle
+//			}, {
+//				dock : 'bottom',
+//				xtype : 'button',
+//				ui : 'decline',
+//				handler : function() {
+//					OKnesset.emailDialog.hide();
+//				},
+//				text : OKnesset.strings.cancel
+//			} ]
+//		});
+//	}
+//}
 
-function displayEmailDialog() {
-	initEmailDialog();
-	// change buttons according to current screen
+//function displayEmailDialog() {
+//
+//    Ext.ControllerManager.get('Email').Index();
+//
+//	return;
+//	initEmailDialog();
+//	// change buttons according to current screen
+//
+//	// The first 2 items are the text and the first button.
+//	// All the other items are context dependant, and should be removed
+//	var count = OKnesset.emailDialog.items.getCount();
+//	if (count > 2) {
+//		for ( var i = count - 1; i >= 2; i--) {
+//			OKnesset.emailDialog.remove(OKnesset.emailDialog.getComponent(i));
+//		}
+//	}
+//
+//	OKnesset.currentPanelId = getViewport().getActiveItem().getId();
+//	var partyListView = getViewport().query('#PartyListView')[0];
+//	var partyView = getViewport().query('#PartyView')[0];
+//	var memberView = getViewport().query('#MemberView')[0];
+//
+//	if (OKnesset.currentPanelId == partyListView.getId()) {
+//		OKnesset.emailDialog.add(getPartyListItems());
+//	} else if (OKnesset.currentPanelId == partyView.getId()) {
+//		OKnesset.emailDialog.add(getMemberListItems());
+//	} else if (OKnesset.currentPanelId == memberView.getId()) {
+//		OKnesset.emailDialog.add(getMemberPanelItems());
+//	}
+//
+//	OKnesset.emailDialog.doLayout();
+//	OKnesset.emailDialog.show({
+//		type : 'slide',
+//		direction : 'up'
+//	});
+//
+//	function getPartyListItems() {
+//		if (!OKnesset.emailDialog.partyListItems) {
+//			OKnesset.emailDialog.partyListItems = [ {
+//				xtype : 'spacer',
+//				height : "2em"
+//			}, {
+//				xtype : 'button',
+//				style : {
+//					'font-size' : '115%'
+//				},
+//				handler : function() {
+//					sendEmail(this.text);
+//				},
+//				text : OKnesset.strings.emailPartyList
+//			} ];
+//		}
+//
+//		return OKnesset.emailDialog.partyListItems;
+//	}
+//
+//	function getMemberListItems() {
+//		if (!OKnesset.emailDialog.memberListItems) {
+//			OKnesset.emailDialog.memberListItems = [ {
+//				xtype : 'spacer',
+//				height : "2em"
+//			}, {
+//				xtype : 'button',
+//				style : {
+//					'font-size' : '115%'
+//				},
+//				handler : function() {
+//					sendEmail(this.text);
+//				}
+//			} ];
+//		}
+//
+//		OKnesset.emailDialog.memberListItems[1].text = Ext.util.Format.format(
+//				OKnesset.strings.emailParty,
+//				Ext.ControllerManager.get('Party').currentParty.name);
+//		return OKnesset.emailDialog.memberListItems;
+//	}
+//
+//	function getMemberPanelItems() {
+//		if (!OKnesset.emailDialog.memberPanelItems) {
+//			OKnesset.emailDialog.memberPanelItems = [ {
+//				xtype : 'spacer',
+//				height : "2em"
+//			}, {
+//				xtype : 'button',
+//				style : {
+//					'font-size' : '115%'
+//				},
+//				handler : function() {
+//					sendEmail(this.text);
+//				}
+//			} ];
+//		}
+//
+//		OKnesset.emailDialog.memberPanelItems[1].text = Ext.util.Format.format(
+//				OKnesset.strings.emailMember,
+//				Ext.ControllerManager.get('Member').currentMember.name);
+//		return OKnesset.emailDialog.memberPanelItems;
+//	}
+//}
 
-	// The first 2 items are the text and the first button.
-	// All the other items are context dependant, and should be removed
-	var count = OKnesset.emailDialog.items.getCount();
-	if (count > 2) {
-		for ( var i = count - 1; i >= 2; i--) {
-			OKnesset.emailDialog.remove(OKnesset.emailDialog.getComponent(i));
-		}
-	}
-
-	OKnesset.currentPanelId = getViewport().getActiveItem().getId();
-	var partyListView = getViewport().query('#PartyListView')[0];
-	var partyView = getViewport().query('#PartyView')[0];
-	var memberView = getViewport().query('#MemberView')[0];
-
-	if (OKnesset.currentPanelId == partyListView.getId()) {
-		OKnesset.emailDialog.add(getPartyListItems());
-	} else if (OKnesset.currentPanelId == partyView.getId()) {
-		OKnesset.emailDialog.add(getMemberListItems());
-	} else if (OKnesset.currentPanelId == memberView.getId()) {
-		OKnesset.emailDialog.add(getMemberPanelItems());
-	}
-
-	OKnesset.emailDialog.doLayout();
-	OKnesset.emailDialog.show({
-		type : 'slide',
-		direction : 'up'
-	});
-
-	function getPartyListItems() {
-		if (!OKnesset.emailDialog.partyListItems) {
-			OKnesset.emailDialog.partyListItems = [ {
-				xtype : 'spacer',
-				height : "2em"
-			}, {
-				xtype : 'button',
-				style : {
-					'font-size' : '115%'
-				},
-				handler : function() {
-					sendEmail(this.text);
-				},
-				text : OKnesset.strings.emailPartyList
-			} ];
-		}
-
-		return OKnesset.emailDialog.partyListItems;
-	}
-
-	function getMemberListItems() {
-		if (!OKnesset.emailDialog.memberListItems) {
-			OKnesset.emailDialog.memberListItems = [ {
-				xtype : 'spacer',
-				height : "2em"
-			}, {
-				xtype : 'button',
-				style : {
-					'font-size' : '115%'
-				},
-				handler : function() {
-					sendEmail(this.text);
-				}
-			} ];
-		}
-
-		OKnesset.emailDialog.memberListItems[1].text = Ext.util.Format.format(
-				OKnesset.strings.emailParty,
-				Ext.ControllerManager.get('Party').currentParty.name);
-		return OKnesset.emailDialog.memberListItems;
-	}
-
-	function getMemberPanelItems() {
-		if (!OKnesset.emailDialog.memberPanelItems) {
-			OKnesset.emailDialog.memberPanelItems = [ {
-				xtype : 'spacer',
-				height : "2em"
-			}, {
-				xtype : 'button',
-				style : {
-					'font-size' : '115%'
-				},
-				handler : function() {
-					sendEmail(this.text);
-				}
-			} ];
-		}
-
-		OKnesset.emailDialog.memberPanelItems[1].text = Ext.util.Format.format(
-				OKnesset.strings.emailMember,
-				Ext.ControllerManager.get('Member').currentMember.name);
-		return OKnesset.emailDialog.memberPanelItems;
-	}
-}
-
-function sendEmail(subject) {
-	OKnesset.log("** sending email with subject " + subject);
-	if (isPhoneGap()) {
-		if (isiOS()) {
-			var emailCallback = function(result) {
-				// called after email has been sent
-				if (result != EmailComposer.ComposeResultType.Cancelled) {
-					OKnesset.emailDialog.hide();
-				}
-			};
-			window.plugins.emailComposer.showEmailComposerWithCB(emailCallback,
-					subject, "", OKnesset.strings.feedbackEmailAddress);
-		} else if (isAndroid) {
-			var extras = {};
-			extras[WebIntent.EXTRA_SUBJECT] = subject;
-			extras[WebIntent.EXTRA_EMAIL] = [ OKnesset.strings.feedbackEmailAddress ];
-			window.plugins.webintent.startActivity({
-				action : WebIntent.ACTION_SEND,
-				type : 'text/plain',
-				extras : extras
-			}, function() {
-				// success callback
-				OKnesset.emailDialog.hide();
-			}, function() {
-				alert(OKnesset.strings.errorAndroidEmail);
-			});
-		}
-	}
-	// TODO - for web, implement a "send email" link
-}
+//function sendEmail(subject) {
+//	OKnesset.log("** sending email with subject " + subject);
+//	if (isPhoneGap()) {
+//		if (isiOS()) {
+//			var emailCallback = function(result) {
+//				// called after email has been sent
+//				if (result != EmailComposer.ComposeResultType.Cancelled) {
+//					OKnesset.emailDialog.hide();
+//				}
+//			};
+//			window.plugins.emailComposer.showEmailComposerWithCB(emailCallback,
+//					subject, "", OKnesset.strings.feedbackEmailAddress);
+//		} else if (isAndroid) {
+//			var extras = {};
+//			extras[WebIntent.EXTRA_SUBJECT] = subject;
+//			extras[WebIntent.EXTRA_EMAIL] = [ OKnesset.strings.feedbackEmailAddress ];
+//			window.plugins.webintent.startActivity({
+//				action : WebIntent.ACTION_SEND,
+//				type : 'text/plain',
+//				extras : extras
+//			}, function() {
+//				// success callback
+//				OKnesset.emailDialog.hide();
+//			}, function() {
+//				alert(OKnesset.strings.errorAndroidEmail);
+//			});
+//		}
+//	}
+//	// TODO - for web, implement a "send email" link
+//}
 
 // /**
 // * Displays the Party panel (the member list panel)

@@ -21,4 +21,9 @@ Ext.regController('PartyList', {
         this.application.viewport.query('#toolbar')[0].setTitle(this.partyListView.title);
         this.application.viewport.setActiveItem(this.partyListView, options.animation);
     },
+
+    getReviewButtonText : function(){
+    	return OKnesset.strings.emailPartyList;
+    }
+
 });
