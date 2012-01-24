@@ -376,13 +376,30 @@ function dispatchPanel(toUrl, historyUrl){
 	Ext.dispatch(dispatchParams);
 }
 
+
 function dispatchBack(){
 	console.log("** dispatchBack");
 	var dispatchParams = {
         controller: 'navigation',
         action: 'pop',
+//	    animation: {
+//	        type: 'slide',
+//	    },
+	};
+	Ext.dispatch(dispatchParams);
+}
+
+function dispatchDialog(toUrl){
+	toObj = historyUrlToObject(toUrl);
+    delete toObj['historyUrl'];
+
+	var dispatchParams = {
+        controller: 'navigation',
+        action: 'push',
+        to: toObj,
 	    animation: {
 	        type: 'slide',
+	        direction : 'up'
 	    },
 	};
 	Ext.dispatch(dispatchParams);

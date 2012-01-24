@@ -14,7 +14,7 @@ OKnesset.app.views.Viewport = new Ext.extend(Ext.Panel, {
             iconCls: 'info',
             // TODO move handler to conteroller
             handler: function(){
-                Ext.ControllerManager.get('Info').Index();
+				dispatchDialog('Info/Index');
             }
         }, {
             // The email icon at the top left of the application toolbar
@@ -24,7 +24,8 @@ OKnesset.app.views.Viewport = new Ext.extend(Ext.Panel, {
             itemId: 'appEmail',
             // TODO move handler to conteroller
             handler: function(){
-                Ext.ControllerManager.get('Email').Index();
+				dispatchDialog('Email/Index');
+//                Ext.ControllerManager.get('Email').Index();
             }
         }, {
             xtype: 'spacer'

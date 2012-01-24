@@ -3,35 +3,34 @@ Ext.regController('Email', {
     // index action
 	Index: function(options)
     {
-        if ( ! this.emailView)
+        if ( ! this.view)
         {
-            this.emailView = this.render({
+            this.view = this.render({
                 xtype: 'EmailView',
             });
 
-            this.contextButton = this.emailView.query('#contextButton')[0];
+            this.contextButton = this.view.query('#contextButton')[0];
             var that = this;
             this.contextButton.setHandler(function(){
                 that.sendEmail(that.contextButton.text);
             });
 
-            this.emailView.query('#generalFeedbackBtn')[0].setHandler(function(button){
+            this.view.query('#generalFeedbackBtn')[0].setHandler(function(button){
                 that.sendEmail(button.text);
             });
 
-            this.emailView.query('#cancelEmailBtn')[0].setHandler(function(){
-      			that.emailView.hide();
+            this.view.query('#cancelEmailBtn')[0].setHandler(function(){
+				dispatchBack();
+//      			that.view.hide();
             });
         }
 
-        var currentController = Ext.ControllerManager.get("navigation").top.controller;
-        this.contextButton.setText(Ext.ControllerManager.get(currentController).getReviewButtonText());
+        var stack = Ext.ControllerManager.get("navigation").stack;
+
+        this.contextButton.setText(Ext.ControllerManager.get(stack[stack.length-1].controller).getReviewButtonText());
         this.contextButton.doComponentLayout();
 
-    	this.emailView.show({
-    		type : 'slide',
-    		direction : 'up'
-    	});
+    	this.view.show(options.animation);
     },
 
     sendEmail : function(subject) {
@@ -41,7 +40,8 @@ Ext.regController('Email', {
     			var emailCallback = function(result) {
     				// called after email has been sent
     				if (result != EmailComposer.ComposeResultType.Cancelled) {
-    					OKnesset.emailDialog.hide();
+    					dispatchBack();
+//    					OKnesset.emailDialog.hide();
     				}
     			};
     			window.plugins.emailComposer.showEmailComposerWithCB(emailCallback,
@@ -56,7 +56,8 @@ Ext.regController('Email', {
     				extras : extras
     			}, function() {
     				// success callback
-    				OKnesset.emailDialog.hide();
+    				dispatchBack();
+//    				OKnesset.emailDialog.hide();
     			}, function() {
     				alert(OKnesset.strings.errorAndroidEmail);
     			});

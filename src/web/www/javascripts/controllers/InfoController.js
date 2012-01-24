@@ -3,29 +3,28 @@ Ext.regController('Info', {
     // index action
 	Index: function(options)
     {
-        if ( ! this.infoView)
+        if ( ! this.view)
         {
-            this.infoView = this.render({
+            this.view = this.render({
                 xtype: 'InfoView',
             });
 
-            this.updateDate = this.infoView.query('#updateDate')[0];
+            this.updateDate = this.view.query('#updateDate')[0];
             var that = this;
 
-            this.infoView.query('#cancelInfoBtn')[0].setHandler(function(){
-      			that.infoView.hide();
+            this.view.query('#cancelInfoBtn')[0].setHandler(function(){
+            	dispatchBack();
             });
 
-            this.infoView.query('#updateAppDataBtn')[0].setHandler(function(){
+            this.view.query('#updateAppDataBtn')[0].setHandler(function(){
     			checkFullDataFromWeb();
-      			that.infoView.hide();
+            	dispatchBack();
             });
 
-            this.infoView.query('#displayDisclaimerBtn')[0].setHandler(function(){
-      			that.infoView.hide();
+            this.view.query('#displayDisclaimerBtn')[0].setHandler(function(){
+            	dispatchBack();
     			displayDisclaimer(true);
             });
-
         }
 
         this.updateDate.update({
@@ -34,11 +33,7 @@ Ext.regController('Info', {
     								.getItem("PartyDataDate")))))
     			});
 
-    	this.infoView.show({
-    		type : 'slide',
-    		direction : 'up'
-    	});
+    	this.view.show(options.animation);
+
     },
-
-
 });
