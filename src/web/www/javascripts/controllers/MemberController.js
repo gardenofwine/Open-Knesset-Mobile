@@ -13,12 +13,12 @@ Ext.regController('Member', {
             });
         }
 
-        // TODO the membeController page should not rely on the MemberStore to contain party members
+        // TODO the memberController page should not rely on the MemberStore to contain party members
         // the way the stores are organized should change
         var member = OKnesset.MemberStore.findBy(function(r){
             return r.data.id === parseInt(options.id)
         });
-        member = OKnesset.MemberStore.getAt(member).data;
+        member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
 
         GATrackMember(member.name);
 
@@ -27,14 +27,7 @@ Ext.regController('Member', {
             member.img_url.substring(member.img_url.lastIndexOf('/') + 1)
         });
 
-        this.memberView.query('#MemberBillsTitle')[0].update({
-            billNumber: member.bills.length,
-            hasExcuseForNoBills: hasExcuseForNoBills(member)
-        });
-        this.memberView.query('#MemberInfo')[0].update(member);
-        OKnesset.MemberBillsStore.loadData(member.bills);
-        this.currentMember = member;
-
+		this.updateData(member);
 
         // scroll bill list up
     	if (options.pushed) {
@@ -56,7 +49,6 @@ Ext.regController('Member', {
         }
         this.memberView.query('#MemberBillList')[0].refresh();
 
-        this.application.viewport.query('#toolbar')[0].setTitle(member.name);
         this.application.viewport.setActiveItem(this.memberView, options.animation);
     },
 
@@ -64,5 +56,29 @@ Ext.regController('Member', {
 		return Ext.util.Format.format(
 				OKnesset.strings.emailMember,
 				this.currentMember.name);
-	}
+	},
+
+	updateData : function(member){
+        this.memberView.query('#MemberBillsTitle')[0].update({
+            billNumber: member.bills.length,
+            hasExcuseForNoBills: hasExcuseForNoBills(member)
+        });
+        this.memberView.query('#MemberInfo')[0].update(member);
+        OKnesset.MemberBillsStore.loadData(member.bills);
+        this.application.viewport.query('#toolbar')[0].setTitle(member.name);
+	},
+
+    refresh: function(){
+        // get current member data from Party store, which is updated
+        var party = getPartyFromPartyStoreByName(this.currentMember.party);
+        Ext.iterate(party.data.members, function(value, index){
+            if (value.data.id === this.currentMember.id) {
+                this.updateData(value.data);
+                return false;
+            }
+        }, this);
+
+        var billList = this.memberView.query('#MemberBillList')[0];
+        billList.refresh();
+    }
 });

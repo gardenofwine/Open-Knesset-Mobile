@@ -41,19 +41,6 @@ OKnesset.app.views.MemberView = new Ext.extend(Ext.Panel, {
             }
         }
     },
-    // TODO move to controller
-    refresh: function(){
-        // get current member data from Party store, which is updated
-        var party = getPartyFromPartyStoreByName(OKnesset.memberPanelWrapper.currentMemeber.party);
-        Ext.iterate(party.data.members, function(value, index){
-            if (value.id === OKnesset.memberPanelWrapper.currentMemeber.id) {
-                updateMemberData(value);
-                return false;
-            }
-        });
-
-        OKnesset.memberBillList.refresh();
-    },
     currentMemeber: null,
     initComponent: function(){
         this.infoWrapper = new OKnesset.app.views.MemberView.InfoWrapper();

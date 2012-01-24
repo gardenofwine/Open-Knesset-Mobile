@@ -43,12 +43,17 @@ Ext.regController('Party', {
     	this.application.viewport.query('#toolbar')[0].setTitle(name);
     	this.application.viewport.setActiveItem(this.partyView, options.animation);
     },
-
-
     getReviewButtonText : function(){
     	return Ext.util.Format.format(
 				OKnesset.strings.emailParty,
 				this.currentParty.name);
-    }
+    },
+	refresh : function() {
+		var party = getPartyFromPartyStoreByName(this.currentParty.name);
+		OKnesset.MemberStore.loadData(party.data.members, false);
+        var memberList = this.partyView.query('#MemberList')[0];
+        memberList.refresh();
+	},
+
 
 });

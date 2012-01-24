@@ -1,10 +1,7 @@
 Ext.regController('PartyList', {
 
-    // index action
 	Index: function(options)
     {
-//		console.log("** party options");
-//		console.log(options)
         if ( ! this.partyListView)
         {
             this.partyListView = this.render({
@@ -24,6 +21,9 @@ Ext.regController('PartyList', {
 
     getReviewButtonText : function(){
     	return OKnesset.strings.emailPartyList;
-    }
+    },
 
+	refresh : function() {
+		OKnesset.app.PartyList.refresh();
+	}
 });

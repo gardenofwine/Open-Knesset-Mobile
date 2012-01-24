@@ -15,10 +15,6 @@ OKnesset.app.views.PartyListView = new Ext.extend(Ext.Panel, {
 	layout : 'fit',
 	items : [ OKnesset.app.PartyList ],
 	title : OKnesset.strings.partiesTitle,
-	// TODO move to controller
-	refresh : function() {
-		OKnesset.app.PartyList.refresh();
-	}
 });
 
 Ext.reg('PartyListView', OKnesset.app.views.PartyListView);

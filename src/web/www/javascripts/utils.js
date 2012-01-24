@@ -257,10 +257,11 @@ function displayFetchCompleteNotification() {
 function updatePartyData(fullPartyData) {
 	OKnesset.log("-=updatePartyData=-");
 	OKnesset.PartyStore.loadData(fullPartyData, false);
-	// getViewport().getActiveItem().items.getAt(0).refresh();
-	// A OKnesset that can be refreshed has a refresh function
 	// TODO handle case where there is no active item...
 	// getViewport().getActiveItem().refresh();
+    var currentController = Ext.ControllerManager.get("navigation").top.controller;
+    Ext.ControllerManager.get(currentController).refresh();
+
 }
 
 /**

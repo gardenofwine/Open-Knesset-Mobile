@@ -14,7 +14,7 @@ OKnesset.app.views.Viewport = new Ext.extend(Ext.Panel, {
             iconCls: 'info',
             // TODO move handler to conteroller
             handler: function(){
-                displayInfoDialog();
+                Ext.ControllerManager.get('Info').Index();
             }
         }, {
             // The email icon at the top left of the application toolbar

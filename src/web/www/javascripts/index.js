@@ -667,91 +667,91 @@ function hasExcuseForNoBills(member) {
 // OKnesset.memberPanelWrapper.currentMemeber = member;
 // }
 
-/**
- * Creates the info dialog (only once)
- */
-function initInfoDialog() {
-	if (!OKnesset.infoPanel) {
-		OKnesset.infoPanel = new Ext.Panel({
-			id : 'infoPanel',
-			layout : 'vbox',
-			cls : 'textCenter',
-			floating : true,
-			centered : true,
-			width : getViewport().getWidth() * 0.9,
-			height : getViewport().getHeight() * 0.65,
-			items : [ {
-				tpl : '{dateString}'
-			}, {
-				xtype : 'spacer',
-				height : "2em"
-			}, {
-				xtype : 'button',
-				width : "50%",
-				handler : function() {
-					checkFullDataFromWeb();
-					OKnesset.infoPanel.hide();
-				},
-				text : OKnesset.strings.updateNow
-			}, {
-				xtype : 'spacer',
-				height : "2em"
-			}, {
-				xtype : 'button',
-				width : "50%",
-				handler : function() {
-					OKnesset.infoPanel.hide();
-					displayDisclaimer(true);
-				},
-				text : OKnesset.strings.showDisclaimer
-			}, {
-				xtype : 'spacer',
-				height : "2em"
-			} ],
-			dockedItems : [ {
-				dock : 'top',
-				xtype : 'toolbar',
-				title : OKnesset.strings.openKnessetTitle
-			}, {
-				dock : 'bottom',
-				ui : 'light',
-				items : [ {
-					xtype : 'button',
-					ui : 'confirm',
-					handler : function() {
-						OKnesset.infoPanel.hide();
-					},
-					text : OKnesset.strings.back
-				} ]
-			} ]
-		});
+///**
+// * Creates the info dialog (only once)
+// */
+//function initInfoDialog() {
+//	if (!OKnesset.infoPanel) {
+//		OKnesset.infoPanel = new Ext.Panel({
+//			id : 'infoPanel',
+//			layout : 'vbox',
+//			cls : 'textCenter',
+//			floating : true,
+//			centered : true,
+//			width : getViewport().getWidth() * 0.9,
+//			height : getViewport().getHeight() * 0.65,
+//			items : [ {
+//				tpl : '{dateString}'
+//			}, {
+//				xtype : 'spacer',
+//				height : "2em"
+//			}, {
+//				xtype : 'button',
+//				width : "50%",
+//				handler : function() {
+//					checkFullDataFromWeb();
+//					OKnesset.infoPanel.hide();
+//				},
+//				text : OKnesset.strings.updateNow
+//			}, {
+//				xtype : 'spacer',
+//				height : "2em"
+//			}, {
+//				xtype : 'button',
+//				width : "50%",
+//				handler : function() {
+//					OKnesset.infoPanel.hide();
+//					displayDisclaimer(true);
+//				},
+//				text : OKnesset.strings.showDisclaimer
+//			}, {
+//				xtype : 'spacer',
+//				height : "2em"
+//			} ],
+//			dockedItems : [ {
+//				dock : 'top',
+//				xtype : 'toolbar',
+//				title : OKnesset.strings.openKnessetTitle
+//			}, {
+//				dock : 'bottom',
+//				ui : 'light',
+//				items : [ {
+//					xtype : 'button',
+//					ui : 'confirm',
+//					handler : function() {
+//						OKnesset.infoPanel.hide();
+//					},
+//					text : OKnesset.strings.back
+//				} ]
+//			} ]
+//		});
+//
+//		OKnesset.infoPanel.refresh = function() {
+//			// TODO refresh the data date
+//			getViewport().items.getByKey(OKnesset.currentPanelId).refresh();
+//		}
+//
+//	}
+//
+//}
 
-		OKnesset.infoPanel.refresh = function() {
-			// TODO refresh the data date
-			getViewport().items.getByKey(OKnesset.currentPanelId).refresh();
-		}
-
-	}
-
-}
-
-function displayInfoDialog() {
-	initInfoDialog();
-	OKnesset.currentPanelId = getViewport().getActiveItem().getId();
-	// TODO fetch the text item more elegantly
-	OKnesset.infoPanel.items.getAt(0).update(
-			{
-				dateString : Ext.util.Format.format(OKnesset.strings.dataDate,
-						dateToString(new Date(parseInt(localStorage
-								.getItem("PartyDataDate")))))
-			});
-
-	OKnesset.infoPanel.show({
-		type : 'slide',
-		direction : 'up'
-	});
-
-}
+//function displayInfoDialog() {
+//	initInfoDialog();
+//	OKnesset.currentPanelId = getViewport().getActiveItem().getId();
+//	// TODO fetch the text item more elegantly
+//	OKnesset.infoPanel.items.getAt(0).update(
+//			{
+//				dateString : Ext.util.Format.format(OKnesset.strings.dataDate,
+//						dateToString(new Date(parseInt(localStorage
+//								.getItem("PartyDataDate")))))
+//			});
+//
+//	OKnesset.infoPanel.show({
+//		type : 'slide',
+//		direction : 'up'
+//	});
+//
+//}
 
 /**
  * For Android only - this function is called when the back button is touched.
