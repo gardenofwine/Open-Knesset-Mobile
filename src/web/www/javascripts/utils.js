@@ -252,16 +252,37 @@ function displayFetchCompleteNotification() {
 	}, isPhoneGap() && isAndroid() ? 4000 : 2000);
 }
 
+function refreshTopPanel(){
+	var stack = Ext.ControllerManager.get("navigation").stack;
+    var top = Ext.ControllerManager.get("navigation").top.controller;
+    if (refreshIfExists(Ext.ControllerManager.get(top))){
+    	return true;
+    }
+
+
+    for (var i = stack.length - 1 ; i >= 0 ; i--){
+    	if (refreshIfExists(Ext.ControllerManager.get(stack[i].controller))){
+    		return true;
+    	}
+    }
+
+    return false;
+
+    function refreshIfExists(controller){
+    	if (controller.refresh){
+    		controller.refresh();
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
+}
 
 // update the party store with the full data (replace the slimData)
 function updatePartyData(fullPartyData) {
 	OKnesset.log("-=updatePartyData=-");
 	OKnesset.PartyStore.loadData(fullPartyData, false);
-	// TODO handle case where there is no active item...
-	// getViewport().getActiveItem().refresh();
-    var currentController = Ext.ControllerManager.get("navigation").top.controller;
-    Ext.ControllerManager.get(currentController).refresh();
-
+	OKnesset.log("Refreshed panel? " + refreshTopPanel());
 }
 
 /**

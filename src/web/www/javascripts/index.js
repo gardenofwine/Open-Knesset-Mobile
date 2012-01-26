@@ -100,8 +100,6 @@ Ext.regApplication({
 			dispatchBack();
 		});
 
-		displayDisclaimer();
-
 		if (isPhoneGap()) {
 			// hide the native splash screen
 			if (isiOS()) {
@@ -127,6 +125,12 @@ function secondaryLaunch() {
 	var secondaryLaunchTimeStart = new Date();
 	OKnesset.log("** secondaryLaunch begin "
 			+ secondaryLaunchTimeStart.toString());
+
+	var disclaimerDismissed = localStorage.getItem("disclaimerDismissed");
+	if (disclaimerDismissed !== 'true') {
+		dispatchDialog('Disclaimer/Index');
+	}
+
 
 	// When the applicaiton comes back from the background state on the iOS or
 	// Android, check if there are any updates from teh oknesset website.
@@ -357,60 +361,60 @@ function secondaryLaunch() {
 					.getTime()) / 1000);
 }
 
-/**
- * Creates the disclaimer dialog (only once)
- */
-function initDisclaimerDialog() {
-	if (!OKnesset.disclaimerDialog) {
-		OKnesset.disclaimerDialog = new Ext.Panel({
-			floating : true,
-			centered : true,
-			width : getViewport().getWidth() * 0.9,
-			height : getViewport().getHeight() * 0.9,
-			styleHtmlContent : true,
-			style : {
-				direction : 'rtl'
-			},
-			scroll : "vertical",
-			hideOnMaskTap : false,
-			items : [ {
-				html : OKnesset.strings.disclaimerDialogBody,
-				height : "5em"
-			} ],
-			dockedItems : [ {
-				dock : 'top',
-				xtype : 'toolbar',
-				title : OKnesset.strings.oknessetName
-			}, {
-				xtype : 'button',
-				ui : 'confirm',
-				handler : function() {
-					OKnesset.disclaimerDialog.hide();
-					localStorage.setItem("disclaimerDismissed", true);
-				},
-				text : OKnesset.strings.ok,
-				dock : 'bottom'
-			} ]
-		});
-	}
-}
+///**
+// * Creates the disclaimer dialog (only once)
+// */
+//function initDisclaimerDialog() {
+//	if (!OKnesset.disclaimerDialog) {
+//		OKnesset.disclaimerDialog = new Ext.Panel({
+//			floating : true,
+//			centered : true,
+//			width : getViewport().getWidth() * 0.9,
+//			height : getViewport().getHeight() * 0.9,
+//			styleHtmlContent : true,
+//			style : {
+//				direction : 'rtl'
+//			},
+//			scroll : "vertical",
+//			hideOnMaskTap : false,
+//			items : [ {
+//				html : OKnesset.strings.disclaimerDialogBody,
+//				height : "5em"
+//			} ],
+//			dockedItems : [ {
+//				dock : 'top',
+//				xtype : 'toolbar',
+//				title : OKnesset.strings.oknessetName
+//			}, {
+//				xtype : 'button',
+//				ui : 'confirm',
+//				handler : function() {
+//					OKnesset.disclaimerDialog.hide();
+//					localStorage.setItem("disclaimerDismissed", true);
+//				},
+//				text : OKnesset.strings.ok,
+//				dock : 'bottom'
+//			} ]
+//		});
+//	}
+//}
 
-/**
- * Displays the disclaimer dialog if it has not already been displayed.
- *
- * @param forceShow -
- *            if true, the disclaimer dialog is displayed regardless
- */
-function displayDisclaimer(forceShow) {
-	var disclaimerDismissed = localStorage.getItem("disclaimerDismissed");
-	if (disclaimerDismissed !== 'true' || forceShow === true) {
-		initDisclaimerDialog();
-		// for Android. If the disclaimer dialog was forcly displayed,
-		// it will be dismissed by touching the back button
-		OKnesset.disclaimerDialog.forceShow = forceShow;
-		OKnesset.disclaimerDialog.show('pop');
-	}
-}
+///**
+// * Displays the disclaimer dialog if it has not already been displayed.
+// *
+// * @param forceShow -
+// *            if true, the disclaimer dialog is displayed regardless
+// */
+//function displayDisclaimer(forceShow) {
+//	var disclaimerDismissed = localStorage.getItem("disclaimerDismissed");
+//	if (disclaimerDismissed !== 'true' || forceShow === true) {
+//		initDisclaimerDialog();
+//		// for Android. If the disclaimer dialog was forcly displayed,
+//		// it will be dismissed by touching the back button
+//		OKnesset.disclaimerDialog.forceShow = forceShow;
+//		OKnesset.disclaimerDialog.show('pop');
+//	}
+//}
 
 ///**
 // * Creates the email dialog (only once)
@@ -791,7 +795,7 @@ function onBackKey() {
 //		navigator.app.exitApp();
 //	}
 
-
+	// TODO - if the disclaimer that pops up at first launch is shown, then pressing back should quit the application
 	if (Ext.ControllerManager.get("navigation").stack.length <= 1) {
 		navigator.app.exitApp();
 	} else {

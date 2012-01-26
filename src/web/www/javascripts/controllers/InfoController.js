@@ -23,7 +23,7 @@ Ext.regController('Info', {
 
             this.view.query('#displayDisclaimerBtn')[0].setHandler(function(){
             	dispatchBack();
-    			displayDisclaimer(true);
+            	dispatchDialog('Disclaimer/Index');
             });
         }
 
