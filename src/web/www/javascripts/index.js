@@ -757,39 +757,47 @@ function hasExcuseForNoBills(member) {
  * For Android only - this function is called when the back button is touched.
  */
 function onBackKey() {
-	// dismiss email dialog if visible
-	if (OKnesset.emailDialog && OKnesset.emailDialog.isVisible()) {
-		OKnesset.emailDialog.hide();
-		return;
-	}
+//	// dismiss email dialog if visible
+//	if (OKnesset.emailDialog && OKnesset.emailDialog.isVisible()) {
+//		OKnesset.emailDialog.hide();
+//		return;
+//	}
+//
+//	// dismiss disclaimer dialog if visible (and if it is not the
+//	// first time the application has loaded)
+//	if (OKnesset.disclaimerDialog && OKnesset.disclaimerDialog.forceShow
+//			&& OKnesset.disclaimerDialog.isVisible()) {
+//		OKnesset.disclaimerDialog.hide();
+//		return;
+//	}
+//
+//	// dismiss info dialog if visible
+//	if (OKnesset.infoPanel && OKnesset.infoPanel.isVisible()) {
+//		OKnesset.infoPanel.hide();
+//		return;
+//	}
 
-	// dismiss disclaimer dialog if visible (and if it is not the
-	// first time the application has loaded)
-	if (OKnesset.disclaimerDialog && OKnesset.disclaimerDialog.forceShow
-			&& OKnesset.disclaimerDialog.isVisible()) {
-		OKnesset.disclaimerDialog.hide();
-		return;
-	}
+//	// find the back button
+//	var activeItem = getViewport().getActiveItem();
+//	var dockedItem = activeItem.getDockedItems()[0];
+//	var backButton = dockedItem.items.findBy(function(item) {
+//		return item.ui === 'forward';
+//	});
+//
+//	if (backButton !== null) {
+//		backButton.handler();
+//	} else {
+//		// if there is no back button, it means we are at the initial screen
+//		navigator.app.exitApp();
+//	}
 
-	// dismiss info dialog if visible
-	if (OKnesset.infoPanel && OKnesset.infoPanel.isVisible()) {
-		OKnesset.infoPanel.hide();
-		return;
-	}
 
-	// find the back button
-	var activeItem = getViewport().getActiveItem();
-	var dockedItem = activeItem.getDockedItems()[0];
-	var backButton = dockedItem.items.findBy(function(item) {
-		return item.ui === 'forward';
-	});
-
-	if (backButton !== null) {
-		backButton.handler();
-	} else {
-		// if there is no back button, it means we are at the initial screen
+	if (Ext.ControllerManager.get("navigation").stack.length <= 1) {
 		navigator.app.exitApp();
+	} else {
+		dispatchBack();
 	}
+
 }
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);
