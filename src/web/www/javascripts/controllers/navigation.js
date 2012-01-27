@@ -40,25 +40,30 @@ Ext.regController('navigation', {
     	// in case of a "dialog" style panel
         var dialogController = Ext.ControllerManager.get(top.controller);
         dialogController.view.addListener('hide', this._pop, this);
+    } else {
+  		// Only non-dialog panels affect the back button visibitilty status
+        this.setBackbuttonVisibility();
     }
-    this.setBackbuttonVisibility();
 
     this.log('> %s::%s', top.controller, top.action);
   },
 
-  _pop : function(a){
+  _pop : function(){
       this.top = (this.stack)? this.stack.pop() : undefined;
   },
 
   pop: function(options) {
   	if (this.top !== undefined && !this.top.historyUrl){
-  		// In case of a "dialog" style panel that is being removed
+  		// In case of a "dialog" style panel that is being popped
         var dialogController = Ext.ControllerManager.get(this.top.controller);
         dialogController.view.removeListener('hide', this._pop, this);
 
         Ext.ControllerManager.get(this.top.controller).view.hide();
-        this._pop("direct");
+        this._pop();
         return;
+  	} else {
+  		// Only non-dialog panels affect the back button visibitilty status
+        this.setBackbuttonVisibility();
   	}
 
     this._pop();
@@ -67,7 +72,6 @@ Ext.regController('navigation', {
     if (top !== undefined) {
       top.dispatched = false;
       Ext.dispatch(Ext.apply(top, { navigation: 'pop' , animation : options.animation, pushed : false}));
-      this.setBackbuttonVisibility();
       this.log('< %s::%s', top.controller, top.action);
     }
   },
