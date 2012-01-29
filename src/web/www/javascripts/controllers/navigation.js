@@ -77,6 +77,10 @@ Ext.regController('navigation', {
   },
 
   setBackbuttonVisibility : function(){
+	  if (isAndroid()){
+		  this.setBackbuttonVisibility = function(){};
+		  return;
+	  }
       var backBtn = this.application.viewport.query('#backBtn')[0];
       // The first panel is also pushed, but we dont want a back button on the first panel
       if (this.stack.length > 1){
