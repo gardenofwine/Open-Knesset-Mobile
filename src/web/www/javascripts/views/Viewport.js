@@ -9,27 +9,20 @@ OKnesset.app.views.Viewport = new Ext.extend(Ext.Panel, {
         items: [{
             // The "i" at the top left of the application toolbar
             ui: 'plain',
-            itemId: 'appInfo',
+            id: 'appInfo',
             iconMask: true,
             iconCls: 'info',
-            // TODO move handler to conteroller
-            handler: function(){
-				dispatchDialog('Info/Index');
-            }
         }, {
             // The email icon at the top left of the application toolbar
             ui: 'plain',
+            id: 'emailReview',
             iconMask: true,
             iconCls: 'mail',
-            itemId: 'appEmail',
-            // TODO move handler to conteroller
-            handler: function(){
-				dispatchDialog('Email/Index');
-            }
         }, {
             xtype: 'spacer'
         }, {
-            itemId: 'backBtn',
+            id: 'backBtn',
+			hidden : true,
             iconCls: 'right2',
             iconMask: true,
             ui: 'action',

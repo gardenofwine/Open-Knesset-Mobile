@@ -38,12 +38,22 @@ Ext.regApplication({
 			}
 		}
 
-
 		//The main view, holds all the panels of the application.
 		this.viewport = new OKnesset.app.views.Viewport();
-        var backBtn = this.viewport.query('#backBtn')[0];
-        backBtn.hide();
-        backBtn.setHandler(function() {
+
+		// set the email button handler
+		console.log(this.viewport);
+        this.viewport.query('#emailReview')[0].setHandler(function(){
+			dispatchDialog('Email/Index');
+        });
+
+        // set the info button handler
+        this.viewport.query('#appInfo')[0].setHandler(function(){
+			dispatchDialog('Info/Index');
+        });
+
+		// set the back button handler
+        this.viewport.query('#backBtn')[0].setHandler(function() {
 			dispatchBack();
 		});
 
