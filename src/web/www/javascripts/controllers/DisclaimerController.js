@@ -9,7 +9,7 @@ Ext.regController('Disclaimer', {
                 xtype: 'DisclaimerView',
             });
 
-            var mask = this.mask = new Ext.LoadMask(Ext.getBody(), OKnesset.strings.showDisclaimer);
+            var mask = this.mask = new Ext.LoadMask(Ext.getBody(), {msg:OKnesset.strings.showDisclaimer});
             this.view.addListener('hide', function(){mask.hide();});
 
             this.view.query('#cancelDisclaimerBtn')[0].setHandler(function(){
