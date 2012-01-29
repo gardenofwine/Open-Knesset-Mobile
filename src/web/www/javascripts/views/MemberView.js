@@ -45,9 +45,6 @@ OKnesset.app.views.MemberView = new Ext.extend(Ext.Panel, {
     initComponent: function(){
         this.infoWrapper = new OKnesset.app.views.MemberView.InfoWrapper();
         this.billList = new OKnesset.app.views.MemberView.BillList();
-
-        //	    items: [OKnesset.memberPanel, OKnesset.memberBillList],
-
         this.items = [this.infoWrapper, this.billList];
         OKnesset.app.views.MemberView.superclass.initComponent.apply(this, arguments);
     }
@@ -56,15 +53,12 @@ OKnesset.app.views.MemberView = new Ext.extend(Ext.Panel, {
 Ext.reg('MemberView', OKnesset.app.views.MemberView);
 
 OKnesset.app.views.MemberView.InfoWrapper = new Ext.extend(Ext.Panel, {
-    //OKnesset.memberPanel = new Ext.Panel({
     id: 'MemberInfoWrapper',
     flex: 1,
     initComponent: function(){
         this.info = new OKnesset.app.views.MemberView.Info();
         this.billsTitle = new OKnesset.app.views.MemberView.BillsTitle();
         this.image = new OKnesset.app.views.MemberView.Image();
-        //	    items: [OKnesset.memberPanel, OKnesset.memberBillList],
-
         this.items = [this.info];
         this.dockedItems = [{
             xtype: 'panel',
@@ -81,7 +75,6 @@ OKnesset.app.views.MemberView.InfoWrapper = new Ext.extend(Ext.Panel, {
 });
 
 OKnesset.app.views.MemberView.BillList = new Ext.extend(Ext.List, {
-    //OKnesset.memberBillList = new Ext.List({
     id: 'MemberBillList',
     itemTpl: '<div>{title}</div>',
     store: OKnesset.MemberBillsStore,
@@ -93,14 +86,12 @@ OKnesset.app.views.MemberView.BillList = new Ext.extend(Ext.List, {
 });
 
 OKnesset.app.views.MemberView.Info = new Ext.extend(Ext.Panel, {
-    //OKnesset.memberInfoPanel = new Ext.Panel({
     id: 'MemberInfo',
     tpl: memberPanelHtml
 });
 
 // The text that appears below the members picture, "bills proposed"
 OKnesset.app.views.MemberView.BillsTitle = new Ext.extend(Ext.Panel, {
-    //OKnesset.app.memberBillsTitle = new Ext.Panel({
     id: 'MemberBillsTitle',
     layout: 'fit',
     dock: 'bottom',
@@ -115,7 +106,6 @@ OKnesset.app.views.MemberView.BillsTitle = new Ext.extend(Ext.Panel, {
 
 
 OKnesset.app.views.MemberView.Image = new Ext.extend(Ext.Panel, {
-    //OKnesset.memberImagePanel = new Ext.Panel({
     id: 'MemberImage',
     layout: 'fit',
     tpl: '<img src={img_url} height="100%"></img>'

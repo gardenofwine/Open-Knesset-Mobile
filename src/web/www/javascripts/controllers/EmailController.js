@@ -21,7 +21,6 @@ Ext.regController('Email', {
 
             this.view.query('#cancelEmailBtn')[0].setHandler(function(){
 				dispatchBack();
-//      			that.view.hide();
             });
         }
 
@@ -41,7 +40,6 @@ Ext.regController('Email', {
     				// called after email has been sent
     				if (result != EmailComposer.ComposeResultType.Cancelled) {
     					dispatchBack();
-//    					OKnesset.emailDialog.hide();
     				}
     			};
     			window.plugins.emailComposer.showEmailComposerWithCB(emailCallback,
@@ -57,7 +55,6 @@ Ext.regController('Email', {
     			}, function() {
     				// success callback
     				dispatchBack();
-//    				OKnesset.emailDialog.hide();
     			}, function() {
     				alert(OKnesset.strings.errorAndroidEmail);
     			});

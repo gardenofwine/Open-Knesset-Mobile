@@ -25,7 +25,6 @@ OKnesset.app.views.Viewport = new Ext.extend(Ext.Panel, {
             // TODO move handler to conteroller
             handler: function(){
 				dispatchDialog('Email/Index');
-//                Ext.ControllerManager.get('Email').Index();
             }
         }, {
             xtype: 'spacer'

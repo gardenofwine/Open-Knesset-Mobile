@@ -403,9 +403,6 @@ function dispatchBack(){
 	var dispatchParams = {
         controller: 'navigation',
         action: 'pop',
-//	    animation: {
-//	        type: 'slide',
-//	    },
 	};
 	Ext.dispatch(dispatchParams);
 }
