@@ -84,11 +84,7 @@ function loadInitialData() {
 					// local request returns
 					if (response.responseText != null
 							&& response.responseText.length > 0) {
-						loadTime = new Date();
 						eval(response.responseText);
-						OKnesset.log('Initial data load was performed in '
-								+ (loadTime.getTime() - mainLaunchTimeEnd
-										.getTime()) / 1000);
 						// partyData is evaluated from the
 						processInitialData(partyData, partyDataDate);
 					} else {
