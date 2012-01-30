@@ -77,7 +77,7 @@ function loadInitialData() {
 			processInitialData(partyData, partyDataDate);
 		} else {
 			Ext.Ajax.request({
-				url : 'javascripts/partyData.js.jpg',
+				url : 'javascripts/models/partyData.js.jpg',
 				callback : function(options, success, response) {
 					// for some reason, Ext.Ajax returns success == false when
 					// the
