@@ -20,7 +20,7 @@ Ext.regController('Email', {
             });
 
             this.view.query('#cancelEmailBtn')[0].setHandler(function(){
-				dispatchBack();
+            	OKnesset.app.controllers.navigation.dispatchBack();
             });
         }
 
@@ -39,7 +39,7 @@ Ext.regController('Email', {
     			var emailCallback = function(result) {
     				// called after email has been sent
     				if (result != EmailComposer.ComposeResultType.Cancelled) {
-    					dispatchBack();
+    					OKnesset.app.controllers.navigation.dispatchBack();
     				}
     			};
     			window.plugins.emailComposer.showEmailComposerWithCB(emailCallback,
@@ -54,7 +54,7 @@ Ext.regController('Email', {
     				extras : extras
     			}, function() {
     				// success callback
-    				dispatchBack();
+    				OKnesset.app.controllers.navigation.dispatchBack();
     			}, function() {
     				alert(OKnesset.strings.errorAndroidEmail);
     			});

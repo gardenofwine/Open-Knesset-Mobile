@@ -7,15 +7,15 @@ Ext.regController('PartyList', {
             this.partyListView = this.render({
                 xtype: 'PartyListView',
             });
-            var partyList = this.partyListView.query('#PartyList')[0];
-            partyList.addListener('itemtap',
+
+            this.partyListView.addListener('itemtap',
             	function(that, index, item, e) {
 					var record = that.store.getAt(index);
-					dispatchPanel('Party/Index/' + record.data.id, options.historyUrl);
+					OKnesset.app.controllers.navigation.dispatchPanel('Party/Index/' + record.data.id, options.historyUrl);
 				});
         }
 
-        this.application.viewport.query('#toolbar')[0].setTitle(this.partyListView.title);
+        this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.partiesTitle);
         this.application.viewport.setActiveItem(this.partyListView, options.animation);
     },
 
@@ -24,6 +24,6 @@ Ext.regController('PartyList', {
     },
 
 	refresh : function() {
-		OKnesset.app.PartyList.refresh();
+		this.partyListView.refresh();
 	}
 });

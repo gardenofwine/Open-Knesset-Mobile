@@ -25,8 +25,9 @@ OKnesset.app.views.DisclaimerView = new Ext.extend(Ext.Panel, {
 		dock : 'bottom'
 	} ],
     initComponent: function(){
-	    this.width = getViewport().getWidth() * 0.9;
-    	this.height = getViewport().getHeight() * 0.9;
+    	var viewport = Ext.ApplicationManager.get("oknesset").viewport;
+	    this.width = viewport.getWidth() * 0.9;
+    	this.height = viewport.getHeight() * 0.9;
         OKnesset.app.views.DisclaimerView.superclass.initComponent.apply(this, arguments);
 	}
 });

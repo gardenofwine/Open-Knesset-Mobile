@@ -14,7 +14,7 @@ Ext.regController('Disclaimer', {
 
             this.view.query('#cancelDisclaimerBtn')[0].setHandler(function(){
     			localStorage.setItem("disclaimerDismissed", true);
-				dispatchBack();
+    			OKnesset.app.controllers.navigation.dispatchBack();
             });
 
         }

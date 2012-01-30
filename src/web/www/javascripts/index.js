@@ -1,10 +1,7 @@
 /**
  * The OKnesset namespace.
  */
-
-if (typeof OKnesset === 'undefined') {
-	var OKnesset = {};
-}
+Ext.namespace('OKnesset');
 
 OKnesset.GAID = "Demo-ID-replace-with-real-id";
 OKnesset.appVersion = "1.0.0";
@@ -44,17 +41,17 @@ Ext.regApplication({
 		// set the email button handler
 		console.log(this.viewport);
         this.viewport.query('#emailReview')[0].setHandler(function(){
-			dispatchDialog('Email/Index');
+        	OKnesset.app.controllers.navigation.dispatchDialog('Email/Index');
         });
 
         // set the info button handler
         this.viewport.query('#appInfo')[0].setHandler(function(){
-			dispatchDialog('Info/Index');
+        	OKnesset.app.controllers.navigation.dispatchDialog('Info/Index');
         });
 
 		// set the back button handler
         this.viewport.query('#backBtn')[0].setHandler(function() {
-			dispatchBack();
+        	OKnesset.app.controllers.navigation.dispatchBack();
 		});
 
 		if (isPhoneGap()) {
@@ -84,7 +81,7 @@ function secondaryLaunch() {
 
 	var disclaimerDismissed = localStorage.getItem("disclaimerDismissed");
 	if (disclaimerDismissed !== 'true') {
-		dispatchDialog('Disclaimer/Index');
+		OKnesset.app.controllers.navigation.dispatchDialog('Disclaimer/Index');
 	}
 
 
@@ -106,7 +103,7 @@ function secondaryLaunch() {
 
 	if (isAndroid()) {
 		// For Android, override the back button functionality
-		document.addEventListener("backbutton", onBackKey, false);
+		document.addEventListener("backbutton", OKnesset.app.onBackKey, false);
 	}
 
 	// Load the full data of the parties and members into the data stores
@@ -118,28 +115,15 @@ function secondaryLaunch() {
 					.getTime()) / 1000);
 }
 
-
-/**
- * Returns true if the member is a minister, or is the chairperson of the
- * Knesset.
- *
- * @param member
- * @returns {Boolean}
- */
-function hasExcuseForNoBills(member) {
-	return (member.roles.indexOf(OKnesset.strings.ministerIndicator) != -1 || member.roles === OKnesset.strings.knessetChairman);
-}
-
-
 /**
  * For Android only - this function is called when the back button is touched.
  */
-function onBackKey() {
+OKnesset.app.onBackKey = function () {
 	// TODO - if the disclaimer that pops up at first launch is shown, then pressing back should quit the application
 	if (Ext.ControllerManager.get("navigation").stack.length <= 1) {
 		navigator.app.exitApp();
 	} else {
-		dispatchBack();
+		OKnesset.app.controllers.navigation.dispatchBack();
 	}
 
 }

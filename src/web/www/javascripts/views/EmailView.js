@@ -33,8 +33,9 @@ OKnesset.app.views.EmailView = new Ext.extend(Ext.Panel, {
         text: OKnesset.strings.cancel
     }],
     initComponent: function(){
-	    this.width = getViewport().getWidth() * 0.9;
-    	this.height = getViewport().getHeight() * 0.65;
+    	var viewport = Ext.ApplicationManager.get("oknesset").viewport;
+	    this.width = viewport.getWidth() * 0.9;
+    	this.height = viewport.getHeight() * 0.65;
         OKnesset.app.views.EmailView.superclass.initComponent.apply(this, arguments);
 	}
 });

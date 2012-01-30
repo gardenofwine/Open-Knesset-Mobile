@@ -12,7 +12,7 @@ Ext.regController('Party', {
             memberList.addListener('itemtap',
                 	function(that, index, item, e) {
     					var record = that.store.getAt(index);
-    					dispatchPanel('Member/Index/' + record.data.id, options.historyUrl);
+    					OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + record.data.id, options.historyUrl);
     				});
         }
 

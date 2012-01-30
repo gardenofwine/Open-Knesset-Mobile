@@ -290,67 +290,11 @@ function updatePartyData(fullPartyData) {
  */
 
 
-
-/**
- * Open Bill in browser. open the browser to display the bill in oknesset.org's
- * website
- */
-function gotoBill(record) {
-	console.log("** gotobill");
-	var bill = record.data;
-	var url = 'http://www.oknesset.org' + bill.url;
-	if (isPhoneGap()) {
-		if (isiOS()) {
-			// Since in iOS opening the browser exists the application,
-			// the user should be prompted if she wishes to do so.
-			navigator.notification.confirm(null, function(idx) {
-				if (idx == 2) {
-					gotoBillCallback(url, bill.url)
-				} else {
-					// track bill cancel
-					GATrackBillCanceled(bill.url)
-				}
-			}, OKnesset.strings.openBillText, OKnesset.strings.dialogOKCancel);
-		} else {// android
-			gotoBillCallback(url, bill.url);
-		}
-	}
-	// TODO for web version - open a new browser tab
-
-}
-
-function gotoBillCallback(url, billUrl) {
-	// in iOS, this function is called form native code, and it is necessary
-	// that the next call to native code via phonegap command would not be
-	// executed in the same "thread".
-	window.setTimeout(function() {
-		GATrackBill(billUrl, function() {
-			if (isAndroid()) {
-				window.plugins.webintent.startActivity({
-					action : WebIntent.ACTION_VIEW,
-					url : url
-				}, function() {
-					// success callback
-				}, function() {
-					alert(OKnesset.strings.errorOpenBill)
-				});
-			} else if (isiOS()) {
-				document.location = url;
-			}
-		});
-	}, 10);
-}
-/**
- * End of Open Bill in browser.
- */
-
-
 /**
  *
  * @param date
  * @returns {String}
  */
-
 function dateToString(date) {
 	var month = date.getMonth() + 1;
 	var day = date.getDate();
@@ -362,63 +306,4 @@ function getPartyFromPartyStoreByName(name) {
 	var partyIndex = OKnesset.PartyStore.findExact('name', name);
 	return OKnesset.PartyStore.getAt(partyIndex);
 
-}
-
-function getViewport(){
-	return Ext.ApplicationManager.get("oknesset").viewport;
-}
-
-function historyUrlToObject(historyUrl){
-	var params = historyUrl.split("/");
-	var obj = {historyUrl : historyUrl};
-	if (params[0]){
-		obj.controller = params[0];
-	}
-	if (params[1]){
-		obj.action = params[1];
-	}
-	if (params[2]){
-		obj.id = params[2];
-	}
-
-	return obj;
-}
-
-function dispatchPanel(toUrl, historyUrl){
-	var dispatchParams = {
-        controller: 'navigation',
-        action: 'push',
-        to: historyUrlToObject(toUrl),
-	    animation: {
-	        type: 'slide',
-	        direction : 'right'
-	    },
-	};
-	Ext.dispatch(dispatchParams);
-}
-
-
-function dispatchBack(){
-	console.log("** dispatchBack");
-	var dispatchParams = {
-        controller: 'navigation',
-        action: 'pop',
-	};
-	Ext.dispatch(dispatchParams);
-}
-
-function dispatchDialog(toUrl){
-	toObj = historyUrlToObject(toUrl);
-    delete toObj['historyUrl'];
-
-	var dispatchParams = {
-        controller: 'navigation',
-        action: 'push',
-        to: toObj,
-	    animation: {
-	        type: 'slide',
-	        direction : 'up'
-	    },
-	};
-	Ext.dispatch(dispatchParams);
 }

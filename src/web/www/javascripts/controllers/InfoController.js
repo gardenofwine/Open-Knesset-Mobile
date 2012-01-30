@@ -13,17 +13,17 @@ Ext.regController('Info', {
             var that = this;
 
             this.view.query('#cancelInfoBtn')[0].setHandler(function(){
-            	dispatchBack();
+            	OKnesset.app.controllers.navigation.dispatchBack();
             });
 
             this.view.query('#updateAppDataBtn')[0].setHandler(function(){
     			checkFullDataFromWeb();
-            	dispatchBack();
+    			OKnesset.app.controllers.navigation.dispatchBack();
             });
 
             this.view.query('#displayDisclaimerBtn')[0].setHandler(function(){
-            	dispatchBack();
-            	dispatchDialog('Disclaimer/Index');
+            	OKnesset.app.controllers.navigation.dispatchBack();
+            	OKnesset.app.controllers.navigation.dispatchDialog('Disclaimer/Index');
             });
         }
 

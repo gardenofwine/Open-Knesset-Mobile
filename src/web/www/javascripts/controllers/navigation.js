@@ -1,4 +1,4 @@
-Ext.regController('navigation', {
+OKnesset.app.controllers.navigation = Ext.regController('navigation', {
 
   debug: false,
 
@@ -82,13 +82,69 @@ Ext.regController('navigation', {
 		  return;
 	  }
       var backBtn = this.application.viewport.query('#backBtn')[0];
-      // The first panel is also pushed, but we dont want a back button on the first panel
+      // The first panel is also pushed, but we dont want a back button on the
+		// first panel
       if (this.stack.length > 1){
       	backBtn.show();
       } else {
       	backBtn.hide();
 
       }
-  }
+  },
+
+  dispatchPanel : function(toUrl, historyUrl){
+		var dispatchParams = {
+	        controller: 'navigation',
+	        action: 'push',
+	        to: this._historyUrlToObject(toUrl),
+		    animation: {
+		        type: 'slide',
+		        direction : 'right'
+		    },
+		};
+		Ext.dispatch(dispatchParams);
+	},
+
+
+	dispatchBack : function(){
+		var dispatchParams = {
+	        controller: 'navigation',
+	        action: 'pop',
+		};
+		Ext.dispatch(dispatchParams);
+	},
+
+	dispatchDialog: function(toUrl){
+		toObj = this._historyUrlToObject(toUrl);
+	    delete toObj['historyUrl'];
+
+		var dispatchParams = {
+	        controller: 'navigation',
+	        action: 'push',
+	        to: toObj,
+		    animation: {
+		        type: 'slide',
+		        direction : 'up'
+		    },
+		};
+		Ext.dispatch(dispatchParams);
+	},
+
+	_historyUrlToObject : function(historyUrl){
+		var params = historyUrl.split("/");
+		var obj = {historyUrl : historyUrl};
+		if (params[0]){
+			obj.controller = params[0];
+		}
+		if (params[1]){
+			obj.action = params[1];
+		}
+		if (params[2]){
+			obj.id = params[2];
+		}
+
+		return obj;
+	}
+
 
 });
