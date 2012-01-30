@@ -1,19 +1,3 @@
-function printLoadingTimes() {
-	OKnesset.log('### mainLaunch (' + mainLaunchTime.toString()
-			+ ').  Phonegap load time '
-			+ (phonegapEnd.getTime() - phonegapStart.getTime()) / 1000
-			+ ' total scripts load time'
-			+ (scriptLoadEndTime.getTime() - scriptLoadStartTime.getTime())
-			/ 1000);
-	OKnesset.log('### sencha (' + senchaLoadEndTime.toString() + ')load time '
-			+ (senchaLoadEndTime.getTime() - senchaLoadStartTime.getTime())
-			/ 1000);
-	OKnesset.log('### oknesset (' + oknessetLoadEndTime.toString()
-			+ ')load time '
-			+ (oknessetLoadEndTime.getTime() - oknessetLoadStartTime.getTime())
-			/ 1000);
-}
-
 /**
  * Google analytics related function
  */
@@ -123,12 +107,12 @@ function checkFullDataFromWeb() {
 			parseInt(localStorage.getItem("PartyDataDate")));
 	var now = new Date();
 
-	// 24 hours is 1000*60*60*24 = 86,400,000
-	OKnesset.log("** now=" + now.getTime() + " PartyDataDate= "
-			+ partyDataDate.getTime());
+//	OKnesset.log("** now=" + now.getTime() + " PartyDataDate= "
+//			+ partyDataDate.getTime());
 	OKnesset.log("** now=" + dateToString(now) + " PartyDataDate= "
 			+ dateToString(partyDataDate));
 
+	// 24 hours is 1000*60*60*24 = 86,400,000 miliseconds
 	if (now.getTime() > partyDataDate.getTime() + 86400000) {
 		if (!isPhoneGap()) {
 			// fetchFullDataFromWeb();

@@ -29,17 +29,14 @@ Ext.regApplication({
 		}
 
 		if (OKnesset.debug) {
-			mainLaunchTime = new Date();
-			if (isPhoneGap()) {
-				printLoadingTimes();
-			}
+			time.start('Main Launch');
+			time.report();
 		}
 
 		//The main view, holds all the panels of the application.
 		this.viewport = new OKnesset.app.views.Viewport();
 
 		// set the email button handler
-		console.log(this.viewport);
         this.viewport.query('#emailReview')[0].setHandler(function(){
         	OKnesset.app.controllers.navigation.dispatchDialog('Email/Index');
         });
@@ -64,10 +61,8 @@ Ext.regApplication({
 		}
 
 		if (OKnesset.debug) {
-			mainLaunchTimeEnd = new Date();
-			OKnesset.log('sencha touch load time '
-					+ (mainLaunchTimeEnd.getTime() - mainLaunchTime.getTime())
-					/ 1000);
+			time.stop('Main Launch');
+			time.report('Main Launch');
 		}
 		// TODO call secondaryLaunch form the afterDisplay event of Ext.Panel
 		window.setTimeout(secondaryLaunch, 10);
@@ -75,9 +70,9 @@ Ext.regApplication({
 });
 
 function secondaryLaunch() {
-	var secondaryLaunchTimeStart = new Date();
-	OKnesset.log("** secondaryLaunch begin "
-			+ secondaryLaunchTimeStart.toString());
+	if (OKnesset.debug){
+		time.start('Secondary Launch');
+	}
 
 	var disclaimerDismissed = localStorage.getItem("disclaimerDismissed");
 	if (disclaimerDismissed !== 'true') {
@@ -109,10 +104,10 @@ function secondaryLaunch() {
 	// Load the full data of the parties and members into the data stores
 	loadInitialData();
 
-	var secondaryLaunchTimeEnd = new Date();
-	OKnesset.log("** secondaryLaunch end. Total time "
-			+ (secondaryLaunchTimeEnd.getTime() - secondaryLaunchTimeStart
-					.getTime()) / 1000);
+	if (OKnesset.debug){
+		time.stop('Secondary Launch');
+		time.report('Secondary Launch');
+	}
 }
 
 /**

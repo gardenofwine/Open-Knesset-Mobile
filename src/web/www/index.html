@@ -2,33 +2,27 @@
 <html>
     <head>
         <title>כנסת פתוחה</title>
-	       <script type="application/javascript">
-            if (typeof OKnesset === 'undefined') {
-                var OKnesset = {};
-            }
-            OKnesset.debug = true;
-
-			if (!OKnesset) {
-				OKnesset = {};
-			}
-			OKnesset.debug = true;
-            var scriptLoadStartTime = new Date();
+        <script src="javascripts/debug/time.js" type="text/javascript" charset="utf-8">
+        </script>
+        <script src="javascripts/debug/debug.js" type="text/javascript" charset="utf-8">
+        </script>
+        <script type="application/javascript">
+            time.start('loading files');
         </script>
         <link rel="stylesheet" href="stylesheets/sencha-touch.css" type="text/css" media="screen"/>
         <link rel="stylesheet" href="stylesheets/styles.css" type="text/css" media="screen"/>
         <script>
-            var senchaLoadStartTime = new Date();
+            time.start('loading sencha touch js');
         </script>
         <script src="javascripts/sencha-touch/sencha-touch-debug-w-comments.js" type="text/javascript" charset="utf-8">
         </script>
         <script src="javascripts/sencha-touch-fixes.js" type="text/javascript" charset="utf-8">
         </script>
-
         <script>
-            var senchaLoadEndTime = new Date();
+            time.stop('loading sencha touch js');
         </script>
         <script>
-            var oknessetLoadStartTime = new Date();
+            time.start('loading Open Knesset files');
         </script>
         <script src="javascripts/customization.js" type="text/javascript" charset="utf-8">
         </script>
@@ -52,33 +46,44 @@
         </script>
         <script src="javascripts/data.js" type="text/javascript" charset="utf-8">
         </script>
-
-		<script type="text/javascript" src="javascripts/routes.js"></script>
-
-		<!-- CONTROLLERS -->
-		<script src="javascripts/controllers/PartyListController.js" type="text/javascript"></script>
-		<script src="javascripts/controllers/PartyController.js" type="text/javascript"></script>
-		<script src="javascripts/controllers/MemberController.js" type="text/javascript"></script>
-		<script src="javascripts/controllers/EmailController.js" type="text/javascript"></script>
-		<script src="javascripts/controllers/InfoController.js" type="text/javascript"></script>
-		<script src="javascripts/controllers/DisclaimerController.js" type="text/javascript"></script>
-		<script src="javascripts/controllers/navigation.js" type="text/javascript"></script>
-
-
-		<!-- VIEWS -->
-		<script type="text/javascript" src="javascripts/views/Viewport.js"></script>
-		<script type="text/javascript" src="javascripts/views/PartyListView.js"></script>
-		<script type="text/javascript" src="javascripts/views/PartyView.js"></script>
-		<script type="text/javascript" src="javascripts/views/MemberView.js"></script>
-		<script type="text/javascript" src="javascripts/views/EmailView.js"></script>
-		<script type="text/javascript" src="javascripts/views/InfoView.js"></script>
-		<script type="text/javascript" src="javascripts/views/DisclaimerView.js"></script>
+        <script type="text/javascript" src="javascripts/routes.js">
+        </script>
+        <!-- CONTROLLERS -->
+        <script src="javascripts/controllers/PartyListController.js" type="text/javascript">
+        </script>
+        <script src="javascripts/controllers/PartyController.js" type="text/javascript">
+        </script>
+        <script src="javascripts/controllers/MemberController.js" type="text/javascript">
+        </script>
+        <script src="javascripts/controllers/EmailController.js" type="text/javascript">
+        </script>
+        <script src="javascripts/controllers/InfoController.js" type="text/javascript">
+        </script>
+        <script src="javascripts/controllers/DisclaimerController.js" type="text/javascript">
+        </script>
+        <script src="javascripts/controllers/navigation.js" type="text/javascript">
+        </script>
+        <!-- VIEWS -->
+        <script type="text/javascript" src="javascripts/views/Viewport.js">
+        </script>
+        <script type="text/javascript" src="javascripts/views/PartyListView.js">
+        </script>
+        <script type="text/javascript" src="javascripts/views/PartyView.js">
+        </script>
+        <script type="text/javascript" src="javascripts/views/MemberView.js">
+        </script>
+        <script type="text/javascript" src="javascripts/views/EmailView.js">
+        </script>
+        <script type="text/javascript" src="javascripts/views/InfoView.js">
+        </script>
+        <script type="text/javascript" src="javascripts/views/DisclaimerView.js">
+        </script>
 
         <script>
-            var oknessetLoadEndTime = new Date();
+            time.stop('loading Open Knesset files');
         </script>
         <script>
-            var scriptLoadEndTime = new Date();
+            time.start('loading files');
         </script>
     </head>
     <body>
