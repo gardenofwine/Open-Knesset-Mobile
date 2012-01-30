@@ -59,12 +59,6 @@
             <fileset refid="concatFiles"/>
         </concat>
 
-		<property name="files" refid="concatFiles" />
-		<echo file="files.txt">${files}</echo>
-		<echo message="My essential concat files ${toString:essentialConcatFiles}" />
-		<echo message="My concat files ${toString:concatFiles}" />
-
-
 		<echo message="Minifying ${channel.dir}"/>
         <!-- minify concatenated file -->
         <java jar="${GoogleClosureDir}/compiler.jar" fork="true">
