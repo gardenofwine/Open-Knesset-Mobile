@@ -1,4 +1,3 @@
-var phonegapStart = new Date();
 /*
  * PhoneGap v1.0.0 is available under *either* the terms of the modified BSD license *or* the
  * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
@@ -3886,4 +3885,3 @@ PhoneGap.addConstructor(function() {
 
 };
 													PhoneGap.addPlugin = function(){};
-var phonegapEnd = new Date();

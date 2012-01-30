@@ -46,7 +46,7 @@
             </fileset>
         </copy>
 
-        <!-- copy all javascript files toa  temp dir for concatenation -->
+        <!-- copy all javascript files to a temp dir for concatenation -->
         <copy todir="${concat.dir}" overwrite="true">
             <fileset dir="target/${channel.dir}/www/">
                 <include name="**/*.js"/>
@@ -55,13 +55,20 @@
 
         <!-- concatenate the javascript files -->
         <concat destfile="${concat.dir}/concat.js">
-            <filelist refid="concatFiles"/>
+            <filelist refid="essentialConcatFiles"/>
+            <fileset refid="concatFiles"/>
         </concat>
 
-        <echo message="Minifying ${channel.dir}"/>
+		<property name="files" refid="concatFiles" />
+		<echo file="files.txt">${files}</echo>
+		<echo message="My essential concat files ${toString:essentialConcatFiles}" />
+		<echo message="My concat files ${toString:concatFiles}" />
+
+
+		<echo message="Minifying ${channel.dir}"/>
         <!-- minify concatenated file -->
         <java jar="${GoogleClosureDir}/compiler.jar" fork="true">
-            <arg line="--js ${concat.dir}/concat.js --compilation_level WHITESPACE_ONLY --js_output_file target_prod/${channel.dir}/www/javascripts/concat.min.js"/>
+            <arg line="--js ${concat.dir}/concat.js --compilation_level WHITESPACE_ONLY --jscomp_off=internetExplorerChecks --js_output_file target_prod/${channel.dir}/www/javascripts/concat.min.js"/>
         </java>
 
         <!-- delete temp directory -->
@@ -132,11 +139,28 @@
 
     </target>
 
-    <filelist id="concatFiles" dir="${concat.dir}/javascripts">
-        <file name="phonegap-1.0.0.js"/>
-        <file name="webintent.js"/>
-        <file name="EmailComposer.js"/>
-        <file name="GoogleAnalyticsPlugin.js"/>
+
+    <patternset id="appFiles">
+        <include name="**/*.js"/>
+        <exclude name="**/debug.js"/>
+        <exclude name="**/time.js"/>
+
+		<exclude name="phonegap-1.0.0*.js"/>
+        <exclude name="sencha-touch/sencha-touch.js"/>
+        <exclude name="sencha-touch-fixes.js"/>
+        <exclude name="customization.js"/>
+        <exclude name="disclaimer.js"/>
+        <exclude name="memberPanel.js"/>
+        <exclude name="utils.js"/>
+        <exclude name="index.js"/>
+        <exclude name="private.js"/>
+        <exclude name="strings.js"/>
+        <exclude name="slimData.js"/>
+        <exclude name="data.js"/>
+    </patternset>
+
+    <filelist id="essentialConcatFiles" dir="${concat.dir}/javascripts">
+		<file name="phonegap-1.0.0.js"/>
         <file name="sencha-touch/sencha-touch.js"/>
         <file name="sencha-touch-fixes.js"/>
         <file name="customization.js"/>
@@ -149,6 +173,10 @@
         <file name="slimData.js"/>
         <file name="data.js"/>
     </filelist>
+
+    <fileset id="concatFiles" dir="${concat.dir}/javascripts">
+        <patternset refid="appFiles"/>
+    </fileset>
 
     <target name="setup">
         <defaultexcludes add="**/.settings"/>

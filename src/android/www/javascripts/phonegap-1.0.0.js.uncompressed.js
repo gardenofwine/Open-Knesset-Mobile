@@ -1,5 +1,3 @@
-var phonegapStart = new Date();
-
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
  * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
@@ -496,10 +494,10 @@ PhoneGap.stringify = function(args) {
  */
 PhoneGap.clone = function(obj) {
     var i, retVal;
-    if(!obj) { 
+    if(!obj) {
         return obj;
     }
-    
+
     if(obj instanceof Array){
         retVal = [];
         for(i = 0; i < obj.length; ++i){
@@ -507,19 +505,19 @@ PhoneGap.clone = function(obj) {
         }
         return retVal;
     }
-    
+
     if (typeof obj === "function") {
         return obj;
     }
-    
+
     if(!(obj instanceof Object)){
         return obj;
     }
-    
+
     if (obj instanceof Date) {
         return obj;
     }
-    
+
     retVal = {};
     for(i in obj){
         if(!(i in retVal) || retVal[i] !== obj[i]) {
@@ -1238,12 +1236,12 @@ Camera.prototype.getPicture = function(successCallback, errorCallback, options) 
     if (options.quality) {
         quality = this.options.quality;
     }
-    
+
     var maxResolution = 0;
     if (options.maxResolution) {
     	maxResolution = this.options.maxResolution;
     }
-    
+
     var destinationType = Camera.DestinationType.DATA_URL;
     if (this.options.destinationType) {
         destinationType = this.options.destinationType;
@@ -1256,7 +1254,7 @@ Camera.prototype.getPicture = function(successCallback, errorCallback, options) 
     if (typeof options.encodingType == "number") {
         encodingType = this.options.encodingType;
     }
-    
+
     var targetWidth = -1;
     if (typeof options.targetWidth == "number") {
         targetWidth = options.targetWidth;
@@ -1276,7 +1274,7 @@ Camera.prototype.getPicture = function(successCallback, errorCallback, options) 
             targetHeight = height.valueOf();
         }
     }
-    
+
     PhoneGap.exec(successCallback, errorCallback, "Camera", "takePicture", [quality, destinationType, sourceType, targetWidth, targetHeight, encodingType]);
 };
 
@@ -1298,7 +1296,7 @@ PhoneGap.addConstructor(function() {
 
 if (!PhoneGap.hasResource("capture")) {
 PhoneGap.addResource("capture");
-	
+
 /**
  * Represents a single file.
  *
@@ -1426,12 +1424,12 @@ Capture.prototype.captureVideo = function(successCallback, errorCallback, option
  * Encapsulates a set of parameters that the capture device supports.
  */
 var ConfigurationData = function(){
-	// The ASCII-encoded string in lower case representing the media type. 
+	// The ASCII-encoded string in lower case representing the media type.
 	this.type = null;
-	// The height attribute represents height of the image or video in pixels. 
-	// In the case of a sound clip this attribute has value 0. 
+	// The height attribute represents height of the image or video in pixels.
+	// In the case of a sound clip this attribute has value 0.
 	this.height = 0;
-	// The width attribute represents width of the image or video in pixels. 
+	// The width attribute represents width of the image or video in pixels.
 	// In the case of a sound clip this attribute has value 0
 	this.width = 0;
 };
@@ -1851,7 +1849,7 @@ Contacts.prototype.find = function(fields, successCB, errorCB, options) {
             errorCB({"code": ContactError.INVALID_ARGUMENT_ERROR});
         }
     } else {
-        PhoneGap.exec(successCB, errorCB, "Contacts", "search", [fields, options]);        
+        PhoneGap.exec(successCB, errorCB, "Contacts", "search", [fields, options]);
     }
 };
 
@@ -2967,7 +2965,7 @@ FileEntry.prototype.toURI = function(mimeType) {
 FileEntry.prototype.createWriter = function(successCallback, errorCallback) {
     this.file(function(filePointer) {
         var writer = new FileWriter(filePointer);
-    
+
         if (writer.fileName === null || writer.fileName === "") {
             if (typeof errorCallback == "function") {
                 errorCallback({
@@ -2975,10 +2973,10 @@ FileEntry.prototype.createWriter = function(successCallback, errorCallback) {
                 });
             }
         }
-    
+
         if (typeof successCallback == "function") {
             successCallback(writer);
-        }       
+        }
     }, errorCallback);
 };
 
@@ -3679,12 +3677,12 @@ var Connection = function() {
                 me.type = type;
                 PhoneGap.fireEvent('online');
             }
-            
+
             // should only fire this once
             if (me._firstRun) {
                 me._firstRun = false;
                 PhoneGap.onPhoneGapConnectionReady.fire();
-            }            
+            }
         },
         function(e) {
             console.log("Error initializing Network Connection: " + e);
@@ -4339,12 +4337,12 @@ PhoneGap.addConstructor(function() {
     } else {
         window.openDatabase_orig = window.openDatabase;
         window.openDatabase = function(name, version, desc, size){
-            // Some versions of Android will throw a SECURITY_ERR so we need 
+            // Some versions of Android will throw a SECURITY_ERR so we need
             // to catch the exception and seutp our own DB handling.
             var db = null;
             try {
                 db = window.openDatabase_orig(name, version, desc, size);
-            } 
+            }
             catch (ex) {
                 db = null;
             }
@@ -4358,13 +4356,10 @@ PhoneGap.addConstructor(function() {
             }
         }
     }
-    
+
     if (typeof window.localStorage === "undefined") {
         navigator.localStorage = window.localStorage = new CupcakeLocalStorage();
         PhoneGap.waitForInitialization("cupcakeStorage");
     }
 });
 }
-
-var phonegapEnd = new Date();
-
