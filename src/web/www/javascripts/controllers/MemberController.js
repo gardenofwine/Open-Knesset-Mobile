@@ -7,9 +7,10 @@ Ext.regController('Member', {
                 xtype: 'MemberView',
             });
             var billList = this.memberView.query('#MemberBillList')[0];
+			var memberController = this;
             billList.addListener('itemtap', function(that, index, item, e){
                 var record = that.store.getAt(index);
-                this._gotoBill(record);
+                memberController._gotoBill(record);
             });
         }
 
@@ -96,16 +97,16 @@ Ext.regController('Member', {
      * website
      */
     _gotoBill: function(record){
-        console.log("** gotobill");
         var bill = record.data;
         var url = 'http://www.oknesset.org' + bill.url;
         if (isPhoneGap()) {
             if (isiOS()) {
                 // Since in iOS opening the browser exists the application,
                 // the user should be prompted if she wishes to do so.
+				var that = this;
                 navigator.notification.confirm(null, function(idx){
                     if (idx == 2) {
-                        this._gotoBillCallback(url, bill.url)
+                        that._gotoBillCallback(url, bill.url)
                     } else {
                         // track bill cancel
                         GATrackBillCanceled(bill.url)
