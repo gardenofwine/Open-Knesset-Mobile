@@ -41,7 +41,7 @@ OKnesset.app.controllers.navigation = Ext.regController('navigation', {
         var dialogController = Ext.ControllerManager.get(top.controller);
         dialogController.view.addListener('hide', this._pop, this);
     } else {
-  		// Only non-dialog panels affect the back button visibitilty status
+  		// Only non-dialog panels affect the back button visibility status
         this.setBackbuttonVisibility();
     }
 
@@ -63,10 +63,10 @@ OKnesset.app.controllers.navigation = Ext.regController('navigation', {
         return;
   	} else {
   		// Only non-dialog panels affect the back button visibitilty status
+        this._pop();
         this.setBackbuttonVisibility();
   	}
 
-    this._pop();
     var stack = this.stack,
     	top = this.top;
     if (top !== undefined) {
@@ -81,6 +81,7 @@ OKnesset.app.controllers.navigation = Ext.regController('navigation', {
 		  this.setBackbuttonVisibility = function(){};
 		  return;
 	  }
+
       var backBtn = this.application.viewport.query('#backBtn')[0];
       // The first panel is also pushed, but we dont want a back button on the
 		// first panel
@@ -88,7 +89,6 @@ OKnesset.app.controllers.navigation = Ext.regController('navigation', {
       	backBtn.show();
       } else {
       	backBtn.hide();
-
       }
   },
 
