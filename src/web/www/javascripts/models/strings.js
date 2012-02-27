@@ -29,7 +29,8 @@ OKnesset.strings = {
 	errorAndroidEmail		: 'כשלון בשליחת מייל',
 	disclaimerDialogBody	: disclaimerText,
 	writeTo					: 'כתבו ל{0}',
-	phoneTo					: ' התקשרו אל {0}'
-
+	phoneTo					: ' התקשרו אל {0}',
+	bills					: 'הצעות חוק',
+	committees              : 'ועדות'	
 };
 

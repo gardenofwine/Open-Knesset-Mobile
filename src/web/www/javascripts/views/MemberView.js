@@ -54,8 +54,8 @@ Ext.reg('MemberView', OKnesset.app.views.MemberView);
 
 OKnesset.app.views.MemberView.memberEmailBtn = new Ext.Button({margin : '10 5 10 5'});
 OKnesset.app.views.MemberView.memberCallBtn = new Ext.Button({margin : '10 5 10 5'});
-OKnesset.app.views.MemberView.memberBillsBtn = new Ext.Button({margin : '10 5 10 5',text:'הצעות חוק'});
-OKnesset.app.views.MemberView.memberCommitteesBtn = new Ext.Button({margin : '10 5 10 5',text:'ועדות'});
+OKnesset.app.views.MemberView.memberBillsBtn = new Ext.Button({margin : '10 5 10 5',text : OKnesset.strings.bills});
+OKnesset.app.views.MemberView.memberCommitteesBtn = new Ext.Button({margin : '10 5 10 5',text : OKnesset.strings.committees});
 
 OKnesset.app.views.MemberView.InfoWrapper = new Ext.extend(Ext.Panel, {
     id: 'MemberInfoWrapper',
