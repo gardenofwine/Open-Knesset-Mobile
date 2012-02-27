@@ -92,6 +92,14 @@ Ext.regController('Member', {
     		}
     	}
     },    
+    phoneMember : function() {
+
+    	var phone_num = this.phone;
+    	OKnesset.log("** calling number " + phone_num);
+    	if (isPhoneGap()) {
+    		document.location="tel:+972-" + phone_num.substr(1);
+    	}
+    },     
     updateData: function(member){
         /*this.memberView.query('#MemberBillsTitle')[0].update({
             billNumber: member.bills.length,
@@ -103,6 +111,7 @@ Ext.regController('Member', {
         OKnesset.app.views.MemberView.memberEmailBtn.setText(this.getEmailButtonText());
         OKnesset.app.views.MemberView.memberEmailBtn.setHandler(this.sendEmail,member);
         OKnesset.app.views.MemberView.memberCallBtn.setText(this.getPhoneCallButtonText());
+        OKnesset.app.views.MemberView.memberCallBtn.setHandler(this.phoneMember,member);
     },
 
     refresh: function(){
