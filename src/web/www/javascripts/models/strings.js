@@ -27,7 +27,9 @@ OKnesset.strings = {
 	emailMember				: 'משוב למסך ח"כ {0}',
 	feedbackEmailAddress	: 'oknesset.mobile@gmail.com',
 	errorAndroidEmail		: 'כשלון בשליחת מייל',
-	disclaimerDialogBody	: disclaimerText
+	disclaimerDialogBody	: disclaimerText,
+	writeTo					: 'כתבו ל{0}',
+	phoneTo					: ' התקשרו אל {0}'
 
 };
 
