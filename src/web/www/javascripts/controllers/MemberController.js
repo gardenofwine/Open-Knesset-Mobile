@@ -13,6 +13,8 @@ Ext.regController('Member', {
                 memberController._gotoBill(record);
             });*/
         }
+        
+        OKnesset.app.views.MemberView.memberBillsBtn.setHandler(this.dispatchBills,options);
 
         // TODO the memberController page should not rely on the MemberStore to contain party members
         // the way the stores are organized should change
@@ -52,7 +54,10 @@ Ext.regController('Member', {
 */
         this.application.viewport.setActiveItem(this.memberView, options.animation);
     },
-
+    dispatchBills: function() {
+    	console.log('dispatchbills');
+		OKnesset.app.controllers.navigation.dispatchPanel('Bills/Index/' + this.id, this.historyUrl)
+    },
     getReviewButtonText: function(){
         return Ext.util.Format.format(OKnesset.strings.emailMember, this.currentMember.name);
     },
@@ -106,7 +111,7 @@ Ext.regController('Member', {
             hasExcuseForNoBills: this.hasExcuseForNoBills(member)
         });*/
         this.memberView.query('#MemberInfo')[0].update(member);
-        //OKnesset.MemberBillsStore.loadData(member.bills);
+        
         this.application.viewport.query('#toolbar')[0].setTitle(member.name);
         OKnesset.app.views.MemberView.memberEmailBtn.setText(this.getEmailButtonText());
         OKnesset.app.views.MemberView.memberEmailBtn.setHandler(this.sendEmail,member);
