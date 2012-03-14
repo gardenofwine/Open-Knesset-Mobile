@@ -12,6 +12,14 @@ OKnesset.log = function(string) {
 	}
 };
 
+function loginUser() {
+	console.log("** FB.login");
+	console.log(FB.login);
+	FB.login(function(response) { alert(response);}, {scope:'email'});
+	console.log("** after FB login");
+}
+
+
 Ext.regApplication({
 	name : 'OKnesset.app',
 	id : "oknesset",
@@ -43,6 +51,8 @@ Ext.regApplication({
 
         // set the info button handler
         this.viewport.query('#appInfo')[0].setHandler(function(){
+			  loginUser();
+
         	OKnesset.app.controllers.navigation.dispatchDialog('Info/Index');
         });
 
