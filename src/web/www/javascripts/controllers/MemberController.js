@@ -15,7 +15,7 @@ Ext.regController('Member', {
         }
         
         OKnesset.app.views.MemberView.memberBillsBtn.setHandler(this.dispatchBills,options);
-
+        OKnesset.app.views.MemberView.memberCommitteesBtn.setHandler(this.dispatchCommittees,options);
         // TODO the memberController page should not rely on the MemberStore to contain party members
         // the way the stores are organized should change
         var member = OKnesset.MemberStore.findBy(function(r){
@@ -55,8 +55,10 @@ Ext.regController('Member', {
         this.application.viewport.setActiveItem(this.memberView, options.animation);
     },
     dispatchBills: function() {
-    	console.log('dispatchbills');
 		OKnesset.app.controllers.navigation.dispatchPanel('Bills/Index/' + this.id, this.historyUrl)
+    },
+    dispatchCommittees: function() {
+		OKnesset.app.controllers.navigation.dispatchPanel('Committees/Index/' + this.id, this.historyUrl)
     },
     getReviewButtonText: function(){
         return Ext.util.Format.format(OKnesset.strings.emailMember, this.currentMember.name);
