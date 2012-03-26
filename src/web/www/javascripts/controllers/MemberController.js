@@ -15,6 +15,7 @@ Ext.regController('Member', {
         }
         
         OKnesset.app.views.MemberView.memberBillsBtn.setHandler(this.dispatchBills,options);
+        
         OKnesset.app.views.MemberView.memberCommitteesBtn.setHandler(this.dispatchCommittees,options);
         // TODO the memberController page should not rely on the MemberStore to contain party members
         // the way the stores are organized should change
@@ -22,7 +23,8 @@ Ext.regController('Member', {
             return r.data.id === parseInt(options.id)
         });
         member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
-
+        debugger
+        if (member.committees.length == 0) OKnesset.app.views.MemberView.memberCommitteesBtn.hide();
         GATrackMember(member.name);
 
         this.memberView.query('#MemberImage')[0].update({
@@ -58,6 +60,7 @@ Ext.regController('Member', {
 		OKnesset.app.controllers.navigation.dispatchPanel('Bills/Index/' + this.id, this.historyUrl)
     },
     dispatchCommittees: function() {
+    	debugger
 		OKnesset.app.controllers.navigation.dispatchPanel('Committees/Index/' + this.id, this.historyUrl)
     },
     getReviewButtonText: function(){

@@ -2,7 +2,6 @@ Ext.regController('Bills', {
 
     // index action
     Index: function(options){
-    	console.log('start index');
         if (!this.billsView) {
             this.billsView = this.render({
                 xtype: 'BillsView',
@@ -16,13 +15,12 @@ Ext.regController('Bills', {
         }
 
  
-    	console.log('before member');
         var member = OKnesset.MemberStore.findBy(function(r){
             return r.data.id === parseInt(options.id)
         });
         member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
         OKnesset.MemberBillsStore.loadData(member.bills);
-        console.log('loaded bills');
+
         // scroll bill list up
         if (options.pushed) {
             var billList = this.billsView.query('#MemberBillList')[0];

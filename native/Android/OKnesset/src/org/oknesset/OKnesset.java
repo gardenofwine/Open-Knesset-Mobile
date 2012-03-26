@@ -1,5 +1,7 @@
 package org.oknesset;
 
+import org.oknessett.R;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Display;
@@ -16,7 +18,7 @@ public class OKnesset extends DroidGap {
     public void onCreate(Bundle savedInstanceState) {
         mRuntimeOrientation = this.getScreenOrientation();
     	super.setIntegerProperty("splashscreen", R.drawable.splash);
-    	super.setStringProperty("loadingDialog", "בודקת מה חברי הכנסת עשו היום");
+    	super.setStringProperty("loadingDialog", "×‘×•×“×§×ª ×ž×” ×—×‘×¨×™ ×”×›× ×¡×ª ×¢×©×• ×”×™×•×�");
         super.onCreate(savedInstanceState);
         super.loadUrl("file:///android_asset/www/index.html");
         

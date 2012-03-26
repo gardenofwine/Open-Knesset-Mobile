@@ -42,3 +42,10 @@ OKnesset.MemberBillsStore = new Ext.data.Store({
     }
 });
 
+Ext.regModel('MemberCommittees', {
+    fields: ['title']
+});
+
+OKnesset.MemberCommitteesStore = new Ext.data.Store({
+    model: 'MemberCommittees'
+});
