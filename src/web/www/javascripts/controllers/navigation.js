@@ -32,8 +32,13 @@ OKnesset.app.controllers.navigation = Ext.regController('navigation', {
       // go back to the home screen when invoking the app in a nested state â
       // e.g. via index.html#some-controller/some-action.
       stack.push(top);
-    }
 
+    }
+    var output = '';
+    for (property in top) {
+      output += property + ': ' + top[property]+'; ';
+    }
+ 
     // TODO the 'pushed' key is not necessary. use 'navigation' in its place.
     Ext.dispatch(Ext.apply(top, { navigation: 'push', animation : options.animation, pushed : true }));
     if (top.historyUrl === undefined){
@@ -93,7 +98,7 @@ OKnesset.app.controllers.navigation = Ext.regController('navigation', {
   },
 
   dispatchPanel : function(toUrl, historyUrl){
-		var dispatchParams = {
+	  var dispatchParams = {
 	        controller: 'navigation',
 	        action: 'push',
 	        to: this._historyUrlToObject(toUrl),
@@ -102,7 +107,7 @@ OKnesset.app.controllers.navigation = Ext.regController('navigation', {
 		        direction : 'right'
 		    },
 		};
-		Ext.dispatch(dispatchParams);
+	  Ext.dispatch(dispatchParams);
 	},
 
 
@@ -142,7 +147,6 @@ OKnesset.app.controllers.navigation = Ext.regController('navigation', {
 		if (params[2]){
 			obj.id = params[2];
 		}
-
 		return obj;
 	}
 

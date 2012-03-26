@@ -68,3 +68,6 @@ div.textCenter * {
 #MemberBillList .x-list-parent {
 	text-align: center;
 }
+
+.CommitteesInfo {width:100%;direction:rtl;text-align:right;padding:10px}
+.CommitteesInfo ul,li {list-style-type : circle}

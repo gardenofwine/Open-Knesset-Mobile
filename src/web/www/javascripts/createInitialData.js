@@ -39,7 +39,14 @@ var OKnessetParser = new function(){
 				}
 
 			}
-
+			var new_committees = [];
+			for (var i = 0; i < value.committees.length; i++) {
+					obj = new Object();
+					obj.title=value.committees[i][0];
+					new_committees.push(obj)
+			}
+			value.committees = new_committees;
+			debugger
 	        memberIdArray.push(value);
 	        memberMap[value.id] = value;
 
