@@ -1,14 +1,17 @@
-#Mon Jan 16 14:21:12 IST 2012
+#Mon Mar 05 10:31:21 IST 2012
 eclipse.preferences.version=1
 encoding//src/web/www/createInitialData.html=UTF-8
 encoding//src/web/www/index.html=UTF-8
+encoding//src/web/www/javascripts/controllers/PartyListController.js=UTF-8
 encoding//src/web/www/javascripts/createInitialData.js=UTF-8
 encoding//src/web/www/javascripts/data.js=UTF-8
 encoding//src/web/www/javascripts/disclaimer.js=UTF-8
 encoding//src/web/www/javascripts/index.js=UTF-8
 encoding//src/web/www/javascripts/memberPanel.js=UTF-8
+encoding//src/web/www/javascripts/models/strings.js=UTF-8
 encoding//src/web/www/javascripts/partyData.js.jpg=UTF-8
 encoding//src/web/www/javascripts/slimData.js=UTF-8
 encoding//src/web/www/javascripts/strings.js=UTF-8
 encoding//src/web/www/javascripts/views/PartyListView.js=UTF-8
+encoding//src/web/www/javascripts/views/Viewport.js=UTF-8
 encoding/README.md=UTF-8
