@@ -160,31 +160,31 @@ function processFullDataFromWebByLocalScript() {
 function fetchFullDataFromWeb() {
 	// load the update script from the web, as it may change according to api
 	// changes in oknesset.org
-	Ext.Ajax
-			.request({
-				url : 'http://oknesset-mobile.appspot.com/static/js/mobile/createInitialData.js',
-				success : function(response, options) {
-					eval(response.responseText);
-					OKnesset.log('Oknesset web parser loaded from web');
-					OKnessetParser.loadData(function(data) {
-						displayFetchCompleteNotification();
-						var partyDataString = JSON.stringify(data);
-						updatePartyData(data);
-						var now = new Date();
-						localStorage.setItem("PartyDataDate", now.getTime());
-						localStorage.setItem("PartyData", partyDataString);
-					});
-				},
-				failure : function(response, options) {
-					OKnesset
-							.log('Oknesset web parser failed to load from web ('
-									+ JSON.stringify(response)
-									+ ') with status code '
-									+ response.status
-									+ '. Attempting to laod locally');
+//	Ext.Ajax
+//			.request({
+//				url : 'http://oknesset-mobile.appspot.com/static/js/mobile/createInitialData.js',
+//				success : function(response, options) {
+//					eval(response.responseText);
+//					OKnesset.log('Oknesset web parser loaded from web');
+//					OKnessetParser.loadData(function(data) {
+//						displayFetchCompleteNotification();
+//						var partyDataString = JSON.stringify(data);
+//						updatePartyData(data);
+//						var now = new Date();
+//						localStorage.setItem("PartyDataDate", now.getTime());
+//						localStorage.setItem("PartyData", partyDataString);
+//					});
+//				},
+//				failure : function(response, options) {
+//					OKnesset
+//							.log('Oknesset web parser failed to load from web ('
+//									+ JSON.stringify(response)
+//									+ ') with status code '
+//									+ response.status
+//									+ '. Attempting to laod locally');
 					fetchFullDataFromWebByLocalScript();
-				}
-			});
+//				}
+//			});
 
 	function fetchFullDataFromWebByLocalScript() {
 		Ext.Ajax.request({

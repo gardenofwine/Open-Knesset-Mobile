@@ -1,5 +1,6 @@
-#Mon Mar 05 10:31:21 IST 2012
+#Tue Mar 20 00:16:50 IST 2012
 eclipse.preferences.version=1
+encoding//native/Android/OKnesset/src/org/oknessett/OKnesset.java=UTF-8
 encoding//src/web/www/createInitialData.html=UTF-8
 encoding//src/web/www/index.html=UTF-8
 encoding//src/web/www/javascripts/controllers/PartyListController.js=UTF-8
@@ -12,6 +13,9 @@ encoding//src/web/www/javascripts/models/strings.js=UTF-8
 encoding//src/web/www/javascripts/partyData.js.jpg=UTF-8
 encoding//src/web/www/javascripts/slimData.js=UTF-8
 encoding//src/web/www/javascripts/strings.js=UTF-8
+encoding//src/web/www/javascripts/views/MemberView.js=UTF-8
 encoding//src/web/www/javascripts/views/PartyListView.js=UTF-8
 encoding//src/web/www/javascripts/views/Viewport.js=UTF-8
+encoding//src/web/www/javascripts/views/committeesPanel.js=UTF-8
+encoding//src/web/www/javascripts/views/memberPanel.js=UTF-8
 encoding/README.md=UTF-8
