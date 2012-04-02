@@ -6,16 +6,11 @@ Ext.regController('Member', {
             this.memberView = this.render({
                 xtype: 'MemberView',
             });
-           // var billList = this.memberView.query('#MemberBillList')[0];
 			var memberController = this;
-           /* billList.addListener('itemtap', function(that, index, item, e){
-                var record = that.store.getAt(index);
-                memberController._gotoBill(record);
-            });*/
         }
-        
+
         OKnesset.app.views.MemberView.memberBillsBtn.setHandler(this.dispatchBills,options);
-        
+
         OKnesset.app.views.MemberView.memberCommitteesBtn.setHandler(this.dispatchCommittees,options);
         // TODO the memberController page should not rely on the MemberStore to contain party members
         // the way the stores are organized should change
@@ -23,7 +18,6 @@ Ext.regController('Member', {
             return r.data.id === parseInt(options.id)
         });
         member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
-        debugger
         if (member.committees.length == 0) OKnesset.app.views.MemberView.memberCommitteesBtn.hide();
         GATrackMember(member.name);
 
@@ -33,45 +27,29 @@ Ext.regController('Member', {
         });
 
         this.updateData(member);
-
-        // scroll bill list up
-       /* if (options.pushed) {
-            var billList = this.memberView.query('#MemberBillList')[0];
-            if (billList.scroller) {
-                billList.scroller.scrollTo({
-                    x: 0,
-                    y: 0
-                });
-            }
-        }*/
-        // if there are no bills for the current member, display a text explaining
-        // that.
-        /*if (this.hasExcuseForNoBills(member)) {
-            this.memberView.query('#MemberBillList')[0].emptyText = "<br/><br/><br/>" +
-            OKnesset.strings.excuseForNoBills;
-        } else {
-            this.memberView.query('#MemberBillList')[0].emptyText = "";
-        }
-        this.memberView.query('#MemberBillList')[0].refresh();
-*/
         this.application.viewport.setActiveItem(this.memberView, options.animation);
     },
+
     dispatchBills: function() {
 		OKnesset.app.controllers.navigation.dispatchPanel('Bills/Index/' + this.id, this.historyUrl)
     },
+
     dispatchCommittees: function() {
-    	debugger
 		OKnesset.app.controllers.navigation.dispatchPanel('Committees/Index/' + this.id, this.historyUrl)
     },
+
     getReviewButtonText: function(){
         return Ext.util.Format.format(OKnesset.strings.emailMember, this.currentMember.name);
     },
+
     getEmailButtonText: function(){
         return Ext.util.Format.format(OKnesset.strings.writeTo, this.currentMember.name);
     },
+
     getPhoneCallButtonText: function(){
         return Ext.util.Format.format(OKnesset.strings.phoneTo, this.currentMember.name);
     },
+
     sendEmail : function() {
     	var recipient = this.email;
     	OKnesset.log("** sending email with recipient " + recipient);
@@ -101,7 +79,7 @@ Ext.regController('Member', {
     			});
     		}
     	}
-    },    
+    },
     phoneMember : function() {
 
     	var phone_num = this.phone;
@@ -109,14 +87,14 @@ Ext.regController('Member', {
     	if (isPhoneGap()) {
     		document.location="tel:+972-" + phone_num.substr(1);
     	}
-    },     
+    },
     updateData: function(member){
         /*this.memberView.query('#MemberBillsTitle')[0].update({
             billNumber: member.bills.length,
             hasExcuseForNoBills: this.hasExcuseForNoBills(member)
         });*/
         this.memberView.query('#MemberInfo')[0].update(member);
-        
+
         this.application.viewport.query('#toolbar')[0].setTitle(member.name);
         OKnesset.app.views.MemberView.memberEmailBtn.setText(this.getEmailButtonText());
         OKnesset.app.views.MemberView.memberEmailBtn.setHandler(this.sendEmail,member);
@@ -133,9 +111,6 @@ Ext.regController('Member', {
                 return false;
             }
         }, this);
-
-      //  var billList = this.memberView.query('#MemberBillList')[0];
-       // billList.refresh();
     },
 
     /**

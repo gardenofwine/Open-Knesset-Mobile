@@ -46,15 +46,9 @@ var OKnessetParser = new function(){
 					new_committees.push(obj)
 			}
 			value.committees = new_committees;
-			debugger
 	        memberIdArray.push(value);
 	        memberMap[value.id] = value;
 
-// Ext.each(value.bills, function(index, value){
-// if (parseInt(value.stage) < 2){
-//
-// }
-// });
 	        partyMap[value.party].members.push(value);
 
 	        var slimMember = {

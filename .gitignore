@@ -23,6 +23,8 @@ native/iOS/OKnesset/OKnesset.xcodeproj/*.pbxuser
 native/iOS/OKnesset/OKnesset.xcodeproj/*.mode1v3
 native/iOS/OKnesset/xcuserdata
 
+#eclipse noise
+.tmp*
 # auto git version noise
 native/iOS/OKnesset/InfoPlist.h
 
