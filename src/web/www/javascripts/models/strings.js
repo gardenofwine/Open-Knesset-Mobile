@@ -8,7 +8,7 @@ OKnesset.strings = {
 	downloadDataText	 	: 'נפח הנתונים הוא כ 2 מגה.',
 	downloadDataTitle		: 'לעדכן נתונים מהאינטרנט?',
 	errorOpenBill 			: 'לא ניתן לפתוח את הצעת החוק בדפדפן',
-	openKnessetTitle		: 'כנסת פתוחה',
+	openKnessetTitle		: 'כנסת ניידת',
 	back					: 'חזרה',
 	cancel					: 'ביטול',
 	ok						: 'אישור',
@@ -31,6 +31,6 @@ OKnesset.strings = {
 	writeTo					: 'כתבו ל{0}',
 	phoneTo					: ' התקשרו אל {0}',
 	bills					: 'הצעות חוק',
-	committees              : 'ועדות'	
+	committees              : 'ועדות'
 };
 
