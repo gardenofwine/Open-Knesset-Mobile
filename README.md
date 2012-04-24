@@ -8,74 +8,58 @@ The purpose of this app is to increase transparency of Knesset activities, and t
 This project is released as Open Source so that everyone can contribute to it.
 Please check our issue [tracking system](https://track.nsa.co.il/projects/oknesset_mobile) for stuff we'd be happy be done :)
 
-Prerequisites
+Installation (for development)
 ========
 
-- Git (obviously)
-- Java
-- Ant (for the build)
+- Fork the repository to your github account
+- Clone the forked repository (first [install git](http://help.github.com/win-set-up-git/) if you don't have it)
 
-For desktop testing:
+-
 
-- Google Chrome (or Safari) or another WebKit based browser. Sencha touch does not support FireFox
+    git clone git@github.com:<YOUR_GITHUB_USER>/Open-Knesset-Mobile.git
+    cd open-knesset-mobile
+    ant
 
-For iOS:
+You have to [install ant](http://ant.apache.org/manual/install.html) first
+
+Run the application (on a browser)
+========
+
+The Open Knesset Mobile application loads on a Google Chrome browser. After installation, open the index.html file under **target\web\www** directory
+
+
+Eclipse
+========
+
+I work with Eclipse and the Aptana plugin for development. I use the Egit plugin for git integration within eclipse:
+
+- Install the latest version of [eclipse](http://www.eclipse.org/downloads/?osType=win32)
+- Install the [Aptana plugin](http://update1.aptana.org/studio/3.2/024747/index.html). (detailed instructions [here](http://www.aptana.com/docs/index.php/Plugging_Aptana_into_an_existing_Eclipse_configuration#Eclipse_3.2.2C_3.3_Instructions))
+- Install the [Egit plugin](http://www.eclipse.org/egit/). (Video instructions [here](http://www.youtube.com/watch?v=I7fbCE5nWPU))
+- [Import](http://help.eclipse.org/helios/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Ftasks%2Ftasks-importproject.htm) the Open-Knesset-Mobile project directly under the 'Open-Knesset-Mobile' directory. ([video instructions](http://www.youtube.com/watch?v=IkYngHQTx7Y))
+- Build the project (Project ==> Build Project)
+
+XCode (iOS):
+=========
 
 - [Xcode](https://developer.apple.com/xcode/index.php) on a Mac machine
 - PhoneGap for iOS (download the tag 1.0.0 from [github](https://github.com/callback/phonegap/zipball/1.0.0))
+- After building to project, Open 'Open-Knesset-Mobile/native/iOS/OKnesset/OKnesset' (with Xcode)
 
-For Android: (PhoneGap for Android is included in this git repository)
-
-- Eclipse
-- ADT for Eclipse (Android development Toolkit)
-
-Installation
+ADT (Android):
 ========
 
-For Desktop browser testing (Chrome/Safari):
+(PhoneGap for Android is included in this git repository)
 
-- clone this git repository
+- run the following git commands to clone the PhoneGap submodule:
 
-    git clone git@github.com:gardenofwine/Open-Knesset-Mobile.git
-
-- import the project directly under 'OKnesset Mobile' to eclipse
-
-Installation - only for Android
-========
-
-run the following git commands to clone the PhoneGap submodule:
+-
 
     git submodule init
     git submodule update
 
-Get started (Build and Run!)
-========
-
-Eclipse:
-
-- build the project (Project ==> Build Project)
-
---------
-
-Command Line:
-
-build the project (command-line) - run ant with no arguments form the project root directory.
-
-    ant
-
-you now have 3 'executable' versions of the OKnesset Mobile application. Android, iPhone and Web (for testing).
-
-Web:
-
-- Open 'OKnesset Mobile/target/web/www/index.html' with google chrome browser
-
-iPhone:
-
-- Open 'OKnesset Mobile/native/iOS/OKnesset/OKnesset' (with Xcode)
-
-Android:
-
-- import the eclipse project in 'OKnesset Mobile/native/Android/OKnesset/'
+- Install The ADT plugin for Eclipse
+- import the eclipse project in 'Open-Knesset-Mobile/native/Android/OKnesset/'
 
 
 Troubleshooting
@@ -92,7 +76,7 @@ Windows:
 
    You need to download and install ANT on your machine.
 
-Make a difference!
+Guidelines
 ========
 
 - When modifying javascript files, please use the 'javascriptFormatting.xml' formatting settings so that file merges and code reviews would be easier.
@@ -117,4 +101,3 @@ When you have finished making your changes, you'll need to push up your changes 
 This pushes everything in that branch up. Then you can go back over to the main github page and issue a pull request from there.  Tell us what you want us to merge and what it does/fixes, and one of us will pick it up.
 
 That lets us know that there's something new from you that needs to be pulled in. We'll review it and get back to you about it if we have any questions. Otherwise, we'll integrate it and let you know when it's in!
-
