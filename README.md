@@ -28,6 +28,12 @@ Run the application (on a browser)
 The Open Knesset Mobile application loads on a Google Chrome browser. After installation, open the index.html file under **target\web\www** directory
 
 
+Understanding the code
+========
+
+The application is build with javascript over version 1.1 of the  [Sencha Touch](http://www.sencha.com/products/touch/) framework ([docs](http://docs.sencha.com/touch/1-1/)), and wrapped with version 1.1 of [PhoneGap](http://phonegap.com/).
+The code structure follows the MVC paradigm, and specifically that which is described in this wonderfully written [tutorial](http://www.onlinesolutionsdevelopment.com/blog/mobile-development/creating-a-sencha-touch-mvc-application-from-scratch-part-1/)
+
 Eclipse
 ========
 
