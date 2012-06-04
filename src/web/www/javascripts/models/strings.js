@@ -31,6 +31,8 @@ OKnesset.strings = {
 	writeTo					: 'כתבו ל{0}',
 	phoneTo					: ' התקשרו אל {0}',
 	bills					: 'הצעות חוק',
-	committees              : 'ועדות'
+	committees              : 'ועדות'	,
+	noBills					: 'אין הצעות חוק' ,
+	noCommittees			: 'אין ועדות'
 };
 
