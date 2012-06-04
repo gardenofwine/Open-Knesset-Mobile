@@ -4,7 +4,6 @@ var memberIdArray;
 var partyNameArray;
 var slimData;
 var slimDataMap;
-var stringImageListForDownload;
 
 var OKnessetParser = new function(){
 	var callbackFunction = null;
@@ -12,7 +11,6 @@ var OKnessetParser = new function(){
 	function parseMembers(members){
 	    memberMap = {};
 	    memberIdArray = new Array();
-	    stringImageListForDownload = "";
 
 	    Ext.each(members, function(value, index){
 	        // TODO - do not add memebers that are not "current"
@@ -55,9 +53,6 @@ var OKnessetParser = new function(){
 	            name: value.name
 	        };
 	        slimDataMap[value.party].members.push(slimMember);
-
-	       // stringImageListForDownload += "-O\nurl = \"" + value.img_url +
-			// "\"\n";
 	    });
 
 		// sort members
@@ -86,6 +81,13 @@ var OKnessetParser = new function(){
 	function compareMembers(member1, member2, partyId){
 		var idx1 = indexInArray(member1.name, sortedMembers[partyId]);
 		var idx2 = indexInArray(member2.name, sortedMembers[partyId]);
+
+		if (idx1 == -1) {
+			console.log("Couldn't find member " + member1.name + " in party with id " + partyId)
+		}
+		if (idx2 == -1) {
+			console.log("Couldn't find member " + member2.name + " in party with id " + partyId)
+		}
 		var compareValue = 0;
 		if (idx1 < idx2) {
 			compareValue = -1;

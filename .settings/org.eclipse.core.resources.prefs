@@ -1,4 +1,4 @@
-#Sat Mar 31 11:39:28 IDT 2012
+#Mon Jun 04 12:30:17 IDT 2012
 eclipse.preferences.version=1
 encoding//native/Android/OKnesset/src/org/oknesset/OKnesset.java=UTF-8
 encoding//native/Android/OKnesset/src/org/oknessett/OKnesset.java=UTF-8
@@ -10,6 +10,7 @@ encoding//src/web/www/javascripts/data.js=UTF-8
 encoding//src/web/www/javascripts/disclaimer.js=UTF-8
 encoding//src/web/www/javascripts/index.js=UTF-8
 encoding//src/web/www/javascripts/memberPanel.js=UTF-8
+encoding//src/web/www/javascripts/models/slimData.js=UTF-8
 encoding//src/web/www/javascripts/models/strings.js=UTF-8
 encoding//src/web/www/javascripts/partyData.js.jpg=UTF-8
 encoding//src/web/www/javascripts/slimData.js=UTF-8
