@@ -21,13 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		1368826C150FCD6300360B6A /* FacebookConnectPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 1368826B150FCD6300360B6A /* FacebookConnectPlugin.m */; };
-		1368828C150FCFDB00360B6A /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 13688272150FCFDB00360B6A /* Facebook.m */; };
-		1368828D150FCFDB00360B6A /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 13688275150FCFDB00360B6A /* FBDialog.bundle */; };
-		1368828E150FCFDB00360B6A /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 13688277150FCFDB00360B6A /* FBDialog.m */; };
-		1368828F150FCFDB00360B6A /* FBFrictionlessRequestSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 13688279150FCFDB00360B6A /* FBFrictionlessRequestSettings.m */; };
-		13688290150FCFDB00360B6A /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1368827B150FCFDB00360B6A /* FBLoginDialog.m */; };
-		13688291150FCFDB00360B6A /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1368827D150FCFDB00360B6A /* FBRequest.m */; };
 		1388D41F1451D7D0009293F2 /* oknesset-splash.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1388D41E1451D7D0009293F2 /* oknesset-splash.mp4 */; };
 		13A116EB1444ADDB005DE409 /* EmailComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A116E81444ADDB005DE409 /* EmailComposer.m */; };
 		13A116EC1444ADDB005DE409 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 13A116E91444ADDB005DE409 /* readme.txt */; };
@@ -100,20 +93,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1368826A150FCD6300360B6A /* FacebookConnectPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookConnectPlugin.h; sourceTree = "<group>"; };
-		1368826B150FCD6300360B6A /* FacebookConnectPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookConnectPlugin.m; sourceTree = "<group>"; };
-		13688271150FCFDB00360B6A /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
-		13688272150FCFDB00360B6A /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
-		13688274150FCFDB00360B6A /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
-		13688275150FCFDB00360B6A /* FBDialog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBDialog.bundle; sourceTree = "<group>"; };
-		13688276150FCFDB00360B6A /* FBDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBDialog.h; sourceTree = "<group>"; };
-		13688277150FCFDB00360B6A /* FBDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBDialog.m; sourceTree = "<group>"; };
-		13688278150FCFDB00360B6A /* FBFrictionlessRequestSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFrictionlessRequestSettings.h; sourceTree = "<group>"; };
-		13688279150FCFDB00360B6A /* FBFrictionlessRequestSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFrictionlessRequestSettings.m; sourceTree = "<group>"; };
-		1368827A150FCFDB00360B6A /* FBLoginDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginDialog.h; sourceTree = "<group>"; };
-		1368827B150FCFDB00360B6A /* FBLoginDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginDialog.m; sourceTree = "<group>"; };
-		1368827C150FCFDB00360B6A /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequest.h; sourceTree = "<group>"; };
-		1368827D150FCFDB00360B6A /* FBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRequest.m; sourceTree = "<group>"; };
 		1388D41E1451D7D0009293F2 /* oknesset-splash.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "oknesset-splash.mp4"; sourceTree = "<group>"; };
 		13A116E61444ADDB005DE409 /* EmailComposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailComposer.h; sourceTree = "<group>"; };
 		13A116E81444ADDB005DE409 /* EmailComposer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailComposer.m; sourceTree = "<group>"; };
@@ -198,25 +177,6 @@
 			);
 			path = Classes;
 			sourceTree = SOURCE_ROOT;
-		};
-		1368826D150FCFDB00360B6A /* src */ = {
-			isa = PBXGroup;
-			children = (
-				13688271150FCFDB00360B6A /* Facebook.h */,
-				13688272150FCFDB00360B6A /* Facebook.m */,
-				13688274150FCFDB00360B6A /* FBConnect.h */,
-				13688275150FCFDB00360B6A /* FBDialog.bundle */,
-				13688276150FCFDB00360B6A /* FBDialog.h */,
-				13688277150FCFDB00360B6A /* FBDialog.m */,
-				13688278150FCFDB00360B6A /* FBFrictionlessRequestSettings.h */,
-				13688279150FCFDB00360B6A /* FBFrictionlessRequestSettings.m */,
-				1368827A150FCFDB00360B6A /* FBLoginDialog.h */,
-				1368827B150FCFDB00360B6A /* FBLoginDialog.m */,
-				1368827C150FCFDB00360B6A /* FBRequest.h */,
-				1368827D150FCFDB00360B6A /* FBRequest.m */,
-			);
-			path = src;
-			sourceTree = "<group>";
 		};
 		13A116E51444ADDA005DE409 /* EmailComposer */ = {
 			isa = PBXGroup;
@@ -348,9 +308,6 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				1368826D150FCFDB00360B6A /* src */,
-				1368826A150FCD6300360B6A /* FacebookConnectPlugin.h */,
-				1368826B150FCD6300360B6A /* FacebookConnectPlugin.m */,
 				13A116E51444ADDA005DE409 /* EmailComposer */,
 				13AD0BDC141E116800C8F6C1 /* GoogleAnalytics */,
 			);
@@ -475,7 +432,6 @@
 				1388D41F1451D7D0009293F2 /* oknesset-splash.mp4 in Resources */,
 				13C5617F147553CE00AE682E /* Animation-End.png in Resources */,
 				13C56180147553CE00AE682E /* Animation-End@2x.png in Resources */,
-				1368828D150FCFDB00360B6A /* FBDialog.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,12 +476,6 @@
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				13AD0BE4141E116800C8F6C1 /* GoogleAnalyticsPlugin.m in Sources */,
 				13A116EB1444ADDB005DE409 /* EmailComposer.m in Sources */,
-				1368826C150FCD6300360B6A /* FacebookConnectPlugin.m in Sources */,
-				1368828C150FCFDB00360B6A /* Facebook.m in Sources */,
-				1368828E150FCFDB00360B6A /* FBDialog.m in Sources */,
-				1368828F150FCFDB00360B6A /* FBFrictionlessRequestSettings.m in Sources */,
-				13688290150FCFDB00360B6A /* FBLoginDialog.m in Sources */,
-				13688291150FCFDB00360B6A /* FBRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,6 +566,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OKnesset_PG1-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "OKnesset_PG1-Info.plist";
 				INFOPLIST_PREFIX_HEADER = InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
@@ -647,6 +598,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OKnesset_PG1-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = /Users/Shared/PhoneGap/Frameworks/PhoneGap.framework/Headers;
 				INFOPLIST_FILE = "OKnesset_PG1-Info.plist";
 				INFOPLIST_PREFIX_HEADER = InfoPlist.h;
@@ -666,6 +618,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OKnesset_PG1-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "OKnesset_PG1-Info.plist";
 				INFOPLIST_PREFIX_HEADER = InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;

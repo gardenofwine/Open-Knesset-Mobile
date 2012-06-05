@@ -5,7 +5,7 @@ var partyNameArray;
 var slimData;
 var slimDataMap;
 
-var OKnessetParser = new function(){
+window.OKnessetParser = new function(){
 	var callbackFunction = null;
 
 	function parseMembers(members){
