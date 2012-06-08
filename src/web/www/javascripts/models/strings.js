@@ -33,6 +33,8 @@ OKnesset.strings = {
 	bills					: 'הצעות חוק',
 	committees              : 'ועדות'	,
 	noBills					: 'אין הצעות חוק' ,
-	noCommittees			: 'אין ועדות'
+	noCommittees			: 'אין ועדות',
+	coalition               : 'קואליציה',
+	opposition              : 'אופוזיציה',
 };
 

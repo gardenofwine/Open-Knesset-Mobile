@@ -65,7 +65,9 @@ div.textCenter * {
 }
 
 /* Center empty bill list emptyText*/
-#MemberBillList .x-list-parent {
+/* Centers group tittle for bill and party list*/
+#MemberBillList .x-list-parent,
+#PartyListView .x-list-parent {
 	text-align: center;
 }
 
