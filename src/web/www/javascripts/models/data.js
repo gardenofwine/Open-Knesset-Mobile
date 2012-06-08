@@ -6,11 +6,16 @@ OKnesset.PartyStore = new Ext.data.Store({
     model: 'Party',
     sorters: [
         {
+            property: 'is_coalition',
+            direction: 'DESC'
+        },
+        {
             property: 'members.length',
             direction: 'DESC'
         }
     ],
     data: slimData,
+    groupField : 'is_coalition',
     getGroupString : function(record) {
         return record.get('is_coalition')?
             OKnesset.strings.coalition :
