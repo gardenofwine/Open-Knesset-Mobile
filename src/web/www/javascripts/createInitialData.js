@@ -136,6 +136,7 @@ var OKnessetParser = new function(){
 	        var slimParty = {
 	            name: value.name,
 				id : value.id,
+				is_coalition: value.is_coalition,
 	            members: []
 	        };
 	        slimDataMap["" + value.name] = slimParty;

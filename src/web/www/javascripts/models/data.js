@@ -4,13 +4,18 @@ Ext.regModel('Party', {
 
 OKnesset.PartyStore = new Ext.data.Store({
     model: 'Party',
-	sorters: [
-		 	{
-			property: 'members.length',
-			direction: 'ASC'
-			}
-	],
-    data: slimData
+    sorters: [
+        {
+            property: 'members.length',
+            direction: 'DESC'
+        }
+    ],
+    data: slimData,
+    getGroupString : function(record) {
+        return record.get('is_coalition')?
+            OKnesset.strings.coalition :
+            OKnesset.strings.opposition;
+    }
 });
 
 Ext.regModel('Member', {
