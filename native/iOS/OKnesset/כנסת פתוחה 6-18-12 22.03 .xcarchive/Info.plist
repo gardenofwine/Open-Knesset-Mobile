@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ApplicationProperties</key>
+	<dict>
+		<key>ApplicationPath</key>
+		<string>Applications/כנסת פתוחה.app</string>
+		<key>CFBundleIdentifier</key>
+		<string>org.oknesset.OKnessetPG1</string>
+		<key>IconPaths</key>
+		<array>
+			<string>Applications/כנסת פתוחה.app/icon.png</string>
+			<string>Applications/כנסת פתוחה.app/icon.png</string>
+			<string>Applications/כנסת פתוחה.app/icon@2x.png</string>
+			<string>Applications/כנסת פתוחה.app/icon-72.png</string>
+		</array>
+	</dict>
+	<key>ArchiveVersion</key>
+	<real>1</real>
+	<key>CreationDate</key>
+	<date>2012-06-18T19:03:01Z</date>
+	<key>Name</key>
+	<string>כנסת פתוחה</string>
+	<key>SchemeName</key>
+	<string>כנסת פתוחה</string>
+</dict>
+</plist>

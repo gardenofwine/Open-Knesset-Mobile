@@ -593,6 +593,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Benjamin Weingarten";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -608,6 +609,7 @@
 					"\"$(SRCROOT)/Plugins/GoogleAnalytics/GoogSDK\"",
 				);
 				PRODUCT_NAME = "כנסת פתוחה";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "99AD5ED7-8FCD-4B15-B0ED-809BCFEAB09B";
 			};
 			name = Debug;
 		};
@@ -615,6 +617,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Benjamin Weingarten";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OKnesset_PG1-Prefix.pch";
@@ -627,6 +630,7 @@
 					"\"$(SRCROOT)/Plugins/GoogleAnalytics/GoogSDK\"",
 				);
 				PRODUCT_NAME = "כנסת פתוחה";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "99AD5ED7-8FCD-4B15-B0ED-809BCFEAB09B";
 			};
 			name = Release;
 		};

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create Initial Memeber Data</title>
+        <script src="javascripts/sencha-touch/sencha-touch-debug-w-comments.js" type="text/javascript" charset="utf-8">
+        </script>
+        <script src="javascripts/createInitialData.js" type="text/javascript" charset="utf-8">
+        </script>
+        <script>
+
+            if (typeof OKnesset === 'undefined') {
+                var OKnesset = {};
+            }
+            OKnesset.debug = true;
+
+
+            function storeData(partyNameArray, slimData){
+				var x=document.getElementById("slimData");
+				x.value = JSON.stringify(slimData, null, "\t");
+                //localStorage.setItem("slimData", JSON.stringify(slimData));
+
+				var x=document.getElementById("partyData");
+				x.value = JSON.stringify(partyNameArray, null, "\t");
+                //localStorage.setItem("PartyData", JSON.stringify(partyNameArray));
+                var now = new Date();
+				var x=document.getElementById("date");
+				x.innerHTML = now.getTime()
+                //localStorage.setItem("PartyDataDate", now.getTime());
+                // DEBUG HERE
+
+				var stringImageListForDownload = "";
+
+			    Ext.each(partyNameArray, function(party, pindex){
+				    Ext.each(party.members, function(member, mindex){
+						if (member.img_url.length > 0 ) {
+							stringImageListForDownload += "-O\nurl = \"" + member.img_url + "\"\n";
+						} else {
+							console.log("member " + member.name + " ("+member.id+") has no image");
+						}
+					});
+				});
+				var x=document.getElementById("imageList");
+				x.value = stringImageListForDownload;
+
+
+                console.log("done");
+
+            }
+
+            OKnessetParser.loadData(storeData);
+        </script>
+    </head>
+    <body>
+		date: <br>
+		<form name="data">
+			<div id="date"></div><br>
+	    	slim data: <br>
+			<TEXTAREA id="slimData" NAME="slimData" ROWS="10" COLS="800">
+			</TEXTAREA>
+			party data: <br>
+			<TEXTAREA id="partyData" NAME="partyData" ROWS="10" COLS="800">
+			</TEXTAREA>
+			image list: <br>
+			<TEXTAREA id="imageList" NAME="partyData" ROWS="10" COLS="800">
+			</TEXTAREA>
+		</form>
+    </body>
+</html>

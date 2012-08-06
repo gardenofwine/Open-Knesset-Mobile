@@ -30,7 +30,7 @@ Ext.regController('Info', {
         this.updateDate.update({
     		dateString : Ext.util.Format.format(OKnesset.strings.dataDate,
     						dateToString(new Date(parseInt(localStorage
-    								.getItem("PartyDataDate")))))
+    								.getItem("DataDate")))))
     			});
 
     	this.view.show(options.animation);

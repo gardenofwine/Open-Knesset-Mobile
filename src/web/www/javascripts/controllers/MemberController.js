@@ -98,13 +98,15 @@ Ext.regController('Member', {
         OKnesset.app.views.MemberView.memberEmailBtn.setHandler(this.sendEmail,member);
         OKnesset.app.views.MemberView.memberCallBtn.setText(this.getPhoneCallButtonText());
         OKnesset.app.views.MemberView.memberCallBtn.setHandler(this.phoneMember,member);
-        if (member.bills.length==0) {
-        	OKnesset.app.views.MemberView.memberBillsBtn.setText(OKnesset.strings.noBills);
-        	OKnesset.app.views.MemberView.memberBillsBtn.disable();
-        } else {
-        	OKnesset.app.views.MemberView.memberBillsBtn.setText(OKnesset.strings.bills);
-        	OKnesset.app.views.MemberView.memberBillsBtn.enable();
-        }
+
+        OKnesset.app.views.MemberView.memberBillsBtn.disable();
+        // if (member.bills.length==0) {
+        // 	OKnesset.app.views.MemberView.memberBillsBtn.setText(OKnesset.strings.noBills);
+        // 	OKnesset.app.views.MemberView.memberBillsBtn.disable();
+        // } else {
+        // 	OKnesset.app.views.MemberView.memberBillsBtn.setText(OKnesset.strings.bills);
+        // 	OKnesset.app.views.MemberView.memberBillsBtn.enable();
+        // }
         if (member.committees.length == 0) {
         	OKnesset.app.views.MemberView.memberCommitteesBtn.setText(OKnesset.strings.noCommittees);
         	OKnesset.app.views.MemberView.memberCommitteesBtn.disable();
