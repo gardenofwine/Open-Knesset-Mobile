@@ -125,20 +125,26 @@ function checkFullDataFromWeb() {
 
 		// Check internet connection
 		if (navigator.network.connection.type == Connection.ETHERNET
-				|| navigator.network.connection.type == Connection.WIFI) {
+				|| navigator.network.connection.type == Connection.WIFI
+				||
+		// 		) {
 
-			OKnesset.log("** updating full data by WIFI");
-			fetchFullDataFromWeb();
-		} else if (navigator.network.connection.type == Connection.CELL_2G
+		// 	OKnesset.log("** updating full data by WIFI");
+		// 	fetchFullDataFromWeb();
+		// } else if (
+			navigator.network.connection.type == Connection.CELL_2G
 				|| navigator.network.connection.type == Connection.CELL_3G
 				|| navigator.network.connection.type == Connection.CELL_4G) {
 
-			OKnesset.log("** updating full data by 3G");
-			var dialogtxt = OKnesset.strings.downloadDataText;
-			navigator.notification.confirm(dialogtxt,
-					checkFullDataFromWebCallback,
-					OKnesset.strings.downloadDataTitle,
-					OKnesset.strings.dialogOKCancel);
+			// OKnesset.log("** updating full data by 3G");
+			// var dialogtxt = OKnesset.strings.downloadDataText;
+			// navigator.notification.confirm(dialogtxt,
+			// 		checkFullDataFromWebCallback,
+			// 		OKnesset.strings.downloadDataTitle,
+			// 		OKnesset.strings.dialogOKCancel);
+		 	OKnesset.log("** updating full data");
+		 	fetchFullDataFromWeb();
+
 		} else {
 			OKnesset.log("** not updating full data becuase of no internet");
 		}
@@ -146,11 +152,11 @@ function checkFullDataFromWeb() {
 
 }
 
-function checkFullDataFromWebCallback(btnIndex) {
-	if (btnIndex == 2) {
-		fetchFullDataFromWeb();
-	}
-}
+// function checkFullDataFromWebCallback(btnIndex) {
+// 	if (btnIndex == 2) {
+// 		fetchFullDataFromWeb();
+// 	}
+// }
 
 function processFullDataFromWebByLocalScript() {
 	OKnessetParser.loadData(function(data) {
@@ -175,31 +181,31 @@ function processFullDataFromWebByLocalScript() {
 function fetchFullDataFromWeb() {
 	// load the update script from the web, as it may change according to api
 	// changes in oknesset.org
-//	Ext.Ajax
-//			.request({
-//				url : 'http://oknesset-mobile.appspot.com/static/js/mobile/createInitialData.js',
-//				success : function(response, options) {
-//					eval(response.responseText);
-//					OKnesset.log('Oknesset web parser loaded from web');
-//					OKnessetParser.loadData(function(data) {
-//						displayFetchCompleteNotification();
-//						var partyDataString = JSON.stringify(data);
-//						updatePartyData(data);
-//						var now = new Date();
-//						localStorage.setItem("DataDate", now.getTime());
-//						localStorage.setItem("PartyData", partyDataString);
-//					});
-//				},
-//				failure : function(response, options) {
-//					OKnesset
-//							.log('Oknesset web parser failed to load from web ('
-//									+ JSON.stringify(response)
-//									+ ') with status code '
-//									+ response.status
-//									+ '. Attempting to laod locally');
+	Ext.Ajax
+			.request({
+				url : 'http://open-knesset-mobile.appspot.com/static/v1.5/createInitialData.js',
+				success : function(response, options) {
+					eval(response.responseText);
+					OKnesset.log('Oknesset web parser loaded from web');
+					OKnessetParser.loadData(function(data) {
+						displayFetchCompleteNotification();
+						var partyDataString = JSON.stringify(data);
+						updatePartyData(data);
+						var now = new Date();
+						localStorage.setItem("DataDate", now.getTime());
+						localStorage.setItem("PartyData", partyDataString);
+					});
+				},
+				failure : function(response, options) {
+					OKnesset
+							.log('Oknesset web parser failed to load from web ('
+									+ JSON.stringify(response)
+									+ ') with status code '
+									+ response.status
+									+ '. Attempting to laod locally');
 					fetchFullDataFromWebByLocalScript();
-//				}
-//			});
+				}
+			});
 
 	function fetchFullDataFromWebByLocalScript() {
 		Ext.Ajax.request({

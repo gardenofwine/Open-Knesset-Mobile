@@ -23,11 +23,6 @@ Ext.regController('Member', {
         }
         GATrackMember(member.name);
 
-        this.memberView.query('#MemberImage')[0].update({
-            img_url: "images/members/" +
-            member.img_url.substring(member.img_url.lastIndexOf('/') + 1)
-        });
-
         this.updateData(member);
         this.application.viewport.setActiveItem(this.memberView, options.animation);
     },
