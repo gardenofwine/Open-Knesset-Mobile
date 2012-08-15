@@ -63,10 +63,12 @@ function processData(data) {
 }
 
 function loadInitialData() {
-	if (localStorage.getItem("PartyData") != null) {
+	if (localStorage.getItem("PartyData") != null && localStorage.getItem("MemberData") != null) {
 		// load data from localstorage (most updated locally)
 		setTimeout(function() {
 			var partyData = JSON.parse(localStorage.getItem("PartyData"));
+			var memberData = JSON.parse(localStorage.getItem("MemberData"));
+			updateMemberData(memberData);
 			updatePartyData(partyData);
 			checkFullDataFromWeb();
 		}, 0);
@@ -86,8 +88,7 @@ function loadInitialData() {
 				url : 'javascripts/models/partyData.js.jpg',
 				callback : function(options, success, response) {
 					// for some reason, Ext.Ajax returns success == false when
-					// the
-					// local request returns
+					// the local request returns
 					if (response.responseText != null
 							&& response.responseText.length > 0) {
 						eval(response.responseText);
@@ -288,7 +289,7 @@ function updateData(data){
 }
 
 function updatePartyData(fullPartyData) {
-	//OKnesset.PartyStore.loadData(fullPartyData, false);
+	OKnesset.PartyStore.loadData(fullPartyData, false);
 }
 
 function updateMemberData(fullMemberData) {
