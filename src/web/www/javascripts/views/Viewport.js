@@ -19,6 +19,12 @@ OKnesset.app.views.Viewport = new Ext.extend(Ext.Panel, {
             iconMask: true,
             iconCls: 'mail',
         }, {
+            // The email icon at the top left of the application toolbar
+            ui: 'plain',
+            id: 'agendas',
+            iconMask: true,
+            iconCls: 'agendas',
+        }, {
             xtype: 'spacer'
         }, {
             id: 'backBtn',

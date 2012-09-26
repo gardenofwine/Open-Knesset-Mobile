@@ -63,3 +63,11 @@ Ext.regModel('MemberCommittees', {
 OKnesset.MemberCommitteesStore = new Ext.data.Store({
     model: 'MemberCommittees'
 });
+
+Ext.regModel('Agenda', {
+    fields: ['name', 'number_of_items']
+});
+
+OKnesset.AgendaStore = new Ext.data.Store({
+    model: 'Agenda'
+});

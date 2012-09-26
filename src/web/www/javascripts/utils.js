@@ -50,7 +50,7 @@ function GATrackBill(url, callback) {
  */
 
 /**
- * Handle updating the application's data from teh internet (oknesset.org)
+ * Handle updating the application's data from the internet (oknesset.org)
  */
 function processData(data) {
 	// stringifying BEFORE using the data, because the data may change 

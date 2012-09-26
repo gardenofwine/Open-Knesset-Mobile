@@ -3,6 +3,7 @@ OKnesset.strings = {
 	hasNoBillsTitle			: "אין הצעות חוק פרטיות שעברו קריאה טרומית",
 	excuseForNoBills		: 'שרים בממשלה ויו"ר הכנסת אינם מגישים, ככלל, הצעות חוק פרטיות',
 	partiesTitle	 		:'מפלגות',
+	agendasTitle	 		:'אג\'נדות',
 	openBillText			: 'לפתוח בדפדפן?',
 	dialogOKCancel	 		: 'ביטול,אישור',
 	downloadDataText	 	: 'נפח הנתונים הוא כ 2 מגה.',
@@ -24,6 +25,7 @@ OKnesset.strings = {
 	emailGeneral			: "משוב כללי",
 	emailPartyList			: "משוב למסך מפלגות",
 	emailParty				: "משוב למסך מפלגת {0}",
+	emailAgendaList			: "משוב למסך אג\'נדות",
 	emailMember				: 'משוב למסך ח"כ {0}',
 	feedbackEmailAddress	: 'oknesset.mobile@gmail.com',
 	errorAndroidEmail		: 'כשלון בשליחת מייל',
@@ -36,5 +38,6 @@ OKnesset.strings = {
 	noCommittees			: 'אין ועדות',
 	coalition               : 'קואליציה',
 	opposition              : 'אופוזיציה',
+	votes                   : 'הצבעות',
 };
 

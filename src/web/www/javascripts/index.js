@@ -51,6 +51,11 @@ Ext.regApplication({
         	OKnesset.app.controllers.navigation.dispatchBack();
 		});
 
+		// set the navigation bar agenda list button handler
+        this.viewport.query('#agendas')[0].setHandler(function() {
+        	OKnesset.app.controllers.navigation.dispatchPanel('AgendaList/Index');
+		});
+
 		if (isPhoneGap()) {
 			// hide the native splash screen
 			if (isiOS()) {
