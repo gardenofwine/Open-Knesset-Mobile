@@ -13,7 +13,7 @@ Ext.define('OKnesset.app.views.PartyView', {
 	},
 
 	initialize: function() {
-		this.callParents(arguments);
+		this.callParent(arguments);
 		this.memberList = new OKnesset.app.views.PartyView.MemberList();
 		this.items = [this.memberList];
 	}

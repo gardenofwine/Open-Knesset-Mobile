@@ -18,7 +18,7 @@ Ext.define('OKnesset.app.views.MemberView', {
     },
     
     initialize: function() {
-        this.callParents(arguments);
+        this.callParent(arguments);
         this.infoWrapper = new OKnesset.app.views.MemberView.InfoWrapper();
         //this.billList = new OKnesset.app.views.MemberView.BillList();
         this.items = [this.infoWrapper];
@@ -40,7 +40,7 @@ Ext.define('OKnesset.app.views.MemberView.InfoWrapper', {
     },
 
     initialize: function() {
-        this.callParents(arguments);
+        this.callParent(arguments);
         this.info = new OKnesset.app.views.MemberView.Info();
         this.image = new OKnesset.app.views.MemberView.Image();
         this.items = [this.info, OKnesset.app.views.MemberView.memberEmailBtn, OKnesset.app.views.MemberView.memberCallBtn, OKnesset.app.views.MemberView.memberBillsBtn, OKnesset.app.views.MemberView.memberCommitteesBtn];
