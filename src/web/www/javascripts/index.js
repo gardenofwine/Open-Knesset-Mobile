@@ -141,7 +141,6 @@ OKnesset.app.onBackKey = function () {
 	} else {
 		OKnesset.app.controllers.navigation.dispatchBack();
 	}
-
 }
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);
