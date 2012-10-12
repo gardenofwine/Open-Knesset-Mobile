@@ -1,54 +1,58 @@
-OKnesset.app.views.Viewport = new Ext.extend(Ext.Panel, {
-    fullscreen: true,
-    layout: 'card',
-    cardSwitchAnimation: 'slide',
-    dockedItems: [{
-        itemId: 'toolbar',
-        xtype: 'toolbar',
-        title: '',
-        items: [
-        {
-             xtype: 'spacer'
-        },
-        {
-            id: 'openMenu',
-            iconCls: 'list',
-            iconMask: true
-        },
-        // {
-        //     // The "i" at the top left of the application toolbar
-        //     ui: 'plain',
-        //     id: 'appInfo',
-        //     iconMask: true,
-        //     iconCls: 'info',
-        // }, {
-        //     // The email icon at the top left of the application toolbar
-        //     ui: 'plain',
-        //     id: 'emailReview',
-        //     iconMask: true,
-        //     iconCls: 'mail',
-        // }, {
-        //     xtype: 'spacer'
-        // }, 
-        {
-            id: 'backBtn',
-			hidden : true,
-            iconCls: 'right2',
-            iconMask: true,
-            ui: 'action',
-        }, ],
-    }, ],
-    initComponent: function(){
+Ext.define('OKnesset.app.views.Viewport', {
+    extend: 'Ext.Panel',
+
+    config: {
+            fullscreen: true,
+            layout: 'card',
+            cardSwitchAnimation: 'slide',
+            dockedItems: [{
+                itemId: 'toolbar',
+                xtype: 'toolbar',
+                title: '',
+                items: [
+                {
+                     xtype: 'spacer'
+                },
+                {
+                    id: 'openMenu',
+                    iconCls: 'list',
+                    iconMask: true
+                },
+                // {
+                //     // The "i" at the top left of the application toolbar
+                //     ui: 'plain',
+                //     id: 'appInfo',
+                //     iconMask: true,
+                //     iconCls: 'info',
+                // }, {
+                //     // The email icon at the top left of the application toolbar
+                //     ui: 'plain',
+                //     id: 'emailReview',
+                //     iconMask: true,
+                //     iconCls: 'mail',
+                // }, {
+                //     xtype: 'spacer'
+                // }, 
+                {
+                    id: 'backBtn',
+                    hidden : true,
+                    iconCls: 'right2',
+                    iconMask: true,
+                    ui: 'action',
+                },],
+            },],
+    },
+
+    initialize: function() {
+        this.callParents(arguments);
         // this.appMenu = this.render({
         //         xtype: 'AppMenu'
         //     });
         //OKnesset.app.views.Viewport.AppMenu.el.appendTo(document.body);
         OKnesset.app.views.Viewport.AppMenu.setFloating(true);
-        OKnesset.app.views.Viewport.AppMenu.setSize(150, 200);        
-        OKnesset.app.views.Viewport.superclass.initComponent.apply(this, arguments);
-    }    
+        OKnesset.app.views.Viewport.AppMenu.setSize(150, 200);
+    },
 });
-
 
 // the data-bound menu list
 OKnesset.app.views.Viewport.menuList = new Ext.List({
@@ -67,9 +71,4 @@ OKnesset.app.views.Viewport.AppMenu = new Ext.Panel({
     dock: 'left',
     hidden : true
 });
-
-//Ext.reg('AppMEnu', OKnesset.app.views.Viewport.AppMenu);
-
-
-
-
+//Ext.reg('AppMenu', OKnesset.app.views.Viewport.AppMenu);

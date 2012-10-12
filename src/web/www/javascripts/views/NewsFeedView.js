@@ -4,12 +4,16 @@
  * http://www.knesset.gov.il/rssservice/daily_agenda.aspx
  * etc... (all of the above are linked from here: http://main.knesset.gov.il/Activity/Info/Pages/Databases.aspx)
  */
-OKnesset.app.views.NewsFeedView = new Ext.extend(Ext.List, {
-    id: 'NewsFeedView',
-    store: OKnesset.NewsFeedStore,
-    grouped: true,
-    itemTpl: '<div class="partyName">{name}<div class="partySize">{number_of_seats}</div></div>',
-    onItemDisclosure: true
-});
 
+Ext.define('OKnesset.app.views.NewsFeedView', {
+	extend: 'Ext.List',
+
+	config: {
+		id: 'NewsFeedView',
+		store: OKnesset.NewsFeedStore,
+		grouped: true,
+		itemTpl: '<div class="partyName">{name}<div class="partySize">{number_of_seats}</div></div>',
+		onItemDisclosure: true
+	},
+});
 Ext.reg('PartyListView', OKnesset.app.views.PartyListView);
