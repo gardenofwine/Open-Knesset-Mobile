@@ -42,7 +42,7 @@ Ext.define('OKnesset.app.views.BillsView.BillsTitle', {
     config: {
             id: 'MemberBillsTitle',
             layout: 'fit',
-            dock: 'bottom',
+            docked: 'bottom',
             // some sencha touch magic to decide the title
             tpl: '<tpl if="billNumber &gt; 0"><h2 class="MemberBillsTitle x-toolbar-dark">' +
             OKnesset.strings.hasBillsTitle +

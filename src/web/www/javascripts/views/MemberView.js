@@ -46,7 +46,7 @@ Ext.define('OKnesset.app.views.MemberView.InfoWrapper', {
         this.items = [this.info, OKnesset.app.views.MemberView.memberEmailBtn, OKnesset.app.views.MemberView.memberCallBtn, OKnesset.app.views.MemberView.memberBillsBtn, OKnesset.app.views.MemberView.memberCommitteesBtn];
         this.dockedItems = [{
             xtype: 'panel',
-            dock: 'right',
+            docked: 'right',
             items: [this.image]
         }];
     },

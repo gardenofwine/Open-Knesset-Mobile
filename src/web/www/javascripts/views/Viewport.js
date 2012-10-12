@@ -68,7 +68,7 @@ OKnesset.app.views.Viewport.AppMenu = new Ext.Panel({
     items: [OKnesset.app.views.Viewport.menuList],
     layout: 'fit',
     width: 150,
-    dock: 'left',
+    docked: 'left',
     hidden : true
 });
 //Ext.reg('AppMenu', OKnesset.app.views.Viewport.AppMenu);

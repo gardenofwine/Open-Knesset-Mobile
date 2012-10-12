@@ -25,11 +25,11 @@ Ext.define('OKnesset.app.views.EmailView', {
                 },
             }],
             dockedItems: [{
-                dock: 'top',
+                docked: 'top',
                 xtype: 'toolbar',
                 title: OKnesset.strings.emailDialogTitle
             }, {
-                dock: 'bottom',
+                docked: 'bottom',
                 id : 'cancelEmailBtn',
                 xtype: 'button',
                 ui: 'decline',

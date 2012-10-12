@@ -31,11 +31,11 @@ Ext.define('OKnesset.app.views.InfoView', {
 			height : "2em"
 		}],
 		dockedItems : [{
-			dock : 'top',
+			docked : 'top',
 			xtype : 'toolbar',
 			title : OKnesset.strings.openKnessetTitle
 		}, {
-			dock : 'bottom',
+			docked : 'bottom',
 			ui : 'light',
 			items : [ {
 				xtype : 'button',

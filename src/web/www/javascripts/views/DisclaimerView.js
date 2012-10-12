@@ -17,7 +17,7 @@ Ext.define('OKnesset.app.views.DisclaimerView', {
 				height : "5em"
 			}],
 			dockedItems : [{
-				dock : 'top',
+				docked : 'top',
 				xtype : 'toolbar',
 				title : OKnesset.strings.oknessetName
 			}, {
@@ -25,7 +25,7 @@ Ext.define('OKnesset.app.views.DisclaimerView', {
 				id : 'cancelDisclaimerBtn',
 				ui : 'confirm',
 				text : OKnesset.strings.ok,
-				dock : 'bottom'
+				docked : 'bottom'
 			}],
 		},
 
