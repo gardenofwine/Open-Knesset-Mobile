@@ -28294,7 +28294,7 @@ Ext.gesture.Manager = new Ext.AbstractManager({
         this.currentGestures = [];
         this.currentTargets = [];
 
-        if (!Ext.supports.Touch) {
+        if (!Ext.feature.has.Touch) {
             Ext.apply(this.eventNames, {
                 start: 'mousedown',
                 move: 'mousemove',
@@ -28333,7 +28333,7 @@ Ext.gesture.Manager = new Ext.AbstractManager({
             document.addEventListener(name, this.listenerWrappers[key], false);
         }, this);
 
-        if (Ext.supports.Touch) {
+        if (Ext.feature.has.Touch) {
             this.defaultPreventedMouseEvents.forEach(function(name) {
                 document.addEventListener(name, this.listenerWrappers['mouse'], true);
             }, this);
@@ -28345,7 +28345,7 @@ Ext.gesture.Manager = new Ext.AbstractManager({
             document.removeEventListener(name, this.listenerWrappers[key], false);
         }, this);
 
-        if (Ext.supports.Touch) {
+        if (Ext.feature.has.Touch) {
             this.defaultPreventedMouseEvents.forEach(function(name) {
                 document.removeEventListener(name, this.listenerWrappers['mouse'], true);
             }, this);
@@ -28427,7 +28427,7 @@ Ext.gesture.Manager = new Ext.AbstractManager({
 
         this.lastMovePoint = Ext.util.Point.fromEvent(e);
 
-        if (Ext.supports.Touch && this.isClick && !this.lastMovePoint.isWithin(this.startPoint, this.clickMoveThreshold)) {
+        if (Ext.feature.has.Touch && this.isClick && !this.lastMovePoint.isWithin(this.startPoint, this.clickMoveThreshold)) {
             this.isClick = false;
         }
 
@@ -28488,7 +28488,7 @@ Ext.gesture.Manager = new Ext.AbstractManager({
         }
 
 
-        if (Ext.supports.Touch && this.isClick) {
+        if (Ext.feature.has.Touch && this.isClick) {
             this.isClick = false;
             this.getEventSimulator().fire('click', this.startEvent.target, touch);
         }
@@ -28508,7 +28508,7 @@ Ext.gesture.Manager = new Ext.AbstractManager({
             i;
 
         this.startedChangedTouch = false;
-        this.startedTouches = Ext.supports.Touch ? e.touches : [e];
+        this.startedTouches = Ext.feature.has.Touch ? e.touches : [e];
 
         for (i = 0; i < ln; i++) {
             if (e.stopped) {
@@ -28527,7 +28527,7 @@ Ext.gesture.Manager = new Ext.AbstractManager({
         }
 
         if (this.startedChangedTouch) {
-            this.followTouches = this.followTouches.concat((Ext.supports.Touch && e.targetTouches) ? Ext.toArray(e.targetTouches) : [e]);
+            this.followTouches = this.followTouches.concat((Ext.feature.has.Touch && e.targetTouches) ? Ext.toArray(e.targetTouches) : [e]);
         }
     },
 
@@ -28541,7 +28541,7 @@ Ext.gesture.Manager = new Ext.AbstractManager({
             if (
                 (!!gesture.capture === !!capture) &&
                 (this.followTouches.length < gesture.touches) &&
-                ((Ext.supports.Touch && e.targetTouches) ? (e.targetTouches.length === gesture.touches) : true)
+                ((Ext.feature.has.Touch && e.targetTouches) ? (e.targetTouches.length === gesture.touches) : true)
             ) {
                 this.startedChangedTouch = true;
                 this.startGesture(gesture);
@@ -29171,7 +29171,7 @@ Ext.gesture.Pinch = Ext.extend(Ext.gesture.Gesture, {
     onTouchStart : function(e) {
         var me = this;
         
-        if (Ext.supports.Touch && e.targetTouches.length >= 2) {
+        if (Ext.feature.has.Touch && e.targetTouches.length >= 2) {
             me.lock('swipe', 'scroll', 'scrollstart', 'scrollend', 'touchmove', 'touchend', 'touchstart', 'tap', 'tapstart', 'taphold', 'tapcancel', 'doubletap');
             me.pinching = true;
             
@@ -42691,7 +42691,7 @@ Ext.form.Checkbox = Ext.extend(Ext.form.Field, {
                 e = e.browserEvent;
             }
 
-            if (Ext.supports.Touch && !e.isSimulated) {
+            if (Ext.feature.has.Touch && !e.isSimulated) {
                 e.preventDefault();
                 e.stopPropagation();
                 return;
