@@ -53,7 +53,7 @@ function GATrackBill(url, callback) {
  * Handle updating the application's data from teh internet (oknesset.org)
  */
 function processData(data) {
-	// stringifying BEFORE using the data, because the data may change 
+	// stringifying BEFORE using the data, because the data may change
 	var partyDataString = JSON.stringify(data.partyData);
 	var memberDataString = JSON.stringify(data.memberData);
 	updateData(data);
@@ -79,7 +79,7 @@ function loadInitialData() {
 		// load initial data (data shipped with the application)
 		if (!isPhoneGap()) {
 			processData({
-				memberData : memberData, 
+				memberData : memberData,
 				partyData : partyData,
 				dataDate : dataDate});
 			checkFullDataFromWeb();
@@ -93,7 +93,7 @@ function loadInitialData() {
 							&& response.responseText.length > 0) {
 						eval(response.responseText);
 						processData({
-							memberData : memberData, 
+							memberData : memberData,
 							partyData : partyData,
 							dataDate : dataDate});
 						checkFullDataFromWeb();
@@ -164,7 +164,7 @@ function processFullDataFromWebByLocalScript() {
 		displayFetchCompleteNotification();
 
 		processData({
-			memberData : data.memberData, 
+			memberData : data.memberData,
 			partyData : data.partyData,
 			dataDate : new Date()});
 		// var resultParty = JSON.stringify(data.partyData);

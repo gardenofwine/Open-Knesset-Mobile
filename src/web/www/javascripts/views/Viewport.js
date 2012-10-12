@@ -29,9 +29,9 @@ OKnesset.app.views.Viewport = new Ext.extend(Ext.Panel, {
         //     });
         //OKnesset.app.views.Viewport.AppMenu.el.appendTo(document.body);
         OKnesset.app.views.Viewport.AppMenu.setFloating(true);
-        OKnesset.app.views.Viewport.AppMenu.setSize(150, 200);        
+        OKnesset.app.views.Viewport.AppMenu.setSize(150, 200);
         OKnesset.app.views.Viewport.superclass.initComponent.apply(this, arguments);
-    }    
+    }
 });
 
 

@@ -69,11 +69,85 @@ OKnesset.menuStore = new Ext.data.Store({
         fields: [
             {name:'title', type:'string'},
             {name:'page', type:'string'},
-            {name:'type', type:'string'}            
+            {name:'type', type:'string'}
         ]
     }),
     data: [
-        {title:Oknesse.strings.partiesTitle,page:"PartyList/Index", type : 'page'},
+        {title:OKnesset.strings.partiesTitle,page:"PartyList/Index", type : 'page'},
         {title:"test",page:"Email/Index", type: 'dialog'},
         ]
     });
+
+//AgendaList
+Ext.regModel('AgendaList', {
+    fields: ['name']
+});
+
+OKnesset.AgendaListStore = new Ext.data.Store({
+    model: 'AgendaList',
+    data: agend.objects
+
+});
+
+//AgendaDetails
+Ext.regModel('AgendaDetails', {
+    fields: ['description','MostSupportMember','MostSupportParty']
+});
+
+OKnesset.AgendaDetailsStore = new Ext.data.Store({
+    model: 'AgendaDetails',
+
+    //data: agendadetails
+
+});
+
+//AgendaVoteList
+Ext.regModel('AgendaVoteList', {
+   fields: ['title','score','scorestring','importancestring','importance']
+});
+
+OKnesset.AgendaVoteListStore = new Ext.data.Store({
+    model: 'AgendaVoteList',
+    sorters: [
+        {
+            property: 'score',
+            direction: 'DESC'
+        },
+        {
+            property: 'importance',
+            direction: 'DESC'
+        }
+    ],
+
+    groupField : 'scorestring'
+
+
+});
+//AgendaMembersSupportList
+Ext.regModel('AgendaMembersSupportList', {
+   fields: ['name','score']
+});
+
+OKnesset.AgendaMembersSupportListStore = new Ext.data.Store({
+    model: 'AgendaMembersSupportList',
+    sorters: [
+        {
+            property: 'score',
+            direction: 'DESC'
+        },
+        ]
+});
+//AgendaPartiesSupportList
+Ext.regModel('AgendaPartiesSupportList', {
+   fields: ['name','score']
+});
+
+OKnesset.AgendaPartiesSupportListStore = new Ext.data.Store({
+    model: 'AgendaPartiesSupportList',
+    sorters: [
+        {
+            property: 'score',
+            direction: 'DESC'
+        },
+        ]
+});

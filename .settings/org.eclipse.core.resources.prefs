@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 #Tue Jun 05 23:23:59 IDT 2012
+=======
+>>>>>>> fea49d48fec339cb817baef2a3f5925495321698
 eclipse.preferences.version=1
 encoding//native/Android/OKnesset/src/org/oknesset/OKnesset.java=UTF-8
 encoding//native/Android/OKnesset/src/org/oknessett/OKnesset.java=UTF-8
@@ -11,6 +14,11 @@ encoding//src/web/www/javascripts/data.js=UTF-8
 encoding//src/web/www/javascripts/disclaimer.js=UTF-8
 encoding//src/web/www/javascripts/index.js=UTF-8
 encoding//src/web/www/javascripts/memberPanel.js=UTF-8
+<<<<<<< HEAD
+=======
+encoding//src/web/www/javascripts/models/agendaData.js.jpg=UTF-8
+encoding//src/web/www/javascripts/models/partyData.js.jpg=UTF-8
+>>>>>>> fea49d48fec339cb817baef2a3f5925495321698
 encoding//src/web/www/javascripts/models/slimData.js=UTF-8
 encoding//src/web/www/javascripts/models/strings.js=UTF-8
 encoding//src/web/www/javascripts/partyData.js.jpg=UTF-8
@@ -20,5 +28,6 @@ encoding//src/web/www/javascripts/views/MemberView.js=UTF-8
 encoding//src/web/www/javascripts/views/PartyListView.js=UTF-8
 encoding//src/web/www/javascripts/views/Viewport.js=UTF-8
 encoding//src/web/www/javascripts/views/committeesPanel.js=UTF-8
+encoding//src/web/www/javascripts/views/disclaimer.js=UTF-8
 encoding//src/web/www/javascripts/views/memberPanel.js=UTF-8
 encoding/README.md=UTF-8

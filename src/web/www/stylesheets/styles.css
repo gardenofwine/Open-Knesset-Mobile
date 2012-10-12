@@ -26,6 +26,15 @@
 	display : inline;
 }
 
+.supportSize {
+	float : left;
+	padding-left : 1em;
+}
+
+.memberName div{
+	display : inline;
+}
+
 /* info page design*/
 div.textCenter * {
 	direction : rtl;
@@ -68,6 +77,7 @@ div.textCenter * {
 #MemberBillList {
 	background-color: lightgrey;
 }
+
 
 /* Center empty bill list emptyText*/
 /* Centers group tittle for bill and party list*/

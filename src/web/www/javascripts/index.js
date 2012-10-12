@@ -15,7 +15,7 @@ OKnesset.log = function(string) {
 Ext.regApplication({
 	name : 'OKnesset.app',
 	id : "oknesset",
-	defaultUrl : 'navigation/push/PartyList/Index',
+	defaultUrl : 'navigation/push/AgendaList/Index',
 	launch : function() {
 		// Invoked immediately after the OKnesset.app created.
 		this.launched = true;
@@ -40,20 +40,17 @@ Ext.regApplication({
         this.viewport.query('#openMenu')[0].setHandler(function(){
             OKnesset.app.views.Viewport.AppMenu.showBy(this);
         });
-		// set the email button handler
-        // this.viewport.query('#emailReview')[0].setHandler(function(){
-        // 	OKnesset.app.controllers.navigation.dispatchDialog('Email/Index');
-        // });
-
-        // // set the info button handler
-        // this.viewport.query('#appInfo')[0].setHandler(function(){
-        // 	OKnesset.app.controllers.navigation.dispatchDialog('Info/Index');
-        // });
 
 		// set the back button handler
         this.viewport.query('#backBtn')[0].setHandler(function() {
         	OKnesset.app.controllers.navigation.dispatchBack();
 		});
+			// shmulik & yossi
+		    // set the agenda button handler
+//        this.viewport.query('#agenda')[0].setHandler(function(){
+//        	OKnesset.app.controllers.navigation.dispatchPanel('AgendaList/Index');
+//        });
+
 
 		if (isPhoneGap()) {
 			// hide the native splash screen
