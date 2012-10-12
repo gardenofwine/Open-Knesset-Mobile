@@ -73,7 +73,7 @@ OKnesset.menuStore = new Ext.data.Store({
         ]
     }),
     data: [
-        {title:"parties",page:"PartyList/Index", type : 'page'},
-        {title:"email",page:"Email/Index", type: 'dialog'},
+        {title:Oknesse.strings.partiesTitle,page:"PartyList/Index", type : 'page'},
+        {title:"test",page:"Email/Index", type: 'dialog'},
         ]
     });

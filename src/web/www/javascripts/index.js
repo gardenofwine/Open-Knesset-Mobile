@@ -36,7 +36,7 @@ Ext.regApplication({
 		//The main view, holds all the panels of the application.
 		this.viewport = new OKnesset.app.views.Viewport();
 
-		// set the email button handler
+		// set the menu panel
         this.viewport.query('#openMenu')[0].setHandler(function(){
             OKnesset.app.views.Viewport.AppMenu.showBy(this);
         });
