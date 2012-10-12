@@ -12,7 +12,7 @@ OKnesset.log = function(string) {
 	}
 };
 
-Ext.regApplication({
+Ext.application({
 	name : 'OKnesset.app',
 	id : "oknesset",
 	defaultUrl : 'navigation/push/PartyList/Index',
