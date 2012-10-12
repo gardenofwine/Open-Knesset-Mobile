@@ -1,6 +1,13 @@
 Ext.define('OKnesset.app.controller.navigation', {
   extend: 'Ext.app.Controller',
 
+  config: {
+    routes: {
+      'navigation/push/:_controller/:_action': 'push',
+      'navigation/pop': 'pop',
+    },
+  },
+
   debug: false,
 
   log: function() {
