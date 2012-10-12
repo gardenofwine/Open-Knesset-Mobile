@@ -20,11 +20,11 @@ OKnesset.PartyStore = new Ext.data.Store({
     ],
     data: slimPartyData,
     groupField : 'is_coalition',
-    getGroupString : function(record) {
+    grouper : {groupFn: function(record) {
         return record.get('is_coalition')?
             OKnesset.strings.coalition :
             OKnesset.strings.opposition;
-    }
+        }},
 });
 
 Ext.define('Member', {
@@ -63,9 +63,9 @@ OKnesset.MemberBillsStore = new Ext.data.Store({
 			property: 'stage',
 			direction: 'DESC'
 			},
-	getGroupString : function(record) {
+	grouper : {groupFn: function(record) {
         return record.get('stage_text');
-    }
+    }},
 });
 
 Ext.define('MemberCommittees', {
