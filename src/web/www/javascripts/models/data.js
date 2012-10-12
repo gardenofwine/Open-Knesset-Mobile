@@ -23,8 +23,12 @@ OKnesset.PartyStore = new Ext.data.Store({
     }
 });
 
-Ext.regModel('Member', {
-    fields: ['name', 'party_id']
+Ext.define('Member', {
+    extend: 'Ext.data.Model',
+
+    config: {
+        fields: ['name', 'party_id'],
+    },
 });
 
 OKnesset.MemberStore = new Ext.data.Store({
@@ -56,8 +60,12 @@ OKnesset.MemberBillsStore = new Ext.data.Store({
     }
 });
 
-Ext.regModel('MemberCommittees', {
-    fields: ['title']
+Ext.define('MemberCommittees', {
+    extend: 'Ext.data.Model',
+
+    config: {
+        fields: ['title'],
+    },
 });
 
 OKnesset.MemberCommitteesStore = new Ext.data.Store({
