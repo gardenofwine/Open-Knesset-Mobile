@@ -1,4 +1,5 @@
 OKnesset.strings = {
+	about				: "אודות",
 	hasBillsTitle 			: "הצעות חוק פרטיות שעברו קריאה טרומית",
 	hasNoBillsTitle			: "אין הצעות חוק פרטיות שעברו קריאה טרומית",
 	excuseForNoBills		: 'שרים בממשלה ויו"ר הכנסת אינם מגישים, ככלל, הצעות חוק פרטיות',
@@ -38,7 +39,7 @@ OKnesset.strings = {
 	opposition              : 'אופוזיציה',
 	AgendaTitle             : "אג'נדות",
 	AgendaVoteTitle         : "רשימת הצבעות משויכות - ",
-	AgendaVoteButton        : "רשימת הצבעות המשוכיות לאג'נדה זו",
+	AgendaVoteButton        : "רשימת הצבעות המשוייכות לאג'נדה זו",
 	AgendaDetailsTitle      : "פרטי האג'נדה",
 	SupportMembers			: "חברי הכנסת התומכים",
 	SupportParties			: "המפלגות התומכות",

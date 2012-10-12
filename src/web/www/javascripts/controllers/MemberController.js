@@ -1,4 +1,4 @@
-Ext.regController('Member', {
+OKnesset.app.controllers.Member = Ext.regController('Member', {
 
     // index action
     Index: function(options){
@@ -109,6 +109,11 @@ Ext.regController('Member', {
         	OKnesset.app.views.MemberView.memberCommitteesBtn.setText(OKnesset.strings.committees);
         	OKnesset.app.views.MemberView.memberCommitteesBtn.enable();
         }
+    },
+
+    getIdFromAbsoluteUrl: function(url){
+        var sub1 = url.substr("/member/".length);
+        return sub1.substr(0,sub1.indexOf('/'));
     },
 
     refresh: function(){
