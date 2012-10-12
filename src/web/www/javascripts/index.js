@@ -37,14 +37,18 @@ Ext.regApplication({
 		this.viewport = new OKnesset.app.views.Viewport();
 
 		// set the email button handler
-        this.viewport.query('#emailReview')[0].setHandler(function(){
-        	OKnesset.app.controllers.navigation.dispatchDialog('Email/Index');
+        this.viewport.query('#openMenu')[0].setHandler(function(){
+            OKnesset.app.views.Viewport.AppMenu.showBy(this);
         });
+		// set the email button handler
+        // this.viewport.query('#emailReview')[0].setHandler(function(){
+        // 	OKnesset.app.controllers.navigation.dispatchDialog('Email/Index');
+        // });
 
-        // set the info button handler
-        this.viewport.query('#appInfo')[0].setHandler(function(){
-        	OKnesset.app.controllers.navigation.dispatchDialog('Info/Index');
-        });
+        // // set the info button handler
+        // this.viewport.query('#appInfo')[0].setHandler(function(){
+        // 	OKnesset.app.controllers.navigation.dispatchDialog('Info/Index');
+        // });
 
 		// set the back button handler
         this.viewport.query('#backBtn')[0].setHandler(function() {
@@ -73,6 +77,23 @@ function secondaryLaunch() {
 	if (OKnesset.debug){
 		time.start('Secondary Launch');
 	}
+
+	// load news XML
+	Ext.Ajax.request({
+		    url: 'javascripts/models/PlenumAgendaTest.js',
+			failure : failXML,
+		    success: gotXML
+		});
+
+	function gotXML(data){
+		console.log("Got XML!");
+		console.log(data);
+	}
+	function failXML(data){
+		console.log("Failed XML!");
+		console.log(data);
+	}
+
 
 	var disclaimerDismissed = localStorage.getItem("disclaimerDismissed");
 	if (disclaimerDismissed !== 'true') {
