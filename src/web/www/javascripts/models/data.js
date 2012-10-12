@@ -81,15 +81,20 @@ OKnesset.MemberCommitteesStore = new Ext.data.Store({
 });
 
 OKnesset.menuStore = new Ext.data.Store({
-    model: Ext.regModel('', {
-        fields: [
+    model: Ext.define('', {
+        extend: 'Ext.data.Model',
+
+        config: {
+            fields: [
             {name:'title', type:'string'},
             {name:'page', type:'string'},
-            {name:'type', type:'string'}            
-        ]
+            {name:'type', type:'string'},
+            ],
+        }
     }),
+
     data: [
         {title:"parties",page:"PartyList/Index", type : 'page'},
         {title:"email",page:"Email/Index", type: 'dialog'},
-        ]
+        ],
     });
