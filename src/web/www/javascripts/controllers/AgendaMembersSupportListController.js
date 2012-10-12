@@ -17,6 +17,9 @@ Ext.regController('AgendaMembersSupportList', {
 				});
         }
 
+        // in order to be able to navigate to any member's page
+        OKnesset.MemberStore.clearFilter(true);
+
         var findData = OKnesset.AgendaListStore.findBy(function(r){return r.data.id === parseInt(options.id)});
 
         findData = OKnesset.AgendaListStore.getAt(findData);
