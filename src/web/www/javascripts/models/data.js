@@ -1,5 +1,9 @@
-Ext.regModel('Party', {
-    fields: ['name']
+Ext.define('Party', {
+    extend: 'Ext.data.Model',
+
+    config: {
+        fields: ['name']
+    },
 });
 
 OKnesset.PartyStore = new Ext.data.Store({
@@ -40,8 +44,12 @@ OKnesset.MemberStore = new Ext.data.Store({
     }]
 });
 
-Ext.regModel('MemberBills', {
-    fields: ['title']
+Ext.define('MemberBills', {
+    extend: 'Ext.data.Model',
+
+    config: {
+        fields: ['title'],
+    },
 });
 
 OKnesset.MemberBillsStore = new Ext.data.Store({
