@@ -1,8 +1,8 @@
-Ext.regController('Info', {
+Ext.define('OKnesset.app.controller.Info', {
+    extend: 'Ext.app.Controller',
 
     // index action
-	Index: function(options)
-    {
+	Index: function(options) {
         if ( ! this.view)
         {
             this.view = this.render({
@@ -34,6 +34,5 @@ Ext.regController('Info', {
     			});
 
     	this.view.show(options.animation);
-
     },
 });

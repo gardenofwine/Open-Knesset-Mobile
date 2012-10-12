@@ -1,7 +1,8 @@
-Ext.regController('Bills', {
+Ext.define('OKnesset.app.controller.Bills', {
+    extend: 'Ext.app.Controller',
 
     // index action
-    Index: function(options){
+    Index: function(options) {
         if (!this.billsView) {
             this.billsView = this.render({
                 xtype: 'BillsView',
@@ -46,7 +47,7 @@ Ext.regController('Bills', {
     },
 
     
-    refresh: function(){
+    refresh: function() {
 
 
         var billList = this.billsView.query('#MemberBillList')[0];
@@ -60,7 +61,7 @@ Ext.regController('Bills', {
      * @param member
      * @returns {Boolean}
      */
-    hasExcuseForNoBills: function(member){
+    hasExcuseForNoBills: function(member) {
         return (member.roles.indexOf(OKnesset.strings.ministerIndicator) != -1 || member.roles === OKnesset.strings.knessetChairman);
     },
 
@@ -68,7 +69,7 @@ Ext.regController('Bills', {
      * Open Bill in browser. open the browser to display the bill in oknesset.org's
      * website
      */
-    _gotoBill: function(record){
+    _gotoBill: function(record) {
         var bill = record.data;
         var url = 'http://www.oknesset.org' + bill.url;
         if (isPhoneGap()) {
@@ -92,7 +93,7 @@ Ext.regController('Bills', {
 
     },
 
-    _gotoBillCallback: function(url, billUrl){
+    _gotoBillCallback: function(url, billUrl) {
         // in iOS, this function is called form native code, and it is necessary
         // that the next call to native code via phonegap command would not be
         // executed in the same "thread".
@@ -113,6 +114,4 @@ Ext.regController('Bills', {
             });
         }, 10);
     }
-
-
 });

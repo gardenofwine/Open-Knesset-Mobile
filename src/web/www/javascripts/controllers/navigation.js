@@ -1,4 +1,5 @@
-OKnesset.app.controllers.navigation = Ext.regController('navigation', {
+Ext.define('OKnesset.app.controller.navigation', {
+  extend: 'Ext.app.Controller',
 
   debug: false,
 
@@ -148,6 +149,4 @@ OKnesset.app.controllers.navigation = Ext.regController('navigation', {
 		}
 		return obj;
 	}
-
-
 });

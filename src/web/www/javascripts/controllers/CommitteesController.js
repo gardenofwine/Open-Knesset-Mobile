@@ -1,4 +1,5 @@
-Ext.regController('Committees', {
+Ext.define('OKnesset.app.controller.Committees', {
+    extend: 'Ext.app.Controller',
 
     // index action
     Index: function (options) {
@@ -9,7 +10,6 @@ Ext.regController('Committees', {
             var committeeList = this.committeesView.query('#MemberCommitteeList')[0];
 			var committeesController = this;
         }
-
  
         var member = OKnesset.MemberStore.findBy(function(r){
             return r.data.id === parseInt(options.id)
@@ -33,7 +33,6 @@ Ext.regController('Committees', {
 
         this.application.viewport.setActiveItem(this.committeesView, options.animation);
     },
-
     
     refresh: function(){
 
@@ -41,8 +40,4 @@ Ext.regController('Committees', {
         var committeeList = this.committeesView.query('#MemberCommitteeList')[0];
         committeeList.refresh();
     }
-
-
-
-
 });

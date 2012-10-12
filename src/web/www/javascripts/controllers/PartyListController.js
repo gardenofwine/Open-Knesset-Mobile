@@ -1,4 +1,5 @@
-Ext.regController('PartyList', {
+Ext.define('OKnesset.app.controller.PartyList', {
+    extend: 'Ext.app.Controller',
 
 	Index: function(options)
     {

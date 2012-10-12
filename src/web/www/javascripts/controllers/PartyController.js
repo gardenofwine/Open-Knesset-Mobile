@@ -1,4 +1,5 @@
-Ext.regController('Party', {
+Ext.define('OKnesset.app.controller.Party', {
+    extend: 'Ext.app.Controller',
 
     // index action
 	Index: function(options)
@@ -65,6 +66,4 @@ Ext.regController('Party', {
             property: 'party_id',  
             value : party.data.id});
     }
-
-
 });

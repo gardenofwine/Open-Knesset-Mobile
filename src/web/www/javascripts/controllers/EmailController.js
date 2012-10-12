@@ -1,8 +1,7 @@
-Ext.regController('Email', {
+Ext.define('OKnesset.app.controller.Email', {
 
     // index action
-	Index: function(options)
-    {
+	Index: function(options) {
         if ( ! this.view)
         {
             this.view = this.render({
@@ -62,5 +61,4 @@ Ext.regController('Email', {
     	}
     	// TODO - for web, implement a "send email" link
     }
-
 });

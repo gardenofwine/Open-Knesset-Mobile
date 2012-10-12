@@ -1,8 +1,8 @@
-Ext.regController('Disclaimer', {
+Ext.define('OKnesset.app.controller.Disclaimer', {
+    extend: 'Ext.app.Controller',
 
     // index action
-	Index: function(options)
-    {
+	Index: function(options) {
         if ( ! this.view)
         {
             this.view = this.render({
@@ -21,6 +21,5 @@ Ext.regController('Disclaimer', {
 
         this.view.show(options.animation);
         this.mask.show();
-    }
-
+    },
 });

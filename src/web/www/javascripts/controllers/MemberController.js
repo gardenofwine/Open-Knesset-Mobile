@@ -1,4 +1,5 @@
-Ext.regController('Member', {
+Ext.define('OKnesset.app.controller.Member', {
+    extend: 'Ext.app.Controller',
 
     // index action
     Index: function(options){
@@ -77,6 +78,7 @@ Ext.regController('Member', {
     		}
     	}
     },
+
     phoneMember : function() {
 
     	var phone_num = this.phone;
@@ -85,7 +87,8 @@ Ext.regController('Member', {
     		document.location="tel:+972-" + phone_num.substr(1);
     	}
     },
-    updateData: function(member){
+
+    updateData: function(member) {
 
         this.memberView.query('#MemberInfo')[0].update(member);
         this.application.viewport.query('#toolbar')[0].setTitle(member.name);
