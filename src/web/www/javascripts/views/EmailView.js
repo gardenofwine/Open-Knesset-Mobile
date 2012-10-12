@@ -42,6 +42,6 @@ Ext.define('OKnesset.app.views.EmailView', {
         var viewport = Ext.ApplicationManager.get("oknesset").viewport;
         this.width = viewport.getWidth() * 0.9;
         this.height = viewport.getHeight() * 0.65;
-    }.
+    },
 });
 Ext.reg('EmailView', OKnesset.app.views.EmailView);
