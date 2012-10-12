@@ -18,7 +18,6 @@ Ext.define('OKnesset.app.views.CommitteesView', {
         this.items = [this.committeeList];
     },
 });
-Ext.reg('CommitteesView', OKnesset.app.views.CommitteesView);
 
 Ext.define('OKnesset.app.views.CommitteesView.CommitteeList', {
     extend: 'Ext.List',

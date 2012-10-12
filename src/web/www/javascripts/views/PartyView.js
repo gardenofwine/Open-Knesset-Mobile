@@ -18,7 +18,6 @@ Ext.define('OKnesset.app.views.PartyView', {
 		this.items = [this.memberList];
 	}
 });
-Ext.reg('PartyView', OKnesset.app.views.PartyView);
 
 Ext.define('OKnesset.app.views.PartyView.MemberList', {
 	extend: 'Ext.List',

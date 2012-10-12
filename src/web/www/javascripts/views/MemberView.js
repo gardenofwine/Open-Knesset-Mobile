@@ -24,7 +24,6 @@ Ext.define('OKnesset.app.views.MemberView', {
         this.items = [this.infoWrapper];
     }
 });
-Ext.reg('MemberView', OKnesset.app.views.MemberView);
 
 OKnesset.app.views.MemberView.memberEmailBtn = new Ext.Button({margin : '10 5 10 5'});
 OKnesset.app.views.MemberView.memberCallBtn = new Ext.Button({margin : '10 5 10 5'});

@@ -13,4 +13,3 @@ Ext.define('OKnesset.app.views.PartyListView', {
 		onItemDisclosure: true
 	},
 });
-Ext.reg('PartyListView', OKnesset.app.views.PartyListView);

@@ -36,4 +36,3 @@ Ext.define('OKnesset.app.views.DisclaimerView', {
     	this.height = viewport.getHeight() * 0.9;
     },
 });
-Ext.reg('DisclaimerView', OKnesset.app.views.DisclaimerView);

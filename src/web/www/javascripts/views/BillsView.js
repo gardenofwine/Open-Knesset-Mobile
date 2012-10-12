@@ -18,7 +18,6 @@ Ext.define('OKnesset.app.views.BillsView', {
         this.items = [this.billList];
     },
 });
-Ext.reg('BillsView', OKnesset.app.views.BillsView);
 
 Ext.define('OKnesset.app.views.BillsView.BillList', {
     extend: 'Ext.List',

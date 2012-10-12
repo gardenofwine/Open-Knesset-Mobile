@@ -44,4 +44,3 @@ Ext.define('OKnesset.app.views.EmailView', {
         this.height = viewport.getHeight() * 0.65;
     },
 });
-Ext.reg('EmailView', OKnesset.app.views.EmailView);

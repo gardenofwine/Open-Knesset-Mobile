@@ -16,4 +16,3 @@ Ext.define('OKnesset.app.views.NewsFeedView', {
 		onItemDisclosure: true
 	},
 });
-Ext.reg('PartyListView', OKnesset.app.views.PartyListView);

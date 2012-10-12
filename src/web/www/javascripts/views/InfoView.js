@@ -53,4 +53,3 @@ Ext.define('OKnesset.app.views.InfoView', {
 		this.height = viewport.getHeight() * 0.65;
 	},
 });
-Ext.reg('InfoView', OKnesset.app.views.InfoView);
