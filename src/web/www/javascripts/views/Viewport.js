@@ -44,7 +44,7 @@ Ext.define('OKnesset.app.views.Viewport', {
     },
 
     initialize: function() {
-        this.callParents(arguments);
+        this.callParent(arguments);
         // this.appMenu = this.render({
         //         xtype: 'AppMenu'
         //     });
