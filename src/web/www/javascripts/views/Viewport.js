@@ -19,6 +19,13 @@ OKnesset.app.views.Viewport = new Ext.extend(Ext.Panel, {
             iconMask: true,
             iconCls: 'mail',
         }, {
+        	//The "agenda" icon at the top left tool bar of the toolbar
+         	ui: 'action',
+            id: 'agenda',
+            iconMask: true,
+          	text:"אג'נדות",
+        
+        }, {
             xtype: 'spacer'
         }, {
             id: 'backBtn',

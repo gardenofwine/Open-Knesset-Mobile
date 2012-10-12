@@ -23,8 +23,8 @@ Ext.regController('Party', {
         // Analytics
     	GATrackParty(name);
 
-    	// Set the page's data
-        OKnesset.MemberStore.loadData(party.data.members, false);
+        this.filterMembersByParty(party);
+
         // TODO currentParty is only needed for the email widget. Find a better way to fetch the current party
     	this.currentParty = party.data;
 
@@ -50,10 +50,21 @@ Ext.regController('Party', {
     },
 	refresh : function() {
 		var party = getPartyFromPartyStoreByName(this.currentParty.name);
-		OKnesset.MemberStore.loadData(party.data.members, false);
+        this.filterMembersByParty(party);
         var memberList = this.partyView.query('#MemberList')[0];
         memberList.refresh();
 	},
+    // private
+    /*  
+    Set the party filter on the store
+    */
+
+    filterMembersByParty : function(party) {
+        OKnesset.MemberStore.clearFilter(true);
+        OKnesset.MemberStore.filter({
+            property: 'party_id',  
+            value : party.data.id});
+    }
 
 
 });

@@ -4,22 +4,36 @@ Ext.regModel('Party', {
 
 OKnesset.PartyStore = new Ext.data.Store({
     model: 'Party',
-	sorters: [
-		 	{
-			property: 'members.length',
-			direction: 'ASC'
-			}
-	],
-    data: slimData
+    sorters: [
+        {
+            property: 'is_coalition',
+            direction: 'DESC'
+        },
+        {
+            property: 'number_of_seats  ',
+            direction: 'DESC'
+        }
+    ],
+    data: slimPartyData,
+    groupField : 'is_coalition',
+    getGroupString : function(record) {
+        return record.get('is_coalition')?
+            OKnesset.strings.coalition :
+            OKnesset.strings.opposition;
+    }
 });
 
 Ext.regModel('Member', {
-    fields: ['name']
+    fields: ['name', 'party_id']
 });
 
 OKnesset.MemberStore = new Ext.data.Store({
     model: 'Member',
-	sorters : []
+    data : slimMembers,
+	sorters : [{
+        property : 'party_ordinal',
+        direction : 'ASC'
+    }]
 });
 
 Ext.regModel('MemberBills', {
@@ -48,4 +62,79 @@ Ext.regModel('MemberCommittees', {
 
 OKnesset.MemberCommitteesStore = new Ext.data.Store({
     model: 'MemberCommittees'
+});
+
+
+//AgendaList
+Ext.regModel('AgendaList', {
+    fields: ['name']
+});
+
+OKnesset.AgendaListStore = new Ext.data.Store({
+    model: 'AgendaList',
+    data: agend.objects
+    
+});
+
+//AgendaDetails
+Ext.regModel('AgendaDetails', {
+    fields: ['description','MostSupportMember','MostSupportParty']
+});
+
+OKnesset.AgendaDetailsStore = new Ext.data.Store({
+    model: 'AgendaDetails',
+    
+    //data: agendadetails
+    
+});
+
+//AgendaVoteList
+Ext.regModel('AgendaVoteList', {
+   fields: ['title','score','scorestring','importancestring','importance']
+});
+
+OKnesset.AgendaVoteListStore = new Ext.data.Store({
+    model: 'AgendaVoteList',
+    sorters: [
+        {
+            property: 'score',
+            direction: 'DESC'
+        },
+        {
+            property: 'importance',
+            direction: 'DESC'
+        }
+    ],
+
+    groupField : 'scorestring'
+
+
+});
+//AgendaMembersSupportList
+Ext.regModel('AgendaMembersSupportList', {
+   fields: ['name','score']
+});
+
+OKnesset.AgendaMembersSupportListStore = new Ext.data.Store({
+    model: 'AgendaMembersSupportList',
+    sorters: [
+        {
+            property: 'score',
+            direction: 'DESC'
+        },
+        ]
+});
+//AgendaPartiesSupportList
+Ext.regModel('AgendaPartiesSupportList', {
+   fields: ['name','score']
+});
+
+OKnesset.AgendaPartiesSupportListStore = new Ext.data.Store({
+    model: 'AgendaPartiesSupportList',
+    sorters: [
+        {
+            property: 'score',
+            direction: 'DESC'
+        },
+        ]
 });

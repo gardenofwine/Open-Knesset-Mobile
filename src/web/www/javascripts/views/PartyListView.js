@@ -5,7 +5,8 @@
 OKnesset.app.views.PartyListView = new Ext.extend(Ext.List, {
     id: 'PartyListView',
     store: OKnesset.PartyStore,
-    itemTpl: '<div class="partyName">{name}<div class="partySize">{members.length}</div></div>',
+    grouped: true,
+    itemTpl: '<div class="partyName">{name}<div class="partySize">{number_of_seats}</div></div>',
     onItemDisclosure: true
 });
 

@@ -31,6 +31,36 @@ OKnesset.strings = {
 	writeTo					: 'כתבו ל{0}',
 	phoneTo					: ' התקשרו אל {0}',
 	bills					: 'הצעות חוק',
-	committees              : 'ועדות'
+	committees              : 'ועדות'	,
+	noBills					: 'אין הצעות חוק' ,
+	noCommittees			: 'אין ועדות',
+	coalition               : 'קואליציה',
+	opposition              : 'אופוזיציה',
+	
+	//shmulik & yosi
+	AgendaTitle             : "אג'נדות",
+	AgendaVoteTitle         : "רשימת הצבעות משויכות - ",
+	AgendaVoteButton        : "רשימת הצבעות המשוכיות לאג'נדה זו",
+	AgendaDetailsTitle      : "פרטי האג'נדה",
+	SupportMembers			: "חברי הכנסת התומכים",
+	SupportParties			: "המפלגות התומכות",
+	AgendaDescription       : "תיאור האג'נדה:",
+	mostsupportmember       : "חבר הכנסת התומך ביותר:",
+	mostsupportparty        : "המפלגה התומכת ביותר:",
+	importance              : "חשיבות ההצבעה: ",
+	level                   : "מידת התמיכה באג'נדה:",
+	supportmembers          : "חברי הכנסת התומכים באג'נדה - ",
+	supportparties          : "מפלגות התומכות באג'נדה - ",
+	partialsupport          :"תמיכה חלקית",
+	fullsupport             :"תמיכה מלאה",
+	fullresistance          :"התנגדות מלאה",
+	partialresistance       :"התנגדות חלקית",
+	unknown                 :"לא ניתן לקבוע",
+	veryimportant			:"חשיבות רבה מאד",
+	important				:"חשיבות רבה",
+	mediumimportant         :"חשיבות בינונית",
+	lowimportance			:"חשיבות נמוכה"
+	
+
 };
 

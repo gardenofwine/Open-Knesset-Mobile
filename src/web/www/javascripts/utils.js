@@ -52,12 +52,14 @@ function GATrackBill(url, callback) {
 /**
  * Handle updating the application's data from teh internet (oknesset.org)
  */
-function processInitialData(partyData, partyDataDate) {
-	var partyDataString = JSON.stringify(partyData);
-	updatePartyData(partyData);
-	localStorage.setItem("PartyDataDate", partyDataDate.getTime());
+function processData(data) {
+	// stringifying BEFORE using the data, because the data may change 
+	var partyDataString = JSON.stringify(data.partyData);
+	var memberDataString = JSON.stringify(data.memberData);
+	updateData(data);
+	localStorage.setItem("DataDate", data.dataDate.getTime());
 	localStorage.setItem("PartyData", partyDataString);
-	checkFullDataFromWeb();
+	localStorage.setItem("MemberData", memberDataString);
 }
 
 function loadInitialData() {
@@ -71,10 +73,14 @@ function loadInitialData() {
 	} else {
 		// set the slimData date, it will be overridden once the partData is
 		// loaded
-		localStorage.setItem("PartyDataDate", slimDataDate.getTime());
+		localStorage.setItem("DataDate", slimDataDate.getTime());
 		// load initial data (data shipped with the application)
 		if (!isPhoneGap()) {
-			processInitialData(partyData, partyDataDate);
+			processData({
+				memberData : memberData, 
+				partyData : partyData,
+				dataDate : dataDate});
+			checkFullDataFromWeb();
 		} else {
 			Ext.Ajax.request({
 				url : 'javascripts/models/partyData.js.jpg',
@@ -85,8 +91,11 @@ function loadInitialData() {
 					if (response.responseText != null
 							&& response.responseText.length > 0) {
 						eval(response.responseText);
-						// partyData is evaluated from the
-						processInitialData(partyData, partyDataDate);
+						processData({
+							memberData : memberData, 
+							partyData : partyData,
+							dataDate : dataDate});
+						checkFullDataFromWeb();
 					} else {
 						OKnesset.log('Full data load failure ('
 								+ JSON.stringify(response)
@@ -99,17 +108,15 @@ function loadInitialData() {
 }
 
 function checkFullDataFromWeb() {
-	var partyDataDate = new Date(
-			parseInt(localStorage.getItem("PartyDataDate")));
+	var dataDate = new Date(
+			parseInt(localStorage.getItem("DataDate")));
 	var now = new Date();
 
-//	OKnesset.log("** now=" + now.getTime() + " PartyDataDate= "
-//			+ partyDataDate.getTime());
-	OKnesset.log("** now=" + dateToString(now) + " PartyDataDate= "
-			+ dateToString(partyDataDate));
+ 		OKnesset.log("** now=" + dateToString(now) + " DataDate= "
+			+ dateToString(dataDate));
 
 	// 24 hours is 1000*60*60*24 = 86,400,000 miliseconds
-	if (now.getTime() > partyDataDate.getTime() + 86400000) {
+	if (now.getTime() > dataDate.getTime() + 86400000) {
 		if (!isPhoneGap()) {
 			// fetchFullDataFromWeb();
 			processFullDataFromWebByLocalScript();
@@ -148,11 +155,19 @@ function checkFullDataFromWebCallback(btnIndex) {
 function processFullDataFromWebByLocalScript() {
 	OKnessetParser.loadData(function(data) {
 		displayFetchCompleteNotification();
-		var partyDataString = JSON.stringify(data);
-		updatePartyData(data);
-		var now = new Date();
-		localStorage.setItem("PartyDataDate", now.getTime());
-		localStorage.setItem("PartyData", partyDataString);
+
+		processData({
+			memberData : data.memberData, 
+			partyData : data.partyData,
+			dataDate : new Date()});
+		// var resultParty = JSON.stringify(data.partyData);
+		// var resultMember = JSON.stringify(data.memberData);
+		// updatePartyData(data);
+		// var now = new Date();
+		// localStorage.setItem("DataDate", now.getTime());
+		// localStorage.setItem("PartyData", resultParty);
+		// localStorage.setItem("MemberData", resultMember);
+
 		OKnesset.log("Data fetch from web complete");
 	});
 }
@@ -171,7 +186,7 @@ function fetchFullDataFromWeb() {
 //						var partyDataString = JSON.stringify(data);
 //						updatePartyData(data);
 //						var now = new Date();
-//						localStorage.setItem("PartyDataDate", now.getTime());
+//						localStorage.setItem("DataDate", now.getTime());
 //						localStorage.setItem("PartyData", partyDataString);
 //					});
 //				},
@@ -258,13 +273,21 @@ function refreshTopPanel(){
     }
 }
 
-// update the party store with the full data (replace the slimData)
-function updatePartyData(fullPartyData) {
-	OKnesset.log("-=updatePartyData=-");
-	OKnesset.PartyStore.loadData(fullPartyData, false);
+// update the stores with the full data (replace the slimData)
+function updateData(data){
+	OKnesset.log("-=updateData=-");
+	updatePartyData(data.partyData);
+	updateMemberData(data.memberData);
 	OKnesset.log("Refreshed panel? " + refreshTopPanel());
 }
 
+function updatePartyData(fullPartyData) {
+	//OKnesset.PartyStore.loadData(fullPartyData, false);
+}
+
+function updateMemberData(fullMemberData) {
+	OKnesset.MemberStore.loadData(fullMemberData, false);
+}
 /**
  * End of handle updating the application's data
  */

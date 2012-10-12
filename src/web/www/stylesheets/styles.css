@@ -21,6 +21,15 @@
 	display : inline;
 }
 
+.supportSize {
+	float : left;
+	padding-left : 1em;
+}
+
+.memberName div{
+	display : inline;
+}
+
 /* info page design*/
 div.textCenter * {
 	direction : rtl;
@@ -64,8 +73,11 @@ div.textCenter * {
 	background-color: lightgrey;
 }
 
+
 /* Center empty bill list emptyText*/
-#MemberBillList .x-list-parent {
+/* Centers group tittle for bill and party list*/
+#MemberBillList .x-list-parent,
+#PartyListView .x-list-parent {
 	text-align: center;
 }
 

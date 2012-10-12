@@ -4,15 +4,17 @@ var memberIdArray;
 var partyNameArray;
 var slimData;
 var slimDataMap;
-var stringImageListForDownload;
 
-var OKnessetParser = new function(){
+
+window.OKnessetParser = new function(){
 	var callbackFunction = null;
+
+	var memberArray = new Array();
+	var partyArray = new Array();
 
 	function parseMembers(members){
 	    memberMap = {};
 	    memberIdArray = new Array();
-	    stringImageListForDownload = "";
 
 	    Ext.each(members, function(value, index){
 	        // TODO - do not add memebers that are not "current"
@@ -55,9 +57,6 @@ var OKnessetParser = new function(){
 	            name: value.name
 	        };
 	        slimDataMap[value.party].members.push(slimMember);
-
-	       // stringImageListForDownload += "-O\nurl = \"" + value.img_url +
-			// "\"\n";
 	    });
 
 		// sort members
@@ -86,6 +85,13 @@ var OKnessetParser = new function(){
 	function compareMembers(member1, member2, partyId){
 		var idx1 = indexInArray(member1.name, sortedMembers[partyId]);
 		var idx2 = indexInArray(member2.name, sortedMembers[partyId]);
+
+		if (idx1 == -1) {
+			console.log("Couldn't find member " + member1.name + " in party with id " + partyId)
+		}
+		if (idx2 == -1) {
+			console.log("Couldn't find member " + member2.name + " in party with id " + partyId)
+		}
 		var compareValue = 0;
 		if (idx1 < idx2) {
 			compareValue = -1;
@@ -134,6 +140,7 @@ var OKnessetParser = new function(){
 	        var slimParty = {
 	            name: value.name,
 				id : value.id,
+				is_coalition: value.is_coalition,
 	            members: []
 	        };
 	        slimDataMap["" + value.name] = slimParty;
@@ -187,16 +194,134 @@ sortedMembers["13"] = sortedMembers["3"];
 /*******************************************************************************
  * API function
  */
+	function waitForAll(){
+		var callback = arguments[0];
+		args = Array.prototype.slice.call(arguments, 1); 
+		that = this;
+		this.functions = [];
+
+		var completedResults = [];
+		for (var i = 0; i < args.length; i++) {
+			var func = args[i];
+			var funcwrapper = function(func){
+				return function(){
+					var result = func.apply(that, arguments);
+					completedResults.push(result);
+					if (completedResults.length == args.length){
+						var result = {};
+						for (var i = completedResults.length - 1; i >= 0; i--) {
+							Ext.apply(result, completedResults[i]);
+						};
+						callback.call(that,result);
+					}
+				}
+			}(func);
+			this.functions.push(funcwrapper);
+		};
+	}
+
+
 	this.loadData = function(callback){
 
 		callbackFunction = callback;
+		var success = new waitForAll(callback, allMembersCallback, allPartiesCallback);
 
 		Ext.util.JSONP.request({
-		    url: 'http://www.oknesset.org/api/party/',
+		    url: 'http://www.oknesset.org/api/v2/member/',
 		    callbackKey : "callback",
-			callback : storeParties,
-			onFailure : onPartyFailure
+		    params : {format:"jsonp"},
+			onFailure : allMembersFailure,
+		    callback: success.functions[0]
 		});
+
+
+		Ext.util.JSONP.request({
+		    url: 'http://www.oknesset.org/api/v2/party/',
+		    callbackKey : "callback",
+		    params : {format:"jsonp"},
+			onFailure : allPartiesFailure,
+		    callback: success.functions[1]
+		});
+
+	}
+
+	function allMembersFailure(){
+		// TODO : return a failure result to the user, and possible to the server, or Google analytics.
+		console.log("allMembersFailure");
+	}
+
+	function allPartiesFailure(){
+		// TODO : return a failure result to the user, and possible to the server, or Google analytics.
+		console.log("allPartiesFailure");
+	}
+
+	function allPartiesCallback(result){
+		console.log("allPartiesCallback");
+		return {partyData : result.objects};
+	}
+
+
+	function allMembersCallback(result){
+		console.log("allMembersCallback");
+
+		// For each member
+		for (var i = result.objects.length - 1; i >= 0; i--) {
+			var member = result.objects[i];
+
+			if (!member.is_current) {
+				continue;
+			}
+
+			// add current memeber to member list
+			var minMember = createMinimalMemberItem(member);
+			// fetch member bills from web?
+
+			memberArray.push(minMember);
+		};
+
+		// dataObjects = {
+		// 	memberData : memberArray,
+		// 	partyData : []
+		// };
+		//callbackFunction(dataObjects);
+
+		return {memberData : memberArray}; 
+
+		// private functions
+
+		function partyIdFromMember(member){
+			return member.party_url.substring(7,member.party_url.indexOf("/", 7));
+		}
+
+		function createMinimalMemberItem(member){
+			var reducedMember = {};
+			reducedMember.current_role_descriptions = member.current_role_descriptions;
+			reducedMember.committees = member.committees;
+			if (!reducedMember.committees){
+				reducedMember.committees = [];
+			}
+			reducedMember.date_of_birth = member.date_of_birth;
+			reducedMember.email = member.email;
+			reducedMember.family_status = member.family_status;
+			reducedMember.gender = member.gender;
+			reducedMember.id = member.id;
+			reducedMember.img_url = member.img_url;
+			reducedMember.name = member.name;
+			reducedMember.phone = member.phone;
+			reducedMember.place_of_residence = member.place_of_residence;
+			reducedMember.party_id = partyIdFromMember(member);
+
+			if (typeof sortedMembers[reducedMember.party_id] != "undefined") {
+				if (sortedMembers[reducedMember.party_id].indexOf(reducedMember.name) == -1){
+					// the member was not found. 
+					console.log("Member " + member.name + " of party " + member.party_id + "was not found in sorted members array");
+				} else {
+					reducedMember.party_ordinal = sortedMembers[reducedMember.party_id].indexOf(reducedMember.name) + 1;
+				}
+			}
+
+			return reducedMember;
+		}
 
 	}
 
