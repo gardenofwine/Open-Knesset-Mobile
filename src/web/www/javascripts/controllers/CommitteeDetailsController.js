@@ -14,34 +14,33 @@ Ext.regController('CommitteeDetails', {
             });
         }
 
-        CommitteeDetails = OKnesset.CommitteeDetailsStore.findBy(function(r){
-            return r.data.id === parseInt(options.id)
-        });
+        var committeeDetailsController = this;
 
-        CommitteeDetails = OKnesset.CommitteeDetailsStore.getAt(CommitteeDetails);
-        
-        this.CommitteeDetailsView.query('#committeeName')[0].update({
-            name: CommitteeDetails.data.name
-        });
+        var committeeName = this.CommitteeDetailsView.query('#committeeName')[0];
+        var committeeMembersList = this.CommitteeDetailsView.query('#CommitteeMembersList')[0];
+        var committeeMeetings = this.CommitteeDetailsView.query('#committeeMeetings')[0];
+        var committeeMembers = this.CommitteeDetailsView.query('#committeeMembers')[0];
 
-        OKnesset.CommitteeDetailsMembersListStore.loadData(CommitteeDetails.data.members);
 
-        //update meetings store with recent and future meetings data.
-        committeesMeetings = [];
-        var recent_meetings = CommitteeDetails.data.recent_meetings;
-        for (i=0;i<recent_meetings.length;i++){
-            recent_meetings[i]['MeetingType'] = 'recent';
-            committeesMeetings.push(recent_meetings[i]);
+
+        if (this.cached != options.id) {
+            this.cached = options.id;
+            var hideWhileLoading = [committeeName, committeeMembersList, committeeMeetings, committeeMembers];
+            committeeDetailsController._init(hideWhileLoading);
+
+
+            Ext.util.JSONP.request({
+                url: 'http://www.oknesset.org/api/committee/' + options.id,
+                callbackKey : "callback",
+                onFailure : function(){console.log("failure");},
+                callback: function(data){
+                    committeeDetailsController._updateData(data);
+                    committeeDetailsController._refresh(hideWhileLoading);
+                }
+            });
+
         }
-
-        var future_meetings = CommitteeDetails.data.future_meetings;
-        for (i=0;i<future_meetings.length;i++){
-            future_meetings[i]['MeetingType'] = 'future';
-            committeesMeetings.push(future_meetings[i]);
-        }
-
-        OKnesset.CommitteeDetailsMeetingsListStore.loadData(committeesMeetings);
-
+      
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.committeeDetails);
         this.application.viewport.setActiveItem(this.CommitteeDetailsView, options.animation);
 
@@ -56,8 +55,46 @@ Ext.regController('CommitteeDetails', {
         this.refresh();
         
     },
+    _updateData: function (CommitteeDetails) {
 
-    
+            this.CommitteeDetailsView.query('#committeeName')[0].update({
+            name: CommitteeDetails.name
+        });
+
+        OKnesset.CommitteeDetailsMembersListStore.loadData(CommitteeDetails.members);
+
+        //update meetings store with recent and future meetings data.
+        committeesMeetings = [];
+        var recent_meetings = CommitteeDetails.recent_meetings;
+        for (i=0;i<recent_meetings.length;i++){
+            recent_meetings[i]['MeetingType'] = 'recent';
+            committeesMeetings.push(recent_meetings[i]);
+        }
+
+        var future_meetings = CommitteeDetails.future_meetings;
+        for (i=0;i<future_meetings.length;i++){
+            future_meetings[i]['MeetingType'] = 'future';
+            committeesMeetings.push(future_meetings[i]);
+        }
+
+        OKnesset.CommitteeDetailsMeetingsListStore.loadData(committeesMeetings);
+    },
+    _init: function(elementsToHIDE){
+
+        this.CommitteeDetailsView.query('#committeeDetailsLoading')[0].show();
+
+        elementsToHIDE.forEach(function(e){
+            e.hide();
+        });
+    },
+    _refresh: function(elementsToSHOW){
+
+        this.CommitteeDetailsView.query('#committeeDetailsLoading')[0].hide();
+
+        elementsToSHOW.forEach(function(e){
+            e.show();
+        });
+    },
     refresh: function(){
 
 
@@ -66,7 +103,7 @@ Ext.regController('CommitteeDetails', {
     },
 
     _gotoMember: function(record){
-        console.log(record)
+        //console.log(record)
         OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + record.data.url.match(/\/member\/(\d+)\/+/)[1], this.historyUrl);
     }
 

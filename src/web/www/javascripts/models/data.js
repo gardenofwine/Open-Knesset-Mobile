@@ -64,14 +64,14 @@ OKnesset.MemberCommitteesStore = new Ext.data.Store({
 });
 
 
-Ext.regModel('CommitteeDetails', {
-    fields: ['title']
-});
+// Ext.regModel('CommitteeDetails', {
+//     fields: ['title']
+// });
 
-OKnesset.CommitteeDetailsStore = new Ext.data.Store({
-    model: 'CommitteeDetails',
-    data: committeesData
-});
+// OKnesset.CommitteeDetailsStore = new Ext.data.Store({
+//     model: 'CommitteeDetails',
+//     data: committeesData
+// });
 
 Ext.regModel('CommitteeDetailsMembersList', {
     fields: ['name','presence']

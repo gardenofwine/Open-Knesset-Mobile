@@ -61,13 +61,6 @@ function processInitialData(partyData, partyDataDate) {
 	localStorage.setItem("PartyDataDate", partyDataDate.getTime());
 	localStorage.setItem("PartyData", partyDataString);
 
-	//votes data
-	var VotesDataString = JSON.stringify(VotesData);
-	updateVotesData(VotesData);
-
-	localStorage.setItem("VotesDataDate", VotesDataDate.getTime());
-	localStorage.setItem("VotesData", VotesDataString);
-
 	checkFullDataFromWeb();
 }
 
