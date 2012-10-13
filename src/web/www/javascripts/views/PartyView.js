@@ -9,13 +9,25 @@ OKnesset.app.views.PartyView = new Ext.extend(Ext.Panel, {
 			currentParty : null,
 		    initComponent: function()
 		    {
+		    	this.manifesto = new OKnesset.app.views.PartyView.Manifesto();
 		    	this.memberList = new OKnesset.app.views.PartyView.MemberList();
 		    	this.items = [this.memberList];
+		    	this.dockedItems = [{
+		             xtype: 'panel',
+		             dock: 'top',
+		             items: [this.manifesto]
+		           }];
 		        OKnesset.app.views.PartyView.superclass.initComponent.apply(this, arguments);
 		    }
 		});
 
 Ext.reg('PartyView', OKnesset.app.views.PartyView);
+
+OKnesset.app.views.PartyView.Manifesto = new Ext.extend(Ext.Panel, {
+	id: 'Manifesto',
+	tpl: '<div dir="rtl">{description}</div>',
+	store: OKnesset.PartyManifestoStore
+});
 
 OKnesset.app.views.PartyView.MemberList = new Ext.extend(Ext.List, {
 	id : 'MemberList',
