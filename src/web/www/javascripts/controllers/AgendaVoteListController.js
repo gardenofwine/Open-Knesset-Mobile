@@ -17,7 +17,9 @@ Ext.regController('AgendaVoteList', {
 
         }
 
-        var findData = OKnesset.AgendaListStore.findBy(function(r){return r.data.id === parseInt(options.id)});
+        var findData = OKnesset.AgendaListStore.findBy(function(r){
+        	return r.data.id === parseInt(options.id)
+        });
         // console.log(options.id);
        // console.log(findData);
         findData = OKnesset.AgendaListStore.getAt(findData);

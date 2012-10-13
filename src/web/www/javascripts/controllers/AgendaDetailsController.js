@@ -32,7 +32,7 @@ Ext.regController('AgendaDetails', {
          MostSupportParty=OKnesset.AgendaPartiesSupportListStore.getAt(0)
          findData.data.MostSupportMember=MostSupportMember.data.name;
          findData.data.MostSupportParty=MostSupportParty.data.name;
-         findData.data = this.replaceURLWithHTMLLinks(findData.data.description);
+         findData.data.description = this.replaceURLWithHTMLLinks(findData.data.description);
          this.application.viewport.query('#AgendaInfo')[0].update(findData.data);
          
    
