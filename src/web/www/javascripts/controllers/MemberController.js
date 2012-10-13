@@ -15,18 +15,13 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 
 		OKnesset.app.views.MemberView.memberVotesBtn.setHandler(this.dispatchVotes,options);
 
-        // TODO the memberController page should not rely on the MemberStore to contain party members
-        // the way the stores are organized should change
-        var member = OKnesset.MemberStore.findBy(function(r){
-            return r.data.id === parseInt(options.id)
-        });
-        console.log(OKnesset.MemberStore);
-        member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
-        if (member.committees.length == 0) {
-        	OKnesset.app.views.MemberView.memberCommitteesBtn.hide();
-        } else {
-        	OKnesset.app.views.MemberView.memberCommitteesBtn.show();
-        }
+        // var member = OKnesset.MemberStore.findBy(function(r){
+        //     return r.data.id === parseInt(options.id)
+        // });
+        // console.log(OKnesset.MemberStore);
+        // member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
+
+        var member = this.currentMember = OKnesset.GetMembersById(options.id)[0];
         GATrackMember(member.name);
 
         this.updateData(member);
@@ -103,6 +98,14 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
         OKnesset.app.views.MemberView.memberEmailBtn.setHandler(this.sendEmail,member);
         OKnesset.app.views.MemberView.memberCallBtn.setText(this.getPhoneCallButtonText());
         OKnesset.app.views.MemberView.memberCallBtn.setHandler(this.phoneMember,member);
+
+        if (!member.committees || member.committees.length == 0) {
+            OKnesset.app.views.MemberView.memberCommitteesBtn.hide();
+        } else {
+            OKnesset.app.views.MemberView.memberCommitteesBtn.show();
+        }
+
+
         if (!member.bills || member.bills.length==0) {
         	OKnesset.app.views.MemberView.memberBillsBtn.setText(OKnesset.strings.noBills);
         	OKnesset.app.views.MemberView.memberBillsBtn.disable();
@@ -110,7 +113,7 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
         	OKnesset.app.views.MemberView.memberBillsBtn.setText(OKnesset.strings.bills);
         	OKnesset.app.views.MemberView.memberBillsBtn.enable();
         }
-        if (member.committees.length == 0) {
+        if (!member.committees || member.committees.length == 0) {
         	OKnesset.app.views.MemberView.memberCommitteesBtn.setText(OKnesset.strings.noCommittees);
         	OKnesset.app.views.MemberView.memberCommitteesBtn.disable();
         } else {

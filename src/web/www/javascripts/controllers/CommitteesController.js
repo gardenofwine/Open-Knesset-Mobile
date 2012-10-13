@@ -50,12 +50,10 @@ Ext.regController('Committees', {
 
     _gotoCommittee: function(record){
 
-        var committee = OKnesset.CommitteeDetailsStore.findBy(function(r){
-            return (r.data.name == record.data.title);
-        });
+        //TODO: update id to the relevant id for the current committee
 
-        var committee = OKnesset.CommitteeDetailsStore.getAt(committee);        
-        OKnesset.app.controllers.navigation.dispatchPanel('CommitteeDetails/Index/' + committee.data.id, this.historyUrl);
+        committeeId = 1;
+        OKnesset.app.controllers.navigation.dispatchPanel('CommitteeDetails/Index/' + committeeId, this.historyUrl);
     }
 
 

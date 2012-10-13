@@ -1,4 +1,3 @@
-
 Ext.regModel('Protocol2', {
     fields: ['topics','protocol_text','committee','date', 'mks_attended']
 });

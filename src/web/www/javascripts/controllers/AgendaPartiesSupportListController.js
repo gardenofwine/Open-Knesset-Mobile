@@ -12,8 +12,8 @@ Ext.regController('AgendaPartiesSupportList', {
             	function(that, index, item, e) {
 				var	record = that.store.getAt(index);
 			   console.log(record);
-			    OKnesset.app.controllers.navigation.dispatchPanel('party/Index/'+ record.data.id, options.historyUrl);
-				});
+			    OKnesset.app.controllers.navigation.dispatchPanel('Party/Index/'+ OKnesset.app.controllers.Party.getIdFromAbsoluteUrl(record.data.absolute_url), options.historyUrl);
+			});
 				
         }
 

@@ -15,7 +15,7 @@ OKnesset.log = function(string) {
 Ext.regApplication({
 	name : 'OKnesset.app',
 	id : "oknesset",
-	defaultUrl : 'navigation/push/Protocol/Index',
+	defaultUrl : 'navigation/push/AgendaList/Index',
 	launch : function() {
 		// Invoked immediately after the OKnesset.app created.
 		this.launched = true;

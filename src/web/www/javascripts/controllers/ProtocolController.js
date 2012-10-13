@@ -29,41 +29,42 @@ Ext.regController('Protocol', {
     					};
             });
             
-            Ext.util.JSONP.request({
-    		    url: 'http://www.oknesset.org/api/committeemeeting/6728/',
-    		    callbackKey : "callback",
-    		    onFailure : function(){console.log("failure");},
-    			callback : function(data){
-    		     // creating ProtocolStore
-    		     var tmpArray = [];
-            	 tmpArray.push(data);
-                 OKnesset.Protocol2Store.loadData(tmpArray);
-                 // creating ProtocolMembersStore
-            	 OKnesset.ProtocolMembersStore.loadData(data.mks_attended);
-            	// creating ProtocolTextStore
-        	     var protocolArray= data.protocol_text.split(/[<>]/);
-            	 var protocolText =[];
-            	 protocolArray.forEach(function(e){
-            		 protocolText.push({protocol_text: e});
-            	 });
-            	 
-            	 //split the array to even array and odd array
-            	 //even array contain the title/spokeman
-            	 //odd array conatain the text
-            	 var protocolArrayEven=[];
-            	 var protocolArrayOdd=[];
-            	 //the "for" loop considering that the array is even
-            	 for (i=0; i<(protocolText.length/2); i++){
-            		 protocolArrayEven[i]=protocolText[2*i];
-            		 protocolArrayOdd[i]=protocolText[2*i+1];
-            	 }
-            	 OKnesset.ProtocolTopicsStoreEven.loadData(protocolArrayEven);
-            	 OKnesset.ProtocolTopicsStoreOdd.loadData(protocolArrayOdd);
-            	 OKnesset.ProtocolTopicsStore.loadData(protocolText);
-    		    },
-    		});
            
         }
+
+        Ext.util.JSONP.request({
+            url: 'http://www.oknesset.org/api/committeemeeting/' + options.id + '/',
+            callbackKey : "callback",
+            onFailure : function(){console.log("failure");},
+            callback : function(data){
+             // creating ProtocolStore
+             var tmpArray = [];
+             tmpArray.push(data);
+             OKnesset.Protocol2Store.loadData(tmpArray);
+             // creating ProtocolMembersStore
+             OKnesset.ProtocolMembersStore.loadData(data.mks_attended);
+            // creating ProtocolTextStore
+             var protocolArray= data.protocol_text.split(/[<>]/);
+             var protocolText =[""];
+             protocolArray.forEach(function(e){
+                 protocolText.push({protocol_text: e});
+             });
+             
+             //split the array to even array and odd array
+             //even array contain the title/spokeman
+             //odd array conatain the text
+             var protocolArrayEven=[];
+             var protocolArrayOdd=[];
+             //the "for" loop considering that the array is even
+             for (i=0; i<(protocolText.length/2); i++){
+                 protocolArrayEven[i]=protocolText[2*i];
+                 protocolArrayOdd[i]=protocolText[2*i+1];
+             }
+             OKnesset.ProtocolTopicsStoreEven.loadData(protocolArrayEven);
+             OKnesset.ProtocolTopicsStoreOdd.loadData(protocolArrayOdd);
+             OKnesset.ProtocolTopicsStore.loadData(protocolText);
+            },
+        });
         
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.Committeemeeting);
         this.application.viewport.setActiveItem(this.protocolView, options.animation);

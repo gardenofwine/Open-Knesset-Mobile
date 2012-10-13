@@ -13,6 +13,13 @@ OKnesset.app.views.CommitteeDetailsView = new Ext.extend(Ext.Panel, {
         this.committeeMeetings = new OKnesset.app.views.CommitteeDetailsView.committeeMeetings();
         this.items = [
             new Ext.Panel({
+                  id: "committeeDetailsLoading",
+                  cls: 'titlePanel',
+                  height : "2em",
+                  padding: '5',
+                  html:'<div class="hebTitle">'+ OKnesset.strings.LoadingPlsWait + '</div>'
+                }),
+            new Ext.Panel({
                   id: "committeeName",
                   cls: 'titlePanel',
                   height : "2em",
@@ -20,17 +27,19 @@ OKnesset.app.views.CommitteeDetailsView = new Ext.extend(Ext.Panel, {
                   tpl:'<div>{name}</div>'
             }),
             new Ext.Panel({
+                  id: 'committeeMembers',
                   cls: 'subtitlePanel',                
                   height : "2em",
                   padding: '5',
-                  html:'<div align="right">חברי הועדה</div>'
+                  html:'<div align="right">' + OKnesset.strings.committeeMembers+ '</div>'
             }),
             this.committeeMembersList,
             new Ext.Panel({
+                  id: 'committeeMeetings',
                   cls: 'subtitlePanel',
                   height : "2em",
                   padding: '5',
-                  html:'<div align="right">דיונים</div>'
+                  html:'<div align="right">' + OKnesset.strings.meetings + '</div>'
             }),
              this.committeeMeetings];
 
