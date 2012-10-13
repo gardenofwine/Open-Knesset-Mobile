@@ -63,6 +63,22 @@ OKnesset.strings = {
 	veryimportant			:"חשיבות רבה מאד",
 	important				:"חשיבות רבה",
 	mediumimportant         :"חשיבות בינונית",
-	lowimportance			:"חשיבות נמוכה"
+	lowimportance			:"חשיבות נמוכה",
+	votes       	        : 'הצבעות',
+	votesDetails   	        : 'פרטי הצבעה',
+	for 					: 'בעד',
+	against 				: 'נגד',
+	abstain 				: 'נמנע',
+	presence 				: 'נוכחות בועדה:',
+	committeeDetails        : 'פרטי ועדה',
+	meetings				: 'דיונים',
+	future_meetings			: 'דיונים עתידיים',
+	recent_meetings			: 'דיונים אחרונים',
+	billDetails   	        : 'פרטי הצעת חוק',
+	billStage				: 'מצב הצעת החוק:',
+	billFounder				: 'יוזמי ההצעה',
+	billJoiner				: 'הצטרפו להצעה',
+	BillpdfExist			: 'ההצעה באתר הכנסת',
+	BillpdfNotExist			: 'מסמך רשמי להצעת החוק איננו זמין',
+	LoadingPlsWait			: 'טוען נתונים, אנא המתן...'
 };
-

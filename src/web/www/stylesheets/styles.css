@@ -14,7 +14,16 @@
 
 .x-list-item {
   direction :rtl;
-  background-color: white;
+
+	background: rgb(233,233,206); /* Old browsers */
+	background: -moz-linear-gradient(45deg,  rgba(214, 214, 205, 1) 1%, rgba(252,255,244,1) 16%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(1%,rgba(214, 214, 205, 1)), color-stop(16%,rgba(252,255,244,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(45deg,  rgba(214, 214, 205, 1) 1%,rgba(252,255,244,1) 16%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(45deg,  rgba(214, 214, 205, 1) 1%,rgba(252,255,244,1) 16%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(45deg,  rgba(214, 214, 205, 1) 1%,rgba(252,255,244,1) 16%); /* IE10+ */
+	background: linear-gradient(45deg,  rgba(214, 214, 205, 1) 1%,rgba(252,255,244,1) 16%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9e9ce', endColorstr='#fcfff4',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
 }
 
 .partySize {
@@ -38,7 +47,7 @@
 /* info page design*/
 div.textCenter * {
 	direction : rtl;
-	text-align:center
+	text-align:center;
 }
 
 /* Member page Design */
@@ -78,13 +87,83 @@ div.textCenter * {
 	background-color: lightgrey;
 }
 
-
 /* Center empty bill list emptyText*/
 /* Centers group tittle for bill and party list*/
 #MemberBillList .x-list-parent,
-#PartyListView .x-list-parent {
+#PartyListView .x-list-parent,
+.x-list-header {
 	text-align: center;
 }
 
 .CommitteesInfo {width:100%;direction:rtl;text-align:right;padding:10px}
 .CommitteesInfo ul,li {list-style-type : circle}
+
+div .timeString {
+	float : left;
+	padding-left : 1em;
+	color: grey;
+	font-size: 15px;
+}
+
+/*Votes*/
+
+
+div.Votescounters{
+	color: grey;
+	font-size: 15px;
+
+}
+
+span.memberVotesListTitle {
+	font-size: 17px;
+	font-weight: bold;
+
+}
+
+
+div.hebTitle {
+	font-size: 17px;
+	font-weight: bold;
+	text-align: right;
+   	direction: rtl;
+}
+
+div.description {
+   	font-size: 16px;
+   	text-align: right;
+   	direction: rtl;
+}
+
+div.titlePanel {
+	text-align: center;
+	font-weight: bold;
+	color: #272831;
+
+	background: rgb(252,255,244); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(252,255,244,1) 0%, rgba(223,229,215,1) 29%, rgba(179,190,173,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,255,244,1)), color-stop(29%,rgba(223,229,215,1)), color-stop(100%,rgba(179,190,173,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(252,255,244,1) 0%,rgba(223,229,215,1) 29%,rgba(179,190,173,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(252,255,244,1) 0%,rgba(223,229,215,1) 29%,rgba(179,190,173,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(252,255,244,1) 0%,rgba(223,229,215,1) 29%,rgba(179,190,173,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(252,255,244,1) 0%,rgba(223,229,215,1) 29%,rgba(179,190,173,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 ); /* IE6-9 */
+
+	border-radius: 0 0 5px 5px;
+
+}
+
+div.subtitlePanel {
+	font-weight: bold;
+}
+
+.memberJob {
+	display: block;
+	padding: 1px;
+	float: right;
+}
+
+.hebLink {
+	direction: rtl;
+	display: block;
+}
+

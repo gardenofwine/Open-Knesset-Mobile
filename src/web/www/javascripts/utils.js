@@ -327,28 +327,26 @@ OKnesset.GetMembersById = function (ids) {
 		}
 
   var members = [];
-  OKnesset.PartyStore.data.items.forEach(function(party) {
-      party.data.members.forEach(function(member) {
-          for (var i=0;i<ids.length;i++) {
-              id=ids[i];
+  OKnesset.MemberStore.snapshot.items.forEach(function(member) {
+      for (var i=0;i<ids.length;i++) {
+          id=ids[i];
 
-              if (member.data !== undefined)
-              {
-                  member = member.data;
-              }
-              if (member.id === undefined)
-                  console.log(member);
-
-               if (member.id == id) {
-                  members.push(member);
-                  ids.remove(id);
-                  i = ids.length;
-              }
+          if (member.data !== undefined)
+          {
+              member = member.data;
           }
+          if (member.id === undefined)
+              console.log(member);
 
-          if (ids.length == 0)
-              return members;
-      });
+           if (member.id == id) {
+              members.push(member);
+              ids.remove(id);
+              i = ids.length;
+          }
+      }
+
+      if (ids.length == 0)
+          return members;
   });
   return members;
 }

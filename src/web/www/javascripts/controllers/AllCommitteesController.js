@@ -12,7 +12,7 @@ Ext.regController('AllCommittees', {
         this.AllCommitteesView.addListener('itemtap',
             	function(that, index, item, e) {
 					var record = that.store.getAt(index);
-					OKnesset.app.controllers.navigation.dispatchPanel('Committee/Index/' + record.data.id, options.historyUrl);
+					OKnesset.app.controllers.navigation.dispatchPanel('CommitteeDetails/Index/' + record.data.id, options.historyUrl);
 				});
         }
         console.log('Ok');

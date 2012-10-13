@@ -12,6 +12,9 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
         OKnesset.app.views.MemberView.memberBillsBtn.setHandler(this.dispatchBills,options);
 
         OKnesset.app.views.MemberView.memberCommitteesBtn.setHandler(this.dispatchCommittees,options);
+
+		OKnesset.app.views.MemberView.memberVotesBtn.setHandler(this.dispatchVotes,options);
+
         // TODO the memberController page should not rely on the MemberStore to contain party members
         // the way the stores are organized should change
         var member = OKnesset.MemberStore.findBy(function(r){
@@ -21,6 +24,8 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
         member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
         if (member.committees.length == 0) {
         	OKnesset.app.views.MemberView.memberCommitteesBtn.hide();
+        } else {
+        	OKnesset.app.views.MemberView.memberCommitteesBtn.show();
         }
         GATrackMember(member.name);
 
@@ -34,6 +39,10 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 
     dispatchCommittees: function() {
 		OKnesset.app.controllers.navigation.dispatchPanel('Committees/Index/' + this.id, this.historyUrl)
+    },
+
+    dispatchVotes: function() {
+        OKnesset.app.controllers.navigation.dispatchPanel('memberVotes/Index/' + this.id, this.historyUrl)
     },
 
     getReviewButtonText: function(){
@@ -94,15 +103,13 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
         OKnesset.app.views.MemberView.memberEmailBtn.setHandler(this.sendEmail,member);
         OKnesset.app.views.MemberView.memberCallBtn.setText(this.getPhoneCallButtonText());
         OKnesset.app.views.MemberView.memberCallBtn.setHandler(this.phoneMember,member);
-
-        OKnesset.app.views.MemberView.memberBillsBtn.disable();
-        // if (member.bills.length==0) {
-        // 	OKnesset.app.views.MemberView.memberBillsBtn.setText(OKnesset.strings.noBills);
-        // 	OKnesset.app.views.MemberView.memberBillsBtn.disable();
-        // } else {
-        // 	OKnesset.app.views.MemberView.memberBillsBtn.setText(OKnesset.strings.bills);
-        // 	OKnesset.app.views.MemberView.memberBillsBtn.enable();
-        // }
+        if (!member.bills || member.bills.length==0) {
+        	OKnesset.app.views.MemberView.memberBillsBtn.setText(OKnesset.strings.noBills);
+        	OKnesset.app.views.MemberView.memberBillsBtn.disable();
+        } else {
+        	OKnesset.app.views.MemberView.memberBillsBtn.setText(OKnesset.strings.bills);
+        	OKnesset.app.views.MemberView.memberBillsBtn.enable();
+        }
         if (member.committees.length == 0) {
         	OKnesset.app.views.MemberView.memberCommitteesBtn.setText(OKnesset.strings.noCommittees);
         	OKnesset.app.views.MemberView.memberCommitteesBtn.disable();
