@@ -17,6 +17,7 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
         var member = OKnesset.MemberStore.findBy(function(r){
             return r.data.id === parseInt(options.id)
         });
+        console.log(OKnesset.MemberStore);
         member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
         if (member.committees.length == 0) {
         	OKnesset.app.views.MemberView.memberCommitteesBtn.hide();

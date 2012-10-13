@@ -1,3 +1,43 @@
+
+Ext.regModel('Protocol2', {
+    fields: ['topics','protocol_text','committee','date', 'mks_attended']
+});
+
+OKnesset.Protocol2Store = new Ext.data.Store({
+    model: 'Protocol2',
+    
+});
+
+Ext.regModel('ProtocolMembers', {
+    fields: ['name','url']
+});
+
+OKnesset.ProtocolMembersStore = new Ext.data.Store({
+    model: 'ProtocolMembers',
+    
+});
+
+Ext.regModel('ProtocolTopics', {
+    fields: ['topics','protocol_text','committee','date', 'mks_attended']
+});
+
+OKnesset.ProtocolTopicsStore = new Ext.data.Store({
+    model: 'ProtocolTopics',
+    
+});
+
+OKnesset.ProtocolTopicsStoreEven = new Ext.data.Store({
+    model: 'ProtocolTopics',
+    
+});
+
+OKnesset.ProtocolTopicsStoreOdd = new Ext.data.Store({
+    model: 'ProtocolTopics',
+    
+});
+
+
+
 Ext.regModel('Party', {
     fields: ['name']
 });
@@ -22,6 +62,20 @@ OKnesset.PartyStore = new Ext.data.Store({
             OKnesset.strings.opposition;
     }
 });
+
+
+//add all committees control
+
+Ext.regModel('AllCommittees', {
+    fields: ['name']
+});
+
+OKnesset.AllCommitteesStore = new Ext.data.Store({
+    model: 'AllCommittees'    
+    //data: CommitteesData
+});
+
+
 
 Ext.regModel('Member', {
     fields: ['name', 'party_id']
@@ -74,7 +128,10 @@ OKnesset.menuStore = new Ext.data.Store({
     }),
     data: [
         {title:OKnesset.strings.partiesTitle,page:"PartyList/Index", type : 'page'},
+        {title:OKnesset.strings.AgendaTitle,page:"AgendaList/Index", type: 'page'},
+        {title:OKnesset.strings.committees,page:"AllCommittees/Index", type: 'page'},
         {title:OKnesset.strings.about,page:"Info/Index", type: 'dialog'},
+
         ]
     });
 

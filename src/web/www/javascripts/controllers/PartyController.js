@@ -19,7 +19,7 @@ Ext.regController('Party', {
         var party = OKnesset.PartyStore.findBy(function(r){return r.data.id === parseInt(options.id)});
         party = OKnesset.PartyStore.getAt(party);
         var name = party.data.name;
-
+       // console.log(party);
         // Analytics
     	GATrackParty(name);
 
@@ -55,14 +55,14 @@ Ext.regController('Party', {
         memberList.refresh();
 	},
     // private
-    /*  
+    /*
     Set the party filter on the store
     */
 
     filterMembersByParty : function(party) {
         OKnesset.MemberStore.clearFilter(true);
         OKnesset.MemberStore.filter({
-            property: 'party_id',  
+            property: 'party_id',
             value : party.data.id});
     }
 
