@@ -25,9 +25,14 @@
 .partyName div{
 	display : inline;
 }
+.AgendaVoteTitle div{
+	
+	display : inline;
+}
 
 .supportSize {
 	float : left;
+	direction : ltr;
 	padding-left : 1em;
 }
 
@@ -83,6 +88,9 @@ div.textCenter * {
 /* Centers group tittle for bill and party list*/
 #MemberBillList .x-list-parent,
 #PartyListView .x-list-parent {
+	text-align: center;
+}
+#AgendaVoteListView .x-list-parent {
 	text-align: center;
 }
 

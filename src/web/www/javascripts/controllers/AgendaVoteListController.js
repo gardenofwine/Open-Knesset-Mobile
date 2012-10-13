@@ -22,7 +22,7 @@ Ext.regController('AgendaVoteList', {
        // console.log(findData);
         findData = OKnesset.AgendaListStore.getAt(findData);
 
-     console.log(findData.data.votes);
+     //console.log(findData.data.votes);
 			for (i=0 ; i<=findData.data.votes.length-1; i++)
 			  {	
 				if (findData.data.votes[i].score==1)

@@ -11,8 +11,8 @@ Ext.regController('AgendaPartiesSupportList', {
              this.AgendaPartiesSupportListView.addListener('itemtap',
             	function(that, index, item, e) {
 				var	record = that.store.getAt(index);
-			   console.log(record);
-			    OKnesset.app.controllers.navigation.dispatchPanel('party/Index/'+ record.data.id, options.historyUrl);
+			   console.log(record.data);
+			    OKnesset.app.controllers.navigation.dispatchPanel('Party/Index/'+ OKnesset.app.controllers.Party.getIdFromAbsoluteUrl(record.data.absolute_url), options.historyUrl);
 				});
 				
         }
@@ -23,7 +23,7 @@ Ext.regController('AgendaPartiesSupportList', {
 
        findData = OKnesset.AgendaListStore.getAt(findData);
        
-  		//OKnesset.AgendaPartiesSupportListStore.loadData(findData.data.parties);
+  		
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.supportparties + findData.data.name);
         this.application.viewport.setActiveItem(this.AgendaPartiesSupportListView, options.animation);
     
