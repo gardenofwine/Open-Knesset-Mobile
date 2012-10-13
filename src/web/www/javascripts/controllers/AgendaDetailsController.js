@@ -32,6 +32,7 @@ Ext.regController('AgendaDetails', {
          MostSupportParty=OKnesset.AgendaPartiesSupportListStore.getAt(0)
          findData.data.MostSupportMember=MostSupportMember.data.name;
          findData.data.MostSupportParty=MostSupportParty.data.name;
+         findData.data = this.replaceURLWithHTMLLinks(findData.data.description);
          this.application.viewport.query('#AgendaInfo')[0].update(findData.data);
          
    
@@ -50,6 +51,16 @@ Ext.regController('AgendaDetails', {
     dispatchMember: function() {
 		OKnesset.app.controllers.navigation.dispatchPanel('AgendaMembersSupportList/Index/' + this.id, this.historyUrl)
     },
- 
+ 	
+ 	replaceURLWithHTMLLinks: function(text) {
+    	var exp = /(\b(http):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/i;
+    	text = text.replace(exp,"<a href='$1'>$1</a>");
+    	exp = /(\b(https):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/i;
+    	text = text.replace(exp,"<a href='$1'>$1</a>");
+    	exp = /(\b(www).[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/i;
+    	text = text.replace(exp,"<a href='http://$1'>http://$1</a>");
+    	return text; 
+	},
+
     });
 
