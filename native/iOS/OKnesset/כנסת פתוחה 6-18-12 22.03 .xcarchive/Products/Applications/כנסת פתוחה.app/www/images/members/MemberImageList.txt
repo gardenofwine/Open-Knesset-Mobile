@@ -1,0 +1,242 @@
+#to download all the images run
+#curl -K MemberImageList.txt
+-O
+url = "http://www.knesset.gov.il/mk/images/members/mofaz_shaul-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/itzik_dalia-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/baron_roni-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/shitrit_meir-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/avraham_ruhama-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/dicter_abraham-s.jpg"
+-O
+url = "http://oknesset.org/static/img/mks/marina-solodkin.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/hasson_yoel-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/edri_yaakov-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Bielski_Zeev-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/tirosh_ronit-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/nachman_shai-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/molla_shlomo-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Tiviaev_Robert-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/whbee_majalli-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Adatto_Rachel-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Plesner_yohanan-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/hermesh_shai-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/hasson_israel-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Bibi_Arie-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/schneller_otniel-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Zuaretz_Orit-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Shamalov_Berkovich_Yulia-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Nino_Abesadze-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/avital_doron-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Avraham_Duan-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/ZellnerYuval.jpg"
+-O
+url = ""
+-O
+url = "http://www.knesset.gov.il/mk/images/members/netanyahu_bibi-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/saar_gidon-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/erdan_gilad-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/rivlin_rubi-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/begin_beni-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/cahlon_moshe-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/shalom_silvan-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/yaalon_moshe-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/steinitz_yuval-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/nass_lea-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/katz_yisrael-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/edelstein_yoel-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/livnat_limor-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/katz_haim-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Peled_Yossi-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/eitan_michael-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/meridor_dan-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Hotovely_Tzipi-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/gamliel_gila-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/elkin_zeev-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/levin_yariv-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Pinyan_Zion-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/kara_ayoob-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/danon_danny-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Shama_Carmel-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/akunis_ofir-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/regev_miri-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/liberman_avigdor-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/landau_uzi-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/miznikov_stas-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/aharonovitch_yitzhak-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/landver_sofa-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Levy_Orli-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Ayalon_Daniel-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/David_Rotem-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Michaeli_Anastassia-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Kirshenbaum_Faina-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/ilatov_robert-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Amar_Hamad-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/matalon_moshe_mutz-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/shemtov_lia-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Miller_Alex-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/yishai_eli-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/atias_ariel-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/cohen_yitzhak-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/cohen_amnon-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/nahari_meshulam-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/margi_yaakov-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/azoulay_david-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/vaknin_yizhak-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/zeev_nissim-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/amsalem_haim-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/michaeli_avraham-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/herzog_yitzhak-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/braverman_avishay-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/yacimovich_shelly-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/cabel_eitan-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/beneliezer_binyamin-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/peretz_amir-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Ben_Simon_Daniel-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/majadele_ralev-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/lizman_yaakov-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/gafni_moshe-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/uri_maklev-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/moses_menachem-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/eichler_israel-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/barak_ehud-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/simhon_shalom-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/noked_orit-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Einat_Wilf-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Shnaan_Shachiv-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/baraka_mohamed-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/swaid_hana-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/khenin_dov-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Agbaria_Afou-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/sarsur_ibrahim-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/tibi_ahmed-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/elsana_taleb-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Ganaim_Masud-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Yaakov_Katzeleh_Katz-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/ariel_uri-yehuda-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/eldad_aryeh-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Ben_Ari_Michael-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/gilon_ilan-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Horowitz_Nitzan-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/galon_zahava-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/zahalka_jamal-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/naffa_said-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Zuabi_Hanin-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Hershkowitz_Daniel-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/orlev_zevulun-s.jpg"
+-O
+url = "http://www.knesset.gov.il/mk/images/members/Orbach_Uri-s.jpg"

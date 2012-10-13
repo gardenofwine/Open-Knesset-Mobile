@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create Initial Memeber Data</title>
+        <script src="javascripts/sencha-touch/sencha-touch-debug-w-comments.js" type="text/javascript" charset="utf-8">
+        </script>
+        <script src="javascripts/sencha-touch/sencha-touch-fixes.js" type="text/javascript" charset="utf-8">
+        </script>
+        <script src="javascripts/createInitialData.js" type="text/javascript" charset="utf-8">
+        </script>
+        <script>
+
+            if (typeof OKnesset === 'undefined') {
+                var OKnesset = {};
+            }
+            OKnesset.debug = true;
+
+            function resultsReceived(dataObjects){
+            	// date of data retrieval
+                var now = new Date();
+				var x=document.getElementById("date");
+				x.innerHTML = now.getTime()
+
+				// parties
+				var x=document.getElementById("parties");
+				x.value = JSON.stringify(dataObjects.partyData, null, "\t");
+
+				// members
+				var x=document.getElementById("members");
+				x.value = JSON.stringify(dataObjects.memberData, null, "\t");
+
+				// create the slimMemeber list
+				var x=document.getElementById("slimMembers");
+				x.value = JSON.stringify(createSlimMemberList(dataObjects.memberData), null, "\t");
+
+				// member image list
+				stringImageListForDownload = "";
+				for (var i = dataObjects.memberData.length - 1; i >= 0; i--) {
+					var member = dataObjects.memberData[i];
+					if (member.img_url.length > 0 ) {
+						stringImageListForDownload += "-O\nurl = \"" + member.img_url + "\"\n";
+					} else {
+						console.log("member " + member.name + " ("+member.id+") has no image");
+					}
+
+				};
+				var x=document.getElementById("imageList");
+				x.value = stringImageListForDownload;
+
+				return;
+
+				function createSlimMemberList(memberList){
+					slimMemberList = new Array();
+					for (var i = memberList.length - 1; i >= 0; i--) {
+						var member = memberList[i];
+						var slimMember = {
+							name : member.name,
+							party_id : member.party_id,
+							party_ordinal : member.party_ordinal
+						};
+
+						slimMemberList.push(slimMember);
+					};
+
+					return slimMemberList;
+				}
+            }
+
+            OKnessetParser.loadData(resultsReceived);
+        </script>
+    </head>
+    <body>
+		date: <br>
+		<form name="data">
+			<div id="date"></div><br>
+	    	members: <br>
+			<TEXTAREA id="members" NAME="members" ROWS="10" COLS="800">
+			</TEXTAREA>
+			slimMembers:
+			<TEXTAREA id="slimMembers" NAME="slimMembers" ROWS="10" COLS="800">
+			</TEXTAREA>
+	    	slim data: <br>
+			<TEXTAREA id="slimData" NAME="slimData" ROWS="10" COLS="800">
+			</TEXTAREA>
+			parties: <br>
+			<TEXTAREA id="parties" NAME="parties" ROWS="10" COLS="800">
+			</TEXTAREA>
+			image list: <br>
+			<TEXTAREA id="imageList" NAME="partyData" ROWS="10" COLS="800">
+			</TEXTAREA>
+		</form>
+    </body>
+</html>

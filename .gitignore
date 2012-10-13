@@ -22,6 +22,7 @@ native/iOS/OKnesset/build/*
 native/iOS/OKnesset/OKnesset.xcodeproj/*.pbxuser
 native/iOS/OKnesset/OKnesset.xcodeproj/*.mode1v3
 native/iOS/OKnesset/xcuserdata
+native/iOS/distribution/2011-11-02 app store update
 
 #eclipse noise
 .tmp*
@@ -39,3 +40,7 @@ native/iOS/OKnesset/profile
 native/iOS/OKnesset/www/*
 native/iOS/OKnesset/www/javascripts/*
 /readme_review.html
+
+native/iOS/distribution/2011-11-02 app store update
+
+native/Android/OKnesset/PhoneGap

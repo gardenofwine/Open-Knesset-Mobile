@@ -64,6 +64,19 @@ OKnesset.MemberCommitteesStore = new Ext.data.Store({
     model: 'MemberCommittees'
 });
 
+OKnesset.menuStore = new Ext.data.Store({
+    model: Ext.regModel('', {
+        fields: [
+            {name:'title', type:'string'},
+            {name:'page', type:'string'},
+            {name:'type', type:'string'}
+        ]
+    }),
+    data: [
+        {title:OKnesset.strings.partiesTitle,page:"PartyList/Index", type : 'page'},
+        {title:OKnesset.strings.about,page:"Info/Index", type: 'dialog'},
+        ]
+    });
 
 //AgendaList
 Ext.regModel('AgendaList', {
@@ -73,7 +86,7 @@ Ext.regModel('AgendaList', {
 OKnesset.AgendaListStore = new Ext.data.Store({
     model: 'AgendaList',
     data: agend.objects
-    
+
 });
 
 //AgendaDetails
@@ -83,9 +96,7 @@ Ext.regModel('AgendaDetails', {
 
 OKnesset.AgendaDetailsStore = new Ext.data.Store({
     model: 'AgendaDetails',
-    
-    //data: agendadetails
-    
+
 });
 
 //AgendaVoteList

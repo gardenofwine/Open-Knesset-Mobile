@@ -1,8 +1,13 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=4160f2555c8566c5ae6726e2a9d37a4ae2a4d53f
 eclipse.preferences.version=1
 encoding//native/Android/OKnesset/src/org/oknesset/OKnesset.java=UTF-8
 encoding//native/Android/OKnesset/src/org/oknessett/OKnesset.java=UTF-8
+encoding//native/iOS/OKnesset/OKnesset.xcodeproj/gardenofwine.pbxuser=UTF-8
 encoding//src/web/www/createInitialData.html=UTF-8
 encoding//src/web/www/index.html=UTF-8
+encoding//src/web/www/javascripts/controllers/AgendaMembersSupportListController.js=UTF-8
 encoding//src/web/www/javascripts/controllers/PartyListController.js=UTF-8
 encoding//src/web/www/javascripts/createInitialData.js=UTF-8
 encoding//src/web/www/javascripts/data.js=UTF-8
@@ -16,6 +21,7 @@ encoding//src/web/www/javascripts/models/strings.js=UTF-8
 encoding//src/web/www/javascripts/partyData.js.jpg=UTF-8
 encoding//src/web/www/javascripts/slimData.js=UTF-8
 encoding//src/web/www/javascripts/strings.js=UTF-8
+encoding//src/web/www/javascripts/utils.js=UTF-8
 encoding//src/web/www/javascripts/views/MemberView.js=UTF-8
 encoding//src/web/www/javascripts/views/PartyListView.js=UTF-8
 encoding//src/web/www/javascripts/views/Viewport.js=UTF-8

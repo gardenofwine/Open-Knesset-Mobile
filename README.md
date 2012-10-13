@@ -31,13 +31,25 @@ The Open Knesset Mobile application loads on a Google Chrome browser. After inst
 Understanding the code
 ========
 
-The application is build with javascript over version 1.1 of the  [Sencha Touch](http://www.sencha.com/products/touch/) framework ([docs](http://docs.sencha.com/touch/1-1/)), and wrapped with version 1.1 of [PhoneGap](http://phonegap.com/).
+The application is build with javascript over version 1.1 of the  [Sencha Touch](http://www.sencha.com/products/touch/), and wrapped with version 1.1 of [PhoneGap](http://phonegap.com/).
+
+Relevant docs:
+
+- [Sencha Touch docs](http://docs.sencha.com/touch/1-1/)
+- [Sencha Touch Hello World](http://www.sencha.com/learn/hello-world/)
+
 The code structure follows the MVC paradigm, and specifically that which is described in this wonderfully written [tutorial](http://www.onlinesolutionsdevelopment.com/blog/mobile-development/creating-a-sencha-touch-mvc-application-from-scratch-part-1/)
+
+The first piece of code running is in index.javascript, in the mainLaunch function - start from there!
+
 
 Eclipse
 ========
 
-I work with Eclipse and the Aptana plugin for development. I use the Egit plugin for git integration within eclipse:
+I used to work with Eclipse and the Aptana plugin for development. However, today I use Sublime Text 2, and command line git.
+
+For those who want a more hugging development environment (although a bit slow), do go on and install Eclispe:
+I use the Egit plugin for git integration within eclipse:
 
 - Install the latest version of [eclipse](http://www.eclipse.org/downloads/?osType=win32)
 - Install the [Aptana plugin](http://update1.aptana.org/studio/3.2/024747/index.html). (detailed instructions [here](http://www.aptana.com/docs/index.php/Plugging_Aptana_into_an_existing_Eclipse_configuration#Eclipse_3.2.2C_3.3_Instructions))

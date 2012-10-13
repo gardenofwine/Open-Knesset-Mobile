@@ -1,4 +1,4 @@
-Ext.regController('Member', {
+OKnesset.app.controllers.Member = Ext.regController('Member', {
 
     // index action
     Index: function(options){
@@ -17,16 +17,11 @@ Ext.regController('Member', {
         var member = OKnesset.MemberStore.findBy(function(r){
             return r.data.id === parseInt(options.id)
         });
-        member  = OKnesset.MemberStore.getAt(member);
-        if (member.data.committees.length == 0) {
+        member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
+        if (member.committees.length == 0) {
         	OKnesset.app.views.MemberView.memberCommitteesBtn.hide();
         }
         GATrackMember(member.name);
-
-        this.memberView.query('#MemberImage')[0].update({
-            img_url: "images/members/" +
-            member.img_url.substring(member.img_url.lastIndexOf('/') + 1)
-        });
 
         this.updateData(member);
         this.application.viewport.setActiveItem(this.memberView, options.animation);
@@ -114,6 +109,11 @@ Ext.regController('Member', {
         	OKnesset.app.views.MemberView.memberCommitteesBtn.setText(OKnesset.strings.committees);
         	OKnesset.app.views.MemberView.memberCommitteesBtn.enable();
         }
+    },
+
+    getIdFromAbsoluteUrl: function(url){
+        var sub1 = url.substr("/member/".length);
+        return sub1.substr(0,sub1.indexOf('/'));
     },
 
     refresh: function(){

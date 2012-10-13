@@ -6,28 +6,7 @@
 	objectVersion = 45;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		135EC3BB143B3D35006B5924 /* GenGitVersion */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 135EC3C0143B3D38006B5924 /* Build configuration list for PBXAggregateTarget "GenGitVersion" */;
-			buildPhases = (
-				135EC3BA143B3D35006B5924 /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = GenGitVersion;
-			productName = GenGitVersion;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
-		1368826C150FCD6300360B6A /* FacebookConnectPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 1368826B150FCD6300360B6A /* FacebookConnectPlugin.m */; };
-		1368828C150FCFDB00360B6A /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 13688272150FCFDB00360B6A /* Facebook.m */; };
-		1368828D150FCFDB00360B6A /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 13688275150FCFDB00360B6A /* FBDialog.bundle */; };
-		1368828E150FCFDB00360B6A /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 13688277150FCFDB00360B6A /* FBDialog.m */; };
-		1368828F150FCFDB00360B6A /* FBFrictionlessRequestSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 13688279150FCFDB00360B6A /* FBFrictionlessRequestSettings.m */; };
-		13688290150FCFDB00360B6A /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1368827B150FCFDB00360B6A /* FBLoginDialog.m */; };
-		13688291150FCFDB00360B6A /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1368827D150FCFDB00360B6A /* FBRequest.m */; };
 		1388D41F1451D7D0009293F2 /* oknesset-splash.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1388D41E1451D7D0009293F2 /* oknesset-splash.mp4 */; };
 		13A116EB1444ADDB005DE409 /* EmailComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A116E81444ADDB005DE409 /* EmailComposer.m */; };
 		13A116EC1444ADDB005DE409 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 13A116E91444ADDB005DE409 /* readme.txt */; };
@@ -69,13 +48,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		135EC3C8143B3E03006B5924 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 135EC3BB143B3D35006B5924;
-			remoteInfo = GenGitVersion;
-		};
 		301BF534109A57CC0062928A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 301BF52D109A57CC0062928A /* PhoneGapLib.xcodeproj */;
@@ -100,20 +72,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1368826A150FCD6300360B6A /* FacebookConnectPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookConnectPlugin.h; sourceTree = "<group>"; };
-		1368826B150FCD6300360B6A /* FacebookConnectPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookConnectPlugin.m; sourceTree = "<group>"; };
-		13688271150FCFDB00360B6A /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
-		13688272150FCFDB00360B6A /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
-		13688274150FCFDB00360B6A /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
-		13688275150FCFDB00360B6A /* FBDialog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBDialog.bundle; sourceTree = "<group>"; };
-		13688276150FCFDB00360B6A /* FBDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBDialog.h; sourceTree = "<group>"; };
-		13688277150FCFDB00360B6A /* FBDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBDialog.m; sourceTree = "<group>"; };
-		13688278150FCFDB00360B6A /* FBFrictionlessRequestSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFrictionlessRequestSettings.h; sourceTree = "<group>"; };
-		13688279150FCFDB00360B6A /* FBFrictionlessRequestSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFrictionlessRequestSettings.m; sourceTree = "<group>"; };
-		1368827A150FCFDB00360B6A /* FBLoginDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginDialog.h; sourceTree = "<group>"; };
-		1368827B150FCFDB00360B6A /* FBLoginDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginDialog.m; sourceTree = "<group>"; };
-		1368827C150FCFDB00360B6A /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequest.h; sourceTree = "<group>"; };
-		1368827D150FCFDB00360B6A /* FBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRequest.m; sourceTree = "<group>"; };
 		1388D41E1451D7D0009293F2 /* oknesset-splash.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "oknesset-splash.mp4"; sourceTree = "<group>"; };
 		13A116E61444ADDB005DE409 /* EmailComposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailComposer.h; sourceTree = "<group>"; };
 		13A116E81444ADDB005DE409 /* EmailComposer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailComposer.m; sourceTree = "<group>"; };
@@ -129,7 +87,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* כנסת פתוחה.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "כנסת פתוחה.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Open-Knesset.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Open-Knesset.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1F766FDD13BBADB100FB74C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		1F766FE013BBADB100FB74C0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localizable.strings; sourceTree = "<group>"; };
@@ -199,25 +157,6 @@
 			path = Classes;
 			sourceTree = SOURCE_ROOT;
 		};
-		1368826D150FCFDB00360B6A /* src */ = {
-			isa = PBXGroup;
-			children = (
-				13688271150FCFDB00360B6A /* Facebook.h */,
-				13688272150FCFDB00360B6A /* Facebook.m */,
-				13688274150FCFDB00360B6A /* FBConnect.h */,
-				13688275150FCFDB00360B6A /* FBDialog.bundle */,
-				13688276150FCFDB00360B6A /* FBDialog.h */,
-				13688277150FCFDB00360B6A /* FBDialog.m */,
-				13688278150FCFDB00360B6A /* FBFrictionlessRequestSettings.h */,
-				13688279150FCFDB00360B6A /* FBFrictionlessRequestSettings.m */,
-				1368827A150FCFDB00360B6A /* FBLoginDialog.h */,
-				1368827B150FCFDB00360B6A /* FBLoginDialog.m */,
-				1368827C150FCFDB00360B6A /* FBRequest.h */,
-				1368827D150FCFDB00360B6A /* FBRequest.m */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
 		13A116E51444ADDA005DE409 /* EmailComposer */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,7 +189,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* כנסת פתוחה.app */,
+				1D6058910D05DD3D006BFB54 /* Open-Knesset.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -348,9 +287,6 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				1368826D150FCFDB00360B6A /* src */,
-				1368826A150FCD6300360B6A /* FacebookConnectPlugin.h */,
-				1368826B150FCD6300360B6A /* FacebookConnectPlugin.m */,
 				13A116E51444ADDA005DE409 /* EmailComposer */,
 				13AD0BDC141E116800C8F6C1 /* GoogleAnalytics */,
 			);
@@ -397,11 +333,10 @@
 			);
 			dependencies = (
 				301BF551109A68C00062928A /* PBXTargetDependency */,
-				135EC3C9143B3E03006B5924 /* PBXTargetDependency */,
 			);
 			name = "כנסת פתוחה";
 			productName = "OKnesset PG1";
-			productReference = 1D6058910D05DD3D006BFB54 /* כנסת פתוחה.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Open-Knesset.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -432,7 +367,6 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* כנסת פתוחה */,
-				135EC3BB143B3D35006B5924 /* GenGitVersion */,
 			);
 		};
 /* End PBXProject section */
@@ -475,26 +409,12 @@
 				1388D41F1451D7D0009293F2 /* oknesset-splash.mp4 in Resources */,
 				13C5617F147553CE00AE682E /* Animation-End.png in Resources */,
 				13C56180147553CE00AE682E /* Animation-End@2x.png in Resources */,
-				1368828D150FCFDB00360B6A /* FBDialog.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		135EC3BA143B3D35006B5924 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# shell script goes here\ngit=/usr/bin/git\ntouch OKnesset_PG1-Info.plist\nversion=`$git describe --dirty`\nversion=`echo $version | sed 's/[a-zA-Z]*//'`\nversionNum=`echo $version | sed 's/\\-[0-9]*\\-[a-zA-Z0-9]*//'`\necho \"#define GIT_VERSION $version\" > InfoPlist.h\necho \"#define APP_VERSION $versionNum\" >> InfoPlist.h\nexit 0";
-		};
 		304B58A110DAC018002A0835 /* Touch www folder */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -520,23 +440,12 @@
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				13AD0BE4141E116800C8F6C1 /* GoogleAnalyticsPlugin.m in Sources */,
 				13A116EB1444ADDB005DE409 /* EmailComposer.m in Sources */,
-				1368826C150FCD6300360B6A /* FacebookConnectPlugin.m in Sources */,
-				1368828C150FCFDB00360B6A /* Facebook.m in Sources */,
-				1368828E150FCFDB00360B6A /* FBDialog.m in Sources */,
-				1368828F150FCFDB00360B6A /* FBFrictionlessRequestSettings.m in Sources */,
-				13688290150FCFDB00360B6A /* FBLoginDialog.m in Sources */,
-				13688291150FCFDB00360B6A /* FBRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		135EC3C9143B3E03006B5924 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 135EC3BB143B3D35006B5924 /* GenGitVersion */;
-			targetProxy = 135EC3C8143B3E03006B5924 /* PBXContainerItemProxy */;
-		};
 		301BF551109A68C00062928A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PhoneGapLib;
@@ -564,27 +473,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		135EC3BC143B3D35006B5924 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				PRODUCT_NAME = GenGitVersion;
-			};
-			name = Debug;
-		};
-		135EC3BD143B3D35006B5924 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				PRODUCT_NAME = GenGitVersion;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
 		1378722814522E66003A6D6B /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 307D28A1123043350040C0FA /* PhoneGapBuildSettings.xcconfig */;
@@ -616,6 +504,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OKnesset_PG1-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "OKnesset_PG1-Info.plist";
 				INFOPLIST_PREFIX_HEADER = InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
@@ -623,18 +512,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Plugins/GoogleAnalytics/GoogSDK\"",
 				);
-				PRODUCT_NAME = "כנסת פתוחה";
-			};
-			name = Distribution;
-		};
-		1378722A14522E66003A6D6B /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				PRODUCT_NAME = GenGitVersion;
-				ZERO_LINK = NO;
+				PRODUCT_NAME = "Open-Knesset";
 			};
 			name = Distribution;
 		};
@@ -642,11 +520,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Benjamin Weingarten";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OKnesset_PG1-Prefix.pch";
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = /Users/Shared/PhoneGap/Frameworks/PhoneGap.framework/Headers;
 				INFOPLIST_FILE = "OKnesset_PG1-Info.plist";
 				INFOPLIST_PREFIX_HEADER = InfoPlist.h;
@@ -655,7 +535,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Plugins/GoogleAnalytics/GoogSDK\"",
 				);
-				PRODUCT_NAME = "כנסת פתוחה";
+				PRODUCT_NAME = "Open-Knesset";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "99AD5ED7-8FCD-4B15-B0ED-809BCFEAB09B";
 			};
 			name = Debug;
 		};
@@ -663,9 +544,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Benjamin Weingarten";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OKnesset_PG1-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "OKnesset_PG1-Info.plist";
 				INFOPLIST_PREFIX_HEADER = InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
@@ -673,7 +556,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Plugins/GoogleAnalytics/GoogSDK\"",
 				);
-				PRODUCT_NAME = "כנסת פתוחה";
+				PRODUCT_NAME = "Open-Knesset";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "99AD5ED7-8FCD-4B15-B0ED-809BCFEAB09B";
 			};
 			name = Release;
 		};
@@ -728,16 +612,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		135EC3C0143B3D38006B5924 /* Build configuration list for PBXAggregateTarget "GenGitVersion" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				135EC3BC143B3D35006B5924 /* Debug */,
-				135EC3BD143B3D35006B5924 /* Release */,
-				1378722A14522E66003A6D6B /* Distribution */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "כנסת פתוחה" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

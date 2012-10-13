@@ -8,15 +8,17 @@ Ext.regController('AgendaMembersSupportList', {
                 xtype: 'AgendaMembersSupportListView',
             });
             
-            /*
              this.AgendaMembersSupportListView.addListener('itemtap',
             	function(that, index, item, e) {
-				var	record = that.store.getAt(index);
-			   console.log(record);
-			    OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/'+ record.data.id, options.historyUrl);
+    				var	record = that.store.getAt(index);
+			         console.log(record);
+//                     console.log("memberid",OKnesset.app.controllers.Member.getIdFromAbsoluteUrl(record.data.absolute_url));
+			         OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/'+ OKnesset.app.controllers.Member.getIdFromAbsoluteUrl(record.data.absolute_url), options.historyUrl);
 				});
-				*/
         }
+
+        // in order to be able to navigate to any member's page
+        OKnesset.MemberStore.clearFilter(true);
 
         var findData = OKnesset.AgendaListStore.findBy(function(r){return r.data.id === parseInt(options.id)});
 

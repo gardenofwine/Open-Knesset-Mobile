@@ -8,6 +8,9 @@ OKnesset.app.views.MemberView = new Ext.extend(Ext.Panel, {
         type: 'vbox',
         align: 'stretch'
     },
+    // items: [{
+    //     xtype : "panel"
+    // }],
     currentMemeber: null,
     initComponent: function(){
         this.infoWrapper = new OKnesset.app.views.MemberView.InfoWrapper();
