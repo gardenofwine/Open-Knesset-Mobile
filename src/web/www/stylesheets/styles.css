@@ -70,6 +70,8 @@ div.textCenter * {
 #PartyListView .x-list-parent {
 	text-align: center;
 }
+#PartyView #MemberList .x-list-item:first-child {background-color: #f7e8c1}
+#PartyView #MemberList .x-list-item.x-item-selected{background-color: #06346A}
 
 .CommitteesInfo {width:100%;direction:rtl;text-align:right;padding:10px}
 .CommitteesInfo ul,li {list-style-type : circle}
