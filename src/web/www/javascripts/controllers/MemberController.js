@@ -12,15 +12,22 @@ Ext.regController('Member', {
         OKnesset.app.views.MemberView.memberBillsBtn.setHandler(this.dispatchBills,options);
 
         OKnesset.app.views.MemberView.memberCommitteesBtn.setHandler(this.dispatchCommittees,options);
+
+        OKnesset.app.views.MemberView.memberVotesBtn.setHandler(this.dispatchVotes,options);
+
+        //ROYCHANGE
         // TODO the memberController page should not rely on the MemberStore to contain party members
         // the way the stores are organized should change
-        var member = OKnesset.MemberStore.findBy(function(r){
-            return r.data.id === parseInt(options.id)
-        });
-        member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
+        // var member = OKnesset.GetMembersById(options.id)
+        // var member = OKnesset.MemberStore.findBy(function(r){
+        //     return r.data.id === parseInt(options.id)
+        // });
+        // member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
+        var member = this.currentMember = OKnesset.GetMembersById(options.id)[0];
         if (member.committees.length == 0) {
         	OKnesset.app.views.MemberView.memberCommitteesBtn.hide();
         }
+        else OKnesset.app.views.MemberView.memberCommitteesBtn.show();
         GATrackMember(member.name);
 
         this.memberView.query('#MemberImage')[0].update({
@@ -38,6 +45,10 @@ Ext.regController('Member', {
 
     dispatchCommittees: function() {
 		OKnesset.app.controllers.navigation.dispatchPanel('Committees/Index/' + this.id, this.historyUrl)
+    },
+
+    dispatchVotes: function() {
+        OKnesset.app.controllers.navigation.dispatchPanel('memberVotes/Index/' + this.id, this.historyUrl)
     },
 
     getReviewButtonText: function(){
@@ -90,6 +101,7 @@ Ext.regController('Member', {
     		document.location="tel:+972-" + phone_num.substr(1);
     	}
     },
+
     updateData: function(member){
 
         this.memberView.query('#MemberInfo')[0].update(member);

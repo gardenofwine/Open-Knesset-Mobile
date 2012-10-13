@@ -23,6 +23,7 @@ OKnesset.app.views.MemberView.memberEmailBtn = new Ext.Button({margin : '10 5 10
 OKnesset.app.views.MemberView.memberCallBtn = new Ext.Button({margin : '10 5 10 5'});
 OKnesset.app.views.MemberView.memberBillsBtn = new Ext.Button({margin : '10 5 10 5',text :  OKnesset.strings.bills});
 OKnesset.app.views.MemberView.memberCommitteesBtn = new Ext.Button({margin : '10 5 10 5',text : OKnesset.strings.committees});
+OKnesset.app.views.MemberView.memberVotesBtn = new Ext.Button({margin : '10 5 10 5',text : OKnesset.strings.votes});
 
 OKnesset.app.views.MemberView.InfoWrapper = new Ext.extend(Ext.Panel, {
     id: 'MemberInfoWrapper',
@@ -30,7 +31,13 @@ OKnesset.app.views.MemberView.InfoWrapper = new Ext.extend(Ext.Panel, {
     initComponent: function(){
         this.info = new OKnesset.app.views.MemberView.Info();
         this.image = new OKnesset.app.views.MemberView.Image();
-        this.items = [this.info, OKnesset.app.views.MemberView.memberEmailBtn, OKnesset.app.views.MemberView.memberCallBtn, OKnesset.app.views.MemberView.memberBillsBtn, OKnesset.app.views.MemberView.memberCommitteesBtn];
+        this.items = [this.info,
+                     OKnesset.app.views.MemberView.memberEmailBtn,
+                     OKnesset.app.views.MemberView.memberCallBtn, 
+                     OKnesset.app.views.MemberView.memberBillsBtn, 
+                     OKnesset.app.views.MemberView.memberCommitteesBtn, 
+                     OKnesset.app.views.MemberView.memberVotesBtn
+                     ];
         this.dockedItems = [{
             xtype: 'panel',
             dock: 'right',

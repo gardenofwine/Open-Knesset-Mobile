@@ -2,7 +2,7 @@ OKnesset.strings = {
 	hasBillsTitle 			: "הצעות חוק פרטיות שעברו קריאה טרומית",
 	hasNoBillsTitle			: "אין הצעות חוק פרטיות שעברו קריאה טרומית",
 	excuseForNoBills		: 'שרים בממשלה ויו"ר הכנסת אינם מגישים, ככלל, הצעות חוק פרטיות',
-	partiesTitle	 		:'מפלגות',
+	partiesTitle	 		: 'מפלגות',
 	openBillText			: 'לפתוח בדפדפן?',
 	dialogOKCancel	 		: 'ביטול,אישור',
 	downloadDataText	 	: 'נפח הנתונים הוא כ 2 מגה.',
@@ -36,5 +36,23 @@ OKnesset.strings = {
 	noCommittees			: 'אין ועדות',
 	coalition               : 'קואליציה',
 	opposition              : 'אופוזיציה',
+	//Roy&Vitaly
+	votes       	        : 'הצבעות',
+	votesDetails   	        : 'פרטי הצבעה',
+	for 					: 'בעד',
+	against 				: 'נגד',
+	abstain 				: 'נמנע',
+	presence 				: 'נוכחות בועדה:',
+	committeeDetails        : 'פרטי ועדה',
+	meetings				: 'דיונים',
+	future_meetings			: 'דיונים עתידיים',
+	recent_meetings			: 'דיונים אחרונים',
+	billDetails   	        : 'פרטי הצעת חוק',
+	billStage				: 'מצב הצעת החוק:',
+	billFounder				: 'יוזמי ההצעה',
+	billJoiner				: 'הצטרפו להצעה',
+	BillpdfExist			: 'ההצעה באתר הכנסת',
+	BillpdfNotExist			: 'מסמך רשמי להצעת החוק איננו זמין',
+	LoadingPlsWait			: 'טוען נתונים, אנא המתן...'
 };
 
