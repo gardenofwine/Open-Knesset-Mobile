@@ -62,6 +62,14 @@ OKnesset.PartyStore = new Ext.data.Store({
     }
 });
 
+Ext.regModel('PartyManifesto', {
+	fields: ['description']
+});
+
+OKnesset.PartyManifestoStore = new Ext.data.Store({
+	model: 'PartyManifesto',
+	data: manifestoData
+});
 
 //add all committees control
 

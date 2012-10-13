@@ -18,6 +18,9 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 
         var party = OKnesset.PartyStore.findBy(function(r){return r.data.id === parseInt(options.id)});
         party = OKnesset.PartyStore.getAt(party);
+        
+        this.showManifesto(party.data.id);
+        
         var name = party.data.name;
        // console.log(party);
         // Analytics
@@ -69,7 +72,12 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
         OKnesset.MemberStore.filter({
             property: 'party_id',
             value : party.data.id});
-    }
+    },
 
-
+	showManifesto : function(partyId){
+		var manifestoIndex = OKnesset.PartyManifestoStore.findBy(function(r){return r.data.party_id === partyId});
+		var manifesto = OKnesset.PartyManifestoStore.getAt(manifestoIndex);
+        this.partyView.query('#Manifesto')[0].update(manifesto.data);
+	}
+	
 });
