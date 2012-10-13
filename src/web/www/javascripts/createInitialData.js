@@ -150,6 +150,13 @@ window.OKnessetParser = new function(){
 			reducedMember.phone = member.phone;
 			reducedMember.place_of_residence = member.place_of_residence;
 			reducedMember.party_id = partyIdFromMember(member);
+			reducedMember.roles = member.current_role_descriptions;
+			reducedMember.average_weekly_presence_hours = member.average_weekly_presence_hours;
+			reducedMember.average_monthly_committee_presence = member.average_monthly_committee_presence;
+			reducedMember.bills_stats_proposed = member.bills_stats_proposed;
+			reducedMember.bills_stats_pre = member.bills_stats_pre;
+			reducedMember.bills_stats_first = member.bills_stats_first;
+			reducedMember.bills_stats_approved = member.bills_stats_approved;
 
 			if (typeof sortedMembers[reducedMember.party_id] != "undefined") {
 				if (sortedMembers[reducedMember.party_id].indexOf(reducedMember.name) == -1){
