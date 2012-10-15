@@ -4,8 +4,7 @@ OKnesset.app.views.AgendaVoteListView = new Ext.extend(Ext.List, {
     store: OKnesset.AgendaVoteListStore,
     grouped: true,
 
-    itemTpl :  //  '<div dir="rtl">{title}<br>'  + OKnesset.strings.importance + ' {importancestring} </div>',
-    '<div class="AgendaVoteTitle">{title}<div class="partySize">{importancestring}</div></div>',
+    itemTpl : '<div align="right">{title}<div class="supportSize">{importancestring}</div></div>',
     onItemDisclosure: true,
   
 });

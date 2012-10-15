@@ -43,9 +43,9 @@ OKnesset.strings = {
 	AgendaDetailsTitle      : "פרטי האג'נדה",
 	SupportMembers			: "חברי הכנסת התומכים",
 	SupportParties			: "המפלגות התומכות",
-	AgendaDescription       : "תיאור האג'נדה:",
-	mostsupportmember       : "חבר הכנסת התומך ביותר:",
-	mostsupportparty        : "המפלגה התומכת ביותר:",
+	AgendaDescription       : "תיאור האג'נדה",
+	mostsupportmember       : "חבר הכנסת התומך ביותר",
+	mostsupportparty        : "המפלגה התומכת ביותר",
 	importance              : "חשיבות ההצבעה: ",
 	level                   : "מידת התמיכה באג'נדה:",
 	supportmembers          : "חברי הכנסת התומכים באג'נדה - ",
@@ -58,7 +58,15 @@ OKnesset.strings = {
 	veryimportant			:"חשיבות רבה מאד",
 	important				:"חשיבות רבה",
 	mediumimportant         :"חשיבות בינונית",
-	lowimportance			:"חשיבות נמוכה"
+	lowimportance			:"חשיבות נמוכה",
+	deletefromvotetitle1    :"להעביר את הצעת החוק לוועדה - ",
+	deletefromvotetitle2    :"להעביר את הצעת החוק לוועדה שתקבע ועדת הכנסת - ",
+	deletefromvotetitle3    :"להעביר את הנושא לוועדה - ",
+	deletefromvotetitle4    :"להעביר את הנושא לוועדה שתקבע ועדת הכנסת - ",
+	deletefromvotetitle5    :"העברת הנושא לוועדה שתקבע ועדת הכנסת - ",
+	deletefromvotetitle6    :"לכלול את הנושא בסדר היום של המליאה  - ",
+	AgendaMostSupport       :"התומכים ביותר",
+	AgendaMore              :"פרטים נוספים",
 };
 
 	

@@ -14,46 +14,12 @@ Ext.regController('AgendaVoteList', {
 					OKnesset.app.controllers.navigation.dispatchPanel('Vote/Index/' + record.data.id, options.historyUrl);
 					
 				});
-
         }
 
         var findData = OKnesset.AgendaListStore.findBy(function(r){return r.data.id === parseInt(options.id)});
-        // console.log(options.id);
-       // console.log(findData);
         findData = OKnesset.AgendaListStore.getAt(findData);
 
-     //console.log(findData.data.votes);
-			for (i=0 ; i<=findData.data.votes.length-1; i++)
-			  {	
-				if (findData.data.votes[i].score==1)
-					{findData.data.votes[i].scorestring=OKnesset.strings.fullsupport}
-					
-			    if (findData.data.votes[i].score==-1)
-			   		{findData.data.votes[i].scorestring=OKnesset.strings.fullresistance}
-			   		
-			    if (findData.data.votes[i].score==0.5) 
-			        {findData.data.votes[i].scorestring=OKnesset.strings.partialsupport}	
-			        
-			    if (findData.data.votes[i].score==-0.5) 
-			        {findData.data.votes[i].scorestring=OKnesset.strings.partialresistance}	
-			        
-			    if (findData.data.votes[i].score==0) 
-			        {findData.data.votes[i].scorestring=OKnesset.strings.unknown}	   
-			        
-			    if (findData.data.votes[i].importance==1)
-					{findData.data.votes[i].importancestring=OKnesset.strings.veryimportant}
-					
-			    if (findData.data.votes[i].importance==0.6)
-			   		{findData.data.votes[i].importancestring=OKnesset.strings.important}
-			   		
-			    if (findData.data.votes[i].importance==0.3) 
-			        {findData.data.votes[i].importancestring=OKnesset.strings.mediumimportant}
-			        	
-			    if (findData.data.votes[i].importance==0) 
-			        {findData.data.votes[i].importancestring=OKnesset.strings.lowimportance}	
-			        
-			  }
-			console.log(findData.data.votes);
+        this.updateString(findData.data.votes)
 		OKnesset.AgendaVoteListStore.loadData(findData.data.votes);
 			  	
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.AgendaVoteTitle + findData.data.name);
@@ -61,8 +27,52 @@ Ext.regController('AgendaVoteList', {
     
  
     },
+    /*
 	refresh : function() {
         this.AgendaVoteList = this.AgendaVoteListView.query('#AgendaVoteList')[0];		
 		this.AgendaVoteList.refresh();
 	 }
+	 */
+	     updateString : function(votes) 
+	     {
+       
+     
+				for (i=0 ; i<=votes.length-1; i++)
+				  {	
+					if (votes[i].score==1)
+						{votes[i].scorestring=OKnesset.strings.fullsupport}
+						
+				    if (votes[i].score==-1)
+				   		{votes[i].scorestring=OKnesset.strings.fullresistance}
+				   		
+				    if (votes[i].score==0.5) 
+				        {votes[i].scorestring=OKnesset.strings.partialsupport}	
+				        
+				    if (votes[i].score==-0.5) 
+				        {votes[i].scorestring=OKnesset.strings.partialresistance}	
+				        
+				    if (votes[i].score==0) 
+				        {votes[i].scorestring=OKnesset.strings.unknown}	   
+				        
+				    if (votes[i].importance==1)
+						{votes[i].importancestring=OKnesset.strings.veryimportant}
+						
+				    if (votes[i].importance==0.6)
+				   		{votes[i].importancestring=OKnesset.strings.important}
+				   		
+				    if (votes[i].importance==0.3) 
+				        {votes[i].importancestring=OKnesset.strings.mediumimportant}
+				        	
+				    if (votes[i].importance==0) 
+				        {votes[i].importancestring=OKnesset.strings.lowimportance}	
+				        
+				        //clear strings from vote title
+				     votes[i].title = votes[i].title.replace(OKnesset.strings.deletefromvotetitle1,'')
+				     votes[i].title = votes[i].title.replace(OKnesset.strings.deletefromvotetitle2,'')
+				     votes[i].title = votes[i].title.replace(OKnesset.strings.deletefromvotetitle3,'')
+				     votes[i].title = votes[i].title.replace(OKnesset.strings.deletefromvotetitle4,'')
+				     votes[i].title = votes[i].title.replace(OKnesset.strings.deletefromvotetitle5,'')
+				     votes[i].title = votes[i].title.replace(OKnesset.strings.deletefromvotetitle6,'')  	        
+			     }
+		}
  });

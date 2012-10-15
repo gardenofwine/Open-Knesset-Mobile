@@ -2,14 +2,28 @@ Ext.regController('AgendaDetails', {
 
     // index action
     Index: function(options){
-        if (!this.AgendaDetailsView) {
-            this.AgendaDetailsView = this.render({
-                xtype: 'AgendaDetailsView',
+        if (!this.AgendaDetailsView) 
+        {
+        	
+            	this.AgendaDetailsView = this.render({
+                	xtype: 'AgendaDetailsView',
             });
-			var AgendaDetailsController = this;
+			
+			   this.AgendaDetailsView.MostSupportMember.addListener('itemtap',
+            	function(that, index, item, e) {
+    				var	record = that.store.getAt(index);                  
+			         OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/'+ OKnesset.app.controllers.Member.getIdFromAbsoluteUrl(record.data.MostSupportMember.absolute_url), options.historyUrl);
+				});
+							
+			   this.AgendaDetailsView.MostSupportParty.addListener('itemtap',
+            	function(that, index, item, e) {
+    				var	record = that.store.getAt(index);                
+			         OKnesset.app.controllers.navigation.dispatchPanel('Party/Index/'+ OKnesset.app.controllers.Party.getIdFromAbsoluteUrl(record.data.MostSupportParty.absolute_url), options.historyUrl);
+				});
+				var AgendaDetailsController = this;
         }
         
-
+	  //button
         OKnesset.app.views.AgendaDetailsView.AgendaVoteListBtn.setHandler(this.dispatchVotes,options);
 
         OKnesset.app.views.AgendaDetailsView.SupportMemberBtn.setHandler(this.dispatchMember,options);
@@ -25,7 +39,7 @@ Ext.regController('AgendaDetails', {
          this.application.viewport.setActiveItem(this.AgendaDetailsView, options.animation);
 
          
-           // roud score of support
+           // round score of support
          this.roundScore(findData.data.members);
          this.roundScore(findData.data.parties);
 
@@ -34,9 +48,12 @@ Ext.regController('AgendaDetails', {
             //find most supports member & party
          MostSupportMember=OKnesset.AgendaMembersSupportListStore.getAt(0)
          MostSupportParty=OKnesset.AgendaPartiesSupportListStore.getAt(0)
-         findData.data.MostSupportMember=MostSupportMember.data.name;
-         findData.data.MostSupportParty=MostSupportParty.data.name;
-         this.application.viewport.query('#AgendaInfo')[0].update(findData.data);
+
+         findData.data.MostSupportMember=MostSupportMember.data;
+         findData.data.MostSupportParty=MostSupportParty.data;
+         var toArr =[findData.data];
+         OKnesset.AgendaDetailsStore.loadData(toArr);
+
 
     },
 

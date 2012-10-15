@@ -17,8 +17,7 @@ Ext.regController('AgendaPartiesSupportList', {
 				
         }
 
-
-       
+        OKnesset.PartyStore.clearFilter(true);
         var findData = OKnesset.AgendaListStore.findBy(function(r){return r.data.id === parseInt(options.id)});
 
        findData = OKnesset.AgendaListStore.getAt(findData);
@@ -30,7 +29,7 @@ Ext.regController('AgendaPartiesSupportList', {
  
     },
 //	refresh : function() {
-    //   this.AgendaVoteList = this.AgendaVoteListView.query('#AgendaVoteList')[0];		
-	//	this.AgendaVoteList.refresh();
+    //   this.AgendaPartiesSupportList = this.AgendaPartiesSupportListView.query('#AgendaPartiesSupportList')[0];		
+	//	this.AgendaPartiesSupportList.refresh();
 	// }
  });
