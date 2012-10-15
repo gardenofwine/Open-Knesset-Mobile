@@ -6,7 +6,7 @@ OKnesset.app.views.CommitteeDetailsView = new Ext.extend(Ext.Panel, {
     },
     scroll: 'vertical',
     listeners: {
-    },    
+    },
     currentMemeber: null,
     initComponent: function(){
         this.committeeMembersList = new OKnesset.app.views.CommitteeDetailsView.committeeMembersList();
@@ -28,7 +28,7 @@ OKnesset.app.views.CommitteeDetailsView = new Ext.extend(Ext.Panel, {
             }),
             new Ext.Panel({
                   id: 'committeeMembers',
-                  cls: 'subtitlePanel',                
+                  cls: 'subtitlePanel',
                   height : "2em",
                   padding: '5',
                   html:'<div align="right">' + OKnesset.strings.committeeMembers+ '</div>'
@@ -61,19 +61,9 @@ OKnesset.app.views.CommitteeDetailsView.committeeMembersList = new Ext.extend(Ex
 OKnesset.app.views.CommitteeDetailsView.committeeMeetings = new Ext.extend(Ext.List, {
     id: 'committeeMeetings',
     itemTpl: '<div>{title}</div><div class="timeString">{date}</div>',
-    store: OKnesset.CommitteeDetailsMeetingsListStore, 
+    store: OKnesset.CommitteeDetailsMeetingsListStore,
     scroll: false,
     grouped: true,
     onItemDisclosure: true,
     deferEmptyText: false
 });
-
-
-
-
-
-
-
-
-
-

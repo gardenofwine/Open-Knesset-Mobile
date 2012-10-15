@@ -57,4 +57,3 @@ OKnesset.app.views.Viewport.AppMenu = new Ext.Panel({
 
 
 
-

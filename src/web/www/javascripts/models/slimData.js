@@ -605,7 +605,7 @@ var slimPartyData = [
 	{
 		"absolute_url": "/party/6/%D7%A7%D7%93%D7%99%D7%9E%D7%94/",
 		"id": 6,
-		"is_coalition": false,
+		"is_coalition": true,
 		"name": "קדימה",
 		"number_of_members": 29,
 		"number_of_seats": 28,
@@ -666,15 +666,6 @@ var slimPartyData = [
 		"resource_uri": "/api/v2/party/13/"
 	},
 	{
-		"absolute_url": "/party/1/%D7%94%D7%90%D7%99%D7%97%D7%95%D7%93-%D7%94%D7%9C%D7%90%D7%95%D7%9E%D7%99/",
-		"id": 1,
-		"is_coalition": false,
-		"name": "האיחוד הלאומי",
-		"number_of_members": 4,
-		"number_of_seats": 4,
-		"resource_uri": "/api/v2/party/1/"
-	},
-	{
 		"absolute_url": "/party/8/%D7%97%D7%93%22%D7%A9/",
 		"id": 8,
 		"is_coalition": false,
@@ -693,13 +684,13 @@ var slimPartyData = [
 		"resource_uri": "/api/v2/party/10/"
 	},
 	{
-		"absolute_url": "/party/12/%D7%94%D7%91%D7%99%D7%AA-%D7%94%D7%99%D7%94%D7%95%D7%93%D7%99/",
-		"id": 12,
-		"is_coalition": true,
-		"name": "הבית היהודי",
-		"number_of_members": 3,
-		"number_of_seats": 3,
-		"resource_uri": "/api/v2/party/12/"
+		"absolute_url": "/party/1/%D7%94%D7%90%D7%99%D7%97%D7%95%D7%93-%D7%94%D7%9C%D7%90%D7%95%D7%9E%D7%99/",
+		"id": 1,
+		"is_coalition": false,
+		"name": "האיחוד הלאומי",
+		"number_of_members": 4,
+		"number_of_seats": 4,
+		"resource_uri": "/api/v2/party/1/"
 	},
 	{
 		"absolute_url": "/party/11/%D7%9E%D7%A8%D7%A6/",
@@ -718,5 +709,14 @@ var slimPartyData = [
 		"number_of_members": 3,
 		"number_of_seats": 3,
 		"resource_uri": "/api/v2/party/9/"
+	},
+	{
+		"absolute_url": "/party/12/%D7%94%D7%91%D7%99%D7%AA-%D7%94%D7%99%D7%94%D7%95%D7%93%D7%99/",
+		"id": 12,
+		"is_coalition": true,
+		"name": "הבית היהודי",
+		"number_of_members": 3,
+		"number_of_seats": 3,
+		"resource_uri": "/api/v2/party/12/"
 	}
 ];

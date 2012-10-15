@@ -25,12 +25,3 @@ OKnesset.app.views.CommitteesView.CommitteeList = new Ext.extend(Ext.List, {
     flex: 1.5,
     onItemDisclosure: true
 });
-
-
-
-
-
-
-
-
-

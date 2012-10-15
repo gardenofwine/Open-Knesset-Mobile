@@ -10,10 +10,8 @@ Ext.regController('AgendaMembersSupportList', {
             
              this.AgendaMembersSupportListView.addListener('itemtap',
             	function(that, index, item, e) {
-    				var	record = that.store.getAt(index);
-			         console.log(record);
-//                     console.log("memberid",OKnesset.app.controllers.Member.getIdFromAbsoluteUrl(record.data.absolute_url));
-			         OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/'+ OKnesset.app.controllers.Member.getIdFromAbsoluteUrl(record.data.absolute_url), options.historyUrl);
+    				var	record = that.store.getAt(index);                     
+			        OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/'+ OKnesset.app.controllers.Member.getIdFromAbsoluteUrl(record.data.absolute_url), options.historyUrl);
 				});
         }
 
@@ -36,7 +34,7 @@ Ext.regController('AgendaMembersSupportList', {
     },
     
 	//refresh : function() {
-    //    this.AgendaVoteList = this.AgendaVoteListView.query('#AgendaVoteList')[0];		
-	//	this.AgendaVoteList.refresh();
+    //    this.AgendaMembersSupportList = this.AgendaMembersSupportListView.query('#AgendaMembersSupportList')[0];		
+	//	this.AgendaMembersSupportList.refresh();
 	// }
  });

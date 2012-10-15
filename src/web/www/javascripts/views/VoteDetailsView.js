@@ -60,10 +60,3 @@ OKnesset.app.views.VoteDetailsView.membersVoted = new Ext.extend(Ext.List, {
     onItemDisclosure: true,
     deferEmptyText: false,
 });
-
-
-
-
-
-
-

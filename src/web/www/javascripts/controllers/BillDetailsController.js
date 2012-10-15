@@ -26,7 +26,7 @@ Ext.regController('BillDetails', {
             this.cached = options.id;
             var hideWhileLoading = [billStage, billContent, billMakersList];
             BillDetailsController._init(hideWhileLoading);
-        
+
             Ext.util.JSONP.request({
                 url: 'http://www.oknesset.org/api/bill/' + options.id,
                 callbackKey : "callback",
@@ -37,7 +37,7 @@ Ext.regController('BillDetails', {
                 }
             });
         }
-        
+
         this.application.viewport.setActiveItem(this.BillDetailsView, options.animation);
 
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.billDetails);
@@ -50,7 +50,7 @@ Ext.regController('BillDetails', {
         }
     },
 
-    
+
     _init: function(elementsToHIDE){
 
         this.BillDetailsView.query('#billTitle')[0].update({
@@ -103,7 +103,7 @@ Ext.regController('BillDetails', {
         var pdfs = [];
         if (data.proposals.private_proposals[0] != null) {
              expalantions.push(data.proposals.private_proposals[0].explanation);
-             
+
              if (data.proposals.private_proposals[0].source_url.match(/\.pdf/))
                 pdfs.push(data.proposals.private_proposals[0].source_url);
          }

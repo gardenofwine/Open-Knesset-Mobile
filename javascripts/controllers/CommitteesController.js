@@ -8,19 +8,14 @@ Ext.regController('Committees', {
             });
             var committeeList = this.committeesView.query('#MemberCommitteeList')[0];
 			var committeesController = this;
-            committeeList.addListener('itemtap', function(that, index, item, e){
-                var record = that.store.getAt(index);
-                committeesController._gotoCommittee(record);
-            });
         }
 
-        //ROYCHANGE
-        // var member = OKnesset.MemberStore.findBy(function(r){
-        //     return r.data.id === parseInt(options.id)
-        // });
-        // member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
-
-        var member = this.currentMember = OKnesset.GetMembersById(options.id)[0];
+ 
+        var member = OKnesset.MemberStore.findBy(function(r){
+            return r.data.id === parseInt(options.id)
+        });
+        member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
+       
         OKnesset.MemberCommitteesStore.loadData(member.committees);
 
         // scroll committee list up
@@ -37,23 +32,14 @@ Ext.regController('Committees', {
         this.committeesView.query('#MemberCommitteeList')[0].refresh();
 
         this.application.viewport.setActiveItem(this.committeesView, options.animation);
-        this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.committees);
     },
 
-
+    
     refresh: function(){
 
 
         var committeeList = this.committeesView.query('#MemberCommitteeList')[0];
         committeeList.refresh();
-    },
-
-    _gotoCommittee: function(record){
-
-        //TODO: update id to the relevant id for the current committee
-
-        committeeId = 1;
-        OKnesset.app.controllers.navigation.dispatchPanel('CommitteeDetails/Index/' + committeeId, this.historyUrl);
     }
 
 

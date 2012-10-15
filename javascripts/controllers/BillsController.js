@@ -14,12 +14,11 @@ Ext.regController('Bills', {
             });
         }
 
-        //ROYCHANGE
-        // var member = OKnesset.MemberStore.findBy(function(r){
-        //     return r.data.id === parseInt(options.id)
-        // });
-        // member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
-        var member = this.currentMember = OKnesset.GetMembersById(options.id)[0];
+ 
+        var member = OKnesset.MemberStore.findBy(function(r){
+            return r.data.id === parseInt(options.id)
+        });
+        member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
         OKnesset.MemberBillsStore.loadData(member.bills);
 
         // scroll bill list up
@@ -46,7 +45,7 @@ Ext.regController('Bills', {
         this.application.viewport.setActiveItem(this.billsView, options.animation);
     },
 
-
+    
     refresh: function(){
 
 
@@ -71,9 +70,26 @@ Ext.regController('Bills', {
      */
     _gotoBill: function(record){
         var bill = record.data;
-        bill.id = bill.url.match(/\/(\d+)\/$/)[1];
-        if (bill.id != null)
-            OKnesset.app.controllers.navigation.dispatchPanel('BillDetails/Index/' + bill.id, this.historyUrl);
+        var url = 'http://www.oknesset.org' + bill.url;
+        if (isPhoneGap()) {
+            if (isiOS()) {
+                // Since in iOS opening the browser exists the application,
+                // the user should be prompted if she wishes to do so.
+				var that = this;
+                navigator.notification.confirm(null, function(idx){
+                    if (idx == 2) {
+                        that._gotoBillCallback(url, bill.url)
+                    } else {
+                        // track bill cancel
+                        GATrackBillCanceled(bill.url)
+                    }
+                }, OKnesset.strings.openBillText, OKnesset.strings.dialogOKCancel);
+            } else {// android
+                this._gotoBillCallback(url, bill.url);
+            }
+        }
+        // TODO for web version - open a new browser tab
+
     },
 
     _gotoBillCallback: function(url, billUrl){

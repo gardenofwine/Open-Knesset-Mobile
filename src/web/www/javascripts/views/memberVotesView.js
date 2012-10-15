@@ -34,5 +34,3 @@ OKnesset.app.views.memberVotesView.VotesList = new Ext.extend(Ext.List, {
     deferEmptyText: false,
     flex: 1.5
 });
-
-

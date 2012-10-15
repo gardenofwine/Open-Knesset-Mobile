@@ -244,7 +244,7 @@ Ext.regModel('AgendaList', {
 
 OKnesset.AgendaListStore = new Ext.data.Store({
     model: 'AgendaList',
-    data: agend.objects
+    data: agenda.objects
 
 });
 
@@ -255,8 +255,6 @@ Ext.regModel('AgendaDetails', {
 
 OKnesset.AgendaDetailsStore = new Ext.data.Store({
     model: 'AgendaDetails',
-
-    //data: agendadetails
 
 });
 

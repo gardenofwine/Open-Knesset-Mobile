@@ -1,12 +1,48 @@
+
 OKnesset.app.views.AgendaDetailsView = new Ext.extend(Ext.Panel, {
 			id : 'AgendaDetailsView',
-			layout : 'fit',
-			title : '',
-			currentParty : null,
+            scroll: 'vertical',
 		    initComponent: function()
 		    {
-		    	this.AgendaDetails = new OKnesset.app.views.AgendaDetailsView.AgendaDetails();
-		    	this.items = [this.AgendaDetails];
+		    	this.AgendaDescription = new OKnesset.app.views.AgendaDetailsView.AgendaDescription();
+		    	this.MostSupportMember = new OKnesset.app.views.AgendaDetailsView.MostSupportMember();
+		    	this.MostSupportParty = new OKnesset.app.views.AgendaDetailsView.MostSupportParty();
+		    	this.items = 
+		    	[
+			    		new Ext.Panel({
+			          		height : "2em",
+			          		padding: '5',
+			            	html: '<div align="right" dir="rtl"><b>'  + OKnesset.strings.AgendaDescription +  '</b></div>'
+			            
+			              }),
+			              
+		    		    this.AgendaDescription,
+		    		
+		    			new Ext.Panel({
+			          		height : "2em",
+			          		padding: '5',
+			            	html: '<div align="right" dir="rtl"><b>'  + OKnesset.strings.AgendaMostSupport +  '</b></div>'
+			            
+			              }),
+			              
+		    			this.MostSupportMember,
+		    			this.MostSupportParty,
+		    		
+		    		
+		    			new Ext.Panel({
+			          		height : "2em",
+			          		padding: '5',
+			            	html: '<div align="right" dir="rtl"><b>'  + OKnesset.strings.AgendaMore +  '</b><br></div>'
+			            
+			              }),
+			              
+			            OKnesset.app.views.AgendaDetailsView.AgendaVoteListBtn,
+                    	OKnesset.app.views.AgendaDetailsView.SupportMemberBtn, 
+                     	OKnesset.app.views.AgendaDetailsView.SupportPartyBtn
+                     	
+		    	];
+		    	
+		    	
 		        OKnesset.app.views.AgendaDetailsView.superclass.initComponent.apply(this, arguments);
 		    }
 		});
@@ -14,49 +50,40 @@ OKnesset.app.views.AgendaDetailsView = new Ext.extend(Ext.Panel, {
 Ext.reg('AgendaDetailsView', OKnesset.app.views.AgendaDetailsView);
 
 
+OKnesset.app.views.AgendaDetailsView.AgendaDescription = new Ext.extend(Ext.List, {
+    id: 'AgendaDetails',
+    layout: ' fit',
+	padding: '5',
+    scroll: false,
+    store :OKnesset.AgendaDetailsStore,
+    itemTpl: '<div align="right"><br> {description}<br><br></div>'
+    //flex: 1,
+ 
+                    
+ 
+});
+
+OKnesset.app.views.AgendaDetailsView.MostSupportMember = new Ext.extend(Ext.List, {
+	id : 'MostSupportMember',
+	layout: ' fit',
+	padding: '5',
+    scroll: false,
+	store : OKnesset.AgendaDetailsStore,
+	itemTpl :    '<div align="right"> {MostSupportMember.name} <br> <font size="2">' + OKnesset.strings.mostsupportmember+ '</font></div>',
+	onItemDisclosure: true,
+
+});
+OKnesset.app.views.AgendaDetailsView.MostSupportParty = new Ext.extend(Ext.List, {
+	id : 'MostSupportParty',
+	layout: ' fit',
+	padding: '5',
+    scroll: false,
+	store : OKnesset.AgendaDetailsStore,
+	itemTpl :    '<div align="right">{MostSupportParty.name} <br> <font size="2">' + OKnesset.strings.mostsupportparty+ '</font></div>',
+	onItemDisclosure: true,
+
+});
+
 OKnesset.app.views.AgendaDetailsView.AgendaVoteListBtn = new Ext.Button({margin : '10 5 10 5',text :  OKnesset.strings.AgendaVoteButton});
 OKnesset.app.views.AgendaDetailsView.SupportMemberBtn = new Ext.Button({margin : '10 5 10 5',text : OKnesset.strings.SupportMembers});
 OKnesset.app.views.AgendaDetailsView.SupportPartyBtn = new Ext.Button({margin : '10 5 10 5',text : OKnesset.strings.SupportParties});
-
-OKnesset.app.views.AgendaDetailsView.AgendaDetails = new Ext.extend(Ext.Panel, {
-    id: 'AgendaDetails',
-    scroll: 'vertical',
-    flex: 1,
-    initComponent: function(){
-        this.AgendaInfo = new OKnesset.app.views.AgendaDetailsView.AgendaInfo();
-       
-        this.items = [
-                     OKnesset.app.views.AgendaDetailsView.AgendaVoteListBtn,
-                     OKnesset.app.views.AgendaDetailsView.SupportMemberBtn, 
-                     OKnesset.app.views.AgendaDetailsView.SupportPartyBtn
-                     ];
-      
-       this.dockedItems = [{
-             xtype: 'panel',
-             dock: 'top',
-             items: [this.AgendaInfo]
-           },
-           {
-           	xtype: 'panel',
-             dock: 'bottom',
-             items: [OKnesset.app.views.AgendaDetailsView.AgendaVoteListBtn,
-                     OKnesset.app.views.AgendaDetailsView.SupportMemberBtn, 
-                     OKnesset.app.views.AgendaDetailsView.SupportPartyBtn]
-           }
-            ];
-
-        
-        OKnesset.app.views.AgendaDetailsView.AgendaDetails.superclass.initComponent.apply(this, arguments);
-    
-}
-});
-
-OKnesset.app.views.AgendaDetailsView.AgendaInfo = new Ext.extend(Ext.Panel, {
-	id : 'AgendaInfo',
-	//scroll: 'vertical',
-	store : OKnesset.AgendaDetailsStore,
-	tpl :    '<div dir="rtl">' + OKnesset.strings.AgendaDescription + '<br> {description}<br><br>'
-	                           + OKnesset.strings.mostsupportmember + ' {MostSupportMember}  '
-	                           + OKnesset.strings.mostsupportparty + ' {MostSupportParty}</div>'
-
-});

@@ -63,10 +63,3 @@ OKnesset.app.views.BillDetailsView.billMakers = new Ext.extend(Ext.List, {
     onItemDisclosure: true,
     deferEmptyText: false,
 });
-
-
-
-
-
-
-

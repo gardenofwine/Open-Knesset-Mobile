@@ -19,7 +19,7 @@ Ext.regController('VoteDetails', {
         var VoteDetailsController = this;
         var voteDescription = this.VoteDetailsView.query('#voteDescription')[0];
         var membersVotedList = this.VoteDetailsView.query('#membersVotedList')[0];
-        
+
         if (this.cached != options.id) {
             this.cached = options.id;
             var hideWhileLoading = [voteDescription, membersVotedList];
@@ -85,7 +85,7 @@ Ext.regController('VoteDetails', {
 
         voted.abstain.forEach(function (member) {
             member.VoteType = 'abstain';
-        });                
+        });
 
         OKnesset.VotedStore.loadData(voted.for);
         OKnesset.VotedStore.add(voted.against);

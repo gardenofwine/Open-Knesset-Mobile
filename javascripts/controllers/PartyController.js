@@ -1,4 +1,4 @@
-OKnesset.app.controllers.Party = Ext.regController('Party', {
+Ext.regController('Party', {
 
     // index action
 	Index: function(options)
@@ -19,12 +19,12 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
         var party = OKnesset.PartyStore.findBy(function(r){return r.data.id === parseInt(options.id)});
         party = OKnesset.PartyStore.getAt(party);
         var name = party.data.name;
-       // console.log(party);
+
         // Analytics
     	GATrackParty(name);
 
-        this.filterMembersByParty(party);
-
+    	// Set the page's data
+        OKnesset.MemberStore.loadData(party.data.members, false);
         // TODO currentParty is only needed for the email widget. Find a better way to fetch the current party
     	this.currentParty = party.data;
 
@@ -48,27 +48,12 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 				OKnesset.strings.emailParty,
 				this.currentParty.name);
     },
-     getIdFromAbsoluteUrl: function(url){
-        var sub1 = url.substr("/party/".length);
-        return sub1.substr(0,sub1.indexOf('/'));
-    },
 	refresh : function() {
 		var party = getPartyFromPartyStoreByName(this.currentParty.name);
-        this.filterMembersByParty(party);
+		OKnesset.MemberStore.loadData(party.data.members, false);
         var memberList = this.partyView.query('#MemberList')[0];
         memberList.refresh();
 	},
-    // private
-    /*
-    Set the party filter on the store
-    */
-
-    filterMembersByParty : function(party) {
-        OKnesset.MemberStore.clearFilter(true);
-        OKnesset.MemberStore.filter({
-            property: 'party_id',
-            value : party.data.id});
-    }
 
 
 });

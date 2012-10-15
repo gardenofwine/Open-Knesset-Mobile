@@ -48,7 +48,7 @@ Ext.regController('CommitteeDetails', {
             });
 
         }
-      
+
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.committeeDetails);
         this.application.viewport.setActiveItem(this.CommitteeDetailsView, options.animation);
 
@@ -61,7 +61,7 @@ Ext.regController('CommitteeDetails', {
             });
         }
         this.refresh();
-        
+
     },
     _updateData: function (CommitteeDetails) {
 
@@ -117,7 +117,7 @@ Ext.regController('CommitteeDetails', {
     getIdFromAbsoluteUrl: function(url){
         var sub1 = url.substr("/committee/meeting/".length);
         return sub1.substr(0,sub1.indexOf('/'));
-    },    
+    },
 
     refresh: function(){
 

@@ -8,40 +8,52 @@ Ext.regController('memberVotes', {
                 xtype: 'memberVotesView',
             });
 
-            //Get the List for reference
             var memberVotesList = this.memberVotesView.query('#MemberVotesList')[0];
-
-            //Defining what is happening when tapping on an item in the list
+        
             memberVotesList.addListener('itemtap',
                 function(that, index, item, e) {
                     var record = that.store.getAt(index);
                     //console.log(record);
-                    OKnesset.app.controllers.navigation.dispatchPanel('VoteDetails/Index/' + record.data.id, options.historyUrl);
+                    OKnesset.app.controllers.navigation.dispatchPanel('Votes/Index/' + record.data.id, options.historyUrl);
             });
         }
 
         var memberVotesController = this;
-        var memberVotesList = this.memberVotesView.query('#MemberVotesList')[0];
 
-        if (this.cached != options.id) {
-            this.cached = options.id;
-            var hideWhileLoading = [memberVotesList];
-            memberVotesController._init(hideWhileLoading);
 
-            //add for votes to store
-             Ext.util.JSONP.request({
-                url: 'http://www.oknesset.org/api/v2/vote/',
-                callbackKey : "callback",
-                params : {limit:10, format:"jsonp", member_for: options.id},
-                onFailure : function(){console.log("failure");},
-                callback: function(data){
+        // var operation = new Ext.data.Operation({
+        //     action: 'read',
+        //     type: 'scripttag'
+        // //    format: jsonp,
+        // });
 
-                    for (var i = data.objects.length - 1; i >= 0; i--) {
-                        data.objects[i]['VoteType'] = 'for';
-                    };
+        // var proxy = new Ext.data.ScriptTagProxy ({
+        //     url: 'http://www.oknesset.org/api/v2/vote/?format=jsonp&callback=callback&member_for=' + options.id,
+        //     reader: new Ext.data.Reader({
+        //         type: 'json',
+        //         root: 'objects'
+        //     })
+        // });
 
-                   //console.log(data.objects);
-                    OKnesset.MemberVotesStore.loadData(data.objects);
+        //add for votes to store
+         Ext.util.JSONP.request({
+            url: 'http://www.oknesset.org/api/v2/vote/',
+            callbackKey : "callback",
+            params : {limit:10, format:"jsonp", member_for: options.id},
+            onFailure : function(){console.log("failure");},
+            callback: function(data){
+
+                for (var i = data.objects.length - 1; i >= 0; i--) {
+                    data.objects[i]['VoteType'] = 'for';
+                };
+
+               //console.log(data.objects);
+                OKnesset.MemberVotesStore.loadData(data.objects);
+
+                           // scroll votes list up
+
+
+                 memberVotesList.refresh();
 
                     //add against votes to store
                     Ext.util.JSONP.request({
@@ -57,18 +69,12 @@ Ext.regController('memberVotes', {
 
                             //console.log(dataAgainst.objects);
                             OKnesset.MemberVotesStore.add(dataAgainst.objects);
-                            memberVotesController._refresh(hideWhileLoading);
+                            memberVotesList.refresh();
                         }
                     });
 
-                }
-            });
-        }
-
-        //Change toolbar title
-        this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.votes);
-
-
+            }
+        });
 
         if (options.pushed) {
             if (memberVotesList.scroller) {
@@ -79,28 +85,12 @@ Ext.regController('memberVotes', {
             }
         }
 
-
+ 
 
         this.application.viewport.setActiveItem(this.memberVotesView, options.animation);
-
+       
     },
-    _init: function(elementsToHIDE){
-
-        this.memberVotesView.query('#memberVotesLoading')[0].show();
-
-        elementsToHIDE.forEach(function(e){
-            e.hide();
-        });
-    },
-    _refresh: function(elementsToSHOW){
-
-        this.memberVotesView.query('#memberVotesLoading')[0].hide();
-
-        elementsToSHOW.forEach(function(e){
-            e.show();
-        });
-    },
-    refresh : function() {
+    refresh : function() {        
         var memberVotesList = this.memberVotesView.query('#MemberVotesList')[0];
         memberVotesList.refresh();
 	},

@@ -11,31 +11,31 @@ OKnesset.app.views.ProtocolView = new Ext.extend(Ext.Panel, {
 		this.protocolMembers = new OKnesset.app.views.ProtocolView.Members();
 		this.protocolText = new OKnesset.app.views.ProtocolView.Text();
 		this.items = [
-		              
+
 		              new Ext.Panel({
 		          		height : "2em",
 		          		padding: '5',
 		            	html: '<div align="right"><b>' + OKnesset.strings.protocolMeetingTitle+'  </b></div>'
-		            
+
 		              }),
 		              this.protocolTitle,
-		              
+
 		              new Ext.Panel({
 		            	  height : "2em",
 		            	  padding: '5',
 		            	  html:'<div align="right"><b>' + OKnesset.strings.protocolMeetingAttendants + '</b></div>'
 		              }),
-		              
+
 		              this.protocolMembers,
-		              
+
 		              new Ext.Panel({
 		            	  height : "2em",
 		            	  padding: '5',
 		            	  html:'<div align="right"><b> '+OKnesset.strings.protocolMeetingContent+'</b></div>'
 		              }),
-		              
+
 		              this.protocolText,
-		              
+
 		      ];
 		 OKnesset.app.views.ProtocolView.superclass.initComponent.apply(this, arguments);
     }
@@ -49,9 +49,9 @@ OKnesset.app.views.ProtocolView.Title = new Ext.extend(Ext.List, {
 	layout: ' fit',
 	padding: '5',
     scroll: false,
-    itemTpl :'<div class="ProtocolTopics">{topics}</div>',	
+    itemTpl :'<div class="ProtocolTopics">{topics}</div>',
 	store : OKnesset.Protocol2Store,
-	
+
 });
 
 OKnesset.app.views.ProtocolView.Members = new Ext.extend(Ext.List, {
@@ -72,7 +72,7 @@ OKnesset.app.views.ProtocolView.Text = new Ext.extend(Ext.List, {
     itemTpl: '<div>{protocol_text}</div>',
   	store : OKnesset.ProtocolTopicsStore,
 	onItemDisclosure : false,
-	
+
 });
 
 
