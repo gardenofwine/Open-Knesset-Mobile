@@ -22,7 +22,8 @@ OKnesset.app.views.CommitteesView.CommitteeList = new Ext.extend(Ext.List, {
     store: OKnesset.MemberCommitteesStore,
     layout: 'fit',
     deferEmptyText: false,
-    flex: 1.5
+    flex: 1.5,
+    onItemDisclosure: true
 });
 
 

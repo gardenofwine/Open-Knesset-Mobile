@@ -11,7 +11,7 @@ Ext.regController('AgendaVoteList', {
           this.AgendaVoteListView.addListener('itemtap',
             	function(that, index, item, e) {
 					var record = that.store.getAt(index);
-					OKnesset.app.controllers.navigation.dispatchPanel('Vote/Index/' + record.data.id, options.historyUrl);
+					OKnesset.app.controllers.navigation.dispatchPanel('VoteDetails/Index/' + record.data.id, options.historyUrl);
 					
 				});
         }
