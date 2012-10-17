@@ -6,10 +6,24 @@
 .x-tab img.right2, .x-button img.x-icon-mask.right2 {
   -webkit-mask-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAD5klEQVRoBe2aSWgUQRSGnSQSMauGBJGIQUEUvCmKRk96kngQr+amKJ5VIihGMagouBBxIRBR0JMgCG6XRA9B0LgcoqLowR2NGtzimvj9moZmmCQ93dXdNT0++Omt+lV9/aqrXvVManBwcEw+WUE+wYr1P3DYEU+lUpVoDioMu65M/uOI8HQasg3VAB15/ZFXCKjqXI4Oo4VAj2MbmcUB7EwLK6DcjZYCPSEq4jiA3Wz1HBxAjUDXuC+EtR83sLj0Tm9G64Gu1okwrShM51n4nkTZDSoPdDubZyREAzo2bTZE2GEqYUej9yY0A/BQpi1bIuxAa7sWlaFWoO8Q6R86acpsirDDpMg2Ig1m9UCPdy6Y2NoI7HAtYKcFNQCtiBsxG7u0G0zQU1AZ0Ofo3u/cF/3s2xxhh6eWnV1oNdB1KOVc8LPNBWBxaX7egjSKTwsCHUeXdlJL2p6VlVJag5kivA/o+3Tx31l5GCosB5GIBqrKuUg7fvWTe8+jeahYPrORIqzULhIjKoLUIBTE1OYGVIWa8XkN4G9eHSqyJ70WNlBO6aLex2UGfMnFXbQVdQHteQT327Vsue8JwBtRlZeuTTnf75ItwGrHZ3QCLUKFI4FzPRHAgtZ7fBnp/R4WOo5pifaEYsV4XYIq0ACDWQeR7s9Uk01d01RbugBdhyrTu3eSIuwOpnJwfVSoINKngH7pvmjqqdro5wWge1GdE2mB29hQk23qg3E/mo3GosQD6+G9R21oYq6slmhrIPvC3Zqrf8mLye5jo69XMDahqUipdGKBlbc/Qko7q/Nh0LoFqL6Aljqw2sps7IZB2qTPuhfRSlTihk0isPLpC2g+yphPcz4xEf4Ii9b2i9Oj6j5OCvAbQJRczEQFbsD0/SQA9wCxCpWnw2U61uJhu6gjtMnUtcZQfZ34aUbdwCmxGNU0EVePWspsgVm4uxrQpeZYjcQ70U1g/2ZQXnwWUfitl4KmyrBcqw3o6zv3t6Gj6EE2sKo3jvVwkN99lRMfQa3oKbD/MgkOvFocwF7bll6ulxPtSKPxaz+wcpgrwMqJW9AVQLUY8G25ANwNnWaSDmA9jcQjPQ3bgS/R+D3oOrBKGwObrcCaZgSrn1F6gNUPaEbMRuCvkGnKOYYeA+vrJ9Hhno5twJ9oqL4ytgP6fLhGBzlvE7BGX72vp4ENLRmyBfghoAfRGWA/sA3NbAC+Dd0O1AmsviGHanEDn4XuELoBbH+opEPO4wB2voUfpw3KifXnFM+rnaAPJQ5gJRBa7TShPmCzXgAEgU5FXJ/+HlxOg/XHlntRw+pBRQ6sSuM0532Ksw2R1p13wH8A5wfg761UXA4AAAAASUVORK5CYII=');
 }
+/* Sencha touch addition for list icon */
+.x-tab img.list, .x-button img.x-icon-mask.list {
+  -webkit-mask-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAADqklEQVRoBe2aS2jUUBSGO7UPX1UrIj4Wgi8EFYvUlUtdKmp14aMggigidSNIFwWRogtBEFwouHMjrkQRLYIKIqKI6MIufBUsglAQLFqrtHX8/tA7jGnuTHAKzcnkwEcy99ybnj8nuTm5aS6fz9dUk9VWk1hpzQSnPeN1EpjD2DTAdHBZH2N/GEa5zyNvdIZpfBNYsaGacS3NRHwEPoHE/YHXsAsa1ScKfK0wCBpjgTbiDDJ02RPwN9oPQ21aBOvy3QNHIcrm0ngW1kc5LbZJ8GnQPeyzhTjafU5r7RK8LEbQa2L0MdFFgkdjRBqnT4zDTH0XCX5SJgzNvo/K9DHjluAL8BUkLGzKbC/cCjus/q7jcXOHAuIUArpgATSCnsO/4A10Qj/4TAXKCESdMN+YqWrPB5UWf/0aKJPbYQMMwVPo4YS8Y+szFR0PYA5IeJJNV/NATgWFMzKt7BYyjK/kZEX/afSf5cYb2A7/I9hAwBWHqDRXlWWC057uLMNZhlN2BqruknaVlta16knmfJgBqka+wyDFh7eCYozWwRaBlRM3EAgmcJWGm2ArLAHVxm/hIb5eRKuujrKlNKoOnwmqv5NsWuS4pAD1wnAevoAyW4xeHo5Dg0rQMLS3gqVFvN26FA/AIdClGba1NJyAdWGH0d95CT4GyrLPVuPY6XNaa5fgVTGC1itjKkyCvbNwkcLfRfumdyX4WQwFL2L0MdFFgi/C+xLRPsd3u4TflEvP4R7QDH0Q9JjRSZDp2fsYrkCpZR7cZiwXrHhQXGhZZyVshMWgIqIPXsJnX7XFOPXdB6q4LNjNwhIPwasS0edSV1r+RGjJyYohWtNSlaarQgVL0u1HQXDSI52s+Nz9OlnHS/xxMsGJT1GFAWYZrvAEJn54luHEp6jCAIMlHncMConZ7Lusj1B46P+0vDZeeJj6mBYIJnCtSW2BdpgHqpr6aL+K6Ffs+2w5jnNg5XNpt8pJ1cEnoQOaQeWiTAt5H6ET7iF8QunICdHLxn3QlTHBT1vSbK8C2g++hTh9H/4ALdIbhnZri3htul+VXV2SUaZsr4AdUU6LbRLcEiNwvTamwtyMXE6MhfuznIbAL8GlZmF3kDh9XN9EbyX4TJkItd51vUwfM24J1mOlG6JWN/pp7wLN1Omw8cerqqVtcBckXP+ZdwM2Q334ceR+4zP3WHKLeCpAVHVpMU+fTTVJqfCQ+DEERk5aFB4a0wRWbChb07KSqv+NU5NWVVnVCf4LlUj5R3Y0QSkAAAAASUVORK5CYII=');
+}
+
 
 .x-list-item {
   direction :rtl;
-  background-color: white;
+
+	background: rgb(233,233,206); /* Old browsers */
+	background: -moz-linear-gradient(45deg,  rgba(214, 214, 205, 1) 1%, rgba(252,255,244,1) 16%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(1%,rgba(214, 214, 205, 1)), color-stop(16%,rgba(252,255,244,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(45deg,  rgba(214, 214, 205, 1) 1%,rgba(252,255,244,1) 16%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(45deg,  rgba(214, 214, 205, 1) 1%,rgba(252,255,244,1) 16%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(45deg,  rgba(214, 214, 205, 1) 1%,rgba(252,255,244,1) 16%); /* IE10+ */
+	background: linear-gradient(45deg,  rgba(214, 214, 205, 1) 1%,rgba(252,255,244,1) 16%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9e9ce', endColorstr='#fcfff4',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
 }
 
 .partySize {
@@ -20,11 +34,25 @@
 .partyName div{
 	display : inline;
 }
+.AgendaVoteTitle div{
+
+	display : inline;
+}
+
+.supportSize {
+	float : left;
+	direction : ltr;
+	padding-left : 1em;
+}
+
+.memberName div{
+	display : inline;
+}
 
 /* info page design*/
 div.textCenter * {
 	direction : rtl;
-	text-align:center
+	text-align:center;
 }
 
 /* Member page Design */
@@ -67,9 +95,83 @@ div.textCenter * {
 /* Center empty bill list emptyText*/
 /* Centers group tittle for bill and party list*/
 #MemberBillList .x-list-parent,
-#PartyListView .x-list-parent {
+#PartyListView .x-list-parent,
+.x-list-header {
+	text-align: center;
+}
+#AgendaVoteListView .x-list-parent {
 	text-align: center;
 }
 
 .CommitteesInfo {width:100%;direction:rtl;text-align:right;padding:10px}
 .CommitteesInfo ul,li {list-style-type : circle}
+
+div .timeString {
+	float : left;
+	padding-left : 1em;
+	color: grey;
+	font-size: 15px;
+}
+
+/*Votes*/
+
+
+div.Votescounters{
+	color: grey;
+	font-size: 15px;
+
+}
+
+span.memberVotesListTitle {
+	font-size: 17px;
+	font-weight: bold;
+
+}
+
+
+div.hebTitle {
+	font-size: 17px;
+	font-weight: bold;
+	text-align: right;
+   	direction: rtl;
+}
+
+div.description {
+   	font-size: 16px;
+   	text-align: right;
+   	direction: rtl;
+}
+
+div.titlePanel {
+	text-align: center;
+	font-weight: bold;
+	color: #272831;
+
+	background: rgb(252,255,244); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(252,255,244,1) 0%, rgba(223,229,215,1) 29%, rgba(179,190,173,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,255,244,1)), color-stop(29%,rgba(223,229,215,1)), color-stop(100%,rgba(179,190,173,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(252,255,244,1) 0%,rgba(223,229,215,1) 29%,rgba(179,190,173,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(252,255,244,1) 0%,rgba(223,229,215,1) 29%,rgba(179,190,173,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(252,255,244,1) 0%,rgba(223,229,215,1) 29%,rgba(179,190,173,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(252,255,244,1) 0%,rgba(223,229,215,1) 29%,rgba(179,190,173,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 ); /* IE6-9 */
+
+	border-radius: 0 0 5px 5px;
+
+}
+
+div.subtitlePanel {
+	font-weight: bold;
+}
+
+.memberJob {
+	display: block;
+	padding: 1px;
+	float: right;
+}
+
+.hebLink {
+	direction: rtl;
+	display: block;
+}
+

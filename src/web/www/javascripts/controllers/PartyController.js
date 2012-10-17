@@ -1,4 +1,4 @@
-Ext.regController('Party', {
+OKnesset.app.controllers.Party = Ext.regController('Party', {
 
     // index action
 	Index: function(options)
@@ -19,7 +19,7 @@ Ext.regController('Party', {
         var party = OKnesset.PartyStore.findBy(function(r){return r.data.id === parseInt(options.id)});
         party = OKnesset.PartyStore.getAt(party);
         var name = party.data.name;
-
+       // console.log(party);
         // Analytics
     	GATrackParty(name);
 
@@ -48,6 +48,10 @@ Ext.regController('Party', {
 				OKnesset.strings.emailParty,
 				this.currentParty.name);
     },
+     getIdFromAbsoluteUrl: function(url){
+        var sub1 = url.substr("/party/".length);
+        return sub1.substr(0,sub1.indexOf('/'));
+    },
 	refresh : function() {
 		var party = getPartyFromPartyStoreByName(this.currentParty.name);
         this.filterMembersByParty(party);
@@ -55,14 +59,14 @@ Ext.regController('Party', {
         memberList.refresh();
 	},
     // private
-    /*  
+    /*
     Set the party filter on the store
     */
 
     filterMembersByParty : function(party) {
         OKnesset.MemberStore.clearFilter(true);
         OKnesset.MemberStore.filter({
-            property: 'party_id',  
+            property: 'party_id',
             value : party.data.id});
     }
 

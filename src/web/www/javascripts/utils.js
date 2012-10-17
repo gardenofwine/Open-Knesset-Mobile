@@ -53,7 +53,7 @@ function GATrackBill(url, callback) {
  * Handle updating the application's data from teh internet (oknesset.org)
  */
 function processData(data) {
-	// stringifying BEFORE using the data, because the data may change 
+	// stringifying BEFORE using the data, because the data may change
 	var partyDataString = JSON.stringify(data.partyData);
 	var memberDataString = JSON.stringify(data.memberData);
 	updateData(data);
@@ -79,7 +79,7 @@ function loadInitialData() {
 		// load initial data (data shipped with the application)
 		if (!isPhoneGap()) {
 			processData({
-				memberData : memberData, 
+				memberData : memberData,
 				partyData : partyData,
 				dataDate : dataDate});
 			checkFullDataFromWeb();
@@ -93,7 +93,7 @@ function loadInitialData() {
 							&& response.responseText.length > 0) {
 						eval(response.responseText);
 						processData({
-							memberData : memberData, 
+							memberData : memberData,
 							partyData : partyData,
 							dataDate : dataDate});
 						checkFullDataFromWeb();
@@ -164,7 +164,7 @@ function processFullDataFromWebByLocalScript() {
 		displayFetchCompleteNotification();
 
 		processData({
-			memberData : data.memberData, 
+			memberData : data.memberData,
 			partyData : data.partyData,
 			dataDate : new Date()});
 		// var resultParty = JSON.stringify(data.partyData);
@@ -317,3 +317,76 @@ function getPartyFromPartyStoreByName(name) {
 	return OKnesset.PartyStore.getAt(partyIndex);
 
 }
+
+//receives an array of id's and returns a array of objects of the members
+OKnesset.GetMembersById = function (ids) {
+
+	if (ids.push === undefined) {
+		//assumming we got only one id
+			tmp=[]; tmp.push(ids); ids = tmp;
+		}
+
+  var members = [];
+  OKnesset.MemberStore.snapshot.items.forEach(function(member) {
+      for (var i=0;i<ids.length;i++) {
+          id=ids[i];
+
+          if (member.data !== undefined)
+          {
+              member = member.data;
+          }
+          if (member.id === undefined)
+              console.log(member);
+
+           if (member.id == id) {
+              members.push(member);
+              ids.remove(id);
+              i = ids.length;
+          }
+      }
+
+      if (ids.length == 0)
+          return members;
+  });
+  return members;
+}
+
+//receives an array of names and returns a array of objects of the members
+//Usage: OKnesset.GetMembersByName(arrayOfNames)
+//TODO: Liba
+
+// OKnesset.GetMembersByName = function (names) {
+
+// 	if (names.push === undefined) {
+// 		//assumming we got only one name
+// 			tmp=[];
+// 			tmp.push(names);
+// 			names = tmp;
+// 		}
+
+//   var members = [];
+//   OKnesset.PartyStore.data.items.forEach(function(party) {
+//       party.data.members.forEach(function(member) {
+//           for (var i=0;i<names.length;i++) {
+//               name=names[i];
+
+//               if (member.data !== undefined)
+//               {
+//                   member = member.data;
+//               }
+//               if (member.name === undefined)
+//                   console.log(member);
+
+//                if (member.name == name) {
+//                   members.push(member);
+//                   names.remove(name);
+//                   i = names.length;
+//               }
+//           }
+
+//           if (names.length == 0)
+//               return members;
+//       });
+//   });
+//   return members;
+// }
