@@ -327,6 +327,7 @@ OKnesset.GetMembersById = function (ids) {
 		}
 
   var members = [];
+  //var storeCollection = OKnesset.MemberStore.snapshot?OKnesset.MemberStore.snapshot:
   OKnesset.MemberStore.snapshot.items.forEach(function(member) {
       for (var i=0;i<ids.length;i++) {
           id=ids[i];
@@ -351,42 +352,3 @@ OKnesset.GetMembersById = function (ids) {
   return members;
 }
 
-//receives an array of names and returns a array of objects of the members
-//Usage: OKnesset.GetMembersByName(arrayOfNames)
-//TODO: Liba
-
-// OKnesset.GetMembersByName = function (names) {
-
-// 	if (names.push === undefined) {
-// 		//assumming we got only one name
-// 			tmp=[];
-// 			tmp.push(names);
-// 			names = tmp;
-// 		}
-
-//   var members = [];
-//   OKnesset.PartyStore.data.items.forEach(function(party) {
-//       party.data.members.forEach(function(member) {
-//           for (var i=0;i<names.length;i++) {
-//               name=names[i];
-
-//               if (member.data !== undefined)
-//               {
-//                   member = member.data;
-//               }
-//               if (member.name === undefined)
-//                   console.log(member);
-
-//                if (member.name == name) {
-//                   members.push(member);
-//                   names.remove(name);
-//                   i = names.length;
-//               }
-//           }
-
-//           if (names.length == 0)
-//               return members;
-//       });
-//   });
-//   return members;
-// }
