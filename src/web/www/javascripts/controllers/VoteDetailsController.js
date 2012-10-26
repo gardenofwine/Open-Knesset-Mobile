@@ -67,6 +67,7 @@ Ext.regController('VoteDetails', {
     },
 
     updateData: function(data) {
+    	console.log(data.for_votes);
         //update VotedStore
         var voted = {
             for: OKnesset.GetMembersById(data.for_votes),

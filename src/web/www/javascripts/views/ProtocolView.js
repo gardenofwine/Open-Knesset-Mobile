@@ -69,7 +69,7 @@ OKnesset.app.views.ProtocolView.Text = new Ext.extend(Ext.List, {
 	layout: ' fit',
 	padding: '5',
     scroll: false,
-    itemTpl: '<div>{protocol_text}</div>',
+    itemTpl: '<div><b>{protocol.header} </b></div>'  + '<div>{protocol.body}</div>',
   	store : OKnesset.ProtocolTopicsStore,
 	onItemDisclosure : false,
 
