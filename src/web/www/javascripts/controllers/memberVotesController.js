@@ -15,7 +15,6 @@ Ext.regController('memberVotes', {
             memberVotesList.addListener('itemtap',
                 function(that, index, item, e) {
                     var record = that.store.getAt(index);
-                    //console.log(record);
                     OKnesset.app.controllers.navigation.dispatchPanel('VoteDetails/Index/' + record.data.id, options.historyUrl);
             });
         }
@@ -48,14 +47,13 @@ Ext.regController('memberVotes', {
                         url: 'http://www.oknesset.org/api/v2/vote/',
                         callbackKey : "callback",
                         params : {limit:10,format:"jsonp", member_against: options.id},
-                        onFailure : function(){console.log("failure");},
+                        onFailure : function(){console.log("Failure loading vote json from server");},
                         callback: function(dataAgainst){
 
                             for (var i = dataAgainst.objects.length - 1; i >= 0; i--) {
                                 dataAgainst.objects[i]['VoteType'] = 'against';
                             };
 
-                            //console.log(dataAgainst.objects);
                             OKnesset.MemberVotesStore.add(dataAgainst.objects);
                             memberVotesController._refresh(hideWhileLoading);
                         }

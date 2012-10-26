@@ -324,30 +324,29 @@ OKnesset.GetMembersById = function (ids) {
 	if (ids.push === undefined) {
 		//assumming we got only one id
 			tmp=[]; tmp.push(ids); ids = tmp;
-		}
+	}
 
-  var members = [];
-  var storeCollection = OKnesset.MemberStore.snapshot?OKnesset.MemberStore.snapshot:OKnesset.MemberStore.data;	
-  storeCollection.items.forEach(function(member) {
-      for (var i=0;i<ids.length;i++) {
-          id=ids[i];
+	  var members = [];
+	  var storeCollection = OKnesset.MemberStore.snapshot?OKnesset.MemberStore.snapshot:OKnesset.MemberStore.data;
+	  storeCollection.items.forEach(function(member) {
+	      for (var i=0;i<ids.length;i++) {
+	          id=ids[i];
 
-          if (member.data !== undefined)
-          {
-              member = member.data;
-          }
-          if (member.id === undefined)
-              console.log(member);
+	          if (member.data !== undefined)
+	          {
+	              member = member.data;
+	          }
 
-           if (member.id == id) {
-              members.push(member);
-              ids.remove(id);
-              i = ids.length;
-          }
-      }
+	          if (member.id == id) {
+			      members.push(member);
+			      ids.remove(id);
+			      i = ids.length;
+			  }
+	      }
 
-      if (ids.length == 0)
-          return members;
-  });
-  return members;
+	      if (ids.length == 0){
+	          return members;
+	      }
+	  });
+	  return members;
 }

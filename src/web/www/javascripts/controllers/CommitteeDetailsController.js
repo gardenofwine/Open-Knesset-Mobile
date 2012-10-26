@@ -40,7 +40,7 @@ Ext.regController('CommitteeDetails', {
             Ext.util.JSONP.request({
                 url: 'http://www.oknesset.org/api/committee/' + options.id,
                 callbackKey : "callback",
-                onFailure : function(){console.log("failure");},
+                onFailure : function(){console.log("Failure loading committee json from server");},
                 callback: function(data){
                     committeeDetailsController._updateData(data);
                     committeeDetailsController._refresh(hideWhileLoading);
@@ -105,12 +105,10 @@ Ext.regController('CommitteeDetails', {
     },
 
     _gotoMember: function(record){
-        //console.log(record)
         OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + record.data.url.match(/\/member\/(\d+)\/+/)[1], this.historyUrl);
     },
 
     _gotoCommitteeProtocol: function(record){
-        //console.log(record)
         OKnesset.app.controllers.navigation.dispatchPanel('Protocol/Index/' + this.getIdFromAbsoluteUrl(record.data.url), this.historyUrl);
     },
 
