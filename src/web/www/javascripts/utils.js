@@ -327,8 +327,8 @@ OKnesset.GetMembersById = function (ids) {
 		}
 
   var members = [];
-  //var storeCollection = OKnesset.MemberStore.snapshot?OKnesset.MemberStore.snapshot:
-  OKnesset.MemberStore.snapshot.items.forEach(function(member) {
+  var storeCollection = OKnesset.MemberStore.snapshot?OKnesset.MemberStore.snapshot:OKnesset.MemberStore.data;	
+  storeCollection.items.forEach(function(member) {
       for (var i=0;i<ids.length;i++) {
           id=ids[i];
 
@@ -351,4 +351,3 @@ OKnesset.GetMembersById = function (ids) {
   });
   return members;
 }
-

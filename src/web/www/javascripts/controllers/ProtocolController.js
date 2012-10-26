@@ -14,8 +14,8 @@ Ext.regController('Protocol', {
             protocolController.addListener('itemtap',
                 	function(that, index, item, e) {
     					var record = that.store.getAt(index);
-    					//var memberObj= OKnesset.GetMembersByName(record.data.name);
-    					OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + OKnesset.app.controllers.Member.getIdFromAbsoluteUrl(record.data.url) , options.historyUrl);
+    					var memberObj= OKnesset.GetMembersByName(record.data.name);
+    					OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + memberObj[0].id, options.historyUrl);
             });
            
             //when tap on the spokeman and text
@@ -23,57 +23,77 @@ Ext.regController('Protocol', {
             spokemantap.addListener('itemtap',
                 	function(that, index, item, e) {
     					var record = that.store.getAt(index);
-    					//only the even lines will be clickable
-    					if((index)%2 == 0){ 
+    					
     					OKnesset.app.controllers.navigation.dispatchPanel('ProtocolSection/Index/' + index, options.historyUrl)
-    					};
+
             });
             
+			var protocolController = this;
+			
+			Ext.util.JSONP.request({
+	        	
+	            url: 'http://www.oknesset.org/api/v2/committeemeeting/' + options.id + '/',
+	            params:{format:'jsonp'},
+	            callbackKey : "callback",
+	            onFailure : function(){console.log("failure");},
+	           
+	            callback : function(data){
+	            	// creating ProtocolStore
+	            	var tmpArray = [];
+	             
+	            	tmpArray.push(data);
+	            	OKnesset.Protocol2Store.loadData(tmpArray);
+	             
+	            	var member_idArray =[];
+	            	// split the id from the url
+	            	data.mks_attended.forEach(function(e){
+	            			var params=e.split("/");
+	                    	member_idArray.push(params[4]);
+	            	});
+	            	
+	            	var memberObj= [];
+	            	//the function GetMemberById doesn't work well/
+	            	memberObj=OKnesset.GetMembersById(member_idArray);
+	            	
+	            		
+	            	// creating ProtocolMembersStore
+	            	
+	                OKnesset.ProtocolMembersStore.loadData(memberObj);
+	            	
+	            	// creating ProtocolTextStore
+	             
+	            	var protocolArray= data.protocol;
+	            	
+		             var protocolText =[];
+		             protocolArray.forEach(function(e){
+		                 protocolText.push({protocol: e});
+		             });
+		        
+            	 OKnesset.ProtocolTopicsStore.loadData(protocolText);
+            	 
+				 
+				 //apply different colors on a 
+				var colors = [ 'GreenYellow ','DarkTurquoise ', 'Gold  ','PaleVioletRed  ', 'Red  '];
+				var j=0;
+				
+				var elements = protocolController.protocolView.query('#ProtocolText')[0].all.elements;
+				for (i=0;i < elements.length ;i++) {
+					elements[i].style.background = colors[j];
+					j++;
+					if ( j == 5 ){
+					j=0;
+				}
+				};
+				 
+    		    },
+    		});
            
         }
-
-        Ext.util.JSONP.request({
-            url: 'http://www.oknesset.org/api/committeemeeting/' + options.id + '/',
-            callbackKey : "callback",
-            onFailure : function(){console.log("failure");},
-            callback : function(data){
-             // creating ProtocolStore
-             var tmpArray = [];
-             tmpArray.push(data);
-             OKnesset.Protocol2Store.loadData(tmpArray);
-             // creating ProtocolMembersStore
-             OKnesset.ProtocolMembersStore.loadData(data.mks_attended);
-            // creating ProtocolTextStore
-             var protocolArray= data.protocol_text.split(/[<>]/);
-             var protocolText =[""];
-             protocolArray.forEach(function(e){
-                 protocolText.push({protocol_text: e});
-             });
-             
-             //split the array to even array and odd array
-             //even array contain the title/spokeman
-             //odd array conatain the text
-             var protocolArrayEven=[];
-             var protocolArrayOdd=[];
-             //the "for" loop considering that the array is even
-             for (i=0; i<(protocolText.length/2); i++){
-                 protocolArrayEven[i]=protocolText[2*i];
-                 protocolArrayOdd[i]=protocolText[2*i+1];
-             }
-             OKnesset.ProtocolTopicsStoreEven.loadData(protocolArrayEven);
-             OKnesset.ProtocolTopicsStoreOdd.loadData(protocolArrayOdd);
-             OKnesset.ProtocolTopicsStore.loadData(protocolText);
-            },
-        });
         
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.Committeemeeting);
         this.application.viewport.setActiveItem(this.protocolView, options.animation);
         
-        
-        
         if (options.pushed){
-        	var protocolController = this.protocolView.query('#ProtocolMembers')[0];
-            var spokemantap = this.protocolView.query('#ProtocolText')[0];
         	if (spokemantap.scroller) {
         		spokemantap.scroller.scrollTo({
         			x: 0,

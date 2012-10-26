@@ -69,7 +69,7 @@ window.OKnessetParser = new function(){
 		Ext.util.JSONP.request({
 		    url: 'http://www.oknesset.org/api/v2/member/',
 		    callbackKey : "callback",
-		    params : {format:"jsonp"},
+		    params : {format:"jsonp", extra_fields:"is_current,party_url"},
 			onFailure : allMembersFailure,
 		    callback: success.functions[0]
 		});
@@ -135,20 +135,21 @@ window.OKnessetParser = new function(){
 
 		function createMinimalMemberItem(member){
 			var reducedMember = {};
-			reducedMember.current_role_descriptions = member.current_role_descriptions;
-			reducedMember.committees = member.committees;
-			if (!reducedMember.committees){
-				reducedMember.committees = [];
-			}
-			reducedMember.date_of_birth = member.date_of_birth;
-			reducedMember.email = member.email;
-			reducedMember.family_status = member.family_status;
-			reducedMember.gender = member.gender;
+//			reducedMember.current_role_descriptions = member.current_role_descriptions;
+//			reducedMember.committees = member.committees;
+			// if (!reducedMember.committees){
+			// 	reducedMember.committees = [];
+			// }
+			// reducedMember.date_of_birth = member.date_of_birth;
+			// reducedMember.email = member.email;
+			// reducedMember.family_status = member.family_status;
+			// reducedMember.gender = member.gender;
 			reducedMember.id = member.id;
 			reducedMember.img_url = "images/members/" + member.img_url.substring(member.img_url.lastIndexOf('/') + 1);
 			reducedMember.name = member.name;
-			reducedMember.phone = member.phone;
-			reducedMember.place_of_residence = member.place_of_residence;
+			reducedMember.resource_uri = member.resource_uri;
+			// reducedMember.phone = member.phone;
+			// reducedMember.place_of_residence = member.place_of_residence;
 			reducedMember.party_id = partyIdFromMember(member);
 
 			if (typeof sortedMembers[reducedMember.party_id] != "undefined") {
