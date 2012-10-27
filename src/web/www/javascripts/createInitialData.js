@@ -6,6 +6,7 @@ var slimData;
 var slimDataMap;
 
 
+
 window.OKnessetParser = new function(){
 
 	/*******************************************************************************
