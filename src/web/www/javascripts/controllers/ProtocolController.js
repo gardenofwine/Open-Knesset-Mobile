@@ -14,8 +14,8 @@ Ext.regController('Protocol', {
             protocolController.addListener('itemtap',
                 	function(that, index, item, e) {
     					var record = that.store.getAt(index);
-    					var memberObj= OKnesset.GetMembersByName(record.data.name);
-    					OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + memberObj[0].id, options.historyUrl);
+    					// var memberObj= OKnesset.GetMembersByName(record.data.name);
+    					OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + record.data.id, options.historyUrl);
             });
 
             //when tap on the spokeman and text

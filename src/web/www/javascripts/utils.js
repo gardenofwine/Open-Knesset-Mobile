@@ -101,6 +101,7 @@ function loadInitialData() {
 						OKnesset.log('Full data load failure ('
 								+ JSON.stringify(response)
 								+ ') with status code ' + response.status);
+						checkFullDataFromWeb();
 					}
 				}
 			});
