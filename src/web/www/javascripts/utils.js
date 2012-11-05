@@ -191,11 +191,10 @@ function fetchFullDataFromWeb() {
 					OKnesset.log('Oknesset web parser loaded from web');
 					OKnessetParser.loadData(function(data) {
 						displayFetchCompleteNotification();
-						var partyDataString = JSON.stringify(data);
-						updatePartyData(data);
-						var now = new Date();
-						localStorage.setItem("DataDate", now.getTime());
-						localStorage.setItem("PartyData", partyDataString);
+						processData({
+							memberData : data.memberData,
+							partyData : data.partyData,
+							dataDate : new Date()});					
 					});
 				},
 				failure : function(response, options) {
