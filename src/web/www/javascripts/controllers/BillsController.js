@@ -40,7 +40,6 @@ Ext.regController('Bills', {
         } else {
             this.billsView.query('#MemberBillList')[0].emptyText = "";
         }
-        console.log('before refresh');
         this.billsView.query('#MemberBillList')[0].refresh();
 
         this.application.viewport.setActiveItem(this.billsView, options.animation);

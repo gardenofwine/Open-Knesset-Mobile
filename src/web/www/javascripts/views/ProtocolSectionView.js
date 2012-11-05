@@ -9,11 +9,12 @@ OKnesset.app.views.ProtocolSectionView = new Ext.extend(Ext.Panel, {
 	initComponent: function()
     {
 		
-		this.image = new OKnesset.app.views.ProtocolSectionView.SpokemanImage();
+		//this.image = new OKnesset.app.views.ProtocolSectionView.SpokemanImage();
 		this.protocolsectionText=  new OKnesset.app.views.ProtocolSectionView.Text();
 		this.spokeman = new OKnesset.app.views.ProtocolSectionView.Spokeman();
 	
 		this.items = [this.protocolsectionText];
+		
 		this.dockedItems = 
 				[{
 					xtype: 'toolbar',
@@ -21,7 +22,7 @@ OKnesset.app.views.ProtocolSectionView = new Ext.extend(Ext.Panel, {
 					height: '75px',
 					maxHeight:'100px',
 					padding: '5' ,
-					items: [this.image,{xtype: 'spacer'},this.spokeman]
+					items: [{xtype: 'spacer'},this.spokeman]
 				 },{
 					xtype: 'toolbar',
 					height: '75px',
@@ -42,18 +43,19 @@ OKnesset.app.views.ProtocolSectionView.Text = new Ext.extend(Ext.Panel, {
 	id : 'Text',
 	height : "2em",
 	padding: '5',
-	tpl:'<div dir="rtl">{protocol_text}</div>', 
+	tpl:'<div dir="rtl">{protocol.body}</div>', 
 	
 });
 
-OKnesset.app.views.ProtocolSectionView.SpokemanImage = new Ext.extend(Ext.Panel, {
-    id: 'SpokemanImage',
-    html: '<img src="http://www.inspiredhealthcoaching.com/wp-content/uploads/2012/08/red_x.jpg" height="100%"></img>'
-});
+
 
 OKnesset.app.views.ProtocolSectionView.Spokeman = new Ext.extend(Ext.Panel, {
     id: 'Spokeman',
     layout: 'fit',
-    tpl: '<div dir="rtl" s><font size="5" color="#FFFAF0"><b>{protocol_text}</b></font></div>'
+    tpl: '<div dir="rtl" s><font size="5" color="#FFFAF0"><b>{protocol.header}</b></font></div>'
 });
-
+/*
+OKnesset.app.views.ProtocolSectionView.SpokemanImage = new Ext.extend(Ext.Panel, {
+    id: 'SpokemanImage',
+    html: '<img src="http://www.inspiredhealthcoaching.com/wp-content/uploads/2012/08/red_x.jpg" height="100%"></img>'
+});*/

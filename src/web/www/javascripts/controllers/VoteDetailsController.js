@@ -29,7 +29,7 @@ Ext.regController('VoteDetails', {
             Ext.util.JSONP.request({
                 url: 'http://www.oknesset.org/api/vote/' + options.id,
                 callbackKey : "callback",
-                onFailure : function(){console.log("failure");},
+                onFailure : function(){console.log("Failure loading vote json from server");},
                 callback: function(data){
                     VoteDetailsController.updateData(data);
                     VoteDetailsController._refresh(hideWhileLoading);
@@ -105,7 +105,6 @@ Ext.regController('VoteDetails', {
 
     },
         _gotoMember: function(record){
-        console.log(record)
         OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + record.data.id, this.historyUrl);
     }
 

@@ -30,7 +30,7 @@ Ext.regController('BillDetails', {
             Ext.util.JSONP.request({
                 url: 'http://www.oknesset.org/api/bill/' + options.id,
                 callbackKey : "callback",
-                onFailure : function(){console.log("failure");},
+                onFailure : function(){console.log("Failure loading bill json from server");},
                 callback: function(data){
                     BillDetailsController.updateData(data);
                     BillDetailsController._refresh(hideWhileLoading);
@@ -139,7 +139,6 @@ Ext.regController('BillDetails', {
 
     },
         _gotoMember: function(record){
-        console.log(record)
         OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + record.data.id, this.historyUrl);
     }
 
