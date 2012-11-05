@@ -49,6 +49,10 @@
 	display : inline;
 }
 
+.memberViewInfo{
+	min-height:110px;
+}
+
 /* info page design*/
 div.textCenter * {
 	direction : rtl;

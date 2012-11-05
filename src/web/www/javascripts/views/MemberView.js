@@ -54,7 +54,8 @@ OKnesset.app.views.MemberView.InfoWrapper = new Ext.extend(Ext.Panel, {
 
 OKnesset.app.views.MemberView.Info = new Ext.extend(Ext.Panel, {
     id: 'MemberInfo',
-    tpl: memberPanelHtml
+    tpl: memberPanelHtml,
+    cls:'memberViewInfo'
 });
 
 OKnesset.app.views.MemberView.Image = new Ext.extend(Ext.Panel, {
