@@ -23,6 +23,7 @@ native/iOS/OKnesset/OKnesset.xcodeproj/*.pbxuser
 native/iOS/OKnesset/OKnesset.xcodeproj/*.mode1v3
 native/iOS/OKnesset/xcuserdata
 native/iOS/distribution/2011-11-02 app store update
+native/iOS/OKnesset/OKnesset.xcodeproj/project.xcworkspace/*
 
 #eclipse noise
 .tmp*
