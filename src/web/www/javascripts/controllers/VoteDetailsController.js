@@ -69,14 +69,14 @@ Ext.regController('VoteDetails', {
     updateData: function(data) {
         //update VotedStore
         var voted = {
-            for: OKnesset.GetMembersById(data.for_votes),
+        	favor: OKnesset.GetMembersById(data.for_votes),
             against: OKnesset.GetMembersById(data.against_votes),
             abstain: OKnesset.GetMembersById(data.abstain_votes)
             //need to get full data required from party store
         }
 
-        voted.for.forEach(function (member) {
-            member.VoteType = 'for';
+        voted.favor.forEach(function (member) {
+            member.VoteType = 'favor';
         });
 
         voted.against.forEach(function (member) {
@@ -87,7 +87,7 @@ Ext.regController('VoteDetails', {
             member.VoteType = 'abstain';
         });
 
-        OKnesset.VotedStore.loadData(voted.for);
+        OKnesset.VotedStore.loadData(voted.favor);
         OKnesset.VotedStore.add(voted.against);
         OKnesset.VotedStore.add(voted.abstain);
 
