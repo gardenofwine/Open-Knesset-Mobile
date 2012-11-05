@@ -23,6 +23,19 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
         var member = this.currentMember = OKnesset.GetMembersById(options.id)[0];
         GATrackMember(member.name);
 
+        // load the extra member data
+        var that = this;
+        that.memberView.getComponent('loading').show();
+        Ext.util.JSONP.request({
+            url: 'http://www.oknesset.org/api/member/' + options.id,
+            callbackKey : "callback",
+            onFailure : function(){console.log("Failure loading committee json from server");},
+            callback: function(data){
+                that.updateData(data);
+                that.memberView.getComponent('loading').hide();
+            }
+        });        
+
         this.updateData(member);
         this.application.viewport.setActiveItem(this.memberView, options.animation);
     },

@@ -15,7 +15,15 @@ OKnesset.app.views.MemberView = new Ext.extend(Ext.Panel, {
     initComponent: function(){
         this.infoWrapper = new OKnesset.app.views.MemberView.InfoWrapper();
         //this.billList = new OKnesset.app.views.MemberView.BillList();
-        this.items = [this.infoWrapper];
+        this.items = [
+            new Ext.Panel({
+                  id: "loading",
+                  cls: 'titlePanel',
+                  height : "2em",
+                  padding: '5',
+                  html:'<div class="hebTitle">'+ OKnesset.strings.LoadingPlsWait + '</div>'
+                }),        
+            this.infoWrapper];
         OKnesset.app.views.MemberView.superclass.initComponent.apply(this, arguments);
     }
 });
