@@ -28,7 +28,7 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
         var that = this;
         that.memberView.getComponent('loading').show();
         Ext.util.JSONP.request({
-            url: 'http://www.oknesset.org/api/member/' + options.id,
+            url: 'http://www.oknesset.org/api/v2/member/' + options.id,
             callbackKey : "callback",
             onFailure : function(){console.log("Failure loading committee json from server");},
             callback: function(data){
