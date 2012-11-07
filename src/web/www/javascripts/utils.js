@@ -194,7 +194,7 @@ function fetchFullDataFromWeb() {
 						processData({
 							memberData : data.memberData,
 							partyData : data.partyData,
-							dataDate : new Date()});					
+							dataDate : new Date()});
 					});
 				},
 				failure : function(response, options) {
@@ -325,7 +325,6 @@ OKnesset.GetMembersById = function (ids) {
 		//assumming we got only one id
 			tmp=[]; tmp.push(ids); ids = tmp;
 	}
-
 	  var members = [];
 	  var storeCollection = OKnesset.MemberStore.snapshot?OKnesset.MemberStore.snapshot:OKnesset.MemberStore.data;
 	  storeCollection.items.forEach(function(member) {
@@ -349,4 +348,66 @@ OKnesset.GetMembersById = function (ids) {
 	      }
 	  });
 	  return members;
+}
+
+//URL mapping - TODO: move to a different location (?)
+OKnesset.mapURL = {
+    key: 'value',
+    voteDetails: 'http://www.oknesset.org/api/vote/@id'
+}
+
+OKnesset.getData = function (req) {
+
+	var cached = false;
+	cacheKeyword = (req.id !== null) ? req.urlKeyword + '@' + req.id : req.urlKeyword;
+	var cachedData = _cacheGet(cacheKeyword);
+
+	if (cachedData != null) {
+		//call callback function with cached data
+		req.callback(cachedData);
+		//change callback for JSONP request.
+		var cached = true;
+	}
+
+	originalCallback = req.callback;
+	var myRequest = req; //same object
+	myRequest.url = _getApiURL(req.urlKeyword);
+	if (req.id != null) {
+		myRequest.url = myRequest.url.replace('@id',req.id);
+		delete(req.id);
+	}
+	myRequest.callback = function (data) {
+
+		if (!cached) //if the data was not in the cache, the response is relevant for the current request.
+			originalCallback(data);
+
+		_cachePush({
+			key: cacheKeyword,
+			response: data
+		});
+	}
+
+	delete(req.urlKeyword);
+
+	//make request
+	Ext.util.JSONP.request(myRequest);
+
+	function _cachePush(data) {
+		date = new Date();
+
+		 localStorage.setItem(data.key,JSON.stringify(data.response));
+	}
+
+	function _cacheGet(key) {
+		var cachedData = localStorage.getItem(key);
+
+		if (cachedData != null)
+			cachedData = JSON.parse(cachedData);
+
+		return cachedData;
+	}
+
+	function _getApiURL(urlKeyword) {
+		return (OKnesset.mapURL[urlKeyword]);
+	}
 }

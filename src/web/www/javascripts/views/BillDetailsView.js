@@ -24,7 +24,8 @@ OKnesset.app.views.BillDetailsView = new Ext.extend(Ext.Panel, {
                   //cls: 'titlePanel',
                   //height : "2em",
                   padding: '5',
-                  tpl:'<div class="hebTitle" style="font-weight: normal;">'+OKnesset.strings.billStage+'<b> {stage_text}</b></div>'
+                  tpl:'<div class="hebTitle" style="font-weight: normal;">'+OKnesset.strings.billStage+'<b> {stage_text}</b></div>\
+                  <tpl if="linkToPdf != -1"><a id="linktoPdf" class="hebLink" href="{linkToPdf}">'   + OKnesset.strings.BillpdfExist + '</a></tpl>'
                 }),
                   this.billMakers,
                   this.billContent
@@ -37,11 +38,8 @@ Ext.reg('BillDetailsView', OKnesset.app.views.BillDetailsView);
 
 
 var billContent = '\
+ <p class="hebTitle">תיאור ההצעה:</p>\
 <div class="bill_content description">{explanation}</div>\
-<tpl if="linkToPdf != -1"><a id="linktoPdf" class="hebLink" href="{linkToPdf}">'
- + OKnesset.strings.BillpdfExist + '</a></tpl>\
- <tpl if="linkToPdf == -1"><p style="padding:5px 0 5px 0;" id="linktoPdf" class="hebLink">'
- + OKnesset.strings.BillpdfNotExist + '</p></tpl>\
 ';
 
 OKnesset.app.views.BillDetailsView.billContent = new Ext.extend(Ext.Panel, {

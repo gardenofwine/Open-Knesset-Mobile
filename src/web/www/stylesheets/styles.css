@@ -133,11 +133,12 @@ span.memberVotesListTitle {
 }
 
 
-div.hebTitle {
+.hebTitle {
 	font-size: 17px;
 	font-weight: bold;
 	text-align: right;
    	direction: rtl;
+   	display: block;
 }
 
 div.description {
@@ -161,6 +162,7 @@ div.titlePanel {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 ); /* IE6-9 */
 
 	border-radius: 0 0 5px 5px;
+	width: 100%;
 
 }
 
@@ -179,3 +181,6 @@ div.subtitlePanel {
 	display: block;
 }
 
+#backBtn > img {
+	width: 23px;
+}

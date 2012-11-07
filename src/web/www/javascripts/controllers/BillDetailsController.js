@@ -74,11 +74,6 @@ Ext.regController('BillDetails', {
             title: data.bill_title
         });
 
-        //update state
-        this.BillDetailsView.query('#billStage')[0].update({
-            stage_text: data.stage_text
-        });
-
         //update billMakersStore
         var billMakers = {
             founders: data.proposing_mks,
@@ -132,7 +127,12 @@ Ext.regController('BillDetails', {
          });
 
         this.BillDetailsView.query('#billContent')[0].update({
-            explanation: explanation,
+            explanation: explanation
+        });
+
+        //update state & Link to PDF
+        this.BillDetailsView.query('#billStage')[0].update({
+            stage_text: data.stage_text,
             linkToPdf: pdf
         });
 

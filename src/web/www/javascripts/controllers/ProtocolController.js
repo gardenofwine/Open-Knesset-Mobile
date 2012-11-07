@@ -1,6 +1,5 @@
 Ext.regController('Protocol', {
     // index action
-
     Index: function(options)
     {
         if (!this.protocolView)
@@ -8,24 +7,20 @@ Ext.regController('Protocol', {
             this.protocolView = this.render({
                 xtype: 'ProtocolView',
             });
-
             //when tap on committee member
             var protocolController = this.protocolView.query('#ProtocolMembers')[0];
             protocolController.addListener('itemtap',
                 	function(that, index, item, e) {
     					var record = that.store.getAt(index);
-    					// var memberObj= OKnesset.GetMembersByName(record.data.name);
-    					OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + record.data.id, options.historyUrl);
+    					//var memberObj= OKnesset.GetMembersByName(record.data.name);
+    					OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + OKnesset.app.controllers.Member.getIdFromAbsoluteUrl(record.data.url) , options.historyUrl);
             });
-
             //when tap on the spokeman and text
             var spokemantap = this.protocolView.query('#ProtocolText')[0];
             spokemantap.addListener('itemtap',
                 	function(that, index, item, e) {
     					var record = that.store.getAt(index);
-
     					OKnesset.app.controllers.navigation.dispatchPanel('ProtocolSection/Index/' + index, options.historyUrl)
-
             });
 
 			var protocolController = this;
@@ -107,11 +102,9 @@ Ext.regController('Protocol', {
         		});
         	}
         }
-
 	},
 
     refresh : function() {
-
 		this.protocolView.refresh();
 	}
 });

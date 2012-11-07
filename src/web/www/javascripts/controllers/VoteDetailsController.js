@@ -26,8 +26,10 @@ Ext.regController('VoteDetails', {
             VoteDetailsController._init(hideWhileLoading);
 
 
-            Ext.util.JSONP.request({
-                url: 'http://www.oknesset.org/api/vote/' + options.id,
+            //Ext.util.JSONP.request
+            OKnesset.getData({
+                urlKeyword: 'voteDetails',
+                id: options.id,
                 callbackKey : "callback",
                 onFailure : function(){console.log("Failure loading vote json from server");},
                 callback: function(data){
