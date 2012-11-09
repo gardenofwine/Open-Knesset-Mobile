@@ -168,8 +168,8 @@ OKnesset.MemberVotesStore = new Ext.data.Store({
         },
     groupField : 'VoteType',
     getGroupString : function(record) {
-        return (record.get('VoteType') == 'for')?
-            OKnesset.strings.for :
+        return (record.get('VoteType') == 'favor')?
+            OKnesset.strings.favor :
             OKnesset.strings.against;
     }
 });
@@ -191,8 +191,8 @@ OKnesset.VotedStore = new Ext.data.Store({
         switch (record.get('VoteType'))
         {
 
-            case 'for':
-                return OKnesset.strings.for;
+            case 'favor':
+                return OKnesset.strings.favor;
             case 'against':
                 return OKnesset.strings.against;
             case 'abstain':
