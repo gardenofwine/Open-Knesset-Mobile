@@ -136,7 +136,8 @@ function checkFullDataFromWeb() {
 		// } else if (
 			navigator.network.connection.type == Connection.CELL_2G
 				|| navigator.network.connection.type == Connection.CELL_3G
-				|| navigator.network.connection.type == Connection.CELL_4G) {
+				|| navigator.network.connection.type == Connection.CELL_4G
+				|| (isAndroid() && navigator.network.connection.type == Connection.UNKNOWN)) {
 
 			// OKnesset.log("** updating full data by 3G");
 			// var dialogtxt = OKnesset.strings.downloadDataText;

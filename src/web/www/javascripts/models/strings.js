@@ -68,7 +68,7 @@ OKnesset.strings = {
 	lowimportance			:"חשיבות נמוכה",
 	votes       	        : 'הצבעות',
 	votesDetails   	        : 'פרטי הצבעה',
-	for 					: 'בעד',
+	favor 					: 'בעד',
 	against 				: 'נגד',
 	abstain 				: 'נמנע',
 	presence 				: 'נוכחות בועדה:',

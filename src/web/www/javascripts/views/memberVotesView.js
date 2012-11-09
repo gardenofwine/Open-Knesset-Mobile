@@ -26,7 +26,7 @@ Ext.reg('memberVotesView', OKnesset.app.views.memberVotesView);
 
 OKnesset.app.views.memberVotesView.VotesList = new Ext.extend(Ext.List, {
     id: 'MemberVotesList',
-    itemTpl: '<div class="memberVotesListItem"><span class="memberVotesListTitle">{title}</span><div class="timeString">{time_string}</div><br /><div class="Votescounters">' + OKnesset.strings.for +':{for_votes_count} ' + OKnesset.strings.against + ':{against_votes_count}</div></div>',
+    itemTpl: '<div class="memberVotesListItem"><span class="memberVotesListTitle">{title}</span><div class="timeString">{time_string}</div><br /><div class="Votescounters">' + OKnesset.strings.favor +':{for_votes_count} ' + OKnesset.strings.against + ':{against_votes_count}</div></div>',
     store: OKnesset.MemberVotesStore,
     grouped: true,
     onItemDisclosure: true,
