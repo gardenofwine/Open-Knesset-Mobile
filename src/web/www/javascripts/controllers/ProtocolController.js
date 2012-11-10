@@ -48,7 +48,7 @@ Ext.regController('Protocol', {
 
 	            	var memberObj= [];
 	            	//the function GetMemberById doesn't work well/
-	            	memberObj=OKnesset.GetMembersById(member_idArray);
+	            	memberObj=getMembersById(member_idArray);
 
 
 	            	// creating ProtocolMembersStore

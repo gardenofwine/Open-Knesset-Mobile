@@ -37,16 +37,7 @@ Ext.regController('VoteDetails', {
                     console.log("Failure loading vote json from server");
                 }
             })
-            // OKnesset.getData({
-            //     urlKeyword: 'voteDetails',
-            //     id: options.id,
-            //     callbackKey : "callback",
-            //     onFailure : function(){console.log("Failure loading vote json from server");},
-            //     callback: function(data){
-            //         VoteDetailsController.updateData(data);
-            //         VoteDetailsController._refresh(hideWhileLoading);
-            //     }
-            // });
+
         }
 
         this.application.viewport.setActiveItem(this.VoteDetailsView, options.animation);
@@ -81,9 +72,9 @@ Ext.regController('VoteDetails', {
     updateData: function(data) {
         //update VotedStore
         var voted = {
-        	favor: OKnesset.GetMembersById(data.for_votes),
-            against: OKnesset.GetMembersById(data.against_votes),
-            abstain: OKnesset.GetMembersById(data.abstain_votes)
+        	favor: getMembersById(data.for_votes),
+            against: getMembersById(data.against_votes),
+            abstain: getMembersById(data.abstain_votes)
             //need to get full data required from party store
         }
 

@@ -20,7 +20,7 @@ Ext.regController('Committees', {
         // });
         // member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
 
-        var member = this.currentMember = OKnesset.GetMembersById(options.id)[0];
+        var member = this.currentMember = getMembersById(options.id)[0];
         OKnesset.MemberCommitteesStore.loadData(member.committees);
 
         // scroll committee list up

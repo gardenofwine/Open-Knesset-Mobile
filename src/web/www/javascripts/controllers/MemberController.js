@@ -21,7 +21,7 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
         // console.log(OKnesset.MemberStore);
         // member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
 
-        var member = this.currentMember = OKnesset.GetMembersById(options.id)[0];
+        var member = this.currentMember = getMembersById(options.id)[0];
         GATrackMember(member.name);
 
         // load the extra member data

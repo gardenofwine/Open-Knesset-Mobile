@@ -19,7 +19,7 @@ Ext.regController('Bills', {
         //     return r.data.id === parseInt(options.id)
         // });
         // member = this.currentMember = OKnesset.MemberStore.getAt(member).data;
-        var member = this.currentMember = OKnesset.GetMembersById(options.id)[0];
+        var member = this.currentMember = getMembersById(options.id)[0];
         OKnesset.MemberBillsStore.loadData(member.bills);
 
         // scroll bill list up
