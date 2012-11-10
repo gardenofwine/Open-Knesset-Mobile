@@ -16,10 +16,8 @@ Ext.regController('AgendaVoteList', {
 				});
         }
 
-        var findData = OKnesset.AgendaListStore.findBy(function(r){
-        	return r.data.id === parseInt(options.id)
-        });
-        findData = OKnesset.AgendaListStore.getAt(findData);
+        // getAt(0), because the AgendaDetailsStore is an array of one item due to mis-implementation of the store
+        findData = OKnesset.AgendaDetailsStore.getAt(0);
 
          //FIX for Adgenda vote list broken button link. (franco)
          if (findData.data.votes[0].data !== undefined) {

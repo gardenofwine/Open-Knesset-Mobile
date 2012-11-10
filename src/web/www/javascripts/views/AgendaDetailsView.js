@@ -63,6 +63,7 @@ OKnesset.app.views.AgendaDetailsView.AgendaDescription = new Ext.extend(Ext.List
  
 });
 
+// TODO: these views are not list views... they present only one item 
 OKnesset.app.views.AgendaDetailsView.MostSupportMember = new Ext.extend(Ext.List, {
 	id : 'MostSupportMember',
 	layout: ' fit',

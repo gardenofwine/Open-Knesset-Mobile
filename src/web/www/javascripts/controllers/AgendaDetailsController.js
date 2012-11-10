@@ -31,30 +31,37 @@ Ext.regController('AgendaDetails', {
         OKnesset.app.views.AgendaDetailsView.SupportPartyBtn.setHandler(this.dispatchParties,options);
 
       // update agenda data
+        var that = this;
 
-        var findData = OKnesset.AgendaListStore.findBy(function(r){return r.data.id === parseInt(options.id)});
-        findData = OKnesset.AgendaListStore.getAt(findData);
+        getAPIData({
+            apiKey : "agendaDetails",
+            urlOptions: options.id,
+            success : function(data){
+                // round score of support
+                that.roundScore(data.members);
+                that.roundScore(data.parties);
 
-         this.application.viewport.query('#toolbar')[0].setTitle(findData.data.name);
-         this.application.viewport.setActiveItem(this.AgendaDetailsView, options.animation);
+                OKnesset.AgendaMembersSupportListStore.loadData(data.members);
+                OKnesset.AgendaPartiesSupportListStore.loadData(data.parties);
+                // find most supports member & party
+                MostSupportMember=OKnesset.AgendaMembersSupportListStore.getAt(0)
+                MostSupportParty=OKnesset.AgendaPartiesSupportListStore.getAt(0)
+                data.MostSupportMember=MostSupportMember.data;
+                data.MostSupportParty=MostSupportParty.data;
+                data.description = that.replaceURLWithHTMLLinks(data.description);
 
+                OKnesset.AgendaDetailsStore.loadData([data]);
+            },
+            failure: function(){
+                console.log("Failure loading vote json from server");
+            }
+        })
 
-           // round score of support
-         this.roundScore(findData.data.members);
-         this.roundScore(findData.data.parties);
-
-         OKnesset.AgendaMembersSupportListStore.loadData(findData.data.members);
-         OKnesset.AgendaPartiesSupportListStore.loadData(findData.data.parties);
-            // find most supports member & party
-         MostSupportMember=OKnesset.AgendaMembersSupportListStore.getAt(0)
-         MostSupportParty=OKnesset.AgendaPartiesSupportListStore.getAt(0)
-         findData.data.MostSupportMember=MostSupportMember.data;
-         findData.data.MostSupportParty=MostSupportParty.data;
-         findData.data.description = this.replaceURLWithHTMLLinks(findData.data.description);
-
-         var toArr =[findData.data];
-         OKnesset.AgendaDetailsStore.loadData(toArr);
-
+        var agenda = getObjectFromStoreByID(OKnesset.AgendaListStore, options.id);
+        // var findData = OKnesset.AgendaListStore.findBy(function(r){return r.data.id === parseInt(options.id)});
+        // findData = OKnesset.AgendaListStore.getAt(findData);
+        this.application.viewport.query('#toolbar')[0].setTitle(agenda.data.name);
+        this.application.viewport.setActiveItem(this.AgendaDetailsView, options.animation);
 
     },
 

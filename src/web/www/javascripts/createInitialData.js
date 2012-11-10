@@ -1,31 +1,5 @@
 window.OKnessetParser = new function(){
 
-	function waitForAll(){
-		var callback = arguments[0];
-		args = Array.prototype.slice.call(arguments, 1); 
-		that = this;
-		this.functions = [];
-
-		var completedResults = [];
-		for (var i = 0; i < args.length; i++) {
-			var func = args[i];
-			var funcwrapper = function(func){
-				return function(){
-					var result = func.apply(that, arguments);
-					completedResults.push(result);
-					if (completedResults.length == args.length){
-						var result = {};
-						for (var i = completedResults.length - 1; i >= 0; i--) {
-							Ext.apply(result, completedResults[i]);
-						};
-						callback.call(that,result);
-					}
-				}
-			}(func);
-			this.functions.push(funcwrapper);
-		};
-	}
-
 	/*******************************************************************************
 	 * members parser
 	 */
@@ -103,25 +77,19 @@ window.OKnessetParser = new function(){
 	}
 
 	/*******************************************************************************
-	 * agendas parser
+	 * trivial parser
 	 */
-	this.agendas =  function(result){
-		return result.objects;
-	}
-
-	/*******************************************************************************
-	 * parties parser
-	 */
-	this.parties =  function(result){
-		return result.objects;
-	}
-
-	/*******************************************************************************
-	 * voteDetails parser
-	 */
-	this.voteDetails =  function(result){
+	this.trivialParser =  function(result){
 		return result;
 	}
+
+	/*******************************************************************************
+	 * objects parser
+	 */
+	this.objectsParser =  function(result){
+		return result.objects;
+	}
+
 }
 
 /*******************************************************************************
@@ -134,7 +102,7 @@ window.OKnessetAPIMapping = {
     	},
     	parameters : {format:"jsonp"},
     	callbackKey : "callback",
-    	parser: OKnessetParser.voteDetails
+    	parser: OKnessetParser.trivialParser
     },
     members : {
     	url : function(){
@@ -153,13 +121,45 @@ window.OKnessetAPIMapping = {
     	parser: OKnessetParser.member
     },
 
+    memberVotesFavor :{
+    	url : function(){
+    		return 'http://www.oknesset.org/api/v2/vote/';
+    	},
+    	parameters : function(id){
+    		return {format:"jsonp", limit : 10, member_for : id};
+    	},
+    	callbackKey : "callback",
+    	parser: OKnessetParser.objectsParser
+    },
+
+    memberVotesAgainst : {
+    	url : function(){
+    		return 'http://www.oknesset.org/api/v2/vote/';
+    	},
+    	parameters : function(id){
+    		return {format:"jsonp", limit : 10, member_against : id};
+    	},
+    	callbackKey : "callback",
+    	parser: OKnessetParser.objectsParser
+    },
+
     agendas : {
     	url : function(){
     		return 'http://www.oknesset.org/api/v2/agenda/';
     	},
     	parameters : {format:"jsonp"},
     	callbackKey : "callback",
-    	parser: OKnessetParser.agendas
+    	parser: OKnessetParser.objectsParser
+    },
+
+    agendaDetails :{
+    	url : function(id){
+    		return 'http://www.oknesset.org/api/v2/agenda/' + id;
+    	},
+    	parameters : {format:"jsonp"},
+    	callbackKey : "callback",
+    	parser: OKnessetParser.trivialParser
+
     },
 
     parties : {
@@ -168,8 +168,35 @@ window.OKnessetAPIMapping = {
     	},
     	parameters : {format:"jsonp"},
     	callbackKey : "callback",
-    	parser: OKnessetParser.parties
-    }
+    	parser: OKnessetParser.objectsParser
+    },
+
+    committees : {
+    	url : function(){
+    		return 'http://www.oknesset.org/api/v2/committee/';
+    	},
+    	parameters : {format:"jsonp"},
+    	callbackKey : "callback",
+    	parser: OKnessetParser.objectsParser
+
+    },
+
+    committeeDetail : {
+    	url : function(id){
+		   	return 'http://www.oknesset.org/api/committee/' + id;
+		},
+    	parameters : {},
+    	callbackKey : "callback",
+		parser: OKnessetParser.trivialParser    
+	},
+	committeeProtocol : {
+    	url : function(id){
+		   	return 'http://www.oknesset.org/api/v2/committeemeeting/' + id;
+		},
+    	parameters : {format:"jsonp"},
+    	callbackKey : "callback",
+		parser: OKnessetParser.trivialParser    
+	}
 
 
 }

@@ -32,12 +32,8 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
                 console.log("error receiving memebers data. ", result);
             }
         });
-        // Ext.util.JSONP.request({
-        //     url: 'http://www.oknesset.org/api/v2/member/' + options.id,
-        //     callbackKey : "callback",
-        //     onFailure : function(){console.log("Failure loading committee json from server");},
-        //     callback: 
-        // });
+
+        //http://www.oknesset.org/api/v2/bill/?format=json&proposer=814
 
         this.updateData(member);
         this.application.viewport.setActiveItem(this.memberView, options.animation);

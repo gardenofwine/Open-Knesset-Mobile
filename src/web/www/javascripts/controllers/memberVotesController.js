@@ -9,10 +9,10 @@ Ext.regController('memberVotes', {
             });
 
             //Get the List for reference
-            var memberVotesList = this.memberVotesView.query('#MemberVotesList')[0];
+            this.memberVotesList = this.memberVotesView.query('#MemberVotesList')[0];
 
             //Defining what is happening when tapping on an item in the list
-            memberVotesList.addListener('itemtap',
+            this.memberVotesList.addListener('itemtap',
                 function(that, index, item, e) {
                     var record = that.store.getAt(index);
                     OKnesset.app.controllers.navigation.dispatchPanel('VoteDetails/Index/' + record.data.id, options.historyUrl);
@@ -20,47 +20,45 @@ Ext.regController('memberVotes', {
         }
 
         var memberVotesController = this;
-        var memberVotesList = this.memberVotesView.query('#MemberVotesList')[0];
 
         if (this.cached != options.id) {
             this.cached = options.id;
-            var hideWhileLoading = [memberVotesList];
+            var hideWhileLoading = [this.memberVotesList];
             memberVotesController._init(hideWhileLoading);
 
             //add for votes to store
-             Ext.util.JSONP.request({
-                url: 'http://www.oknesset.org/api/v2/vote/',
-                callbackKey : "callback",
-                params : {limit:10, format:"jsonp", member_for: options.id},
-                onFailure : function(){console.log("failure");},
-                callback: function(data){
+            getAPIData({
+                apiKey:'memberVotesFavor',
+                parameterOptions : options.id,
+                success:function(data){
+                    for (var i = data.length - 1; i >= 0; i--) {
+                        data[i]['VoteType'] = 'favor';
+                    };
+                    OKnesset.MemberVotesStore.add(data);
+                    memberVotesController._refresh(hideWhileLoading);
+                    memberVotesController.refresh();
+                },
+                failure:function(result){
+                    console.log("error receiving member favor votes data. ", result);
+                }
+            });            
 
-                    for (var i = data.objects.length - 1; i >= 0; i--) {
-                        data.objects[i]['VoteType'] = 'for';
+            getAPIData({
+                apiKey:'memberVotesAgainst',
+                parameterOptions : options.id,
+                success:function(data){
+                    for (var i = data.length - 1; i >= 0; i--) {
+                        data[i]['VoteType'] = 'against';
                     };
 
-                   //console.log(data.objects);
-                    OKnesset.MemberVotesStore.loadData(data.objects);
-
-                    //add against votes to store
-                    Ext.util.JSONP.request({
-                        url: 'http://www.oknesset.org/api/v2/vote/',
-                        callbackKey : "callback",
-                        params : {limit:10,format:"jsonp", member_against: options.id},
-                        onFailure : function(){console.log("Failure loading vote json from server");},
-                        callback: function(dataAgainst){
-
-                            for (var i = dataAgainst.objects.length - 1; i >= 0; i--) {
-                                dataAgainst.objects[i]['VoteType'] = 'against';
-                            };
-
-                            OKnesset.MemberVotesStore.add(dataAgainst.objects);
-                            memberVotesController._refresh(hideWhileLoading);
-                        }
-                    });
-
+                    OKnesset.MemberVotesStore.add(data);
+                    memberVotesController._refresh(hideWhileLoading);
+                    memberVotesController.refresh();
+                },
+                failure:function(result){
+                    console.log("error receiving member against votes data. ", result);
                 }
-            });
+            });            
         }
 
         //Change toolbar title
@@ -69,8 +67,8 @@ Ext.regController('memberVotes', {
 
 
         if (options.pushed) {
-            if (memberVotesList.scroller) {
-                memberVotesList.scroller.scrollTo({
+            if (this.memberVotesList.scroller) {
+                this.memberVotesList.scroller.scrollTo({
                     x: 0,
                     y: 0
                 });
@@ -99,7 +97,7 @@ Ext.regController('memberVotes', {
         });
     },
     refresh : function() {
-        var memberVotesList = this.memberVotesView.query('#MemberVotesList')[0];
-        memberVotesList.refresh();
+        // var memberVotesList = this.memberVotesView.query('#MemberVotesList')[0];
+        this.memberVotesList.refresh();
 	},
 });

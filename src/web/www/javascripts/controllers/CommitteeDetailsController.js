@@ -37,13 +37,15 @@ Ext.regController('CommitteeDetails', {
             committeeDetailsController._init(hideWhileLoading);
 
 
-            Ext.util.JSONP.request({
-                url: 'http://www.oknesset.org/api/committee/' + options.id,
-                callbackKey : "callback",
-                onFailure : function(){console.log("Failure loading committee json from server");},
-                callback: function(data){
+            getAPIData({
+                apiKey:'committeeDetail',
+                urlOptions : options.id,
+                success:function(data){
                     committeeDetailsController._updateData(data);
                     committeeDetailsController._refresh(hideWhileLoading);
+                },
+                failure:function(result){
+                    console.log("error receiving committeeDetail data. ", result);
                 }
             });
 

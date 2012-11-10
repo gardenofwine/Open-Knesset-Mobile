@@ -13,16 +13,16 @@ Ext.regController('AllCommittees', {
 					OKnesset.app.controllers.navigation.dispatchPanel('CommitteeDetails/Index/' + record.data.id, options.historyUrl);
 				});
         }
-		Ext.util.JSONP.request({
-		    url: 'http://www.oknesset.org/api/v2/committee/',
-		    params:{format:'jsonp'},
-		    callbackKey : "callback",
-			callback : function(data){
-		    	OKnesset.AllCommitteesStore.loadData(data.objects);
 
-		    	},
-			onFailure : function(){console.log("Failure loading committee json from server");}
-		});
+        getAPIData({
+            apiKey : "committees",
+            success : function(data){
+		    	OKnesset.AllCommitteesStore.loadData(data);
+            },
+            failure: function(){
+                console.log("Failure loading committees json from server");
+            }
+        })
 
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.committees);
         this.application.viewport.setActiveItem(this.AllCommitteesView, options.animation);

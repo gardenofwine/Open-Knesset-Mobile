@@ -67,6 +67,17 @@ function getPartyFromPartyStoreByName(name) {
 
 }
 
+function getObjectFromStoreByID(store, id){
+	return getObjectFromStoreByFunc(store, function(r){
+		return r.data.id === parseInt(id)
+	});
+}
+
+function getObjectFromStoreByFunc(store, func){
+    var index = store.findBy(func);
+    return store.getAt(index);
+}
+
 //receives an array of id's and returns a array of objects of the members
 function getMembersById(ids) {
 
@@ -100,10 +111,11 @@ function getMembersById(ids) {
 }
 
 
+
 /**
  * options: an object with the following keys:
  *	(string)apiKey, (function)success, (boolean)cache, (function)failure
- * (object)urlOptions
+ * (object)urlOptions, (object)parameterOptions
  */
 function getAPIData(options) {
 	var requestUrl = OKnessetAPIMapping[options.apiKey].url(options.urlOptions);
@@ -116,11 +128,18 @@ function getAPIData(options) {
 		return;
 	}
 
+	var parameters;
+	if (typeof OKnessetAPIMapping[options.apiKey].parameters === 'function') {
+		parameters = OKnessetAPIMapping[options.apiKey].parameters(options.parameterOptions);
+	} else {
+		parameters = OKnessetAPIMapping[options.apiKey].parameters;
+	}
+
 	// make request
 	Ext.util.JSONP.request({
 	    url: requestUrl,
 	    callbackKey : OKnessetAPIMapping[options.apiKey].callbackKey,
-	    params : OKnessetAPIMapping[options.apiKey].parameters,
+	    params : parameters,
 		onFailure : options.failure,
 	    callback: function(results){
 	    	options.success(OKnessetAPIMapping[options.apiKey].parser(results));
@@ -136,3 +155,35 @@ function getAPIData(options) {
 		return cachedData;
 	}
 }
+
+
+// usage:
+// var callbackArray = new waitForAll(finalCallback, callbackA, callbackB...);
+// callbackArray[0] == callbackA
+// callbackArray[0] == callbackB
+function waitForAll(){
+	var callback = arguments[0];
+	args = Array.prototype.slice.call(arguments, 1); 
+	that = this;
+	this.functions = [];
+
+	var completedResults = [];
+	for (var i = 0; i < args.length; i++) {
+		var func = args[i];
+		var funcwrapper = function(func){
+			return function(){
+				var result = func.apply(that, arguments);
+				completedResults.push(result);
+				if (completedResults.length == args.length){
+					var result = {};
+					for (var i = completedResults.length - 1; i >= 0; i--) {
+						Ext.apply(result, completedResults[i]);
+					};
+					callback.call(that,result);
+				}
+			}
+		}(func);
+		this.functions.push(funcwrapper);
+	};
+}
+

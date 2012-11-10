@@ -25,8 +25,6 @@ Ext.regController('VoteDetails', {
             var hideWhileLoading = [voteDescription, membersVotedList];
             VoteDetailsController._init(hideWhileLoading);
 
-
-            //Ext.util.JSONP.request
             getAPIData({
                 apiKey : "voteDetails",
                 urlOptions: options.id,
