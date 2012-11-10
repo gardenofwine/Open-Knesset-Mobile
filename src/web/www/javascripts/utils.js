@@ -103,9 +103,10 @@ function getMembersById(ids) {
 /**
  * options: an object with the following keys:
  *	(string)apiKey, (function)success, (boolean)cache, (function)failure
+ * (object)urlOptions
  */
 function getAPIData(options) {
-	var requestUrl = OKnessetAPIMapping[options.apiKey].url();
+	var requestUrl = OKnessetAPIMapping[options.apiKey].url(options.urlOptions);
 
 	// if a cached version of the data exists, return it immediately
 	var cachedData = _cacheGet(requestUrl);

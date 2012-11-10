@@ -15,6 +15,18 @@ Ext.regController('PartyList', {
 				});
         }
 
+        getAPIData({
+            apiKey:'parties',
+            success:function(data){
+                OKnesset.PartyStore.loadData(data);
+               // that.memberView.getComponent('loading').hide();
+            },
+            failure:function(result){
+                console.log("error receiving parties data. ", result);
+            }
+        });
+
+
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.partiesTitle);
         this.application.viewport.setActiveItem(this.partyListView, options.animation);
     },

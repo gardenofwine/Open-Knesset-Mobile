@@ -95,6 +95,15 @@ window.OKnessetParser = new function(){
 	this.members.sortedMembers["13"] = this.members.sortedMembers["3"];	
 
 	/*******************************************************************************
+	 * member parser
+	 */
+	this.member =  function(result){
+		result.img_url = "images/members/" + result.img_url.substring(result.img_url.lastIndexOf('/') + 1);
+		return result;
+	}
+
+
+	/*******************************************************************************
 	 * parties parser
 	 */
 	this.parties =  function(result){
@@ -129,6 +138,16 @@ window.OKnessetAPIMapping = {
     	callbackKey : "callback",
     	parser: OKnessetParser.members
     },
+    member : {
+    	url : function(id){
+    		return 'http://www.oknesset.org/api/v2/member/' + id;
+    	},
+    	parameters : {format:"jsonp"},
+    	callbackKey : "callback",
+    	parser: OKnessetParser.member
+    },
+
+
     parties : {
     	url : function(){
     		return 'http://www.oknesset.org/api/v2/party/';

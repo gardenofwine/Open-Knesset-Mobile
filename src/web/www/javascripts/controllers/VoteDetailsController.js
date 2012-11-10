@@ -29,6 +29,7 @@ Ext.regController('VoteDetails', {
             //Ext.util.JSONP.request
             OKnesset.getAPIData({
                 apiKey : "voteDetails",
+                urlOptions: options.id,
                 success : function(data){
                     VoteDetailsController.updateData(data);
                     VoteDetailsController._refresh(hideWhileLoading);
