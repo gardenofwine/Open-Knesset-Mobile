@@ -57,7 +57,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 										  value:value
 									  withError:&error]) {
 		// Handle error here
-		NSLog(@"GoogleAnalyticsPlugin.trackEvent Error::",[error localizedDescription]);
+		NSLog(@"GoogleAnalyticsPlugin.trackEvent Error:: %@",[error localizedDescription]);
 		resultString = [result toErrorCallbackString: callbackId];
 	} else {
 		resultString = 	[result toSuccessCallbackString: callbackId];

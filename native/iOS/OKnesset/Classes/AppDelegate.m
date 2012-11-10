@@ -69,7 +69,7 @@ NSDate *lastTime;
 }
 
 -(void)playMovie:(NSNotification *)notification {
-    if (self.playerView.loadState == MPMovieLoadStatePlayable | MPMovieLoadStatePlaythroughOK) {
+    if (self.playerView.loadState == (MPMovieLoadStatePlayable | MPMovieLoadStatePlaythroughOK)) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerLoadStateDidChangeNotification object:notification.object];
 		[self.playerView.view setFrame:[self.window frame]];
 		[self.window addSubview:self.playerView.view];
