@@ -102,6 +102,12 @@ window.OKnessetParser = new function(){
 		return result;
 	}
 
+	/*******************************************************************************
+	 * agendas parser
+	 */
+	this.agendas =  function(result){
+		return result.objects;
+	}
 
 	/*******************************************************************************
 	 * parties parser
@@ -147,6 +153,14 @@ window.OKnessetAPIMapping = {
     	parser: OKnessetParser.member
     },
 
+    agendas : {
+    	url : function(){
+    		return 'http://www.oknesset.org/api/v2/agenda/';
+    	},
+    	parameters : {format:"jsonp"},
+    	callbackKey : "callback",
+    	parser: OKnessetParser.agendas
+    },
 
     parties : {
     	url : function(){

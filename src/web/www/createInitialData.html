@@ -22,8 +22,8 @@
 				x.value = JSON.stringify(members, null, "\t");
 
 				// create the slimMemeber list
-				var x=document.getElementById("slimMembers");
-				x.value = JSON.stringify(createSlimMemberList(members), null, "\t");
+				// var x=document.getElementById("slimMembers");
+				// x.value = JSON.stringify(createSlimMemberList(members), null, "\t");
 
 				// member image list
 				stringImageListForDownload = "";
@@ -39,22 +39,22 @@
 				var x=document.getElementById("imageList");
 				x.value = stringImageListForDownload;
 
-				function createSlimMemberList(memberList){
-					slimMemberList = new Array();
-					for (var i = memberList.length - 1; i >= 0; i--) {
-						var member = memberList[i];
-						var slimMember = {
-							name : member.name,
-							img_url : member.img_url,
-							party_id : member.party_id,
-							party_ordinal : member.party_ordinal
-						};
+				// function createSlimMemberList(memberList){
+				// 	slimMemberList = new Array();
+				// 	for (var i = memberList.length - 1; i >= 0; i--) {
+				// 		var member = memberList[i];
+				// 		var slimMember = {
+				// 			name : member.name,
+				// 			img_url : member.img_url,
+				// 			party_id : member.party_id,
+				// 			party_ordinal : member.party_ordinal
+				// 		};
 
-						slimMemberList.push(slimMember);
-					};
+				// 		slimMemberList.push(slimMember);
+				// 	};
 
-					return slimMemberList;
-				}
+				// 	return slimMemberList;
+				// }
 
             }
 
@@ -70,6 +70,18 @@
 
             }
 
+            function agendasReceived(agendas){
+            	reducedAgendas = [];
+            	for (i = 0 ; i < agendas.length; i++){
+            		delete agendas[i].description;
+            	}
+				var x=document.getElementById("agendas");
+				x.value = JSON.stringify(agendas, null, "\t");
+            }
+
+
+            /**********************************/
+
 			getAPIData({
 				apiKey:'members',
 				success:membersReceived,
@@ -84,6 +96,14 @@
 					console.log("error receiving parties data. ", result);
 				}
 			});
+			getAPIData({
+				apiKey:'agendas',
+				success:agendasReceived,
+				failure:function(result){
+					console.log("error receiving agendas data. ", result);
+				}
+			});
+
         </script>
     </head>
     <body>
@@ -93,14 +113,17 @@
 	    	members: <br>
 			<TEXTAREA id="members" NAME="members" ROWS="10" COLS="800">
 			</TEXTAREA>
-			slimMembers:
+<!--			slimMembers:
 			<TEXTAREA id="slimMembers" NAME="slimMembers" ROWS="10" COLS="800">
 			</TEXTAREA>
-<!--	    	slim data: <br>
+	    	slim data: <br>
 			<TEXTAREA id="slimData" NAME="slimData" ROWS="10" COLS="800">
 			</TEXTAREA> -->
 			parties: <br>
 			<TEXTAREA id="parties" NAME="parties" ROWS="10" COLS="800">
+			</TEXTAREA>
+	    	agendas: <br>
+			<TEXTAREA id="agendas" NAME="agendas" ROWS="10" COLS="800">
 			</TEXTAREA>
 			image list: <br>
 			<TEXTAREA id="imageList" NAME="partyData" ROWS="10" COLS="800">

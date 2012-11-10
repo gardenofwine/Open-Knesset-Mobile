@@ -961,3 +961,202 @@ var slimPartyData = [
 		"resource_uri": "/api/v2/party/12/"
 	}
 ];
+
+var slimAgendas = [
+    {
+        "absolute_url": "/agenda/49/",
+        "id": 49,
+        "name": "סביבה ופיתוח בר-קיימא",
+        "public_owner_name": "חיים וסביבה",
+        "resource_uri": "/api/v2/agenda/49/"
+    },
+    {
+        "absolute_url": "/agenda/7/",
+        "id": 7,
+        "name": "סיוע לנזקקים",
+        "public_owner_name": "עפרי רביב ויניב כליף",
+        "resource_uri": "/api/v2/agenda/7/"
+    },
+    {
+        "absolute_url": "/agenda/9/",
+        "id": 9,
+        "name": "חיזוק הפריפריה",
+        "public_owner_name": "דוד שמעון, יונתן רואש ועפרי רביב",
+        "resource_uri": "/api/v2/agenda/9/"
+    },
+    {
+        "absolute_url": "/agenda/41/",
+        "id": 41,
+        "name": "זכויות אדם",
+        "public_owner_name": "רם אזרח ואלון אנתין",
+        "resource_uri": "/api/v2/agenda/41/"
+    },
+    {
+        "absolute_url": "/agenda/61/",
+        "id": 61,
+        "name": "קידום חינוך ציבורי איכותי",
+        "public_owner_name": "חינוך ישראלי",
+        "resource_uri": "/api/v2/agenda/61/"
+    },
+    {
+        "absolute_url": "/agenda/24/",
+        "id": 24,
+        "name": "שיוויון הזדמנויות",
+        "public_owner_name": "אבטלה סמויה",
+        "resource_uri": "/api/v2/agenda/24/"
+    },
+    {
+        "absolute_url": "/agenda/2/",
+        "id": 2,
+        "name": "שקיפות המידע הציבורי",
+        "public_owner_name": "התנועה לחופש המידע",
+        "resource_uri": "/api/v2/agenda/2/"
+    },
+    {
+        "absolute_url": "/agenda/1/",
+        "id": 1,
+        "name": "ימין מדיני בטחוני",
+        "public_owner_name": "מטות ערים",
+        "resource_uri": "/api/v2/agenda/1/"
+    },
+    {
+        "absolute_url": "/agenda/40/",
+        "id": 40,
+        "name": "שיפור הדמוקרטיה הפרלמנטרית",
+        "public_owner_name": "ישראלים להצלת הדמוקרטיה",
+        "resource_uri": "/api/v2/agenda/40/"
+    },
+    {
+        "absolute_url": "/agenda/45/",
+        "id": 45,
+        "name": "ציונות דתית לאומית",
+        "public_owner_name": "יעקב פייגלין",
+        "resource_uri": "/api/v2/agenda/45/"
+    },
+    {
+        "absolute_url": "/agenda/44/",
+        "id": 44,
+        "name": "שיקום והעצמת חוסנו ויציבותו של המוסד לביטוח לאומי ",
+        "public_owner_name": "שירי סיני",
+        "resource_uri": "/api/v2/agenda/44/"
+    },
+    {
+        "absolute_url": "/agenda/39/",
+        "id": 39,
+        "name": "הקטנת ריכוזיות ועידוד תחרותיות במשק",
+        "public_owner_name": "היוזמה לפירוק הריכוזיות",
+        "resource_uri": "/api/v2/agenda/39/"
+    },
+    {
+        "absolute_url": "/agenda/60/",
+        "id": 60,
+        "name": "קידום אכיפת חוק, הבטחת הבטחון האישי, ומאבק בארגוני הפשע",
+        "public_owner_name": "אלון דותן ורועי עידן",
+        "resource_uri": "/api/v2/agenda/60/"
+    },
+    {
+        "absolute_url": "/agenda/6/",
+        "id": 6,
+        "name": "שיוויון בנטל שירות החובה",
+        "public_owner_name": "הפורום לשיוויון בנטל",
+        "resource_uri": "/api/v2/agenda/6/"
+    },
+    {
+        "absolute_url": "/agenda/71/",
+        "id": 71,
+        "name": "קידום הדיור הציבורי ",
+        "public_owner_name": "צוות דיור ציבורי",
+        "resource_uri": "/api/v2/agenda/71/"
+    },
+    {
+        "absolute_url": "/agenda/26/",
+        "id": 26,
+        "name": "הפרדת דת ומדינה",
+        "public_owner_name": "המרכז הרפורמי לדת ומדינה",
+        "resource_uri": "/api/v2/agenda/26/"
+    },
+    {
+        "absolute_url": "/agenda/48/",
+        "id": 48,
+        "name": "הסדרת נציגות הורים במערכת החינוך",
+        "public_owner_name": "נבות",
+        "resource_uri": "/api/v2/agenda/48/"
+    },
+    {
+        "absolute_url": "/agenda/64/",
+        "id": 64,
+        "name": "הקטנת אי-השיוויון במשק",
+        "public_owner_name": "אלון אנתין",
+        "resource_uri": "/api/v2/agenda/64/"
+    },
+    {
+        "absolute_url": "/agenda/79/",
+        "id": 79,
+        "name": "קידום של מערכת האינטרנט בישראל",
+        "public_owner_name": "יהונתן דניב ואלון אנתין",
+        "resource_uri": "/api/v2/agenda/79/"
+    },
+    {
+        "absolute_url": "/agenda/63/",
+        "id": 63,
+        "name": "קידום החינוך הציבורי",
+        "public_owner_name": "פעילי החינוך",
+        "resource_uri": "/api/v2/agenda/63/"
+    },
+    {
+        "absolute_url": "/agenda/53/",
+        "id": 53,
+        "name": "מדד החופש",
+        "public_owner_name": "התנועה הליברלית החדשה, הפורום הליברלי בליכוד ",
+        "resource_uri": "/api/v2/agenda/53/"
+    },
+    {
+        "absolute_url": "/agenda/55/",
+        "id": 55,
+        "name": "רציונליות סביבתית",
+        "public_owner_name": "צוות \"הבלוג הירוק\"",
+        "resource_uri": "/api/v2/agenda/55/"
+    },
+    {
+        "absolute_url": "/agenda/66/",
+        "id": 66,
+        "name": "שיפור מערכת הבריאות",
+        "public_owner_name": "עמותת מרשם - מתמחים לשיפור הרפואה בישראל",
+        "resource_uri": "/api/v2/agenda/66/"
+    },
+    {
+        "absolute_url": "/agenda/77/",
+        "id": 77,
+        "name": "קידום החברה האזרחית בישראל",
+        "public_owner_name": "מנהיגות אזרחית",
+        "resource_uri": "/api/v2/agenda/77/"
+    },
+    {
+        "absolute_url": "/agenda/74/",
+        "id": 74,
+        "name": "המדד החברתי ",
+        "public_owner_name": "המשמר החברתי",
+        "resource_uri": "/api/v2/agenda/74/"
+    },
+    {
+        "absolute_url": "/agenda/73/",
+        "id": 73,
+        "name": "קידום זכויות בעלי החיים",
+        "public_owner_name": "ארנבות לשלטון",
+        "resource_uri": "/api/v2/agenda/73/"
+    },
+    {
+        "absolute_url": "/agenda/36/",
+        "id": 36,
+        "name": "קיימות",
+        "public_owner_name": "העמותה הישראלית לכלכלה בת קיימא",
+        "resource_uri": "/api/v2/agenda/36/"
+    },
+    {
+        "absolute_url": "/agenda/72/",
+        "id": 72,
+        "name": "מדד השיוויון המגדרי",
+        "public_owner_name": "מתפקדות",
+        "resource_uri": "/api/v2/agenda/72/"
+    }
+]

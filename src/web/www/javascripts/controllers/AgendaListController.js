@@ -16,17 +16,17 @@ Ext.regController('AgendaList', {
       
         }
 
-     /*
-		Ext.util.JSONP.request({
-		    url: 'http://www.oknesset.org/api/v2/agenda',
-		    params:{format:'jsonp'},
-		    callbackKey : "callback",
-			callback : function(data){
-		    			OKnesset.AgendaListStore.loadData(data.objects);
-		    	        },
-			onFailure : function(){console.log("Failure!");}
-		});
-		*/
+        getAPIData({
+            apiKey:'agendas',
+            success:function(data){
+				OKnesset.AgendaListStore.loadData(data);            	
+                // that.memberView.getComponent('loading').hide();
+            },
+            failure:function(result){
+                console.log("error receiving memebers data. ", result);
+            }
+        });
+
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.AgendaTitle);
         this.application.viewport.setActiveItem(this.AgendaListView, options.animation);
         
