@@ -37,7 +37,7 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
             }
         });
 
-        this.updateData(member);
+        //this.updateData(member);
         this.application.viewport.setActiveItem(this.memberView, options.animation);
     },
 

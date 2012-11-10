@@ -27,16 +27,26 @@ Ext.regController('VoteDetails', {
 
 
             //Ext.util.JSONP.request
-            OKnesset.getData({
-                urlKeyword: 'voteDetails',
-                id: options.id,
-                callbackKey : "callback",
-                onFailure : function(){console.log("Failure loading vote json from server");},
-                callback: function(data){
+            OKnesset.getAPIData({
+                apiKey : "voteDetails",
+                success : function(data){
                     VoteDetailsController.updateData(data);
                     VoteDetailsController._refresh(hideWhileLoading);
+                },
+                failure: function(){
+                    console.log("Failure loading vote json from server");
                 }
-            });
+            })
+            // OKnesset.getData({
+            //     urlKeyword: 'voteDetails',
+            //     id: options.id,
+            //     callbackKey : "callback",
+            //     onFailure : function(){console.log("Failure loading vote json from server");},
+            //     callback: function(data){
+            //         VoteDetailsController.updateData(data);
+            //         VoteDetailsController._refresh(hideWhileLoading);
+            //     }
+            // });
         }
 
         this.application.viewport.setActiveItem(this.VoteDetailsView, options.animation);

@@ -78,6 +78,7 @@ OKnesset.app.controllers.navigation = Ext.regController('navigation', {
   },
 
   setBackbuttonVisibility : function(){
+    // Android doesn't have an on screen back button
 	  if (isAndroid()){
 		  this.setBackbuttonVisibility = function(){};
 		  return;

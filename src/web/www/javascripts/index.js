@@ -15,7 +15,7 @@ OKnesset.log = function(string) {
 Ext.regApplication({
 	name : 'OKnesset.app',
 	id : "oknesset",
-	defaultUrl : 'navigation/push/AgendaList/Index',
+	defaultUrl : 'navigation/push/PartyList/Index',
 	launch : function() {
 		// Invoked immediately after the OKnesset.app created.
 		this.launched = true;
@@ -126,9 +126,6 @@ function secondaryLaunch() {
 		// For Android, override the back button functionality
 		document.addEventListener("backbutton", OKnesset.app.onBackKey, false);
 	}
-
-	// Load the full data of the parties and members into the data stores
-	loadInitialData();
 
 	if (OKnesset.debug){
 		time.stop('Secondary Launch');

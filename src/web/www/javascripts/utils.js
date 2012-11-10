@@ -52,7 +52,7 @@ function GATrackBill(url, callback) {
 /**
  * Handle updating the application's data from teh internet (oknesset.org)
  */
-function processData(data) {
+/*function processData(data) {
 	// stringifying BEFORE using the data, because the data may change
 	var partyDataString = JSON.stringify(data.partyData);
 	var memberDataString = JSON.stringify(data.memberData);
@@ -77,35 +77,36 @@ function loadInitialData() {
 		// loaded
 		localStorage.setItem("DataDate", slimDataDate.getTime());
 		// load initial data (data shipped with the application)
-		if (!isPhoneGap()) {
-			processData({
-				memberData : memberData,
-				partyData : partyData,
-				dataDate : dataDate});
-			checkFullDataFromWeb();
-		} else {
-			Ext.Ajax.request({
-				url : 'javascripts/models/partyData.js.jpg',
-				callback : function(options, success, response) {
-					// for some reason, Ext.Ajax returns success == false when
-					// the local request returns
-					if (response.responseText != null
-							&& response.responseText.length > 0) {
-						eval(response.responseText);
-						processData({
-							memberData : memberData,
-							partyData : partyData,
-							dataDate : dataDate});
-						checkFullDataFromWeb();
-					} else {
-						OKnesset.log('Full data load failure ('
-								+ JSON.stringify(response)
-								+ ') with status code ' + response.status);
-						checkFullDataFromWeb();
-					}
-				}
-			});
-		}
+		// if (!isPhoneGap()) {
+		// 	processData({
+		// 		memberData : memberData,
+		// 		partyData : partyData,
+		// 		dataDate : dataDate});
+		// 	checkFullDataFromWeb();
+		// } else {
+		// 	Ext.Ajax.request({
+		// 		url : 'javascripts/models/partyData.js.jpg',
+		// 		callback : function(options, success, response) {
+		// 			// for some reason, Ext.Ajax returns success == false when
+		// 			// the local request returns
+		// 			if (response.responseText != null
+		// 					&& response.responseText.length > 0) {
+		// 				eval(response.responseText);
+		// 				processData({
+		// 					memberData : memberData,
+		// 					partyData : partyData,
+		// 					dataDate : dataDate});
+		// 				checkFullDataFromWeb();
+		// 			} else {
+		// 				OKnesset.log('Full data load failure ('
+		// 						+ JSON.stringify(response)
+		// 						+ ') with status code ' + response.status);
+		// 				checkFullDataFromWeb();
+		// 			}
+		// 		}
+		// 	});
+		// }
+		checkFullDataFromWeb();
 	}
 }
 
@@ -356,7 +357,41 @@ OKnesset.mapURL = {
     key: 'value',
     voteDetails: 'http://www.oknesset.org/api/vote/@id'
 }
+/*
+* options: an object with the following keys:
+	(string)apiKey, (function)success, (boolean)cache, (function)failure
+*/
+OKnesset.getAPIData = function (options) {
+	var requestUrl = OKnessetAPIMapping[options.apiKey].url;
 
+	// if a cached version of the data exists, return it immediately
+	var cachedData = _cacheGet(requestUrl);
+	if (cachedData != null) {
+		//call callback function with cached data
+		options.success(cachedData);
+		return;
+	}
+
+	// make request
+	Ext.util.JSONP.request({
+	    url: requestUrl,
+	    callbackKey : OKnessetAPIMapping[options.apiKey].callbackKey,
+	    params : OKnessetAPIMapping[options.apiKey].parameters,
+		onFailure : options.failure,
+	    callback: options.success
+	});
+
+	function _cacheGet(key) {
+		var cachedData = localStorage.getItem(key);
+
+		if (cachedData != null)
+			cachedData = JSON.parse(cachedData);
+
+		return cachedData;
+	}
+}
+
+/*
 OKnesset.getData = function (req) {
 
 	var cached = false;
@@ -411,4 +446,4 @@ OKnesset.getData = function (req) {
 	function _getApiURL(urlKeyword) {
 		return (OKnesset.mapURL[urlKeyword]);
 	}
-}
+}*/
