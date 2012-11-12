@@ -3,7 +3,7 @@ window.OKnessetParser = new function(){
 	/*******************************************************************************
 	 * members parser
 	 */
-	this.members = function(result){
+	this.members = function(result, success, failure){
 		var memberArray = new Array();
 
 		// For each member
@@ -21,7 +21,7 @@ window.OKnessetParser = new function(){
 			memberArray.push(minMember);
 		};
 
-		return memberArray; 
+		success(memberArray); 
 
 		// private functions
 
@@ -71,23 +71,23 @@ window.OKnessetParser = new function(){
 	/*******************************************************************************
 	 * member parser
 	 */
-	this.member =  function(result){
+	this.member =  function(result, success, failure){
 		result.img_url = "images/members/" + result.img_url.substring(result.img_url.lastIndexOf('/') + 1);
-		return result;
+		success(result);
 	}
 
 	/*******************************************************************************
 	 * trivial parser
 	 */
-	this.trivialParser =  function(result){
-		return result;
+	this.trivialParser =  function(result, success, failure){
+		success(result);
 	}
 
 	/*******************************************************************************
 	 * objects parser
 	 */
-	this.objectsParser =  function(result){
-		return result.objects;
+	this.objectsParser =  function(result, success, failure){
+		success(result.objects);
 	}
 
 }

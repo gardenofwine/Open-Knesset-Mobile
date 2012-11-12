@@ -142,7 +142,14 @@ function getAPIData(options) {
 	    params : parameters,
 		onFailure : options.failure,
 	    callback: function(results){
-	    	options.success(OKnessetAPIMapping[options.apiKey].parser(results));
+	    	OKnessetAPIMapping[options.apiKey].parser(results, 
+	    		function(parseResults){
+	    			options.success(parseResults);
+	    		},
+	    		function(parseResults){
+	    			options.failure(parseResults);
+	    		});
+	    	;
 	    }
 	});
 
