@@ -9,6 +9,7 @@ OKnesset.app.views.PartyView = new Ext.extend(Ext.Panel, {
 				align: 'stretch'
 			},
 			title : '',
+			scroll: 'vertical',
 			currentParty : null,
 			initComponent: function()
 			{
@@ -24,6 +25,7 @@ Ext.reg('PartyView', OKnesset.app.views.PartyView);
 OKnesset.app.views.PartyView.MemberList = new Ext.extend(Ext.List, {
 	id : 'MemberList',
 	itemTpl : '<div>{#} {name}</div>',
+	scroll: false,
 	store : OKnesset.MemberStore,
 	onItemDisclosure : true
 });
