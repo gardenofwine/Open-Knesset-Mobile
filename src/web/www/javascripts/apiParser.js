@@ -100,7 +100,7 @@ window.OKnessetAPIMapping = {
     	url : function(id){
     		return 'http://www.oknesset.org/api/vote/' + id;
     	},
-    	parameters : {format:"jsonp"},
+    	parameters : {},
     	callbackKey : "callback",
     	parser: OKnessetParser.trivialParser
     },
