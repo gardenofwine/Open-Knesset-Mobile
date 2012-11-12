@@ -34,6 +34,12 @@
 .partyName div{
 	display : inline;
 }
+
+.party-logo {
+	float: right;
+	margin: 10px;
+}
+
 .AgendaVoteTitle div{
 
 	display : inline;

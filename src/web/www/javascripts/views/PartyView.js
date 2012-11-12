@@ -31,8 +31,7 @@ OKnesset.app.views.PartyView.MemberList = new Ext.extend(Ext.List, {
 });
 OKnesset.app.views.PartyView.MiniInfo = new Ext.extend(Ext.Panel, {
 	id : 'MiniInfo',
-	height : 300,
 	scroll: false,
 	padding: 5,
-	tpl : '<div class="partyInfo" dir="rtl"><p><img class= "party-logo" src="{logo_url}" alt="{party_name}" title="{party_name}">{short_info}</p><p><a href="#PartyInfo/Index/{party_id}">' + OKnesset.strings.ReadMore + '</a></p></div>'
+	tpl : '<div class="partyInfo"><p><img class= "party-logo" src="{logo_url}" alt="{party_name}" title="{party_name}">{short_info}</p><p><a href="#PartyInfo/Index/{party_id}">' + OKnesset.strings.ReadMore + '</a></p></div>'
 });
