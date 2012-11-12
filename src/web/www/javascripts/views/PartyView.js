@@ -29,9 +29,23 @@ OKnesset.app.views.PartyView.MemberList = new Ext.extend(Ext.List, {
 	store : OKnesset.MemberStore,
 	onItemDisclosure : true
 });
+
+OKnesset.app.views.PartyView.MiniText = new Ext.extend(Ext.Panel, {
+	id : 'MiniText',
+	scroll: false,
+	padding: 5,
+	tpl : '<div class="partyInfo"><p><img class= "party-logo" src="{logo_url}" alt="{party_name}" title="{party_name}">{short_info}</p><p></p></div>'
+});
+
 OKnesset.app.views.PartyView.MiniInfo = new Ext.extend(Ext.Panel, {
 	id : 'MiniInfo',
 	scroll: false,
-	padding: 5,
-	tpl : '<div class="partyInfo"><p><img class= "party-logo" src="{logo_url}" alt="{party_name}" title="{party_name}">{short_info}</p><p><a href="#PartyInfo/Index/{party_id}">' + OKnesset.strings.ReadMore + '</a></p></div>'
+	items: [
+		new OKnesset.app.views.PartyView.MiniText(),
+		new Ext.Button({
+			id  : 'Button',
+			cls : 'read-more-btn',
+			text: OKnesset.strings.ReadMore
+		})
+	]
 });

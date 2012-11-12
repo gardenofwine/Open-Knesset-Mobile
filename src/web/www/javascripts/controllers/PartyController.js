@@ -3,7 +3,7 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 	// index action
 	Index: function(options)
 	{
-		var memberList, id , party, name, info;
+		var memberList, id , party, name, info, infoView;
 		if ( ! this.partyView)
 		{
 			this.partyView = this.render({
@@ -11,10 +11,16 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 			});
 			memberList = this.partyView.query('#MemberList')[0];
 			memberList.addListener('itemtap',
-					function(that, index, item, e) {
-						var record = that.store.getAt(index);
-						OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + record.data.id, options.historyUrl);
-					});
+				function(that, index, item, e) {
+					var record = that.store.getAt(index);
+					OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + record.data.id, options.historyUrl);
+			});
+			this.partyView.query('#Button')[0].addListener('tap',
+				function(that, index, item, e) {
+					if (that.party_id) {
+						OKnesset.app.controllers.navigation.dispatchPanel('PartyInfo/Index/' + that.party_id, options.historyUrl);
+					}
+			});
 		}
 
 		id = parseInt(options.id, 10);
@@ -46,7 +52,8 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 				});
 			}
 		}
-		this.partyView.query('#MiniInfo')[0].update(info && info.data || {});
+		this.partyView.query('#MiniText')[0].update(info && info.data || {});
+		this.partyView.query('#Button')[0].party_id = info && info.data.party_id;
 		this.application.viewport.query('#toolbar')[0].setTitle(name);
 		this.application.viewport.setActiveItem(this.partyView, options.animation);
 	},

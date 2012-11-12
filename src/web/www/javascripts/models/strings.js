@@ -93,5 +93,5 @@ OKnesset.strings = {
     AgendaMostSupport       :"התומכים ביותר",
     AgendaMore              :"פרטים נוספים",
     CreditFrom              :"המידע באדיבות - ",
-    ReadMore                :"המשך..."
+    ReadMore                :"קרא עוד"
 };
