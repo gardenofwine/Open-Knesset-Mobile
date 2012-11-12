@@ -118,6 +118,10 @@ function getMembersById(ids) {
  * (object)urlOptions, (object)parameterOptions
  */
 function getAPIData(options) {
+	if (typeof OKnessetAPIMapping === 'undefined'){
+		options.failure("The file apiParser.js has not been loaded from the server");
+		return ;
+	}
 	var requestUrl = OKnessetAPIMapping[options.apiKey].url(options.urlOptions);
 
 	// if a cached version of the data exists, return it immediately

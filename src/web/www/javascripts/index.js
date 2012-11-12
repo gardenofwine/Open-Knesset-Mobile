@@ -82,6 +82,19 @@ function secondaryLaunch() {
 		time.start('Secondary Launch');
 	}
 
+	if (isPhoneGap()){
+		// load the api parser
+		Ext.Ajax.request({
+		    url: 'http://open-knesset-mobile.appspot.com/static/V2.0/apiParser.js',
+			failure : function(results){
+				console.log("Error loding apiParser.js from server");
+			},
+		    success: function(results){
+		    	eval(results.responseText);
+		    }
+		});
+	}
+
 	var disclaimerDismissed = localStorage.getItem("disclaimerDismissed");
 	if (disclaimerDismissed !== 'true') {
 		OKnesset.app.controllers.navigation.dispatchDialog('Disclaimer/Index');
