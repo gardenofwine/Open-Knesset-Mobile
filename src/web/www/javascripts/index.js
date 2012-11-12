@@ -54,24 +54,6 @@ Ext.regApplication({
 					OKnesset.app.views.Viewport.AppMenu.hide();
 				});
 
-//        //
-//        // set the AllCommittees button handler
-//        // delete this button after Protocol page
-//        //
-//        this.viewport.query('#prot')[0].setHandler(function(){
-//        	OKnesset.app.controllers.navigation.dispatchPanel('Protocol/Index');
-//
-//        });
-//        //
-
-
-
-//        // set the protocol button handler
-//        this.viewport.query('#allComm')[0].setHandler(function(){
-//        	OKnesset.app.controllers.navigation.dispatchPanel('AllCommittees/Index');
-//
-//        });
-
 		// set the back button handler
         this.viewport.query('#backBtn')[0].setHandler(function() {
         	OKnesset.app.controllers.navigation.dispatchBack();
