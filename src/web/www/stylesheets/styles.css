@@ -12,6 +12,31 @@
 }
 
 
+
+/* Homepage design */
+.oklogo {
+	position : absolute;
+	right : 0px;
+
+}
+
+.sadnalogo {
+	position : absolute;
+	left : 0px;
+	width :100px;
+	height: 100px;
+}
+.homepageBtn{
+	text-align: center;
+	display : block; 
+	-webkit-box-flex:1;
+	background-image: '';
+	background-color:'#6E90DB';
+}
+
+
+
+/* list items design */
 .x-list-item {
   direction :rtl;
 
