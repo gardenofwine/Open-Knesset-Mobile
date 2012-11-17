@@ -21,7 +21,7 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
         // load the extra member data
         var that = this;
         that.memberView.getComponent('loading').show();
-        getAPIData({
+        var dataRecevied = getAPIData({
             apiKey:'member',
             urlOptions : options.id,
             success:function(data){
@@ -34,8 +34,9 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
         });
 
         //http://www.oknesset.org/api/v2/bill/?format=json&proposer=814
-
-        this.updateData(member);
+        if (!dataRecevied){
+            this.updateData(member);
+        }
         this.application.viewport.setActiveItem(this.memberView, options.animation);
     },
 
