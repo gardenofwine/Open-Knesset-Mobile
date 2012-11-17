@@ -114,23 +114,33 @@ function getMembersById(ids) {
 
 /**
  * options: an object with the following keys:
- *	(string)apiKey, (function)success, (boolean)cache, (function)failure
+ *	(string)apiKey, (function)success, (boolean)diskCache, (function)failure
  * (object)urlOptions, (object)parameterOptions
+
+ * retuns: ture if data was retrieved from cache. false otherwise
  */
+memcache = {};
 function getAPIData(options) {
 	if (typeof OKnessetAPIMapping === 'undefined'){
 		options.failure("The file apiParser.js has not been loaded from the server");
-		return ;
+		return false;
 	}
 	var requestUrl = OKnessetAPIMapping[options.apiKey].url(options.urlOptions);
 
 	// if a cached version of the data exists, return it immediately
-	var cachedData = _cacheGet(requestUrl);
+	var cachedData = _diskCacheGet(requestUrl);
 	if (cachedData != null) {
 		//call callback function with cached data
 		options.success(cachedData);
-		return;
+		return true;
 	}
+	cachedData = _cacheGet(requestUrl);
+	if ((typeof cachedData !== 'undefined') && cachedData != null ) {
+		//call callback function with cached data
+		options.success(cachedData);
+		return true;
+	}
+
 
 	var parameters;
 	if (typeof OKnessetAPIMapping[options.apiKey].parameters === 'function') {
@@ -148,21 +158,30 @@ function getAPIData(options) {
 	    callback: function(results){
 	    	OKnessetAPIMapping[options.apiKey].parser(results, 
 	    		function(parseResults){
+	    			// success
+	    			memcache[requestUrl] = parseResults;
 	    			options.success(parseResults);
 	    		},
 	    		function(parseResults){
+	    			// failure
 	    			options.failure(parseResults);
 	    		});
 	    	;
 	    }
 	});
 
-	function _cacheGet(key) {
+	return false;
+
+	function _diskCacheGet(key) {
 		var cachedData = localStorage.getItem(key);
 
 		if (cachedData != null)
 			cachedData = JSON.parse(cachedData);
 
+		return cachedData;
+	}
+	function _cacheGet(key) {
+		var cachedData = memcache[key];
 		return cachedData;
 	}
 }
