@@ -1,0 +1,28 @@
+#to download all the images run
+#curl -K PartyImageList.txt
+-O
+url = "http://www.idi.org.il/media/195012/haichudhaleumi.jpg"
+-O
+url = "http://www.idi.org.il/media/195056/likud.jpg"
+-O
+url = "http://www.idi.org.il/media/195045/labor.jpg"
+-O
+url = "http://www.idi.org.il/media/195111/torahjudaism.jpg"
+-O
+url = "http://www.idi.org.il/media/195023/israelbeiteinu.jpg"
+-O
+url = "http://www.idi.org.il/media/195034/kadima.jpg"
+-O
+url = "http://www.idi.org.il/media/195100/shas.jpg"
+-O
+url = "http://www.idi.org.il/media/195001/hadash.jpg"
+-O
+url = "http://www.idi.org.il/media/194946/balad.jpg"
+-O
+url = "http://www.idi.org.il/media/195089/raamtaal.jpg"
+-O
+url = "http://www.idi.org.il/media/195078/meretz.jpg"
+-O
+url = "http://www.idi.org.il/media/194990/habaithayehudi.jpg"
+-O
+url = "http://upload.wikimedia.org/wikipedia/he/a/a3/Logo_haatzmaut.png"

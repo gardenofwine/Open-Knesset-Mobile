@@ -58,6 +58,13 @@
 .partyName div{
 	display : inline;
 }
+
+.party-logo {
+	float: right;
+	width : 50%;
+	margin: 10px;
+}
+
 .AgendaVoteTitle div{
 
 	display : inline;

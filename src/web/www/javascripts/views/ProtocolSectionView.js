@@ -22,14 +22,27 @@ OKnesset.app.views.ProtocolSectionView = new Ext.extend(Ext.Panel, {
 					height: '75px',
 					maxHeight:'100px',
 					padding: '5' ,
-					items: [{xtype: 'spacer'},this.spokeman]
+					items: [this.spokeman,{xtype: 'spacer'}]
 				 },{
 					xtype: 'toolbar',
 					height: '75px',
 					maxHeight:'100px',
 					padding: '5' ,
 				    dock: 'bottom',
-					items: [{ui: 'action',id: 'next_spokemanBtn',iconMask: true,text: OKnesset.strings.next,}, {xtype: 'spacer' },{ui: 'action',id: 'pre_spokemanBtn',iconMask: true,text: OKnesset.strings.previous,}]
+					items: [{
+						ui: 'action',
+						id: 'pre_spokemanBtn',
+						iconMask: true,
+						text: OKnesset.strings.previous},
+						{
+						xtype: 'spacer' 
+						},
+						{
+						ui: 'action',
+						id: 'next_spokemanBtn',
+						iconMask: true,
+						text: OKnesset.strings.next
+					}]
 				 }];
 
 		 OKnesset.app.views.ProtocolSectionView.superclass.initComponent.apply(this, arguments);
