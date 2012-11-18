@@ -7,16 +7,16 @@ var homepagePanelHTml = " \
 ";
 
 var homepageAgendaBtnHtml = " \
-<span><b>" + OKnesset.strings.AgendaTitle +"</b><br/>\
+<span><b>" + OKnesset.strings.AgendaTitle +"</b><br/><br/>\
 <span style='font-size:0.8em'>"+ OKnesset.strings.HomepageAgendaBtnText +"</span></span> \
 ";
 
 var homepagePartiesBtnHtml = " \
-<span><b>" + OKnesset.strings.partiesTitle +"</b><br/>\
+<span><b>" + OKnesset.strings.partiesTitle +"</b><br/><br/>\
 <span style='font-size:0.8em'>"+ OKnesset.strings.HomepagePartiesBtnText +"</span></span> \
 ";
 
 var homepageCommitteesBtnHtml = " \
-<span><b>" + OKnesset.strings.committees +"</b><br/>\
+<span><b>" + OKnesset.strings.committees +"</b><br/><br/>\
 <span style='font-size:0.8em'>"+ OKnesset.strings.HomepageCommitteesBtnTxt +"</span></span> \
 ";

@@ -1,6 +1,7 @@
 /**
  * The Homepage
  */
+
 OKnesset.app.views.HomepageView = new Ext.extend(Ext.Panel, {
     id: 'HomePage',
     layout: {
@@ -25,14 +26,14 @@ OKnesset.app.views.HomepageView = new Ext.extend(Ext.Panel, {
       items: [{
         id: 'homepageAgendaBtn',
         flex : 1,
-        margin: "20 20 20 20",
+        margin: "10 10 10 10",
         xtype: 'button',
         cls : 'homepageBtn',
         html : homepageAgendaBtnHtml},
         {
         id: 'homepagePartiesBtn',
         flex : 1,
-        margin: "20 20 20 20",
+        margin: "10 10 10 10",
         xtype: 'button',
         cls : 'homepageBtn',
         html : homepagePartiesBtnHtml
@@ -48,23 +49,23 @@ OKnesset.app.views.HomepageView = new Ext.extend(Ext.Panel, {
       items: [{
         id: 'homepageAboutBtn',
         flex : 1,
-        margin: "20 20 20 20",
+        margin: "10 10 10 10",
         xtype: 'button',
         cls : 'homepageBtn',
         text : OKnesset.strings.about},
         {
         id: 'homepageCommitteesBtn',
         flex : 1,
-        margin: "20 20 20 20",
+        margin: "10 10 10 10",
         xtype: 'button',
         cls : 'homepageBtn',
         html : homepageCommitteesBtnHtml
         },
       ]},
     ],
-    initComponent: function(){
-      OKnesset.app.views.MemberView.superclass.initComponent.apply(this, arguments);
-    }
+    // initComponent: function(){
+    //   OKnesset.app.views.MemberView.superclass.initComponent.apply(this, arguments);
+    // }
 });
 
 Ext.reg('HomePage', OKnesset.app.views.HomepageView);

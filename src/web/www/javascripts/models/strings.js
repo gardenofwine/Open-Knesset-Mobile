@@ -92,7 +92,7 @@ OKnesset.strings = {
 	deletefromvotetitle6    :"לכלול את הנושא בסדר היום של המליאה  - ",
 	AgendaMostSupport       :"התומכים ביותר",
 	AgendaMore              :"פרטים נוספים",
-	Homepagetagline			:"מה חברי הכנסת שלנו עשו במהלך הכנסת ה 18?",
+	Homepagetagline			:"מה חברי הכנסת עשו במהלך הכנסת ה 18?",
 	HomepageAgendaBtnText	:"בחינת עמדת חברי הכנסת בנושאים שונים כגון חיזוק הפריפריה",
 	HomepagePartiesBtnText	:"רשימת חברי הכנסת לפי מפלגות ולפי מיקומם במפלגה בכנסת",
 	HomepageCommitteesBtnTxt:"ועדות הכנסת והחברים בהן, פרוטוקולים של ישיבות ופעילותם",
