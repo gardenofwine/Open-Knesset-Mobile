@@ -81,12 +81,13 @@ Ext.regController('AgendaDetails', {
 	},
 
 	replaceURLWithHTMLLinks: function(text) {
-		var exp = /(\b(http):\/\/[\-A-Z0-9+&@#\/%?=~_|!:,.;]*[\-A-Z0-9+&@#\/%=~_|])/i;
+		var exp;
+		exp = /(([\s\w])((www).[\-A-Z0-9+&@#\/%?=~_|!:,.;]*[\-A-Z0-9+&@#\/%=~_|]))/ig;
+		text = text.replace(exp,"http://$3");
+		exp = /(([\s\w])(http):\/\/[\-A-Z0-9+&@#\/%?=~_|!:,.;]*[\-A-Z0-9+&@#\/%=~_|])/ig;
 		text = text.replace(exp,"<a href='$1'>$1</a>");
-		exp = /(\b(https):\/\/[\-A-Z0-9+&@#\/%?=~_|!:,.;]*[\-A-Z0-9+&@#\/%=~_|])/i;
+		exp = /(([\s\w])(https):\/\/[\-A-Z0-9+&@#\/%?=~_|!:,.;]*[\-A-Z0-9+&@#\/%=~_|])/ig;
 		text = text.replace(exp,"<a href='$1'>$1</a>");
-		exp = /(\b(www).[\-A-Z0-9+&@#\/%?=~_|!:,.;]*[\-A-Z0-9+&@#\/%=~_|])/i;
-		text = text.replace(exp,"<a href='http://$1'>http://$1</a>");
 		return text;
 	}
 
