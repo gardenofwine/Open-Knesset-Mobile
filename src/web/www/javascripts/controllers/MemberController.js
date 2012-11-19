@@ -9,11 +9,9 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 			var memberController = this;
         }
 
-        OKnesset.app.views.MemberView.memberBillsBtn.setHandler(this.dispatchBills,options);
-
-        OKnesset.app.views.MemberView.memberCommitteesBtn.setHandler(this.dispatchCommittees,options);
-
-		OKnesset.app.views.MemberView.memberVotesBtn.setHandler(this.dispatchVotes,options);
+        this.memberView.query('#memberBillsBtn')[0].setHandler(this.dispatchBills,options);
+        this.memberView.query('#memberCommitteesBtn')[0].setHandler(this.dispatchCommittees,options);
+        this.memberView.query('#memberVotesBtn')[0].setHandler(this.dispatchVotes,options);
 
         var member = this.currentMember = getMembersById(options.id)[0];
         GATrackMember(member.name);
@@ -104,33 +102,38 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
     },
     updateData: function(member){
 
+        this.memberView.query('#MemberImage')[0].update(member);
         this.memberView.query('#MemberInfo')[0].update(member);
         this.application.viewport.query('#toolbar')[0].setTitle(member.name);
-        OKnesset.app.views.MemberView.memberEmailBtn.setText(this.getEmailButtonText());
-        OKnesset.app.views.MemberView.memberEmailBtn.setHandler(this.sendEmail,member);
-        OKnesset.app.views.MemberView.memberCallBtn.setText(this.getPhoneCallButtonText());
-        OKnesset.app.views.MemberView.memberCallBtn.setHandler(this.phoneMember,member);
+        this.memberView.query('#memberEmailBtn')[0].setText(this.getEmailButtonText());
+        this.memberView.query('#memberEmailBtn')[0].setHandler(this.sendEmail,member);
+        this.memberView.query('#memberCallBtn')[0].setText(this.getPhoneCallButtonText());
+        this.memberView.query('#memberCallBtn')[0].setHandler(this.phoneMember,member);
 
+
+        // TODO: member data returned from the server, does not return 
+        // committee data anymore. To link between memebers and committees, 
+        // we need to reverse-link from the commttees api.
         if (!member.committees || member.committees.length == 0) {
-            OKnesset.app.views.MemberView.memberCommitteesBtn.hide();
+            this.memberView.query('#memberCommitteesBtn')[0].hide();
         } else {
-            OKnesset.app.views.MemberView.memberCommitteesBtn.show();
+            this.memberView.query('#memberCommitteesBtn')[0].show();
         }
 
 
         if (!member.bills || member.bills.length==0) {
-        	OKnesset.app.views.MemberView.memberBillsBtn.setText(OKnesset.strings.noBills);
-        	OKnesset.app.views.MemberView.memberBillsBtn.disable();
+            this.memberView.query('#memberBillsBtn')[0].setText(OKnesset.strings.noBills);
+            this.memberView.query('#memberBillsBtn')[0].disable();
         } else {
-        	OKnesset.app.views.MemberView.memberBillsBtn.setText(OKnesset.strings.bills);
-        	OKnesset.app.views.MemberView.memberBillsBtn.enable();
+            this.memberView.query('#memberBillsBtn')[0].setText(OKnesset.strings.bills);
+            this.memberView.query('#memberBillsBtn')[0].enable();
         }
         if (!member.committees || member.committees.length == 0) {
-        	OKnesset.app.views.MemberView.memberCommitteesBtn.setText(OKnesset.strings.noCommittees);
-        	OKnesset.app.views.MemberView.memberCommitteesBtn.disable();
+            this.memberView.query('#memberCommitteesBtn')[0].setText(OKnesset.strings.noCommittees);
+            this.memberView.query('#memberCommitteesBtn')[0].disable();
         } else {
-        	OKnesset.app.views.MemberView.memberCommitteesBtn.setText(OKnesset.strings.committees);
-        	OKnesset.app.views.MemberView.memberCommitteesBtn.enable();
+            this.memberView.query('#memberCommitteesBtn')[0].setText(OKnesset.strings.committees);
+            this.memberView.query('#memberCommitteesBtn')[0].enable();
         }
     },
 
