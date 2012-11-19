@@ -28,9 +28,9 @@
 }
 .homepageBtn{
 	text-align: center;
-	display : block; 
+	display : block;
 	-webkit-box-flex:1;
-	line-height: 90%;	
+	line-height: 90%;
 }
 
 
@@ -68,6 +68,12 @@
 .AgendaVoteTitle div{
 
 	display : inline;
+}
+
+.x-list .x-list-item .x-list-item-body .btn-mini-text,
+.btn-mini-text {
+	font-size: 0.7em;
+	display: block;
 }
 
 .supportSize {
