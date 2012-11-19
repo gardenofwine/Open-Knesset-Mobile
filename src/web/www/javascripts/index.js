@@ -37,9 +37,9 @@ Ext.regApplication({
 		this.viewport = new OKnesset.app.views.Viewport();
 
 		// set the menu panel
-        this.viewport.query('#openMenu')[0].setHandler(function(){
-            OKnesset.app.views.Viewport.AppMenu.showBy(this);
-        });
+        // this.viewport.query('#openMenu')[0].setHandler(function(){
+        //     OKnesset.app.views.Viewport.AppMenu.showBy(this);
+        // });
 
         OKnesset.app.views.Viewport.menuList.addListener('itemtap',
             	function(that, index, item, e) {

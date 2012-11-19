@@ -85,15 +85,15 @@ OKnesset.app.controllers.navigation = Ext.regController('navigation', {
 	  }
 
       var backBtn = this.application.viewport.query('#backBtn')[0];
-      var openMenuBtn = this.application.viewport.query('#openMenu')[0];
+      // var openMenuBtn = this.application.viewport.query('#openMenu')[0];
       // The first panel is also pushed, but we dont want a back button on the
 		// first panel
       if (this.stack.length > 1){
       	backBtn.show();
-        openMenuBtn.hide();
+        // openMenuBtn.hide();
       } else {
       	backBtn.hide();
-        openMenuBtn.show();
+        // openMenuBtn.show();
       }
   },
 
