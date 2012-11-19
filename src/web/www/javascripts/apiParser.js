@@ -1,10 +1,10 @@
-window.OKnessetParser = new function(){
+window.OKnessetParser = function (){
 
 	/*******************************************************************************
 	 * members parser
 	 */
 	this.members = function(result, success, failure){
-		var memberArray = new Array();
+		var memberArray = [];
 
 		// For each member
 		for (var i = result.objects.length - 1; i >= 0; i--) {
@@ -19,9 +19,9 @@ window.OKnessetParser = new function(){
 			// fetch member bills from web?
 
 			memberArray.push(minMember);
-		};
+		}
 
-		success(memberArray); 
+		success(memberArray);
 
 		// private functions
 
@@ -40,7 +40,7 @@ window.OKnessetParser = new function(){
 
 			if (typeof OKnessetParser.members.sortedMembers[reducedMember.party_id] != "undefined") {
 				if (OKnessetParser.members.sortedMembers[reducedMember.party_id].indexOf(reducedMember.name) == -1){
-					// the member was not found. 
+					// the member was not found.
 					console.log("Member " + member.name + " of party " + member.party_id + "was not found in sorted members array");
 				} else {
 					reducedMember.party_ordinal = OKnessetParser.members.sortedMembers[reducedMember.party_id].indexOf(reducedMember.name) + 1;
@@ -52,7 +52,7 @@ window.OKnessetParser = new function(){
 	};
 
 	this.members.sortedMembers =  {
-		  	"9" : ["ג`מאל זחאלקה","סעיד נפאע","חנין זועבי","עבאס זכור"],
+			"9" : ["ג`מאל זחאלקה","סעיד נפאע","חנין זועבי","עבאס זכור"],
 			"7" : ["אליהו ישי","אריאל אטיאס","יצחק כהן","אמנון כהן","משולם נהרי","יעקב מרגי","דוד אזולאי","יצחק וקנין","נסים זאב","חיים אמסלם","אברהם מיכאלי","מזור בהיינה","רפאל כהן","עמי ביטון","אורן מלכה","רפאל מלאכי","חיים אלי רואש","גרשון לוי","דוד גבאי","פינחס צברי","צבי זאב חי חקוק","יצחק אבידני","בנימין אלחרר","חגי חדד","עופר כרדי","יצחק סולטן","צבי אסולין","גבריאל רחמים"],
 			"11" : ["חיים אורון","אילן גילאון","ניצן הורוביץ","זהבה גלאון","משה רז","אבשלום וילן","טליה ששון","צביה גרינפלד","צלי רשף","עיסווי פריג`","מיכל רוזין","אברהם מיכאלי","מזור בהיינה","רפאל כהן","עמי ביטון","אורן מלכה","רפאל מלאכי","חיים אלי רואש"],
 			"10" : ["אברהים צרצור","אחמד טיבי","טלב אלסאנע","מסעוד גנאים","טלב אבו עראר","גסאן עבדאללה","באסל דראושה","יוסף פדילה","איעתמאד קעדאן","מחמוד מואסי"],
@@ -67,138 +67,137 @@ window.OKnessetParser = new function(){
 		};
 
 	// סיעת העצמאות היא בעצם סיעת העבודה
-	this.members.sortedMembers["13"] = this.members.sortedMembers["3"];	
+	this.members.sortedMembers["13"] = this.members.sortedMembers["3"];
 
 	/*******************************************************************************
 	 * member parser
 	 */
-	this.member =  function(result, success, failure){
+	this.member = function (result, success, failure){
 		result.img_url = "images/members/" + result.img_url.substring(result.img_url.lastIndexOf('/') + 1);
 		success(result);
-	}
+	};
 
 	/*******************************************************************************
 	 * trivial parser
 	 */
-	this.trivialParser =  function(result, success, failure){
+	this.trivialParser = function (result, success, failure){
 		success(result);
-	}
+	};
 
 	/*******************************************************************************
 	 * objects parser
 	 */
-	this.objectsParser =  function(result, success, failure){
+	this.objectsParser = function (result, success, failure){
 		success(result.objects);
-	}
-
-}
+	};
+};
 
 /*******************************************************************************
  * API Mapping
  */
 window.OKnessetAPIMapping = {
-    voteDetails : {
-    	url : function(id){
-    		return 'http://www.oknesset.org/api/vote/' + id;
-    	},
-    	parameters : {},
-    	callbackKey : "callback",
-    	parser: OKnessetParser.trivialParser
-    },
-    members : {
-    	url : function(){
-    		return 'http://www.oknesset.org/api/v2/member/';
-    	},
-    	parameters : {format:"jsonp", extra_fields:"is_current,party_url"},
-    	callbackKey : "callback",
-    	parser: OKnessetParser.members
-    },
-    member : {
-    	url : function(id){
-    		return 'http://www.oknesset.org/api/v2/member/' + id;
-    	},
-    	parameters : {format:"jsonp"},
-    	callbackKey : "callback",
-    	parser: OKnessetParser.member
-    },
-
-    memberVotesFavor :{
-    	url : function(){
-    		return 'http://www.oknesset.org/api/v2/vote/';
-    	},
-    	parameters : function(id){
-    		return {format:"jsonp", limit : 10, member_for : id};
-    	},
-    	callbackKey : "callback",
-    	parser: OKnessetParser.objectsParser
-    },
-
-    memberVotesAgainst : {
-    	url : function(){
-    		return 'http://www.oknesset.org/api/v2/vote/';
-    	},
-    	parameters : function(id){
-    		return {format:"jsonp", limit : 10, member_against : id};
-    	},
-    	callbackKey : "callback",
-    	parser: OKnessetParser.objectsParser
-    },
-
-    agendas : {
-    	url : function(){
-    		return 'http://www.oknesset.org/api/v2/agenda/';
-    	},
-    	parameters : {format:"jsonp"},
-    	callbackKey : "callback",
-    	parser: OKnessetParser.objectsParser
-    },
-
-    agendaDetails :{
-    	url : function(id){
-    		return 'http://www.oknesset.org/api/v2/agenda/' + id;
-    	},
-    	parameters : {format:"jsonp"},
-    	callbackKey : "callback",
-    	parser: OKnessetParser.trivialParser
-
-    },
-
-    parties : {
-    	url : function(){
-    		return 'http://www.oknesset.org/api/v2/party/';
-    	},
-    	parameters : {format:"jsonp"},
-    	callbackKey : "callback",
-    	parser: OKnessetParser.objectsParser
-    },
-
-    committees : {
-    	url : function(){
-    		return 'http://www.oknesset.org/api/v2/committee/';
-    	},
-    	parameters : {format:"jsonp"},
-    	callbackKey : "callback",
-    	parser: OKnessetParser.objectsParser
-
-    },
-
-    committeeDetail : {
-    	url : function(id){
-		   	return 'http://www.oknesset.org/api/committee/' + id;
+	voteDetails : {
+		url : function(id){
+			return 'http://www.oknesset.org/api/vote/' + id;
 		},
-    	parameters : {},
-    	callbackKey : "callback",
-		parser: OKnessetParser.trivialParser    
+		parameters : {},
+		callbackKey : "callback",
+		parser: OKnessetParser.trivialParser
 	},
-	committeeProtocol : {
-    	url : function(id){
-		   	return 'http://www.oknesset.org/api/v2/committeemeeting/' + id;
+
+	members : {
+		url : function(){
+			return 'http://www.oknesset.org/api/v2/member/';
 		},
-    	parameters : {format:"jsonp"},
-    	callbackKey : "callback",
-		parser: OKnessetParser.trivialParser    
+		parameters : {format:"jsonp", extra_fields:"is_current,party_url"},
+		callbackKey : "callback",
+		parser: OKnessetParser.members
+	},
+
+	member : {
+		url : function(id){
+			return 'http://www.oknesset.org/api/v2/member/' + id;
+		},
+		parameters : {format:"jsonp"},
+		callbackKey : "callback",
+		parser: OKnessetParser.member
+	},
+
+	memberVotesFavor :{
+		url : function(){
+			return 'http://www.oknesset.org/api/v2/vote/';
+		},
+		parameters : function(id){
+			return {format:"jsonp", limit : 10, member_for : id};
+		},
+		callbackKey : "callback",
+		parser: OKnessetParser.objectsParser
+	},
+
+	memberVotesAgainst : {
+		url : function(){
+			return 'http://www.oknesset.org/api/v2/vote/';
+		},
+		parameters : function(id){
+			return {format:"jsonp", limit : 10, member_against : id};
+		},
+		callbackKey : "callback",
+		parser: OKnessetParser.objectsParser
+	},
+
+	agendas : {
+		url : function(){
+			return 'http://www.oknesset.org/api/v2/agenda/';
+		},
+		parameters : {format:"jsonp"},
+		callbackKey : "callback",
+		parser: OKnessetParser.objectsParser
+	},
+
+	agendaDetails :{
+		url : function(id){
+			return 'http://www.oknesset.org/api/v2/agenda/' + id;
+		},
+		parameters : {format:"jsonp"},
+		callbackKey : "callback",
+		parser: OKnessetParser.trivialParser
+
+	},
+
+	parties : {
+		url : function(){
+			return 'http://www.oknesset.org/api/v2/party/';
+		},
+		parameters : {format:"jsonp"},
+		callbackKey : "callback",
+		parser: OKnessetParser.objectsParser
+	},
+
+	committees : {
+		url : function(){
+			return 'http://www.oknesset.org/api/v2/committee/';
+		},
+		parameters : {format:"jsonp"},
+		callbackKey : "callback",
+		parser: OKnessetParser.objectsParser
+	},
+
+	committeeDetail : {
+		url : function(id){
+			return 'http://www.oknesset.org/api/committee/' + id;
+		},
+		parameters : {},
+		callbackKey : "callback",
+		parser: OKnessetParser.trivialParser
+	},
+
+	committeeProtocol : {
+		url : function(id){
+			return 'http://www.oknesset.org/api/v2/committeemeeting/' + id;
+		},
+		parameters : {format:"jsonp"},
+		callbackKey : "callback",
+		parser: OKnessetParser.trivialParser
 	}
-
-
-}
+};
 
