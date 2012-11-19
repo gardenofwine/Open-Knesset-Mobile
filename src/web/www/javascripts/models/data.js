@@ -214,8 +214,10 @@ Ext.regModel('AgendaList', {
 
 OKnesset.AgendaListStore = new Ext.data.Store({
 	model: 'AgendaList',
-	data: slimAgendas
-
+	data: slimAgendas,
+	sorters: {
+		property: 'name'
+	}
 });
 
 //AgendaDetails
