@@ -846,7 +846,7 @@ var slimPartyData = [
 	{
 		"absolute_url": "/party/6/%D7%A7%D7%93%D7%99%D7%9E%D7%94/",
 		"id": 6,
-		"is_coalition": true,
+		"is_coalition": false,
 		"name": "קדימה",
 		"number_of_members": 29,
 		"number_of_seats": 28,
