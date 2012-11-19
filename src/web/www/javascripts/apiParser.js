@@ -34,7 +34,8 @@ window.OKnessetParser = new function(){
 			reducedMember.id = member.id;
 			reducedMember.img_url = "images/members/" + member.img_url.substring(member.img_url.lastIndexOf('/') + 1);
 			reducedMember.name = member.name;
-			// reducedMember.resource_uri = member.resource_uri;
+			// reducedMember.current_role_description = member.current_role_description;
+			// reducedMember.party_name = member.party_name;
 			reducedMember.party_id = partyIdFromMember(member);
 
 			if (typeof OKnessetParser.members.sortedMembers[reducedMember.party_id] != "undefined") {

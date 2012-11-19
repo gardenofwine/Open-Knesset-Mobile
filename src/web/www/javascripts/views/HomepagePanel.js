@@ -3,7 +3,7 @@ var homepagePanelHTml = " \
 	<img src='images/logo.png' class='oklogo'> \
 	<img src='images/sadna100x100.png' class='sadnalogo'> \
 </div> \
-<div style='top: 6em; position: absolute;'>" + OKnesset.strings.Homepagetagline + "</div> \
+<div style='top: 6em; position: absolute; text-align: center'>" + OKnesset.strings.Homepagetagline + "</div> \
 ";
 
 var homepageAgendaBtnHtml = " \
