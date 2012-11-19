@@ -81,6 +81,7 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 		OKnesset.MemberStore.clearFilter(true);
 		OKnesset.MemberStore.filter({
 			property: 'party_id',
+			exactMatch : true,
 			value : party.data.id});
 	}
 
