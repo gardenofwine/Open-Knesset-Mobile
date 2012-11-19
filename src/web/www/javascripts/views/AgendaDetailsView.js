@@ -48,7 +48,7 @@ OKnesset.app.views.AgendaDetailsView.AgendaDescription = new Ext.extend(Ext.List
 	padding: '5',
 	scroll: false,
 	store :OKnesset.AgendaDetailsStore,
-	itemTpl: '<div align="right"><br> {description}<br><br></div>'
+	itemTpl: '<div align="right"><img class="agend-image" src="http://www.oknesset.org{image}"/><br> {description}<br><br></div>'
 	//flex: 1,
 });
 
