@@ -19,7 +19,6 @@ OKnesset.app.controllers.Homepage = Ext.regController('Homepage', {
                 OKnesset.app.controllers.navigation.dispatchDialog('Info/Index');
             });
         }
-        console.log("this.application.viewport",this.application.viewport);
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.openKnessetTitle);
         this.application.viewport.setActiveItem(this.homepage, options.animation);
     },
