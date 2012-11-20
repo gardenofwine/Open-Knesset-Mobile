@@ -129,13 +129,13 @@ function getAPIData(options) {
 
 	// if a cached version of the data exists, return it immediately
 	var cachedData = _diskCacheGet(requestUrl);
-	if (cachedData != null) {
+	if (cachedData !== null) {
 		//call callback function with cached data
 		options.success(cachedData);
 		return true;
 	}
 	cachedData = _cacheGet(requestUrl);
-	if ((typeof cachedData !== 'undefined') && cachedData != null ) {
+	if ((typeof cachedData !== 'undefined') && cachedData !== null ) {
 		//call callback function with cached data
 		options.success(cachedData);
 		return true;
@@ -160,6 +160,12 @@ function getAPIData(options) {
 	    		function(parseResults){
 	    			// success
 	    			memcache[requestUrl] = parseResults;
+	    			if (options.diskCache){
+	    				localStorage.setItem(requestUrl, {
+	    					data : parseResults,
+	    					date : new Date()
+	    				});
+	    			}
 	    			options.success(parseResults);
 	    		},
 	    		function(parseResults){
@@ -175,7 +181,7 @@ function getAPIData(options) {
 	function _diskCacheGet(key) {
 		var cachedData = localStorage.getItem(key);
 
-		if (cachedData != null)
+		if (cachedData !== null)
 			cachedData = JSON.parse(cachedData);
 
 		return cachedData;
