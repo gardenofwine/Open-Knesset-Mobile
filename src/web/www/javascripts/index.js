@@ -91,8 +91,11 @@ function secondaryLaunch() {
 			},
 		    success: function(results){
 		    	eval(results.responseText);
-		    }
+				loadPartiesAndMembersDataIfNeeded();
+			}
 		});
+	} else {
+		loadPartiesAndMembersDataIfNeeded()
 	}
 
 	var disclaimerDismissed = localStorage.getItem("disclaimerDismissed");
@@ -125,6 +128,33 @@ function secondaryLaunch() {
 	if (OKnesset.debug){
 		time.stop('Secondary Launch');
 		time.report('Secondary Launch');
+	}
+
+	function loadPartiesAndMembersDataIfNeeded(){
+        getAPIData({
+            apiKey:'parties',
+            diskCache : true,
+            forceLoad : true,
+            success:function(data){
+                OKnesset.PartyStore.loadData(data);
+            },
+            failure:function(result){
+                console.log("error receiving parties data. ", result);
+            }
+        });
+
+		getAPIData({
+			apiKey:'members',
+            diskCache : true,
+            forceLoad : true,
+			success:function(data){
+                OKnesset.MemberStore.loadData(data);
+            },
+			failure:function(result){
+				console.log("error receiving memebers data. ", result);
+			}
+		});
+
 	}
 }
 

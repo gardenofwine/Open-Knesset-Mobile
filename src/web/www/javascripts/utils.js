@@ -114,7 +114,7 @@ function getMembersById(ids) {
 
 /**
  * options: an object with the following keys:
- *	(string)apiKey, (function)success, (boolean)diskCache, (function)failure
+ *	(string)apiKey, (function)success, (boolean)diskCache, (boolean)forceLoad,(function)failure
  * (object)urlOptions, (object)parameterOptions
 
  * retuns: ture if data was retrieved from cache. false otherwise
@@ -129,18 +129,29 @@ function getAPIData(options) {
 
 	// if a cached version of the data exists, return it immediately
 	var cachedData = _diskCacheGet(requestUrl);
+	var storeInCacheOnly = false;
 	if (cachedData !== null) {
 		//call callback function with cached data
-		options.success(cachedData);
-		return true;
+		options.success(cachedData.data);
+		if (!options.forceLoad && !has24HoursPassedSince(new Date(cachedData.date))){
+			// do not call the server if the disk cache is less than a day old,
+			// and forceLoad is not required
+			return true;
+		} else {
+			storeInCacheOnly = true;
+		}
+	} else {
+		cachedData = _cacheGet(requestUrl);
+		if ((typeof cachedData !== 'undefined') && cachedData !== null ) {
+			//call callback function with cached data
+			options.success(cachedData);
+			if (!options.forceLoad) {
+				return true;
+			} else {
+				storeInCacheOnly = true;
+			}
+		}
 	}
-	cachedData = _cacheGet(requestUrl);
-	if ((typeof cachedData !== 'undefined') && cachedData !== null ) {
-		//call callback function with cached data
-		options.success(cachedData);
-		return true;
-	}
-
 
 	var parameters;
 	if (typeof OKnessetAPIMapping[options.apiKey].parameters === 'function') {
@@ -161,22 +172,31 @@ function getAPIData(options) {
 	    			// success
 	    			memcache[requestUrl] = parseResults;
 	    			if (options.diskCache){
-	    				localStorage.setItem(requestUrl, {
-	    					data : parseResults,
-	    					date : new Date()
-	    				});
+	    				localStorage.setItem(requestUrl, JSON.stringify({
+	    					date : new Date(),
+	    					data : parseResults
+	    				}));
 	    			}
-	    			options.success(parseResults);
+
+	    			if (!storeInCacheOnly){
+	    				options.success(parseResults);
+	    			}
 	    		},
 	    		function(parseResults){
 	    			// failure
-	    			options.failure(parseResults);
+	    			if (!storeInCacheOnly){
+	    				options.failure(parseResults);
+	    			}
 	    		});
 	    	;
 	    }
 	});
-
-	return false;
+	if (storeInCacheOnly){
+		// this menas the callback has already been invoked on the caller
+		return true;
+	} else {
+		return false;
+	}
 
 	function _diskCacheGet(key) {
 		var cachedData = localStorage.getItem(key);
@@ -192,6 +212,11 @@ function getAPIData(options) {
 	}
 }
 
+function has24HoursPassedSince(theDate){
+	var now = new Date();
+
+	return (now.getTime() > theDate.getTime() + 1000 * 60 * 60 * 24);
+}
 
 // usage:
 // var callbackArray = new waitForAll(finalCallback, callbackA, callbackB...);
