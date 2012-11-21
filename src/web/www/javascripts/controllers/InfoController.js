@@ -9,31 +9,62 @@ Ext.regController('Info', {
                 xtype: 'InfoView',
             });
 
-            this.updateDate = this.view.query('#updateDate')[0];
-            var that = this;
-
-            this.view.query('#cancelInfoBtn')[0].setHandler(function(){
+            this.view.dockedItems.getAt(1).items.getByKey('cancelInfoBtn').setHandler(function(){
             	OKnesset.app.controllers.navigation.dispatchBack();
             });
 
-            this.view.query('#updateAppDataBtn')[0].setHandler(function(){
-    			checkFullDataFromWeb();
-    			OKnesset.app.controllers.navigation.dispatchBack();
-            });
+            this.view.items.getByKey('emailReview').setHandler(function(){
+                this.sendEmail(this.emailSubject);
+            }, this);
 
-            this.view.query('#displayDisclaimerBtn')[0].setHandler(function(){
+            this.view.items.getByKey('displayDisclaimerBtn').setHandler(function(){
             	OKnesset.app.controllers.navigation.dispatchBack();
             	OKnesset.app.controllers.navigation.dispatchDialog('Disclaimer/Index');
             });
         }
 
-        this.updateDate.update({
-    		dateString : Ext.util.Format.format(OKnesset.strings.dataDate,
-    						dateToString(new Date(parseInt(localStorage
-    								.getItem("DataDate")))))
-    			});
 
+        var infoTitle = OKnesset.strings["info_" + options.id + "_title"];
+        var infoText  = OKnesset.strings["info_" + options.id + "_text"];
+
+        // store the options for the email button action
+        this.emailSubject = infoTitle;
+        
+        this.view.dockedItems.getAt(0).setTitle(infoTitle);
+        this.view.items.getByKey('pageDescription').update({text:infoText});
     	this.view.show(options.animation);
 
     },
+
+    sendEmail : function(subject) {
+        subject = OKnesset.strings.openKnessetTitle + " - " + subject;
+        OKnesset.log("Sending email with subject " + subject);
+        if (isPhoneGap()) {
+            if (isiOS()) {
+                var emailCallback = function(result) {
+                    // called after email has been sent
+                    if (result != EmailComposer.ComposeResultType.Cancelled) {
+                        OKnesset.app.controllers.navigation.dispatchBack();
+                    }
+                };
+                window.plugins.emailComposer.showEmailComposerWithCB(emailCallback,
+                        subject, "", OKnesset.strings.feedbackEmailAddress);
+            } else if (isAndroid) {
+                var extras = {};
+                extras[WebIntent.EXTRA_SUBJECT] = subject;
+                extras[WebIntent.EXTRA_EMAIL] = [ OKnesset.strings.feedbackEmailAddress ];
+                window.plugins.webintent.startActivity({
+                    action : WebIntent.ACTION_SEND,
+                    type : 'text/plain',
+                    extras : extras
+                }, function() {
+                    // success callback
+                    OKnesset.app.controllers.navigation.dispatchBack();
+                }, function() {
+                    alert(OKnesset.strings.errorAndroidEmail);
+                });
+            }
+        }
+        // TODO - for web, implement a "send email" link
+    }    
 });

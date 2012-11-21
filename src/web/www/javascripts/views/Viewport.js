@@ -21,7 +21,14 @@ OKnesset.app.views.Viewport = new Ext.extend(Ext.Panel, {
         }, 
         {
              xtype: 'spacer'
-        }],
+        },
+        {
+            // The "i" at the top left of the application toolbar
+            ui: 'plain',
+            id: 'info',
+            iconMask: true,
+            iconCls: 'info',
+        }] 
     }, ],
     initComponent: function(){
         OKnesset.app.views.Viewport.AppMenu.setFloating(true);

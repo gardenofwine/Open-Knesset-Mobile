@@ -2,35 +2,37 @@ OKnesset.app.views.InfoView = new Ext.extend(Ext.Panel, {
 	id : 'InfoView',
 	layout : 'vbox',
 	cls : 'textCenter',
+	width : '90%',
+	height : '80%',	
 	floating : true,
 	centered : true,
-	items : [ {
-		tpl : '{dateString}',
-		id : 'updateDate'
+	items : [ 
+	{
+		id : 'pageDescription',
+		tpl : '<span>{text}</span>',
+		margin : "10 10 0 10",
 	}, {
 		xtype : 'spacer',
-		height : "2em"
-	}, {
-		xtype : 'button',
-		id : 'updateAppDataBtn',
-		width : "50%",
-		text : OKnesset.strings.updateNow
-	}, {
-		xtype : 'spacer',
-		height : "2em"
-	}, {
+	}, 
+	{
 		xtype : 'button',
 		id : 'displayDisclaimerBtn',
-		width : "50%",
+		width : "90%",
+		margin : "0 0 10 0",
 		text : OKnesset.strings.showDisclaimer
-	}, {
-		xtype : 'spacer',
-		height : "2em"
-	} ],
+	}, 
+	{
+        // The email icon at the top left of the application toolbar
+        xtype: 'button',
+        id: 'emailReview',
+		width : "90%",
+		margin : "0 0 10 0",
+        text: OKnesset.strings.emailButtonLabel,
+	},
+	],
 	dockedItems : [ {
 		dock : 'top',
 		xtype : 'toolbar',
-		title : OKnesset.strings.openKnessetTitle
 	}, {
 		dock : 'bottom',
 		ui : 'light',
@@ -41,13 +43,6 @@ OKnesset.app.views.InfoView = new Ext.extend(Ext.Panel, {
 			text : OKnesset.strings.back
 		} ]
 	} ],
-	initComponent : function() {
-    	var viewport = Ext.ApplicationManager.get("oknesset").viewport;
-		this.width = viewport.getWidth() * 0.9;
-		this.height = viewport.getHeight() * 0.65;
-		OKnesset.app.views.InfoView.superclass.initComponent.apply(this,
-				arguments);
-	}
 });
 
 Ext.reg('InfoView', OKnesset.app.views.InfoView);

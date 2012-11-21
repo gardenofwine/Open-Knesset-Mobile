@@ -36,6 +36,11 @@ Ext.regApplication({
 		//The main view, holds all the panels of the application.
 		this.viewport = new OKnesset.app.views.Viewport();
 
+        // set the info button handler
+        this.viewport.query('#info')[0].setHandler(function(){
+        	OKnesset.app.controllers.navigation.dispatchDialog('Info/Index/' + this.viewport.getActiveItem().xtype);
+        }, this);
+
 		// set the menu panel
         // this.viewport.query('#openMenu')[0].setHandler(function(){
         //     OKnesset.app.views.Viewport.AppMenu.showBy(this);

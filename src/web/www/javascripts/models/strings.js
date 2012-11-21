@@ -20,6 +20,7 @@ OKnesset.strings = {
     oknessetName            : 'כנסת פתוחה',
     ministerIndicator        : "שר",
     knessetChairman            : "יושב ראש הכנסת",
+    emailButtonLabel        : "שלחו לנו משוב",
     emailDialogTitle        : "שליחת משוב על האפליקציה",
     emailDialogBody            : "תודה שבחרתם לעזור לנו לשפר את האפליקציה 'כנסת פתוחה'! </br>שלחו מייל בנושא:",
     emailGeneral            : "משוב כללי",
@@ -98,4 +99,7 @@ OKnesset.strings = {
 	HomepageAgendaBtnText	:"בחינת עמדת חברי הכנסת בנושאים שונים כגון חיזוק הפריפריה",
 	HomepagePartiesBtnText	:"רשימת חברי הכנסת לפי מפלגות ולפי מיקומם במפלגה בכנסת",
 	HomepageCommitteesBtnTxt:"ועדות הכנסת והחברים בהן, פרוטוקולים של ישיבות ופעילותם",
+
+	info_HomePage_title		:"ברוכים הבאים",
+	info_HomePage_text		:"אנו מזמינים אתכם להכיר את חברי הכנסת שלכם טוב יותר.",
 };
