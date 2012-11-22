@@ -13,11 +13,11 @@ Ext.regController('Info', {
             	OKnesset.app.controllers.navigation.dispatchBack();
             });
 
-            this.view.items.getByKey('emailReview').setHandler(function(){
+            this.view.dockedItems.getAt(1).items.getByKey('emailReview').setHandler(function(){
                 this.sendEmail(this.emailSubject);
             }, this);
 
-            this.view.items.getByKey('displayDisclaimerBtn').setHandler(function(){
+            this.view.dockedItems.getAt(1).items.getByKey('displayDisclaimerBtn').setHandler(function(){
             	OKnesset.app.controllers.navigation.dispatchBack();
             	OKnesset.app.controllers.navigation.dispatchDialog('Disclaimer/Index');
             });
@@ -35,6 +35,7 @@ Ext.regController('Info', {
         this.emailSubject = infoTitle + " (" + options.id + ")";
         
         this.view.dockedItems.getAt(0).setTitle(infoTitle);
+
         this.view.items.getByKey('pageDescription').update({text:infoText});
     	this.view.show(options.animation);
 
