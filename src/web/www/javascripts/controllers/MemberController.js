@@ -14,7 +14,11 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
         this.memberView.query('#memberVotesBtn')[0].setHandler(this.dispatchVotes,options);
 
         var member = this.currentMember = getMembersById(options.id)[0];
-        GATrackMember(member.name);
+
+        // don't track if the panal was reached by pressing 'back'
+        if (options.pushed){
+            GATrackPage('MemberView', member.name);
+        }
 
         // load the extra member data
         var that = this;
@@ -50,10 +54,6 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
         OKnesset.app.controllers.navigation.dispatchPanel('memberVotes/Index/' + this.id, this.historyUrl)
     },
 
-    getReviewButtonText: function(){
-        return Ext.util.Format.format(OKnesset.strings.emailMember, this.currentMember.name);
-    },
-
     getEmailButtonText: function(){
         return Ext.util.Format.format(OKnesset.strings.writeTo, this.currentMember.name);
     },
@@ -64,8 +64,9 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 
     sendEmail : function() {
     	var recipient = this.email;
-    	OKnesset.log("** sending email with recipient " + recipient);
     	if (isPhoneGap()) {
+            GATrackEvent('email', this.name);
+
     		if (isiOS()) {
     			var emailCallback = function(result) {
     				// called after email has been sent
@@ -74,11 +75,13 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
     				}
     			};
     			window.plugins.emailComposer.showEmailComposerWithCB(emailCallback,
-    					"", "", recipient);
+    					"", OKnesset.strings.emailBody, recipient);
     		} else if (isAndroid) {
     			var extras = {};
     			extras[WebIntent.EXTRA_SUBJECT] = "";
+                extras[WebIntent.EXTRA_TEXT] = OKnesset.strings.emailBody;
     			extras[WebIntent.EXTRA_EMAIL] = [ recipient ];
+
     			window.plugins.webintent.startActivity({
     				action : WebIntent.ACTION_SEND,
     				type : 'text/plain',
@@ -90,15 +93,19 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
     				alert(OKnesset.strings.errorAndroidEmail);
     			});
     		}
-    	}
+    	} else {
+            OKnesset.log("sending email to member " + this.name + " via email " +recipient);
+        }
     },
     phoneMember : function() {
 
     	var phone_num = this.phone;
-    	OKnesset.log("** calling number " + phone_num);
     	if (isPhoneGap()) {
+            GATrackEvent('call', this.name);
     		document.location="tel:+972-" + phone_num.substr(1);
-    	}
+    	} else {
+            OKnesset.log("calling number " + phone_num);
+        }
     },
     updateData: function(member){
 

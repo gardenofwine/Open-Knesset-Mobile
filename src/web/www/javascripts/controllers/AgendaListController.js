@@ -24,16 +24,13 @@ Ext.regController('AgendaList', {
 				console.log("error receiving memebers data. ", result);
 			}
 		});
+		// don't track if the panal was reached by pressing 'back'
+		if (options.pushed){
+        	GATrackPage('AgendaListView', '');
+        }
 
 		this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.AgendaTitle);
 		this.application.viewport.setActiveItem(this.AgendaListView, options.animation);
 
-	},
-
-	refresh : function() {
-		// TODO implement correctly - now that Agenda list is the first panel inteh application
-		// var AgendaList = this.AgendaListView.query('#AgendaList')[0];
-		// this.AgendaListView.refresh();
 	}
-
  });

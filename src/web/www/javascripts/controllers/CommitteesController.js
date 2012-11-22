@@ -1,3 +1,4 @@
+// Member committees
 Ext.regController('Committees', {
 
     // index action
@@ -23,6 +24,11 @@ Ext.regController('Committees', {
         var member = this.currentMember = getMembersById(options.id)[0];
         OKnesset.MemberCommitteesStore.loadData(member.committees);
 
+        // don't track if the panal was reached by pressing 'back'
+        if (options.pushed){
+            GATrackPage('CommitteesView', member.name);
+        }
+
         // scroll committee list up
         if (options.pushed) {
             var committeeList = this.committeesView.query('#MemberCommitteeList')[0];
@@ -39,15 +45,6 @@ Ext.regController('Committees', {
         this.application.viewport.setActiveItem(this.committeesView, options.animation);
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.committees);
     },
-
-
-    refresh: function(){
-
-
-        var committeeList = this.committeesView.query('#MemberCommitteeList')[0];
-        committeeList.refresh();
-    },
-
     _gotoCommittee: function(record){
 
         //TODO: update id to the relevant id for the current committee
@@ -55,8 +52,4 @@ Ext.regController('Committees', {
         committeeId = 1;
         OKnesset.app.controllers.navigation.dispatchPanel('CommitteeDetails/Index/' + committeeId, this.historyUrl);
     }
-
-
-
-
 });

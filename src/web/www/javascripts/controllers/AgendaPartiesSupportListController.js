@@ -19,16 +19,16 @@ Ext.regController('AgendaPartiesSupportList', {
         OKnesset.PartyStore.clearFilter(true);
         var findData = OKnesset.AgendaListStore.findBy(function(r){return r.data.id === parseInt(options.id)});
 
-       findData = OKnesset.AgendaListStore.getAt(findData);
+        findData = OKnesset.AgendaListStore.getAt(findData);
 
+        // don't track if the panal was reached by pressing 'back'
+        if (options.pushed){
+            GATrackPage('AgendaPartiesSupportListView', findData.data.name);
+        }
 
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.supportparties + findData.data.name);
         this.application.viewport.setActiveItem(this.AgendaPartiesSupportListView, options.animation);
 
 
-    },
-//	refresh : function() {
-    //   this.AgendaPartiesSupportList = this.AgendaPartiesSupportListView.query('#AgendaPartiesSupportList')[0];
-	//	this.AgendaPartiesSupportList.refresh();
-	// }
+    }
  });

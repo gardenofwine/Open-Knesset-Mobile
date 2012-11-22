@@ -24,17 +24,25 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 		}
 
 		id = parseInt(options.id, 10);
-		party = OKnesset.PartyStore.findBy(function (r) {
-			return r.data.id === id;
-		});
-		party = OKnesset.PartyStore.getAt(party);
-		info = OKnesset.PartyInfoStore.findBy(function (r) {
-			return r.data.party_id === id;
-		});
-		info = OKnesset.PartyInfoStore.getAt(info);
+		party = getObjectFromStoreByID(OKnesset.PartyStore, id);
+		// party = OKnesset.PartyStore.findBy(function (r) {
+		// 	return r.data.id === id;
+		// });
+		// party = OKnesset.PartyStore.getAt(party);
+
+
+		info = getObjectFromStoreByID(OKnesset.PartyInfoStore, id, 'party_id');
+		// info = OKnesset.PartyInfoStore.findBy(function (r) {
+		// 	return r.data.party_id === id;
+		// });
+		// info = OKnesset.PartyInfoStore.getAt(info);
+
 		name = party.data.name;
-		// Analytics
-		GATrackParty(name);
+
+		// don't track if the panal was reached by pressing 'back'
+		if (options.pushed){
+			GATrackPage('PartyView', name);
+		}
 
 		this.filterMembersByParty(party);
 
@@ -57,25 +65,10 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 		this.application.viewport.query('#toolbar')[0].setTitle(name);
 		this.application.viewport.setActiveItem(this.partyView, options.animation);
 	},
-	getReviewButtonText : function(){
-		return Ext.util.Format.format(
-				OKnesset.strings.emailParty,
-				this.currentParty.name);
-	},
 	getIdFromAbsoluteUrl: function(url){
 		var sub1 = url.substr("/party/".length);
 		return sub1.substr(0,sub1.indexOf('/'));
 	},
-	refresh : function() {
-		var party = getPartyFromPartyStoreByName(this.currentParty.name);
-		this.filterMembersByParty(party);
-		var memberList = this.partyView.query('#MemberList')[0];
-		memberList.refresh();
-	},
-	// private
-	/*
-	Set the party filter on the store
-	*/
 
 	filterMembersByParty : function(party) {
 		OKnesset.MemberStore.clearFilter(true);

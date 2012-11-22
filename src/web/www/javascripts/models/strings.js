@@ -21,6 +21,7 @@ OKnesset.strings = {
     ministerIndicator        : "שר",
     knessetChairman            : "יושב ראש הכנסת",
     emailButtonLabel        : "שלחו לנו משוב",
+    emailBody 				: "\n\n\nנשלח מאפליקציית כנסת פתוחה",
     emailDialogTitle        : "שליחת משוב על האפליקציה",
     emailDialogBody            : "תודה שבחרתם לעזור לנו לשפר את האפליקציה 'כנסת פתוחה'! </br>שלחו מייל בנושא:",
     emailGeneral            : "משוב כללי",

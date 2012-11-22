@@ -53,7 +53,13 @@ Ext.regController('AgendaDetails', {
 			}
 		});
 
+
 		var agenda = getObjectFromStoreByID(OKnesset.AgendaListStore, options.id);
+
+		// don't track if the panal was reached by pressing 'back'
+		if (options.pushed){
+        	GATrackPage('AgendaDetailsView', agenda.data.name);
+        }
 		// var findData = OKnesset.AgendaListStore.findBy(function(r){return r.data.id === parseInt(options.id)});
 		// findData = OKnesset.AgendaListStore.getAt(findData);
 		this.application.viewport.query('#toolbar')[0].setTitle(agenda.data.name);

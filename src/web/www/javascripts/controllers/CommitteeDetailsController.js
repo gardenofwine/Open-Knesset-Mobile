@@ -51,18 +51,26 @@ Ext.regController('CommitteeDetails', {
 
         }
 
-        this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.committeeDetails);
-        this.application.viewport.setActiveItem(this.CommitteeDetailsView, options.animation);
+        var committee = getObjectFromStoreByID(OKnesset.AllCommitteesStore, options.id);
+        
+        // don't track if the panal was reached by pressing 'back'
+        if (options.pushed){
+            GATrackPage('CommitteeDetailsView', committee.data.name);
+        }
+
+        var committeeMembersList = this.CommitteeDetailsView.query('#CommitteeMembersList')[0];
+        committeeMembersList.refresh();
 
         //scroll view up
-
         if (this.CommitteeDetailsView.scroller) {
             this.CommitteeDetailsView.scroller.scrollTo({
                 x: 0,
                 y: 0
             });
         }
-        this.refresh();
+
+        this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.committeeDetails);
+        this.application.viewport.setActiveItem(this.CommitteeDetailsView, options.animation);
 
     },
     _updateData: function (CommitteeDetails) {
@@ -117,14 +125,5 @@ Ext.regController('CommitteeDetails', {
     getIdFromAbsoluteUrl: function(url){
         var sub1 = url.substr("/committee/meeting/".length);
         return sub1.substr(0,sub1.indexOf('/'));
-    },
-
-    refresh: function(){
-
-
-        var committeeMembersList = this.CommitteeDetailsView.query('#CommitteeMembersList')[0];
-        committeeMembersList.refresh();
-    },
-
-
+    }
 });

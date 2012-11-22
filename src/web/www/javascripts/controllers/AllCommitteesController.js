@@ -24,10 +24,13 @@ Ext.regController('AllCommittees', {
             }
         })
 
+        // don't track if the panal was reached by pressing 'back'
+        if (options.pushed){
+            GATrackPage('AllCommitteesView', '');
+        }
+
+
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.committees);
         this.application.viewport.setActiveItem(this.AllCommitteesView, options.animation);
-},
-	refresh : function() {
-		this.AllCommitteesView.refresh();
-	 }
- });
+    }
+});

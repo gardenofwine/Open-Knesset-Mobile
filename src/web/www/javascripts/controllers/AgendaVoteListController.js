@@ -30,17 +30,16 @@ Ext.regController('AgendaVoteList', {
 		this.updateString(findData.data.votes);
 		OKnesset.AgendaVoteListStore.loadData(findData.data.votes);
 
+		// don't track if the panal was reached by pressing 'back'
+		if (options.pushed){
+    	    GATrackPage('AgendaVoteListView', findData.data.name);
+    	}
+
 		this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.AgendaVoteTitle + findData.data.name);
 		this.application.viewport.setActiveItem(this.AgendaVoteListView, options.animation);
 
 
 	},
-	/*
-	refresh : function() {
-		this.AgendaVoteList = this.AgendaVoteListView.query('#AgendaVoteList')[0];
-		this.AgendaVoteList.refresh();
-	}
-	*/
 	updateString : function(votes) {
 		for (i=0 ; i<=votes.length-1; i++)  {
 			switch (votes[i].score) {

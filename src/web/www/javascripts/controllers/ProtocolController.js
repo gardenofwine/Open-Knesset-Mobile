@@ -63,6 +63,7 @@ Ext.regController('Protocol', {
                 });
 
                 OKnesset.ProtocolTopicsStore.loadData(protocolText);
+                OKnesset.ProtocolTopicsStore.protocolId = options.id;
 
 
                  //apply different colors on a
@@ -83,6 +84,12 @@ Ext.regController('Protocol', {
             }
         });
 
+
+        // don't track if the panal was reached by pressing 'back'
+        if (options.pushed){
+            GATrackPage('ProtocolView', options.id);
+        }
+
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.Committeemeeting);
         this.application.viewport.setActiveItem(this.protocolView, options.animation);
 
@@ -100,9 +107,5 @@ Ext.regController('Protocol', {
         		});
         	}
         }
-	},
-
-    refresh : function() {
-		this.protocolView.refresh();
 	}
 });

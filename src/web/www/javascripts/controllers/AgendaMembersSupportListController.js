@@ -23,18 +23,13 @@ Ext.regController('AgendaMembersSupportList', {
         findData = OKnesset.AgendaListStore.getAt(findData);
        
 
+        // don't track if the panal was reached by pressing 'back'
+        if (options.pushed){
+            GATrackPage('AgendaMembersSupportListView', findData.data.name);
+        }
   		
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.supportmembers + findData.data.name);
         this.application.viewport.setActiveItem(this.AgendaMembersSupportListView, options.animation);
     
- 
- 
-     //this.AgendaMembersSupportListView.query('#MAgendaMembersSupportList')[0].refresh();
- 
-    },
-    
-	//refresh : function() {
-    //    this.AgendaMembersSupportList = this.AgendaMembersSupportListView.query('#AgendaMembersSupportList')[0];		
-	//	this.AgendaMembersSupportList.refresh();
-	// }
+    }
  });

@@ -44,15 +44,6 @@ Ext.regController('Bills', {
 
         this.application.viewport.setActiveItem(this.billsView, options.animation);
     },
-
-
-    refresh: function(){
-
-
-        var billList = this.billsView.query('#MemberBillList')[0];
-        billList.refresh();
-    },
-
     /**
      * Returns true if the member is a minister, or is the chairperson of the
      * Knesset.
@@ -73,29 +64,5 @@ Ext.regController('Bills', {
         bill.id = bill.url.match(/\/(\d+)\/$/)[1];
         if (bill.id != null)
             OKnesset.app.controllers.navigation.dispatchPanel('BillDetails/Index/' + bill.id, this.historyUrl);
-    },
-
-    _gotoBillCallback: function(url, billUrl){
-        // in iOS, this function is called form native code, and it is necessary
-        // that the next call to native code via phonegap command would not be
-        // executed in the same "thread".
-        window.setTimeout(function(){
-            GATrackBill(billUrl, function(){
-                if (isAndroid()) {
-                    window.plugins.webintent.startActivity({
-                        action: WebIntent.ACTION_VIEW,
-                        url: url
-                    }, function(){
-                        // success callback
-                    }, function(){
-                        alert(OKnesset.strings.errorOpenBill)
-                    });
-                } else if (isiOS()) {
-                    document.location = url;
-                }
-            });
-        }, 10);
     }
-
-
 });

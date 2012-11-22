@@ -28,8 +28,13 @@ Ext.regController('ProtocolSection', {
 
         this.updateData(first_record,options.id);
 
-        this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.protocolsec);
 
+        // don't track if the panal was reached by pressing 'back'
+        if (options.pushed){
+            GATrackPage('ProtocolSectionView', OKnesset.ProtocolTopicsStore.protocolId);
+        }
+        
+        this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.protocolsec);
         this.application.viewport.setActiveItem(this.protocolsectionView, options.animation);
 
 

@@ -26,16 +26,13 @@ Ext.regController('PartyList', {
             }
         });
 
+        // don't track if the panal was reached by pressing 'back'
+        if (options.pushed){
+            GATrackPage('PartyListView', '');
+        }
+
 
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.partiesTitle);
         this.application.viewport.setActiveItem(this.partyListView, options.animation);
-    },
-
-    getReviewButtonText : function(){
-    	return OKnesset.strings.emailPartyList;
-    },
-
-	refresh : function() {
-		this.partyListView.refresh();
-	}
+    }
 });

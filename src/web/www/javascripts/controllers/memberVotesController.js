@@ -36,7 +36,8 @@ Ext.regController('memberVotes', {
                     };
                     OKnesset.MemberVotesStore.add(data);
                     memberVotesController._refresh(hideWhileLoading);
-                    memberVotesController.refresh();
+                    memberVotesController.memberVotesList.refresh();
+                    //memberVotesController.refresh();
                 },
                 failure:function(result){
                     console.log("error receiving member favor votes data. ", result);
@@ -53,7 +54,8 @@ Ext.regController('memberVotes', {
 
                     OKnesset.MemberVotesStore.add(data);
                     memberVotesController._refresh(hideWhileLoading);
-                    memberVotesController.refresh();
+                    memberVotesController.memberVotesList.refresh();
+                    // memberVotesController.refresh();
                 },
                 failure:function(result){
                     console.log("error receiving member against votes data. ", result);
@@ -75,8 +77,13 @@ Ext.regController('memberVotes', {
             }
         }
 
+        var member = getMembersById(options.id)[0];
 
-
+        // don't track if the panal was reached by pressing 'back'
+        if (options.pushed){
+            GATrackPage('memberVotesView', member.name);
+        }
+        
         this.application.viewport.setActiveItem(this.memberVotesView, options.animation);
 
     },
@@ -96,8 +103,8 @@ Ext.regController('memberVotes', {
             e.show();
         });
     },
-    refresh : function() {
-        // var memberVotesList = this.memberVotesView.query('#MemberVotesList')[0];
-        this.memberVotesList.refresh();
-	},
+ //    refresh : function() {
+ //        // var memberVotesList = this.memberVotesView.query('#MemberVotesList')[0];
+ //        this.memberVotesList.refresh();
+	// },
 });

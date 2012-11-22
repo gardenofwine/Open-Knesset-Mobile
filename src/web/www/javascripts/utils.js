@@ -36,7 +36,6 @@ function GATrackBill(url, callback) {
 		if (isAndroid()) {
 			googleAnalytics.trackPageview("/app/external" + url, {
 				dispatch : true
-			}, callback, callback);
 		} else if (isiOS()) {
 			googleAnalytics.trackPageview("/app/external" + url, callback, {
 				dispatch : true

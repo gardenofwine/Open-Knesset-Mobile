@@ -33,9 +33,13 @@ Ext.regController('Info', {
 
         // store the options for the email button action
         this.emailSubject = infoTitle + " (" + options.id + ")";
-        
-        this.view.dockedItems.getAt(0).setTitle(infoTitle);
 
+        // don't track if the panal was reached by pressing 'back'
+        if (options.pushed){
+            GATrackPage('InfoView', this.emailSubject);
+        }
+
+        this.view.dockedItems.getAt(0).setTitle(infoTitle);
         this.view.items.getByKey('pageDescription').update({text:infoText});
     	this.view.show(options.animation);
 
@@ -45,6 +49,7 @@ Ext.regController('Info', {
         subject = OKnesset.strings.openKnessetTitle + " - " + subject;
         OKnesset.log("Sending email with subject " + subject);
         if (isPhoneGap()) {
+            GATrackEvent('email', 'review');
             if (isiOS()) {
                 var emailCallback = function(result) {
                     // called after email has been sent

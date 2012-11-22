@@ -39,8 +39,12 @@ Ext.regController('VoteDetails', {
 
         }
 
-        this.application.viewport.setActiveItem(this.VoteDetailsView, options.animation);
+        // don't track if the panal was reached by pressing 'back'
+        if (options.pushed){
+            GATrackPage('VoteDetailsView', options.id);
+        }
 
+        this.application.viewport.setActiveItem(this.VoteDetailsView, options.animation);
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.votesDetails);
 
         if (VoteDetailsController.VoteDetailsView.scroller) {
@@ -92,8 +96,6 @@ Ext.regController('VoteDetails', {
         OKnesset.VotedStore.loadData(voted.favor);
         OKnesset.VotedStore.add(voted.against);
         OKnesset.VotedStore.add(voted.abstain);
-
-        // membersVotedList.refresh();
 
         //update title + description
         this.VoteDetailsView.query('#voteTitle')[0].update({
