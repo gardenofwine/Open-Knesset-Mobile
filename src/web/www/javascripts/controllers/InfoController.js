@@ -24,11 +24,15 @@ Ext.regController('Info', {
         }
 
 
-        var infoTitle = OKnesset.strings["info_" + options.id + "_title"];
-        var infoText  = OKnesset.strings["info_" + options.id + "_text"];
+        var infoTitle = OKnesset.strings.infoDialog.Default.title; 
+        var infoText = OKnesset.strings.infoDialog.Default.text;
+        if (typeof OKnesset.strings.infoDialog[options.id] !== "undefined"){
+            infoTitle = OKnesset.strings.infoDialog[options.id].title;
+            infoText = OKnesset.strings.infoDialog[options.id].text;
+        }
 
         // store the options for the email button action
-        this.emailSubject = infoTitle;
+        this.emailSubject = infoTitle + " (" + options.id + ")";
         
         this.view.dockedItems.getAt(0).setTitle(infoTitle);
         this.view.items.getByKey('pageDescription').update({text:infoText});
