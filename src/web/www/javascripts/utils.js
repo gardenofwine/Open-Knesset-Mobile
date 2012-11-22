@@ -8,39 +8,45 @@ function googleAnalytics() {
 		googleAnalytics.startTrackerWithAccountID(OKnesset.GAID);
 		googleAnalytics.setCustomVariable(1, "appVersion", OKnesset.appVersion,
 				2);
-		googleAnalytics.trackPageview("/app");
+		googleAnalytics.trackPageview("/app/");
 	}
 }
 
-function GATrackMember(name) {
+GApageMapping = {
+	MemberView 						: "/app/member/",
+	CommitteesView 					: "/app/member/committees/",
+	PartyListView					: "/app/party/",
+	PartyView 						: "/app/party/",
+	PartyInfoView 					: "/app/party/info/",
+	memberVotesView					: "/app/member/votes/",
+	VoteDetailsView					: "/app/vote/",
+	AgendaListView					: "/app/agenda/",
+	AgendaDetailsView				: "/app/agenda/",
+	AgendaVoteListView				: "/app/agenda/votes/",
+	AgendaMembersSupportListView	: "/app/agenda/members/",
+	AgendaPartiesSupportListView	: "/app/agenda/parties/",
+	AllCommitteesView				: "/app/committee/",
+	CommitteeDetailsView			: "/app/committee/",
+	ProtocolView					: "/app/committee/protocol/",
+	ProtocolSectionView				: "/app/committee/protocol/sections/",
+	InfoView 						: "/app/info/"
+
+}
+
+function GATrackPage(page, extra) {
 	if (isPhoneGap()) {
-		googleAnalytics.trackPageview("/app/member/" + name);
+		googleAnalytics.trackPageview(GApageMapping[page] + extra);
+	} else {
+		OKnesset.log("Google Analytics Page" + GApageMapping[page] + "" + extra);
 	}
 }
 
-function GATrackParty(name) {
-	if (isPhoneGap()) {
-		googleAnalytics.trackPageview("/app/party/" + name);
-	}
-}
-
-function GATrackBillCanceled(url) {
+function GATrackEvent(category, action, label) {
 	if (isPhoneGap()) {
 		googleAnalytics.trackEvent(function() {
-		}, "bills", "cancelView", url, undefined, true);
-	}
-}
-
-function GATrackBill(url, callback) {
-	if (isPhoneGap()) {
-		if (isAndroid()) {
-			googleAnalytics.trackPageview("/app/external" + url, {
-				dispatch : true
-		} else if (isiOS()) {
-			googleAnalytics.trackPageview("/app/external" + url, callback, {
-				dispatch : true
-			});
-		}
+		}, category, action, label, undefined, true);
+	} else {
+		OKnesset.log("Google Analytics Event. (category " + category + ", action " + action + ", label " + label + ")");
 	}
 }
 
@@ -66,9 +72,12 @@ function getPartyFromPartyStoreByName(name) {
 
 }
 
-function getObjectFromStoreByID(store, id){
+function getObjectFromStoreByID(store, id, id_key){
+	if (typeof id_key === 'undefined'){
+		id_key = 'id';
+	}
 	return getObjectFromStoreByFunc(store, function(r){
-		return r.data.id === parseInt(id)
+		return r.data[id_key] === parseInt(id)
 	});
 }
 
@@ -82,6 +91,9 @@ function getMembersById(ids) {
 
 	if (ids.push === undefined) {
 		//assumming we got only one id
+			if (typeof ids === 'string'){
+				ids = parseInt(ids);
+			}
 			tmp=[]; tmp.push(ids); ids = tmp;
 	}
 	  var members = [];
