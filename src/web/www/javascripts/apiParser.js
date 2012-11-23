@@ -75,6 +75,7 @@ window.OKnessetParser.sortedMembers = {
  */
 window.OKnessetParser.member = function (result, success, failure){
 	result.img_url = "images/members/" + result.img_url.substring(result.img_url.lastIndexOf('/') + 1);
+	result.party_id = partyIdFromMember(result);
 	success(result);
 };
 

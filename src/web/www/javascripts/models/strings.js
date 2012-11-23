@@ -94,7 +94,7 @@ OKnesset.strings = {
     ReadMore                :"קרא עוד",
 	Homepagetagline			:"מה חברי הכנסת עשו בכנסת ה 18?",
 	HomepageAgendaBtnText	:"עמדת חברי הכנסת בנושאים שונים לפי הצבעותיהם במליאה",
-	HomepagePartiesBtnText	:"כל המפלגות והמידע אודותן, לפי שיוך קואליציוני",
+	HomepagePartiesBtnText	:"כל המפלגות והמידע אודותיהן, לפי שיוך קואליציוני",
 	HomepageCommitteesBtnTxt:"ועדות הכנסת והחברים בהן, פרוטוקולים של ישיבות ופעילותם",
 	HomepageMembersBtnTxt	:"רשימת כל חברי הכנסת לפי הא\x22ב",
 
