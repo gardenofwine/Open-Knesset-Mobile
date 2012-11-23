@@ -92,9 +92,7 @@ window.OKnessetParser.sortedMembers = {
  * member parser
  */
 window.OKnessetParser.member = function (result, success, failure){
-	result = window.OKnessetParser.createMinimalMemberItem(result);
-	// result.img_url = "images/members/" + result.img_url.substring(result.img_url.lastIndexOf('/') + 1);
-	// result.party_id = window.OKnessetParser.partyIdFromMember(result);
+	result = window.OKnessetParser.createExpandedMember(result);
 	success(result);
 };
 
