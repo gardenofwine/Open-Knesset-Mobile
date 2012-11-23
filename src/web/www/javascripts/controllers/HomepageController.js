@@ -15,7 +15,7 @@ OKnesset.app.controllers.Homepage = Ext.regController('Homepage', {
             this.homepage.items.get(2).items.getByKey('homepageCommitteesBtn').setHandler(function(){
                 OKnesset.app.controllers.navigation.dispatchPanel('AllCommittees/Index');
             });
-            this.homepage.items.get(2).items.getByKey('homepageAboutBtn').setHandler(function(){
+            this.homepage.items.get(2).items.getByKey('homepageMembersBtn').setHandler(function(){
                 OKnesset.app.controllers.navigation.dispatchPanel('MemberList/Index');
             });
         }

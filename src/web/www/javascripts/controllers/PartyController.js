@@ -74,6 +74,6 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 	},
 
 	navigateToParty: function(partyId){
-		console.log(partyId);	
+		OKnesset.app.controllers.navigation.dispatchPanel('Party/Index/' + partyId, "");
 	}
 });

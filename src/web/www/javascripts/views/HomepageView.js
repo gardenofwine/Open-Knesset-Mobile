@@ -56,7 +56,7 @@ OKnesset.app.views.HomepageView = new Ext.extend(Ext.Panel, {
         html : homepageCommitteesBtnHtml
       },
         {
-        id: 'homepageAboutBtn',
+        id: 'homepageMembersBtn',
         flex : 1,
         margin: "10 10 10 10",
         xtype: 'button',
