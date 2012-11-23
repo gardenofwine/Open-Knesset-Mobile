@@ -40,6 +40,13 @@ window.OKnessetParser.createMinimalMemberItem = function (member){
 	}
 }
 
+window.OKnessetParser.createExpandedMember = function (member){
+	var reducedMember = window.OKnessetParser.createMinimalMemberItem(member);
+	reducedMember.party_name = member.party_name;
+	reducedMember.date_of_birth = member.date_of_birth;
+	reducedMember.place_of_residence = member.place_of_residence;
+	reducedMember.average_weekly_presence_hours = member.average_weekly_presence_hours;
+}
 
 window.OKnessetParser.members = function(result, success, failure){
 	var memberArray = [];
