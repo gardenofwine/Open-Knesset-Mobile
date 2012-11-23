@@ -62,13 +62,27 @@ Ext.regModel('Member', {
 	fields: ['name', 'party_id']
 });
 
+OKnesset.MemberStoreSorters = {
+	partyOrdinal : {
+		property : 'party_ordinal',
+		direction : 'ASC'
+	},
+	alphabetical : {
+		property : 'name',
+		direction : 'ASC'
+	}	
+}
+
 OKnesset.MemberStore = new Ext.data.Store({
 	model: 'Member',
 	data : slimMembers,
-	sorters : [{
-		property : 'party_ordinal',
-		direction : 'ASC'
-	}]
+	sorters : [OKnesset.MemberStoreSorters.partyOrdinal],
+	groupField : 'name',
+	getGroupString : function(record) {
+		var name = record.get('name');
+		return name.substring(0,1);
+	}
+
 });
 
 Ext.regModel('MemberBills', {

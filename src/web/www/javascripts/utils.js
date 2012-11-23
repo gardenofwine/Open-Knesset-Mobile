@@ -13,6 +13,7 @@ function googleAnalytics() {
 }
 
 GApageMapping = {
+	MemberListView 					: "/app/member/",
 	MemberView 						: "/app/member/",
 	CommitteesView 					: "/app/member/committees/",
 	PartyListView					: "/app/party/",

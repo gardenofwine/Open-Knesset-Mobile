@@ -61,13 +61,10 @@ OKnesset.app.views.HomepageView = new Ext.extend(Ext.Panel, {
         margin: "10 10 10 10",
         xtype: 'button',
         cls : 'homepageBtn',
-        text : OKnesset.strings.about
+        html : homepageMemberBtnHtml
         },
       ]},
-    ],
-    // initComponent: function(){
-    //   OKnesset.app.views.MemberView.superclass.initComponent.apply(this, arguments);
-    // }
+    ]
 });
 
 Ext.reg('HomePage', OKnesset.app.views.HomepageView);

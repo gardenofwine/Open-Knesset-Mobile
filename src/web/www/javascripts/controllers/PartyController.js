@@ -13,6 +13,7 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 			memberList.addListener('itemtap',
 				function(that, index, item, e) {
 					var record = that.store.getAt(index);
+ 					OKnesset.MemberStore.sort([OKnesset.MemberStoreSorters.partyOrdinal]);
 					OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + record.data.id, options.historyUrl);
 			});
 			this.partyView.query('#Button')[0].addListener('tap',

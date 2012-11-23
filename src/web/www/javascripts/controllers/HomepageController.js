@@ -16,7 +16,7 @@ OKnesset.app.controllers.Homepage = Ext.regController('Homepage', {
                 OKnesset.app.controllers.navigation.dispatchPanel('AllCommittees/Index');
             });
             this.homepage.items.get(2).items.getByKey('homepageAboutBtn').setHandler(function(){
-                OKnesset.app.controllers.navigation.dispatchDialog('Info/Index');
+                OKnesset.app.controllers.navigation.dispatchPanel('MemberList/Index');
             });
         }
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.openKnessetTitle);

@@ -20,3 +20,8 @@ var homepageCommitteesBtnHtml = " \
 <span><b>" + OKnesset.strings.committees +"</b><br/><br/>\
 <span style='font-size:0.8em'>"+ OKnesset.strings.HomepageCommitteesBtnTxt +"</span></span> \
 ";
+
+var homepageMemberBtnHtml = " \
+<span><b>" + OKnesset.strings.membersTitle +"</b><br/><br/>\
+<span style='font-size:0.8em'>"+ OKnesset.strings.HomepageMembersBtnTxt +"</span></span> \
+";

@@ -2,6 +2,7 @@ OKnesset.strings = {
     about                : "אודות",
     hasBillsTitle             : "הצעות חוק פרטיות שעברו קריאה טרומית",
     hasNoBillsTitle            : "אין הצעות חוק פרטיות שעברו קריאה טרומית",
+	membersTitle    		: "חברי הכנסת ה 18",
     excuseForNoBills        : 'שרים בממשלה ויו"ר הכנסת אינם מגישים, ככלל, הצעות חוק פרטיות',
     partiesTitle             :'מפלגות',
     openBillText            : 'לפתוח בדפדפן?',
@@ -95,6 +96,7 @@ OKnesset.strings = {
 	HomepageAgendaBtnText	:"בחינת עמדת חברי הכנסת בנושאים שונים כגון חיזוק הפריפריה",
 	HomepagePartiesBtnText	:"רשימת חברי הכנסת לפי מפלגות ולפי מיקומם במפלגה בכנסת",
 	HomepageCommitteesBtnTxt:"ועדות הכנסת והחברים בהן, פרוטוקולים של ישיבות ופעילותם",
+	HomepageMembersBtnTxt	:"רשימת כל חברי הכנסת לפי א\x22ב",
 
 	infoDialog 				: {
 		Default 			: {
