@@ -1,4 +1,4 @@
-OKnesset.app.controllers.Party = Ext.regController('PartyInfo', {
+OKnesset.app.controllers.PartyInfo = Ext.regController('PartyInfo', {
 
 	// index action
 	Index: function (options) {

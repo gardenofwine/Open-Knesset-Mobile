@@ -50,6 +50,7 @@
 
 }
 
+/* TODO: merge partySize with supportSize and rename */
 .partySize {
 	float : left;
 	padding-left : 1em;
@@ -83,7 +84,6 @@
 
 .supportSize {
 	float : left;
-	direction : ltr;
 	padding-left : 1em;
 }
 

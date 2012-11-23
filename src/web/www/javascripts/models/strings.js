@@ -93,10 +93,10 @@ OKnesset.strings = {
     CreditFrom              :"המידע באדיבות - ",
     ReadMore                :"קרא עוד",
 	Homepagetagline			:"מה חברי הכנסת עשו בכנסת ה 18?",
-	HomepageAgendaBtnText	:"בחינת עמדת חברי הכנסת בנושאים שונים כגון חיזוק הפריפריה",
-	HomepagePartiesBtnText	:"רשימת חברי הכנסת לפי מפלגות ולפי מיקומם במפלגה בכנסת",
+	HomepageAgendaBtnText	:"עמדת חברי הכנסת בנושאים שונים לפי הצבעותיהם במליאה",
+	HomepagePartiesBtnText	:"כל המפלגות והמידע אודותן, לפי שיוך קואליציוני",
 	HomepageCommitteesBtnTxt:"ועדות הכנסת והחברים בהן, פרוטוקולים של ישיבות ופעילותם",
-	HomepageMembersBtnTxt	:"רשימת כל חברי הכנסת לפי א\x22ב",
+	HomepageMembersBtnTxt	:"רשימת כל חברי הכנסת לפי הא\x22ב",
 
 	infoDialog 				: {
 		Default 			: {

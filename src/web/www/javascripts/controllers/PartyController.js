@@ -26,17 +26,7 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 
 		id = parseInt(options.id, 10);
 		party = getObjectFromStoreByID(OKnesset.PartyStore, id);
-		// party = OKnesset.PartyStore.findBy(function (r) {
-		// 	return r.data.id === id;
-		// });
-		// party = OKnesset.PartyStore.getAt(party);
-
-
 		info = getObjectFromStoreByID(OKnesset.PartyInfoStore, id, 'party_id');
-		// info = OKnesset.PartyInfoStore.findBy(function (r) {
-		// 	return r.data.party_id === id;
-		// });
-		// info = OKnesset.PartyInfoStore.getAt(info);
 
 		name = party.data.name;
 
@@ -53,7 +43,6 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 		// in case the member list was scrolled down( because the user viewed the
 		// panel for another member)
 		if (options.pushed){
-			// memberList = this.partyView.query('#MemberList')[0];
 			if (this.partyView.scroller) {
 				this.partyView.scroller.scrollTo({
 					x : 0,
@@ -66,9 +55,15 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 		this.application.viewport.query('#toolbar')[0].setTitle(name);
 		this.application.viewport.setActiveItem(this.partyView, options.animation);
 	},
+
 	getIdFromAbsoluteUrl: function(url){
 		var sub1 = url.substr("/party/".length);
 		return sub1.substr(0,sub1.indexOf('/'));
+	},
+
+	getNameById : function(partyId){
+		var party = getObjectFromStoreByID(OKnesset.PartyStore, partyId);
+		return party.data.name;
 	},
 
 	filterMembersByParty : function(party) {
@@ -78,6 +73,4 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 			exactMatch : true,
 			value : party.data.id});
 	}
-
-
 });
