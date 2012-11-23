@@ -3,6 +3,11 @@ window.OKnessetParser = {};
 /*******************************************************************************
  * members parser
  */
+
+window.OKnessetParser.partyIdFromMember = function (member){
+		return member.party_url.substring(7,member.party_url.indexOf("/", 7));
+}
+
 window.OKnessetParser.members = function(result, success, failure){
 	var memberArray = [];
 
@@ -24,11 +29,6 @@ window.OKnessetParser.members = function(result, success, failure){
 	success(memberArray);
 
 	// private functions
-
-	function partyIdFromMember(member){
-		return member.party_url.substring(7,member.party_url.indexOf("/", 7));
-	}
-
 	function createMinimalMemberItem(member){
 		var reducedMember = {};
 		reducedMember.id = member.id;
@@ -36,7 +36,7 @@ window.OKnessetParser.members = function(result, success, failure){
 		reducedMember.name = member.name;
 		// reducedMember.current_role_description = member.current_role_description;
 		// reducedMember.party_name = member.party_name;
-		reducedMember.party_id = partyIdFromMember(member);
+		reducedMember.party_id = window.OKnessetParser.partyIdFromMember(member);
 
 		if (typeof OKnessetParser.sortedMembers[reducedMember.party_id] != "undefined") {
 			if (OKnessetParser.sortedMembers[reducedMember.party_id].indexOf(reducedMember.name) == -1){
@@ -75,7 +75,7 @@ window.OKnessetParser.sortedMembers = {
  */
 window.OKnessetParser.member = function (result, success, failure){
 	result.img_url = "images/members/" + result.img_url.substring(result.img_url.lastIndexOf('/') + 1);
-	result.party_id = partyIdFromMember(result);
+	result.party_id = window.OKnessetParser.partyIdFromMember(result);
 	success(result);
 };
 
