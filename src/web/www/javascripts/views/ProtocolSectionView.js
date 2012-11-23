@@ -23,7 +23,7 @@ OKnesset.app.views.ProtocolSectionView = new Ext.extend(Ext.Panel, {
 					height: '75px',
 					maxHeight:'100px',
 					padding: '5' ,
-					items: [this.spokeman,{xtype: 'spacer'}]
+					items: [this.spokeman]
 				 },{
 					xtype: 'toolbar',
 					minHeight:'100px',
@@ -63,5 +63,5 @@ OKnesset.app.views.ProtocolSectionView.Text = new Ext.extend(Ext.Panel, {
 OKnesset.app.views.ProtocolSectionView.Spokeman = new Ext.extend(Ext.Panel, {
     id: 'Spokeman',
     layout: 'fit',
-    tpl: '<div><font size="5" color="#FFFAF0"><b>{protocol.header}</b></font></div>'
+    tpl: '<div><font size="5" color="#FFFAF0"><b style="color:white">{protocol.header}</b></font></div>'
 });
