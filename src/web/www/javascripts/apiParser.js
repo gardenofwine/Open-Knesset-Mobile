@@ -46,6 +46,8 @@ window.OKnessetParser.createExpandedMember = function (member){
 	reducedMember.date_of_birth = member.date_of_birth;
 	reducedMember.place_of_residence = member.place_of_residence;
 	reducedMember.average_weekly_presence_hours = member.average_weekly_presence_hours;
+
+	return reducedMember;
 }
 
 window.OKnessetParser.members = function(result, success, failure){
