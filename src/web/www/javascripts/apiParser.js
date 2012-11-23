@@ -4,9 +4,42 @@ window.OKnessetParser = {};
  * members parser
  */
 
-window.OKnessetParser.partyIdFromMember = function (member){
+window.OKnessetParser.createMinimalMemberItem = function (member){
+	var reducedMember = {};
+	reducedMember.id = member.id;
+	reducedMember.img_url = "images/members/" + member.img_url.substring(member.img_url.lastIndexOf('/') + 1);
+	reducedMember.name = member.name;
+	reducedMember.average_weekly_presence_hours = member.average_weekly_presence_hours;
+	// if (member.start_date){}
+	// 	var now = new Date(); 
+	// 	var start_date_arr = member.start_date.split("-");
+	// 	var startDate = new Date(
+	// 		start_date_arr[0],
+	// 		start_date_arr[1],
+	// 		start_date_arr[2]);
+	// 	reducedMember.monthesInOffice = (now - startDate) / 1000 / 60 / 60 / 24 / 30;	
+	// }
+
+	// reducedMember.current_role_description = member.current_role_description;
+	// reducedMember.party_name = member.party_name;
+	reducedMember.party_id = partyIdFromMember(member);
+
+	if (typeof OKnessetParser.sortedMembers[reducedMember.party_id] != "undefined") {
+		if (OKnessetParser.sortedMembers[reducedMember.party_id].indexOf(reducedMember.name) == -1){
+			// the member was not found.
+			console.log("Member " + member.name + " of party " + member.party_id + "was not found in sorted members array");
+		} else {
+			reducedMember.party_ordinal = OKnessetParser.sortedMembers[reducedMember.party_id].indexOf(reducedMember.name) + 1;
+		}
+	}
+
+	return reducedMember;
+	
+	function partyIdFromMember(member){
 		return member.party_url.substring(7,member.party_url.indexOf("/", 7));
+	}
 }
+
 
 window.OKnessetParser.members = function(result, success, failure){
 	var memberArray = [];
@@ -20,35 +53,13 @@ window.OKnessetParser.members = function(result, success, failure){
 		}
 
 		// add current memeber to member list
-		var minMember = createMinimalMemberItem(member);
+		var minMember = window.OKnessetParser.createMinimalMemberItem(member);
 		// fetch member bills from web?
 
 		memberArray.push(minMember);
 	}
 
 	success(memberArray);
-
-	// private functions
-	function createMinimalMemberItem(member){
-		var reducedMember = {};
-		reducedMember.id = member.id;
-		reducedMember.img_url = "images/members/" + member.img_url.substring(member.img_url.lastIndexOf('/') + 1);
-		reducedMember.name = member.name;
-		// reducedMember.current_role_description = member.current_role_description;
-		// reducedMember.party_name = member.party_name;
-		reducedMember.party_id = window.OKnessetParser.partyIdFromMember(member);
-
-		if (typeof OKnessetParser.sortedMembers[reducedMember.party_id] != "undefined") {
-			if (OKnessetParser.sortedMembers[reducedMember.party_id].indexOf(reducedMember.name) == -1){
-				// the member was not found.
-				console.log("Member " + member.name + " of party " + member.party_id + "was not found in sorted members array");
-			} else {
-				reducedMember.party_ordinal = OKnessetParser.sortedMembers[reducedMember.party_id].indexOf(reducedMember.name) + 1;
-			}
-		}
-
-		return reducedMember;
-	}
 };
 
 window.OKnessetParser.AVODA = ["אהוד ברק","יצחק הרצוג","אופיר פינס-פז","אבישי ברוורמן","שלי יחימוביץ","מתן וילנאי","איתן כבל","בנימין (פואד) בן-אליעזר","יולי תמיר","עמיר פרץ","דניאל בן-סימון","שלום שמחון","אורית נוקד","עינת וילף","ראלב מג`אדלה","שכיב שנאן","יורם מרציאנו","לאון ליטינצקי","קולט אביטל","משה סמיה","יוסף סולימני","אריק חדד","אבי חזקיהו","מנחם ליבוביץ","עפר קורנפלד","יואב חי","עזי נגר","בנימין לוין","אבי שקד","נאדיה חילו","שמעון שיטרית","יריב אופנהיימר","רות דיין מדר","אסתר ביתן","דנה אורן","אמנון זילברמן","ואפד קבלאן","יעקב רומי","מיקי מיכאל גולד","מאיר וייס","ולדימיר סברדלוב","מעין אמודאי","פייצל אלהזייל","ניקולא מסעד","זאב-ולוולה שור","אהרון קראוס","אמנון זך","מוטי ששון","חנה מרשק","הדסה חנה רוסו","אלי אורן","דב צור","סימון אלפסי","יוסף ונונו","שייע יצחק ישועה","שלומי וייזר","מישל שלום חלימי","יוסי ארבל","לאה יונה גבע","ארז שלמה אבו","יובל אדמון","דקל דוד עוזר","יהונתן מאייר עוזר","אהרון רוני כהן","משה פרנקל","אדית אבוד","יהודית הרן","אליהו סדן","רבקה בית הלחמי","אבינועם טובים","אברהם הצמרי","רמי אזרן","שמעון קמרי","שרה גנסטיל","מוטי דותן","יהודית אוליאל","נורית לוי","יהודה שביט","דניאל עטר"];
@@ -74,8 +85,9 @@ window.OKnessetParser.sortedMembers = {
  * member parser
  */
 window.OKnessetParser.member = function (result, success, failure){
-	result.img_url = "images/members/" + result.img_url.substring(result.img_url.lastIndexOf('/') + 1);
-	result.party_id = window.OKnessetParser.partyIdFromMember(result);
+	result = window.OKnessetParser.createMinimalMemberItem(result);
+	// result.img_url = "images/members/" + result.img_url.substring(result.img_url.lastIndexOf('/') + 1);
+	// result.party_id = window.OKnessetParser.partyIdFromMember(result);
 	success(result);
 };
 
