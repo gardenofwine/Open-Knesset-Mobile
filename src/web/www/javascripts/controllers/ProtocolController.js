@@ -8,16 +8,16 @@ Ext.regController('Protocol', {
                 xtype: 'ProtocolView',
             });
             //when tap on committee member
-            var protocolController = this.protocolView.query('#ProtocolMembers')[0];
-            protocolController.addListener('itemtap',
+            this.protocolController = this.protocolView.query('#ProtocolMembers')[0];
+            this.protocolController.addListener('itemtap',
                 	function(that, index, item, e) {
     					var record = that.store.getAt(index);
     					//var memberObj= OKnesset.GetMembersByName(record.data.name);
     					OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + record.data.id , options.historyUrl);
             });
             //when tap on the spokeman and text
-            var spokemantap = this.protocolView.query('#ProtocolText')[0];
-            spokemantap.addListener('itemtap',
+            this.spokemantap = this.protocolView.query('#ProtocolText')[0];
+            this.spokemantap.addListener('itemtap',
                 	function(that, index, item, e) {
     					var record = that.store.getAt(index);
     					OKnesset.app.controllers.navigation.dispatchPanel('ProtocolSection/Index/' + index, options.historyUrl)
@@ -94,14 +94,14 @@ Ext.regController('Protocol', {
         this.application.viewport.setActiveItem(this.protocolView, options.animation);
 
         if (options.pushed){
-        	if (spokemantap.scroller) {
-        		spokemantap.scroller.scrollTo({
+        	if (this.spokemantap.scroller) {
+        		this.spokemantap.scroller.scrollTo({
         			x: 0,
         			y: 0
         		});
         	}
-        	if (protocolController.scroller) {
-        		protocolController.scroller.scrollTo({
+        	if (this.protocolController.scroller) {
+        		this.protocolController.scroller.scrollTo({
         			x: 0,
         			y: 0
         		});
