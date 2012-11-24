@@ -4,7 +4,7 @@
 Ext.namespace('OKnesset');
 
 OKnesset.GAID = "Demo-ID-replace-with-real-id";
-OKnesset.appVersion = "1.0.0";
+OKnesset.appVersion = "2";
 
 OKnesset.log = function(string) {
 	if (OKnesset.debug) {
@@ -86,6 +86,8 @@ function secondaryLaunch() {
 	if (OKnesset.debug){
 		time.start('Secondary Launch');
 	}
+
+	localStorage.setItem('version', OKnesset.appVersion);
 
 	if (isPhoneGap()){
 		// load the api parser
@@ -177,3 +179,20 @@ OKnesset.app.onBackKey = function () {
 }
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);
+
+function appUpdate(){
+	var previosVersion = localStorage.getItem('version');
+
+	if (previosVersion === null){
+		// upgrade from v1.0
+		localStorage.removeItem('PartyData');
+		localStorage.removeItem('PartyDataDate');
+		localStorage.setItem("disclaimerDismissed", false);
+	} else {
+		// new installation
+	}
+		localStorage.setItem("disclaimerDismissed", false);
+	
+}
+
+appUpdate();
