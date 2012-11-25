@@ -20,8 +20,6 @@ window.OKnessetParser.createMinimalMemberItem = function (member){
 	// 	reducedMember.monthesInOffice = (now - startDate) / 1000 / 60 / 60 / 24 / 30;	
 	// }
 
-	// reducedMember.current_role_description = member.current_role_description;
-	// reducedMember.party_name = member.party_name;
 	reducedMember.party_id = partyIdFromMember(member);
 
 	if (typeof OKnessetParser.sortedMembers[reducedMember.party_id] != "undefined") {
@@ -119,7 +117,9 @@ window.OKnessetParser.memberBills = function (result, success, failure){
 		}
 	};
 
-	success(legitBills);
+	success({
+		bills:legitBills, 
+		total:result.objects.length});
 };
 
 

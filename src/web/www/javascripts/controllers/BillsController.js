@@ -31,7 +31,7 @@ Ext.regController('Bills', {
                     apiKey : 'memberBills',
                     parameterOptions : options.id,
                     success:function(billsData){
-                        OKnesset.MemberBillsStore.loadData(billsData);                        
+                        OKnesset.MemberBillsStore.loadData(billsData.bills);                        
                         // if there are no bills for the current member, display a text explaining
                         // that.
                         if (that.hasExcuseForNoBills(member)) {

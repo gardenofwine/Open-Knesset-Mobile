@@ -62,6 +62,11 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 
 	getNameById : function(partyId){
 		var party = getObjectFromStoreByID(OKnesset.PartyStore, partyId);
+		if (typeof party === 'undefined') {
+			OKnesset.log("Cannot find party from id '" + partyId + "'");
+			return "";
+		}
+		
 		return party.data.name;
 	},
 

@@ -26,7 +26,7 @@ OKnesset.strings = {
     disclaimerDialogBody    : disclaimerText,
     writeTo                    : 'כתבו ל{0}',
     phoneTo                    : ' התקשרו אל {0}',
-    bills                    : 'הצעות חוק',
+    billsOutOf                    : 'הצעות חוק מתוך',
     committees              : 'ועדות'    ,
     loadingBills			: 'טוען הצעות חוק. המתן...',
     noBills                    : 'אין הצעות חוק' ,

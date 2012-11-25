@@ -123,12 +123,11 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
         }
     },
 
-    updateBills: function(bills){
-        if (!bills || bills.length==0) {
+    updateBills: function(data){
+        if (!data.bills || data.bills.length==0) {
             this.memberView.query('#memberBillsBtn')[0].setText(OKnesset.strings.noBills);
-            //this.memberView.query('#memberBillsBtn')[0].disable();
         } else {
-            this.memberView.query('#memberBillsBtn')[0].setText("" + bills.length + " " + OKnesset.strings.bills);
+            this.memberView.query('#memberBillsBtn')[0].setText("" + data.bills.length + " " + OKnesset.strings.billsOutOf + " " + data.total);
         }
         this.memberView.query('#memberBillsBtn')[0].enable();
     },
