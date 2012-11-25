@@ -42,10 +42,12 @@ window.OKnessetParser.createMinimalMemberItem = function (member){
 
 window.OKnessetParser.createExpandedMember = function (member){
 	var reducedMember = window.OKnessetParser.createMinimalMemberItem(member);
+	reducedMember.gender = member.gender;
 	reducedMember.party_name = member.party_name;
 	reducedMember.date_of_birth = member.date_of_birth;
 	reducedMember.place_of_residence = member.place_of_residence;
 	reducedMember.average_weekly_presence_hours = member.average_weekly_presence_hours;
+	reducedMember.current_role_descriptions = member.current_role_descriptions;
 
 	return reducedMember;
 }
@@ -99,6 +101,29 @@ window.OKnessetParser.member = function (result, success, failure){
 };
 
 /*******************************************************************************
+ * memberBills parser
+ */
+window.OKnessetParser.memberBills = function (result, success, failure){
+	var legitBills = [];
+	for (var i = 0; i < result.objects.length ; i++) {
+		var item = result.objects[i];
+		if (
+			item.stage == OKnesset.strings.billStage6 ||
+			item.stage == OKnesset.strings.billStage5 ||
+			item.stage == OKnesset.strings.billStage4 ||
+			item.stage == OKnesset.strings.billStage3 ||
+			item.stage == OKnesset.strings.billStage2 ||
+			item.stage == OKnesset.strings.billStage1){
+
+			legitBills.push(item);
+		}
+	};
+
+	success(legitBills);
+};
+
+
+/*******************************************************************************
  * trivial parser
  */
 window.OKnessetParser.trivialParser = function (result, success, failure){
@@ -144,6 +169,30 @@ window.OKnessetAPIMapping = {
 		callbackKey : "callback",
 		parser: OKnessetParser.member
 	},
+
+	memberBills : {
+		url : function(){
+			return 'http://www.oknesset.org/api/v2/bill/'
+		},
+		parameters : function(id){
+			return {
+				format:"jsonp",
+				limit : 200,
+				proposer:id
+			}
+		},
+		callbackKey : "callback",
+		parser: OKnessetParser.memberBills
+	},
+
+	bill : {
+		url : function(id){
+			return 'http://www.oknesset.org/api/bill/' + id;
+		},
+		callbackKey : "callback",
+		parser: OKnessetParser.trivialParser
+	},
+
 
 	memberVotesFavor :{
 		url : function(){

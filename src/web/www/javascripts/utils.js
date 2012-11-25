@@ -55,6 +55,35 @@ function GATrackEvent(category, action, label) {
  * End of google analytics
  */
 
+
+/**
+ * Bills
+ */
+ function billStageTextToIndex(stage){
+	if (stage === OKnesset.strings.billStage6){
+		return 6;
+	} 	
+	if (stage === OKnesset.strings.billStage5){
+		return 5;
+	} 	
+	if (stage === OKnesset.strings.billStage4){
+		return 4;
+	} 	
+	if (stage === OKnesset.strings.billStage3){
+		return 3;
+	} 	
+	if (stage === OKnesset.strings.billStage2){
+		return 2;
+	} 	
+	if (stage === OKnesset.strings.billStage1){
+		return 1;
+	} 	
+ }
+
+/**
+ * Bills
+ */
+
 /**
  *
  * @param date
@@ -139,8 +168,16 @@ function getAPIData(options) {
 	}
 	var requestUrl = OKnessetAPIMapping[options.apiKey].url(options.urlOptions);
 
+	var parameters;
+	if (typeof OKnessetAPIMapping[options.apiKey].parameters === 'function') {
+		parameters = OKnessetAPIMapping[options.apiKey].parameters(options.parameterOptions);
+	} else {
+		parameters = OKnessetAPIMapping[options.apiKey].parameters;
+	}
+
+	cacheKey = requestUrl + JSON.stringify(parameters);
 	// if a cached version of the data exists, return it immediately
-	var cachedData = _diskCacheGet(requestUrl);
+	var cachedData = _diskCacheGet(cacheKey);
 	var storeInCacheOnly = false;
 	if (cachedData !== null) {
 		//call callback function with cached data
@@ -153,7 +190,7 @@ function getAPIData(options) {
 			storeInCacheOnly = true;
 		}
 	} else {
-		cachedData = _cacheGet(requestUrl);
+		cachedData = _cacheGet(cacheKey);
 		if ((typeof cachedData !== 'undefined') && cachedData !== null ) {
 			//call callback function with cached data
 			options.success(cachedData);
@@ -165,12 +202,6 @@ function getAPIData(options) {
 		}
 	}
 
-	var parameters;
-	if (typeof OKnessetAPIMapping[options.apiKey].parameters === 'function') {
-		parameters = OKnessetAPIMapping[options.apiKey].parameters(options.parameterOptions);
-	} else {
-		parameters = OKnessetAPIMapping[options.apiKey].parameters;
-	}
 
 	// make request
 	Ext.util.JSONP.request({
@@ -182,9 +213,9 @@ function getAPIData(options) {
 	    	OKnessetAPIMapping[options.apiKey].parser(results, 
 	    		function(parseResults){
 	    			// success
-	    			memcache[requestUrl] = parseResults;
+	    			memcache[cacheKey] = parseResults;
 	    			if (options.diskCache){
-	    				localStorage.setItem(requestUrl, JSON.stringify({
+	    				localStorage.setItem(cacheKey, JSON.stringify({
 	    					date : new Date(),
 	    					data : parseResults
 	    				}));

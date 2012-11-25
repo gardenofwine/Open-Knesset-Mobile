@@ -191,8 +191,6 @@ function appUpdate(){
 	} else {
 		// new installation
 	}
-		localStorage.setItem("disclaimerDismissed", false);
-	
 }
 
 appUpdate();

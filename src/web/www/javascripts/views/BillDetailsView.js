@@ -24,7 +24,8 @@ OKnesset.app.views.BillDetailsView = new Ext.extend(Ext.Panel, {
                   //cls: 'titlePanel',
                   //height : "2em",
                   padding: '5',
-                  tpl:'<div class="hebTitle" style="font-weight: normal;">'+OKnesset.strings.billStage+'<b> {stage_text}</b></div>\
+                  tpl:'<div class="hebTitle" style="font-weight: normal;">'+OKnesset.strings.billStage+'<b> {stage_text}</b><br/></div>\
+                  <div>' + OKnesset.strings.dateString + ': {stage_date}</div>\
                   <tpl if="linkToPdf != -1"><a id="linktoPdf" class="hebLink" href="{linkToPdf}">'   + OKnesset.strings.BillpdfExist + '</a></tpl>'
                 }),
                   this.billMakers,

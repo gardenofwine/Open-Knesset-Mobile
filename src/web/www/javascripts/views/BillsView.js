@@ -21,7 +21,7 @@ Ext.reg('BillsView', OKnesset.app.views.BillsView);
 
 OKnesset.app.views.BillsView.BillList = new Ext.extend(Ext.List, {
     id: 'MemberBillList',
-    itemTpl: '<div>{title}</div>',
+    itemTpl: '<div>{full_title}</div>',
     store: OKnesset.MemberBillsStore,
     layout: 'fit',
     deferEmptyText: false,

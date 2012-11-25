@@ -16,7 +16,7 @@ OKnesset.app.views.DisclaimerView = new Ext.extend(Ext.Panel, {
 	dockedItems : [ {
 		dock : 'top',
 		xtype : 'toolbar',
-		title : OKnesset.strings.oknessetName
+		title : OKnesset.strings.openKnessetTitle
 	}, {
 		xtype : 'button',
 		id : 'cancelDisclaimerBtn',

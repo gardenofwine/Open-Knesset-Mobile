@@ -27,11 +27,26 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
             apiKey:'member',
             urlOptions : options.id,
             success:function(data){
+                var billsReceived = getAPIData({
+                    apiKey : 'memberBills',
+                    parameterOptions : options.id,
+                    success:function(billsData){
+                        that.updateBills(billsData);
+                    },
+                    failure:function(result){
+                        console.log("Error receiving memeber bills data. ", result);
+                    }
+                });
+                if (!billsReceived) {
+                    that.memberView.query('#memberBillsBtn')[0].setText(OKnesset.strings.loadingBills);
+                    that.memberView.query('#memberBillsBtn')[0].disable();
+                }
+
                 that.updateData(data);
                 that.memberView.getComponent('loading').hide();
             },
             failure:function(result){
-                console.log("error receiving memebers data. ", result);
+                console.log("Error receiving memeber data. ", result);
             }
         });
 
@@ -107,6 +122,16 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
             OKnesset.log("calling number " + phone_num);
         }
     },
+
+    updateBills: function(bills){
+        if (!bills || bills.length==0) {
+            this.memberView.query('#memberBillsBtn')[0].setText(OKnesset.strings.noBills);
+            //this.memberView.query('#memberBillsBtn')[0].disable();
+        } else {
+            this.memberView.query('#memberBillsBtn')[0].setText("" + bills.length + " " + OKnesset.strings.bills);
+        }
+        this.memberView.query('#memberBillsBtn')[0].enable();
+    },
     updateData: function(member){
 
         this.memberView.query('#MemberImage')[0].update(member);
@@ -126,22 +151,13 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
         } else {
             this.memberView.query('#memberCommitteesBtn')[0].show();
         }
-
-
-        if (!member.bills || member.bills.length==0) {
-            this.memberView.query('#memberBillsBtn')[0].setText(OKnesset.strings.noBills);
-            this.memberView.query('#memberBillsBtn')[0].disable();
-        } else {
-            this.memberView.query('#memberBillsBtn')[0].setText(OKnesset.strings.bills);
-            this.memberView.query('#memberBillsBtn')[0].enable();
-        }
-        if (!member.committees || member.committees.length == 0) {
-            this.memberView.query('#memberCommitteesBtn')[0].setText(OKnesset.strings.noCommittees);
-            this.memberView.query('#memberCommitteesBtn')[0].disable();
-        } else {
-            this.memberView.query('#memberCommitteesBtn')[0].setText(OKnesset.strings.committees);
-            this.memberView.query('#memberCommitteesBtn')[0].enable();
-        }
+        // if (!member.committees || member.committees.length == 0) {
+        //     this.memberView.query('#memberCommitteesBtn')[0].setText(OKnesset.strings.noCommittees);
+        //     this.memberView.query('#memberCommitteesBtn')[0].disable();
+        // } else {
+        //     this.memberView.query('#memberCommitteesBtn')[0].setText(OKnesset.strings.committees);
+        //     this.memberView.query('#memberCommitteesBtn')[0].enable();
+        // }
     },
 
     getIdFromAbsoluteUrl: function(url){

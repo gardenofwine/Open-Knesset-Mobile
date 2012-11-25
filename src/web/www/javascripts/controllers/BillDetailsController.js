@@ -21,25 +21,26 @@ Ext.regController('BillDetails', {
         var billMakersList = this.BillDetailsView.query('#billMakersList')[0];
         var billStage = this.BillDetailsView.query('#billStage')[0];
 
+        var hideWhileLoading = [billStage, billContent, billMakersList];
 
-        if (this.cached != options.id) {
-            this.cached = options.id;
-            var hideWhileLoading = [billStage, billContent, billMakersList];
+        var bill = getAPIData({
+            apiKey:'bill',
+            urlOptions : options.id,
+            success:function(data){
+                BillDetailsController.updateData(data);
+                BillDetailsController._refresh(hideWhileLoading);                
+            },
+            failure : function(result){
+                console.log("Error receiving bill data. ", result);
+            }
+        });
+
+        if (!bill){
             BillDetailsController._init(hideWhileLoading);
-
-            Ext.util.JSONP.request({
-                url: 'http://www.oknesset.org/api/bill/' + options.id,
-                callbackKey : "callback",
-                onFailure : function(){console.log("Failure loading bill json from server");},
-                callback: function(data){
-                    BillDetailsController.updateData(data);
-                    BillDetailsController._refresh(hideWhileLoading);
-                }
-            });
         }
 
-        this.application.viewport.setActiveItem(this.BillDetailsView, options.animation);
 
+        this.application.viewport.setActiveItem(this.BillDetailsView, options.animation);
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.billDetails);
 
         if (BillDetailsController.BillDetailsView.scroller) {
@@ -133,6 +134,7 @@ Ext.regController('BillDetails', {
         //update state & Link to PDF
         this.BillDetailsView.query('#billStage')[0].update({
             stage_text: data.stage_text,
+            stage_date:data.stage_date,
             linkToPdf: pdf
         });
 

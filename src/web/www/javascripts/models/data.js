@@ -91,17 +91,32 @@ Ext.regModel('MemberBills', {
 
 OKnesset.MemberBillsStore = new Ext.data.Store({
 	model: 'MemberBills',
-	filters : {
-	filterFn: function(item) {
-			return parseInt(item.data.stage, 10) >= 2;
+	sorters: {
+		sorterFn : function(b1, b2) { 
+			// sort by stage (i1, i2), then by date
+			var i1 = billStageTextToIndex(b1.data.stage);
+			var i2 = billStageTextToIndex(b2.data.stage);
+
+			if (i1 === i2){
+				var dateParts = b1.data.stage_date.split("-");
+				var date1 = new Date(
+					dateParts[0],
+					dateParts[1],
+					dateParts[2]);
+				dateParts = b2.data.stage_date.split("-");
+				var date2 = new Date(
+					dateParts[0],
+					dateParts[1],
+					dateParts[2]);
+
+				return date1.getTime() < date2.getTime() ? 1 : -1;
+			} else {
+				return  i1 > i2 ? -1 : 1;
+			}
 		}
 	},
-	sorters: {
-			property: 'stage',
-			direction: 'DESC'
-			},
 	getGroupString : function(record) {
-		return record.get('stage_text');
+		return record.get('stage');
 	}
 });
 
