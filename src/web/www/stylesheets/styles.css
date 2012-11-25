@@ -124,12 +124,6 @@ div.textCenter * {
 	vertical-align: top;
 }
 
-.MemberBillsTitle {
-	color: white;
-   	text-align: center;
-
-}
-
 #MemberBillList .x-list-header {
 	direction: rtl;
 }

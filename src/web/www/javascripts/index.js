@@ -110,21 +110,6 @@ function secondaryLaunch() {
 		OKnesset.app.controllers.navigation.dispatchDialog('Disclaimer/Index');
 	}
 
-
-	// When the applicaiton comes back from the background state on the iOS or
-	// Android, check if there are any updates from teh oknesset website.
-	OKnesset.resumeCount = 0;
-	document.addEventListener("resume", function() {
-		window.setTimeout(function() {
-			// For Android. the 'resume' event is fired even when the
-			// application launches, so we need to ignore this first event
-			if (isiOS() || isAndroid() && OKnesset.resumeCount != 0) {
-				checkFullDataFromWeb();
-			}
-			OKnesset.resumeCount++;
-		}, 0);
-	}, false);
-
 	googleAnalytics();
 
 	if (isAndroid()) {

@@ -16,7 +16,7 @@ GApageMapping = {
 	MemberListView 					: "/app/member/",
 	MemberView 						: "/app/member/",
 	BillsView						: "/app/member/bills/",
-	BillsView						: "/app/bill/",
+	BillDetailsView					: "/app/bill/",
 	CommitteesView 					: "/app/member/committees/",
 	PartyListView					: "/app/party/",
 	PartyView 						: "/app/party/",

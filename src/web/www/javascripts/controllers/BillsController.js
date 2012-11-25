@@ -38,7 +38,8 @@ Ext.regController('Bills', {
                             that.billsView.query('#MemberBillList')[0].emptyText = "<br/><br/><br/>" +
                                 OKnesset.strings.excuseForNoBills;
                         } else {
-                            that.billsView.query('#MemberBillList')[0].emptyText = "";
+                            that.billsView.query('#MemberBillList')[0].emptyText = "<br/><br/><br/>" +
+                                OKnesset.strings.hasNoBillsTitle;
                         }
                         that.billsView.query('#MemberBillList')[0].refresh();                
                     },
