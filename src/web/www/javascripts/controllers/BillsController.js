@@ -21,6 +21,12 @@ Ext.regController('Bills', {
             urlOptions : options.id,
             success:function(data){
                 var member = data;
+
+                // don't track if the panal was reached by pressing 'back'
+                if (options.pushed){
+                    GATrackPage('BillsView', member.name);
+                }
+
                 getAPIData({
                     apiKey : 'memberBills',
                     parameterOptions : options.id,

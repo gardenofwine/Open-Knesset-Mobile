@@ -35,6 +35,11 @@ Ext.regController('BillDetails', {
             }
         });
 
+        // don't track if the panal was reached by pressing 'back'
+        if (options.pushed){
+            GATrackPage('BillDetailsView', options.id);
+        }        
+
         if (!bill){
             BillDetailsController._init(hideWhileLoading);
         }
