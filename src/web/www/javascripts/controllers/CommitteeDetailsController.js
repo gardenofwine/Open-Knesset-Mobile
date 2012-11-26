@@ -25,6 +25,7 @@ Ext.regController('CommitteeDetails', {
         var committeeDetailsController = this;
 
         var committeeName = this.CommitteeDetailsView.query('#committeeName')[0];
+        var committeeDescription = this.CommitteeDetailsView.query('#committeeDescription')[0];
         var committeeMembersList = this.CommitteeDetailsView.query('#CommitteeMembersList')[0];
         var committeeMeetings = this.CommitteeDetailsView.query('#committeeMeetings')[0];
         var committeeMembers = this.CommitteeDetailsView.query('#committeeMembers')[0];
@@ -33,7 +34,7 @@ Ext.regController('CommitteeDetails', {
 
         if (this.cached != options.id) {
             this.cached = options.id;
-            var hideWhileLoading = [committeeName, committeeMembersList, committeeMeetings, committeeMembers];
+            var hideWhileLoading = [committeeName, committeeDescription, committeeMembersList, committeeMeetings, committeeMembers];
             committeeDetailsController._init(hideWhileLoading);
 
 
@@ -75,8 +76,13 @@ Ext.regController('CommitteeDetails', {
     },
     _updateData: function (CommitteeDetails) {
 
-            this.CommitteeDetailsView.query('#committeeName')[0].update({
-            name: CommitteeDetails.name
+        this.CommitteeDetailsView.query('#committeeName')[0].update({
+           name: CommitteeDetails.name
+        });
+
+        var committeeFromList = getObjectFromStoreByID(OKnesset.AllCommitteesStore, CommitteeDetails.id);
+        this.CommitteeDetailsView.query('#committeeDescription')[0].update({
+           description : committeeFromList.data.description
         });
 
         OKnesset.CommitteeDetailsMembersListStore.loadData(CommitteeDetails.members);

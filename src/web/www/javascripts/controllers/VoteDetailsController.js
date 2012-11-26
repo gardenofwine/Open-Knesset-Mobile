@@ -47,12 +47,21 @@ Ext.regController('VoteDetails', {
         this.application.viewport.setActiveItem(this.VoteDetailsView, options.animation);
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.votesDetails);
 
-        if (VoteDetailsController.VoteDetailsView.scroller) {
-            VoteDetailsController.VoteDetailsView.scroller.scrollTo({
+        if (membersVotedList.scroller) {
+            membersVotedList.scroller.scrollTo({
                 x: 0,
                 y: 0
             });
         }
+
+        var infoWrapper = this.VoteDetailsView.query('#MemberVotedInfoWrapper')[0];
+        if (infoWrapper.scroller) {
+            infoWrapper.scroller.scrollTo({
+                x: 0,
+                y: 0
+            });
+        }
+
     },
 
     _init: function(elementsToHIDE){
@@ -108,7 +117,7 @@ Ext.regController('VoteDetails', {
 
 
     },
-        _gotoMember: function(record){
+    _gotoMember: function(record){
         OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + record.data.id, this.historyUrl);
     }
 

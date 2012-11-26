@@ -80,10 +80,17 @@
 .btn-mini-text {
 	font-size: 0.7em;
 	display: block;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;	
 }
 
 .supportSize {
 	float : left;
+	direction : ltr;
 	padding-left : 1em;
 }
 
@@ -93,12 +100,6 @@
 
 .memberViewInfo{
 	min-height:110px;
-}
-
-/* info page design*/
-div.textCenter * {
-	direction : rtl;
-	text-align:center;
 }
 
 /* Member page Design */

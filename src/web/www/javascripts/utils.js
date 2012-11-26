@@ -32,8 +32,9 @@ GApageMapping = {
 	CommitteeDetailsView			: "/app/committee/",
 	ProtocolView					: "/app/committee/protocol/",
 	ProtocolSectionView				: "/app/committee/protocol/sections/",
-	InfoView 						: "/app/info/"
-
+	InfoView 						: "/app/info/",
+	DisclaimerView 					: "/app/disclaimer/",
+	CreditsView 					: "/app/disclaimer/credits"
 }
 
 function GATrackPage(page, extra) {
@@ -177,7 +178,7 @@ function getAPIData(options) {
 		parameters = OKnessetAPIMapping[options.apiKey].parameters;
 	}
 
-	cacheKey = requestUrl + JSON.stringify(parameters);
+	var cacheKey = requestUrl + JSON.stringify(parameters);
 	// if a cached version of the data exists, return it immediately
 	var cachedData = _diskCacheGet(cacheKey);
 	var storeInCacheOnly = false;

@@ -27,6 +27,11 @@ OKnesset.app.views.CommitteeDetailsView = new Ext.extend(Ext.Panel, {
                   tpl:'<div>{name}</div>'
             }),
             new Ext.Panel({
+                  id: "committeeDescription",
+                  padding: '5',
+                  tpl:'<div>{description}</div>'
+            }),
+            new Ext.Panel({
                   id: 'committeeMembers',
                   cls: 'subtitlePanel',
                   height : "2em",

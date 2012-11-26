@@ -1,4 +1,4 @@
-OKnesset.app.controllers.disclaimer = Ext.regController('Disclaimer', {
+Ext.regController('Credits', {
 
     // index action
 	Index: function(options)
@@ -6,30 +6,26 @@ OKnesset.app.controllers.disclaimer = Ext.regController('Disclaimer', {
         if ( ! this.view)
         {
             this.view = this.render({
-                xtype: 'DisclaimerView',
+                xtype: 'CreditsView',
             });
 
             var mask = this.mask = new Ext.LoadMask(Ext.getBody(), {msg:OKnesset.strings.showDisclaimer});
             this.view.addListener('hide', function(){mask.hide();});
 
-            this.view.query('#DisclaimerCancel')[0].setHandler(function(){
-    			localStorage.setItem("disclaimerDismissed", true);
+            this.view.query('#creditsCancel')[0].setHandler(function(){
     			OKnesset.app.controllers.navigation.dispatchBack();
             });
 
         }
 
-        if (localStorage.getItem("disclaimerDismissed") === 'true'){
-            GATrackPage('DisclaimerView', '');
-        }
+        GATrackPage('CreditsView', '');
 
         this.view.show(options.animation);
         this.mask.show();
     },
 
     openCreditPanel : function(){
-        OKnesset.app.controllers.navigation.dispatchBack();
-        OKnesset.app.controllers.navigation.dispatchDialog('Credits/Index');
+        console.log("credits");
     }
 
 });
