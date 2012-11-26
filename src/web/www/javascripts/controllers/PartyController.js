@@ -36,9 +36,6 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 
 		this.filterMembersByParty(party);
 
-		// TODO currentParty is only needed for the email widget. Find a better way to fetch the current party
-		this.currentParty = party.data;
-
 		// in case the member list was scrolled down( because the user viewed the
 		// panel for another member)
 		if (options.pushed){

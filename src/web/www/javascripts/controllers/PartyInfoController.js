@@ -23,7 +23,6 @@ OKnesset.app.controllers.PartyInfo = Ext.regController('PartyInfo', {
 		}
 
 
-		// TODO currentParty is only needed for the email widget. Find a better way to fetch the current party
 		this.currentInfo = info.data;
 		this.view.query('#Info')[0].update(this.currentInfo);
 		this.application.viewport.query('#toolbar')[0].setTitle(name);

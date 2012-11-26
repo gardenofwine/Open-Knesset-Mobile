@@ -10,7 +10,6 @@ OKnesset.app.views.PartyView = new Ext.extend(Ext.Panel, {
 			},
 			title : '',
 			scroll: 'vertical',
-			currentParty : null,
 			initComponent: function()
 			{
 				this.memberList = new OKnesset.app.views.PartyView.MemberList();
