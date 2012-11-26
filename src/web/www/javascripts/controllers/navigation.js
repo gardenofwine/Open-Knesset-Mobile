@@ -50,7 +50,11 @@ OKnesset.app.controllers.navigation = Ext.regController('navigation', {
   },
 
   _pop : function(){
-      this.top = (this.stack)? this.stack.pop() : undefined;
+    if (this.stack){
+      this.top =  this.stack.pop();
+    } else {
+      this.top =  undefined;
+    }
   },
 
   pop: function(options) {
@@ -84,17 +88,16 @@ OKnesset.app.controllers.navigation = Ext.regController('navigation', {
 		  return;
 	  }
 
-      var backBtn = this.application.viewport.query('#backBtn')[0];
-      // var openMenuBtn = this.application.viewport.query('#openMenu')[0];
-      // The first panel is also pushed, but we dont want a back button on the
+    var backBtn = this.application.viewport.query('#backBtn')[0];
+    // The first panel is also pushed, but we dont want a back button on the
 		// first panel
-      if (this.stack.length > 1){
-      	backBtn.show();
-        // openMenuBtn.hide();
-      } else {
-      	backBtn.hide();
-        // openMenuBtn.show();
-      }
+    if (this.stack.length > 1){
+    	backBtn.show();
+      // openMenuBtn.hide();
+    } else {
+    	backBtn.hide();
+      // openMenuBtn.show();
+    }
   },
 
   dispatchPanel : function(toUrl, historyUrl){
