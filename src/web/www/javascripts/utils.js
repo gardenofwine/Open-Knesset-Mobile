@@ -1,7 +1,7 @@
 /**
  * Google analytics related function
  */
-function googleAnalytics() {
+var googleAnalytics = function () {
 	if (isPhoneGap()) {
 		googleAnalytics = window.plugins.googleAnalyticsPlugin;
 		// The oknesset.mobile google analytics Accoutn ID
@@ -10,32 +10,32 @@ function googleAnalytics() {
 				2);
 		googleAnalytics.trackPageview("/app/");
 	}
-}
+};
 
 GApageMapping = {
-	MemberListView 					: "/app/member/",
-	MemberView 						: "/app/member/",
-	BillsView						: "/app/member/bills/",
-	BillDetailsView					: "/app/bill/",
-	CommitteesView 					: "/app/member/committees/",
-	PartyListView					: "/app/party/",
-	PartyView 						: "/app/party/",
-	PartyInfoView 					: "/app/party/info/",
-	memberVotesView					: "/app/member/votes/",
-	VoteDetailsView					: "/app/vote/",
-	AgendaListView					: "/app/agenda/",
-	AgendaDetailsView				: "/app/agenda/",
-	AgendaVoteListView				: "/app/agenda/votes/",
-	AgendaMembersSupportListView	: "/app/agenda/members/",
-	AgendaPartiesSupportListView	: "/app/agenda/parties/",
-	AllCommitteesView				: "/app/committee/",
-	CommitteeDetailsView			: "/app/committee/",
-	ProtocolView					: "/app/committee/protocol/",
-	ProtocolSectionView				: "/app/committee/protocol/sections/",
-	InfoView 						: "/app/info/",
-	DisclaimerView 					: "/app/disclaimer/",
-	CreditsView 					: "/app/disclaimer/credits"
-}
+	MemberListView              : "/app/member/",
+	MemberView                  : "/app/member/",
+	BillsView                   : "/app/member/bills/",
+	BillDetailsView             : "/app/bill/",
+	CommitteesView              : "/app/member/committees/",
+	PartyListView               : "/app/party/",
+	PartyView                   : "/app/party/",
+	PartyInfoView               : "/app/party/info/",
+	memberVotesView             : "/app/member/votes/",
+	VoteDetailsView             : "/app/vote/",
+	AgendaListView              : "/app/agenda/",
+	AgendaDetailsView           : "/app/agenda/",
+	AgendaVoteListView          : "/app/agenda/votes/",
+	AgendaMembersSupportListView: "/app/agenda/members/",
+	AgendaPartiesSupportListView: "/app/agenda/parties/",
+	AllCommitteesView           : "/app/committee/",
+	CommitteeDetailsView        : "/app/committee/",
+	ProtocolView                : "/app/committee/protocol/",
+	ProtocolSectionView         : "/app/committee/protocol/sections/",
+	InfoView                    : "/app/info/",
+	DisclaimerView              : "/app/disclaimer/",
+	CreditsView                 : "/app/disclaimer/credits"
+};
 
 function GATrackPage(page, extra) {
 	if (isPhoneGap()) {
@@ -65,22 +65,22 @@ function GATrackEvent(category, action, label) {
  function billStageTextToIndex(stage){
 	if (stage === OKnesset.strings.billStage6){
 		return 6;
-	} 	
+	}
 	if (stage === OKnesset.strings.billStage5){
 		return 5;
-	} 	
+	}
 	if (stage === OKnesset.strings.billStage4){
 		return 4;
-	} 	
+	}
 	if (stage === OKnesset.strings.billStage3){
 		return 3;
-	} 	
+	}
 	if (stage === OKnesset.strings.billStage2){
 		return 2;
-	} 	
+	}
 	if (stage === OKnesset.strings.billStage1){
 		return 1;
-	} 	
+	}
  }
 
 /**
@@ -110,13 +110,13 @@ function getObjectFromStoreByID(store, id, id_key){
 		id_key = 'id';
 	}
 	return getObjectFromStoreByFunc(store, function(r){
-		return r.data[id_key] === parseInt(id)
+		return r.data[id_key] === parseInt(id, 10);
 	});
 }
 
 function getObjectFromStoreByFunc(store, func){
-    var index = store.findBy(func);
-    return store.getAt(index);
+	var index = store.findBy(func);
+	return store.getAt(index);
 }
 
 //receives an array of id's and returns a array of objects of the members
@@ -125,33 +125,32 @@ function getMembersById(ids) {
 	if (ids.push === undefined) {
 		//assumming we got only one id
 			if (typeof ids === 'string'){
-				ids = parseInt(ids);
+				ids = parseInt(ids, 10);
 			}
 			tmp=[]; tmp.push(ids); ids = tmp;
-	}
-	  var members = [];
-	  var storeCollection = OKnesset.MemberStore.snapshot?OKnesset.MemberStore.snapshot:OKnesset.MemberStore.data;
-	  storeCollection.items.forEach(function(member) {
-	      for (var i=0;i<ids.length;i++) {
-	          id=ids[i];
+		}
+		var members = [];
+		var storeCollection = OKnesset.MemberStore.snapshot?OKnesset.MemberStore.snapshot:OKnesset.MemberStore.data;
+		storeCollection.items.forEach(function(member) {
+			for (var i=0;i<ids.length;i++) {
+				id=ids[i];
 
-	          if (member.data !== undefined)
-	          {
-	              member = member.data;
-	          }
+				if (member.data !== undefined) {
+					member = member.data;
+				}
 
-	          if (member.id == id) {
-			      members.push(member);
-			      ids.remove(id);
-			      i = ids.length;
-			  }
-	      }
+				if (member.id == id) {
+					members.push(member);
+					ids.remove(id);
+					i = ids.length;
+				}
+			}
 
-	      if (ids.length == 0){
-	          return members;
-	      }
-	  });
-	  return members;
+			if (!ids.length) {
+				return members;
+			}
+		});
+		return members;
 }
 
 
@@ -194,10 +193,10 @@ function getAPIData(options) {
 		}
 	} else {
 		cachedData = _cacheGet(cacheKey);
-		if ((typeof cachedData !== 'undefined') && cachedData !== null ) {
+		if ((typeof cachedData !== 'undefined') && cachedData !== null ){
 			//call callback function with cached data
 			options.success(cachedData);
-			if (!options.forceLoad) {
+			if (!options.forceLoad){
 				return true;
 			} else {
 				storeInCacheOnly = true;
@@ -208,34 +207,33 @@ function getAPIData(options) {
 
 	// make request
 	Ext.util.JSONP.request({
-	    url: requestUrl,
-	    callbackKey : OKnessetAPIMapping[options.apiKey].callbackKey,
-	    params : parameters,
-		onFailure : options.failure,
-	    callback: function(results){
-	    	OKnessetAPIMapping[options.apiKey].parser(results, 
-	    		function(parseResults){
-	    			// success
-	    			memcache[cacheKey] = parseResults;
-	    			if (options.diskCache){
-	    				localStorage.setItem(cacheKey, JSON.stringify({
-	    					date : new Date(),
-	    					data : parseResults
-	    				}));
-	    			}
+		url        : requestUrl,
+		callbackKey: OKnessetAPIMapping[options.apiKey].callbackKey,
+		params     : parameters,
+		onFailure  : options.failure,
+		callback   : function (results){
+			OKnessetAPIMapping[options.apiKey].parser(results,
+				function(parseResults){
+					// success
+					memcache[cacheKey] = parseResults;
+					if (options.diskCache){
+						localStorage.setItem(cacheKey, JSON.stringify({
+							date : new Date(),
+							data : parseResults
+						}));
+					}
 
-	    			if (!storeInCacheOnly){
-	    				options.success(parseResults);
-	    			}
-	    		},
-	    		function(parseResults){
-	    			// failure
-	    			if (!storeInCacheOnly){
-	    				options.failure(parseResults);
-	    			}
-	    		});
-	    	;
-	    }
+					if (!storeInCacheOnly){
+						options.success(parseResults);
+					}
+				},
+				function(parseResults){
+					// failure
+					if (!storeInCacheOnly){
+						options.failure(parseResults);
+					}
+			});
+		}
 	});
 	if (storeInCacheOnly){
 		// this menas the callback has already been invoked on the caller
@@ -247,9 +245,9 @@ function getAPIData(options) {
 	function _diskCacheGet(key) {
 		var cachedData = localStorage.getItem(key);
 
-		if (cachedData !== null)
+		if (cachedData !== null){
 			cachedData = JSON.parse(cachedData);
-
+		}
 		return cachedData;
 	}
 	function _cacheGet(key) {
@@ -269,28 +267,27 @@ function has24HoursPassedSince(theDate){
 // callbackArray[0] == callbackA
 // callbackArray[0] == callbackB
 function waitForAll(){
-	var callback = arguments[0];
-	args = Array.prototype.slice.call(arguments, 1); 
-	that = this;
-	this.functions = [];
-
-	var completedResults = [];
-	for (var i = 0; i < args.length; i++) {
-		var func = args[i];
-		var funcwrapper = function(func){
+	var callback = arguments[0],
+		completedResults = [],
+		args = Array.prototype.slice.call(arguments, 1),
+		that = this,
+		funcwrapper = function(i){
+			var func = args[i];
 			return function(){
 				var result = func.apply(that, arguments);
 				completedResults.push(result);
 				if (completedResults.length == args.length){
-					var result = {};
+					result = {};
 					for (var i = completedResults.length - 1; i >= 0; i--) {
 						Ext.apply(result, completedResults[i]);
-					};
-					callback.call(that,result);
+					}
+					callback.call(that, result);
 				}
-			}
-		}(func);
-		this.functions.push(funcwrapper);
-	};
+			};
+		};
+	this.functions = [];
+	for (var i = 0; i < args.length; i++) {
+		this.functions.push(funcwrapper(i));
+	}
 }
 
