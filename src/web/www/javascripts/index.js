@@ -178,4 +178,8 @@ function appUpdate(){
 	}
 }
 
+OKnesset.onError = function (code, userMsg, logMsg){
+	console.log(code, logMsg || userMsg);
+	Ext.Msg.alert(userMsg || OKnesset.strings.generalError);
+};
 appUpdate();
