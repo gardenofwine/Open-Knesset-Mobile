@@ -4,10 +4,10 @@ Ext.regController('BillDetails', {
 	Index: function (options) {
 
 		var BillDetailsController = this,
-			billMakersList = this.BillDetailsView.query('#billMakersList')[0],
-			billContent = this.BillDetailsView.query('#billContent')[0],
-			billStage = this.BillDetailsView.query('#billStage')[0],
-			hideWhileLoading = [billStage, billContent, billMakersList],
+			billMakersList,
+			billContent,
+			billStage,
+			hideWhileLoading,
 			bill;
 		if (!this.BillDetailsView) {
 			this.BillDetailsView = this.render({
@@ -19,6 +19,11 @@ Ext.regController('BillDetails', {
 				BillDetailsController._gotoMember(record);
 			});
 		}
+
+		billMakersList = this.BillDetailsView.query('#billMakersList')[0],
+		billContent = this.BillDetailsView.query('#billContent')[0],
+		billStage = this.BillDetailsView.query('#billStage')[0],
+		hideWhileLoading = [billStage, billContent, billMakersList],
 
 		bill = getAPIData({
 			apiKey:'bill',

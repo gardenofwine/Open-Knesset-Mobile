@@ -2,24 +2,24 @@ Ext.regController('Bills', {
 
     // index action
     Index: function(options){
+        var billList = this.billsView.query('#MemberBillList')[0],
+            that = this;
         if (!this.billsView) {
             this.billsView = this.render({
-                xtype: 'BillsView',
+                xtype: 'BillsView'
             });
-            var billList = this.billsView.query('#MemberBillList')[0];
-			var billsController = this;
+            var billsController = this;
             billList.addListener('itemtap', function(that, index, item, e){
                 var record = that.store.getAt(index);
                 billsController._gotoBill(record);
             });
         }
 
-        var that = this;
 
         getAPIData({
             apiKey:'member',
             urlOptions : options.id,
-            success:function(data){
+            success: function (data){
                 var member = data;
 
                 // don't track if the panal was reached by pressing 'back'
@@ -30,8 +30,8 @@ Ext.regController('Bills', {
                 getAPIData({
                     apiKey : 'memberBills',
                     parameterOptions : options.id,
-                    success:function(billsData){
-                        OKnesset.MemberBillsStore.loadData(billsData.bills);                        
+                    success: function (billsData){
+                        OKnesset.MemberBillsStore.loadData(billsData.bills);
                         // if there are no bills for the current member, display a text explaining
                         // that.
                         if (that.hasExcuseForNoBills(member)) {
@@ -41,7 +41,7 @@ Ext.regController('Bills', {
                             that.billsView.query('#MemberBillList')[0].emptyText = "<br/><br/><br/>" +
                                 OKnesset.strings.hasNoBillsTitle;
                         }
-                        that.billsView.query('#MemberBillList')[0].refresh();                
+                        that.billsView.query('#MemberBillList')[0].refresh();
                     },
                     failure:function(result){
                         console.log("Error receiving memeber bills data. ", result);
@@ -55,7 +55,7 @@ Ext.regController('Bills', {
 
         // scroll bill list up
         if (options.pushed) {
-            var billList = this.billsView.query('#MemberBillList')[0];
+            billList = this.billsView.query('#MemberBillList')[0];
             if (billList.scroller) {
                 billList.scroller.scrollTo({
                     x: 0,
@@ -77,7 +77,7 @@ Ext.regController('Bills', {
     hasExcuseForNoBills: function(member){
         return (
             member.current_role_descriptions !== null &&
-            (member.current_role_descriptions.indexOf(OKnesset.strings.ministerIndicator) != -1 || 
+            (member.current_role_descriptions.indexOf(OKnesset.strings.ministerIndicator) != -1 ||
             member.current_role_descriptions === OKnesset.strings.knessetChairman));
     },
 
