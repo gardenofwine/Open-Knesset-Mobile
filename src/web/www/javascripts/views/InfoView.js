@@ -1,7 +1,6 @@
 OKnesset.app.views.InfoView = new Ext.extend(Ext.Panel, {
 	id : 'InfoView',
 	layout : 'vbox',
-	cls : 'textCenter',
 	width : '90%',
 	height : '80%',	
 	floating : true,
@@ -10,9 +9,9 @@ OKnesset.app.views.InfoView = new Ext.extend(Ext.Panel, {
 	{
 		scroll : 'vertical',
 		id : 'pageDescription',
-		tpl : '<span>{text}</span>',
-		height: "100%"
-		// margin : "10 10 0 10",
+		tpl : '{text}',
+		height: "100%",
+		margin : "10 10 0 10",
 	}
 	// , {
 	// 	xtype : 'spacer',

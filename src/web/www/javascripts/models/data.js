@@ -55,7 +55,6 @@ Ext.regModel('AllCommittees', {
 
 OKnesset.AllCommitteesStore = new Ext.data.Store({
 	model: 'AllCommittees'
-	//data: CommitteesData
 });
 
 Ext.regModel('Member', {
