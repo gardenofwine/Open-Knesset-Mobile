@@ -6,9 +6,9 @@ Ext.namespace('OKnesset');
 OKnesset.GAID = "Demo-ID-replace-with-real-id";
 OKnesset.appVersion = "2";
 
-OKnesset.log = function(string) {
+OKnesset.log = function(/*args*/) {
 	if (OKnesset.debug) {
-		console.log(string);
+		console.log.apply(console, arguments);
 	}
 };
 
@@ -179,9 +179,7 @@ function appUpdate(){
 }
 
 OKnesset.onError = function (code, logMsg, userMsg, silent){
-	if (OKnesset.debug) {
-		console.log(code, logMsg || userMsg);
-	}
+	OKnesset.log(code, logMsg || userMsg);
 	if (!silent) {
 		Ext.Msg.alert('',userMsg || OKnesset.strings.generalError);
 	}
