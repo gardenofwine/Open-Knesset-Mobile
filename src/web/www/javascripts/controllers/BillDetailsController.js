@@ -28,12 +28,12 @@ Ext.regController('BillDetails', {
 		bill = getAPIData({
 			apiKey:'bill',
 			urlOptions : options.id,
-			success:function(data){
+			success: function (data){
 				BillDetailsController.updateData(data);
 				BillDetailsController._refresh(hideWhileLoading);
 			},
-			failure : function(result){
-				console.log("Error receiving bill data. ", result);
+			failure: function (result){
+				OKnesset.onError('SERVER', ["Error receiving bill data. ", result]);
 			}
 		});
 

@@ -16,10 +16,10 @@ Ext.regController('AllCommittees', {
 
 		getAPIData({
 			apiKey : "committees",
-			success : function(data){
+			success: function (data){
 				OKnesset.AllCommitteesStore.loadData(data);
 			},
-			failure:function(result){
+			failure: function (result){
 				OKnesset.onError('SERVER', ["Failure loading committees json from server", result]);
 			}
 		});

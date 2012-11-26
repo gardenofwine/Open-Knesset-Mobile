@@ -18,12 +18,12 @@ Ext.regController('PartyList', {
 
 		getAPIData({
 			apiKey:'parties',
-			success:function(data){
+			success: function (data){
 				OKnesset.PartyStore.loadData(data);
 				// that.memberView.getComponent('loading').hide();
 			},
-			failure:function(result){
-				console.log("error receiving parties data. ", result);
+			failure: function (result){
+				OKnesset.onError('SERVER', ["error receiving parties data.", result]);
 			}
 		});
 

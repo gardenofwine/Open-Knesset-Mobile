@@ -178,8 +178,12 @@ function appUpdate(){
 	}
 }
 
-OKnesset.onError = function (code, userMsg, logMsg){
-	console.log(code, logMsg || userMsg);
-	Ext.Msg.alert(userMsg || OKnesset.strings.generalError);
+OKnesset.onError = function (code, logMsg, userMsg, silent){
+	if (OKnesset.debug) {
+		console.log(code, logMsg || userMsg);
+	}
+	if (!silent) {
+		Ext.Msg.alert('',userMsg || OKnesset.strings.generalError);
+	}
 };
 appUpdate();

@@ -47,8 +47,8 @@ Ext.regController('CommitteeDetails', {
 					committeeDetailsController._updateData(data);
 					committeeDetailsController._refresh(hideWhileLoading);
 				},
-				failure:function(result){
-					console.log("error receiving committeeDetail data. ", result);
+				failure: function (result){
+					OKnesset.onError('SERVER', ["error receiving committeeDetail data.", result]);
 				}
 			});
 

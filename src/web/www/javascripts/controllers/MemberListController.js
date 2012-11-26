@@ -19,7 +19,7 @@ Ext.regController('MemberList', {
 				OKnesset.MemberStore.loadData(data);
 			},
 			failure: function (result){
-				console.log("error receiving members data. ", result);
+				OKnesset.onError('SERVER', ["error receiving members data.", result]);
 			}
 		});
 

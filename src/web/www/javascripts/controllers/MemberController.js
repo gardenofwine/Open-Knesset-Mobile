@@ -30,11 +30,11 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 				var billsReceived = getAPIData({
 					apiKey : 'memberBills',
 					parameterOptions : options.id,
-					success:function(billsData){
+					success: function (billsData){
 						that.updateBills(billsData);
 					},
-					failure:function(result){
-						console.log("Error receiving memeber bills data. ", result);
+					failure: function (result){
+						OKnesset.onError('SERVER', ["Error receiving memeber bills data.", result]);
 					}
 				});
 				if (!billsReceived) {
@@ -45,8 +45,8 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 				that.updateData(data);
 				that.memberView.getComponent('loading').hide();
 			},
-			failure:function(result){
-				console.log("Error receiving memeber data. ", result);
+			failure: function (result){
+				OKnesset.onError('SERVER', ["Error receiving memeber data.", result]);
 			}
 		});
 

@@ -39,8 +39,8 @@ Ext.regController('memberVotes', {
 					memberVotesController.memberVotesList.refresh();
 					//memberVotesController.refresh();
 				},
-				failure:function(result){
-					console.log("error receiving member favor votes data. ", result);
+				failure: function (result){
+					OKnesset.onError('SERVER', ["error receiving member favor votes data.", result]);
 				}
 			});
 
@@ -57,8 +57,8 @@ Ext.regController('memberVotes', {
 					memberVotesController.memberVotesList.refresh();
 					// memberVotesController.refresh();
 				},
-				failure:function(result){
-					console.log("error receiving member against votes data. ", result);
+				failure: function (result){
+					OKnesset.onError('SERVER', ["error receiving member against votes data.", result]);
 				}
 			});
 		}

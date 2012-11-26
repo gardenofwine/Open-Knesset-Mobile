@@ -30,7 +30,7 @@ Ext.regController('Protocol', {
 		getAPIData({
 			apiKey:'committeeProtocol',
 			urlOptions : options.id,
-			success:function(data){
+			success: function (data){
 				// creating ProtocolStore
 				var tmpArray = [];
 
@@ -79,8 +79,8 @@ Ext.regController('Protocol', {
 					}
 				}
 			},
-			failure:function(result){
-				console.log("error receiving Committee Protocol data. ", result);
+			failure: function (result){
+				OKnesset.onError('SERVER', ["error receiving Committee Protocol data.", result]);
 			}
 		});
 

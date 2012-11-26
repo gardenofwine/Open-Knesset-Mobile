@@ -43,13 +43,13 @@ Ext.regController('Bills', {
                         }
                         that.billsView.query('#MemberBillList')[0].refresh();
                     },
-                    failure:function(result){
-                        console.log("Error receiving memeber bills data. ", result);
+                    failure: function (result){
+                        OKnesset.onError('SERVER', ["Error receiving memeber bills data.", result]);
                     }
                 });
             },
-            failure:function(result){
-                console.log("Error receiving memeber data. ", result);
+            failure: function (result){
+                OKnesset.onError('SERVER', ["Error receiving memeber data.", result]);
             }
         });
 

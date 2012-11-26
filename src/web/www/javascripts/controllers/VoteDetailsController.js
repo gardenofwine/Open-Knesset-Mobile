@@ -33,8 +33,8 @@ Ext.regController('VoteDetails', {
 					VoteDetailsController.updateData(data);
 					VoteDetailsController._refresh(hideWhileLoading);
 				},
-				failure: function(){
-					console.log("Failure loading vote json from server");
+				failure: function (result){
+					OKnesset.onError('SERVER', ["Failure loading vote json from server", result]);
 				}
 			});
 		}
