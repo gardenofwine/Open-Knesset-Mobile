@@ -21,12 +21,12 @@ Ext.regController('AgendaList', {
 				// that.memberView.getComponent('loading').hide();
 			},
 			failure:function(result){
-				console.log("error receiving memebers data. ", result);
+				OKnesset.onError('SERVER', ["error receiving memebers data. ", result]);
 			}
 		});
 		// don't track if the panal was reached by pressing 'back'
 		if (options.pushed){
-        	GATrackPage('AgendaListView', '');
+			GATrackPage('AgendaListView', '');
         }
 
 		this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.AgendaTitle);

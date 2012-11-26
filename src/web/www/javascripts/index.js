@@ -6,9 +6,9 @@ Ext.namespace('OKnesset');
 OKnesset.GAID = "Demo-ID-replace-with-real-id";
 OKnesset.appVersion = "2";
 
-OKnesset.log = function(string) {
+OKnesset.log = function(/*args*/) {
 	if (OKnesset.debug) {
-		console.log(string);
+		console.log.apply(console, arguments);
 	}
 };
 
@@ -36,18 +36,18 @@ Ext.regApplication({
 		//The main view, holds all the panels of the application.
 		this.viewport = new OKnesset.app.views.Viewport();
 
-        // set the info button handler
-        this.viewport.query('#info')[0].setHandler(function(){
-        	OKnesset.app.controllers.navigation.dispatchDialog('Info/Index/' + this.viewport.getActiveItem().xtype);
-        }, this);
+		// set the info button handler
+		this.viewport.query('#info')[0].setHandler(function(){
+			OKnesset.app.controllers.navigation.dispatchDialog('Info/Index/' + this.viewport.getActiveItem().xtype);
+		}, this);
 
 		// set the menu panel
-        // this.viewport.query('#openMenu')[0].setHandler(function(){
-        //     OKnesset.app.views.Viewport.AppMenu.showBy(this);
-        // });
+		// this.viewport.query('#openMenu')[0].setHandler(function(){
+		//     OKnesset.app.views.Viewport.AppMenu.showBy(this);
+		// });
 
-        OKnesset.app.views.Viewport.menuList.addListener('itemtap',
-            	function(that, index, item, e) {
+		OKnesset.app.views.Viewport.menuList.addListener('itemtap',
+				function(that, index, item, e) {
 					var record = that.store.getAt(index);
 					if (record.data.type === 'page'){
 						OKnesset.app.controllers.navigation.dispatchPanel(record.data.page);
@@ -60,8 +60,8 @@ Ext.regApplication({
 				});
 
 		// set the back button handler
-        this.viewport.query('#backBtn')[0].setHandler(function() {
-        	OKnesset.app.controllers.navigation.dispatchBack();
+		this.viewport.query('#backBtn')[0].setHandler(function() {
+			OKnesset.app.controllers.navigation.dispatchBack();
 		});
 
 		if (isPhoneGap()) {
@@ -92,17 +92,17 @@ function secondaryLaunch() {
 	if (isPhoneGap()){
 		// load the api parser
 		Ext.Ajax.request({
-		    url: 'http://open-knesset-mobile.appspot.com/static/V2.0/apiParser.js',
+			url: 'http://open-knesset-mobile.appspot.com/static/V2.0/apiParser.js',
 			failure : function(results){
 				console.log("Error loding apiParser.js from server");
 			},
-		    success: function(results){
-		    	eval(results.responseText);
+			success: function(results){
+				eval(results.responseText);
 				loadPartiesAndMembersDataIfNeeded();
 			}
 		});
 	} else {
-		loadPartiesAndMembersDataIfNeeded()
+		loadPartiesAndMembersDataIfNeeded();
 	}
 
 	var disclaimerDismissed = localStorage.getItem("disclaimerDismissed");
@@ -123,25 +123,25 @@ function secondaryLaunch() {
 	}
 
 	function loadPartiesAndMembersDataIfNeeded(){
-        getAPIData({
-            apiKey:'parties',
-            diskCache : true,
-            forceLoad : true,
-            success:function(data){
-                OKnesset.PartyStore.loadData(data);
-            },
-            failure:function(result){
-                console.log("error receiving parties data. ", result);
-            }
-        });
+		getAPIData({
+			apiKey:'parties',
+			diskCache : true,
+			forceLoad : true,
+			success:function(data){
+				OKnesset.PartyStore.loadData(data);
+			},
+			failure:function(result){
+				console.log("error receiving parties data. ", result);
+			}
+		});
 
 		getAPIData({
 			apiKey:'members',
-            diskCache : true,
-            forceLoad : true,
+			diskCache : true,
+			forceLoad : true,
 			success:function(data){
-                OKnesset.MemberStore.loadData(data);
-            },
+				OKnesset.MemberStore.loadData(data);
+			},
 			failure:function(result){
 				console.log("error receiving memebers data. ", result);
 			}
@@ -161,7 +161,7 @@ OKnesset.app.onBackKey = function () {
 		OKnesset.app.controllers.navigation.dispatchBack();
 	}
 
-}
+};
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);
 
@@ -178,4 +178,10 @@ function appUpdate(){
 	}
 }
 
+OKnesset.onError = function (code, logMsg, userMsg, silent){
+	OKnesset.log(code, logMsg || userMsg);
+	if (!silent) {
+		Ext.Msg.alert('',userMsg || OKnesset.strings.generalError);
+	}
+};
 appUpdate();

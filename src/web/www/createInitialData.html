@@ -86,21 +86,21 @@
 				apiKey:'members',
 				success:membersReceived,
 				failure:function(result){
-					console.log("error receiving memebers data. ", result);
+					OKnesset.onError('SERVER', ["error receiving memebers data. ", result]);
 				}
 			});
 			getAPIData({
 				apiKey:'parties',
 				success:partiesReceived,
 				failure:function(result){
-					console.log("error receiving parties data. ", result);
+					OKnesset.onError('SERVER', ["error receiving parties data. ", result]);
 				}
 			});
 			getAPIData({
 				apiKey:'agendas',
 				success:agendasReceived,
 				failure:function(result){
-					console.log("error receiving agendas data. ", result);
+					OKnesset.onError('SERVER', ["error receiving agendas data. ", result]);
 				}
 			});
 

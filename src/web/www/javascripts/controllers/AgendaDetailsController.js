@@ -51,8 +51,8 @@ Ext.regController('AgendaDetails', {
 		        that.AgendaDetailsView.showLoading(false);
 				OKnesset.AgendaDetailsStore.loadData([data]);
 			},
-			failure: function (){
-				console.log("Failure loading vote json from server");
+			failure: function (result){
+				OKnesset.onError('SERVER', ["Failure loading vote json from server", result]);
 			}
 		});
 
@@ -61,7 +61,7 @@ Ext.regController('AgendaDetails', {
 
 		// don't track if the panal was reached by pressing 'back'
 		if (options.pushed){
-        	GATrackPage('AgendaDetailsView', agenda.data.name);
+			GATrackPage('AgendaDetailsView', agenda.data.name);
         }
 		// var findData = OKnesset.AgendaListStore.findBy(function(r){return r.data.id === parseInt(options.id)});
 		// findData = OKnesset.AgendaListStore.getAt(findData);
