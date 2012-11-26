@@ -13,6 +13,7 @@
 			this.BillDetailsView = this.render({
 				xtype: 'BillDetailsView'
 			});
+			billMakersList = this.BillDetailsView.query('#billMakersList')[0],
 
 			billMakersList.addListener('itemtap', function(that, index, item, e){
 				var record = that.store.getAt(index);

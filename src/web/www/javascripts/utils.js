@@ -172,12 +172,13 @@ function getAPIData(options) {
 
 	var parameters;
 	if (typeof OKnessetAPIMapping[options.apiKey].parameters === 'function') {
-		parameters = OKnessetAPIMapping[options.apiKey].parameters(options.parameterOptions);
+		parameters = Ext.apply({},OKnessetAPIMapping[options.apiKey].parameters(options.parameterOptions));
 	} else {
-		parameters = OKnessetAPIMapping[options.apiKey].parameters;
+		parameters = Ext.apply({},OKnessetAPIMapping[options.apiKey].parameters);
 	}
 
 	var cacheKey = requestUrl + JSON.stringify(parameters);
+	console.log("** loading",cacheKey);
 	// if a cached version of the data exists, return it immediately
 	var cachedData = _diskCacheGet(cacheKey);
 	var storeInCacheOnly = false;
@@ -207,16 +208,18 @@ function getAPIData(options) {
 
 	// make request
 	Ext.util.JSONP.request({
-		url        : requestUrl,
-		callbackKey: OKnessetAPIMapping[options.apiKey].callbackKey,
-		params     : parameters,
-		onFailure  : options.failure,
-		callback   : function (results){
+		url        	: requestUrl,
+		callbackKey	: OKnessetAPIMapping[options.apiKey].callbackKey,
+		params     	: parameters,
+		scope		: this,
+		onFailure  	: options.failure,
+		callback   	: function (results){
 			OKnessetAPIMapping[options.apiKey].parser(results,
 				function(parseResults){
 					// success
 					memcache[cacheKey] = parseResults;
 					if (options.diskCache){
+						console.log("** loaded cacheKey for results", cacheKey, options.apiKey);
 						localStorage.setItem(cacheKey, JSON.stringify({
 							date : new Date(),
 							data : parseResults

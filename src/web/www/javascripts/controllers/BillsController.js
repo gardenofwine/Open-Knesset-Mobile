@@ -2,20 +2,19 @@ Ext.regController('Bills', {
 
     // index action
     Index: function(options){
-        var billList = this.billsView.query('#MemberBillList')[0],
+        var billList,
             that = this;
         if (!this.billsView) {
             this.billsView = this.render({
                 xtype: 'BillsView'
             });
             var billsController = this;
+            billList = this.billsView.query('#MemberBillList')[0];         
             billList.addListener('itemtap', function(that, index, item, e){
                 var record = that.store.getAt(index);
                 billsController._gotoBill(record);
             });
         }
-
-
         that.billsView.showLoading(true);
         getAPIData({
             apiKey:'member',
