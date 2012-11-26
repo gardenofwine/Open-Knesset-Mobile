@@ -1,108 +1,108 @@
 Ext.regController('memberVotes', {
 
-    // index action
+	// index action
 	Index: function(options)
-    {
-        if (!this.memberVotesView) {
-            this.memberVotesView = this.render({
-                xtype: 'memberVotesView',
-            });
+	{
+		if (!this.memberVotesView) {
+			this.memberVotesView = this.render({
+				xtype: 'memberVotesView'
+			});
 
-            //Get the List for reference
-            this.memberVotesList = this.memberVotesView.query('#MemberVotesList')[0];
+			//Get the List for reference
+			this.memberVotesList = this.memberVotesView.query('#MemberVotesList')[0];
 
-            //Defining what is happening when tapping on an item in the list
-            this.memberVotesList.addListener('itemtap',
-                function(that, index, item, e) {
-                    var record = that.store.getAt(index);
-                    OKnesset.app.controllers.navigation.dispatchPanel('VoteDetails/Index/' + record.data.id, options.historyUrl);
-            });
-        }
+			//Defining what is happening when tapping on an item in the list
+			this.memberVotesList.addListener('itemtap',
+				function(that, index, item, e) {
+					var record = that.store.getAt(index);
+					OKnesset.app.controllers.navigation.dispatchPanel('VoteDetails/Index/' + record.data.id, options.historyUrl);
+			});
+		}
 
-        var memberVotesController = this;
+		var memberVotesController = this;
 
-        if (this.cached != options.id) {
-            this.cached = options.id;
-            var hideWhileLoading = [this.memberVotesList];
-            memberVotesController._init(hideWhileLoading);
+		if (this.cached != options.id) {
+			this.cached = options.id;
+			var hideWhileLoading = [this.memberVotesList];
+			memberVotesController._init(hideWhileLoading);
 
-            //add for votes to store
-            getAPIData({
-                apiKey:'memberVotesFavor',
-                parameterOptions : options.id,
-                success:function(data){
-                    for (var i = data.length - 1; i >= 0; i--) {
-                        data[i]['VoteType'] = 'favor';
-                    };
-                    OKnesset.MemberVotesStore.add(data);
-                    memberVotesController._refresh(hideWhileLoading);
-                    memberVotesController.memberVotesList.refresh();
-                    //memberVotesController.refresh();
-                },
-                failure:function(result){
-                    console.log("error receiving member favor votes data. ", result);
-                }
-            });            
+			//add for votes to store
+			getAPIData({
+				apiKey:'memberVotesFavor',
+				parameterOptions : options.id,
+				success:function(data){
+					for (var i = data.length - 1; i >= 0; i--) {
+						data[i]['VoteType'] = 'favor';
+					}
+					OKnesset.MemberVotesStore.add(data);
+					memberVotesController._refresh(hideWhileLoading);
+					memberVotesController.memberVotesList.refresh();
+					//memberVotesController.refresh();
+				},
+				failure:function(result){
+					console.log("error receiving member favor votes data. ", result);
+				}
+			});
 
-            getAPIData({
-                apiKey:'memberVotesAgainst',
-                parameterOptions : options.id,
-                success:function(data){
-                    for (var i = data.length - 1; i >= 0; i--) {
-                        data[i]['VoteType'] = 'against';
-                    };
+			getAPIData({
+				apiKey:'memberVotesAgainst',
+				parameterOptions : options.id,
+				success:function(data){
+					for (var i = data.length - 1; i >= 0; i--) {
+						data[i]['VoteType'] = 'against';
+					}
 
-                    OKnesset.MemberVotesStore.add(data);
-                    memberVotesController._refresh(hideWhileLoading);
-                    memberVotesController.memberVotesList.refresh();
-                    // memberVotesController.refresh();
-                },
-                failure:function(result){
-                    console.log("error receiving member against votes data. ", result);
-                }
-            });            
-        }
+					OKnesset.MemberVotesStore.add(data);
+					memberVotesController._refresh(hideWhileLoading);
+					memberVotesController.memberVotesList.refresh();
+					// memberVotesController.refresh();
+				},
+				failure:function(result){
+					console.log("error receiving member against votes data. ", result);
+				}
+			});
+		}
 
-        //Change toolbar title
-        this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.votes);
+		//Change toolbar title
+		this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.votes);
 
 
 
-        if (options.pushed) {
-            if (this.memberVotesList.scroller) {
-                this.memberVotesList.scroller.scrollTo({
-                    x: 0,
-                    y: 0
-                });
-            }
-        }
+		if (options.pushed) {
+			if (this.memberVotesList.scroller) {
+				this.memberVotesList.scroller.scrollTo({
+					x: 0,
+					y: 0
+				});
+			}
+		}
 
-        var member = getMembersById(options.id)[0];
+		var member = getMembersById(options.id)[0];
 
-        // don't track if the panal was reached by pressing 'back'
-        if (options.pushed){
-            GATrackPage('memberVotesView', member.name);
-        }
-        
-        this.application.viewport.setActiveItem(this.memberVotesView, options.animation);
+		// don't track if the panal was reached by pressing 'back'
+		if (options.pushed){
+			GATrackPage('memberVotesView', member.name);
+		}
 
-    },
-    _init: function(elementsToHIDE){
+		this.application.viewport.setActiveItem(this.memberVotesView, options.animation);
 
-        this.memberVotesView.query('#memberVotesLoading')[0].show();
+	},
+	_init: function(elementsToHIDE){
 
-        elementsToHIDE.forEach(function(e){
-            e.hide();
-        });
-    },
-    _refresh: function(elementsToSHOW){
+		this.memberVotesView.query('#memberVotesLoading')[0].show();
 
-        this.memberVotesView.query('#memberVotesLoading')[0].hide();
+		elementsToHIDE.forEach(function(e){
+			e.hide();
+		});
+	},
+	_refresh: function(elementsToSHOW){
 
-        elementsToSHOW.forEach(function(e){
-            e.show();
-        });
-    },
+		this.memberVotesView.query('#memberVotesLoading')[0].hide();
+
+		elementsToSHOW.forEach(function(e){
+			e.show();
+		});
+	}
  //    refresh : function() {
  //        // var memberVotesList = this.memberVotesView.query('#MemberVotesList')[0];
  //        this.memberVotesList.refresh();
