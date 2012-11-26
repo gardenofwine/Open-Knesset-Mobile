@@ -3,7 +3,7 @@
  * Protocol
  */
 
-OKnesset.app.views.ProtocolView = new Ext.extend(Ext.Panel, {
+OKnesset.app.views.ProtocolView = new Ext.extend(OKnesset.Panel, {
 	scroll: 'vertical',
 	initComponent: function()
     {

@@ -22,12 +22,16 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 
         // load the extra member data
         var that = this;
-        that.memberView.getComponent('loading').show();
+
+        that.memberView.query('#memberBillsBtn')[0].setText(OKnesset.strings.loadingBills);
+        that.memberView.query('#memberBillsBtn')[0].disable();
+
+        that.memberView.showLoading(true);
         var dataRecevied = getAPIData({
             apiKey:'member',
             urlOptions : options.id,
             success:function(data){
-                var billsReceived = getAPIData({
+                getAPIData({
                     apiKey : 'memberBills',
                     parameterOptions : options.id,
                     success:function(billsData){
@@ -37,13 +41,9 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
                         console.log("Error receiving memeber bills data. ", result);
                     }
                 });
-                if (!billsReceived) {
-                    that.memberView.query('#memberBillsBtn')[0].setText(OKnesset.strings.loadingBills);
-                    that.memberView.query('#memberBillsBtn')[0].disable();
-                }
 
                 that.updateData(data);
-                that.memberView.getComponent('loading').hide();
+                that.memberView.showLoading(false);
             },
             failure:function(result){
                 console.log("Error receiving memeber data. ", result);

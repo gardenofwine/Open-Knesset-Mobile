@@ -1,5 +1,5 @@
 
-OKnesset.app.views.AgendaDetailsView = new Ext.extend(Ext.Panel, {
+OKnesset.app.views.AgendaDetailsView = new Ext.extend(OKnesset.Panel, {
 	id : 'AgendaDetailsView',
 	scroll: 'vertical',
 	initComponent: function() {

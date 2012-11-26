@@ -104,16 +104,14 @@ Ext.regController('CommitteeDetails', {
         OKnesset.CommitteeDetailsMeetingsListStore.loadData(committeesMeetings);
     },
     _init: function(elementsToHIDE){
-
-        this.CommitteeDetailsView.query('#committeeDetailsLoading')[0].show();
+        this.CommitteeDetailsView.showLoading(true);
 
         elementsToHIDE.forEach(function(e){
             e.hide();
         });
     },
     _refresh: function(elementsToSHOW){
-
-        this.CommitteeDetailsView.query('#committeeDetailsLoading')[0].hide();
+        this.CommitteeDetailsView.showLoading(false);
 
         elementsToSHOW.forEach(function(e){
             e.show();

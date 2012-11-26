@@ -17,18 +17,23 @@ Ext.regController('BillDetails', {
         }
 
         var BillDetailsController = this;
+        var billTitle = this.BillDetailsView.query('#billTitle')[0];
         var billContent = this.BillDetailsView.query('#billContent')[0];
         var billMakersList = this.BillDetailsView.query('#billMakersList')[0];
         var billStage = this.BillDetailsView.query('#billStage')[0];
 
-        var hideWhileLoading = [billStage, billContent, billMakersList];
+        var hideWhileLoading = [billTitle, billStage, billContent, billMakersList];
+
+        BillDetailsController.BillDetailsView.showLoading(true);
 
         var bill = getAPIData({
             apiKey:'bill',
             urlOptions : options.id,
             success:function(data){
                 BillDetailsController.updateData(data);
-                BillDetailsController._refresh(hideWhileLoading);                
+                BillDetailsController._refresh(hideWhileLoading);
+
+                BillDetailsController.BillDetailsView.showLoading(false);
             },
             failure : function(result){
                 console.log("Error receiving bill data. ", result);
@@ -58,11 +63,6 @@ Ext.regController('BillDetails', {
 
 
     _init: function(elementsToHIDE){
-
-        this.BillDetailsView.query('#billTitle')[0].update({
-            title: OKnesset.strings.LoadingPlsWait
-        });
-
         elementsToHIDE.forEach(function(e){
             e.hide();
         });

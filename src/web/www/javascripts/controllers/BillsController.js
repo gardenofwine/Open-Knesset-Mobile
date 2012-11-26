@@ -16,6 +16,7 @@ Ext.regController('Bills', {
 
         var that = this;
 
+        that.billsView.showLoading(true);
         getAPIData({
             apiKey:'member',
             urlOptions : options.id,
@@ -42,6 +43,8 @@ Ext.regController('Bills', {
                                 OKnesset.strings.hasNoBillsTitle;
                         }
                         that.billsView.query('#MemberBillList')[0].refresh();                
+
+                        that.billsView.showLoading(false);
                     },
                     failure:function(result){
                         console.log("Error receiving memeber bills data. ", result);

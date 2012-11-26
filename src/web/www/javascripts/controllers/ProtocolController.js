@@ -26,6 +26,7 @@ Ext.regController('Protocol', {
 
 		var protocolController = this;
 
+        protocolController.protocolView.showLoading(true);
 
         getAPIData({
             apiKey:'committeeProtocol',
@@ -78,6 +79,7 @@ Ext.regController('Protocol', {
                         j=0;
                     }
                 }
+                protocolController.protocolView.showLoading(false);
             },
             failure:function(result){
                 console.log("error receiving Committee Protocol data. ", result);

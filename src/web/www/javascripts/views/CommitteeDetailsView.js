@@ -1,4 +1,4 @@
-OKnesset.app.views.CommitteeDetailsView = new Ext.extend(Ext.Panel, {
+OKnesset.app.views.CommitteeDetailsView = new Ext.extend(OKnesset.Panel, {
     id: 'CommitteeDetailsView',
     layout: {
         type: 'vbox',
@@ -12,13 +12,6 @@ OKnesset.app.views.CommitteeDetailsView = new Ext.extend(Ext.Panel, {
         this.committeeMembersList = new OKnesset.app.views.CommitteeDetailsView.committeeMembersList();
         this.committeeMeetings = new OKnesset.app.views.CommitteeDetailsView.committeeMeetings();
         this.items = [
-            new Ext.Panel({
-                  id: "committeeDetailsLoading",
-                  cls: 'titlePanel',
-                  height : "2em",
-                  padding: '5',
-                  html:'<div class="hebTitle">'+ OKnesset.strings.LoadingPlsWait + '</div>'
-                }),
             new Ext.Panel({
                   id: "committeeName",
                   cls: 'titlePanel',

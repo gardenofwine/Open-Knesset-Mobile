@@ -1,7 +1,7 @@
 /**
  * Bills
  */
-OKnesset.app.views.BillsView = new Ext.extend(Ext.Panel, {
+OKnesset.app.views.BillsView = new Ext.extend(OKnesset.Panel, {
     id: 'BillsView',
     layout: {
         type: 'vbox',

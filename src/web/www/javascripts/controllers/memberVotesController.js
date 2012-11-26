@@ -88,23 +88,17 @@ Ext.regController('memberVotes', {
 
     },
     _init: function(elementsToHIDE){
-
-        this.memberVotesView.query('#memberVotesLoading')[0].show();
+        this.memberVotesView.showLoading(true);
 
         elementsToHIDE.forEach(function(e){
             e.hide();
         });
     },
     _refresh: function(elementsToSHOW){
-
-        this.memberVotesView.query('#memberVotesLoading')[0].hide();
+        this.memberVotesView.showLoading(false);
 
         elementsToSHOW.forEach(function(e){
             e.show();
         });
     },
- //    refresh : function() {
- //        // var memberVotesList = this.memberVotesView.query('#MemberVotesList')[0];
- //        this.memberVotesList.refresh();
-	// },
 });

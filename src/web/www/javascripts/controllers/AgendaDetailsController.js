@@ -29,6 +29,8 @@ Ext.regController('AgendaDetails', {
 		// update agenda data
 		var that = this;
 
+        that.AgendaDetailsView.showLoading(true);
+
 		getAPIData({
 			apiKey : "agendaDetails",
 			urlOptions: options.id,
@@ -46,6 +48,7 @@ Ext.regController('AgendaDetails', {
 				data.MostSupportParty  = MostSupportParty.data;
 				data.description       = that.replaceURLWithHTMLLinks(data.description);
 
+		        that.AgendaDetailsView.showLoading(false);
 				OKnesset.AgendaDetailsStore.loadData([data]);
 			},
 			failure: function (){

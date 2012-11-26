@@ -20,6 +20,8 @@ Ext.regController('VoteDetails', {
         var voteDescription = this.VoteDetailsView.query('#voteDescription')[0];
         var membersVotedList = this.VoteDetailsView.query('#membersVotedList')[0];
 
+        VoteDetailsController.VoteDetailsView.showLoading(true);
+
         if (this.cached != options.id) {
             this.cached = options.id;
             var hideWhileLoading = [voteDescription, membersVotedList];
@@ -31,6 +33,7 @@ Ext.regController('VoteDetails', {
                 success : function(data){
                     VoteDetailsController.updateData(data);
                     VoteDetailsController._refresh(hideWhileLoading);
+                    VoteDetailsController.VoteDetailsView.showLoading(false);
                 },
                 failure: function(){
                     console.log("Failure loading vote json from server");
@@ -65,17 +68,11 @@ Ext.regController('VoteDetails', {
     },
 
     _init: function(elementsToHIDE){
-
-        this.VoteDetailsView.query('#voteTitle')[0].update({
-            title: OKnesset.strings.LoadingPlsWait
-        });
-
         elementsToHIDE.forEach(function(e){
             e.hide();
         });
     },
     _refresh: function(elementsToSHOW){
-
         elementsToSHOW.forEach(function(e){
             e.show();
         });

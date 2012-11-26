@@ -1,12 +1,10 @@
-OKnesset.app.views.BillDetailsView = new Ext.extend(Ext.Panel, {
+OKnesset.app.views.BillDetailsView = new Ext.extend(OKnesset.Panel, {
     id: 'BillDetailsView',
     layout: {
         type: 'vbox',
         align: 'stretch'
     },
     scroll: 'vertical',
-    listeners: {
-    },
     currentMember: null,
     initComponent: function(){
         this.billContent = new OKnesset.app.views.BillDetailsView.billContent();
@@ -15,14 +13,11 @@ OKnesset.app.views.BillDetailsView = new Ext.extend(Ext.Panel, {
                   new Ext.Panel({
                   id: "billTitle",
                   cls: 'titlePanel',
-                  //height : "2em",
                   padding: '5',
                   tpl:'<div class="hebTitle">{title}</div>'
                 }),
                   new Ext.Panel({
                   id: "billStage",
-                  //cls: 'titlePanel',
-                  //height : "2em",
                   padding: '5',
                   tpl:'<div class="hebTitle" style="font-weight: normal;">'+OKnesset.strings.billStage+'<b> {stage_text}</b><br/></div>\
                   <div>' + OKnesset.strings.dateString + ': {stage_date}</div>\
