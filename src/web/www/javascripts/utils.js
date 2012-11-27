@@ -178,7 +178,6 @@ function getAPIData(options) {
 	}
 
 	var cacheKey = requestUrl + JSON.stringify(parameters);
-	console.log("** loading",cacheKey);
 	// if a cached version of the data exists, return it immediately
 	var cachedData = _diskCacheGet(cacheKey);
 	var storeInCacheOnly = false;
@@ -219,7 +218,6 @@ function getAPIData(options) {
 					// success
 					memcache[cacheKey] = parseResults;
 					if (options.diskCache){
-						console.log("** loaded cacheKey for results", cacheKey, options.apiKey);
 						localStorage.setItem(cacheKey, JSON.stringify({
 							date : new Date(),
 							data : parseResults
