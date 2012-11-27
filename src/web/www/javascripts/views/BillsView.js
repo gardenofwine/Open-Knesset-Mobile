@@ -7,8 +7,6 @@ OKnesset.app.views.BillsView = new Ext.extend(OKnesset.Panel, {
         type: 'vbox',
         align: 'stretch'
     },
-    listeners: {
-    },
     currentMemeber: null,
     initComponent: function(){
         this.billList = new OKnesset.app.views.BillsView.BillList();
