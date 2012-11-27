@@ -7,17 +7,22 @@ Ext.regController('AllCommittees', {
 				xtype: 'AllCommitteesView'
 			});
 
-		this.AllCommitteesView.addListener('itemtap',
+			this.AllCommitteesView.committeeList.addListener('itemtap',
 				function(that, index, item, e) {
 					var record = that.store.getAt(index);
 					OKnesset.app.controllers.navigation.dispatchPanel('CommitteeDetails/Index/' + record.data.id, options.historyUrl);
 				});
 		}
 
+		var that = this;
+		that.AllCommitteesView.showLoading(true);
+
 		getAPIData({
 			apiKey : "committees",
 			success: function (data){
 				OKnesset.AllCommitteesStore.loadData(data);
+				that.AllCommitteesView.committeeList.refresh();
+				that.AllCommitteesView.showLoading(false);
 			},
 			failure: function (result){
 				OKnesset.onError('SERVER', ["Failure loading committees json from server", result]);
