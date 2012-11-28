@@ -6,6 +6,7 @@ OKnesset.Panel = Ext.extend(Ext.Panel, {
 		this.loadingPanel = new Ext.Panel({
 			id: "loading",
 			cls: 'titlePanel',
+			floating : true,			
 			height : "2em",
 			padding: '5',
 			html:'<div class="hebTitle">'+ OKnesset.strings.LoadingPlsWait + '</div>'
