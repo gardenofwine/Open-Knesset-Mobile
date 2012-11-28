@@ -6,17 +6,23 @@ Ext.regController('MemberList', {
 				xtype: 'MemberListView'
 			});
 
-			this.memberListView.addListener('itemtap',
+			// never show the loading pane, because there are always members to display from slimData
+			this.memberListView.showLoading(false);
+
+			this.memberListView.memberList.addListener('itemtap',
 				function(that, index, item, e) {
 					var record = that.store.getAt(index);
 					OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + record.data.id, options.historyUrl);
 				});
 		}
 
+		var that = this;
+		
 		getAPIData({
 			apiKey:'members',
 			success: function (data){
 				OKnesset.MemberStore.loadData(data);
+				that.memberListView.memberList.refresh();
 			},
 			failure: function (result){
 				OKnesset.onError('SERVER', ["error receiving members data.", result]);

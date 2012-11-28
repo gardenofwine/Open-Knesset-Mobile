@@ -19,8 +19,7 @@ Ext.reg('AllCommitteesView', OKnesset.app.views.AllCommitteesView);
 
 OKnesset.app.views.AllCommitteesView.List = new Ext.extend(Ext.List, {
     id: 'AllCommitteesView',
-    title:'ועדות הכנסת ' ,
-    html:'</2>Committees</h2> <p> Knesset Committees page, </p>',
+    flex: 1,
     store: OKnesset.AllCommitteesStore,
     itemTpl: '<div class="AllCommitteesName">{name}<span class="btn-mini-text">{description}</span></div>',
     onItemDisclosure: true,

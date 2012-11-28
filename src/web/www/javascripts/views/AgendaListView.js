@@ -16,6 +16,7 @@ OKnesset.app.views.AgendaListView = new Ext.extend(OKnesset.Panel, {
 
 OKnesset.app.views.AgendaListView.List = new Ext.extend(Ext.List, {
 	id: 'AgendaListView',
+    flex: 1,
 	store: OKnesset.AgendaListStore,
 	itemTpl: '<div>{name}<span class="btn-mini-text">' + OKnesset.strings.by + ' {public_owner_name}</span></div>',
 	onItemDisclosure: true
