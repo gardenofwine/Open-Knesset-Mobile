@@ -26,7 +26,8 @@ OKnesset.strings = {
 	errorAndroidEmail        : 'כשלון בשליחת מייל',
 	writeTo                  : 'כתבו ל{0}',
 	phoneTo                  : ' התקשרו אל {0}',
-	billsOutOf               : 'הצעות חוק מתוך',
+	bills  		             : 'הצעות חוק',
+	billsOutOf				 : 'מוצגות {0} הצעות חוק שעברו קריאה טרומית (לפחות), מתוך {1} שהוגשו',
 	committees               : 'ועדות'    ,
 	loadingBills             : 'טוען הצעות חוק. המתן...',
 	noBills                  : 'אין הצעות חוק' ,
@@ -51,8 +52,8 @@ OKnesset.strings = {
 	AgendaVoteButton         : "הצבעות משוייכות",
 	AgendaDetailsTitle       : "פרטי האג'נדה",
 	by                       : "ע\x22י",
-	SupportMembers           : "חברי הכנסת התומכים",
-	SupportParties           : "המפלגות התומכות",
+	SupportMembers           : "דירוג חברי/ות הכנסת",
+	SupportParties           : "דירוג המפלגות",
 	AgendaDescription        : "תיאור האג'נדה",
 	mostsupportmember        : "חבר הכנסת התומך ביותר",
 	mostsupportparty         : "המפלגה התומכת ביותר",
@@ -123,7 +124,7 @@ OKnesset.strings = {
 		},
 		BillsView: {
 			title: "מסך רשימת הצעות חוק",
-			text : "רשימה של כל הצעות החוק הפרטיות של הח\x22כ אשר עברו קריאה טרומית. הצעות החוק ממויינות לפי השלב בתהליך החקיקה שבו הן נמצאות ותאריך.<br/><br/>\n<a href='http://he.wikipedia.org/wiki/%D7%94%D7%97%D7%A7%D7%99%D7%A7%D7%94_%D7%91%D7%99%D7%A9%D7%A8%D7%90%D7%9C#.D7.94.D7.A6.D7.A2.D7.AA_.D7.97.D7.95.D7.A7_.D7.A4.D7.A8.D7.98.D7.99.D7.AA'>הסבר על תהליך החקיקה בויקיפדיה</a>"
+			text : "רשימה של כל הצעות החוק הפרטיות של הח\x22כ אשר עברו קריאה טרומית (כולל הצעות חוק שאושרו, נמצאות בדיונים בועדה, וכ\'..).<br/> הצעות החוק ממויינות לפי השלב בתהליך החקיקה שבו הן נמצאות ותאריך.<br/><br/>\n<a href='http://he.wikipedia.org/wiki/%D7%94%D7%97%D7%A7%D7%99%D7%A7%D7%94_%D7%91%D7%99%D7%A9%D7%A8%D7%90%D7%9C#.D7.94.D7.A6.D7.A2.D7.AA_.D7.97.D7.95.D7.A7_.D7.A4.D7.A8.D7.98.D7.99.D7.AA'>הסבר על תהליך החקיקה בויקיפדיה</a>"
 		},
 		BillDetailsView: {
 			title: "מסך הצעת חוק",

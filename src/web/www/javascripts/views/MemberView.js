@@ -44,6 +44,7 @@ OKnesset.app.views.MemberView.InfoWrapper = new Ext.extend(Ext.Panel, {
             flex : 2,
             id: 'MemberInfo',
             tpl: memberPanelHtml,
+            margin : '0 10 0 0',
             cls:'memberViewInfo',
           },
         ]

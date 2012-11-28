@@ -43,6 +43,10 @@ Ext.regController('Bills', {
                         }
                         that.billsView.query('#MemberBillList')[0].refresh();
 
+                        that.billsView.billListTitle.update({
+                            relevant : billsData.bills.length,
+                            total : billsData.total
+                        });
                         that.billsView.showLoading(false);
                     },
                     failure: function (result){

@@ -23,6 +23,9 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 		// load the extra member data
 		var that = this;
         that.memberView.showLoading(true);
+		that.memberView.query('#memberBillsBtn')[0].setText(OKnesset.strings.loadingBills);
+		that.memberView.query('#memberBillsBtn')[0].disable();
+        
 		var dataRecevied = getAPIData({
 			apiKey:'member',
 			urlOptions : options.id,
@@ -37,10 +40,6 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 						OKnesset.onError('SERVER', ["Error receiving memeber bills data.", result]);
 					}
 				});
-				if (!billsReceived) {
-					that.memberView.query('#memberBillsBtn')[0].setText(OKnesset.strings.loadingBills);
-					that.memberView.query('#memberBillsBtn')[0].disable();
-				}
 
 				that.updateData(data);
                 that.memberView.showLoading(false);
@@ -127,7 +126,7 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 		if (!data.bills || !data.bills.length) {
 			this.memberView.query('#memberBillsBtn')[0].setText(OKnesset.strings.noBills);
 		} else {
-			this.memberView.query('#memberBillsBtn')[0].setText("" + data.bills.length + " " + OKnesset.strings.billsOutOf + " " + data.total);
+			this.memberView.query('#memberBillsBtn')[0].setText("" + data.bills.length + " " + OKnesset.strings.bills);
 		}
 		this.memberView.query('#memberBillsBtn')[0].enable();
 	},
