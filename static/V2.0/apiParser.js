@@ -10,6 +10,8 @@ window.OKnessetParser.createMinimalMemberItem = function (member){
 	reducedMember.img_url = "images/members/" + member.img_url.substring(member.img_url.lastIndexOf('/') + 1);
 	reducedMember.name = member.name;
 	reducedMember.average_weekly_presence_hours = member.average_weekly_presence_hours;
+	reducedMember.email = member.email;
+	reducedMember.phone = member.phone;
 	// if (member.start_date){}
 	// 	var now = new Date(); 
 	// 	var start_date_arr = member.start_date.split("-");
