@@ -35,21 +35,22 @@ Ext.regController('AgendaDetails', {
 			apiKey : "agendaDetails",
 			urlOptions: options.id,
 			success : function (data){
+				var dataCopy = Ext.apply({}, data);
 				// round score of support
-				that.roundScore(data.members);
-				that.roundScore(data.parties);
+				that.roundScore(dataCopy.members);
+				that.roundScore(dataCopy.parties);
 
-				OKnesset.AgendaMembersSupportListStore.loadData(data.members);
-				OKnesset.AgendaPartiesSupportListStore.loadData(data.parties);
+				OKnesset.AgendaMembersSupportListStore.loadData(dataCopy.members);
+				OKnesset.AgendaPartiesSupportListStore.loadData(dataCopy.parties);
 				// find most supports member & party
 				MostSupportMember      = OKnesset.AgendaMembersSupportListStore.getAt(0);
 				MostSupportParty       = OKnesset.AgendaPartiesSupportListStore.getAt(0);
-				data.MostSupportMember = MostSupportMember.data;
-				data.MostSupportParty  = MostSupportParty.data;
-				data.description       = that.replaceURLWithHTMLLinks(data.description);
+				dataCopy.MostSupportMember = MostSupportMember.data;
+				dataCopy.MostSupportParty  = MostSupportParty.data;
+				dataCopy.description       = that.replaceURLWithHTMLLinks(dataCopy.description);
 
 		        that.AgendaDetailsView.showLoading(false);
-				OKnesset.AgendaDetailsStore.loadData([data]);
+				OKnesset.AgendaDetailsStore.loadData([dataCopy]);
 			},
 			failure: function (result){
 				OKnesset.onError('SERVER', ["Failure loading vote json from server", result]);
