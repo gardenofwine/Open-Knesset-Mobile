@@ -1,3 +1,4 @@
+
 /**
  * The OKnesset namespace.
  */
@@ -94,7 +95,7 @@ function secondaryLaunch() {
 		Ext.Ajax.request({
 			url: 'http://open-knesset-mobile.appspot.com/static/V2.0/apiParser.js',
 			failure : function(results){
-				console.log("Error loding apiParser.js from server");
+				OKnesset.onError('SERVER', ["Error loding apiParser.js from server.", result]);
 			},
 			success: function(results){
 				eval(results.responseText);

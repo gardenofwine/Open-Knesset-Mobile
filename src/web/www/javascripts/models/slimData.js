@@ -1159,4 +1159,4 @@ var slimAgendas = [
         "public_owner_name": "מתפקדות",
         "resource_uri": "/api/v2/agenda/72/"
     }
-]
+];

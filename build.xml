@@ -40,12 +40,6 @@
             </fileset>
         </copy>
 
-        <copy todir="target_prod/${channel.dir}/www">
-            <fileset dir="target/${channel.dir}/www">
-                <include name="javascripts/createInitialData.js"/>
-            </fileset>
-        </copy>
-
         <!-- copy all javascript files to a temp dir for concatenation -->
         <copy todir="${concat.dir}" overwrite="true">
             <fileset dir="target/${channel.dir}/www/">
@@ -54,8 +48,8 @@
         </copy>
 
         <!-- concatenate the javascript files -->
-        <concat destfile="${concat.dir}/concat.js">
-            <filelist refid="essentialConcatFiles"/>
+        <concat destfile="${concat.dir}/concat.js" outputencoding="UTF-8">
+<!--             <filelist refid="essentialConcatFiles"/> -->
             <fileset refid="concatFiles"/>
         </concat>
 
@@ -65,8 +59,8 @@
             <arg line="--js ${concat.dir}/concat.js --compilation_level WHITESPACE_ONLY --jscomp_off=internetExplorerChecks --js_output_file target_prod/${channel.dir}/www/javascripts/concat.min.js"/>
         </java>
 
-        <!-- delete temp directory -->
-        <delete dir="${concat.dir}"/>
+        <!-- delete temp directory 
+        <delete dir="${concat.dir}"/> -->
 
         <!-- copy index-prod.html file -->
         <copy file="target/${channel.dir}/www/index-prod.html" tofile="target_prod/${channel.dir}/www/index.html"/>
@@ -136,22 +130,10 @@
 
     <patternset id="appFiles">
         <include name="**/*.js"/>
+        <exclude name="**/apiParser.js"/>
         <exclude name="**/debug.js"/>
         <exclude name="**/time.js"/>
-
-		<exclude name="phonegap-1.0.0*.js"/>
-        <exclude name="sencha-touch/sencha-touch.js"/>
-        <exclude name="sencha-touch/sencha-touch-fixes.js"/>
-        <exclude name="customization.js"/>
-        <exclude name="views/disclaimer.js"/>
-        <exclude name="views/memberPanel.js"/>
-        <exclude name="utils.js"/>
-        <exclude name="index.js"/>
-        <exclude name="private.js"/>
-        <exclude name="models/strings.js"/>
-        <exclude name="models/slimData.js"/>
-        <exclude name="models/data.js"/>
-
+        <exclude name="**/*.txt"/>
     </patternset>
 
     <filelist id="essentialConcatFiles" dir="${concat.dir}/javascripts">
