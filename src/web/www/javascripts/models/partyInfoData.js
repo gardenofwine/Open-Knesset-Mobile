@@ -147,4 +147,4 @@
 			direction : 'ASC'
 		}]
 	});
-}(OKnesset));
+})(OKnesset);

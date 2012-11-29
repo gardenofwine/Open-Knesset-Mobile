@@ -32,6 +32,9 @@
     </target>
 
     <target name="buildProd">
+        <delete dir="target_prod/${channel.dir}/"/>
+        <delete dir="${concat.dir}"/>
+
         <!-- Copy all files except javascripts files that need concatenation -->
         <copy todir="target_prod/${channel.dir}/www">
             <fileset dir="target/${channel.dir}/www">
@@ -48,15 +51,17 @@
         </copy>
 
         <!-- concatenate the javascript files -->
-        <concat destfile="${concat.dir}/concat.js" outputencoding="UTF-8">
-<!--             <filelist refid="essentialConcatFiles"/> -->
-            <fileset refid="concatFiles"/>
+        <concat destfile="${concat.dir}/concat.js" outputencoding="utf-8" encoding="utf-8">
+            <filelist refid="essentialConcatFiles"/> 
+            <fileset refid="concatFilesViews"/>
+            <fileset refid="concatFilesControllers"/>
         </concat>
 
 		<echo message="Minifying ${channel.dir}"/>
         <!-- minify concatenated file -->
         <java jar="${GoogleClosureDir}/compiler.jar" fork="true">
-            <arg line="--js ${concat.dir}/concat.js --compilation_level WHITESPACE_ONLY --jscomp_off=internetExplorerChecks --js_output_file target_prod/${channel.dir}/www/javascripts/concat.min.js"/>
+            <jvmarg line="-Dfile.encoding=iso-8859-1"/>
+            <arg line="--js ${concat.dir}/concat.js --compilation_level WHITESPACE_ONLY --jscomp_off=internetExplorerChecks --charset UTF-8  --js_output_file target_prod/${channel.dir}/www/javascripts/concat.min.js"/>
         </java>
 
         <!-- delete temp directory 
@@ -122,37 +127,98 @@
             <param name="source.dir" value="target_prod/android/www"/>
         </antcall>
 
+        <antcall target="buildProd">
+            <param name="channel.dir" value="web"/>
+        </antcall>
+
+
         <set.timestamp/>
         <echo message="build complete at ${current.time}"/>
 
     </target>
 
 
-    <patternset id="appFiles">
-        <include name="**/*.js"/>
+    <patternset id="appFilesViews">
+        <include name="**/views/*.js"/>
         <exclude name="**/apiParser.js"/>
         <exclude name="**/debug.js"/>
         <exclude name="**/time.js"/>
         <exclude name="**/*.txt"/>
+
+        <exclude name="phonegap-1.0.0*.js"/>
+        <exclude name="sencha-touch/sencha-touch.js"/>
+        <exclude name="sencha-touch/sencha-touch-debug-w-comments.js"/>
+        <exclude name="sencha-touch/sencha-touch-fixes.js"/>
+        <exclude name="customization.js"/>
+        <exclude name="views/disclaimer.js"/>
+        <exclude name="views/memberPanel.js"/>
+        <exclude name="utils.js"/>
+        <exclude name="routes.js"/>
+        <exclude name="index.js"/>
+        <exclude name="private.js"/>
+        <exclude name="models/strings.js"/>
+        <exclude name="models/slimData.js"/>
+        <exclude name="models/partyInfoData.js"/>
+        <exclude name="models/data.js"/>
+        <exclude name="views/OKnessetPanel.js"/>
+        <exclude name="views/memberPanel.js"/>
+        <exclude name="views/committeesPanel.js"/>
+    </patternset>
+
+    <patternset id="appFilesControllers">
+        <include name="**/controllers/*.js"/>
+        <exclude name="**/apiParser.js"/>
+        <exclude name="**/debug.js"/>
+        <exclude name="**/time.js"/>
+        <exclude name="**/*.txt"/>
+
+        <exclude name="phonegap-1.0.0*.js"/>
+        <exclude name="sencha-touch/sencha-touch.js"/>
+        <exclude name="sencha-touch/sencha-touch-debug-w-comments.js"/>
+        <exclude name="sencha-touch/sencha-touch-fixes.js"/>
+        <exclude name="customization.js"/>
+        <exclude name="views/disclaimer.js"/>
+        <exclude name="views/memberPanel.js"/>
+        <exclude name="utils.js"/>
+        <exclude name="routes.js"/>
+        <exclude name="index.js"/>
+        <exclude name="private.js"/>
+        <exclude name="models/strings.js"/>
+        <exclude name="models/slimData.js"/>
+        <exclude name="models/partyInfoData.js"/>
+        <exclude name="models/data.js"/>
+        <exclude name="views/OKnessetPanel.js"/>
+        <exclude name="views/memberPanel.js"/>
+        <exclude name="views/committeesPanel.js"/>
     </patternset>
 
     <filelist id="essentialConcatFiles" dir="${concat.dir}/javascripts">
 		<file name="phonegap-1.0.0.js"/>
-        <file name="sencha-touch/sencha-touch.js"/>
+        <file name="sencha-touch/sencha-touch-debug-w-comments.js"/>
+<!--        <file name="sencha-touch/sencha-touch.js"/> -->
         <file name="sencha-touch/sencha-touch-fixes.js"/>
         <file name="customization.js"/>
-        <file name="views/disclaimer.js"/>
-        <file name="views/memberPanel.js"/>
         <file name="utils.js"/>
         <file name="index.js"/>
         <file name="private.js"/>
-        <file name="models/strings.js"/>
+        <file name="routes.js"/>
         <file name="models/slimData.js"/>
+        <file name="models/partyInfoData.js"/>
+        <file name="views/disclaimer.js"/>
+        <file name="views/credits.js"/>
+        <file name="models/strings.js"/>
         <file name="models/data.js"/>
+        <file name="views/OKnessetPanel.js"/>
+        <file name="views/memberPanel.js"/>
+        <file name="views/committeesPanel.js"/>
     </filelist>
 
-    <fileset id="concatFiles" dir="${concat.dir}/javascripts">
-        <patternset refid="appFiles"/>
+    <fileset id="concatFilesViews" dir="${concat.dir}/javascripts">
+        <patternset refid="appFilesViews"/>
+    </fileset>
+
+    <fileset id="concatFilesControllers" dir="${concat.dir}/javascripts">
+        <patternset refid="appFilesControllers"/>
     </fileset>
 
     <target name="setup">
