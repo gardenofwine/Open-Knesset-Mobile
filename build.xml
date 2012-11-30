@@ -119,7 +119,6 @@
             <param name="source.dir" value="target_prod/ios/www"/>
         </antcall>
 
-<!--
         <antcall target="buildProd">
             <param name="channel.dir" value="android"/>
         </antcall>
@@ -130,7 +129,6 @@
         <antcall target="buildProd">
             <param name="channel.dir" value="web"/>
         </antcall>
--->
 
         <set.timestamp/>
         <echo message="build complete at ${current.time}"/>
