@@ -86,7 +86,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* Open-Knesset.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Open-Knesset.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* כנסת פתוחה.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "כנסת פתוחה.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1F766FDD13BBADB100FB74C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		1F766FE013BBADB100FB74C0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localizable.strings; sourceTree = "<group>"; };
@@ -188,7 +188,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* Open-Knesset.app */,
+				1D6058910D05DD3D006BFB54 /* כנסת פתוחה.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -335,7 +335,7 @@
 			);
 			name = "כנסת פתוחה";
 			productName = "OKnesset PG1";
-			productReference = 1D6058910D05DD3D006BFB54 /* Open-Knesset.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* כנסת פתוחה.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -509,13 +509,14 @@
 				INFOPLIST_FILE = "OKnesset_PG1-Info.plist";
 				INFOPLIST_PREFIX_HEADER = InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Plugins/GoogleAnalytics/GoogSDK\"",
 				);
-				PRODUCT_NAME = "Open-Knesset";
+				PRODUCT_NAME = "כנסת פתוחה";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1A9CDE6C-4BDF-4834-A91B-273C014D98D1";
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "armv7 armv6";
 			};
 			name = Distribution;
 		};
@@ -534,13 +535,14 @@
 				INFOPLIST_FILE = "OKnesset_PG1-Info.plist";
 				INFOPLIST_PREFIX_HEADER = InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Plugins/GoogleAnalytics/GoogSDK\"",
 				);
-				PRODUCT_NAME = "Open-Knesset";
+				PRODUCT_NAME = "כנסת פתוחה";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1A9CDE6C-4BDF-4834-A91B-273C014D98D1";
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "armv7 armv6";
 			};
 			name = Debug;
 		};
@@ -556,13 +558,14 @@
 				INFOPLIST_FILE = "OKnesset_PG1-Info.plist";
 				INFOPLIST_PREFIX_HEADER = InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Plugins/GoogleAnalytics/GoogSDK\"",
 				);
-				PRODUCT_NAME = "Open-Knesset";
+				PRODUCT_NAME = "כנסת פתוחה";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1A9CDE6C-4BDF-4834-A91B-273C014D98D1";
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "armv7 armv6";
 			};
 			name = Release;
 		};
