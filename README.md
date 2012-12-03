@@ -1,12 +1,13 @@
-Open Knesset Mobile
+Open Knesset Mobile - כנסת פתוחה מובייל
+========
+[הסברים בעברית בסוף המסמך](#%D7%A2%D7%91%D7%A8%D7%99%D7%AA)
+[General info](#general)
+
+Run the application on Chrome or Safari
 ========
 
-Open Knesset Mobile (כנסת פתוחה) uses [PhoneGap](http://www.phonegap.com) and [Sencha Touch](http://www.sencha.com/products/touch/) to construct a multi-platform mobile application for the [Open Knesset](http://www.oknesset.rog) website.
-This application is available free on the [App Store](http://itunes.apple.com/us/app/id475096101) and [Android Market](https://market.android.com/details?id=org.oknesset) and will always be free.
-The purpose of this app is to increase transparency of Knesset activities, and to encourage people to be more involved with what is happening with the rulers of Israel's country.
-
-This project is released as Open Source so that everyone can contribute to it.
-Please check our issue [tracking system](https://track.nsa.co.il/projects/oknesset_mobile) for stuff we'd be happy be done :)
+ - [Download the application](https://github.com/gardenofwine/Open-Knesset-Mobile/archive/master.zip) or clone it.
+ - open /src/www/web/index.html in the browser.
 
 Installation (for development)
 ========
@@ -117,5 +118,17 @@ When you have finished making your changes, you'll need to push up your changes 
 	git push origin my_new_code
 
 This pushes everything in that branch up. Then you can go back over to the main github page and issue a pull request from there.  Tell us what you want us to merge and what it does/fixes, and one of us will pick it up.
+That lets us know if there's something new from you that needs to be pulled in. We'll review it and get back to you about it if we have any questions. Otherwise, we'll integrate it and let you know when it's in!
 
-That lets us know that there's something new from you that needs to be pulled in. We'll review it and get back to you about it if we have any questions. Otherwise, we'll integrate it and let you know when it's in!
+General
+========
+Open Knesset Mobile (כנסת פתוחה) uses [PhoneGap](http://www.phonegap.com) and [Sencha Touch](http://www.sencha.com/products/touch/) to construct a multi-platform mobile application for the [Open Knesset](http://www.oknesset.rog) website.
+This application is available free on the [App Store](http://itunes.apple.com/us/app/id475096101) and [Android Market](https://market.android.com/details?id=org.oknesset) and will always be free.
+The purpose of this app is to increase transparency of Knesset activities, and to encourage people to be more involved with what is happening with the rulers of Israel's country.
+
+This project is released as Open Source so that everyone can contribute to it.
+Check the [open issues](https://github.com/gardenofwine/Open-Knesset-Mobile/issues) for stuff that is waiting to be done
+
+עברית
+=======
+בקרוב...
