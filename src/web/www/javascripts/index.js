@@ -42,11 +42,6 @@ Ext.regApplication({
 			OKnesset.app.controllers.navigation.dispatchDialog('Info/Index/' + this.viewport.getActiveItem().xtype);
 		}, this);
 
-		// set the menu panel
-		// this.viewport.query('#openMenu')[0].setHandler(function(){
-		//     OKnesset.app.views.Viewport.AppMenu.showBy(this);
-		// });
-
 		OKnesset.app.views.Viewport.menuList.addListener('itemtap',
 				function(that, index, item, e) {
 					var record = that.store.getAt(index);

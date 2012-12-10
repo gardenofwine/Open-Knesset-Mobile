@@ -127,22 +127,6 @@ OKnesset.MemberCommitteesStore = new Ext.data.Store({
 	model: 'MemberCommittees'
 });
 
-OKnesset.menuStore = new Ext.data.Store({
-	model: Ext.regModel('', {
-		fields: [
-			{name:'title', type:'string'},
-			{name:'page', type:'string'},
-			{name:'type', type:'string'}
-		]
-	}),
-	data: [
-			{title:OKnesset.strings.partiesTitle,page:"PartyList/Index", type : 'page'},
-			{title:OKnesset.strings.AgendaTitle,page:"AgendaList/Index", type: 'page'},
-			{title:OKnesset.strings.committees,page:"AllCommittees/Index", type: 'page'},
-			{title:OKnesset.strings.about,page:"Info/Index", type: 'dialog'}
-		]
-	});
-
 Ext.regModel('CommitteeDetailsMembersList', {
 	fields: ['name','presence']
 });
