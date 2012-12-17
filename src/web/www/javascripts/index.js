@@ -42,19 +42,6 @@ Ext.regApplication({
 			OKnesset.app.controllers.navigation.dispatchDialog('Info/Index/' + this.viewport.getActiveItem().xtype);
 		}, this);
 
-		OKnesset.app.views.Viewport.menuList.addListener('itemtap',
-				function(that, index, item, e) {
-					var record = that.store.getAt(index);
-					if (record.data.type === 'page'){
-						OKnesset.app.controllers.navigation.dispatchPanel(record.data.page);
-					} else if (record.data.type === 'dialog'){
-						OKnesset.app.controllers.navigation.dispatchDialog(record.data.page);
-					}
-					// that = the item in teh list
-					that.deselect();
-					OKnesset.app.views.Viewport.AppMenu.hide();
-				});
-
 		// set the back button handler
 		this.viewport.query('#backBtn')[0].setHandler(function() {
 			OKnesset.app.controllers.navigation.dispatchBack();
