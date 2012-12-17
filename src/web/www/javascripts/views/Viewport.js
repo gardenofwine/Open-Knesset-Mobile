@@ -28,24 +28,5 @@ OKnesset.app.views.Viewport = new Ext.extend(Ext.Panel, {
 });
 
 
-// the data-bound menu list
-OKnesset.app.views.Viewport.menuList = new Ext.List({
-    id: 'AppMenuList',
-    store: OKnesset.menuStore,
-    itemTpl: '{title}',
-    allowDeselect: true,
-    singleSelect: true
-});
-
-// a wrapper around the menu list
-OKnesset.app.views.Viewport.AppMenu = new Ext.Panel({
-    id: 'AppMenu',
-    items: [OKnesset.app.views.Viewport.menuList],
-    layout: 'fit',
-    dock: 'left',
-    hidden : true
-});
-
-
 
 
