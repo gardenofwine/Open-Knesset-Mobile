@@ -103,6 +103,8 @@ OKnesset.strings = {
 	HomepagePartiesBtnText   : "כל המפלגות והמידע אודותיהן, לפי שיוך קואליציוני",
 	HomepageCommitteesBtnTxt : "ועדות הכנסת והחברים בהן, פרוטוקולים של ישיבות ופעילותם",
 	HomepageMembersBtnTxt    : "רשימת כל חברי הכנסת לפי הא\x22ב",
+	Homepage19ElectionsBtn	 : "כל המידע אודות הבחירות הקרובות",
+	ElcetionTitle			 : "הבחירות לכנסת ה 19",
 	generalError             : "חלה תקלה אנא בדוק את החיבור לאינטרנט ונסה שוב",
 
 	infoDialog: {

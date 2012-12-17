@@ -9,7 +9,7 @@ OKnesset.app.views.HomepageView = new Ext.extend(Ext.Panel, {
         align: 'stretch'
     },
     items: [{
-      flex : 1,
+      flex : 2,
       xtype : 'panel',
       html: homepagePanelHTml,
       layout: {
@@ -17,7 +17,14 @@ OKnesset.app.views.HomepageView = new Ext.extend(Ext.Panel, {
           align: 'stretch'
       }},
       {
-      flex : 1,
+        id : 'electionsBtn',
+        flex : 1,
+        xtype: 'button',
+        margin: "10 10 10 10",
+        text : OKnesset.strings.Homepage19ElectionsBtn
+      },
+      {
+      flex : 2,
       xtype : 'panel',
       layout: {
           type: 'hbox',
@@ -41,7 +48,7 @@ OKnesset.app.views.HomepageView = new Ext.extend(Ext.Panel, {
         }
       ]},
       {
-      flex : 1,
+      flex : 2,
       xtype : 'panel',
       layout: {
           type: 'hbox',
