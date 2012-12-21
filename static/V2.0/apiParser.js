@@ -101,9 +101,9 @@ window.OKnessetParser.member = function (result, success, failure){
 };
 
 /*******************************************************************************
- * member parser
+ * object.id to number parser
  */
-window.OKnessetParser.partiesParser = function (result, success, failure){
+window.OKnessetParser.objectIdToNumberParser = function (result, success, failure){
 	for (var i = 0; i < result.objects.length; i++) {
 			result.objects[i].id = parseInt(result.objects[i].id, 10);
 		};	
@@ -234,7 +234,7 @@ window.OKnessetAPIMapping = {
 		},
 		parameters : {format:"jsonp"},
 		callbackKey : "callback",
-		parser: OKnessetParser.objectsParser
+		parser: OKnessetParser.objectIdToNumberParser
 	},
 
 	agendaDetails :{
@@ -253,7 +253,7 @@ window.OKnessetAPIMapping = {
 		},
 		parameters : {format:"jsonp"},
 		callbackKey : "callback",
-		parser: OKnessetParser.partiesParser
+		parser: OKnessetParser.objectIdToNumberParser
 	},
 
 	committees : {
