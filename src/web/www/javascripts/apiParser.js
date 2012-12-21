@@ -101,6 +101,16 @@ window.OKnessetParser.member = function (result, success, failure){
 };
 
 /*******************************************************************************
+ * member parser
+ */
+window.OKnessetParser.partiesParser = function (result, success, failure){
+	for (var i = 0; i < result.objects.length; i++) {
+			result.objects[i].id = parseInt(result.objects[i].id, 10);
+		};	
+	success(result.objects);
+};
+
+/*******************************************************************************
  * memberBills parser
  */
 window.OKnessetParser.memberBills = function (result, success, failure){
@@ -243,7 +253,7 @@ window.OKnessetAPIMapping = {
 		},
 		parameters : {format:"jsonp"},
 		callbackKey : "callback",
-		parser: OKnessetParser.objectsParser
+		parser: OKnessetParser.partiesParser
 	},
 
 	committees : {
