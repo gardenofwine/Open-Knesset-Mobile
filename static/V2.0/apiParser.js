@@ -262,7 +262,7 @@ window.OKnessetAPIMapping = {
 		},
 		parameters : {format:"jsonp"},
 		callbackKey : "callback",
-		parser: OKnessetParser.objectsParser
+		parser: OKnessetParser.objectIdToNumberParser
 	},
 
 	committeeDetail : {
