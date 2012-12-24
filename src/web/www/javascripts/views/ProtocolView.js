@@ -21,6 +21,13 @@ OKnesset.app.views.ProtocolView = new Ext.extend(OKnesset.Panel, {
 		              this.protocolTitle,
 
 		              new Ext.Panel({
+		            	    id: "ProtocolDate",
+			          		height : "2em",
+			          		padding: '5',
+			          		tpl: '<div align="right"><b>' + OKnesset.strings.protocolMeetingDate +':</b> {date}</div>'
+			              }),
+			              
+		              new Ext.Panel({
 		            	  height : "2em",
 		            	  padding: '5',
 		            	  html:'<div align="right"><b>' + OKnesset.strings.protocolMeetingAttendants + '</b></div>'
