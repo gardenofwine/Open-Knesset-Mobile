@@ -99,19 +99,6 @@ function dateToString(date) {
 	return "" + day + "/" + month + "/" + year;
 }
 
-/**
-*
-* @param date - format "yyyy-mm-dd"
-* @returns {String} format "dd/mm/yyyy"
-*/
-function formatDate(date) {
-	var year = date.substr(0,4);
-	var month = date.substr(5,2);
-	var day = date.substr(8,2);
-	
-	return day + "/" + month + "/" + year;
-}
-
 function getPartyFromPartyStoreByName(name) {
 	var partyIndex = OKnesset.PartyStore.findExact('name', name);
 	return OKnesset.PartyStore.getAt(partyIndex);
