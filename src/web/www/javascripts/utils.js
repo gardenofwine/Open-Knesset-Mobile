@@ -157,8 +157,13 @@ function getMembersById(ids) {
 
 /**
  * options: an object with the following keys:
- *	(string)apiKey, (function)success, (boolean)diskCache, (boolean)forceLoad,(function)failure
- * (object)urlOptions, (object)parameterOptions
+ 	(string)apiKey, 
+ 	(function)success, 
+ 	(boolean)diskCache, 
+ 	(boolean)forceLoad,
+ 	(function)failure
+ 	(object)urlOptions, 
+ 	(object)parameterOptions
 
  * retuns: ture if data was retrieved from cache. false otherwise
  */
@@ -213,8 +218,19 @@ function getAPIData(options) {
 		scope		: this,
 		onFailure  	: options.failure,
 		callback   	: function (results){
+			if (OKnesset.debug) {
+				// validate results
+				var valid = validateObject(results, OKnessetAPIMapping[options.apiKey].expectedObject);
+				if (typeof valid == 'boolean' && valid){
+					console.log("" + options.apiKey + " valid");	
+				} else {
+					console.error("" + options.apiKey + " not valid. " + valid);	
+				}
+			}
+
 			OKnessetAPIMapping[options.apiKey].parser(results,
 				function(parseResults){
+
 					// success
 					memcache[cacheKey] = parseResults;
 					if (options.diskCache){
@@ -262,6 +278,79 @@ function has24HoursPassedSince(theDate){
 
 	return (now.getTime() > theDate.getTime() + 1000 * 60 * 60 * 24);
 }
+
+
+function validateObject(object, expectedTypes){
+	if (typeOf(expectedTypes) !== 'array' && typeOf(expectedTypes) !== 'string' && typeOf(expectedTypes) !== 'object'){
+	 	return "Error: non valid expected type (" + typeOf(expectedTypes) + ")";
+	} 
+
+	if (typeOf(object) !== 'object' || typeOf(expectedTypes) === 'string'){
+		var match = typeMatch(typeOf(object), expectedTypes.split(","));
+		if (typeof match !== 'boolean'){
+			return "Failed match for " + object + ". " + match;
+		} else {
+			return match;
+		}
+	}
+
+	var valid = true;
+	var keys = Object.keys(expectedTypes);
+
+	// validate that each expected key in the input object is of the same type 
+	// as its expected object value
+	for (var i = 0; i < keys.length && typeof valid === 'boolean'; i++) {
+		if (typeOf(object[keys[i]]) === "array" && typeOf(expectedTypes[keys[i]]) === "array"){
+			// validate only the first element, assuming all elements are of the same type
+			if (object[keys[i]].length !== 0) {
+				valid = validateObject(object[keys[i]][0], expectedTypes[keys[i]][0]);
+				if (typeof valid !== 'boolean'){
+					valid = "Failed match for array '" + keys[i] + "'. " + valid;
+				}
+
+				break;
+			}			
+			// each expected type can in fact be a comma separated list of types
+		} else {
+			valid = validateObject(object[keys[i]], expectedTypes[keys[i]]);
+			if (typeof valid !== 'boolean'){
+				return "Failed match for '" + keys[i] + "'. " + valid;
+			}
+
+		}
+	};
+
+	return valid;
+
+	function typeMatch(type, possibleMatches){
+		for (var i = 0; i < possibleMatches.length; i++) {
+			if (type === possibleMatches[i]){
+				return true;
+			}
+		};
+
+		return "object of type '" + type + "' doesn't match any of the expected types '" + possibleMatches + "'";
+	}
+
+	function typeOf(o){
+		var type = typeof o;
+	         //If typeof return something different than object then returns it.
+		if (type !== 'object') {
+			return type;
+	         //If it is an instance of the Array then return "array"
+		} else if (Object.prototype.toString.call(o) === '[object Array]') {
+			return 'array';
+	         //If it is null then return "null"
+		} else if (o === null) {
+			return 'null';
+	       //if it gets here then it is an "object"
+		} else {
+			return 'object';
+		}
+	}
+
+};
+
 
 // usage:
 // var callbackArray = new waitForAll(finalCallback, callbackA, callbackB...);
