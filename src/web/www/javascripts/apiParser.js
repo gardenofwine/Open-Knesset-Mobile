@@ -3,6 +3,20 @@ window.OKnessetParser = {
 	parsers : {}
 };
 
+/**
+*
+* @param date - format "yyyy-mm-dd"
+* @returns {String} format "dd/mm/yyyy"
+*/
+window.OKnessetParser.helpers.formatDate = function(date) {
+	var year = date.substr(0,4);
+	var month = date.substr(5,2);
+	var day = date.substr(8,2);
+
+	return day + "/" + month + "/" + year;
+}
+
+
 /*******************************************************************************
  * members parser
  */
@@ -47,24 +61,12 @@ window.OKnessetParser.helpers.createExpandedMember = function (member){
 	var reducedMember = window.OKnessetParser.helpers.createMinimalMemberItem(member);
 	reducedMember.gender = member.gender;
 	reducedMember.party_name = member.party_name;
-	reducedMember.date_of_birth = formatDate(member.date_of_birth);
+	reducedMember.date_of_birth = window.OKnessetParser.helpers.formatDate(member.date_of_birth);
 	reducedMember.place_of_residence = member.place_of_residence;
 	reducedMember.current_role_descriptions = member.current_role_descriptions;
 
 	return reducedMember;
 
-	/**
-	*
-	* @param date - format "yyyy-mm-dd"
-	* @returns {String} format "dd/mm/yyyy"
-	*/
-	function formatDate(date) {
-		var year = date.substr(0,4);
-		var month = date.substr(5,2);
-		var day = date.substr(8,2);
-
-		return day + "/" + month + "/" + year;
-	}
 }
 
 window.OKnessetParser.parsers.members = function(result, success, failure){
@@ -150,6 +152,14 @@ window.OKnessetParser.parsers.memberBills = function (result, success, failure){
 	});
 };
 
+/*******************************************************************************
+ * voteDetails parser
+ */
+window.OKnessetParser.parsers.voteDetails = function (result, success, failure){
+	result.time = result.time.substr(0,10);  // data.time format: yyyy-mm-ddThh:mm:ss
+	result.time = window.OKnessetParser.helpers.formatDate(result.time);
+	success(result);
+};
 
 /*******************************************************************************
  * trivial parser
@@ -177,7 +187,7 @@ window.OKnessetAPIMapping = {
 		sampleUrl : [5592,5388],
 		parameters : {},
 		callbackKey : "callback",
-		parser: OKnessetParser.parsers.trivialParser,
+		parser: OKnessetParser.parsers.voteDetails,
 		expectedObject: {
 			for_votes : ["number"],
 			against_votes : ["number"],

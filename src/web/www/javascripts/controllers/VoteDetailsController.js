@@ -103,11 +103,9 @@ Ext.regController('VoteDetails', {
 		OKnesset.VotedStore.add(voted.against);
 		OKnesset.VotedStore.add(voted.abstain);
 
-		var date = data.time.substr(0,10);  // data.time format: yyyy-mm-ddThh:mm:ss
-		
 		//update title + description
 		this.VoteDetailsView.query('#voteTitle')[0].update({
-			title: data.title + "<br>" + OKnesset.strings.dateString + ": " + formatDate(date)
+			title: data.title + "<br>" + OKnesset.strings.dateString + ": " + data.time
 		});
 
 		this.VoteDetailsView.query('#voteDescription')[0].update({
