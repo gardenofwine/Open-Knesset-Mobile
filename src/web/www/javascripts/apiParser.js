@@ -158,8 +158,10 @@ window.OKnessetParser.parsers.objectsParser = function (result, success, failure
 window.OKnessetAPIMapping = {
 	voteDetails : {
 		url : function(id){
+			// example id: 5592, 5388
 			return 'http://www.oknesset.org/api/vote/' + id;
 		},
+		sampleUrl : [5592,5388],
 		parameters : {},
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.trivialParser,
@@ -194,6 +196,7 @@ window.OKnessetAPIMapping = {
 			// example id: 826, 800
 			return 'http://www.oknesset.org/api/v2/member/' + id;
 		},
+		sampleUrl : [90, 826],
 		parameters : {format:"jsonp"},
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.member,
@@ -224,6 +227,7 @@ window.OKnessetAPIMapping = {
 				proposer:id
 			}
 		},
+		sampleParameters: [800],
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.memberBills,
 		expectedObject: {
@@ -241,6 +245,7 @@ window.OKnessetAPIMapping = {
 			// example id: 6397
 			return 'http://www.oknesset.org/api/bill/' + id;
 		},
+		sampleUrl : [6397],
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.trivialParser,
 		expectedObject: {
@@ -281,6 +286,7 @@ window.OKnessetAPIMapping = {
 			// example memeber_for: 800
 			return {format:"jsonp", limit : 10, member_for : id};
 		},
+		sampleParameters: [800],		
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.objectsParser,
 		expectedObject: {
@@ -301,6 +307,7 @@ window.OKnessetAPIMapping = {
 		parameters : function(id){
 			return {format:"jsonp", limit : 10, member_against : id};
 		},
+		sampleParameters : [800],
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.objectsParser,
 		expectedObject: {
@@ -334,6 +341,7 @@ window.OKnessetAPIMapping = {
 			// id for example: 74
 			return 'http://www.oknesset.org/api/v2/agenda/' + id;
 		},
+		sampleUrl : [74],
 		parameters : {format:"jsonp"},
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.trivialParser,
@@ -389,9 +397,10 @@ window.OKnessetAPIMapping = {
 
 	committeeDetail : {
 		url : function(id){
-			//  example id: 
+			//  example id: 1, 3
 			return 'http://www.oknesset.org/api/committee/' + id;
 		},
+		sampleUrl : [1,3],
 		parameters : {},
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.trivialParser,
@@ -421,6 +430,7 @@ window.OKnessetAPIMapping = {
 			// example id 6726, 6858
 			return 'http://www.oknesset.org/api/v2/committeemeeting/' + id;
 		},
+		sampleUrl : [6726, 6858],
 		parameters : {format:"jsonp"},
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.trivialParser,
