@@ -44,7 +44,7 @@ window.OKnessetParser.createExpandedMember = function (member){
 	var reducedMember = window.OKnessetParser.createMinimalMemberItem(member);
 	reducedMember.gender = member.gender;
 	reducedMember.party_name = member.party_name;
-	reducedMember.date_of_birth = member.date_of_birth;
+	reducedMember.date_of_birth = formatDate(member.date_of_birth);
 	reducedMember.place_of_residence = member.place_of_residence;
 	reducedMember.average_weekly_presence_hours = member.average_weekly_presence_hours;
 	reducedMember.current_role_descriptions = member.current_role_descriptions;
@@ -284,3 +284,15 @@ window.OKnessetAPIMapping = {
 	}
 };
 
+/**
+*
+* @param date - format "yyyy-mm-dd"
+* @returns {String} format "dd/mm/yyyy"
+*/
+function formatDate(date) {
+	var year = date.substr(0,4);
+	var month = date.substr(5,2);
+	var day = date.substr(8,2);
+	
+	return day + "/" + month + "/" + year;
+}
