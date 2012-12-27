@@ -153,6 +153,14 @@ window.OKnessetParser.parsers.memberBills = function (result, success, failure){
 };
 
 /*******************************************************************************
+ * protocol meeting parser
+ */
+window.OKnessetParser.parsers.committeeProtocol = function (result, success, failure){
+	result.date = window.OKnessetParser.helpers.formatDate(result.date);
+	success(result);
+};
+
+/*******************************************************************************
  * voteDetails parser
  */
 window.OKnessetParser.parsers.voteDetails = function (result, success, failure){
@@ -456,7 +464,7 @@ window.OKnessetAPIMapping = {
 		sampleUrl : [6726, 6858],
 		parameters : {format:"jsonp"},
 		callbackKey : "callback",
-		parser: OKnessetParser.parsers.trivialParser,
+		parser: OKnessetParser.parsers.committeeProtocol,
 		expectedObject: {
 			mks_attended : ["string"],
 			protocol : [{

@@ -67,7 +67,7 @@ Ext.regController('Protocol', {
 				OKnesset.ProtocolTopicsStore.protocolId = options.id;
 
 				protocolController.protocolView.query('#ProtocolDate')[0].update({
-					date: formatDate(data.date)
+					date: data.date
 				});
 
 
