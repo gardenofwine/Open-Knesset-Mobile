@@ -75,7 +75,7 @@ function secondaryLaunch() {
 	if (isPhoneGap()){
 		// load the api parser
 		Ext.Ajax.request({
-			url: 'http://open-knesset-mobile.appspot.com/static/V2.0/apiParser.js',
+			url: 'http://open-knesset-mobile.appspot.com/static/V3.0/apiParser.js',
 			failure : function(results){
 				OKnesset.onError('SERVER', ["Error loding apiParser.js from server.", result]);
 			},
