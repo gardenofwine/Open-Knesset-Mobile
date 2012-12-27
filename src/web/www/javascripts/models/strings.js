@@ -44,6 +44,7 @@ OKnesset.strings = {
 	next                     : 'הבא',
 	previous                 : 'הקודם',
 	protocolMeetingTitle     :'כותרת הישיבה',
+	protocolMeetingDate		 :'תאריך הישיבה',
 	protocolMeetingAttendants: 'חברי  הכנסת שנכחו בישיבה',
 	protocolMeetingContent   : 'תוכן הישיבה',
 	Committeemeeting         : ' ישיבת ועדה',
