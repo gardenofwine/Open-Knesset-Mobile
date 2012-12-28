@@ -105,7 +105,7 @@ Ext.regController('VoteDetails', {
 
 		//update title + description
 		this.VoteDetailsView.query('#voteTitle')[0].update({
-			title: data.title
+			title: data.title + "<br>" + OKnesset.strings.dateString + ": " + data.time
 		});
 
 		this.VoteDetailsView.query('#voteDescription')[0].update({

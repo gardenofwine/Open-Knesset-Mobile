@@ -66,6 +66,10 @@ Ext.regController('Protocol', {
 				OKnesset.ProtocolTopicsStore.loadData(protocolText);
 				OKnesset.ProtocolTopicsStore.protocolId = options.id;
 
+				protocolController.protocolView.query('#ProtocolDate')[0].update({
+					date: data.date
+				});
+
 
 				//apply different colors on a
 				var colors = [ 'GreenYellow ','DarkTurquoise ', 'Gold  ','PaleVioletRed  ', 'Red  '];

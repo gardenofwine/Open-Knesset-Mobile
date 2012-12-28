@@ -1,5 +1,5 @@
 Ext.regModel('Protocol2', {
-	fields: ['topics','protocol_text','protocol','committee','date', 'mks_attended']
+	fields: ['topics']
 });
 
 OKnesset.Protocol2Store = new Ext.data.Store({
@@ -15,7 +15,7 @@ OKnesset.ProtocolMembersStore = new Ext.data.Store({
 });
 
 Ext.regModel('ProtocolTopics', {
-	fields: ['topics','protocol_text','protocol','committee','date', 'mks_attended']
+	fields: ['protocol']
 });
 
 OKnesset.ProtocolTopicsStore = new Ext.data.Store({
