@@ -9,6 +9,10 @@ window.OKnessetParser = {
 * @returns {String} format "dd/mm/yyyy"
 */
 window.OKnessetParser.helpers.formatDate = function(date) {
+    if (!date) {
+        return '--/--/--';
+    }
+
 	var year = date.substr(0,4);
 	var month = date.substr(5,2);
 	var day = date.substr(8,2);
@@ -115,6 +119,10 @@ window.OKnessetParser.helpers.sortedMembers = {
 window.OKnessetParser.parsers.member = function (result, success, failure){
 	result = window.OKnessetParser.helpers.createExpandedMember(result);
 	success(result);
+};
+
+window.OKnessetParser.parsers.memberCommittees = function (result, success, failure){
+    success(result);
 };
 
 /*******************************************************************************
@@ -245,6 +253,20 @@ window.OKnessetAPIMapping = {
 			average_weekly_presence_hours : "number"
 		}
 	},
+
+    memberCommittees : {
+        url : function(id){
+            // example id: 826, 800
+            return 'http://www.oknesset.org/api/member/' + id;
+        },
+        sampleUrl : [90, 826],
+        //parameters : {format:"jsonp"},
+        callbackKey : "callback",
+        parser: OKnessetParser.parsers.memberCommittees,
+        expectedObject: {
+            // committees: [["string"]] TODO: need to define the committees as an array of arrays with two strings each
+        }
+    },
 
 	memberBills : {
 		url : function(){
@@ -451,8 +473,7 @@ window.OKnessetAPIMapping = {
 				url : "string",
 				name : "string",
 				presence : "string"
-			}],
-
+			}]
 		}
 	},
 

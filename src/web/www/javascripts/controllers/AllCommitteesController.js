@@ -16,6 +16,7 @@ Ext.regController('AllCommittees', {
 
 		var that = this;
 		that.AllCommitteesView.showLoading(true);
+        OKnesset.AllCommitteesStore.clearFilter();
 
 		getAPIData({
 			apiKey : "committees",
@@ -37,5 +38,21 @@ Ext.regController('AllCommittees', {
 
 		this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.committees);
 		this.application.viewport.setActiveItem(this.AllCommitteesView, options.animation);
-	}
+	},
+
+    Filter: function (options) {
+        var idsStr = options.id.split(','),
+            ids = [],
+            filters = OKnesset.AllCommitteesStore.filters;
+        Ext.each(idsStr, function (id) {
+            ids.push(+id);
+        });
+        this.Index(options);
+        OKnesset.AllCommitteesStore.filter({
+            filterFn: function (item) {
+                var id = item.get('id');
+                return ids.contains(id);
+            }
+        });
+    }
 });

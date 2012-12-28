@@ -25,34 +25,48 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
         that.memberView.showLoading(true);
 		that.memberView.query('#memberBillsBtn')[0].setText(OKnesset.strings.loadingBills);
 		that.memberView.query('#memberBillsBtn')[0].disable();
-        
-		var dataRecevied = getAPIData({
-			apiKey:'member',
-			urlOptions : options.id,
-			success:function(data){
-				var billsReceived = getAPIData({
-					apiKey : 'memberBills',
-					parameterOptions : options.id,
-					success: function (billsData){
-						that.updateBills(billsData);
-					},
+
+        that.memberView.query('#memberCommitteesBtn')[0].setText(OKnesset.strings.loadingCommittees);
+        that.memberView.query('#memberCommitteesBtn')[0].disable();
+
+        var dataReceived = getAPIData({
+			apiKey: 'member',
+			urlOptions: options.id,
+			success: function (data){
+				getAPIData({
+					apiKey: 'memberBills',
+					parameterOptions: options.id,
+					success: function (billsData) {
+                        that.updateBills(billsData);
+                    },
 					failure: function (result){
-						OKnesset.onError('SERVER', ["Error receiving memeber bills data.", result]);
+						OKnesset.onError('SERVER', ["Error receiving member bills data.", result]);
 					}
 				});
+                getAPIData({
+                    apiKey: 'memberCommittees',
+                    urlOptions: options.id,
+                    success: function (committeeData) {
+                        that.updateCommittees(committeeData);
+                    },
+                    failure: function (result) {
+                        OKnesset.onError('SERVER', ["Error receiving member committees data.", result]);
+                    }
+                });
 
-				that.updateData(data);
+                that.updateData(data);
                 that.memberView.showLoading(false);
 			},
 			failure: function (result){
-				OKnesset.onError('SERVER', ["Error receiving memeber data.", result]);
+				OKnesset.onError('SERVER', ["Error receiving member data.", result]);
 			}
 		});
 
 		//http://www.oknesset.org/api/v2/bill/?format=json&proposer=814
-		if (!dataRecevied){
+		if (!dataReceived){
 			this.updateData(member);
 		}
+
 		this.application.viewport.setActiveItem(this.memberView, options.animation);
 	},
 
@@ -61,7 +75,9 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 	},
 
 	dispatchCommittees: function() {
-		OKnesset.app.controllers.navigation.dispatchPanel('Committees/Index/' + this.id, this.historyUrl);
+        var currentMember = this.controller.currentMember,
+            committeeIds = currentMember.committees.join(',');
+		OKnesset.app.controllers.navigation.dispatchPanel('AllCommittees/Filter/' + committeeIds, this.historyUrl);
 	},
 
 	dispatchVotes: function() {
@@ -111,8 +127,8 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 			OKnesset.log("sending email to member " + this.name + " via email " +recipient);
 		}
 	},
-	phoneMember : function() {
 
+	phoneMember : function() {
 		var phone_num = this.phone;
 		if (isPhoneGap()) {
 			GATrackEvent('call', this.name);
@@ -128,10 +144,30 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 		} else {
 			this.memberView.query('#memberBillsBtn')[0].setText("" + data.bills.length + " " + OKnesset.strings.bills);
 		}
+
 		this.memberView.query('#memberBillsBtn')[0].enable();
 	},
-	updateData: function(member){
 
+    updateCommittees: function (data) {
+        var committees = [];
+        if (!data.committees || data.committees.length == 0) {
+            this.memberView.query('#memberCommitteesBtn')[0].setText(OKnesset.strings.noCommittees);
+            this.memberView.query('#memberCommitteesBtn')[0].disable();
+        } else {
+            Ext.each(data.committees, function (item) {
+                var url = item[1],
+                    values = url.split('/'),
+                    id = values[2];
+                committees.push(id);
+            });
+            this.memberView.query('#memberCommitteesBtn')[0].setText(OKnesset.strings.committees);
+            this.memberView.query('#memberCommitteesBtn')[0].enable();
+        }
+
+        this.currentMember.committees = committees;
+    },
+
+    updateData: function(member){
 		this.memberView.query('#MemberImage')[0].update(member);
 		this.memberView.query('#MemberInfo')[0].update(member);
 		this.application.viewport.query('#toolbar')[0].setTitle(member.name);
@@ -139,24 +175,7 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 		this.memberView.query('#memberEmailBtn')[0].setHandler(this.sendEmail,member);
 		this.memberView.query('#memberCallBtn')[0].setText(this.getPhoneCallButtonText());
 		this.memberView.query('#memberCallBtn')[0].setHandler(this.phoneMember,member);
-
-
-		// TODO: member data returned from the server, does not return
-		// committee data anymore. To link between memebers and committees,
-		// we need to reverse-link from the commttees api.
-		if (!member.committees || !member.committees.length) {
-			this.memberView.query('#memberCommitteesBtn')[0].hide();
-		} else {
-			this.memberView.query('#memberCommitteesBtn')[0].show();
-		}
-		// if (!member.committees || member.committees.length == 0) {
-		//     this.memberView.query('#memberCommitteesBtn')[0].setText(OKnesset.strings.noCommittees);
-		//     this.memberView.query('#memberCommitteesBtn')[0].disable();
-		// } else {
-		//     this.memberView.query('#memberCommitteesBtn')[0].setText(OKnesset.strings.committees);
-		//     this.memberView.query('#memberCommitteesBtn')[0].enable();
-		// }
-	},
+    },
 
 	getIdFromAbsoluteUrl: function(url){
 		var sub1 = url.substr("/member/".length);

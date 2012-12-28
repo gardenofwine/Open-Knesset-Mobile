@@ -30,6 +30,7 @@ OKnesset.strings = {
 	billsOutOf				 : 'מוצגות {0} הצעות חוק שעברו קריאה טרומית (לפחות), מתוך {1} שהוגשו',
 	committees               : 'ועדות'    ,
 	loadingBills             : 'טוען הצעות חוק. המתן...',
+    loadingCommittees        : 'טוען ועדות. המתן...',
 	noBills                  : 'אין הצעות חוק' ,
 	billStage6               : 'אושרה',
 	billStage5               : 'בתיקונים בוועדה',

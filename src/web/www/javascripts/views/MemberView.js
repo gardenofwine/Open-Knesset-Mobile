@@ -45,8 +45,8 @@ OKnesset.app.views.MemberView.InfoWrapper = new Ext.extend(Ext.Panel, {
             id: 'MemberInfo',
             tpl: memberPanelHtml,
             margin : '0 10 0 0',
-            cls:'memberViewInfo',
-          },
+            cls:'memberViewInfo'
+          }
         ]
       },
       {
@@ -79,8 +79,7 @@ OKnesset.app.views.MemberView.InfoWrapper = new Ext.extend(Ext.Panel, {
         id : 'memberVotesBtn',
         text : OKnesset.strings.votes,
         margin : '5 5 5 5'
-      },        
-
-    ],
+      }
+    ]
 });
 
