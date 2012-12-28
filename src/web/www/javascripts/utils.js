@@ -121,6 +121,7 @@ function getObjectFromStoreByFunc(store, func){
 
 //receives an array of id's and returns a array of objects of the members
 function getMembersById(ids) {
+
 	if (ids.push === undefined) {
 		//assumming we got only one id
 			if (typeof ids === 'string'){
@@ -248,7 +249,9 @@ function getAPIData(options) {
 					if (!storeInCacheOnly){
 						options.failure(parseResults);
 					}
-			});
+				},
+				OKnessetAPIMapping[options.apiKey].expectedObject
+			);
 		}
 	});
 	if (storeInCacheOnly){
