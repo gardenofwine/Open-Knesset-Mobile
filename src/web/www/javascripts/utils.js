@@ -261,7 +261,9 @@ function getAPIData(options) {
 					if (!storeInCacheOnly){
 						options.failure(parseResults);
 					}
-			});
+				},
+				OKnessetAPIMapping[options.apiKey].expectedObject
+			);
 		}
 	});
 	if (storeInCacheOnly){
