@@ -184,6 +184,47 @@ window.OKnessetParser.parsers.objectsParser = function (result, success, failure
 	success(result.objects);
 };
 
+
+/*******************************************************************************
+ * genericParser
+ */
+window.OKnessetParser.parsers.genericParser = function (result, success, failure, expectedObject){
+
+	var newObj = {}
+	var a = {"bill_title":"string","proposing_mks":[{"id":"number","name":"string"}],"joining_mks":[{"id":"number","name":"string"}],"proposals":{"private_proposals":[{"explanation":"string","source_url":"sring"}],"gov_proposal":{"explanation":"string","source_url":"sring"},"knesset_proposal":{"explanation":"string","source_url":"sring"}},"stage_text":"string","stage_date":"string"}
+
+	var copyByKeysRecur = function(mapping,source,_target){
+		for (var key in mapping ){
+			var handlePerKey = function(mappingVal, sourceVal){
+				switch(Object.prototype.toString.call(mappingVal)){
+					case "[object Array]":
+						return sourceVal.map(function(sv){ 
+							return mappingVal.map(function(mv){
+								return handlePerKey(mv, sv);
+							})[0]
+						})
+					case "[object Object]":
+						var __target = {}
+						copyByKeysRecur(mappingVal, sourceVal, __target)
+						return __target;
+					default : 
+						// the value needs to be copied over
+						return sourceVal
+					    
+				}
+			}
+			if (source[key]) 
+				_target[key] = handlePerKey(mapping[key], source[key])
+	    }
+	}
+
+	var target = {}
+	copyByKeysRecur(expectedObject,result,target);
+	success(target)
+
+}
+
+
 /*******************************************************************************
  * API Mapping
  */
@@ -280,7 +321,7 @@ window.OKnessetAPIMapping = {
 		},
 		sampleUrl : [6397],
 		callbackKey : "callback",
-		parser: OKnessetParser.parsers.trivialParser,
+		parser: OKnessetParser.parsers.genericParser,
 		expectedObject: {
 			bill_title: "string",
 			proposing_mks :[{
@@ -407,7 +448,7 @@ window.OKnessetAPIMapping = {
 				id : "string",
 				is_coalition : "boolean",
 				number_of_seats : "number",
-				name: "string",
+				name: "string"
 			}]
 		}
 	},
@@ -453,7 +494,7 @@ window.OKnessetAPIMapping = {
 				url : "string",
 				name : "string",
 				presence : "string"
-			}],
+			}]
 
 		}
 	},
