@@ -16,6 +16,10 @@ OKnesset.app.controllers.Homepage = Ext.regController('Homepage', {
                 OKnesset.app.controllers.navigation.dispatchPanel('AllCommittees/Index');
             });
             this.homepage.query('#homepageMembersBtn')[0].setHandler(function(){
+                if (OKnesset.debug) {
+                    time.start('Member panel');
+                    time.report();
+                }
                 OKnesset.app.controllers.navigation.dispatchPanel('MemberList/Index');
             });
             this.homepage.query('#electionsBtn')[0].setHandler(function(){

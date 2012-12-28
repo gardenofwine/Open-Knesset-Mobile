@@ -25,6 +25,8 @@ native/iOS/OKnesset/xcuserdata
 native/iOS/distribution/2011-11-02 app store update
 native/iOS/OKnesset/OKnesset.xcodeproj/project.xcworkspace/*
 native/iOS/OKnesset/OKnesset.xcodeproj/xcuserdata/*
+native/iOS/OKnesset/*.xcarchive
+native/iOS/OKnesset/*.ipa
 
 #eclipse noise
 .tmp*
