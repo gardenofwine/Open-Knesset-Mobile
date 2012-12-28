@@ -208,7 +208,7 @@ window.OKnessetParser.parsers.genericParser = function (result, success, failure
 						copyByKeysRecur(mappingVal, sourceVal, __target)
 						return __target;
 					default : 
-						// the value needs to be compied over
+						// the value needs to be copied over
 						return sourceVal
 					    
 				}
