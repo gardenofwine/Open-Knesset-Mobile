@@ -190,9 +190,6 @@ window.OKnessetParser.parsers.objectsParser = function (result, success, failure
  */
 window.OKnessetParser.parsers.genericParser = function (result, success, failure, expectedObject){
 
-	var newObj = {}
-	var a = {"bill_title":"string","proposing_mks":[{"id":"number","name":"string"}],"joining_mks":[{"id":"number","name":"string"}],"proposals":{"private_proposals":[{"explanation":"string","source_url":"sring"}],"gov_proposal":{"explanation":"string","source_url":"sring"},"knesset_proposal":{"explanation":"string","source_url":"sring"}},"stage_text":"string","stage_date":"string"}
-
 	var copyByKeysRecur = function(mapping,source,_target){
 		for (var key in mapping ){
 			var handlePerKey = function(mappingVal, sourceVal){
@@ -208,7 +205,7 @@ window.OKnessetParser.parsers.genericParser = function (result, success, failure
 						copyByKeysRecur(mappingVal, sourceVal, __target)
 						return __target;
 					default : 
-						// the value needs to be compied over
+						// the value needs to be copied over
 						return sourceVal
 					    
 				}
