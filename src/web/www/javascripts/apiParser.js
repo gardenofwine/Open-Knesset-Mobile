@@ -363,6 +363,7 @@ window.OKnessetAPIMapping = {
 			// example memeber_for: 800
 			return {format:"jsonp", limit : 10, member_for : id};
 		},
+		isImmutable : true,
 		sampleParameters: [800],		
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.objectsParser,
@@ -384,6 +385,7 @@ window.OKnessetAPIMapping = {
 		parameters : function(id){
 			return {format:"jsonp", limit : 10, member_against : id};
 		},
+		isImmutable : true,
 		sampleParameters : [800],
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.objectsParser,
@@ -462,6 +464,7 @@ window.OKnessetAPIMapping = {
 		},
 		parameters : {format:"jsonp"},
 		callbackKey : "callback",
+		isImmutable : true,
 		parser: OKnessetParser.parsers.objectIdToNumberParser,
 		expectedObject: {
 			objects : [{
@@ -510,6 +513,7 @@ window.OKnessetAPIMapping = {
 		sampleUrl : [6726, 6858],
 		parameters : {format:"jsonp"},
 		callbackKey : "callback",
+		isImmutable : true,
 		parser: OKnessetParser.parsers.committeeProtocol,
 		expectedObject: {
 			mks_attended : ["string"],
