@@ -184,12 +184,12 @@ function getAPIData(options) {
 
 	var cacheKey = requestUrl + JSON.stringify(parameters);
 	// if a cached version of the data exists, return it immediately
-	var cachedData = _diskCacheGet(cacheKey);
+	var cachedData = _diskCacheGet(cacheKey, OKnessetAPIMapping[options.apiKey].isImmutable );
 	var storeInCacheOnly = false;
 	if (cachedData !== null) {
 		//call callback function with cached data
 		options.success(cachedData.data);
-		if (!options.forceLoad && !has24HoursPassedSince(new Date(cachedData.date))){
+		if (!options.forceLoad){
 			// do not call the server if the disk cache is less than a day old,
 			// and forceLoad is not required
 			return true;
@@ -233,12 +233,15 @@ function getAPIData(options) {
 
 					// success
 					memcache[cacheKey] = parseResults;
-					if (options.diskCache){
-						localStorage.setItem(cacheKey, JSON.stringify({
-							date : new Date(),
-							data : parseResults
-						}));
-					}
+					if (options.diskCache || !options.skipDiskCache){
+                        try {
+                            localStorage.setItem(cacheKey, JSON.stringify({
+                                date : Date.now(),
+                                data : parseResults
+                            }));
+                        } catch (ignore){}
+
+                    }
 
 					if (!storeInCacheOnly){
 						options.success(parseResults);
@@ -261,26 +264,23 @@ function getAPIData(options) {
 		return false;
 	}
 
-	function _diskCacheGet(key) {
+	function _diskCacheGet(key, isImmutable) {
 		var cachedData = localStorage.getItem(key);
-
 		if (cachedData !== null){
-			cachedData = JSON.parse(cachedData);
-		}
-		return cachedData;
+            if (!isImmutable && parseInt(cachedData.date) < Date.now() - 1000 * 60 * 60 * 24) {
+                localStorage.removeItem(key);
+                return null
+            } else {
+                return JSON.parse(cachedData);
+            }
+        }
+        return null;
 	}
 	function _cacheGet(key) {
 		var cachedData = memcache[key];
 		return cachedData;
 	}
 }
-
-function has24HoursPassedSince(theDate){
-	var now = new Date();
-
-	return (now.getTime() > theDate.getTime() + 1000 * 60 * 60 * 24);
-}
-
 
 function validateObject(object, expectedTypes){
 	if (typeOf(expectedTypes) !== 'array' && typeOf(expectedTypes) !== 'string' && typeOf(expectedTypes) !== 'object'){
