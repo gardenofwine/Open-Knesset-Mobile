@@ -9,9 +9,9 @@ public class OKnesset extends DroidGap {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	super.onCreate(savedInstanceState);
     	super.setIntegerProperty("splashscreen", R.drawable.splash);
     	super.setStringProperty("loadingDialog", "בודקת מה חברי הכנסת עשו היום");
-        super.onCreate(savedInstanceState);
-        super.loadUrl("file:///android_asset/www/index.html");
+        super.loadUrl("file:///android_asset/www/index.html", 10000);
     }
 }
