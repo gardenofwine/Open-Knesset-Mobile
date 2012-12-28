@@ -3,12 +3,20 @@
  */
 var googleAnalytics = function () {
 	if (isPhoneGap()) {
-		googleAnalytics = window.plugins.googleAnalyticsPlugin;
-		// The oknesset.mobile google analytics Accoutn ID
-		googleAnalytics.startTrackerWithAccountID(OKnesset.GAID);
-		googleAnalytics.setCustomVariable(1, "appVersion", OKnesset.appVersion,
-				2);
-		googleAnalytics.trackPageview("/app/");
+		if (isAndroid()){
+			googleAnalytics = window.plugins.analytics;
+			// The oknesset.mobile google analytics Accoutn ID
+			googleAnalytics.start(OKnesset.GAID);
+			googleAnalytics.setCustomVar(1, "appVersion", OKnesset.appVersion, 2);
+			googleAnalytics.trackPageView("/app/");
+		} else {
+			googleAnalytics = window.plugins.googleAnalyticsPlugin;
+	 		// The oknesset.mobile google analytics Accoutn ID
+			googleAnalytics.startTrackerWithAccountID(OKnesset.GAID);
+			googleAnalytics.setCustomVariable(1, "appVersion", OKnesset.appVersion,
+					2);
+			googleAnalytics.trackPageview("/app/");
+		}
 	}
 };
 
@@ -39,7 +47,11 @@ GApageMapping = {
 
 function GATrackPage(page, extra) {
 	if (isPhoneGap()) {
-		googleAnalytics.trackPageview(GApageMapping[page] + extra);
+		if (isAndroid()){
+			googleAnalytics.trackPageView(GApageMapping[page] + extra);
+		} else {
+			googleAnalytics.trackPageview(GApageMapping[page] + extra);
+		}
 	} else {
 		OKnesset.log("Google Analytics Page" + GApageMapping[page] + "" + extra);
 	}
