@@ -27,6 +27,7 @@ window.OKnessetParser.helpers.createMinimalMemberItem = function (member){
 	reducedMember.img_url = "images/members/" + member.img_url.substring(member.img_url.lastIndexOf('/') + 1);
 	reducedMember.name = member.name;
 	reducedMember.average_weekly_presence_hours = member.average_weekly_presence_hours;
+	reducedMember.average_monthly_committee_presence = member.average_monthly_committee_presence;
 	reducedMember.email = member.email;
 	reducedMember.phone = member.phone;
 	// if (member.start_date){}
@@ -283,7 +284,8 @@ window.OKnessetAPIMapping = {
 			gender : "string",
 			party_name : "string",
 			place_of_residence : "string",
-			average_weekly_presence_hours : "number"
+			average_weekly_presence_hours : "number",
+			average_monthly_committee_presence: "number"
 		}
 	},
 
@@ -446,7 +448,7 @@ window.OKnessetAPIMapping = {
 				id : "string",
 				is_coalition : "boolean",
 				number_of_seats : "number",
-				name: "string",
+				name: "string"
 			}]
 		}
 	},
@@ -492,7 +494,7 @@ window.OKnessetAPIMapping = {
 				url : "string",
 				name : "string",
 				presence : "string"
-			}],
+			}]
 
 		}
 	},
