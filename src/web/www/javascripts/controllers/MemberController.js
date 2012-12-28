@@ -77,7 +77,7 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 	dispatchCommittees: function() {
         var currentMember = this.controller.currentMember,
             committeeIds = currentMember.committees.join(',');
-		OKnesset.app.controllers.navigation.dispatchPanel('AllCommittees/Filter/' + committeeIds, this.historyUrl);
+		OKnesset.app.controllers.navigation.dispatchPanel('AllCommittees/Index/' + committeeIds, this.historyUrl);
 	},
 
 	dispatchVotes: function() {
