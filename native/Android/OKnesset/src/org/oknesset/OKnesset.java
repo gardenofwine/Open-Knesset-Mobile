@@ -1,16 +1,16 @@
 package org.oknesset;
 
+import org.apache.cordova.DroidGap;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Display;
 
-import com.phonegap.DroidGap;
-
 public class OKnesset extends DroidGap {
-	
+
 	 private int mRuntimeOrientation;
 	 private boolean mDisableScreenRotation = true;
-	   
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,9 +19,9 @@ public class OKnesset extends DroidGap {
     	super.setStringProperty("loadingDialog", "בודקת מה חברי הכנסת עשו היום");
         super.onCreate(savedInstanceState);
         super.loadUrl("file:///android_asset/www/index.html");
-        
+
     }
-    
+
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
        if (mDisableScreenRotation) {
@@ -32,7 +32,7 @@ public class OKnesset extends DroidGap {
           super.onConfigurationChanged(newConfig);
        }
     }
-    
+
     protected int getScreenOrientation() {
         Display display = getWindowManager().getDefaultDisplay();
         int orientation = display.getOrientation();
