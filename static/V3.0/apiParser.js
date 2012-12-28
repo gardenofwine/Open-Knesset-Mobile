@@ -9,6 +9,9 @@ window.OKnessetParser = {
 * @returns {String} format "dd/mm/yyyy"
 */
 window.OKnessetParser.helpers.formatDate = function(date) {
+	if (!date) {
+        return '--/--/--';
+    }
 	var year = date.substr(0,4);
 	var month = date.substr(5,2);
 	var day = date.substr(8,2);
