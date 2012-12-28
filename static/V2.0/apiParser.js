@@ -290,6 +290,9 @@ window.OKnessetAPIMapping = {
 * @returns {String} format "dd/mm/yyyy"
 */
 function formatDate(date) {
+	if (!date) {
+        return '--/--/--';
+    }	
 	var year = date.substr(0,4);
 	var month = date.substr(5,2);
 	var day = date.substr(8,2);
