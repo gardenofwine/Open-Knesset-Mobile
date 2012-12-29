@@ -30,7 +30,6 @@ native/iOS/OKnesset/OKnesset.xcodeproj/xcuserdata/*
 native/iOS/OKnesset/*.xcarchive
 native/iOS/OKnesset/*.ipa
 
-
 #eclipse noise
 .tmp*
 # auto git version noise

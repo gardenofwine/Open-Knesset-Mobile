@@ -275,6 +275,7 @@ OKnesset.AgendaMembersSupportListStore = new Ext.data.Store({
 		}
 	]
 });
+
 //AgendaPartiesSupportList
 Ext.regModel('AgendaPartiesSupportList', {
    fields: ['name','score']
@@ -288,4 +289,35 @@ OKnesset.AgendaPartiesSupportListStore = new Ext.data.Store({
 			direction: 'DESC'
 		}
 	]
+});
+
+// Election data
+Ext.regModel('ElectionParty', {
+   fields: ['name']
+});
+
+OKnesset.ElectionPartyStore = new Ext.data.Store({
+	model: 'ElectionParty',
+	sorters: [
+		{
+			property: 'name',
+			direction: 'ASC'
+		}
+	],
+	data : electionParties
+});
+
+Ext.regModel('electionMembers', {
+   fields: ['name','party','image','id']
+});
+
+OKnesset.electionMembersStore = new Ext.data.Store({
+	model: 'electionMembers',
+	sorters: [
+		{
+			property: 'party',
+			direction: 'ASC'
+		}
+	],
+	data : electionMembers
 });
