@@ -307,3 +307,17 @@ OKnesset.ElectionPartyStore = new Ext.data.Store({
 	data : electionParties
 });
 
+Ext.regModel('electionMembers', {
+   fields: ['name','party','image','id']
+});
+
+OKnesset.electionMembersStore = new Ext.data.Store({
+	model: 'electionMembers',
+	sorters: [
+		{
+			property: 'party',
+			direction: 'ASC'
+		}
+	],
+	data : electionMembers
+});

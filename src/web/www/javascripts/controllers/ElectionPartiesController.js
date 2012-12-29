@@ -8,12 +8,13 @@ Ext.regController('Election', {
 
 			// never show the loading pane, because there are always members to display from slimData
 			this.electionView.showLoading(false);
-
-			// this.memberListView.memberList.addListener('itemtap',
-			// 	function(that, index, item, e) {
-			// 		var record = that.store.getAt(index);
-			// 		OKnesset.app.controllers.navigation.dispatchPanel('Member/Index/' + record.data.id, options.historyUrl);
-			// 	});
+			PartyList = this.electionView.query('#ElectionPrtyListView')[0]
+			PartyList.addListener('itemtap',
+				function(that, index, item, e) {
+					var record = that.store.getAt(index);
+					console.log(record.data);
+					OKnesset.app.controllers.navigation.dispatchPanel('CandidateParty/Index/' + record.data.id, options.historyUrl);
+				});
 		}
 
 		// var that = this;

@@ -107,6 +107,8 @@ OKnesset.strings = {
 	Homepage19ElectionsBtn	 : "כל המידע אודות הבחירות הקרובות",
 	ElcetionTitle			 : "הבחירות לכנסת ה 19",
 	generalError             : "חלה תקלה אנא בדוק את החיבור לאינטרנט ונסה שוב",
+	GotoPartyWebsite		 : "לאתר המפלגה",
+	GotoPartyManifest		 : "למצע המפלגה",
 
 	infoDialog: {
 		Default: {

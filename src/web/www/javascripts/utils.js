@@ -154,6 +154,10 @@ function getMembersById(ids) {
 		return members;
 }
 
+function setTitle(title,that) {
+	var titleBar = that.application.viewport.query('#toolbar')[0];
+	titleBar.setTitle(title);
+}
 
 
 /**
