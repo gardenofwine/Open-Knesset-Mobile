@@ -9,6 +9,9 @@ window.OKnessetParser = {
 * @returns {String} format "dd/mm/yyyy"
 */
 window.OKnessetParser.helpers.formatDate = function(date) {
+	if (!date) {
+        return '--/--/--';
+    }
 	var year = date.substr(0,4);
 	var month = date.substr(5,2);
 	var day = date.substr(8,2);
@@ -27,6 +30,7 @@ window.OKnessetParser.helpers.createMinimalMemberItem = function (member){
 	reducedMember.img_url = "images/members/" + member.img_url.substring(member.img_url.lastIndexOf('/') + 1);
 	reducedMember.name = member.name;
 	reducedMember.average_weekly_presence_hours = member.average_weekly_presence_hours;
+	reducedMember.average_monthly_committee_presence = member.average_monthly_committee_presence;
 	reducedMember.email = member.email;
 	reducedMember.phone = member.phone;
 	// if (member.start_date){}
@@ -183,6 +187,43 @@ window.OKnessetParser.parsers.objectsParser = function (result, success, failure
 	success(result.objects);
 };
 
+
+/*******************************************************************************
+ * genericParser
+ */
+window.OKnessetParser.parsers.genericParser = function (result, success, failure, expectedObject){
+	var copyByKeysRecur = function(mapping,source,_target){
+		for (var key in mapping ){
+			var handlePerKey = function(mappingVal, sourceVal){
+				switch(Object.prototype.toString.call(mappingVal)){
+					case "[object Array]":
+						return sourceVal.map(function(sv){ 
+							return mappingVal.map(function(mv){
+								return handlePerKey(mv, sv);
+							})[0]
+						})
+					case "[object Object]":
+						var __target = {}
+						copyByKeysRecur(mappingVal, sourceVal, __target)
+						return __target;
+					default : 
+						// the value needs to be copied over
+						return sourceVal
+					    
+				}
+			}
+			if (source[key]) 
+				_target[key] = handlePerKey(mapping[key], source[key])
+	    }
+	}
+
+	var target = {}
+	copyByKeysRecur(expectedObject,result,target);
+	success(target)
+
+}
+
+
 /*******************************************************************************
  * API Mapping
  */
@@ -242,7 +283,8 @@ window.OKnessetAPIMapping = {
 			gender : "string",
 			party_name : "string",
 			place_of_residence : "string",
-			average_weekly_presence_hours : "number"
+			average_weekly_presence_hours : "number",
+			average_monthly_committee_presence: "number"
 		}
 	},
 
@@ -278,7 +320,7 @@ window.OKnessetAPIMapping = {
 		},
 		sampleUrl : [6397],
 		callbackKey : "callback",
-		parser: OKnessetParser.parsers.trivialParser,
+		parser: OKnessetParser.parsers.genericParser,
 		expectedObject: {
 			bill_title: "string",
 			proposing_mks :[{
@@ -317,6 +359,7 @@ window.OKnessetAPIMapping = {
 			// example memeber_for: 800
 			return {format:"jsonp", limit : 10, member_for : id};
 		},
+		isImmutable : true,
 		sampleParameters: [800],		
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.objectsParser,
@@ -338,6 +381,7 @@ window.OKnessetAPIMapping = {
 		parameters : function(id){
 			return {format:"jsonp", limit : 10, member_against : id};
 		},
+		isImmutable : true,
 		sampleParameters : [800],
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.objectsParser,
@@ -405,7 +449,7 @@ window.OKnessetAPIMapping = {
 				id : "string",
 				is_coalition : "boolean",
 				number_of_seats : "number",
-				name: "string",
+				name: "string"
 			}]
 		}
 	},
@@ -416,6 +460,7 @@ window.OKnessetAPIMapping = {
 		},
 		parameters : {format:"jsonp"},
 		callbackKey : "callback",
+		isImmutable : true,
 		parser: OKnessetParser.parsers.objectIdToNumberParser,
 		expectedObject: {
 			objects : [{
@@ -451,7 +496,7 @@ window.OKnessetAPIMapping = {
 				url : "string",
 				name : "string",
 				presence : "string"
-			}],
+			}]
 
 		}
 	},
@@ -464,6 +509,7 @@ window.OKnessetAPIMapping = {
 		sampleUrl : [6726, 6858],
 		parameters : {format:"jsonp"},
 		callbackKey : "callback",
+		isImmutable : true,
 		parser: OKnessetParser.parsers.committeeProtocol,
 		expectedObject: {
 			mks_attended : ["string"],

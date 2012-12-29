@@ -3,12 +3,20 @@
  */
 var googleAnalytics = function () {
 	if (isPhoneGap()) {
-		googleAnalytics = window.plugins.googleAnalyticsPlugin;
-		// The oknesset.mobile google analytics Accoutn ID
-		googleAnalytics.startTrackerWithAccountID(OKnesset.GAID);
-		googleAnalytics.setCustomVariable(1, "appVersion", OKnesset.appVersion,
-				2);
-		googleAnalytics.trackPageview("/app/");
+		if (isAndroid()){
+			googleAnalytics = window.plugins.analytics;
+			// The oknesset.mobile google analytics Accoutn ID
+			googleAnalytics.start(OKnesset.GAID);
+			googleAnalytics.setCustomVar(1, "appVersion", OKnesset.appVersion, 2);
+			googleAnalytics.trackPageView("/app/");
+		} else {
+			googleAnalytics = window.plugins.googleAnalyticsPlugin;
+	 		// The oknesset.mobile google analytics Accoutn ID
+			googleAnalytics.startTrackerWithAccountID(OKnesset.GAID);
+			googleAnalytics.setCustomVariable(1, "appVersion", OKnesset.appVersion,
+					2);
+			googleAnalytics.trackPageview("/app/");
+		}
 	}
 };
 
@@ -40,7 +48,11 @@ GApageMapping = {
 
 function GATrackPage(page, extra) {
 	if (isPhoneGap()) {
-		googleAnalytics.trackPageview(GApageMapping[page] + extra);
+		if (isAndroid()){
+			googleAnalytics.trackPageView(GApageMapping[page] + extra);
+		} else {
+			googleAnalytics.trackPageview(GApageMapping[page] + extra);
+		}
 	} else {
 		OKnesset.log("Google Analytics Page" + GApageMapping[page] + "" + extra);
 	}
@@ -185,12 +197,12 @@ function getAPIData(options) {
 
 	var cacheKey = requestUrl + JSON.stringify(parameters);
 	// if a cached version of the data exists, return it immediately
-	var cachedData = _diskCacheGet(cacheKey);
+	var cachedData = _diskCacheGet(cacheKey, OKnessetAPIMapping[options.apiKey].isImmutable );
 	var storeInCacheOnly = false;
 	if (cachedData !== null) {
 		//call callback function with cached data
 		options.success(cachedData.data);
-		if (!options.forceLoad && !has24HoursPassedSince(new Date(cachedData.date))){
+		if (!options.forceLoad){
 			// do not call the server if the disk cache is less than a day old,
 			// and forceLoad is not required
 			return true;
@@ -234,12 +246,33 @@ function getAPIData(options) {
 
 					// success
 					memcache[cacheKey] = parseResults;
-					if (options.diskCache){
-						localStorage.setItem(cacheKey, JSON.stringify({
-							date : new Date(),
-							data : parseResults
-						}));
-					}
+                    var tryStoring = function(key, value) {
+                        try {
+
+                            localStorage.setItem(key, JSON.stringify({
+                                date : Date.now(),
+                                data : value
+                            }));
+
+                            var cachedKeyList = JSON.parse(localStorage.getItem("cacheKeysList")) || [];
+                            cachedKeyList.push(key);
+                            localStorage.setItem("cacheKeysList",JSON.stringify(cachedKeyList))
+                        } catch (ignored){
+                            var cachedKeyListC = JSON.parse(localStorage.getItem("cacheKeysList"));
+                            if (!cachedKeyListC) return; // weird situation, should never happen
+
+                            var origLength = cachedKeyListC.length;
+                            while (cachedKeyListC.length > origLength * 0.7 ){
+                                localStorage.removeItem(cachedKeyListC.shift());
+                            }
+                            // now that we made some storage available,lats clean it up
+                            localStorage.setItem("cacheKeysList",JSON.stringify(cachedKeyListC))
+                            tryStoring(key, value);
+                        }
+                    }
+					if (options.diskCache || !options.skipDiskCache){
+                        tryStoring(cacheKey,parseResults)
+                    }
 
 					if (!storeInCacheOnly){
 						options.success(parseResults);
@@ -250,7 +283,9 @@ function getAPIData(options) {
 					if (!storeInCacheOnly){
 						options.failure(parseResults);
 					}
-			});
+				},
+				OKnessetAPIMapping[options.apiKey].expectedObject
+			);
 		}
 	});
 	if (storeInCacheOnly){
@@ -260,26 +295,23 @@ function getAPIData(options) {
 		return false;
 	}
 
-	function _diskCacheGet(key) {
+	function _diskCacheGet(key, isImmutable) {
 		var cachedData = localStorage.getItem(key);
-
 		if (cachedData !== null){
-			cachedData = JSON.parse(cachedData);
-		}
-		return cachedData;
+            if (!isImmutable && parseInt(cachedData.date) < Date.now() - 1000 * 60 * 60 * 24) {
+                localStorage.removeItem(key);
+                return null
+            } else {
+                return JSON.parse(cachedData);
+            }
+        }
+        return null;
 	}
 	function _cacheGet(key) {
 		var cachedData = memcache[key];
 		return cachedData;
 	}
 }
-
-function has24HoursPassedSince(theDate){
-	var now = new Date();
-
-	return (now.getTime() > theDate.getTime() + 1000 * 60 * 60 * 24);
-}
-
 
 function validateObject(object, expectedTypes){
 	if (typeOf(expectedTypes) !== 'array' && typeOf(expectedTypes) !== 'string' && typeOf(expectedTypes) !== 'object'){

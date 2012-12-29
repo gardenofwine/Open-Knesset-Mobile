@@ -6,6 +6,7 @@ var memberPanelHtml =
 	<tpl if="date_of_birth.length &gt; 0"> תאריך לידה: {date_of_birth}<br/></tpl> \
 	<tpl if="place_of_residence.length &gt; 0"> יישוב: {place_of_residence}<br/></tpl> \
 	<tpl if="average_weekly_presence_hours &gt; -1">ממוצע שעות שבועי במשכן: {average_weekly_presence_hours} <tpl if="number_of_children.length &gt; 0">+{number_of_children}</tpl><br/></tpl> \
+	<tpl if="average_monthly_committee_presence &gt; -1">ישיבות וועדות בחודש: {average_monthly_committee_presence}<br/></tpl> \
 </div><div style="clear:both"></div> \
 ';
 

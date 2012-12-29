@@ -49,11 +49,7 @@ Ext.regApplication({
 
 		if (isPhoneGap()) {
 			// hide the native splash screen
-			if (isiOS()) {
-				navigator.splashscreen.hide();
-			} else if (isAndroid()) {
-				prompt("", "oknesset_init:");
-			}
+			navigator.splashscreen.hide();
 		}
 
 		if (OKnesset.debug) {

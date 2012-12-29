@@ -62,23 +62,17 @@ XCode (iOS):
 =========
 
 - [Xcode](https://developer.apple.com/xcode/index.php) on a Mac machine
-- PhoneGap for iOS (download the tag 1.0.0 from [github](https://github.com/callback/phonegap/zipball/1.0.0))
 - After building to project, Open 'Open-Knesset-Mobile/native/iOS/OKnesset/OKnesset' (with Xcode)
+
+(PhoneGap 1.0.0 for iOS is included in this git repository)
 
 ADT (Android):
 ========
 
-(PhoneGap for Android is included in this git repository)
-
-- run the following git commands to clone the PhoneGap submodule:
-
--
-
-    git submodule init
-    git submodule update
-
 - Install The ADT plugin for Eclipse
 - import the eclipse project in 'Open-Knesset-Mobile/native/Android/OKnesset/'
+
+(PhoneGap 2.2 (Cordoba) for Android is included in this git repository)
 
 
 Troubleshooting
