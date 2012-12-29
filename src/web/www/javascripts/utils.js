@@ -59,8 +59,7 @@ function GATrackPage(page, extra) {
 
 function GATrackEvent(category, action, label) {
 	if (isPhoneGap()) {
-		googleAnalytics.trackEvent(function() {
-		}, category, action, label, undefined, true);
+		googleAnalytics.trackEvent(category, action, label, undefined);
 	} else {
 		OKnesset.log("Google Analytics Event. (category " + category + ", action " + action + ", label " + label + ")");
 	}

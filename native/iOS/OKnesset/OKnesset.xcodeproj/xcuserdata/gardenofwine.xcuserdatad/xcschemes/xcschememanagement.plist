@@ -4,12 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>GenGitVersion.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
-		<key>כנסת פתוחה.xcscheme</key>
+		<key>OKnesset.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -17,11 +12,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>135EC3BB143B3D35006B5924</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>1D6058900D05DD3D006BFB54</key>
 		<dict>
 			<key>primary</key>

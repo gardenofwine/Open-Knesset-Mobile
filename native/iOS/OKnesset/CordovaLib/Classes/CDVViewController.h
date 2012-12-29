@@ -51,6 +51,8 @@
 @property (nonatomic, readonly, strong) CDVCommandQueue* commandQueue;
 @property (nonatomic, readonly, strong) CDVCommandDelegateImpl* commandDelegate;
 
+
+
 + (NSDictionary*)getBundlePlist:(NSString*)plistName;
 + (NSString*)applicationDocumentsDirectory;
 
