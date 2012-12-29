@@ -87,6 +87,7 @@ window.OKnessetParser.parsers.members = function(result, success, failure){
 
 		// add current memeber to member list
 		var minMember = window.OKnessetParser.helpers.createMinimalMemberItem(member);
+        minMember.current_role_descriptions = member.current_role_descriptions;
 		// fetch member bills from web?
 
 		memberArray.push(minMember);
@@ -256,12 +257,13 @@ window.OKnessetAPIMapping = {
 		url : function(){
 			return 'http://www.oknesset.org/api/v2/member/';
 		},
-		parameters : {format:"jsonp", extra_fields:"is_current,party_url"},
+		parameters : {format:"jsonp", extra_fields:"is_current,party_url,current_role_descriptions"},
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.members,
 		expectedObject: {
 			objects : [{
 				id : "string",
+                current_role_descriptions: "string,null",
 				is_current : "boolean",
 				name: "string",
 				party_url : "string"

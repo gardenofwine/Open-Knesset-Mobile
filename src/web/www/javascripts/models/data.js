@@ -61,6 +61,10 @@ Ext.regModel('Member', {
 	fields: ['name', 'party_id']
 });
 
+Ext.regModel('Minister', {
+    fields: ['id', 'name', 'role']
+});
+
 OKnesset.MemberStoreSorters = {
 	partyOrdinal : {
 		property : 'party_ordinal',
@@ -70,7 +74,7 @@ OKnesset.MemberStoreSorters = {
 		property : 'name',
 		direction : 'ASC'
 	}	
-}
+};
 
 OKnesset.MemberStore = new Ext.data.Store({
 	model: 'Member',
@@ -81,7 +85,18 @@ OKnesset.MemberStore = new Ext.data.Store({
 		var name = record.get('name');
 		return name.substring(0,1);
 	}
+});
 
+OKnesset.MinisterStore = {
+    MinisterOrder : {
+        property : 'role',
+        direction : 'ASC'
+    }
+};
+
+OKnesset.MinisterStore = new Ext.data.Store({
+    model: 'Minister',
+    sorters : [OKnesset.MinisterStore.MinisterOrder]
 });
 
 Ext.regModel('MemberBills', {

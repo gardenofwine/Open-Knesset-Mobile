@@ -126,13 +126,35 @@ function secondaryLaunch() {
 			diskCache : true,
 			forceLoad : true,
 			success:function(data){
-				OKnesset.MemberStore.loadData(data);
+                var createMinister = function (role, member) {
+                    return {
+                            role: role,
+                            id: member.id,
+                            name: member.name
+                        };
+                    },
+                    ministers = [];
+                Ext.each(data, function (member) {
+                    var roles;
+                    if (!member.current_role_descriptions) {
+                        return;
+                    }
+
+                    roles = member.current_role_descriptions.split(',');
+                    Ext.each(roles, function (role) {
+                        role = role.trim();
+                        if (role === 'ראש הממשלה' || role === 'סגן ראש הממשלה' || role.search('שר') === 0) {
+                            ministers.push(createMinister(role, member));
+                        }
+                    });
+                });
+                OKnesset.MemberStore.loadData(data);
+                OKnesset.MinisterStore.loadData(ministers);
 			},
 			failure:function(result){
-				console.log("error receiving memebers data. ", result);
+				console.log("error receiving members data. ", result);
 			}
 		});
-
 	}
 }
 
@@ -146,7 +168,6 @@ OKnesset.app.onBackKey = function () {
 	} else {
 		OKnesset.app.controllers.navigation.dispatchBack();
 	}
-
 };
 
 document.addEventListener("deviceready", OKnesset.mainLaunch, false);
