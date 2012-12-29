@@ -5,11 +5,18 @@
 Ext.namespace('OKnesset');
 
 OKnesset.GAID = "Demo-ID-replace-with-real-id";
-OKnesset.appVersion = "2";
+OKnesset.appVersion = "3";
 
 OKnesset.log = function(/*args*/) {
 	if (OKnesset.debug) {
 		console.log.apply(console, arguments);
+	}
+};
+
+OKnesset.onError = function (code, logMsg, userMsg, silent){
+	OKnesset.log(code, logMsg || userMsg);
+	if (!silent) {
+		Ext.Msg.alert('',userMsg || OKnesset.strings.generalError);
 	}
 };
 
@@ -157,10 +164,4 @@ function appUpdate(){
 	}
 }
 
-OKnesset.onError = function (code, logMsg, userMsg, silent){
-	OKnesset.log(code, logMsg || userMsg);
-	if (!silent) {
-		Ext.Msg.alert('',userMsg || OKnesset.strings.generalError);
-	}
-};
 appUpdate();

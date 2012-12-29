@@ -250,7 +250,7 @@ window.OKnessetAPIMapping = {
 		url : function(){
 			return 'http://www.oknesset.org/api/v2/member/';
 		},
-		parameters : {format:"jsonp", extra_fields:"is_current,party_url"},
+		parameters : {format:"jsonp", extra_fields:"is_current,party_url,current_role_descriptions"},
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.members,
 		expectedObject: {

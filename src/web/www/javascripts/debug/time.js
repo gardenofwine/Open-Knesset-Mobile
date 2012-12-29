@@ -1,4 +1,5 @@
 /*
+http://remysharp.com/2007/04/20/performance-profiling-javascript/
 @author: Remy Sharp / http://remysharp.com
 @date: 2007-04-20
 @name: time
