@@ -17,26 +17,16 @@
  under the License.
  */
 
-//
-//  AppDelegate.h
-//  TestPG22
-//
-//  Created by ___FULLUSERNAME___ on ___DATE___.
-//  Copyright ___ORGANIZATIONNAME___ ___YEAR___. All rights reserved.
-//
+#import <Foundation/Foundation.h>
+#import "CDVAvailability.h"
 
-#import <UIKit/UIKit.h>
+@class CDVViewController;
 
-#import <Cordova/CDVViewController.h>
+@interface CDVURLProtocol : NSURLProtocol {}
 
-@interface AppDelegate : NSObject <UIApplicationDelegate>{}
++ (void)registerPGHttpURLProtocol CDV_DEPRECATED (2.0, "This is now a no-op and should be removed.");
++ (void)registerURLProtocol CDV_DEPRECATED (2.0, "This is now a no-op and should be removed.");
 
-// invoke string is passed to your app on launch, this is only valid if you
-// edit TestPG22-Info.plist to add a protocol
-// a simple tutorial can be found here :
-// http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
-
-@property (nonatomic, strong) IBOutlet UIWindow* window;
-@property (nonatomic, strong) IBOutlet CDVViewController* viewController;
-
++ (void)registerViewController:(CDVViewController*)viewController;
++ (void)unregisterViewController:(CDVViewController*)viewController;
 @end

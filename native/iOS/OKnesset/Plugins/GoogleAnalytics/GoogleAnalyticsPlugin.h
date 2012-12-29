@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PGPlugin.h"
+#import <Cordova/CDVPlugin.h>
 #import "GANTracker.h"
 
 

@@ -8,14 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		1388D41F1451D7D0009293F2 /* oknesset-splash.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1388D41E1451D7D0009293F2 /* oknesset-splash.mp4 */; };
-		13A116EB1444ADDB005DE409 /* EmailComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A116E81444ADDB005DE409 /* EmailComposer.m */; };
 		13A116EC1444ADDB005DE409 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 13A116E91444ADDB005DE409 /* readme.txt */; };
 		13A1170A1444ADF2005DE409 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A117091444ADF2005DE409 /* MessageUI.framework */; };
-		13AD0BE4141E116800C8F6C1 /* GoogleAnalyticsPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD0BDF141E116800C8F6C1 /* GoogleAnalyticsPlugin.m */; };
 		13AD0BE5141E116800C8F6C1 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13AD0BE2141E116800C8F6C1 /* libGoogleAnalytics.a */; };
 		13AD0C40141E141C00C8F6C1 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 13AD0C3F141E141C00C8F6C1 /* libsqlite3.0.dylib */; };
 		13C5617F147553CE00AE682E /* Animation-End.png in Resources */ = {isa = PBXBuildFile; fileRef = 13C5617D147553CE00AE682E /* Animation-End.png */; };
 		13C56180147553CE00AE682E /* Animation-End@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13C5617E147553CE00AE682E /* Animation-End@2x.png */; };
+		13E7BFB0168F132B00A3F032 /* PhoneGap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13E7BFAF168F132B00A3F032 /* PhoneGap.plist */; };
+		13E7BFB4168F154400A3F032 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13E7BFB2168F154400A3F032 /* MainViewController.xib */; };
+		13E7BFB5168F154400A3F032 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E7BFB3168F154400A3F032 /* MainViewController.m */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -23,7 +24,7 @@
 		1F766FE113BBADB100FB74C0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F766FDC13BBADB100FB74C0 /* Localizable.strings */; };
 		1F766FE213BBADB100FB74C0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F766FDF13BBADB100FB74C0 /* Localizable.strings */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		301BF552109A68D80062928A /* libPhoneGap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 301BF535109A57CC0062928A /* libPhoneGap.a */; };
+		301BF552109A68D80062928A /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 301BF535109A57CC0062928A /* libCordova.a */; };
 		301BF570109A69640062928A /* www in Resources */ = {isa = PBXBuildFile; fileRef = 301BF56E109A69640062928A /* www */; };
 		301BF5B5109A6A2B0062928A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 301BF5B4109A6A2B0062928A /* AddressBook.framework */; };
 		301BF5B7109A6A2B0062928A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 301BF5B6109A6A2B0062928A /* AddressBookUI.framework */; };
@@ -34,7 +35,6 @@
 		301BF5C1109A6A2B0062928A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 301BF5C0109A6A2B0062928A /* MediaPlayer.framework */; };
 		301BF5C3109A6A2B0062928A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 301BF5C2109A6A2B0062928A /* QuartzCore.framework */; };
 		301BF5C5109A6A2B0062928A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 301BF5C4109A6A2B0062928A /* SystemConfiguration.framework */; };
-		3053AC6F109B7857006FCFE7 /* PhoneGapLib/VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 3053AC6E109B7857006FCFE7 /* PhoneGapLib/VERSION */; };
 		305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */; };
 		3072F99713A8081B00425683 /* Capture.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3072F99613A8081B00425683 /* Capture.bundle */; };
 		308D05371370CCF300D202BF /* icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 308D052E1370CCF300D202BF /* icon-72.png */; };
@@ -42,47 +42,40 @@
 		308D05391370CCF300D202BF /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 308D05301370CCF300D202BF /* icon@2x.png */; };
 		308D053C1370CCF300D202BF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 308D05341370CCF300D202BF /* Default.png */; };
 		308D053D1370CCF300D202BF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 308D05351370CCF300D202BF /* Default@2x.png */; };
-		30E1352710E2C1420031B30D /* PhoneGap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30E1352610E2C1420031B30D /* PhoneGap.plist */; };
+		30E1352710E2C1420031B30D /* Cordova.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30E1352610E2C1420031B30D /* Cordova.plist */; };
 		30E5649213A7FCAF007403D8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E5649113A7FCAF007403D8 /* CoreMedia.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		301BF534109A57CC0062928A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 301BF52D109A57CC0062928A /* PhoneGapLib/PhoneGapLib.xcodeproj */;
+			containerPortal = 301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2AAC07E0554694100DB518D;
-			remoteInfo = PhoneGapLib;
+			remoteInfo = CordovaLib;
 		};
 		301BF550109A68C00062928A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 301BF52D109A57CC0062928A /* PhoneGapLib/PhoneGapLib.xcodeproj */;
+			containerPortal = 301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
-			remoteInfo = PhoneGapLib;
-		};
-		30E47BC2136F595F00DBB853 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 301BF52D109A57CC0062928A /* PhoneGapLib/PhoneGapLib.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 303258D8136B2C9400982B63;
-			remoteInfo = PhoneGap;
+			remoteInfo = CordovaLib;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1388D41E1451D7D0009293F2 /* oknesset-splash.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "oknesset-splash.mp4"; sourceTree = "<group>"; };
-		13A116E61444ADDB005DE409 /* EmailComposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailComposer.h; sourceTree = "<group>"; };
-		13A116E81444ADDB005DE409 /* EmailComposer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailComposer.m; sourceTree = "<group>"; };
 		13A116E91444ADDB005DE409 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		13A117091444ADF2005DE409 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		13AD0BDD141E116800C8F6C1 /* GoogleAnalyticsPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAnalyticsPlugin.h; sourceTree = "<group>"; };
-		13AD0BDF141E116800C8F6C1 /* GoogleAnalyticsPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleAnalyticsPlugin.m; sourceTree = "<group>"; };
 		13AD0BE1141E116800C8F6C1 /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
 		13AD0BE2141E116800C8F6C1 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		13AD0C3F141E141C00C8F6C1 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		13C5617D147553CE00AE682E /* Animation-End.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Animation-End.png"; sourceTree = "<group>"; };
 		13C5617E147553CE00AE682E /* Animation-End@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Animation-End@2x.png"; sourceTree = "<group>"; };
+		13E7BFAF168F132B00A3F032 /* PhoneGap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PhoneGap.plist; sourceTree = "<group>"; };
+		13E7BFB1168F154400A3F032 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		13E7BFB2168F154400A3F032 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		13E7BFB3168F154400A3F032 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -92,7 +85,7 @@
 		1F766FE013BBADB100FB74C0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localizable.strings; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		301BF52D109A57CC0062928A /* PhoneGapLib/PhoneGapLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = PhoneGapLib/PhoneGapLib.xcodeproj; sourceTree = SOURCE_ROOT; };
+		301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CordovaLib.xcodeproj; path = CordovaLib/CordovaLib.xcodeproj; sourceTree = "<group>"; };
 		301BF56E109A69640062928A /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = SOURCE_ROOT; };
 		301BF5B4109A6A2B0062928A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		301BF5B6109A6A2B0062928A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
@@ -103,16 +96,14 @@
 		301BF5C0109A6A2B0062928A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		301BF5C2109A6A2B0062928A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		301BF5C4109A6A2B0062928A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		3053AC6E109B7857006FCFE7 /* PhoneGapLib/VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PhoneGapLib/VERSION; sourceTree = SOURCE_ROOT; };
 		305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3072F99613A8081B00425683 /* Capture.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Capture.bundle; path = Resources/Capture.bundle; sourceTree = "<group>"; };
-		307D28A1123043350040C0FA /* PhoneGapBuildSettings.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = PhoneGapBuildSettings.xcconfig; sourceTree = "<group>"; };
 		308D052E1370CCF300D202BF /* icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72.png"; sourceTree = "<group>"; };
 		308D052F1370CCF300D202BF /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		308D05301370CCF300D202BF /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		308D05341370CCF300D202BF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		308D05351370CCF300D202BF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		30E1352610E2C1420031B30D /* PhoneGap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PhoneGap.plist; sourceTree = "<group>"; };
+		30E1352610E2C1420031B30D /* Cordova.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Cordova.plist; sourceTree = "<group>"; };
 		30E5649113A7FCAF007403D8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* OKnesset_PG1-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OKnesset_PG1-Prefix.pch"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* OKnesset_PG1-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "OKnesset_PG1-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -123,7 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				301BF552109A68D80062928A /* libPhoneGap.a in Frameworks */,
+				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -150,6 +141,9 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				13E7BFB1168F154400A3F032 /* MainViewController.h */,
+				13E7BFB2168F154400A3F032 /* MainViewController.xib */,
+				13E7BFB3168F154400A3F032 /* MainViewController.m */,
 				1D3623240D0F684500981E51 /* AppDelegate.h */,
 				1D3623250D0F684500981E51 /* AppDelegate.m */,
 			);
@@ -159,8 +153,6 @@
 		13A116E51444ADDA005DE409 /* EmailComposer */ = {
 			isa = PBXGroup;
 			children = (
-				13A116E61444ADDB005DE409 /* EmailComposer.h */,
-				13A116E81444ADDB005DE409 /* EmailComposer.m */,
 				13A116E91444ADDB005DE409 /* readme.txt */,
 			);
 			path = EmailComposer;
@@ -169,8 +161,6 @@
 		13AD0BDC141E116800C8F6C1 /* GoogleAnalytics */ = {
 			isa = PBXGroup;
 			children = (
-				13AD0BDD141E116800C8F6C1 /* GoogleAnalyticsPlugin.h */,
-				13AD0BDF141E116800C8F6C1 /* GoogleAnalyticsPlugin.m */,
 				13AD0BE0141E116800C8F6C1 /* GoogSDK */,
 			);
 			path = GoogleAnalytics;
@@ -215,7 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				301BF56E109A69640062928A /* www */,
-				301BF52D109A57CC0062928A /* PhoneGapLib/PhoneGapLib.xcodeproj */,
+				301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				307C750510C5A3420062BCA9 /* Plugins */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -243,10 +233,9 @@
 				3072F99613A8081B00425683 /* Capture.bundle */,
 				308D052D1370CCF300D202BF /* icons */,
 				308D05311370CCF300D202BF /* splash */,
-				30E1352610E2C1420031B30D /* PhoneGap.plist */,
-				3053AC6E109B7857006FCFE7 /* PhoneGapLib/VERSION */,
+				30E1352610E2C1420031B30D /* Cordova.plist */,
+				13E7BFAF168F132B00A3F032 /* PhoneGap.plist */,
 				8D1107310486CEB800E47090 /* OKnesset_PG1-Info.plist */,
-				307D28A1123043350040C0FA /* PhoneGapBuildSettings.xcconfig */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -277,8 +266,7 @@
 		301BF52E109A57CC0062928A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				301BF535109A57CC0062928A /* libPhoneGap.a */,
-				30E47BC3136F595F00DBB853 /* PhoneGap.framework */,
+				301BF535109A57CC0062928A /* libCordova.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -363,7 +351,7 @@
 			projectReferences = (
 				{
 					ProductGroup = 301BF52E109A57CC0062928A /* Products */;
-					ProjectRef = 301BF52D109A57CC0062928A /* PhoneGapLib/PhoneGapLib.xcodeproj */;
+					ProjectRef = 301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -374,18 +362,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		301BF535109A57CC0062928A /* libPhoneGap.a */ = {
+		301BF535109A57CC0062928A /* libCordova.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libPhoneGap.a;
+			path = libCordova.a;
 			remoteRef = 301BF534109A57CC0062928A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		30E47BC3136F595F00DBB853 /* PhoneGap.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = PhoneGap.framework;
-			remoteRef = 30E47BC2136F595F00DBB853 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -396,8 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				301BF570109A69640062928A /* www in Resources */,
-				3053AC6F109B7857006FCFE7 /* PhoneGapLib/VERSION in Resources */,
-				30E1352710E2C1420031B30D /* PhoneGap.plist in Resources */,
+				30E1352710E2C1420031B30D /* Cordova.plist in Resources */,
 				308D05371370CCF300D202BF /* icon-72.png in Resources */,
 				308D05381370CCF300D202BF /* icon.png in Resources */,
 				308D05391370CCF300D202BF /* icon@2x.png in Resources */,
@@ -410,6 +390,8 @@
 				1388D41F1451D7D0009293F2 /* oknesset-splash.mp4 in Resources */,
 				13C5617F147553CE00AE682E /* Animation-End.png in Resources */,
 				13C56180147553CE00AE682E /* Animation-End@2x.png in Resources */,
+				13E7BFB0168F132B00A3F032 /* PhoneGap.plist in Resources */,
+				13E7BFB4168F154400A3F032 /* MainViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,8 +421,7 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
-				13AD0BE4141E116800C8F6C1 /* GoogleAnalyticsPlugin.m in Sources */,
-				13A116EB1444ADDB005DE409 /* EmailComposer.m in Sources */,
+				13E7BFB5168F154400A3F032 /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,7 +430,7 @@
 /* Begin PBXTargetDependency section */
 		301BF551109A68C00062928A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = PhoneGapLib;
+			name = CordovaLib;
 			targetProxy = 301BF550109A68C00062928A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -476,7 +457,6 @@
 /* Begin XCBuildConfiguration section */
 		1378722814522E66003A6D6B /* Distribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 307D28A1123043350040C0FA /* PhoneGapBuildSettings.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -493,7 +473,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
-				USER_HEADER_SEARCH_PATHS = "\"$(SDKROOT)/PhoneGapLib/Classes/JSON\" \"$(SDKROOT)/PhoneGapLib/Classes\"";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Distribution;
 		};
@@ -516,7 +496,7 @@
 				);
 				PRODUCT_NAME = "כנסת פתוחה";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1A9CDE6C-4BDF-4834-A91B-273C014D98D1";
-				USER_HEADER_SEARCH_PATHS = "\"PhoneGapLib/Classes/JSON\" \"PhoneGapLib/Classes\"";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv6";
 			};
 			name = Distribution;
@@ -532,7 +512,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OKnesset_PG1-Prefix.pch";
 				GCC_VERSION = "";
-				HEADER_SEARCH_PATHS = PhoneGapLib/Classes;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "OKnesset_PG1-Info.plist";
 				INFOPLIST_PREFIX_HEADER = InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
@@ -543,7 +523,7 @@
 				);
 				PRODUCT_NAME = "כנסת פתוחה";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1A9CDE6C-4BDF-4834-A91B-273C014D98D1";
-				USER_HEADER_SEARCH_PATHS = "\"PhoneGapLib/Classes/JSON\" \"PhoneGapLib/Classes\"";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv6";
 			};
 			name = Debug;
@@ -567,14 +547,13 @@
 				);
 				PRODUCT_NAME = "כנסת פתוחה";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1A9CDE6C-4BDF-4834-A91B-273C014D98D1";
-				USER_HEADER_SEARCH_PATHS = "\"PhoneGapLib/Classes/JSON\" \"PhoneGapLib/Classes\"";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv6";
 			};
 			name = Release;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 307D28A1123043350040C0FA /* PhoneGapBuildSettings.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -591,13 +570,12 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
-				USER_HEADER_SEARCH_PATHS = "\"$(SDKROOT)/PhoneGapLib/Classes/JSON\" \"$(SDKROOT)/PhoneGapLib/Classes\"";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 307D28A1123043350040C0FA /* PhoneGapBuildSettings.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -614,7 +592,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
-				USER_HEADER_SEARCH_PATHS = "\"$(SDKROOT)/PhoneGapLib/Classes/JSON\" \"$(SDKROOT)/PhoneGapLib/Classes\"";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

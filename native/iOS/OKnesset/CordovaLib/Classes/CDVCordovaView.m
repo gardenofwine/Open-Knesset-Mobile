@@ -17,26 +17,21 @@
  under the License.
  */
 
-//
-//  AppDelegate.h
-//  TestPG22
-//
-//  Created by ___FULLUSERNAME___ on ___DATE___.
-//  Copyright ___ORGANIZATIONNAME___ ___YEAR___. All rights reserved.
-//
+#import "CDVCordovaView.h"
 
-#import <UIKit/UIKit.h>
+@implementation CDVCordovaView
 
-#import <Cordova/CDVViewController.h>
+- (void)loadRequest:(NSURLRequest*)request
+{
+    [super loadRequest:request];
+}
 
-@interface AppDelegate : NSObject <UIApplicationDelegate>{}
-
-// invoke string is passed to your app on launch, this is only valid if you
-// edit TestPG22-Info.plist to add a protocol
-// a simple tutorial can be found here :
-// http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
-
-@property (nonatomic, strong) IBOutlet UIWindow* window;
-@property (nonatomic, strong) IBOutlet CDVViewController* viewController;
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code.
+}
+*/
 
 @end

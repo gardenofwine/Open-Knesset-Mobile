@@ -17,26 +17,15 @@
  under the License.
  */
 
-//
-//  AppDelegate.h
-//  TestPG22
-//
-//  Created by ___FULLUSERNAME___ on ___DATE___.
-//  Copyright ___ORGANIZATIONNAME___ ___YEAR___. All rights reserved.
-//
+#import <Foundation/Foundation.h>
 
-#import <UIKit/UIKit.h>
+@interface UIDevice (org_apache_cordova_UIDevice_Extension)
 
-#import <Cordova/CDVViewController.h>
-
-@interface AppDelegate : NSObject <UIApplicationDelegate>{}
-
-// invoke string is passed to your app on launch, this is only valid if you
-// edit TestPG22-Info.plist to add a protocol
-// a simple tutorial can be found here :
-// http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
-
-@property (nonatomic, strong) IBOutlet UIWindow* window;
-@property (nonatomic, strong) IBOutlet CDVViewController* viewController;
+/*
+    Get the unique identifier from the app bundle's folder, which is already a GUID
+    Upgrading and/or deleting the app and re-installing will get you a new GUID, so
+    this is only unique per install per device.
+ */
+- (NSString*)uniqueAppInstanceIdentifier;
 
 @end

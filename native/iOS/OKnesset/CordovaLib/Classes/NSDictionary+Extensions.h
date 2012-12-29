@@ -17,26 +17,19 @@
  under the License.
  */
 
-//
-//  AppDelegate.h
-//  TestPG22
-//
-//  Created by ___FULLUSERNAME___ on ___DATE___.
-//  Copyright ___ORGANIZATIONNAME___ ___YEAR___. All rights reserved.
-//
+#import <Foundation/Foundation.h>
 
-#import <UIKit/UIKit.h>
+@interface NSDictionary (org_apache_cordova_NSDictionary_Extension)
 
-#import <Cordova/CDVViewController.h>
+- (bool)existsValue:(NSString*)expectedValue forKey:(NSString*)key;
+- (NSInteger)integerValueForKey:(NSString*)key defaultValue:(NSInteger)defaultValue withRange:(NSRange)range;
+- (NSInteger)integerValueForKey:(NSString*)key defaultValue:(NSInteger)defaultValue;
+- (BOOL)typeValueForKey:(NSString*)key isArray:(BOOL*)bArray isNull:(BOOL*)bNull isNumber:(BOOL*)bNumber isString:(BOOL*)bString;
+- (BOOL)valueForKeyIsArray:(NSString*)key;
+- (BOOL)valueForKeyIsNull:(NSString*)key;
+- (BOOL)valueForKeyIsString:(NSString*)key;
+- (BOOL)valueForKeyIsNumber:(NSString*)key;
 
-@interface AppDelegate : NSObject <UIApplicationDelegate>{}
-
-// invoke string is passed to your app on launch, this is only valid if you
-// edit TestPG22-Info.plist to add a protocol
-// a simple tutorial can be found here :
-// http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
-
-@property (nonatomic, strong) IBOutlet UIWindow* window;
-@property (nonatomic, strong) IBOutlet CDVViewController* viewController;
+- (NSDictionary*)dictionaryWithLowercaseKeys;
 
 @end
