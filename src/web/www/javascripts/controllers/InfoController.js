@@ -60,13 +60,9 @@ Ext.regController('Info', {
                 window.plugins.emailComposer.showEmailComposerWithCB(emailCallback,
                         subject, "", OKnesset.strings.feedbackEmailAddress);
             } else if (isAndroid) {
-                var extras = {};
-                extras[WebIntent.EXTRA_SUBJECT] = subject;
-                extras[WebIntent.EXTRA_EMAIL] = [ OKnesset.strings.feedbackEmailAddress ];
                 window.plugins.webintent.startActivity({
-                    action : WebIntent.ACTION_SEND,
-                    type : 'text/plain',
-                    extras : extras
+                    action : WebIntent.ACTION_SENDTO,
+					url: 'mailto:' + OKnesset.strings.feedbackEmailAddress + '?subject=' + encodeURI(subject),
                 }, function() {
                     // success callback
                     OKnesset.app.controllers.navigation.dispatchBack();
