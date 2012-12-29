@@ -245,14 +245,32 @@ function getAPIData(options) {
 
 					// success
 					memcache[cacheKey] = parseResults;
-					if (options.diskCache || !options.skipDiskCache){
+                    var tryStoring = function(key, value) {
                         try {
-                            localStorage.setItem(cacheKey, JSON.stringify({
-                                date : Date.now(),
-                                data : parseResults
-                            }));
-                        } catch (ignore){}
 
+                            localStorage.setItem(key, JSON.stringify({
+                                date : Date.now(),
+                                data : value
+                            }));
+
+                            var cachedKeyList = JSON.parse(localStorage.getItem("cacheKeysList")) || [];
+                            cachedKeyList.push(key);
+                            localStorage.setItem("cacheKeysList",JSON.stringify(cachedKeyList))
+                        } catch (ignored){
+                            var cachedKeyListC = JSON.parse(localStorage.getItem("cacheKeysList"));
+                            if (!cachedKeyListC) return; // weird situation, should never happen
+
+                            var origLength = cachedKeyListC.length;
+                            while (cachedKeyListC.length > origLength * 0.7 ){
+                                localStorage.removeItem(cachedKeyListC.shift());
+                            }
+                            // now that we made some storage available,lats clean it up
+                            localStorage.setItem("cacheKeysList",JSON.stringify(cachedKeyListC))
+                            tryStoring(key, value);
+                        }
+                    }
+					if (options.diskCache || !options.skipDiskCache){
+                        tryStoring(cacheKey,parseResults)
                     }
 
 					if (!storeInCacheOnly){
