@@ -18,17 +18,14 @@ OKnesset.app.controllers.CandidateParty = Ext.regController('CandidateParty', {
 			});
 			this.partyView.query('#websiteButton')[0].addListener('tap',
 				function(that, index, item, e) {
-					console.log(that);
-					/*if (that.party_id) {
-						OKnesset.app.controllers.navigation.dispatchPanel('PartyInfo/Index/' + that.party_id, options.historyUrl);
-					}*/
+					//console.log(that);
+					window.open(that.url);
 			});
 			this.partyView.query('#manifestButton')[0].addListener('tap',
 				function(that, index, item, e) {
-					console.log(that);
-					/*if (that.party_id) {
-						OKnesset.app.controllers.navigation.dispatchPanel('PartyInfo/Index/' + that.party_id, options.historyUrl);
-					}*/
+					//console.log(that);
+					window.open(that.url);
+					
 			});
 		}
 
@@ -63,7 +60,17 @@ OKnesset.app.controllers.CandidateParty = Ext.regController('CandidateParty', {
 													  size: lettersSize.toString() + 'px'
 													 });
 		this.partyView.query('#websiteButton')[0].url = party.website;
-		this.partyView.query('#manifestButton')[0].url = party.manifest_url;
+		this.manifestButton = this.partyView.query('#manifestButton')[0];
+		if (party.manifest_url.length>0) {
+			this.manifestButton.url = party.manifest_url;
+			this.manifestButton.setText(OKnesset.strings.GotoPartyManifest);
+			this.manifestButton.enable();
+		}
+		else {
+			this.manifestButton.setText(OKnesset.strings.ManifestNA);
+			this.manifestButton.disable();
+		}
+
 		
 		setTitle(name, this);
 		this.application.viewport.setActiveItem(this.partyView, options.animation);

@@ -12,7 +12,7 @@ Ext.regController('Election', {
 			PartyList.addListener('itemtap',
 				function(that, index, item, e) {
 					var record = that.store.getAt(index);
-					console.log(record.data);
+					//console.log(record.data);
 					OKnesset.app.controllers.navigation.dispatchPanel('CandidateParty/Index/' + record.data.id, options.historyUrl);
 				});
 		}

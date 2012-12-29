@@ -109,7 +109,7 @@ OKnesset.strings = {
 	generalError             : "חלה תקלה אנא בדוק את החיבור לאינטרנט ונסה שוב",
 	GotoPartyWebsite		 : "לאתר המפלגה",
 	GotoPartyManifest		 : "למצע המפלגה",
-
+	ManifestNA				 : "מצע אינו זמין",
 	infoDialog: {
 		Default: {
 			title:"אופס...",

@@ -237,3 +237,20 @@ div.partyLetters {
 	text-align: center;
 	display: table;
 }
+
+div.partyLetters100precent {
+	float: none;
+	width: 50%;
+	height: 90%;
+	margin: 5px;
+	margin-left: 20px;
+	margin-right: 25%;
+	font-size: 100px;
+	font-weight: bold;
+	background-color: white;
+	border: 4px;
+	border-color: black;
+	border-style: solid;
+	text-align: center;
+	display: table;
+}

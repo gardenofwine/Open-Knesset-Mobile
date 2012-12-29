@@ -36,7 +36,7 @@ Ext.reg('CandidatePartyView', OKnesset.app.views.CandidatePartyView);
 OKnesset.app.views.CandidatePartyView.MemberList = new Ext.extend(Ext.List, {
 	id : 'MemberList',
 	flex : 5,
-	itemTpl : '<div>{#} {name}</div>',
+	itemTpl : '<div>{#} {name}</div><tpl if="id"></div><div class="x-list-disclosure"></div></tpl>',
 	scroll: false,
 	store : OKnesset.electionMembersStore
 	//onItemDisclosure : true
@@ -55,8 +55,12 @@ OKnesset.app.views.CandidatePartyView.MiniInfo = new Ext.extend(Ext.Panel, {
   //         align: 'stretch'
   //   },
 	padding: 5,
-	tpl : '<div class="partyInfo" style="position: absolute; width: 100%; height: 100%;"> \
+	/*tpl : '<div class="partyInfo" style="position: absolute; width: 100%; height: 100%;"> \
 				<div class="partyLetters"><div style="display: table-row;">\
 				<div style="display: table-cell;vertical-align:middle;font-size:{size}">{letters}</div>\
-				</div></div><p>עוד מידע על המפלגה</p></div>'
+				</div></div><p>עוד מידע על המפלגה</p></div>'*/
+	tpl : '<div class="partyInfo" style="position: absolute; width: 100%; height: 100%;"> \
+				<div class="partyLetters100precent"><div style="display: table-row;">\
+				<div style="display: table-cell;vertical-align:middle;font-size:{size}">{letters}</div>\
+				</div></div></div>'
 });
