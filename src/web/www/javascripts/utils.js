@@ -155,6 +155,21 @@ function getMembersById(ids) {
 }
 
 function setTitle(title,that) {
+	titleBar = document.getElementsByClassName('x-toolbar-title')[0];
+	var screenWidth = OKnesset.DeviceWidth;
+	//parseInt(document.getElementsByTagName('body')[0].style.width);
+	titleBar.style.width = (screenWidth - 100).toString() + 'px';
+	titleBar.style.marginRight = '59px';
+	var fontSize = (27 *screenWidth/362  / title.length * 100);
+	if (fontSize>120)
+		fontSize =120;
+	else if (fontSize < 84) {
+		fontSize = 84;
+		title = title.substring(0,parseInt(30*screenWidth/362)) + '...';
+	}
+
+	titleBar.style.fontSize = fontSize.toString() + '%';
+	titleBar.style.marginTop = (25.5290-0.2189*fontSize).toString() + 'px';
 	var titleBar = that.application.viewport.query('#toolbar')[0];
 	titleBar.setTitle(title);
 }
