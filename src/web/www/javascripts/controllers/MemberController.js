@@ -91,15 +91,9 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 				window.plugins.emailComposer.showEmailComposerWithCB(emailCallback,
 						"", OKnesset.strings.emailBody, recipient);
 			} else if (isAndroid) {
-				var extras = {};
-				extras[WebIntent.EXTRA_SUBJECT] = "";
-				extras[WebIntent.EXTRA_TEXT] = OKnesset.strings.emailBody;
-				extras[WebIntent.EXTRA_EMAIL] = [ recipient ];
-
 				window.plugins.webintent.startActivity({
-					action : WebIntent.ACTION_SEND,
-					type : 'text/plain',
-					extras : extras
+					action : WebIntent.ACTION_SENDTO,
+					url: 'mailto:' + recipient + '?body=' + encodeURI(OKnesset.strings.emailBody),
 				}, function() {
 					// success callback
 					OKnesset.app.controllers.navigation.dispatchBack();
