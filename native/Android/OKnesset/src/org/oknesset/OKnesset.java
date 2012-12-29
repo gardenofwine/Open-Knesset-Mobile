@@ -48,7 +48,7 @@ public class OKnesset extends DroidGap {
     	map.put("member", "MemberList");
     	map.put("about", "Credits");
     	map.put("party", "PartyList");
-    	// committee/meeting
+    	// We also need to handle the committee/meeting page.
     	return map;
     }
 
