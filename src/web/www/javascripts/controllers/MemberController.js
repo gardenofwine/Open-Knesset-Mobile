@@ -94,11 +94,12 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 				var extras = {};
 				extras[WebIntent.EXTRA_SUBJECT] = "";
 				extras[WebIntent.EXTRA_TEXT] = OKnesset.strings.emailBody;
-				extras[WebIntent.EXTRA_EMAIL] = [ recipient ];
+				extras[WebIntent.EXTRA_EMAIL] = recipient;
+				OKnesset.log("sending email to member " + this.name + " via email " +recipient);
 
 				window.plugins.webintent.startActivity({
 					action : WebIntent.ACTION_SEND,
-					type : 'text/plain',
+					type : 'text/html',
 					extras : extras
 				}, function() {
 					// success callback

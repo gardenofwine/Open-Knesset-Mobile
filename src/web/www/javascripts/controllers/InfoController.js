@@ -62,10 +62,10 @@ Ext.regController('Info', {
             } else if (isAndroid) {
                 var extras = {};
                 extras[WebIntent.EXTRA_SUBJECT] = subject;
-                extras[WebIntent.EXTRA_EMAIL] = [ OKnesset.strings.feedbackEmailAddress ];
+                extras[WebIntent.EXTRA_EMAIL] = OKnesset.strings.feedbackEmailAddress;
                 window.plugins.webintent.startActivity({
                     action : WebIntent.ACTION_SEND,
-                    type : 'text/plain',
+                    type : 'text/html',
                     extras : extras
                 }, function() {
                     // success callback
