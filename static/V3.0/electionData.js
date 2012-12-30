@@ -19,8 +19,8 @@ var electionParties =
 		"id":3,
 		"name": "אחים אנחנו",
 		"letters": "פנ",
-		"website": "http://www.ahim-anahnu.org/",
-		"manifest_url": "http://www.ahim-anahnu.org/viewStaticPage.aspx?pageID=4"
+		"website": "",
+		"manifest_url": ""
 	},
 	{
 		"id":4,
@@ -127,7 +127,7 @@ var electionParties =
 		"id":18,
 		"name": "נצח",
 		"letters": "פך",
-		"website": "http://he.wikipedia.org/wiki/%D7%A0%D7%A6%D7%97_(%D7%9E%D7%A4%D7%9C%D7%92%D7%94)",
+		"website": "",
 		"manifest_url": ""
 	},
 	{
