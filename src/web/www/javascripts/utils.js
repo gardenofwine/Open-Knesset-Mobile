@@ -29,6 +29,7 @@ GApageMapping = {
 	PartyListView               : "/app/party/",
 	PartyView                   : "/app/party/",
 	PartyInfoView               : "/app/party/info/",
+	CandidatePartyView			: "/app/elections/party/",
 	memberVotesView             : "/app/member/votes/",
 	VoteDetailsView             : "/app/vote/",
 	AgendaListView              : "/app/agenda/",

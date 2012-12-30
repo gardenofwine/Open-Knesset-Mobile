@@ -14,6 +14,13 @@ OKnesset.app.views.CandidatePartyView = new Ext.extend(Ext.Panel, {
 			{
 				this.memberList = new OKnesset.app.views.CandidatePartyView.MemberList();
 				this.info = new OKnesset.app.views.CandidatePartyView.MiniInfo();
+				this.partyButton = new Ext.Button({                                                       
+					id  : 'partyButton',
+					margin: "10 10 10 10",
+					flex : 1,
+					cls : 'read-more-btn',
+					text: OKnesset.strings.GotoPartyPanel
+				});
 				this.websiteButton = new Ext.Button({                                                       
 					id  : 'websiteButton',
 					margin: "10 10 10 10",
@@ -28,7 +35,7 @@ OKnesset.app.views.CandidatePartyView = new Ext.extend(Ext.Panel, {
 					cls : 'read-more-btn',
 					text: OKnesset.strings.GotoPartyManifest
 				});
-				this.items = [this.info, this.websiteButton, this.manifestButton, this.memberList];
+				this.items = [this.info, this.partyButton, this.websiteButton, this.manifestButton, this.memberList];
 				OKnesset.app.views.CandidatePartyView.superclass.initComponent.apply(this, arguments);
 			}
 		});
@@ -36,7 +43,7 @@ OKnesset.app.views.CandidatePartyView = new Ext.extend(Ext.Panel, {
 Ext.reg('CandidatePartyView', OKnesset.app.views.CandidatePartyView);
 
 OKnesset.app.views.CandidatePartyView.MemberList = new Ext.extend(Ext.List, {
-	id : 'MemberList',
+	id : 'CandidateMemberList',
 	flex : 5,
 	itemTpl : '<div>{#} {name}</div><tpl if="id"></div><div class="x-list-disclosure"></div></tpl>',
 	scroll: false,

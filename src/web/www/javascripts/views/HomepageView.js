@@ -21,7 +21,7 @@ OKnesset.app.views.HomepageView = new Ext.extend(Ext.Panel, {
         flex : 1,
         xtype: 'button',
         margin: "10 10 10 10",
-        text : OKnesset.strings.Homepage19ElectionsBtn
+        text : OKnesset.strings.ElcetionTitle
       },
       {
       flex : 3,
