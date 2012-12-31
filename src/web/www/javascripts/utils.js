@@ -250,14 +250,8 @@ function getAPIData(options) {
 		}
 	}
 
-	// make request
-	Ext.util.JSONP.request({
-		url        	: requestUrl,
-		callbackKey	: OKnessetAPIMapping[options.apiKey].callbackKey,
-		params     	: parameters,
-		scope		: this,
-		onFailure  	: options.failure,
-		callback   	: function (results){
+
+	var internalCallbackFunc = function (results){
 			if (OKnesset.debug) {
 				// validate results
 				var valid = validateObject(results, OKnessetAPIMapping[options.apiKey].expectedObject);
@@ -290,8 +284,36 @@ function getAPIData(options) {
 				},
 				OKnessetAPIMapping[options.apiKey].expectedObject
 			);
+		};
+
+	if (OKnessetAPIMapping[options.apiKey].ajax){
+		if (isPhoneGap()) {
+			Ext.Ajax.request({
+				url: requestUrl,
+				failure : options.failure
+				success: function(results){
+					eval(results.responseText);
+					// ajax responses return no result parameter 
+					// for the success callback; just eval the responseText
+					options.success();
+				}
+			});
+		} else {
+			// not phonegap, ajax is not possible; return immediately with no result
+			options.success();
 		}
-	});
+	} else {	
+		// make request
+		Ext.util.JSONP.request({
+			url        	: requestUrl,
+			callbackKey	: OKnessetAPIMapping[options.apiKey].callbackKey,
+			params     	: parameters,
+			scope		: this,
+			onFailure  	: options.failure,
+			callback   	: internalCallbackFunc
+		});
+	}
+
 	if (storeInCacheOnly){
 		// this menas the callback has already been invoked on the caller
 		return true;

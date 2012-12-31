@@ -529,6 +529,7 @@ window.OKnessetAPIMapping = {
 		url : function(){
 			return 'https://raw.github.com/gardenofwine/Open-Knesset-Mobile/elections/static/V3.0/electionData.js';
 		},
+		ajax : true,
 		parameters : {},
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.trivialParser,
