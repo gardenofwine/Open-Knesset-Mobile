@@ -21,7 +21,8 @@ Ext.regController('Election', {
 		
 		getAPIData({
 			apiKey:'elections',
-			success: function (){
+			success: function (data){
+				eval(data);
 				that.partyList.refresh();
 			},
 			failure: function (result){

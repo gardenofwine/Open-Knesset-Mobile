@@ -292,14 +292,11 @@ function getAPIData(options) {
 				url: requestUrl,
 				failure : options.failure,
 				success: function(results){
-					eval(results.responseText);
 					if (!options.skipDiskCache){
                         _diskCacheSet(cacheKey,results.responseText);
                     }
 
-					// ajax responses return no result parameter 
-					// for the success callback; just eval the responseText
-					options.success();
+					options.success(results.responseText);
 				}
 			});
 		} else {
