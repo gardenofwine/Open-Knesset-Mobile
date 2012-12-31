@@ -301,7 +301,7 @@ OKnesset.ElectionPartyStore = new Ext.data.Store({
 			direction: 'ASC'
 		}
 	],
-	data : electionParties
+	// data : electionParties
 });
 
 Ext.regModel('electionMembers', {
@@ -316,5 +316,5 @@ OKnesset.electionMembersStore = new Ext.data.Store({
 			direction: 'ASC'
 		}
 	],
-	data : electionMembers
+	// data : electionMembers
 });

@@ -1,4 +1,5 @@
-var electionParties = 
+var election = {};
+election.parties = 
 [
 	{
 		"id":1,
@@ -252,7 +253,7 @@ var electionParties =
 ]
 ;
 
-var electionMembers = 
+election.members = 
 [
 	{
 		"name": "ידען ירון",

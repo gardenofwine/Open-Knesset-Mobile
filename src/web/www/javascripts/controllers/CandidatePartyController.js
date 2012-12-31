@@ -35,6 +35,9 @@ OKnesset.app.controllers.CandidateParty = Ext.regController('CandidateParty', {
 			});
 		}
 
+		// It is assumed that the api call to load the elections data has been loaded in 
+		// the ElectionPartyListController
+
 		id = parseInt(options.id, 10);
 		party = getObjectFromStoreByID(OKnesset.ElectionPartyStore, id);
 		party = party.data;

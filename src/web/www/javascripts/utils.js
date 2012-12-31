@@ -245,7 +245,6 @@ function getAPIData(options) {
 				// and it hasn't yet been stord in the cache.
                 _diskCacheSet(cacheKey, options.bundledData, -1);
                 options.success(options.bundledData);
-				storeInCacheOnly = true;
 			}
 		}
 	}
