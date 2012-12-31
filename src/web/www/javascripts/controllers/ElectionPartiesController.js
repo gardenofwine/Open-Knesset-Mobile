@@ -17,15 +17,12 @@ Ext.regController('Election', {
 				});
 		}
 
-		// var that = this;
+		var that = this;
 		
 		getAPIData({
 			apiKey:'elections',
 			success: function (){
-				console.log("GOT ELECTIONS DATA");
-				this.partyList.refresh();
-				// OKnesset.MemberStore.loadData(data);
-				// that.memberListView.memberList.refresh();
+				that.partyList.refresh();
 			},
 			failure: function (result){
 				OKnesset.onError('SERVER', ["error receiving members data.", result]);
