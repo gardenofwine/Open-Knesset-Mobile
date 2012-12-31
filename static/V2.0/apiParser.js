@@ -44,7 +44,7 @@ window.OKnessetParser.createExpandedMember = function (member){
 	var reducedMember = window.OKnessetParser.createMinimalMemberItem(member);
 	reducedMember.gender = member.gender;
 	reducedMember.party_name = member.party_name;
-	reducedMember.date_of_birth = member.date_of_birth;
+	reducedMember.date_of_birth = formatDate(member.date_of_birth);
 	reducedMember.place_of_residence = member.place_of_residence;
 	reducedMember.average_weekly_presence_hours = member.average_weekly_presence_hours;
 	reducedMember.current_role_descriptions = member.current_role_descriptions;
@@ -98,6 +98,31 @@ window.OKnessetParser.sortedMembers = {
 window.OKnessetParser.member = function (result, success, failure){
 	result = window.OKnessetParser.createExpandedMember(result);
 	success(result);
+};
+
+/*******************************************************************************
+ * object.id to number parser
+ */
+window.OKnessetParser.objectIdToNumberParser = function (result, success, failure){
+	for (var i = 0; i < result.objects.length; i++) {
+			result.objects[i].id = parseInt(result.objects[i].id, 10);
+		};	
+	success(result.objects);
+};
+
+/*******************************************************************************
+ * committee to number parser
+ */
+window.OKnessetParser.committeeParser = function (result, success, failure){
+	var committees = [];
+	for (var i = 0; i < result.length; i++) {
+			committees.push({
+				name : result[i].name,
+				id : parseInt(result[i].id, 10),
+				description : ""
+			})
+		};	
+	success(committees);
 };
 
 /*******************************************************************************
@@ -224,7 +249,7 @@ window.OKnessetAPIMapping = {
 		},
 		parameters : {format:"jsonp"},
 		callbackKey : "callback",
-		parser: OKnessetParser.objectsParser
+		parser: OKnessetParser.objectIdToNumberParser
 	},
 
 	agendaDetails :{
@@ -243,16 +268,16 @@ window.OKnessetAPIMapping = {
 		},
 		parameters : {format:"jsonp"},
 		callbackKey : "callback",
-		parser: OKnessetParser.objectsParser
+		parser: OKnessetParser.objectIdToNumberParser
 	},
 
 	committees : {
 		url : function(){
-			return 'http://www.oknesset.org/api/v2/committee/';
+			return 'http://www.oknesset.org/api/committee/';
 		},
-		parameters : {format:"jsonp"},
+		parameters : {},
 		callbackKey : "callback",
-		parser: OKnessetParser.objectsParser
+		parser: OKnessetParser.committeeParser
 	},
 
 	committeeDetail : {
@@ -274,3 +299,18 @@ window.OKnessetAPIMapping = {
 	}
 };
 
+/**
+*
+* @param date - format "yyyy-mm-dd"
+* @returns {String} format "dd/mm/yyyy"
+*/
+function formatDate(date) {
+	if (!date) {
+        return '--/--/--';
+    }
+	var year = date.substr(0,4);
+	var month = date.substr(5,2);
+	var day = date.substr(8,2);
+	
+	return day + "/" + month + "/" + year;
+}
