@@ -1,4 +1,4 @@
-var slimDataDate = new Date(2012, 6 - 1, 3);
+// Data updated at 03.06.2012
 var slimMembers = [
     {
         "id": 810,

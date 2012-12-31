@@ -20,6 +20,7 @@ Ext.regController('AgendaList', {
 		var that = this;
 		getAPIData({
 			apiKey:'agendas',
+			bundledData : slimAgendas,
 			success:function(data){
 				OKnesset.AgendaListStore.loadData(data);
                 that.AgendaListView.agendaList.refresh();

@@ -115,7 +115,6 @@ function secondaryLaunch() {
 	function loadPartiesAndMembersDataIfNeeded(){
 		getAPIData({
 			apiKey:'parties',
-			diskCache : true,
 			forceLoad : true,
 			success:function(data){
 				OKnesset.PartyStore.loadData(data);
@@ -127,7 +126,6 @@ function secondaryLaunch() {
 
 		getAPIData({
 			apiKey:'members',
-			diskCache : true,
 			forceLoad : true,
 			success:function(data){
 				OKnesset.MemberStore.loadData(data);

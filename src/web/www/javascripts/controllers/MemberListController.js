@@ -20,6 +20,7 @@ Ext.regController('MemberList', {
 		
 		getAPIData({
 			apiKey:'members',
+			bundledData : slimMembers,
 			success: function (data){
 				OKnesset.MemberStore.loadData(data);
 				that.memberListView.memberList.refresh();

@@ -18,6 +18,7 @@ Ext.regController('PartyList', {
 
 		getAPIData({
 			apiKey:'parties',
+			bundledData : slimPartyData,
 			success: function (data){
 				OKnesset.PartyStore.loadData(data);
 				// that.memberView.getComponent('loading').hide();

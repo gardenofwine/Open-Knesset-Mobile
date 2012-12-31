@@ -38,7 +38,6 @@ OKnesset.PartyStore = new Ext.data.Store({
 			direction: 'DESC'
 		}
 	],
-	data: slimPartyData,
 	groupField : 'is_coalition',
 	getGroupString : function(record) {
 		return record.get('is_coalition')?
@@ -74,7 +73,6 @@ OKnesset.MemberStoreSorters = {
 
 OKnesset.MemberStore = new Ext.data.Store({
 	model: 'Member',
-	data : slimMembers,
 	sorters : [OKnesset.MemberStoreSorters.partyOrdinal],
 	groupField : 'name',
 	getGroupString : function(record) {
@@ -226,7 +224,6 @@ Ext.regModel('AgendaList', {
 
 OKnesset.AgendaListStore = new Ext.data.Store({
 	model: 'AgendaList',
-	data: slimAgendas,
 	sorters: {
 		property: 'name'
 	}
