@@ -170,12 +170,11 @@ function getMembersById(ids) {
  * options: an object with the following keys:
  	(string)apiKey, 
  	(function)success, 
- 	(boolean)diskCache, 
  	(boolean)forceLoad,
  	(function)failure
  	(object)urlOptions, 
  	(object)parameterOptions
-
+	(object)bundledData
  * retuns: ture if data was retrieved from cache. false otherwise
  */
 memcache = {};
@@ -184,6 +183,7 @@ function getAPIData(options) {
 		options.failure("The file apiParser.js has not been loaded from the server");
 		return false;
 	}
+
 	var requestUrl = OKnessetAPIMapping[options.apiKey].url(options.urlOptions);
 
 	var parameters;
@@ -208,7 +208,7 @@ function getAPIData(options) {
 			storeInCacheOnly = true;
 		}
 	} else {
-		cachedData = _cacheGet(cacheKey);
+		cachedData = _memoryCacheGet(cacheKey);
 		if ((typeof cachedData !== 'undefined') && cachedData !== null ){
 			//call callback function with cached data
 			options.success(cachedData);
@@ -217,9 +217,17 @@ function getAPIData(options) {
 			} else {
 				storeInCacheOnly = true;
 			}
+		} else {
+			// no disk cache and no memory cache for apiKey
+			if (options.bundledData){
+				// there is a bundled data for this api call, 
+				// and it hasn't yet been stord in the cache.
+                _diskCacheSet(cacheKey, options.bundledData, -1);
+                options.success(options.bundledData);
+				storeInCacheOnly = true;
+			}
 		}
 	}
-
 
 	// make request
 	Ext.util.JSONP.request({
@@ -244,32 +252,9 @@ function getAPIData(options) {
 
 					// success
 					memcache[cacheKey] = parseResults;
-                    var tryStoring = function(key, value) {
-                        try {
 
-                            localStorage.setItem(key, JSON.stringify({
-                                date : Date.now(),
-                                data : value
-                            }));
-
-                            var cachedKeyList = JSON.parse(localStorage.getItem("cacheKeysList")) || [];
-                            cachedKeyList.push(key);
-                            localStorage.setItem("cacheKeysList",JSON.stringify(cachedKeyList))
-                        } catch (ignored){
-                            var cachedKeyListC = JSON.parse(localStorage.getItem("cacheKeysList"));
-                            if (!cachedKeyListC) return; // weird situation, should never happen
-
-                            var origLength = cachedKeyListC.length;
-                            while (cachedKeyListC.length > origLength * 0.7 ){
-                                localStorage.removeItem(cachedKeyListC.shift());
-                            }
-                            // now that we made some storage available,lats clean it up
-                            localStorage.setItem("cacheKeysList",JSON.stringify(cachedKeyListC))
-                            tryStoring(key, value);
-                        }
-                    }
-					if (options.diskCache || !options.skipDiskCache){
-                        tryStoring(cacheKey,parseResults)
+					if (!options.skipDiskCache){
+                        _diskCacheSet(cacheKey,parseResults)
                     }
 
 					if (!storeInCacheOnly){
@@ -305,10 +290,35 @@ function getAPIData(options) {
         }
         return null;
 	}
-	function _cacheGet(key) {
+	function _memoryCacheGet(key) {
 		var cachedData = memcache[key];
 		return cachedData;
 	}
+	function _diskCacheSet(key, value, time) {
+	    try {
+
+	        localStorage.setItem(key, JSON.stringify({
+	            date : time || Date.now(),
+	            data : value
+	        }));
+
+	        var cachedKeyList = JSON.parse(localStorage.getItem("cacheKeysList")) || [];
+	        cachedKeyList.push(key);
+	        localStorage.setItem("cacheKeysList",JSON.stringify(cachedKeyList))
+	    } catch (ignored){
+	        var cachedKeyListC = JSON.parse(localStorage.getItem("cacheKeysList"));
+	        if (!cachedKeyListC) return; // weird situation, should never happen
+
+	        var origLength = cachedKeyListC.length;
+	        while (cachedKeyListC.length > origLength * 0.7 ){
+	            localStorage.removeItem(cachedKeyListC.shift());
+	        }
+	        // now that we made some storage available,lats clean it up
+	        localStorage.setItem("cacheKeysList",JSON.stringify(cachedKeyListC))
+	        _diskCacheSet(key, value);
+	    }
+	}
+
 }
 
 function validateObject(object, expectedTypes){
