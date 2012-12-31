@@ -8,8 +8,8 @@ Ext.regController('Election', {
 
 			// never show the loading pane, because there are always members to display from slimData
 			this.electionView.showLoading(false);
-			PartyList = this.electionView.query('#ElectionPrtyListView')[0]
-			PartyList.addListener('itemtap',
+			this.partyList = this.electionView.query('#ElectionPrtyListView')[0]
+			this.partyList.addListener('itemtap',
 				function(that, index, item, e) {
 					var record = that.store.getAt(index);
 					//console.log(record.data);
@@ -19,16 +19,18 @@ Ext.regController('Election', {
 
 		// var that = this;
 		
-		// getAPIData({
-		// 	apiKey:'members',
-		// 	success: function (data){
-		// 		OKnesset.MemberStore.loadData(data);
-		// 		that.memberListView.memberList.refresh();
-		// 	},
-		// 	failure: function (result){
-		// 		OKnesset.onError('SERVER', ["error receiving members data.", result]);
-		// 	}
-		// });
+		getAPIData({
+			apiKey:'elections',
+			success: function (){
+				console.log("GOT ELECTIONS DATA");
+				this.partyList.refresh();
+				// OKnesset.MemberStore.loadData(data);
+				// that.memberListView.memberList.refresh();
+			},
+			failure: function (result){
+				OKnesset.onError('SERVER', ["error receiving members data.", result]);
+			}
+		});
 
 		// don't track if the panal was reached by pressing 'back'
 		if (options.pushed){
