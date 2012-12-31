@@ -269,7 +269,7 @@ function getAPIData(options) {
 					memcache[cacheKey] = parseResults;
 
 					if (!options.skipDiskCache){
-                        _diskCacheSet(cacheKey,parseResults)
+                        _diskCacheSet(cacheKey,parseResults);
                     }
 
 					if (!storeInCacheOnly){
@@ -290,9 +290,13 @@ function getAPIData(options) {
 		if (isPhoneGap()) {
 			Ext.Ajax.request({
 				url: requestUrl,
-				failure : options.failure
+				failure : options.failure,
 				success: function(results){
 					eval(results.responseText);
+					if (!options.skipDiskCache){
+                        _diskCacheSet(cacheKey,results.responseText);
+                    }
+
 					// ajax responses return no result parameter 
 					// for the success callback; just eval the responseText
 					options.success();
