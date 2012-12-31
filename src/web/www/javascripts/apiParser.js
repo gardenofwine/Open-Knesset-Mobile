@@ -523,7 +523,17 @@ window.OKnessetAPIMapping = {
 			date : "string",
 			id : "string"
 		}
+	},
+
+	elections : {
+		url : function(){
+			return 'https://raw.github.com/gardenofwine/Open-Knesset-Mobile/elections/static/V3.0/electionData.js';
+		},
+		parameters : {},
+		callbackKey : "callback",
+		parser: OKnessetParser.parsers.trivialParser,
 	}
+
 };
 
 
