@@ -111,6 +111,21 @@ window.OKnessetParser.objectIdToNumberParser = function (result, success, failur
 };
 
 /*******************************************************************************
+ * committee to number parser
+ */
+window.OKnessetParser.committeeParser = function (result, success, failure){
+	var committees = [];
+	for (var i = 0; i < result.length; i++) {
+			committees.push({
+				name : result[i].name,
+				id : parseInt(result[i].id, 10),
+				description : ""
+			})
+		};	
+	success(committees);
+};
+
+/*******************************************************************************
  * memberBills parser
  */
 window.OKnessetParser.memberBills = function (result, success, failure){
@@ -258,11 +273,11 @@ window.OKnessetAPIMapping = {
 
 	committees : {
 		url : function(){
-			return 'http://www.oknesset.org/api/v2/committee/';
+			return 'http://www.oknesset.org/api/committee/';
 		},
-		parameters : {format:"jsonp"},
+		parameters : {},
 		callbackKey : "callback",
-		parser: OKnessetParser.objectIdToNumberParser
+		parser: OKnessetParser.committeeParser
 	},
 
 	committeeDetail : {
