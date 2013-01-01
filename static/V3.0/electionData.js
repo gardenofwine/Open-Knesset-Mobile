@@ -256,7 +256,7 @@ election.parties =
 election.members = 
 [
 	{
-		"name": "ידען ירון",
+		"name": "1ידען ירון",
 		"party": "אור",
 		"image": "http://www.orr.org.il/images/stories/or_members/yaron.jpg"
 	},
