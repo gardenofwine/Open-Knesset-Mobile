@@ -34,8 +34,7 @@ Ext.regController('AgendaVoteList', {
 		if (options.pushed){
     	    GATrackPage('AgendaVoteListView', findData.data.name);
     	}
-
-		this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.AgendaVoteTitle + findData.data.name);
+setTitle(OKnesset.strings.AgendaVoteTitle + findData.data.name,this);
 		this.application.viewport.setActiveItem(this.AgendaVoteListView, options.animation);
 
 

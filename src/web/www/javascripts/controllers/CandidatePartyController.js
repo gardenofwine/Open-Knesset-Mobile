@@ -61,7 +61,7 @@ OKnesset.app.controllers.CandidateParty = Ext.regController('CandidateParty', {
 				});
 			}
 		}
-		var lettersSize = (parseInt(document.getElementsByTagName('body')[0].style.width) * 1.8 / 2 / party.letters.length)
+		var lettersSize = (OKnesset.DeviceWidth * 1.8 / 2 / party.letters.length)
 		if (lettersSize > 120)
 			lettersSize = 120;
 		this.partyView.query('#MiniInfo')[0].update({ letters: party.letters,

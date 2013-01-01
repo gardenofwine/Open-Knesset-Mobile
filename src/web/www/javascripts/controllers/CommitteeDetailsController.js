@@ -71,7 +71,7 @@ Ext.regController('CommitteeDetails', {
 			});
 		}
 
-		this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.committeeDetails);
+		setTitle(OKnesset.strings.committeeDetails,this);
 		this.application.viewport.setActiveItem(this.CommitteeDetailsView, options.animation);
 
 	},

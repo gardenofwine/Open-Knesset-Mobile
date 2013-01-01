@@ -48,7 +48,7 @@ Ext.regController('VoteDetails', {
 		}
 
 		this.application.viewport.setActiveItem(this.VoteDetailsView, options.animation);
-		this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.votesDetails);
+		setTitle(OKnesset.strings.votesDetails,this);
 
 		if (membersVotedList.scroller) {
 			membersVotedList.scroller.scrollTo({

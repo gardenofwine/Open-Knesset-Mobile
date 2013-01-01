@@ -128,7 +128,7 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 
 		this.memberView.query('#MemberImage')[0].update(member);
 		this.memberView.query('#MemberInfo')[0].update(member);
-		this.application.viewport.query('#toolbar')[0].setTitle(member.name);
+		setTitle(member.name,this);
 		this.memberView.query('#memberEmailBtn')[0].setText(this.getEmailButtonText());
 		this.memberView.query('#memberEmailBtn')[0].setHandler(this.sendEmail,member);
 		this.memberView.query('#memberCallBtn')[0].setText(this.getPhoneCallButtonText());

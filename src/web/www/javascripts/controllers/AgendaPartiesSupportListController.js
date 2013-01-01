@@ -26,7 +26,7 @@ Ext.regController('AgendaPartiesSupportList', {
             GATrackPage('AgendaPartiesSupportListView', findData.data.name);
         }
 
-        this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.supportparties + findData.data.name);
+        setTitle(OKnesset.strings.supportparties + findData.data.name,this);
         this.application.viewport.setActiveItem(this.AgendaPartiesSupportListView, options.animation);
 
 

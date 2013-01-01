@@ -33,8 +33,7 @@ Ext.regController('ProtocolSection', {
         if (options.pushed){
             GATrackPage('ProtocolSectionView', OKnesset.ProtocolTopicsStore.protocolId);
         }
-        
-        this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.protocolsec);
+        setTitle(OKnesset.strings.protocolsec,this);
         this.application.viewport.setActiveItem(this.protocolsectionView, options.animation);
 
 

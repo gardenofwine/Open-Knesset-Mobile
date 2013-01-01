@@ -37,8 +37,7 @@ Ext.regController('MemberList', {
 
 		OKnesset.MemberStore.clearFilter(true);
 		OKnesset.MemberStore.sort([OKnesset.MemberStoreSorters.alphabetical]);
-
-		this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.membersTitle);
+		setTitle(OKnesset.strings.membersTitle,this);
 		this.application.viewport.setActiveItem(this.memberListView, options.animation);
 	}
 });

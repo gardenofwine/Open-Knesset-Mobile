@@ -48,7 +48,7 @@ OKnesset.app.controllers.Party = Ext.regController('Party', {
 		}
 		this.partyView.query('#MiniText')[0].update(info && info.data || {});
 		this.partyView.query('#Button')[0].party_id = info && info.data.party_id;
-		this.application.viewport.query('#toolbar')[0].setTitle(name);
+		setTitle(name,this);
 		this.application.viewport.setActiveItem(this.partyView, options.animation);
 	},
 

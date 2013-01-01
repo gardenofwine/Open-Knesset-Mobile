@@ -26,7 +26,7 @@ OKnesset.app.controllers.Homepage = Ext.regController('Homepage', {
                 OKnesset.app.controllers.navigation.dispatchPanel('Election/Index');
             });
         }
-        this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.openKnessetTitle);
+        setTitle(OKnesset.strings.openKnessetTitle,this);
         this.application.viewport.setActiveItem(this.homepage, options.animation);
     },
 });

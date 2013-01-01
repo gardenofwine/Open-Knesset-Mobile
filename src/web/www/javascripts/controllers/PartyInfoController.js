@@ -25,7 +25,7 @@ OKnesset.app.controllers.PartyInfo = Ext.regController('PartyInfo', {
 
 		this.currentInfo = info.data;
 		this.view.query('#Info')[0].update(this.currentInfo);
-		this.application.viewport.query('#toolbar')[0].setTitle(name);
+		setTitle(name,this);
 		this.application.viewport.setActiveItem(this.view, options.animation);
 	}
 });

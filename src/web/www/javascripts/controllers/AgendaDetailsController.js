@@ -66,7 +66,7 @@ Ext.regController('AgendaDetails', {
         }
 		// var findData = OKnesset.AgendaListStore.findBy(function(r){return r.data.id === parseInt(options.id)});
 		// findData = OKnesset.AgendaListStore.getAt(findData);
-		this.application.viewport.query('#toolbar')[0].setTitle(agenda.data.name);
+		setTitle(agenda.data.name,this);
 		this.application.viewport.setActiveItem(this.AgendaDetailsView, options.animation);
 
 	},

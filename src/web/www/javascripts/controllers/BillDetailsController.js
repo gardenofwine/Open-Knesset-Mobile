@@ -53,7 +53,7 @@
 
 
 		this.application.viewport.setActiveItem(this.BillDetailsView, options.animation);
-		this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.billDetails);
+		setTitle(OKnesset.strings.billDetails,this);
 
 		if (BillDetailsController.BillDetailsView.scroller) {
 			BillDetailsController.BillDetailsView.scroller.scrollTo({

@@ -28,7 +28,7 @@ Ext.regController('AgendaMembersSupportList', {
             GATrackPage('AgendaMembersSupportListView', findData.data.name);
         }
   		
-        this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.supportmembers + findData.data.name);
+        setTitle(OKnesset.strings.supportmembers + findData.data.name,this);
         this.application.viewport.setActiveItem(this.AgendaMembersSupportListView, options.animation);
     
     }

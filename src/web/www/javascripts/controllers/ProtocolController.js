@@ -96,8 +96,7 @@ Ext.regController('Protocol', {
 		if (options.pushed){
 			GATrackPage('ProtocolView', options.id);
 		}
-
-		this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.Committeemeeting);
+		setTitle(OKnesset.strings.Committeemeeting,this);
 		this.application.viewport.setActiveItem(this.protocolView, options.animation);
 
 		if (options.pushed){

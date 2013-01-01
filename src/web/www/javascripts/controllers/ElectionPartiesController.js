@@ -50,8 +50,7 @@ Ext.regController('Election', {
 		if (options.pushed){
 			GATrackPage('ElectionView', '');
 		}
-
-		this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.ElcetionTitle);
+		setTitle(OKnesset.strings.ElcetionTitle,this);
 		this.application.viewport.setActiveItem(this.electionView, options.animation);
 	}
 });

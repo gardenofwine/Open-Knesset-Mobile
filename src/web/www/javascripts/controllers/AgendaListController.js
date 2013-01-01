@@ -37,7 +37,7 @@ Ext.regController('AgendaList', {
 			GATrackPage('AgendaListView', '');
         }
 
-		this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.AgendaTitle);
+		setTitle(OKnesset.strings.AgendaTitle,this);
 		this.application.viewport.setActiveItem(this.AgendaListView, options.animation);
 
 	}

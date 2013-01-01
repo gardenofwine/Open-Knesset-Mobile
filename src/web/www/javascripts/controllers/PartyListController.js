@@ -32,9 +32,7 @@ Ext.regController('PartyList', {
 		if (options.pushed){
 			GATrackPage('PartyListView', '');
 		}
-
-
-		this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.partiesTitle);
+		setTitle(OKnesset.strings.partiesTitle,this);
 		this.application.viewport.setActiveItem(this.partyListView, options.animation);
 	}
 });
