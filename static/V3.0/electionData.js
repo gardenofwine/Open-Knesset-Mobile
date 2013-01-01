@@ -136,7 +136,7 @@ election.parties =
 		"name": "הישראלים",
 		"letters": "יק",
 		"website": "http://he.wikipedia.org/wiki/%D7%94%D7%99%D7%A9%D7%A8%D7%90%D7%9C%D7%99%D7%9D_(%D7%9E%D7%A4%D7%9C%D7%92%D7%94)",
-		"manifest_url": ""
+		"manifest_url": "http://www.google.com"
 	},
 	{
 		"id":20,
