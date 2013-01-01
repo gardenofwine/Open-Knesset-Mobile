@@ -1400,7 +1400,7 @@ election.members =
 		"party": "כולנו חברים - ננח"
 	},
 	{
-		"name": "ג`מאל זחאלקה",
+		"name": " הגמאל ג`מאל זחאלקה",
 		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי",
 		"image": "http://www.knesset.gov.il/mk/images/members/zahalka_jamal-s.jpg",
 		"id": "756"
