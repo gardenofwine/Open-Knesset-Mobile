@@ -256,7 +256,7 @@ election.parties =
 election.members = 
 [
 	{
-		"name": "הגמרלידען ירון",
+		"name": "ידען ירון",
 		"party": "אור",
 		"image": "http://www.orr.org.il/images/stories/or_members/yaron.jpg"
 	},
@@ -1400,7 +1400,7 @@ election.members =
 		"party": "כולנו חברים - ננח"
 	},
 	{
-		"name": " הגמאל ג`מאל זחאלקה",
+		"name": "ג`מאל זחאלקה",
 		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי",
 		"image": "http://www.knesset.gov.il/mk/images/members/zahalka_jamal-s.jpg",
 		"id": "756"
