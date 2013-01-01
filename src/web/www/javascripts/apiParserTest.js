@@ -56,6 +56,6 @@ function testAPIParser(){
 		};
 			 
 	} catch (e) {
-		console.error("exception")
+		console.error(e);
 	}
 }
