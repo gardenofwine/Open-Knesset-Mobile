@@ -76,6 +76,15 @@ function secondaryLaunch() {
 	localStorage.setItem('version', OKnesset.appVersion);
 
 	if (isPhoneGap()){
+		// There are 3 possible ways to get the apiPArser.
+		// 1) it is included in the application bundle, and loaded at the end of the body
+		// 2) it is loaded form the web, and stored in localStorage
+		// 3) it is loaded form localStorage before it is loaded form the web.
+		var apiParserJS = localStorage.getItem('API_PARSER');
+		if (apiParserJS !== null){
+			eval(apiParserJS);
+		} 
+
 		// load the api parser
 		Ext.Ajax.request({
 			url: 'http://open-knesset-mobile.appspot.com/static/V3.0/apiParser.js',
@@ -84,6 +93,7 @@ function secondaryLaunch() {
 			},
 			success: function(results){
 				eval(results.responseText);
+				localStorage.setItem('API_PARSER', results.responseText);
 				loadPartiesAndMembersDataIfNeeded();
 			}
 		});

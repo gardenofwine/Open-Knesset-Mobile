@@ -67,8 +67,9 @@
         <!-- delete temp directory 
         <delete dir="${concat.dir}"/> -->
 
-        <!-- copy index-prod.html file -->
+        <!-- copy index-prod.html and apiParser file -->
         <copy file="target/${channel.dir}/www/index-prod.html" tofile="target_prod/${channel.dir}/www/index.html"/>
+        <copy file="target/${channel.dir}/www/javascripts/apiParser.js" tofile="target_prod/${channel.dir}/www/javascripts/apiParser.js"/>
     </target>
 
 
