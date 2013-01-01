@@ -30,6 +30,11 @@ native/iOS/OKnesset/OKnesset.xcodeproj/xcuserdata/*
 native/iOS/OKnesset/*.xcarchive
 native/iOS/OKnesset/*.ipa
 
+native/iOS/OKnesset/CordovaLib/CordovaLib.xcodeproj/*.pbxuser
+native/iOS/OKnesset/CordovaLib/CordovaLib.xcodeproj/*.mode1v3
+native/iOS/OKnesset/CordovaLib/CordovaLib.xcodeproj/xcuserdata/*
+native/iOS/OKnesset/CordovaLib/CordovaLib.xcodeproj/project.xcworkspace/*
+
 
 #eclipse noise
 .tmp*
