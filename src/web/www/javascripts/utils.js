@@ -29,6 +29,7 @@ GApageMapping = {
 	PartyListView               : "/app/party/",
 	PartyView                   : "/app/party/",
 	PartyInfoView               : "/app/party/info/",
+	CandidatePartyView			: "/app/elections/party/",
 	memberVotesView             : "/app/member/votes/",
 	VoteDetailsView             : "/app/vote/",
 	AgendaListView              : "/app/agenda/",
@@ -42,7 +43,8 @@ GApageMapping = {
 	ProtocolSectionView         : "/app/committee/protocol/sections/",
 	InfoView                    : "/app/info/",
 	DisclaimerView              : "/app/disclaimer/",
-	CreditsView                 : "/app/disclaimer/credits"
+	CreditsView                 : "/app/disclaimer/credits",
+	ElectionView				: "/app/elections/"
 };
 
 function GATrackPage(page, extra) {
@@ -164,6 +166,25 @@ function getMembersById(ids) {
 		return members;
 }
 
+function setTitle(title,that) {
+	titleBar = document.getElementsByClassName('x-toolbar-title')[0];
+	var screenWidth = OKnesset.DeviceWidth;
+	//parseInt(document.getElementsByTagName('body')[0].style.width);
+	titleBar.style.width = (screenWidth - 100).toString() + 'px';
+	titleBar.style.marginRight = '59px';
+	var fontSize = (27 *screenWidth/362  / title.length * 100);
+	if (fontSize>120)
+		fontSize =120;
+	else if (fontSize < 84) {
+		fontSize = 84;
+		title = title.substring(0,parseInt(30*screenWidth/362)) + '...';
+	}
+
+	titleBar.style.fontSize = fontSize.toString() + '%';
+	titleBar.style.marginTop = (25.5290-0.2189*fontSize).toString() + 'px';
+	var titleBar = that.application.viewport.query('#toolbar')[0];
+	titleBar.setTitle(title);
+}
 
 
 /**
@@ -224,19 +245,12 @@ function getAPIData(options) {
 				// and it hasn't yet been stord in the cache.
                 _diskCacheSet(cacheKey, options.bundledData, -1);
                 options.success(options.bundledData);
-				storeInCacheOnly = true;
 			}
 		}
 	}
 
-	// make request
-	Ext.util.JSONP.request({
-		url        	: requestUrl,
-		callbackKey	: OKnessetAPIMapping[options.apiKey].callbackKey,
-		params     	: parameters,
-		scope		: this,
-		onFailure  	: options.failure,
-		callback   	: function (results){
+
+	var internalCallbackFunc = function (results){
 			if (OKnesset.debug) {
 				// validate results
 				var valid = validateObject(results, OKnessetAPIMapping[options.apiKey].expectedObject);
@@ -254,7 +268,7 @@ function getAPIData(options) {
 					memcache[cacheKey] = parseResults;
 
 					if (!options.skipDiskCache){
-                        _diskCacheSet(cacheKey,parseResults)
+                        _diskCacheSet(cacheKey,parseResults);
                     }
 
 					if (!storeInCacheOnly){
@@ -269,8 +283,37 @@ function getAPIData(options) {
 				},
 				OKnessetAPIMapping[options.apiKey].expectedObject
 			);
+		};
+
+	if (OKnessetAPIMapping[options.apiKey].ajax){
+		if (isPhoneGap()) {
+			Ext.Ajax.request({
+				url: requestUrl,
+				failure : options.failure,
+				success: function(results){
+					if (!options.skipDiskCache){
+                        _diskCacheSet(cacheKey,results.responseText);
+                    }
+
+					options.success(results.responseText);
+				}
+			});
+		} else {
+			// not phonegap, ajax is not possible; return immediately with no result
+			options.success();
 		}
-	});
+	} else {	
+		// make request
+		Ext.util.JSONP.request({
+			url        	: requestUrl,
+			callbackKey	: OKnessetAPIMapping[options.apiKey].callbackKey,
+			params     	: parameters,
+			scope		: this,
+			onFailure  	: options.failure,
+			callback   	: internalCallbackFunc
+		});
+	}
+
 	if (storeInCacheOnly){
 		// this menas the callback has already been invoked on the caller
 		return true;

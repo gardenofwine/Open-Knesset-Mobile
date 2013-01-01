@@ -23,8 +23,6 @@ native/Android/OKnesset/gen/*
 native/iOS/OKnesset/build/*
 native/iOS/OKnesset/OKnesset.xcodeproj/*.pbxuser
 native/iOS/OKnesset/OKnesset.xcodeproj/*.mode1v3
-native/iOS/OKnesset/xcuserdata
-native/iOS/distribution/2011-11-02 app store update
 native/iOS/OKnesset/OKnesset.xcodeproj/project.xcworkspace/*
 native/iOS/OKnesset/OKnesset.xcodeproj/xcuserdata/*
 native/iOS/OKnesset/*.xcarchive
@@ -34,7 +32,6 @@ native/iOS/OKnesset/CordovaLib/CordovaLib.xcodeproj/*.pbxuser
 native/iOS/OKnesset/CordovaLib/CordovaLib.xcodeproj/*.mode1v3
 native/iOS/OKnesset/CordovaLib/CordovaLib.xcodeproj/xcuserdata/*
 native/iOS/OKnesset/CordovaLib/CordovaLib.xcodeproj/project.xcworkspace/*
-
 
 #eclipse noise
 .tmp*

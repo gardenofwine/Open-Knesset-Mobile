@@ -65,6 +65,10 @@ Ext.regApplication({
 		}
 		// TODO call secondaryLaunch form the afterDisplay event of Ext.Panel
 		window.setTimeout(secondaryLaunch, 10);
+
+		var viewport = Ext.ApplicationManager.get("oknesset").viewport;
+	    OKnesset.DeviceWidth = viewport.getWidth();
+    	OKnesset.DeviceHeight = viewport.getHeight();
 	}
 });
 

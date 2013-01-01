@@ -6,17 +6,24 @@ OKnesset.app.controllers.Homepage = Ext.regController('Homepage', {
             this.homepage = this.render({
                 xtype: 'HomePage',
             });
-            this.homepage.items.get(1).items.getByKey('homepageAgendaBtn').setHandler(function(){
+            this.homepage.query('#homepageAgendaBtn')[0].setHandler(function(){
                 OKnesset.app.controllers.navigation.dispatchPanel('AgendaList/Index');
             });
-            this.homepage.items.get(1).items.getByKey('homepagePartiesBtn').setHandler(function(){
+            this.homepage.query('#homepagePartiesBtn')[0].setHandler(function(){
                 OKnesset.app.controllers.navigation.dispatchPanel('PartyList/Index');
             });
-            this.homepage.items.get(2).items.getByKey('homepageCommitteesBtn').setHandler(function(){
+            this.homepage.query('#homepageCommitteesBtn')[0].setHandler(function(){
                 OKnesset.app.controllers.navigation.dispatchPanel('AllCommittees/Index');
             });
-            this.homepage.items.get(2).items.getByKey('homepageMembersBtn').setHandler(function(){
+            this.homepage.query('#homepageMembersBtn')[0].setHandler(function(){
+                if (OKnesset.debug) {
+                    time.start('Member panel');
+                    time.report();
+                }
                 OKnesset.app.controllers.navigation.dispatchPanel('MemberList/Index');
+            });
+            this.homepage.query('#electionsBtn')[0].setHandler(function(){
+                OKnesset.app.controllers.navigation.dispatchPanel('Election/Index');
             });
         }
         this.application.viewport.query('#toolbar')[0].setTitle(OKnesset.strings.openKnessetTitle);

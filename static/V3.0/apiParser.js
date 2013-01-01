@@ -192,6 +192,7 @@ window.OKnessetParser.parsers.objectsParser = function (result, success, failure
  * genericParser
  */
 window.OKnessetParser.parsers.genericParser = function (result, success, failure, expectedObject){
+
 	var copyByKeysRecur = function(mapping,source,_target){
 		for (var key in mapping ){
 			var handlePerKey = function(mappingVal, sourceVal){
@@ -250,7 +251,7 @@ window.OKnessetAPIMapping = {
 		url : function(){
 			return 'http://www.oknesset.org/api/v2/member/';
 		},
-		parameters : {format:"jsonp", extra_fields:"is_current,party_url,current_role_descriptions"},
+		parameters : {format:"jsonp", extra_fields:"is_current,party_url"},
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.members,
 		expectedObject: {
@@ -522,8 +523,16 @@ window.OKnessetAPIMapping = {
 			date : "string",
 			id : "string"
 		}
+	},
+
+	elections : {
+		url : function(){
+			return 'http://open-knesset-mobile.appspot.com/static/V3.0/electionData.js';
+		},
+		ajax : true,
+		parameters : {},
+		callbackKey : "callback",
+		parser: OKnessetParser.parsers.trivialParser,
 	}
+
 };
-
-
-

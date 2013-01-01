@@ -523,7 +523,18 @@ window.OKnessetAPIMapping = {
 			date : "string",
 			id : "string"
 		}
+	},
+
+	elections : {
+		url : function(){
+			return 'http://open-knesset-mobile.appspot.com/static/V3.0/electionData.js';
+		},
+		ajax : true,
+		parameters : {},
+		callbackKey : "callback",
+		parser: OKnessetParser.parsers.trivialParser,
 	}
+
 };
 
 

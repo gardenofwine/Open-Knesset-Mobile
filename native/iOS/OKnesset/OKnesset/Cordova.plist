@@ -28,6 +28,7 @@
 	<string>cloud</string>
 	<key>ExternalHosts</key>
 	<array>
+		<string>*</string>
 		<string>google-analytics.com</string>
 		<string>http://open-knesset-mobile.appspot.com</string>
 		<string>http://www.oknesset.org</string>

@@ -102,10 +102,14 @@ OKnesset.strings = {
 	Homepagetagline          : "מה חברי הכנסת עשו בכנסת ה 18?",
 	HomepageAgendaBtnText    : "עמדת חברי הכנסת בנושאים שונים לפי הצבעותיהם במליאה",
 	HomepagePartiesBtnText   : "כל המפלגות והמידע אודותיהן, לפי שיוך קואליציוני",
-	HomepageCommitteesBtnTxt : "ועדות הכנסת והחברים בהן, פרוטוקולים של ישיבות ופעילותם",
+	HomepageCommitteesBtnTxt : "ועדות הכנסת, החברים בהן ופרוטוקולי ישיבות",
 	HomepageMembersBtnTxt    : "רשימת כל חברי הכנסת לפי הא\x22ב",
+	ElcetionTitle			 : "הבחירות לכנסת ה 19",
 	generalError             : "חלה תקלה אנא בדוק את החיבור לאינטרנט ונסה שוב",
-
+	GotoPartyWebsite		 : "לאתר המפלגה",
+	GotoPartyManifest		 : "למצע המפלגה",
+	GotoPartyPanel			 : "למסך המפלגה בכנסת פתוחה",
+	ManifestNA				 : "מצע אינו זמין ברשת",
 	infoDialog: {
 		Default: {
 			title:"אופס...",
