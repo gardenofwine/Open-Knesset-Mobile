@@ -29,14 +29,12 @@ Ext.regController('Election', {
 						// data received via ajax form the server is of type 'string'
 						eval(data);
 					} else {
-						// bundle data is o ftype 'object'
+						// bundle data is of type 'object'
 						election = data;						
 					}
 					
 					OKnesset.ElectionPartyStore.clearFilter();
-					OKnesset.electionMembersStore.clearFilter();
 					OKnesset.ElectionPartyStore.loadData(election.parties);
-					OKnesset.electionMembersStore.loadData(election.members);
 					that.partyList.enable();
 					that.partyList.refresh();
 				} 
