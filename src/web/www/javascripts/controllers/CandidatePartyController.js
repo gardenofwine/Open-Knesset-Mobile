@@ -35,12 +35,6 @@ OKnesset.app.controllers.CandidateParty = Ext.regController('CandidateParty', {
 			});
 		}
 
-		// It is assumed that the api call to load the elections data has been loaded in 
-		// the ElectionPartyListController
-		OKnesset.electionMembersStore.clearFilter();
-		OKnesset.electionMembersStore.loadData(election.members);
-
-		// var id = parseInt(options.id, 10);
 		var that = this;
 		that.partyView.showLoading(true);
 		getAPIData({
@@ -115,30 +109,4 @@ OKnesset.app.controllers.CandidateParty = Ext.regController('CandidateParty', {
 
 	},
 
-	getIdFromAbsoluteUrl: function(url){
-		var sub1 = url.substr("/party/".length);
-		return sub1.substr(0,sub1.indexOf('/'));
-	},
-
-	getNameById : function(partyId){
-		var party = getObjectFromStoreByID(OKnesset.PartyStore, partyId);
-		if (typeof party === 'undefined') {
-			OKnesset.log("Cannot find party from id '" + partyId + "'");
-			return "";
-		}
-		
-		return party.data.name;
-	},
-
-	// filterMembersByParty : function(id) {
-	// 	OKnesset.electionMembersStore.clearFilter(true);
-	// 	OKnesset.electionMembersStore.filter({
-	// 		property: 'party',
-	// 		exactMatch : true,
-	// 		value : party.name});
-	// },
-
-	navigateToParty: function(partyId){
-		OKnesset.app.controllers.navigation.dispatchPanel('Party/Index/' + partyId, "");
-	}
 });
