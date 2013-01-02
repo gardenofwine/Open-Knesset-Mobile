@@ -1,4 +1,4 @@
-{
+Ext.util.JSONP.callback({
 	"name": "נצח",
 	"members": [
 		{
@@ -33,4 +33,4 @@
 			"name": "קצבורג דוד צבי"
 		}
 	]
-}
+});
