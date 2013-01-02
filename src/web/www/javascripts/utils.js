@@ -251,68 +251,49 @@ function getAPIData(options) {
 
 
 	var internalCallbackFunc = function (results){
-			if (OKnesset.debug) {
-				// validate results
-				var valid = validateObject(results, OKnessetAPIMapping[options.apiKey].expectedObject);
-				if (typeof valid == 'boolean' && valid){
-					console.log("" + options.apiKey + " valid");	
-				} else {
-					console.error("" + options.apiKey + " not valid. " + valid);	
-				}
+		if (OKnesset.debug) {
+			// validate results
+			var valid = validateObject(results, OKnessetAPIMapping[options.apiKey].expectedObject);
+			if (typeof valid == 'boolean' && valid){
+				console.log("" + options.apiKey + " valid");	
+			} else {
+				console.error("" + options.apiKey + " not valid. " + valid);	
 			}
-
-			OKnessetAPIMapping[options.apiKey].parser(results,
-				function(parseResults){
-
-					// success
-					memcache[cacheKey] = parseResults;
-
-					if (!options.skipDiskCache){
-                        _diskCacheSet(cacheKey,parseResults);
-                    }
-
-					if (!storeInCacheOnly){
-						options.success(parseResults);
-					}
-				},
-				function(parseResults){
-					// failure
-					if (!storeInCacheOnly){
-						options.failure(parseResults);
-					}
-				},
-				OKnessetAPIMapping[options.apiKey].expectedObject
-			);
-		};
-
-	if (OKnessetAPIMapping[options.apiKey].ajax){
-		if (isPhoneGap()) {
-			Ext.Ajax.request({
-				url: requestUrl,
-				failure : options.failure,
-				success: function(results){
-					if (!options.skipDiskCache){
-                        _diskCacheSet(cacheKey,results.responseText);
-                    }
-
-					options.success(results.responseText);
-				}
-			});
-		} else {
-			// not phonegap, ajax is not possible; return immediately with no result
-			options.success();
 		}
-	} else {	
-		// make request
-		Ext.util.JSONP.request({
-			url        	: requestUrl,
-			callbackKey	: OKnessetAPIMapping[options.apiKey].callbackKey,
-			params     	: parameters,
-			scope		: this,
-			onFailure  	: options.failure,
-			callback   	: internalCallbackFunc
-		});
-	}
+
+		OKnessetAPIMapping[options.apiKey].parser(results,
+			function(parseResults){
+
+				// success
+				memcache[cacheKey] = parseResults;
+
+				if (!options.skipDiskCache){
+                    _diskCacheSet(cacheKey,parseResults);
+                }
+
+				if (!storeInCacheOnly){
+					options.success(parseResults);
+				}
+			},
+			function(parseResults){
+				// failure
+				if (!storeInCacheOnly){
+					options.failure(parseResults);
+				}
+			},
+			OKnessetAPIMapping[options.apiKey].expectedObject
+		);
+	};
+
+	// make request
+	Ext.util.JSONP.request({
+		url        	: requestUrl,
+		callbackKey	: OKnessetAPIMapping[options.apiKey].callbackKey,
+		params     	: parameters,
+		scope		: this,
+		onFailure  	: options.failure,
+		callback   	: internalCallbackFunc
+	});
 
 	if (storeInCacheOnly){
 		// this menas the callback has already been invoked on the caller

@@ -1,7 +1,7 @@
 Ext.util.JSONP.callback([
 	{
 		"id": 1,
-		"name": "אור",
+		"name": "אור בראשות ירון ידען",
 		"letters": "ני",
 		"website": "http://www.orr.org.il/",
 		"manifest_url": "http://www.orr.org.il/index.php?option=com_content&view=article&id=1&Itemid=2"

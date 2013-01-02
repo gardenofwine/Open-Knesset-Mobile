@@ -1,5 +1,5 @@
 Ext.util.JSONP.callback({
-	"name": "אור",
+	"name": "אור בראשות ירון ידען",
 	"members": [
 		{
 			"name": "ידען ירון",
