@@ -324,11 +324,12 @@ function getAPIData(options) {
 	function _diskCacheGet(key, isImmutable) {
 		var cachedData = localStorage.getItem(key);
 		if (cachedData !== null){
+			cachedData = JSON.parse(cachedData);
             if (!isImmutable && parseInt(cachedData.date) < Date.now() - 1000 * 60 * 60 * 24) {
                 localStorage.removeItem(key);
-                return null
+                return null;
             } else {
-                return JSON.parse(cachedData);
+                return cachedData;
             }
         }
         return null;
