@@ -9,6 +9,7 @@
         <script src="javascripts/utils.js" type="text/javascript" charset="utf-8">
         </script>
         <script src="javascripts/apiParser.js" type="text/javascript" charset="utf-8"></script>
+        <script src="javascripts/models/electionData.js" type="text/javascript" charset="utf-8"></script>
         <script>
 
             if (typeof OKnesset === 'undefined') {
@@ -79,30 +80,97 @@
 				x.value = JSON.stringify(agendas, null, "\t");
             }
 
+            function parseElectionData(){
+            	electionData = {
+            		parties : election.parties,
+            		memberByParty : {}
+            	};
+
+            	for (var i = 0; i < election.members.length; i++) {
+            		var member = election.members[i];
+            		var partyId = getParyIdByName(member.party);
+
+            		//get the party entry in memberByParty
+            		var partyMemberArray;
+            		if (typeof electionData.memberByParty[''+partyId] === 'undefined'){
+            			electionData.memberByParty[''+partyId] = partyMemberArray = {
+            					name : member.party,
+            					members : []
+            			};
+            		} else {
+            			partyMemberArray = electionData.memberByParty[''+partyId];
+            		}
+
+            		//add the member to the array
+            		partyMemberArray.members.push(createCandidateMember(member));
+            	};
+
+				var x=document.getElementById("election");
+				x.value = JSON.stringify(electionData, null, "\t");
+
+
+				for (var key in electionData.memberByParty){
+					var div = document.createElement('div');
+					div.innerHTML = '' + 
+					key + '(' +electionData.memberByParty[key].name+ ')' +
+					':</br><TEXTAREA ROWS="10" COLS="800">' + 
+					JSON.stringify(electionData.memberByParty[key], null, "\t"); + 
+					'</TEXTAREA>';
+					document.body.appendChild(div);
+				}
+
+            	function getParyIdByName(name){
+					for (var i = 0; i < election.parties.length; i++) {
+						if (election.parties[i].name === name){
+							return election.parties[i].id;
+						}
+            		}
+
+            		return -1;	
+            	}
+
+            	function createCandidateMember(member){
+            		var candMember = {
+            			name : member.name
+            		};
+            		if (member.id){
+            			candMember.id = member.id;
+            		}
+
+            		if (member.image){
+            			candMember.image = member.image;
+            		}
+
+            		return candMember;
+            	}
+            }
 
             /**********************************/
+			window.onload = function(){
+				parseElectionData();
 
-			getAPIData({
-				apiKey:'members',
-				success:membersReceived,
-				failure:function(result){
-					OKnesset.onError('SERVER', ["error receiving memebers data. ", result]);
-				}
-			});
-			getAPIData({
-				apiKey:'parties',
-				success:partiesReceived,
-				failure:function(result){
-					OKnesset.onError('SERVER', ["error receiving parties data. ", result]);
-				}
-			});
-			getAPIData({
-				apiKey:'agendas',
-				success:agendasReceived,
-				failure:function(result){
-					OKnesset.onError('SERVER', ["error receiving agendas data. ", result]);
-				}
-			});
+				getAPIData({
+					apiKey:'members',
+					success:membersReceived,
+					failure:function(result){
+						OKnesset.onError('SERVER', ["error receiving memebers data. ", result]);
+					}
+				});
+				getAPIData({
+					apiKey:'parties',
+					success:partiesReceived,
+					failure:function(result){
+						OKnesset.onError('SERVER', ["error receiving parties data. ", result]);
+					}
+				});
+				getAPIData({
+					apiKey:'agendas',
+					success:agendasReceived,
+					failure:function(result){
+						OKnesset.onError('SERVER', ["error receiving agendas data. ", result]);
+					}
+				});
+			}
 
         </script>
     </head>
@@ -113,12 +181,6 @@
 	    	members: <br>
 			<TEXTAREA id="members" NAME="members" ROWS="10" COLS="800">
 			</TEXTAREA>
-<!--			slimMembers:
-			<TEXTAREA id="slimMembers" NAME="slimMembers" ROWS="10" COLS="800">
-			</TEXTAREA>
-	    	slim data: <br>
-			<TEXTAREA id="slimData" NAME="slimData" ROWS="10" COLS="800">
-			</TEXTAREA> -->
 			parties: <br>
 			<TEXTAREA id="parties" NAME="parties" ROWS="10" COLS="800">
 			</TEXTAREA>
@@ -127,6 +189,9 @@
 			</TEXTAREA>
 			image list: <br>
 			<TEXTAREA id="imageList" NAME="partyData" ROWS="10" COLS="800">
+			</TEXTAREA>
+	    	election: <br>
+			<TEXTAREA id="election" NAME="election" ROWS="10" COLS="800">
 			</TEXTAREA>
 		</form>
     </body>
