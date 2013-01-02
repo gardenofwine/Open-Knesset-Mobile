@@ -9,7 +9,7 @@ OKnesset.app.controllers.CandidateParty = Ext.regController('CandidateParty', {
 			this.partyView = this.render({
 				xtype: 'CandidatePartyView'
 			});
-			memberList = this.partyView.query('#CandidateMemberList')[0];
+			var memberList = this.partyView.query('#CandidateMemberList')[0];
 			memberList.addListener('itemtap',
 				function(that, index, item, e) {
 					var record = that.store.getAt(index);
@@ -40,19 +40,33 @@ OKnesset.app.controllers.CandidateParty = Ext.regController('CandidateParty', {
 		OKnesset.electionMembersStore.clearFilter();
 		OKnesset.electionMembersStore.loadData(election.members);
 
-		id = parseInt(options.id, 10);
-		party = getObjectFromStoreByID(OKnesset.ElectionPartyStore, id);
-		party = party.data;
+		// var id = parseInt(options.id, 10);
+		var that = this;
+		that.partyView.showLoading(true);
+		getAPIData({
+			apiKey:'candidateParty',
+			urlOptions: options.id,
+            bundledData : election.memberByParty[''+options.id],
+			success: function (data){
+				var party = getObjectFromStoreByID(OKnesset.ElectionPartyStore, options.id);
+				that.updateData({
+					party: party.data,
+					members: data.members
+				});
+				that.partyView.showLoading(false);
+			},
+			failure: function (result){
+				OKnesset.onError('SERVER', ["error receiving members data.", result]);
+			}
+		});
 
-		name = party.name;
+		var party = getObjectFromStoreByID(OKnesset.ElectionPartyStore, options.id);
 
 		// don't track if the panal was reached by pressing 'back'
 		if (options.pushed){
-			GATrackPage('CandidatePartyView', name);
+			GATrackPage('CandidatePartyView', party.data.name);
 		}
-
-		this.filterMembersByParty(party);
-
+	
 		// in case the member list was scrolled down( because the user viewed the
 		// panel for another member)
 		if (options.pushed){
@@ -63,6 +77,18 @@ OKnesset.app.controllers.CandidateParty = Ext.regController('CandidateParty', {
 				});
 			}
 		}
+	
+		setTitle(party.data.name, this);
+		this.application.viewport.setActiveItem(this.partyView, options.animation);
+
+	},
+
+	updateData: function(data){
+		var party = data.party;
+		OKnesset.electionMembersStore.clearFilter();
+		OKnesset.electionMembersStore.loadData(data.members);
+		// this.filterMembersByParty(data.party.id);
+
 		var lettersSize = (parseInt(document.getElementsByTagName('body')[0].style.width) * 1.8 / 2 / party.letters.length)
 		if (lettersSize > 120)
 			lettersSize = 120;
@@ -87,10 +113,6 @@ OKnesset.app.controllers.CandidateParty = Ext.regController('CandidateParty', {
 			this.manifestButton.disable();
 		}
 
-		
-		setTitle(name, this);
-		this.application.viewport.setActiveItem(this.partyView, options.animation);
-
 	},
 
 	getIdFromAbsoluteUrl: function(url){
@@ -108,13 +130,13 @@ OKnesset.app.controllers.CandidateParty = Ext.regController('CandidateParty', {
 		return party.data.name;
 	},
 
-	filterMembersByParty : function(party) {
-		OKnesset.electionMembersStore.clearFilter(true);
-		OKnesset.electionMembersStore.filter({
-			property: 'party',
-			exactMatch : true,
-			value : party.name});
-	},
+	// filterMembersByParty : function(id) {
+	// 	OKnesset.electionMembersStore.clearFilter(true);
+	// 	OKnesset.electionMembersStore.filter({
+	// 		property: 'party',
+	// 		exactMatch : true,
+	// 		value : party.name});
+	// },
 
 	navigateToParty: function(partyId){
 		OKnesset.app.controllers.navigation.dispatchPanel('Party/Index/' + partyId, "");

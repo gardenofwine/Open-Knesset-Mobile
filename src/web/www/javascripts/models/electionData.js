@@ -1,6920 +1,5454 @@
-var election = {};
-election.parties = 
-[
-	{
-		"id":1,
-		"name": "אור",
-		"letters": "ני",
-		"website": "http://www.orr.org.il/",
-		"manifest_url": "http://www.orr.org.il/index.php?option=com_content&view=article&id=1&Itemid=2"
-	},
-	{
-		"id":2,
-		"party_id":4,
-		"name": "יהדות התורה והשבת אגודת ישראל - דגל התורה",
-		"letters": "ג",
-		"website": "http://he.wikipedia.org/wiki/%D7%99%D7%94%D7%93%D7%95%D7%AA_%D7%94%D7%AA%D7%95%D7%A8%D7%94",
-		"manifest_url": ""
-	},
-	{
-		"id":3,
-		"name": "אחים אנחנו",
-		"letters": "פנ",
-		"website": "http://www.ahim-anahnu.org/",
-		"manifest_url": "http://www.ahim-anahnu.org/viewStaticPage.aspx?pageID=4"
-	},
-	{
-		"id":4,
-		"name": "יש עתיד בראשות יאיר לפיד",
-		"letters": "פה",
-		"website": "http://yeshatid.org.il/",
-		"manifest_url": "http://yeshatid.org.il/%D7%A2%D7%9C-%D7%94%D7%9E%D7%A4%D7%9C%D7%92%D7%94-2/%D7%9E%D7%A0%D7%95%D7%A4%D7%99-%D7%94%D7%A9%D7%99%D7%A0%D7%95%D7%99/        http://yeshatid.org.il/"
-	},
-	{
-		"id":5,
-		"name": "ארץ חדשה - החזית להפלת שלטון ההון",
-		"letters": "ז",
-		"website": "http://eretzchadasha.com/",
-		"manifest_url": "http://eretzchadasha.com/who-we-are"
-	},
-	{
-		"id":6,
-		"name": "כולנו חברים - ננח",
-		"letters": "פץ",
-		"website": "http://www.nanach.co.il",
-		"manifest_url": "http://www.nanach.co.il/?page_id=18"
-	},
-	{
-		"id":7,
-		"party_id":9,
-		"name": 'בל”ד - אלתג`מוע אלווטני אלדמוקרטי',
-		"letters": "ד",
-		"website": "http://www.tajamoa.org/",
-		"manifest_url": "http://www.tajamoa.org/?mod=arch&ID=22"
-	},
-	{
-		"id":8,
-		"name": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק",
-		"letters": "פז",
-		"website": "http://he.wikipedia.org/wiki/%D7%9B%D7%97_%D7%9C%D7%94%D7%A9%D7%A4%D7%99%D7%A2",
-		"manifest_url": ""
-	},
-	{
-		"id":9,
-		"name": "ברית עולם לגאולת ישראל",
-		"letters": "נ",
-		"website": "http://www.britolam.org.il/",
-		"manifest_url": "http://www.britolam.org.il/187853/%D7%A2%D7%99%D7%A7%D7%A8%D7%99-%D7%94%D7%9E%D7%A6%D7%A2"
-	},
-	{
-		"id":10,
-		"name": "מורשת אבות",
-		"letters": "הי",
-		"website": "http://he.wikipedia.org/wiki/%D7%9E%D7%95%D7%A8%D7%A9%D7%AA_%D7%90%D7%91%D7%95%D7%AA",
-		"manifest_url": "http://www.facebook.com/pages/%D7%9E%D7%95%D7%A8%D7%A9%D7%AA-%D7%90%D7%91%D7%95%D7%AA-%D7%90%D7%99%D7%9C%D7%9F-%D7%9E%D7%A9%D7%99%D7%97%D7%90/553431928004275?ref=stream"
-	},
-	{
-		"id":11,
-		"name": "דור בוני הארץ בראשות אפרים לפיד",
-		"letters": "זך",
-		"website": "http://www.gimlaim.org.il/BRPortal/br/P100.jsp",
-		"manifest_url": "http://www.gimlaim.org.il/BRPortal/br/P103.jsp?cat=29224"
-	},
-	{
-		"id":12,
-		"name": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ",
-		"letters": "פי",
-		"website": "http://he.wikipedia.org/wiki/%D7%9B%D7%9C%D7%9B%D7%9C%D7%94_(%D7%9E%D7%A4%D7%9C%D7%92%D7%94)",
-		"manifest_url": "http://www.facebook.com/media/set/?set=a.234353946669627.43722.228132433958445&type=3"
-	},
-	{
-		"id":13,
-		"name": 'דע"ם - מפלגת פועלים',
-		"letters": "ק",
-		"website": "http://www.daam.org.il/",
-		"manifest_url": "http://heb.daam.org.il/%D7%9E%D7%A6%D7%A2-%D7%93%D7%A2%D7%9D/"
-	},
-	{
-		"id":14,
-		"party_id":11,
-		"name": "מרצ - השמאל של ישראל",
-		"letters": "מרצ",
-		"website": "http://meretz.org.il/",
-		"manifest_url": "http://meretz.org.il/%D7%9E%D7%A6%D7%A2-%D7%94%D7%9E%D7%A4%D7%9C%D7%92%D7%94/"
-	},
-	{
-		"id":15,
-		"party_id":12,
-		"name": 'הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה',
-		"letters": "טב",
-		"website": "http://www.israelim.org.il/",
-		"manifest_url": "http://www.israelim.org.il/our-principles/"
-	},
-	{
-		"id":16,
-		"name": "מתקדמת ליברלית - דמוקרטית",
-		"letters": "נק",
-		"website": "http://he.wikipedia.org/wiki/%D7%9C%D7%99%D7%93%D7%A8_(%D7%9E%D7%A4%D7%9C%D7%92%D7%94)",
-		"manifest_url": ""
-	},
-	{
-		"id":17,
-		"name": "הירוקים והצעירים לעתיד ירוק בישראל",
-		"letters": "רק",
-		"website": "http://www.green-party.co.il/Election2013/",
-		"manifest_url": "http://www.green-party.co.il/Election2013/matza"
-	},
-	{
-		"id":18,
-		"name": "נצח",
-		"letters": "פך",
-		"website": "http://he.wikipedia.org/wiki/%D7%A0%D7%A6%D7%97_(%D7%9E%D7%A4%D7%9C%D7%92%D7%94)",
-		"manifest_url": ""
-	},
-	{
-		"id":19,
-		"name": "הישראלים",
-		"letters": "יק",
-		"website": "http://he.wikipedia.org/wiki/%D7%94%D7%99%D7%A9%D7%A8%D7%90%D7%9C%D7%99%D7%9D_(%D7%9E%D7%A4%D7%9C%D7%92%D7%94)",
-		"manifest_url": ""
-	},
-	{
-		"id":20,
-		"party_id":1,
-		"name": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי",
-		"letters": "נץ",
-		"website": "http://otzmaleisrael.co.il/",
-		"manifest_url": "http://otzmaleisrael.co.il/main-platform/"
-	},
-	{
-		"id":21,
-		"party_id":2,
-		"name": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"letters": "מחל",
-		"website": "https://www.likud.org.il/",
-		"manifest_url": "המצע של הליכוד עדיין בתהליך כתיבה (http://www.ynet.co.il/articles/0,7340,L-4319455,00.html). המצע של ישראל ביתנו: http://www.beytenu.org.il/category/%D7%9E%D7%A6%D7%A2/"
-	},
-	{
-		"id":22,
-		"name": "עלה ירוק - הרשימה הליברלית",
-		"letters": "קנ",
-		"website": "http://aleyarok.org.il/",
-		"manifest_url": "http://aleyarok.org.il/agenda/"
-	},
-	{
-		"id":23,
-		"party_id":21,
-		"name": "העבודה בראשות שלי יחימוביץ",
-		"letters": "אמת",
-		"website": "http://www.havoda.org.il/Web/Default.aspx",
-		"manifest_url": "http://havoda.org.il/Items/05463/%D7%9E%D7%A6%D7%A2%20%D7%94%D7%9E%D7%A4%D7%9C%D7%92%D7%94%20%D7%9C%D7%9B%D7%A0%D7%A1%D7%AA%20%D7%94-19.pdf"
-	},
-	{
-		"id":24,
-		"name": "עם שלם - בראשות הרב חיים אמסלם",
-		"letters": "ץ",
-		"website": "http://amshalem.org/",
-		"manifest_url": "http://amshalem.org/?page_id=21"
-	},
-	{
-		"id":25,
-		"name": "הפיראטים",
-		"letters": "פ",
-		"website": "http://piratim.org/",
-		"manifest_url": "http://www.piratim.org/wiki/doku.php?id=%D7%9E%D7%A6%D7%A2"
-	},
-	{
-		"id":26,
-		"name": "עתיד אחד – נלחמים בסם החדש",
-		"letters": "זה",
-		"website": "http://www.atid1.org.il/",
-		"manifest_url": ""
-	},
-	{
-		"id":34,
-		"name": "התנועה בראשות ציפי לבני",
-		"letters": "צפ",
-		"website": "http://he.wikipedia.org/wiki/%D7%94%D7%AA%D7%A0%D7%95%D7%A2%D7%94",
-		"manifest_url": ""
-	},
-	{
-		"id":27,
-		"name": "צדק חברתי בראשות גד הרן",
-		"letters": "צק",
-		"website": "http://www.tzedekhev.com/",
-		"manifest_url": "http://www.tzedekhev.com/#!our_team/cqn6"
-	},
-	{
-		"id":28,
-		"name": "אלאמל לתג`ייר - התקווה לשינוי",
-		"letters": "הק",
-		"website": "http://hope-for-change.org/index_h.php",
-		"manifest_url": "http://hope-for-change.org/about_h.php"
-	},
-	{
-		"id":29,
-		"party_id":6,
-		"name": "קדימה בראשות שאול מופז",
-		"letters": "כן",
-		"website": "http://he.wikipedia.org/wiki/%D7%A7%D7%93%D7%99%D7%9E%D7%94",
-		"manifest_url": "http://www.facebook.com/kadimaparty/app_376885859069497"
-	},
-	{
-		"id":30,
-		"party_id":8,
-		"name": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)',
-		"letters": "ו",
-		"website": "http://hadash.org.il/",
-		"manifest_url": "http://hadash.org.il/matzahadash/"
-	},
-	{
-		"id":31,
-		"party_id":10,
-		"name": "רע”מ - תע”ל - מד”ע",
-		"letters": "עם",
-		"website": "http://www.a-m-c.org/",
-		"manifest_url": "http://www.a-m-c.org/page.asp?id=566"
-	},
-	{
-		"id":32,
-		"name": "חיים בכבוד",
-		"letters": "הפ",
-		"website": "https://www.facebook.com/pages/%D7%9E%D7%A4%D7%9C%D7%92%D7%AA-%D7%97%D7%99%D7%99%D7%9D-%D7%91%D7%9B%D7%91%D7%95%D7%93/438796402841642",
-		"manifest_url": ""
-	},
-	{
-		"id":33,
-		"party‫_‬id":7,
-		"name": "שס התאחדות הספרדית העולמית שומרי תורה",
-		"letters": "שס",
-		"website": "shas.org.il",
-		"manifest_url": "http://shas.org.il/Web/He/About/Platform/Default.aspx"
+var election = {
+	"parties": [
+		{
+			"id": 1,
+			"name": "אור",
+			"letters": "ני",
+			"website": "http://www.orr.org.il/",
+			"manifest_url": "http://www.orr.org.il/index.php?option=com_content&view=article&id=1&Itemid=2"
+		},
+		{
+			"id": 2,
+			"party_id": 4,
+			"name": "יהדות התורה והשבת אגודת ישראל - דגל התורה",
+			"letters": "ג",
+			"website": "http://he.wikipedia.org/wiki/%D7%99%D7%94%D7%93%D7%95%D7%AA_%D7%94%D7%AA%D7%95%D7%A8%D7%94",
+			"manifest_url": ""
+		},
+		{
+			"id": 3,
+			"name": "אחים אנחנו",
+			"letters": "פנ",
+			"website": "http://www.ahim-anahnu.org/",
+			"manifest_url": "http://www.ahim-anahnu.org/viewStaticPage.aspx?pageID=4"
+		},
+		{
+			"id": 4,
+			"name": "יש עתיד בראשות יאיר לפיד",
+			"letters": "פה",
+			"website": "http://yeshatid.org.il/",
+			"manifest_url": "http://yeshatid.org.il/%D7%A2%D7%9C-%D7%94%D7%9E%D7%A4%D7%9C%D7%92%D7%94-2/%D7%9E%D7%A0%D7%95%D7%A4%D7%99-%D7%94%D7%A9%D7%99%D7%A0%D7%95%D7%99/        http://yeshatid.org.il/"
+		},
+		{
+			"id": 5,
+			"name": "ארץ חדשה - החזית להפלת שלטון ההון",
+			"letters": "ז",
+			"website": "http://eretzchadasha.com/",
+			"manifest_url": "http://eretzchadasha.com/who-we-are"
+		},
+		{
+			"id": 6,
+			"name": "כולנו חברים - ננח",
+			"letters": "פץ",
+			"website": "http://www.nanach.co.il",
+			"manifest_url": "http://www.nanach.co.il/?page_id=18"
+		},
+		{
+			"id": 7,
+			"party_id": 9,
+			"name": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי",
+			"letters": "ד",
+			"website": "http://www.tajamoa.org/",
+			"manifest_url": "http://www.tajamoa.org/?mod=arch&ID=22"
+		},
+		{
+			"id": 8,
+			"name": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק",
+			"letters": "פז",
+			"website": "http://he.wikipedia.org/wiki/%D7%9B%D7%97_%D7%9C%D7%94%D7%A9%D7%A4%D7%99%D7%A2",
+			"manifest_url": ""
+		},
+		{
+			"id": 9,
+			"name": "ברית עולם לגאולת ישראל",
+			"letters": "נ",
+			"website": "http://www.britolam.org.il/",
+			"manifest_url": "http://www.britolam.org.il/187853/%D7%A2%D7%99%D7%A7%D7%A8%D7%99-%D7%94%D7%9E%D7%A6%D7%A2"
+		},
+		{
+			"id": 10,
+			"name": "מורשת אבות",
+			"letters": "הי",
+			"website": "http://he.wikipedia.org/wiki/%D7%9E%D7%95%D7%A8%D7%A9%D7%AA_%D7%90%D7%91%D7%95%D7%AA",
+			"manifest_url": "http://www.facebook.com/pages/%D7%9E%D7%95%D7%A8%D7%A9%D7%AA-%D7%90%D7%91%D7%95%D7%AA-%D7%90%D7%99%D7%9C%D7%9F-%D7%9E%D7%A9%D7%99%D7%97%D7%90/553431928004275?ref=stream"
+		},
+		{
+			"id": 11,
+			"name": "דור בוני הארץ בראשות אפרים לפיד",
+			"letters": "זך",
+			"website": "http://www.gimlaim.org.il/BRPortal/br/P100.jsp",
+			"manifest_url": "http://www.gimlaim.org.il/BRPortal/br/P103.jsp?cat=29224"
+		},
+		{
+			"id": 12,
+			"name": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ",
+			"letters": "פי",
+			"website": "http://he.wikipedia.org/wiki/%D7%9B%D7%9C%D7%9B%D7%9C%D7%94_(%D7%9E%D7%A4%D7%9C%D7%92%D7%94)",
+			"manifest_url": "http://www.facebook.com/media/set/?set=a.234353946669627.43722.228132433958445&type=3"
+		},
+		{
+			"id": 13,
+			"name": "דע\"ם - מפלגת פועלים",
+			"letters": "ק",
+			"website": "http://www.daam.org.il/",
+			"manifest_url": "http://heb.daam.org.il/%D7%9E%D7%A6%D7%A2-%D7%93%D7%A2%D7%9D/"
+		},
+		{
+			"id": 14,
+			"party_id": 11,
+			"name": "מרצ - השמאל של ישראל",
+			"letters": "מרצ",
+			"website": "http://meretz.org.il/",
+			"manifest_url": "http://meretz.org.il/%D7%9E%D7%A6%D7%A2-%D7%94%D7%9E%D7%A4%D7%9C%D7%92%D7%94/"
+		},
+		{
+			"id": 15,
+			"party_id": 12,
+			"name": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה",
+			"letters": "טב",
+			"website": "http://www.israelim.org.il/",
+			"manifest_url": "http://www.israelim.org.il/our-principles/"
+		},
+		{
+			"id": 16,
+			"name": "מתקדמת ליברלית - דמוקרטית",
+			"letters": "נק",
+			"website": "http://he.wikipedia.org/wiki/%D7%9C%D7%99%D7%93%D7%A8_(%D7%9E%D7%A4%D7%9C%D7%92%D7%94)",
+			"manifest_url": ""
+		},
+		{
+			"id": 17,
+			"name": "הירוקים והצעירים לעתיד ירוק בישראל",
+			"letters": "רק",
+			"website": "http://www.green-party.co.il/Election2013/",
+			"manifest_url": "http://www.green-party.co.il/Election2013/matza"
+		},
+		{
+			"id": 18,
+			"name": "נצח",
+			"letters": "פך",
+			"website": "http://he.wikipedia.org/wiki/%D7%A0%D7%A6%D7%97_(%D7%9E%D7%A4%D7%9C%D7%92%D7%94)",
+			"manifest_url": ""
+		},
+		{
+			"id": 19,
+			"name": "הישראלים",
+			"letters": "יק",
+			"website": "http://he.wikipedia.org/wiki/%D7%94%D7%99%D7%A9%D7%A8%D7%90%D7%9C%D7%99%D7%9D_(%D7%9E%D7%A4%D7%9C%D7%92%D7%94)",
+			"manifest_url": ""
+		},
+		{
+			"id": 20,
+			"party_id": 1,
+			"name": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי",
+			"letters": "נץ",
+			"website": "http://otzmaleisrael.co.il/",
+			"manifest_url": "http://otzmaleisrael.co.il/main-platform/"
+		},
+		{
+			"id": 21,
+			"party_id": 2,
+			"name": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
+			"letters": "מחל",
+			"website": "https://www.likud.org.il/",
+			"manifest_url": "המצע של הליכוד עדיין בתהליך כתיבה (http://www.ynet.co.il/articles/0,7340,L-4319455,00.html). המצע של ישראל ביתנו: http://www.beytenu.org.il/category/%D7%9E%D7%A6%D7%A2/"
+		},
+		{
+			"id": 22,
+			"name": "עלה ירוק - הרשימה הליברלית",
+			"letters": "קנ",
+			"website": "http://aleyarok.org.il/",
+			"manifest_url": "http://aleyarok.org.il/agenda/"
+		},
+		{
+			"id": 23,
+			"party_id": 21,
+			"name": "העבודה בראשות שלי יחימוביץ",
+			"letters": "אמת",
+			"website": "http://www.havoda.org.il/Web/Default.aspx",
+			"manifest_url": "http://havoda.org.il/Items/05463/%D7%9E%D7%A6%D7%A2%20%D7%94%D7%9E%D7%A4%D7%9C%D7%92%D7%94%20%D7%9C%D7%9B%D7%A0%D7%A1%D7%AA%20%D7%94-19.pdf"
+		},
+		{
+			"id": 24,
+			"name": "עם שלם - בראשות הרב חיים אמסלם",
+			"letters": "ץ",
+			"website": "http://amshalem.org/",
+			"manifest_url": "http://amshalem.org/?page_id=21"
+		},
+		{
+			"id": 25,
+			"name": "הפיראטים",
+			"letters": "פ",
+			"website": "http://piratim.org/",
+			"manifest_url": "http://www.piratim.org/wiki/doku.php?id=%D7%9E%D7%A6%D7%A2"
+		},
+		{
+			"id": 26,
+			"name": "עתיד אחד – נלחמים בסם החדש",
+			"letters": "זה",
+			"website": "http://www.atid1.org.il/",
+			"manifest_url": ""
+		},
+		{
+			"id": 34,
+			"name": "התנועה בראשות ציפי לבני",
+			"letters": "צפ",
+			"website": "http://he.wikipedia.org/wiki/%D7%94%D7%AA%D7%A0%D7%95%D7%A2%D7%94",
+			"manifest_url": ""
+		},
+		{
+			"id": 27,
+			"name": "צדק חברתי בראשות גד הרן",
+			"letters": "צק",
+			"website": "http://www.tzedekhev.com/",
+			"manifest_url": "http://www.tzedekhev.com/#!our_team/cqn6"
+		},
+		{
+			"id": 28,
+			"name": "אלאמל לתג`ייר - התקווה לשינוי",
+			"letters": "הק",
+			"website": "http://hope-for-change.org/index_h.php",
+			"manifest_url": "http://hope-for-change.org/about_h.php"
+		},
+		{
+			"id": 29,
+			"party_id": 6,
+			"name": "קדימה בראשות שאול מופז",
+			"letters": "כן",
+			"website": "http://he.wikipedia.org/wiki/%D7%A7%D7%93%D7%99%D7%9E%D7%94",
+			"manifest_url": "http://www.facebook.com/kadimaparty/app_376885859069497"
+		},
+		{
+			"id": 30,
+			"party_id": 8,
+			"name": "חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)",
+			"letters": "ו",
+			"website": "http://hadash.org.il/",
+			"manifest_url": "http://hadash.org.il/matzahadash/"
+		},
+		{
+			"id": 31,
+			"party_id": 10,
+			"name": "רע”מ - תע”ל - מד”ע",
+			"letters": "עם",
+			"website": "http://www.a-m-c.org/",
+			"manifest_url": "http://www.a-m-c.org/page.asp?id=566"
+		},
+		{
+			"id": 32,
+			"name": "חיים בכבוד",
+			"letters": "הפ",
+			"website": "https://www.facebook.com/pages/%D7%9E%D7%A4%D7%9C%D7%92%D7%AA-%D7%97%D7%99%D7%99%D7%9D-%D7%91%D7%9B%D7%91%D7%95%D7%93/438796402841642",
+			"manifest_url": ""
+		},
+		{
+			"id": 33,
+			"party‫_‬id": 7,
+			"name": "שס התאחדות הספרדית העולמית שומרי תורה",
+			"letters": "שס",
+			"website": "shas.org.il",
+			"manifest_url": "http://shas.org.il/Web/He/About/Platform/Default.aspx"
+		}
+	],
+	"memberByParty": {
+		"1": {
+			"name": "אור",
+			"members": [
+				{
+					"name": "ידען ירון",
+					"image": "http://www.orr.org.il/images/stories/or_members/yaron.jpg"
+				},
+				{
+					"name": "קרמן תומר"
+				},
+				{
+					"name": "יחזקאל שרית"
+				},
+				{
+					"name": "ורובל דניאל"
+				},
+				{
+					"name": "אלון לביאה"
+				},
+				{
+					"name": "בליזובסקי אברהם"
+				},
+				{
+					"name": "דרזי דוד"
+				},
+				{
+					"name": "קרבצ`יק זאב"
+				},
+				{
+					"name": "שני אורנה"
+				},
+				{
+					"name": "סורוג`ון קובי יעקב"
+				}
+			]
+		},
+		"2": {
+			"name": "יהדות התורה והשבת אגודת ישראל - דגל התורה",
+			"members": [
+				{
+					"name": "ליצמן יעקב",
+					"id": "216",
+					"image": "http://www.knesset.gov.il/mk/images/members/lizman_yaakov-s.jpg"
+				},
+				{
+					"name": "גפני משה",
+					"id": "35"
+				},
+				{
+					"name": "פרוש מאיר",
+					"id": "103"
+				},
+				{
+					"name": "מקלב אורי",
+					"id": "814"
+				},
+				{
+					"name": "מוזס מנחם אליעזר",
+					"id": "839"
+				},
+				{
+					"name": "אייכלר ישראל יצחק",
+					"id": "754"
+				},
+				{
+					"name": "אשר יעקב"
+				},
+				{
+					"name": "גוטרמן יעקב אשר"
+				},
+				{
+					"name": "ברוידא יצחק"
+				},
+				{
+					"name": "חדד שמעון"
+				},
+				{
+					"name": "פולק יהושע מנחם"
+				},
+				{
+					"name": "רייך יצחק"
+				},
+				{
+					"name": "טסלר יעקב"
+				},
+				{
+					"name": "בוימל אריה צבי"
+				},
+				{
+					"name": "קליין מנחם"
+				},
+				{
+					"name": "קרליץ אליהו מרדכי"
+				},
+				{
+					"name": "פיק יצחק"
+				},
+				{
+					"name": "פינדרוס יצחק זאב"
+				},
+				{
+					"name": "שוורץ אברהם"
+				},
+				{
+					"name": "פראנק משה"
+				},
+				{
+					"name": "רודיק יצחק"
+				},
+				{
+					"name": "ויז`בינסקי יעקב"
+				},
+				{
+					"name": "זייברט חנוך"
+				},
+				{
+					"name": "שפירא מנחם"
+				},
+				{
+					"name": "דייטש יוסף"
+				},
+				{
+					"name": "וידיסלבסקי שלמה"
+				},
+				{
+					"name": "גולדנטל שלמה"
+				},
+				{
+					"name": "אוחנה דוד"
+				},
+				{
+					"name": "אייזנברג מנחם מנדל"
+				},
+				{
+					"name": "פרידמן ישראל משה"
+				},
+				{
+					"name": "אוברלנדר משה"
+				},
+				{
+					"name": "אורלנסקי זליג"
+				},
+				{
+					"name": "סלומיאנסקי אליעזר"
+				},
+				{
+					"name": "רייסנר ישראל מאיר"
+				},
+				{
+					"name": "ציינווירט פנחס"
+				},
+				{
+					"name": "דייטש אברהם"
+				},
+				{
+					"name": "רוזנר חיים"
+				},
+				{
+					"name": "ויינמן משה אליהו"
+				},
+				{
+					"name": "גרטנהויז מרדכי"
+				},
+				{
+					"name": "מישקובסקי אברהם צבי"
+				},
+				{
+					"name": "אדלר דוד"
+				},
+				{
+					"name": "בדוש פנחס"
+				},
+				{
+					"name": "ליפשיץ בנימין"
+				},
+				{
+					"name": "יברוב יהודה"
+				},
+				{
+					"name": "ולצר גדליה דוד"
+				},
+				{
+					"name": "בלוי מרדכי זאב"
+				},
+				{
+					"name": "רושגולד אברהם צבי"
+				},
+				{
+					"name": "שטרית יוסף שאול"
+				},
+				{
+					"name": "קוסטליץ שלמה"
+				},
+				{
+					"name": "גרינברג שמואל"
+				},
+				{
+					"name": "כץ חיים מאיר"
+				},
+				{
+					"name": "ולנשטיין יעקב"
+				},
+				{
+					"name": "ברנשטיין חיים שלמה"
+				},
+				{
+					"name": "מושקוביץ יונה"
+				},
+				{
+					"name": "קלוגמן אלתר בן ציון"
+				},
+				{
+					"name": "בוכניק יהושע"
+				},
+				{
+					"name": "שיינין גדליה דוד"
+				},
+				{
+					"name": "ברונר אליהו יוסף"
+				},
+				{
+					"name": "ויזל חיים מאיר"
+				},
+				{
+					"name": "ברוכי אליהו"
+				},
+				{
+					"name": "וובר אפרים"
+				},
+				{
+					"name": "סירוקה פנחס דוד"
+				},
+				{
+					"name": "טרויבע אברהם מרדכי"
+				},
+				{
+					"name": "רייך יהודה"
+				},
+				{
+					"name": "דייטש שלמה"
+				},
+				{
+					"name": "גרשי משה"
+				},
+				{
+					"name": "זיידה יקותיאל דוד"
+				},
+				{
+					"name": "גולד מנחם מנדל"
+				},
+				{
+					"name": "רוטנר דוד נחמן"
+				},
+				{
+					"name": "גולדברג מרדכי"
+				},
+				{
+					"name": "הרשטיין דוד"
+				},
+				{
+					"name": "מונטג בנימין משה"
+				},
+				{
+					"name": "שוורץ מנחם"
+				},
+				{
+					"name": "ברנר יצחק דוד"
+				},
+				{
+					"name": "טסלר יצחק"
+				},
+				{
+					"name": "מקלב אברהם"
+				},
+				{
+					"name": "ברנדוויין ברוך"
+				},
+				{
+					"name": "נורדמן בן ציון"
+				},
+				{
+					"name": "ברסלר ברהם אלכסנדר"
+				},
+				{
+					"name": "אלפר מרדכי מיכאל"
+				},
+				{
+					"name": "הומינר פנחס דוד"
+				},
+				{
+					"name": "גולומב ישראל יצחק"
+				},
+				{
+					"name": "מורגנשטרן משה דוד"
+				},
+				{
+					"name": "ויכלדר חיים ברוך"
+				},
+				{
+					"name": "אביטן גבריאל מאיר"
+				},
+				{
+					"name": "זיידמן חנוך דוד"
+				},
+				{
+					"name": "קלרמן ישראל"
+				},
+				{
+					"name": "ויינר דוד"
+				},
+				{
+					"name": "שטרן שלמה"
+				},
+				{
+					"name": "רוזן יהודה אריה"
+				},
+				{
+					"name": "הומינר שלמה"
+				},
+				{
+					"name": "ויינברגר יהושע"
+				},
+				{
+					"name": "וייס אפרים"
+				},
+				{
+					"name": "מאיר ישראל"
+				},
+				{
+					"name": "לוינשטיין בנימין טוביה"
+				},
+				{
+					"name": "קליין אברהם"
+				},
+				{
+					"name": "פולק יהודה אריה"
+				},
+				{
+					"name": "הורביץ פנחס"
+				},
+				{
+					"name": "גורא משה יעקב"
+				},
+				{
+					"name": "וירניק נפתלי"
+				},
+				{
+					"name": "וייס נתן"
+				},
+				{
+					"name": "כהן משה"
+				},
+				{
+					"name": "סגל אוריאל"
+				},
+				{
+					"name": "ברייש ראובן"
+				},
+				{
+					"name": "מונק אריה"
+				},
+				{
+					"name": "רוזנבוים יעקב דוד"
+				},
+				{
+					"name": "ארנטרוי אלחנן"
+				},
+				{
+					"name": "ליברמן מרדכי"
+				},
+				{
+					"name": "מן משה"
+				},
+				{
+					"name": "קריבוס שמואל"
+				},
+				{
+					"name": "קארפ משה שלום"
+				},
+				{
+					"name": "קלוגמן מנחם"
+				},
+				{
+					"name": "ברויאר דוד"
+				},
+				{
+					"name": "שיינפלד שבתי"
+				},
+				{
+					"name": "רוזנטל אברהם אהרן"
+				},
+				{
+					"name": "רובינשטיין מאיר"
+				},
+				{
+					"name": "אברמוביץ אברהם חנוך"
+				},
+				{
+					"name": "אבו יוסף"
+				},
+				{
+					"name": "אירנשטיין משה אליהו"
+				}
+			]
+		},
+		"3": {
+			"name": "אחים אנחנו",
+			"members": [
+				{
+					"name": "אבבה דוד",
+					"image": "http://sphotos-f.ak.fbcdn.net/hphotos-ak-ash4/297738_120976104731619_705711375_n.jpg"
+				},
+				{
+					"name": "יהודה דורון"
+				},
+				{
+					"name": "יתמנו גרמא שמואל"
+				},
+				{
+					"name": "טלקר דניאל"
+				},
+				{
+					"name": "טסמה נאווה"
+				},
+				{
+					"name": "רצון שאלתיאל"
+				},
+				{
+					"name": "זוארץ מאיר"
+				},
+				{
+					"name": "בצון יצחק"
+				},
+				{
+					"name": "שמשון יגאל"
+				},
+				{
+					"name": "סולומון ברה דרור"
+				},
+				{
+					"name": "טלקר נתנאל מאיר"
+				},
+				{
+					"name": "ברכה אליהו חיים"
+				},
+				{
+					"name": "גרמאי אסרסי אסתר"
+				}
+			]
+		},
+		"4": {
+			"name": "יש עתיד בראשות יאיר לפיד",
+			"members": [
+				{
+					"name": "לפיד יאיר",
+					"image": "http://yeshatid.org.il/wp-content/uploads/2012/11/y1.jpg"
+				},
+				{
+					"name": "פירון שי משה"
+				},
+				{
+					"name": "גרמן יעל"
+				},
+				{
+					"name": "כהן מאיר"
+				},
+				{
+					"name": "פרי יעקב"
+				},
+				{
+					"name": "שלח עפר"
+				},
+				{
+					"name": "לביא עליזה"
+				},
+				{
+					"name": "רזבוגוב יואל"
+				},
+				{
+					"name": "קול עדי"
+				},
+				{
+					"name": "אלהרר הרטשטיין קארין"
+				},
+				{
+					"name": "לוי מיקי"
+				},
+				{
+					"name": "סולומון יאסו שמעון"
+				},
+				{
+					"name": "קלדרון רות"
+				},
+				{
+					"name": "תמנו-שטה פנינה"
+				},
+				{
+					"name": "פרנקל רינה"
+				},
+				{
+					"name": "קריב יפעת"
+				},
+				{
+					"name": "ליפמן דב"
+				},
+				{
+					"name": "טופורובסקי בועז"
+				},
+				{
+					"name": "הופמן רונן"
+				},
+				{
+					"name": "אל-על טל"
+				},
+				{
+					"name": "בבוט מרק"
+				},
+				{
+					"name": "שולץ נעמה"
+				},
+				{
+					"name": "קדור סלים"
+				},
+				{
+					"name": "בנישתי איציק יצחק"
+				},
+				{
+					"name": "מאירי גדי"
+				},
+				{
+					"name": "סטדלר לריסה"
+				},
+				{
+					"name": "מגן עמי"
+				},
+				{
+					"name": "מנייב בוריס"
+				},
+				{
+					"name": "פלד-חיון תמי"
+				},
+				{
+					"name": "שוייצר הדר"
+				},
+				{
+					"name": "שריר גלעד"
+				},
+				{
+					"name": "כהן יובל"
+				},
+				{
+					"name": "קרול ילנה חיה"
+				},
+				{
+					"name": "מזאוי אוהם"
+				},
+				{
+					"name": "ביטון דבורה"
+				},
+				{
+					"name": "בר -תור שמואל"
+				},
+				{
+					"name": "הרטמן אביבה-יוליה"
+				},
+				{
+					"name": "סבויסקי מיכאל"
+				},
+				{
+					"name": "בז”ה רמי"
+				},
+				{
+					"name": "יאסו אקליל"
+				},
+				{
+					"name": "קוזין אנטון"
+				},
+				{
+					"name": "בלוגובסקי חנה"
+				},
+				{
+					"name": "שפושניק יוסף"
+				},
+				{
+					"name": "גרבינר כרמלה"
+				},
+				{
+					"name": "שטיינר רוברט"
+				},
+				{
+					"name": "אהרוני ארז"
+				},
+				{
+					"name": "שומרוני יצחק"
+				},
+				{
+					"name": "מיאון שחר"
+				},
+				{
+					"name": "גרינברגר אורי"
+				},
+				{
+					"name": "פדהצור דורון"
+				},
+				{
+					"name": "דרורי דלית"
+				},
+				{
+					"name": "וולף אלון"
+				},
+				{
+					"name": "לוי ירון עמוס"
+				},
+				{
+					"name": "ברזילי יעל"
+				},
+				{
+					"name": "דיאמנט חנית חנה"
+				},
+				{
+					"name": "מולכו דרור"
+				},
+				{
+					"name": "בוחבוט-לוין יצחק"
+				},
+				{
+					"name": "קורץ יעקב"
+				},
+				{
+					"name": "שור עידו"
+				},
+				{
+					"name": "בלום זוהר זוגברד"
+				},
+				{
+					"name": "דוידי דניאל"
+				},
+				{
+					"name": "פינקלשטיין עופרה"
+				},
+				{
+					"name": "סטורוזנקו תמרה"
+				},
+				{
+					"name": "אלפסי סמי"
+				},
+				{
+					"name": "אבוטבול אלי"
+				},
+				{
+					"name": "בן אבי חיים"
+				},
+				{
+					"name": "דניאלי ישראל"
+				},
+				{
+					"name": "בל עופרה"
+				},
+				{
+					"name": "שבלת ארנון"
+				},
+				{
+					"name": "סלומון ברק אברהם"
+				},
+				{
+					"name": "כץ רון"
+				},
+				{
+					"name": "נדב יוסף"
+				},
+				{
+					"name": "פיינה איתי"
+				},
+				{
+					"name": "מזרחי אפרת חיה"
+				},
+				{
+					"name": "להט אור-לי"
+				},
+				{
+					"name": "סקס-פרידמן יסמין"
+				},
+				{
+					"name": "שחורי-ג`יג`י דן"
+				},
+				{
+					"name": "פישר תומי"
+				},
+				{
+					"name": "קמפלר דורון"
+				},
+				{
+					"name": "בלייכר רן"
+				},
+				{
+					"name": "אסרף אורי"
+				},
+				{
+					"name": "שריפי יצחק"
+				},
+				{
+					"name": "הרפז מאיר"
+				},
+				{
+					"name": "עמרם אהובה (יצחק)"
+				},
+				{
+					"name": "ששון חנה"
+				},
+				{
+					"name": "טבת חגי"
+				},
+				{
+					"name": "שושן יהודה"
+				},
+				{
+					"name": "בן צבי קוברנסקי אורלי"
+				},
+				{
+					"name": "כהן אבשלום"
+				},
+				{
+					"name": "אלראי נוי"
+				},
+				{
+					"name": "רוזנפלד אביעד"
+				},
+				{
+					"name": "אבוחצירה שי"
+				},
+				{
+					"name": "סגל איילת"
+				},
+				{
+					"name": "האושנר גיל"
+				},
+				{
+					"name": "פלד עמרי"
+				},
+				{
+					"name": "קלדרון אילן"
+				},
+				{
+					"name": "פישמן ליטל"
+				},
+				{
+					"name": "גורדון מעיין"
+				},
+				{
+					"name": "פיפרברג טל"
+				},
+				{
+					"name": "דוידזון סימון"
+				},
+				{
+					"name": "קוברינסקי יצחק"
+				},
+				{
+					"name": "ברעם אבישי"
+				},
+				{
+					"name": "עזורי אביבה"
+				},
+				{
+					"name": "הרפז שי"
+				},
+				{
+					"name": "פלדמן גד"
+				},
+				{
+					"name": "קדם אלי"
+				},
+				{
+					"name": "ששון יואל אברהם"
+				},
+				{
+					"name": "לוי ערן"
+				},
+				{
+					"name": "יאני מעיין"
+				},
+				{
+					"name": "כהן אביעד"
+				},
+				{
+					"name": "שינדלר בוריס"
+				},
+				{
+					"name": "בן אברהם גוליאנה"
+				},
+				{
+					"name": "חסיד טליה"
+				},
+				{
+					"name": "רוכברג נועה-שרה"
+				},
+				{
+					"name": "זגורסקי ליטל"
+				},
+				{
+					"name": "איל גל"
+				},
+				{
+					"name": "ירקוני יורם (ג`רי)"
+				},
+				{
+					"name": "פרי לירן אמילי"
+				},
+				{
+					"name": "גמזטוב מורד"
+				},
+				{
+					"name": "סומק רוני"
+				}
+			]
+		},
+		"5": {
+			"name": "ארץ חדשה - החזית להפלת שלטון ההון",
+			"members": [
+				{
+					"name": "יניב אלדד",
+					"image": "http://eretzchadasha.com/images/the-faces/eldad-yaniv.jpg"
+				},
+				{
+					"name": "דוד מרב"
+				},
+				{
+					"name": "בלייר רן"
+				},
+				{
+					"name": "ששון לינדה"
+				},
+				{
+					"name": "סגל ברק"
+				},
+				{
+					"name": "רבינוביץ` אלכסנדרה"
+				},
+				{
+					"name": "עוזר דקל-דוד"
+				},
+				{
+					"name": "ספיר לילך"
+				},
+				{
+					"name": "מוסינזון גילי-משה"
+				}
+			]
+		},
+		"6": {
+			"name": "כולנו חברים - ננח",
+			"members": [
+				{
+					"name": "קנאפו שרון",
+					"image": "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-ash3/559047_459270254108436_1870515845_n.jpg"
+				},
+				{
+					"name": "שי ליאור צפריר"
+				},
+				{
+					"name": "אופיר ערן"
+				},
+				{
+					"name": "בן שלום שחר ישראל"
+				},
+				{
+					"name": "ינאי משה"
+				},
+				{
+					"name": "אברהם תומר"
+				},
+				{
+					"name": "שואשו נס חי"
+				},
+				{
+					"name": "אופיר משה"
+				},
+				{
+					"name": "ג`מילי ננח שגיא יוסף"
+				},
+				{
+					"name": "אריאל אהוד"
+				},
+				{
+					"name": "דגני ברק עמוס"
+				},
+				{
+					"name": "דלויה דניאל"
+				}
+			]
+		},
+		"7": {
+			"name": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי",
+			"members": [
+				{
+					"name": "ג`מאל זחאלקה",
+					"id": "756",
+					"image": "http://www.knesset.gov.il/mk/images/members/zahalka_jamal-s.jpg"
+				},
+				{
+					"name": "זועבי חנין",
+					"id": "846"
+				},
+				{
+					"name": "ג`טאס באסל"
+				},
+				{
+					"name": "אזברגה ג`ומעה"
+				},
+				{
+					"name": "פוקרא עבדאל רחים"
+				},
+				{
+					"name": "יזבק היבא"
+				},
+				{
+					"name": "מהנא סאמי"
+				},
+				{
+					"name": "דקב פתחי"
+				},
+				{
+					"name": "פרח מרים"
+				},
+				{
+					"name": "שלחת אנטאין"
+				},
+				{
+					"name": "קיס מחאסן"
+				},
+				{
+					"name": "לירר יעל"
+				},
+				{
+					"name": "נחאדה מטאנס"
+				},
+				{
+					"name": "מנסור נורא"
+				},
+				{
+					"name": "ח`מיס ווליד"
+				},
+				{
+					"name": "טאהא לולו"
+				},
+				{
+					"name": "עבאס טאהר"
+				},
+				{
+					"name": "חלבי חאתם"
+				},
+				{
+					"name": "אבו שחאדה סאמי"
+				},
+				{
+					"name": "צמל-ורשבסקי לאה"
+				},
+				{
+					"name": "אבו רחמין ניבין"
+				},
+				{
+					"name": "עאמר אחמד"
+				},
+				{
+					"name": "ח`לאילה איאד"
+				},
+				{
+					"name": "מרעי אמין"
+				},
+				{
+					"name": "אילני יהודית"
+				},
+				{
+					"name": "אבו בצר אברהים"
+				},
+				{
+					"name": "אבו אחמד ח`לוד"
+				},
+				{
+					"name": "חאג` ווליאם"
+				},
+				{
+					"name": "חוש דועא"
+				},
+				{
+					"name": "חאג` יחיא מוחמד"
+				},
+				{
+					"name": "חיידר ראמי"
+				},
+				{
+					"name": "ג`ורבאן סאמי"
+				},
+				{
+					"name": "עבאס וסים"
+				},
+				{
+					"name": "טנוס נח`לה"
+				},
+				{
+					"name": "ח`לף ג`מיל"
+				},
+				{
+					"name": "קובטי מירי"
+				},
+				{
+					"name": "ערבוש מועין"
+				},
+				{
+					"name": "הנדאוי רבים"
+				},
+				{
+					"name": "עודה-חאג` אינאס"
+				},
+				{
+					"name": "עתאמנה מופיצ"
+				},
+				{
+					"name": "ג`מטוס וופא"
+				},
+				{
+					"name": "סאדר מייסלון"
+				},
+				{
+					"name": "טאהה נביט"
+				},
+				{
+					"name": "חמדאן אלהאם"
+				},
+				{
+					"name": "שעבאן פרידה"
+				},
+				{
+					"name": "אלעתאייקה עבדאל כרים"
+				},
+				{
+					"name": "עיאשה מועתכם"
+				},
+				{
+					"name": "אבו הלאל מוסטפא"
+				},
+				{
+					"name": "מסרי אחמד"
+				},
+				{
+					"name": "דיאב מוסא"
+				},
+				{
+					"name": "ג`נטוס כרים"
+				},
+				{
+					"name": "חורני חנא"
+				},
+				{
+					"name": "אבו אלעסל ג`האד"
+				},
+				{
+					"name": "אבו סייף ח`ליל"
+				},
+				{
+					"name": "שקור אילייא"
+				},
+				{
+					"name": "דקוור נסרי"
+				},
+				{
+					"name": "נח`אש יוסף"
+				},
+				{
+					"name": "טאהא דימא"
+				},
+				{
+					"name": "נעאמנה מוחמד"
+				},
+				{
+					"name": "מחאג`נר מוחמד"
+				},
+				{
+					"name": "סאדר כמיל"
+				},
+				{
+					"name": "ח`טיב חנאן"
+				},
+				{
+					"name": "בולוס ג`רים"
+				},
+				{
+					"name": "סולטאני חוסני"
+				},
+				{
+					"name": "ח`טיב קאסם"
+				},
+				{
+					"name": "עטייה כאיד"
+				},
+				{
+					"name": "סובח מייסאן"
+				},
+				{
+					"name": "סעיד יוסף"
+				},
+				{
+					"name": "שקור בסאם"
+				},
+				{
+					"name": "סבסג ג`רים"
+				},
+				{
+					"name": "מטר עדנאן"
+				},
+				{
+					"name": "ג`אליב כאמל"
+				},
+				{
+					"name": "אג`בריה ריאד"
+				},
+				{
+					"name": "דכוור ג`ואד"
+				},
+				{
+					"name": "חמאד באסם"
+				},
+				{
+					"name": "אגברייה חנין"
+				},
+				{
+					"name": "ראבי איאד"
+				},
+				{
+					"name": "ח`טיב מוחמד"
+				},
+				{
+					"name": "אלשאער האדיה"
+				},
+				{
+					"name": "עבד אלחלים חסן"
+				},
+				{
+					"name": "חדאד מוראד"
+				},
+				{
+					"name": "טאטור מחמוד"
+				},
+				{
+					"name": "מזלבט עמאד"
+				},
+				{
+					"name": "ליום אנטון"
+				},
+				{
+					"name": "אבו זקיקה מוחמד"
+				},
+				{
+					"name": "אגברביה ספאא"
+				},
+				{
+					"name": "מראענה מוחמד"
+				},
+				{
+					"name": "עלי סאלח ויסאם"
+				},
+				{
+					"name": "פרח אכרם"
+				},
+				{
+					"name": "חוסין פתחיה"
+				},
+				{
+					"name": "עראר ערב"
+				},
+				{
+					"name": "סואעד מחמוד"
+				},
+				{
+					"name": "ענבתאוו אמאני"
+				},
+				{
+					"name": "בלעום ויאאם"
+				},
+				{
+					"name": "ונתד נידאל"
+				},
+				{
+					"name": "ח`ליליה מאהר"
+				},
+				{
+					"name": "ג`סאר חסאן"
+				},
+				{
+					"name": "בדראן עז אלדין"
+				},
+				{
+					"name": "בנא עאוני"
+				},
+				{
+					"name": "קורטאם אשרף"
+				},
+				{
+					"name": "אגבריה ויסאם"
+				},
+				{
+					"name": "חוסן יוסף"
+				},
+				{
+					"name": "אברהים נביל"
+				},
+				{
+					"name": "מסארווה כסאם"
+				},
+				{
+					"name": "ג`טאס ראיד"
+				},
+				{
+					"name": "שחאדה אדמונד"
+				},
+				{
+					"name": "הווארי ערין"
+				},
+				{
+					"name": "ורשבסקי מיכאל"
+				},
+				{
+					"name": "עבד אמיל"
+				},
+				{
+					"name": "מחטמיד ריאד"
+				},
+				{
+					"name": "סולטאני פואד"
+				},
+				{
+					"name": "אבו פול מוחמד"
+				},
+				{
+					"name": "זריק סולימאן"
+				},
+				{
+					"name": "מנסור ג`וני"
+				},
+				{
+					"name": "אגבריה אפנאן"
+				},
+				{
+					"name": "יונס מוחמד"
+				},
+				{
+					"name": "עאטללה אליאס"
+				},
+				{
+					"name": "מוחארב מחמוד"
+				},
+				{
+					"name": "מחאמיד האשם"
+				},
+				{
+					"name": "טאהא ואסל"
+				}
+			]
+		},
+		"8": {
+			"name": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק",
+			"members": [
+				{
+					"name": "סאמרלי אריה",
+					"image": "http://sphotos-a.ak.fbcdn.net/hphotos-ak-snc6/224064_283190351783652_678376640_n.png"
+				},
+				{
+					"name": "שיפר אליהו"
+				},
+				{
+					"name": "בן משה משה"
+				},
+				{
+					"name": "פרטקוב ליעד"
+				},
+				{
+					"name": "לוי רונן"
+				},
+				{
+					"name": "כהן עימנואל אמיר"
+				},
+				{
+					"name": "צוברי יהונתן"
+				},
+				{
+					"name": "כלפא יונה"
+				},
+				{
+					"name": "בניזרי אליהו"
+				},
+				{
+					"name": "פז אלון"
+				},
+				{
+					"name": "סקריצקי מיכאל"
+				},
+				{
+					"name": "שאולוב רונן"
+				},
+				{
+					"name": "ולורד דרור ברוך"
+				},
+				{
+					"name": "יצחק אליהו"
+				},
+				{
+					"name": "יצחק שפריר"
+				},
+				{
+					"name": "חורש יניב"
+				},
+				{
+					"name": "והב מרדכי"
+				},
+				{
+					"name": "לסרי אורן"
+				}
+			]
+		},
+		"9": {
+			"name": "ברית עולם לגאולת ישראל",
+			"members": [
+				{
+					"name": "ליפשיץ עופר פינחס",
+					"image": "http://www.britolam.org.il/image/users/187853/ftp/my_files/%D7%A2%D7%95%D7%A4%D7%A8.gif?id=8533299"
+				},
+				{
+					"name": "בלייש חיים"
+				},
+				{
+					"name": "סבאג איילה"
+				},
+				{
+					"name": "אביזהר משה מרדכי"
+				},
+				{
+					"name": "דדון ניסים מקסים"
+				},
+				{
+					"name": "צלמון מרים"
+				},
+				{
+					"name": "שטראוס נתן"
+				},
+				{
+					"name": "ביטון אבנר"
+				}
+			]
+		},
+		"10": {
+			"name": "מורשת אבות",
+			"members": [
+				{
+					"name": "יר-זנבר אילן משיחא",
+					"image": "http://sphotos-a.ak.fbcdn.net/hphotos-ak-ash4/767_561266043887530_435713194_n.jpg"
+				},
+				{
+					"name": "שפיצר אמיר"
+				},
+				{
+					"name": "מוזס משה"
+				},
+				{
+					"name": "סלע חי משה"
+				},
+				{
+					"name": "עשור מכלוף מיכאל"
+				},
+				{
+					"name": "בונפיס משה"
+				},
+				{
+					"name": "לבנוני שלמה"
+				},
+				{
+					"name": "רוטנברג טליה"
+				},
+				{
+					"name": "יפרח אילן מיכאל"
+				},
+				{
+					"name": "צרפתי שמעון"
+				},
+				{
+					"name": "הרשיש סילביה"
+				},
+				{
+					"name": "כהן יוסף חיים"
+				},
+				{
+					"name": "ביטון אלישי"
+				},
+				{
+					"name": "מורי יוסף עומרי"
+				},
+				{
+					"name": "תני משה"
+				},
+				{
+					"name": "בן עמי שמעון"
+				},
+				{
+					"name": "פדידה ימין"
+				},
+				{
+					"name": "קרני יאיר"
+				},
+				{
+					"name": "מזרחי אליהו"
+				},
+				{
+					"name": "אביסרור שי"
+				},
+				{
+					"name": "צירניש אנטון משה"
+				},
+				{
+					"name": "כהן רחמים"
+				},
+				{
+					"name": "בן חמו יוגב"
+				},
+				{
+					"name": "זלצר קהת"
+				},
+				{
+					"name": "דבוש מור"
+				}
+			]
+		},
+		"11": {
+			"name": "דור בוני הארץ בראשות אפרים לפיד",
+			"members": [
+				{
+					"name": "לפיד אפרים",
+					"image": "http://www.gimlaim.org.il/BRPortalStorage/b/78/46/86-zJ4aZEsRXO.jpg"
+				},
+				{
+					"name": "גיסין מידד"
+				},
+				{
+					"name": "קליינר יורם"
+				},
+				{
+					"name": "נקר דליה"
+				},
+				{
+					"name": "גרנות הלל"
+				},
+				{
+					"name": "אלדור גרא"
+				},
+				{
+					"name": "פרידמן משה"
+				},
+				{
+					"name": "נעים גראר ניסים"
+				},
+				{
+					"name": "ספאדיה פרחה"
+				},
+				{
+					"name": "יפעת יצחק"
+				},
+				{
+					"name": "טרסר אהרון"
+				},
+				{
+					"name": "מיתר צבי"
+				},
+				{
+					"name": "זקס דניאל"
+				},
+				{
+					"name": "כהן בנימין"
+				},
+				{
+					"name": "פלד אבשלום"
+				},
+				{
+					"name": "אור אדיבה"
+				},
+				{
+					"name": "כהנא ויקטור"
+				},
+				{
+					"name": "מוזר ראובן"
+				},
+				{
+					"name": "רפוביץ אוליביה"
+				}
+			]
+		},
+		"12": {
+			"name": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ",
+			"members": [
+				{
+					"name": "שמאלוב ברקוביץ יוליה",
+					"id": "848",
+					"image": "http://www.knesset.gov.il/mk/images/members/Shamalov_Berkovich_Yulia-s.jpg"
+				},
+				{
+					"name": "גולדשטיין דניאל"
+				},
+				{
+					"name": "גולדשטיין בן ציון"
+				},
+				{
+					"name": "מנגל יפית"
+				},
+				{
+					"name": "אלוני אודי"
+				},
+				{
+					"name": "צעירי דרור"
+				},
+				{
+					"name": "דריימר יצחק"
+				},
+				{
+					"name": "דובלינסקי אדם"
+				},
+				{
+					"name": "קורזינר גרגורי"
+				},
+				{
+					"name": "נבות זהר"
+				},
+				{
+					"name": "דור דניאל"
+				},
+				{
+					"name": "בן ישי מרדכי"
+				},
+				{
+					"name": "מיכאל יאיר"
+				},
+				{
+					"name": "בן עזרי ניר"
+				}
+			]
+		},
+		"13": {
+			"name": "דע\"ם - מפלגת פועלים",
+			"members": [
+				{
+					"name": "אגבארייה זחאלקה אסמא",
+					"image": "http://upload.wikimedia.org/wikipedia/he/thumb/5/59/Asmaagbariyazachalka_72.jpg/200px-Asmaagbariyazachalka_72.jpg"
+				},
+				{
+					"name": "נאדר ניר"
+				},
+				{
+					"name": "בן שמחון דני"
+				},
+				{
+					"name": "טיארה ופא"
+				},
+				{
+					"name": "פלדהיים אורלי"
+				},
+				{
+					"name": "זועבי חנאן"
+				},
+				{
+					"name": "עקאד אורנה"
+				},
+				{
+					"name": "הלוי להב"
+				},
+				{
+					"name": "לבארי נעמי"
+				},
+				{
+					"name": "קעואר מוניר"
+				},
+				{
+					"name": "איצקוביץ גסטון צבי"
+				},
+				{
+					"name": "שורר דן"
+				},
+				{
+					"name": "טחאן ראניה"
+				},
+				{
+					"name": "בריל ערן"
+				},
+				{
+					"name": "מישורי אפרת"
+				},
+				{
+					"name": "בראל נוית"
+				},
+				{
+					"name": "טל פנינה"
+				},
+				{
+					"name": "מגנס אליזבט"
+				},
+				{
+					"name": "הוס רבקה"
+				},
+				{
+					"name": "טיר צביה"
+				},
+				{
+					"name": "ענבל שושנה"
+				},
+				{
+					"name": "בלאו בנימין"
+				},
+				{
+					"name": "אלוני גיא"
+				},
+				{
+					"name": "להב תומר"
+				},
+				{
+					"name": "פרידמן מיכל"
+				},
+				{
+					"name": "הראל מיקי"
+				},
+				{
+					"name": "סודרי אורית"
+				},
+				{
+					"name": "וגנר ארז"
+				},
+				{
+					"name": "קלגסברון טלי"
+				},
+				{
+					"name": "לביא תומר"
+				},
+				{
+					"name": "פאהום אחמד"
+				},
+				{
+					"name": "בלומנטל אפרת"
+				},
+				{
+					"name": "כהן בכור טל"
+				},
+				{
+					"name": "רוזן נחמני דניאל אברהם"
+				},
+				{
+					"name": "להב אדיב הדס"
+				},
+				{
+					"name": "כיתאני סמיר"
+				},
+				{
+					"name": "לנגפור סטפן"
+				},
+				{
+					"name": "פרמינגר יונתן"
+				},
+				{
+					"name": "קדושים כוכבית"
+				},
+				{
+					"name": "טמיר יואב"
+				},
+				{
+					"name": "מהל עידו"
+				},
+				{
+					"name": "פרידמן ציפורה פניה"
+				},
+				{
+					"name": "חנוכה שאול"
+				},
+				{
+					"name": "בן אפרת יעקב יוסף"
+				}
+			]
+		},
+		"14": {
+			"name": "מרצ - השמאל של ישראל",
+			"members": [
+				{
+					"name": "גלאון זהבה",
+					"id": "201",
+					"image": "http://www.knesset.gov.il/mk/images/members/galon_zahava-s.jpg"
+				},
+				{
+					"name": "גיל און אילן",
+					"id": "200"
+				},
+				{
+					"name": "הורוביץ ניצן",
+					"id": "843"
+				},
+				{
+					"name": "רוזין מיכל"
+				},
+				{
+					"name": "פריג` עיסווי"
+				},
+				{
+					"name": "זנדברג תמר"
+				},
+				{
+					"name": "וילן אבשלום"
+				},
+				{
+					"name": "רז מוסי"
+				},
+				{
+					"name": "סולל יפעת"
+				},
+				{
+					"name": "זכי אורי"
+				},
+				{
+					"name": "ורטון לורה"
+				},
+				{
+					"name": "דרומי חכים תום"
+				},
+				{
+					"name": "בנדל אהוד"
+				},
+				{
+					"name": "עמוס אורנה"
+				},
+				{
+					"name": "שירן איל"
+				},
+				{
+					"name": "רגב מיכאל"
+				},
+				{
+					"name": "צויזנר יצחק"
+				},
+				{
+					"name": "מורג דרור"
+				},
+				{
+					"name": "אבקסיס דינה"
+				},
+				{
+					"name": "למדן עידן"
+				},
+				{
+					"name": "אורון אייל"
+				},
+				{
+					"name": "אורשלימי שרון"
+				},
+				{
+					"name": "אדמי יעל"
+				},
+				{
+					"name": "אללו יוסף פפה"
+				},
+				{
+					"name": "ארז חנן"
+				},
+				{
+					"name": "בדיר אחמד"
+				},
+				{
+					"name": "בכר סוזן לינדה"
+				},
+				{
+					"name": "ברוך אילן"
+				},
+				{
+					"name": "ברלב נוגה"
+				},
+				{
+					"name": "ברנע נמרוד"
+				},
+				{
+					"name": "גולן גילד גליה"
+				},
+				{
+					"name": "וסר רחלה מיכל"
+				},
+				{
+					"name": "דיאמנט עדית"
+				},
+				{
+					"name": "כהן חמוטל"
+				},
+				{
+					"name": "הרסגור הנדין עילאי"
+				},
+				{
+					"name": "וולפסון ויויאנה לאה"
+				},
+				{
+					"name": "טריינין רני"
+				},
+				{
+					"name": "לבנון מורדוך אסתר"
+				},
+				{
+					"name": "לוי מרק"
+				},
+				{
+					"name": "צור שושנה"
+				},
+				{
+					"name": "לסקי שוץ גבריאלה"
+				},
+				{
+					"name": "מזרחי דרור"
+				},
+				{
+					"name": "מרציאנו יוסף"
+				},
+				{
+					"name": "נימן חנה"
+				},
+				{
+					"name": "נעמן אייל"
+				},
+				{
+					"name": "סטרקובסקי שילון שרה"
+				},
+				{
+					"name": "עדן מיכל"
+				},
+				{
+					"name": "פילק דניאל"
+				},
+				{
+					"name": "פינקל ליאור"
+				},
+				{
+					"name": "צרפתי דניאל"
+				},
+				{
+					"name": "קרבטרי מאיה"
+				},
+				{
+					"name": "רבין עזרא"
+				},
+				{
+					"name": "רזניק תומר"
+				},
+				{
+					"name": "רייז אייל"
+				},
+				{
+					"name": "שאינסקי אלה"
+				},
+				{
+					"name": "שמיר גדעון"
+				},
+				{
+					"name": "ליטבק מאשה"
+				},
+				{
+					"name": "איזנר יעל"
+				},
+				{
+					"name": "חאג` יחיא ג`מיל"
+				},
+				{
+					"name": "אבן ג`מיל"
+				},
+				{
+					"name": "הרצוג חנה"
+				},
+				{
+					"name": "דורי לטיף"
+				},
+				{
+					"name": "עופרן חגית"
+				},
+				{
+					"name": "ברניב ארן"
+				},
+				{
+					"name": "חורש ראובן"
+				},
+				{
+					"name": "רייז אמציה"
+				},
+				{
+					"name": "וינטראוב רונית"
+				},
+				{
+					"name": "עזור גבריאל"
+				},
+				{
+					"name": "מסארוה סאלח"
+				},
+				{
+					"name": "מטאנס אליאס"
+				},
+				{
+					"name": "זהר רקפת"
+				},
+				{
+					"name": "יעקבסון דניאל"
+				},
+				{
+					"name": "יסעור יהונתן"
+				},
+				{
+					"name": "בורדון גבריאל"
+				},
+				{
+					"name": "אופיר אורי"
+				},
+				{
+					"name": "ברנבויים גריגורי"
+				},
+				{
+					"name": "זועבי עבד אלחלים"
+				},
+				{
+					"name": "אברמסון זיוית"
+				},
+				{
+					"name": "אושרוב נילי"
+				},
+				{
+					"name": "זמבוני בכר אליזבטה"
+				},
+				{
+					"name": "סל נחמיה"
+				},
+				{
+					"name": "ציון נעמי"
+				},
+				{
+					"name": "זועבי עבד אלכרים"
+				},
+				{
+					"name": "זהר עמיר עליזה"
+				},
+				{
+					"name": "חלבי בשיר"
+				},
+				{
+					"name": "זרטל עדית"
+				},
+				{
+					"name": "גולדבלום עמירם"
+				},
+				{
+					"name": "אשדות יזהר"
+				},
+				{
+					"name": "רציסטר קמחי אלונה"
+				},
+				{
+					"name": "הופנונג מנחם"
+				},
+				{
+					"name": "פרוסט יוסי"
+				},
+				{
+					"name": "דיין רות"
+				},
+				{
+					"name": "זקהיים אסתר"
+				},
+				{
+					"name": "קלדרון נסים"
+				},
+				{
+					"name": "ביזאוי צביה סלביה"
+				},
+				{
+					"name": "רדאי פרנסס"
+				},
+				{
+					"name": "ברינקר מנחם"
+				},
+				{
+					"name": "וייץ יחיעם"
+				},
+				{
+					"name": "בובר אגסי יהודית"
+				},
+				{
+					"name": "ליבק אלכס"
+				},
+				{
+					"name": "מטלון רונית"
+				},
+				{
+					"name": "שביט דן"
+				},
+				{
+					"name": "נאמן יהודה גאד"
+				},
+				{
+					"name": "טפרסון עידית"
+				},
+				{
+					"name": "קנז יהושע"
+				},
+				{
+					"name": "רזניק רות"
+				},
+				{
+					"name": "סובול יהושע"
+				},
+				{
+					"name": "שלוי אליס הילדגרד"
+				},
+				{
+					"name": "יהושע א.ב"
+				},
+				{
+					"name": "בר-און מרדכי"
+				},
+				{
+					"name": "סרטני אמירה"
+				},
+				{
+					"name": "מאור ענת"
+				},
+				{
+					"name": "פארס חוסיין"
+				},
+				{
+					"name": "חזן נעמי"
+				},
+				{
+					"name": "שם טוב ויקטור"
+				},
+				{
+					"name": "צבן יאיר"
+				},
+				{
+					"name": "כהן רן"
+				},
+				{
+					"name": "ביילין יוסי"
+				},
+				{
+					"name": "אורון חיים",
+					"id": "5"
+				},
+				{
+					"name": "אלוני שולמית"
+				}
+			]
+		},
+		"15": {
+			"name": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה",
+			"members": [
+				{
+					"name": "בנט נפתלי",
+					"image": "http://www.israelim.org.il/wp-content/uploads/2012/12/Naftali-Bennett.jpg"
+				},
+				{
+					"name": "אריאל אורי יהודה",
+					"id": "713"
+				},
+				{
+					"name": "סלומינסקי ניסן"
+				},
+				{
+					"name": "בן דהן אליהו"
+				},
+				{
+					"name": "שקד איילת"
+				},
+				{
+					"name": "אורבך אורי שרגא",
+					"id": "845"
+				},
+				{
+					"name": "קלפה זבולון"
+				},
+				{
+					"name": "וורצמן אברהם"
+				},
+				{
+					"name": "יוגב מרדכי"
+				},
+				{
+					"name": "סטרוק אורית מלכה"
+				},
+				{
+					"name": "שטבון יונתן"
+				},
+				{
+					"name": "מועלם-רפאלי שולי"
+				},
+				{
+					"name": "הורוביץ הלל אילן"
+				},
+				{
+					"name": "גימפל ירמיהו"
+				},
+				{
+					"name": "אייל נחמן"
+				},
+				{
+					"name": "נסימי רחמים"
+				},
+				{
+					"name": "כהן יצחק אמיתי"
+				},
+				{
+					"name": "פינקלשטיין גילה"
+				},
+				{
+					"name": "בנק אורי"
+				},
+				{
+					"name": "דנינו משה דורון"
+				},
+				{
+					"name": "איפראימוב מרק"
+				},
+				{
+					"name": "טאוב עמיעד דוד"
+				},
+				{
+					"name": "טרבלסי שמעון מכלוף"
+				},
+				{
+					"name": "גימאני אהרן"
+				},
+				{
+					"name": "שושן יצחק"
+				},
+				{
+					"name": "בן אריה יצחק"
+				},
+				{
+					"name": "זרגרי יצחק"
+				},
+				{
+					"name": "דוד יהודה"
+				},
+				{
+					"name": "זפרן זאב"
+				},
+				{
+					"name": "רפל נחמיה"
+				},
+				{
+					"name": "ידין דוד"
+				},
+				{
+					"name": "יחזקאל הרצל"
+				},
+				{
+					"name": "מלמד חנן חיים"
+				},
+				{
+					"name": "גרינוולד גאל"
+				},
+				{
+					"name": "ריפקין אפרים יהודה"
+				},
+				{
+					"name": "וסרמן יחיאל מאיר"
+				},
+				{
+					"name": "בן דוד איתן"
+				},
+				{
+					"name": "בשארי דניאל"
+				},
+				{
+					"name": "הררי הושעיה יפת"
+				},
+				{
+					"name": "בלומנטל שי"
+				},
+				{
+					"name": "חרל”פ מיכאל צבי"
+				},
+				{
+					"name": "בן-דוד עמרם"
+				},
+				{
+					"name": "גולדברג אברהם יוסף"
+				},
+				{
+					"name": "אדרי ג`קי"
+				},
+				{
+					"name": "און נריה"
+				},
+				{
+					"name": "קיל רז"
+				},
+				{
+					"name": "חזיזה מרדכי"
+				},
+				{
+					"name": "רצון אורי"
+				},
+				{
+					"name": "גרנק איתי"
+				},
+				{
+					"name": "גולדמן חיים יהודה"
+				},
+				{
+					"name": "עציון אליעזר"
+				},
+				{
+					"name": "סיבוני עמיחי"
+				},
+				{
+					"name": "פלד גל"
+				},
+				{
+					"name": "אלמגור שלום"
+				},
+				{
+					"name": "אייזן משה דורון"
+				},
+				{
+					"name": "קפלן רפאל אברהם"
+				},
+				{
+					"name": "פורת דוד"
+				},
+				{
+					"name": "מאירוביץ שמואל"
+				},
+				{
+					"name": "מאיר רפאל"
+				},
+				{
+					"name": "אדרי אריאל"
+				},
+				{
+					"name": "בן שושן לירן"
+				},
+				{
+					"name": "רוזנפלד יהודה"
+				},
+				{
+					"name": "סלטן ג`רמי"
+				},
+				{
+					"name": "מאזוז הודיה"
+				},
+				{
+					"name": "חודפי דביר"
+				},
+				{
+					"name": "וקנין מרדכי"
+				},
+				{
+					"name": "טבק אביחי"
+				},
+				{
+					"name": "לוזון מאיר"
+				},
+				{
+					"name": "גור אריה ראובן"
+				},
+				{
+					"name": "פרידמן אריה"
+				},
+				{
+					"name": "הכהן אלישיב"
+				},
+				{
+					"name": "קליגר עמוס"
+				},
+				{
+					"name": "אהרונסון אלעזר אהרון"
+				},
+				{
+					"name": "לוי שלמה"
+				},
+				{
+					"name": "קעניג צבי מאיר"
+				},
+				{
+					"name": "בוק טומי יהודה"
+				},
+				{
+					"name": "שפר אליעזר"
+				},
+				{
+					"name": "אליאש שרה"
+				},
+				{
+					"name": "דרוקמן חיים מאיר"
+				},
+				{
+					"name": "צוקרמן אברהם"
+				}
+			]
+		},
+		"16": {
+			"name": "מתקדמת ליברלית - דמוקרטית",
+			"members": [
+				{
+					"name": "רדקו אלכסנדר",
+					"image": "http://blog.tapuz.co.il/declaration48/images/3569783_91.jpg"
+				},
+				{
+					"name": "רסין יבגני"
+				},
+				{
+					"name": "איבשקין ולרי"
+				},
+				{
+					"name": "פלג אלכסנדר"
+				},
+				{
+					"name": "פדורצ`נקו אנטולי"
+				},
+				{
+					"name": "לרין נינה"
+				},
+				{
+					"name": "משטקוב פולינה"
+				},
+				{
+					"name": "לרין מיכאל"
+				},
+				{
+					"name": "פקר פאינה"
+				}
+			]
+		},
+		"17": {
+			"name": "הירוקים והצעירים לעתיד ירוק בישראל",
+			"members": [
+				{
+					"name": "מלצר עמיר",
+					"image": "http://www.green-party.co.il/Election2013/wp-content/uploads/2009/01/mekzer_face.jpg"
+				},
+				{
+					"name": "עזרא דרור"
+				},
+				{
+					"name": "קינסטליך רז"
+				},
+				{
+					"name": "פרייס סיטון רם"
+				},
+				{
+					"name": "פוליצר קוסובר, לירון"
+				},
+				{
+					"name": "יגאנה אורן"
+				},
+				{
+					"name": "קירשנר שרגא"
+				},
+				{
+					"name": "אורן שרה"
+				},
+				{
+					"name": "רועה מיכאל"
+				},
+				{
+					"name": "יריב  ניר"
+				}
+			]
+		},
+		"18": {
+			"name": "נצח",
+			"members": [
+				{
+					"name": "אפשטיין חיים",
+					"image": "http://s1.kikar.net/th/data/auto/nadm/gh/rc34idic__w300h180q85.jpg"
+				},
+				{
+					"name": "אלמליח משה"
+				},
+				{
+					"name": "בידרמן דוד צבי שלמה"
+				},
+				{
+					"name": "רוחמקין חיים מנחם"
+				},
+				{
+					"name": "גולדשמיד שמואל דוב"
+				},
+				{
+					"name": "וין ישעיהו"
+				},
+				{
+					"name": "פרידמן יעקב"
+				},
+				{
+					"name": "שם טוב יהודה"
+				},
+				{
+					"name": "ברגמן אברהם ישעיהו"
+				},
+				{
+					"name": "קצבורג דוד צבי"
+				}
+			]
+		},
+		"19": {
+			"name": "הישראלים",
+			"members": [
+				{
+					"name": "קון דוד",
+					"image": "http://blog.tapuz.co.il/declaration48/images/3569783_85.jpg"
+				},
+				{
+					"name": "שורר מרינה סול"
+				},
+				{
+					"name": "וקסלר אלכסנדר"
+				},
+				{
+					"name": "בודיאנסקי ולדימיר"
+				},
+				{
+					"name": "אלפנדרי עינת"
+				},
+				{
+					"name": "קורזינר עמירה דיאנה"
+				},
+				{
+					"name": "אלקון בנון"
+				}
+			]
+		},
+		"20": {
+			"name": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי",
+			"members": [
+				{
+					"name": "אריה אלדד",
+					"id": "752",
+					"image": "http://www.knesset.gov.il/mk/images/members/eldad_aryeh-s.jpg"
+				},
+				{
+					"name": "בן ארי מיכאל",
+					"id": "841"
+				},
+				{
+					"name": "מרזל ברוך"
+				},
+				{
+					"name": "קינג אריה יצחק"
+				},
+				{
+					"name": "בן גביר איתמר"
+				},
+				{
+					"name": "כהן אלעד"
+				},
+				{
+					"name": "ליינסקי שלמה"
+				},
+				{
+					"name": "שריון נילי"
+				},
+				{
+					"name": "אוחיון יעקב אבי"
+				},
+				{
+					"name": "גולן מאי"
+				},
+				{
+					"name": "בן מאיר עתליה"
+				},
+				{
+					"name": "תורגמן מאיר"
+				},
+				{
+					"name": "שליסל גדליה"
+				},
+				{
+					"name": "בן זיקרי משה"
+				},
+				{
+					"name": "סבלדי דניאל"
+				},
+				{
+					"name": "רבינוביץ יוסף"
+				},
+				{
+					"name": "חכמון מרדכי"
+				},
+				{
+					"name": "פבלוב מיכאל"
+				},
+				{
+					"name": "לבני ענת"
+				},
+				{
+					"name": "בן חיון מאיר חנן"
+				},
+				{
+					"name": "פרייז תומר בן"
+				},
+				{
+					"name": "שלוש שלמה"
+				},
+				{
+					"name": "איתן טניה"
+				},
+				{
+					"name": "נסים אליהו"
+				},
+				{
+					"name": "ויינשטיין אליהו אדוארד"
+				},
+				{
+					"name": "סטורץ זרחיה"
+				},
+				{
+					"name": "ספירשטיין משה"
+				},
+				{
+					"name": "גוזלן דוד"
+				},
+				{
+					"name": "בנימין עמנואל"
+				},
+				{
+					"name": "אוביץ מיכאל"
+				},
+				{
+					"name": "פרידמן רחל"
+				},
+				{
+					"name": "ברזאני יהודה"
+				},
+				{
+					"name": "תוריק איגור"
+				},
+				{
+					"name": "כהן יהודה"
+				},
+				{
+					"name": "גולדברגר יוסף יצחק"
+				},
+				{
+					"name": "מיוחס פנחס יעקב"
+				},
+				{
+					"name": "קומש אבי אברהם"
+				},
+				{
+					"name": "קוגן בנימין"
+				},
+				{
+					"name": "ויצמן ניצן"
+				},
+				{
+					"name": "צצ`יק שמעון דב"
+				},
+				{
+					"name": "לנקרי אלירן"
+				},
+				{
+					"name": "יופה עתידי"
+				},
+				{
+					"name": "הופמן מנחם"
+				},
+				{
+					"name": "זהביאן מתן"
+				},
+				{
+					"name": "סמדגה שלום דורון"
+				},
+				{
+					"name": "מעוז רפאל"
+				},
+				{
+					"name": "גולן עופר"
+				},
+				{
+					"name": "קלמיקוביץ אולג יצהר"
+				},
+				{
+					"name": "טבצניק יעל"
+				},
+				{
+					"name": "פיגנבאום ישראל דב"
+				},
+				{
+					"name": "אלבום נחמיה"
+				},
+				{
+					"name": "ברוקס שמחה"
+				},
+				{
+					"name": "פפקין שרון"
+				},
+				{
+					"name": "גרוני הילה אורלי"
+				},
+				{
+					"name": "בן אהרן יוסף חיים"
+				}
+			]
+		},
+		"21": {
+			"name": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
+			"members": [
+				{
+					"name": "נתניהו בנימין",
+					"id": "90",
+					"image": "http://www.knesset.gov.il/mk/images/members/netanyahu_bibi-s.jpg"
+				},
+				{
+					"name": "ליברמן אביגדור",
+					"id": "214"
+				},
+				{
+					"name": "סער גדעון משה",
+					"id": "725"
+				},
+				{
+					"name": "שמיר יאיר"
+				},
+				{
+					"name": "ארדן גלעד מנשה",
+					"id": "734"
+				},
+				{
+					"name": "שלום סילבן",
+					"id": "122"
+				},
+				{
+					"name": "לנדאו עוזי",
+					"id": "77"
+				},
+				{
+					"name": "כ”ץ ישראל",
+					"id": "69"
+				},
+				{
+					"name": "דנון דני",
+					"id": "828"
+				},
+				{
+					"name": "לנדבר סופיה סוניה",
+					"id": "78"
+				},
+				{
+					"name": "ריבלין ראובן רובי",
+					"id": "114"
+				},
+				{
+					"name": "יעלון משה",
+					"id": "823"
+				},
+				{
+					"name": "אהרונוביץ יצחק",
+					"id": "790"
+				},
+				{
+					"name": "אלקין זאב",
+					"id": "768"
+				},
+				{
+					"name": "חוטובלי ציפי",
+					"id": "825"
+				},
+				{
+					"name": "לוי אבקסיס אורלי",
+					"id": "832"
+				},
+				{
+					"name": "לוין יריב גדעון",
+					"id": "826"
+				},
+				{
+					"name": "אדלשטיין יולי יואל",
+					"id": "1"
+				},
+				{
+					"name": "קירשנבאום פניה",
+					"id": "835"
+				},
+				{
+					"name": "כץ חיים",
+					"id": "212"
+				},
+				{
+					"name": "רגב מירי מרים",
+					"id": "831"
+				},
+				{
+					"name": "רותם דוד",
+					"id": "805"
+				},
+				{
+					"name": "פייגלין משה זלמן"
+				},
+				{
+					"name": "שטייניץ יובל",
+					"id": "695"
+				},
+				{
+					"name": "אילטוב רוברט",
+					"id": "793"
+				},
+				{
+					"name": "הנגבי צחי",
+					"id": "45"
+				},
+				{
+					"name": "לבנת לימור אהבה",
+					"id": "70"
+				},
+				{
+					"name": "עמאר חמד",
+					"id": "837"
+				},
+				{
+					"name": "אקוניס אופיר",
+					"id": "830"
+				},
+				{
+					"name": "גמליאל דמרי גילה",
+					"id": "723"
+				},
+				{
+					"name": "אוחיון שמעון"
+				},
+				{
+					"name": "שאמה הכהן כרמל",
+					"id": "829"
+				},
+				{
+					"name": "מילר אלכס",
+					"id": "785"
+				},
+				{
+					"name": "ליטינצקי ליאון"
+				},
+				{
+					"name": "ביטן דוד"
+				},
+				{
+					"name": "פרג` אורי"
+				},
+				{
+					"name": "מלינובסקי יוליה"
+				},
+				{
+					"name": "שטרית קטי קטרין"
+				},
+				{
+					"name": "קרא איוב",
+					"id": "230"
+				},
+				{
+					"name": "לויטן סמדר בת אדם"
+				},
+				{
+					"name": "אוחנה שוקי"
+				},
+				{
+					"name": "אמסלם דוד"
+				},
+				{
+					"name": "פורר עודד"
+				},
+				{
+					"name": "אפריימוב ויקטור"
+				},
+				{
+					"name": "דנינו יצחק"
+				},
+				{
+					"name": "מטלון משה מוץ",
+					"id": "838"
+				},
+				{
+					"name": "ברק קרן"
+				},
+				{
+					"name": "נגוסה אברהם"
+				},
+				{
+					"name": "שמטוב ליה",
+					"id": "802"
+				},
+				{
+					"name": "אבן צור דוד"
+				},
+				{
+					"name": "קינן שי"
+				},
+				{
+					"name": "סלבין יצחק"
+				},
+				{
+					"name": "שמחון אברהם"
+				},
+				{
+					"name": "קורן נורית"
+				},
+				{
+					"name": "בן זקן משה"
+				},
+				{
+					"name": "גליק יהודה יהושע"
+				},
+				{
+					"name": "גרוסברג דוד"
+				},
+				{
+					"name": "נודלמן אריאל"
+				},
+				{
+					"name": "דיכטר אברהם משה",
+					"id": "771"
+				},
+				{
+					"name": "נס לאה",
+					"id": "738"
+				},
+				{
+					"name": "פומרנץ ארקדי"
+				},
+				{
+					"name": "תואבה אסמרה אמיר"
+				},
+				{
+					"name": "ביבי אריה",
+					"id": "821"
+				},
+				{
+					"name": "מנור בוריס"
+				},
+				{
+					"name": "פיניאן ציון",
+					"id": "827"
+				},
+				{
+					"name": "אליעזר ישי יוליאנה"
+				},
+				{
+					"name": "אברבוך טליה"
+				},
+				{
+					"name": "וייס מתן דמטרי"
+				},
+				{
+					"name": "אביטל גבריאל"
+				},
+				{
+					"name": "שובל זלמן"
+				},
+				{
+					"name": "עבד עפיף"
+				},
+				{
+					"name": "אדמסו אללי"
+				},
+				{
+					"name": "הרשטל דניאל משה"
+				},
+				{
+					"name": "תלמי אתי אסתר"
+				},
+				{
+					"name": "נבון עמנואל יוסף"
+				},
+				{
+					"name": "בולשטיין אריאל"
+				},
+				{
+					"name": "רבינוביץ אליהו אלונה"
+				},
+				{
+					"name": "סימנה מלסה שחר"
+				},
+				{
+					"name": "מוסטפא ג`יהאד"
+				},
+				{
+					"name": "וידר יעקב"
+				},
+				{
+					"name": "שראל נתן שמעון"
+				},
+				{
+					"name": "בני דיוויס אורלי מזל"
+				},
+				{
+					"name": "טאובר דניאל משה בן אר"
+				},
+				{
+					"name": "מורלי אריאל"
+				},
+				{
+					"name": "רג`ואן סנדרה"
+				},
+				{
+					"name": "דמתי ניר אל"
+				},
+				{
+					"name": "בן שושן מאיר"
+				},
+				{
+					"name": "טיאצ`או עומר"
+				},
+				{
+					"name": "ג`ורג`י אילן"
+				},
+				{
+					"name": "גורדין ציפי ציפורה"
+				},
+				{
+					"name": "שלמון לזרוביץ אסתר שושנה"
+				},
+				{
+					"name": "מזרחי סילבה"
+				},
+				{
+					"name": "איש שלום דוד"
+				},
+				{
+					"name": "הרמלין דוד"
+				},
+				{
+					"name": "ואטורי ניסים"
+				},
+				{
+					"name": "איפרגן משה"
+				},
+				{
+					"name": "אשד אמנון"
+				},
+				{
+					"name": "בר משה"
+				},
+				{
+					"name": "ברדוגו רמי"
+				},
+				{
+					"name": "בשארי גדי"
+				},
+				{
+					"name": "גמרסני מרק אברהם"
+				},
+				{
+					"name": "גרינולד עמיחי"
+				},
+				{
+					"name": "דיין נורית"
+				},
+				{
+					"name": "דרעי אפרים אפי"
+				},
+				{
+					"name": "כהן צדוק"
+				},
+				{
+					"name": "כהן רוני"
+				},
+				{
+					"name": "לסרי ליאור"
+				},
+				{
+					"name": "מזור משה"
+				},
+				{
+					"name": "מלכה מאיר"
+				},
+				{
+					"name": "מעוז שלמה"
+				},
+				{
+					"name": "צוף צוריאל שמחה"
+				},
+				{
+					"name": "קהת סיני שאול"
+				},
+				{
+					"name": "קיש יואב"
+				},
+				{
+					"name": "שטגמן איילה"
+				},
+				{
+					"name": "שטרן רוני"
+				},
+				{
+					"name": "שרעבי עמוס"
+				},
+				{
+					"name": "דולגין משה"
+				},
+				{
+					"name": "כהן אורגד יגאל"
+				},
+				{
+					"name": "אולקניצקי שרה"
+				},
+				{
+					"name": "קדישאי יחיאל"
+				}
+			]
+		},
+		"22": {
+			"name": "עלה ירוק - הרשימה הליברלית",
+			"members": [
+				{
+					"name": "לרמן ירון",
+					"image": "http://aleyarok.org.il/wp-content/uploads/2012/11/196238_10151164969922717_352169413_n1.jpg"
+				},
+				{
+					"name": "מסיכה שמרי"
+				},
+				{
+					"name": "צויג צבי"
+				},
+				{
+					"name": "קני כרמל"
+				},
+				{
+					"name": "ליבוביץ` אורן"
+				},
+				{
+					"name": "גולן מיכאל"
+				},
+				{
+					"name": "מולד ליבי"
+				},
+				{
+					"name": "עידן רועי"
+				},
+				{
+					"name": "קלישר אחיעד"
+				},
+				{
+					"name": "היינריך טל"
+				},
+				{
+					"name": "סוטו עמיעד"
+				},
+				{
+					"name": "דברת אורן"
+				},
+				{
+					"name": "קלישר עידית"
+				},
+				{
+					"name": "פטישמן יבגני"
+				}
+			]
+		},
+		"23": {
+			"name": "העבודה בראשות שלי יחימוביץ",
+			"members": [
+				{
+					"name": "יחימוביץ רחל שלי",
+					"id": "782",
+					"image": "http://sphotos-f.ak.fbcdn.net/hphotos-ak-prn1/16232_162322619217_462074_n.jpg"
+				},
+				{
+					"name": "הרצוג יצחק",
+					"id": "740"
+				},
+				{
+					"name": "כבל איתן",
+					"id": "236"
+				},
+				{
+					"name": "מיכאלי מירב"
+				},
+				{
+					"name": "בן אליעזר פואד בנימין",
+					"id": "20"
+				},
+				{
+					"name": "בר יחיאל"
+				},
+				{
+					"name": "בר לב ישראל עמר"
+				},
+				{
+					"name": "שפיר סתיו"
+				},
+				{
+					"name": "ברורמן אבישי",
+					"id": "797"
+				},
+				{
+					"name": "מרגלית נחום אראל"
+				},
+				{
+					"name": "שמולי יצחק"
+				},
+				{
+					"name": "רוזנטל משה מיכאל"
+				},
+				{
+					"name": "בירן מיכל"
+				},
+				{
+					"name": "שי נחמן",
+					"id": "818"
+				},
+				{
+					"name": "מזרחי משה"
+				},
+				{
+					"name": "עטר דניאל"
+				},
+				{
+					"name": "מגדלה גאלב",
+					"id": "758"
+				},
+				{
+					"name": "חילו נאדיה"
+				},
+				{
+					"name": "אבסדזה נינו",
+					"id": "850"
+				},
+				{
+					"name": "יונה יוסף"
+				},
+				{
+					"name": "בן סימון דניאל",
+					"id": "836"
+				},
+				{
+					"name": "קורנפלד עפר"
+				},
+				{
+					"name": "טרופר משה יחיאל"
+				},
+				{
+					"name": "פריטל יונה"
+				},
+				{
+					"name": "סעד סאלח"
+				},
+				{
+					"name": "אופנהיימר יריב"
+				},
+				{
+					"name": "קריב גלעד"
+				},
+				{
+					"name": "קירמאיר אסתר"
+				},
+				{
+					"name": "זלץ ברוך"
+				},
+				{
+					"name": "חרמוני ערן"
+				},
+				{
+					"name": "פדידה בן שיטרית לאה"
+				},
+				{
+					"name": "שושן שלמה סמי"
+				},
+				{
+					"name": "צור נורית"
+				},
+				{
+					"name": "חופרי נחום"
+				},
+				{
+					"name": "נחמיאס ורבין איילת"
+				},
+				{
+					"name": "סהלו שולמית"
+				},
+				{
+					"name": "שליט נועם"
+				},
+				{
+					"name": "שוורץ אריאל איתן"
+				},
+				{
+					"name": "בראון שמעון"
+				},
+				{
+					"name": "אורן ינאי דנה"
+				},
+				{
+					"name": "ורטמן אור"
+				},
+				{
+					"name": "בן עמי לילי"
+				},
+				{
+					"name": "עטייה יוסף"
+				},
+				{
+					"name": "אמארה פתחי"
+				},
+				{
+					"name": "בדר מאלכ"
+				},
+				{
+					"name": "אבו פארס סמיר"
+				},
+				{
+					"name": "ינאי שאול"
+				},
+				{
+					"name": "גולדמן פלורנטינה אליס"
+				},
+				{
+					"name": "קלינגר יוסף יהונתן"
+				},
+				{
+					"name": "קליין גילה"
+				},
+				{
+					"name": "צברי יורם"
+				},
+				{
+					"name": "נתנזון גולדשטרום רוברטו"
+				},
+				{
+					"name": "פסטרנק ליאון אורן"
+				},
+				{
+					"name": "ונונו יוסף"
+				},
+				{
+					"name": "נאטור אחמד"
+				},
+				{
+					"name": "אדירי ציון"
+				},
+				{
+					"name": "סטופאי שוורץ נירה"
+				},
+				{
+					"name": "שחף עמנואל"
+				},
+				{
+					"name": "קננגיסר דב"
+				},
+				{
+					"name": "עווד אמיר"
+				},
+				{
+					"name": "הרשקוביץ עמית"
+				},
+				{
+					"name": "שקד אריה"
+				},
+				{
+					"name": "שחם יוסף"
+				},
+				{
+					"name": "שתיל אבלין"
+				},
+				{
+					"name": "אובלס אבי"
+				},
+				{
+					"name": "מרום צבי"
+				},
+				{
+					"name": "אברהם אביבה"
+				},
+				{
+					"name": "סטרולוב עמירם"
+				},
+				{
+					"name": "גלעדי אלון"
+				},
+				{
+					"name": "נחום שלום"
+				},
+				{
+					"name": "כתר יעקב איתן"
+				},
+				{
+					"name": "שמש ירון"
+				},
+				{
+					"name": "מלמד למואל"
+				},
+				{
+					"name": "בצלאלי שמואל"
+				},
+				{
+					"name": "מריומה יעקב"
+				},
+				{
+					"name": "פרדס אברהם"
+				},
+				{
+					"name": "סרגובי אוריאל עמיחי"
+				},
+				{
+					"name": "גוטלר איתי"
+				},
+				{
+					"name": "דורון בוסתן"
+				},
+				{
+					"name": "אזולאי דניאל"
+				},
+				{
+					"name": "גרינולד הדס"
+				},
+				{
+					"name": "מנשה לביא ארז"
+				},
+				{
+					"name": "בן נשר בנימין"
+				},
+				{
+					"name": "אוחיון אשר"
+				},
+				{
+					"name": "פינק יאיר"
+				},
+				{
+					"name": "פרס ריצ`רד"
+				},
+				{
+					"name": "קבלו פנחס פיני"
+				},
+				{
+					"name": "גבעוני אהרן זליג"
+				},
+				{
+					"name": "מרשק יואל"
+				},
+				{
+					"name": "אלקסלסי הנרי"
+				},
+				{
+					"name": "מזרחי שמואל"
+				},
+				{
+					"name": "אורן אלי אליהו"
+				},
+				{
+					"name": "גבע לאה"
+				},
+				{
+					"name": "בילקר דן"
+				},
+				{
+					"name": "בן ישראל גדעון"
+				},
+				{
+					"name": "איצקוביץ` חיה שרה"
+				},
+				{
+					"name": "דלמן לואיס"
+				},
+				{
+					"name": "זילברברג מיכל"
+				},
+				{
+					"name": "בוקאעי מחמוד"
+				},
+				{
+					"name": "דהמן מרדכי"
+				},
+				{
+					"name": "כהן שולמית שולה"
+				},
+				{
+					"name": "ריטוב עמיר"
+				},
+				{
+					"name": "תיתי עבאס"
+				},
+				{
+					"name": "ביטון מיכאל מרדכי"
+				},
+				{
+					"name": "פכטר אריה"
+				},
+				{
+					"name": "ימיני יצחק"
+				},
+				{
+					"name": "חדד אריה אריק"
+				},
+				{
+					"name": "אריאלי דוד"
+				},
+				{
+					"name": "אוחיון יצחק"
+				},
+				{
+					"name": "אלפסי סימון"
+				},
+				{
+					"name": "שוסטר אלון נתן"
+				},
+				{
+					"name": "דולה יוסף"
+				},
+				{
+					"name": "דיין יעל"
+				},
+				{
+					"name": "כהן רענן"
+				},
+				{
+					"name": "שחל משה"
+				},
+				{
+					"name": "ליבאי דוד"
+				},
+				{
+					"name": "וייס שבח"
+				},
+				{
+					"name": "ידלין אהרון"
+				},
+				{
+					"name": "הלל שלמה"
+				},
+				{
+					"name": "נבון יצחק"
+				}
+			]
+		},
+		"24": {
+			"name": "עם שלם - בראשות הרב חיים אמסלם",
+			"members": [
+				{
+					"name": "אמסלם חיים",
+					"id": "795",
+					"image": "http://www.knesset.gov.il/mk/images/members/amsalem_haim-s.jpg"
+				},
+				{
+					"name": "צרפתי משה"
+				},
+				{
+					"name": "אגסי ראובן"
+				},
+				{
+					"name": "יקירה דניאלה"
+				},
+				{
+					"name": "אוקנין מקסים"
+				},
+				{
+					"name": "בן דוד מרב"
+				},
+				{
+					"name": "בן חיים מאיר"
+				},
+				{
+					"name": "קונסטנטין אריאל ברוך"
+				},
+				{
+					"name": "אבסירה תמר"
+				},
+				{
+					"name": "ניישטדט ולדימיר"
+				},
+				{
+					"name": "אסולין שמואל"
+				},
+				{
+					"name": "זאוש אסתר"
+				},
+				{
+					"name": "סבן אלי"
+				},
+				{
+					"name": "פרץ שלומי"
+				},
+				{
+					"name": "אבוהב עידן ישראל"
+				}
+			]
+		},
+		"25": {
+			"name": "הפיראטים",
+			"members": [
+				{
+					"name": "שם טוב אוהד יעקב",
+					"image": "http://blog.tapuz.co.il/declaration48/images/3569783_86.jpg"
+				},
+				{
+					"name": "כוזר נועם"
+				},
+				{
+					"name": "בירון דן"
+				},
+				{
+					"name": "מלטין לידיה"
+				},
+				{
+					"name": "חדד רפרם"
+				},
+				{
+					"name": "פלנקר הסקלברג דניאל"
+				},
+				{
+					"name": "ליברמן לאו"
+				},
+				{
+					"name": "גוטמן מורן קטרין שמופ"
+				},
+				{
+					"name": "שועלי חפציבה איטה"
+				},
+				{
+					"name": "סקטון עבריה"
+				},
+				{
+					"name": "מלטין איוון"
+				},
+				{
+					"name": "קלנר יותם"
+				},
+				{
+					"name": "שטדלר טל"
+				},
+				{
+					"name": "גולדשטיין קיט לורנס"
+				},
+				{
+					"name": "חזן שלי"
+				},
+				{
+					"name": "בנאי איתמר גדעון"
+				},
+				{
+					"name": "סטו ריינהרד"
+				},
+				{
+					"name": "יוספשוילי ארין"
+				},
+				{
+					"name": "עופר קרן"
+				},
+				{
+					"name": "אלון יונתן עמנואל"
+				},
+				{
+					"name": "מילינבסקי יאנה"
+				},
+				{
+					"name": "גרדשטיין שרון"
+				},
+				{
+					"name": "שוסטק אלעד"
+				},
+				{
+					"name": "אברהם רות"
+				},
+				{
+					"name": "פטרושקה נתנאל"
+				},
+				{
+					"name": "כוזר יוסף"
+				},
+				{
+					"name": "גולני עופר"
+				},
+				{
+					"name": "צוקרמן יעל"
+				},
+				{
+					"name": "ווילר דינה"
+				},
+				{
+					"name": "זהר זאב אל אשר עדין"
+				},
+				{
+					"name": "בן מנחם נחמן"
+				},
+				{
+					"name": "שטיננבאום אמנואל"
+				},
+				{
+					"name": "וינטר מאירה"
+				},
+				{
+					"name": "פרנק ליעד"
+				}
+			]
+		},
+		"26": {
+			"name": "עתיד אחד – נלחמים בסם החדש",
+			"members": [
+				{
+					"name": "שטלצר יחזקאל",
+					"image": "http://blog.tapuz.co.il/declaration48/images/3569783_93.jpg"
+				}
+			]
+		},
+		"27": {
+			"name": "צדק חברתי בראשות גד הרן",
+			"members": [
+				{
+					"name": "הרן גד",
+					"image": "http://mscwbe.walla.co.il/archive/1131597-54.jpg"
+				},
+				{
+					"name": "סושרד עודד יהודה"
+				},
+				{
+					"name": "סתוי אלי שלום"
+				},
+				{
+					"name": "מוואסי אדריס"
+				},
+				{
+					"name": "ואנונו ויקי"
+				},
+				{
+					"name": "רומנו דוד"
+				},
+				{
+					"name": "רובין צבי"
+				},
+				{
+					"name": "כהן סימי"
+				},
+				{
+					"name": "גנוסר ניר גד"
+				},
+				{
+					"name": "יגנה רואי"
+				},
+				{
+					"name": "שורץ יעקב"
+				},
+				{
+					"name": "פרדה אדמסי אדיר"
+				},
+				{
+					"name": "בלומנטל יוסף אילן"
+				}
+			]
+		},
+		"28": {
+			"name": "אלאמל לתג`ייר - התקווה לשינוי",
+			"members": [
+				{
+					"name": "קריואוי עאטף",
+					"image": "http://blog.tapuz.co.il/declaration48/images/3569783_87.jpg"
+				},
+				{
+					"name": "בדראן\tסעיד"
+				},
+				{
+					"name": "סלימאן\tמרתא"
+				},
+				{
+					"name": "אבו אלהיג`א מוחמד"
+				},
+				{
+					"name": "אבו רביעה מחמד"
+				},
+				{
+					"name": "עבאס אמנה"
+				},
+				{
+					"name": "ח`ורי ג`מאל"
+				},
+				{
+					"name": "טהה בינאן"
+				},
+				{
+					"name": "סאלח עבד אלרחמאן"
+				},
+				{
+					"name": "אבו זלאם סעיד"
+				},
+				{
+					"name": "אבו ליל יוסף"
+				}
+			]
+		},
+		"29": {
+			"name": "קדימה בראשות שאול מופז",
+			"members": [
+				{
+					"name": "מופז שאול",
+					"id": "720",
+					"image": "http://blog.tapuz.co.il/declaration48/images/3569783_78.jpg"
+				},
+				{
+					"name": "חסון ישראל",
+					"id": "781"
+				},
+				{
+					"name": "פלסנר יוחנן",
+					"id": "809"
+				},
+				{
+					"name": "תירוש רונית",
+					"id": "774"
+				},
+				{
+					"name": "חרמש שי שכנאי",
+					"id": "804"
+				},
+				{
+					"name": "צלנר יובל",
+					"id": "853"
+				},
+				{
+					"name": "אביטל דורון",
+					"id": "851"
+				},
+				{
+					"name": "חסון אכרם",
+					"id": "854"
+				},
+				{
+					"name": "דבאח אחמד"
+				},
+				{
+					"name": "לבני אתי אסתר"
+				},
+				{
+					"name": "יוגב מטי (מרטין)"
+				},
+				{
+					"name": "וייצמן אהוד"
+				},
+				{
+					"name": "רייבי נחמיה"
+				},
+				{
+					"name": "טנצר אלכסנדר"
+				},
+				{
+					"name": "אלפריח מוטי מרדכי"
+				},
+				{
+					"name": "אזולאי אירית"
+				},
+				{
+					"name": "דרמן דנילו"
+				},
+				{
+					"name": "טבאש יאסר"
+				},
+				{
+					"name": "טריף סלמאן"
+				},
+				{
+					"name": "אחרק רזיאל"
+				},
+				{
+					"name": "קסנטיני איתן"
+				},
+				{
+					"name": "גלזר אלחנן"
+				},
+				{
+					"name": "טל ויקטור"
+				},
+				{
+					"name": "ברקאי צביקה"
+				},
+				{
+					"name": "מורד בהזד"
+				},
+				{
+					"name": "גולן ניר"
+				},
+				{
+					"name": "עומרד אבי"
+				},
+				{
+					"name": "מסרי חוסאם"
+				},
+				{
+					"name": "פלג מירה"
+				},
+				{
+					"name": "גבאי יהודה"
+				},
+				{
+					"name": "חוא לואי"
+				},
+				{
+					"name": "רוטשילד יעקב"
+				},
+				{
+					"name": "ביבר ענת"
+				},
+				{
+					"name": "מוסט ראובן"
+				},
+				{
+					"name": "נחמן עודד"
+				},
+				{
+					"name": "רייבי אביתר"
+				},
+				{
+					"name": "מנחם אשר"
+				},
+				{
+					"name": "אסולין יואב"
+				},
+				{
+					"name": "וינברגר עופרית"
+				},
+				{
+					"name": "וידרמן אברהם"
+				},
+				{
+					"name": "בניטה שמעון (סימו)"
+				},
+				{
+					"name": "אמר חנוך"
+				},
+				{
+					"name": "טוריס שירלי"
+				},
+				{
+					"name": "ברזילי יוסף"
+				},
+				{
+					"name": "אטרי דרור"
+				},
+				{
+					"name": "סיבק יחזקאל"
+				},
+				{
+					"name": "קצנלבוגן עמירם"
+				},
+				{
+					"name": "אלגרבלי מקסים"
+				},
+				{
+					"name": "קאשי מירי (מרים)"
+				},
+				{
+					"name": "בנדר אהוד (אדי)"
+				},
+				{
+					"name": "קזז יניב"
+				},
+				{
+					"name": "שרגא רפאל"
+				},
+				{
+					"name": "בן מנחם אליהו אלי"
+				},
+				{
+					"name": "שחר דביר"
+				},
+				{
+					"name": "ראמוס רחל"
+				},
+				{
+					"name": "יצחק מרדכי מוקי"
+				},
+				{
+					"name": "רוזנשטיין אפרים"
+				},
+				{
+					"name": "בר אילן טובה"
+				},
+				{
+					"name": "שרם ניסים"
+				},
+				{
+					"name": "קורקוס ניסים"
+				},
+				{
+					"name": "בלאל עאסי"
+				},
+				{
+					"name": "שיף דבורה"
+				},
+				{
+					"name": "שמיר בלאט ריאל"
+				},
+				{
+					"name": "סדון אדם"
+				},
+				{
+					"name": "אליאס עדי"
+				},
+				{
+					"name": "עמר מאיר"
+				},
+				{
+					"name": "צבי אורלי"
+				},
+				{
+					"name": "חולי אברהם"
+				},
+				{
+					"name": "יגודה יעקב"
+				},
+				{
+					"name": "פיש יובל"
+				},
+				{
+					"name": "מויאל יניב"
+				},
+				{
+					"name": "יראל אלון"
+				},
+				{
+					"name": "רוטשטיין עקיבא יוסף"
+				},
+				{
+					"name": "טריף אנסי"
+				},
+				{
+					"name": "נחמן משה"
+				},
+				{
+					"name": "הרץ שרגא"
+				},
+				{
+					"name": "מלכה נורית"
+				},
+				{
+					"name": "עאסי חאזם"
+				},
+				{
+					"name": "לקסמן יעקב"
+				},
+				{
+					"name": "עאסי זאהר"
+				},
+				{
+					"name": "סיטרוק מרקו"
+				},
+				{
+					"name": "ניסימפור משה"
+				},
+				{
+					"name": "אמר שלמה (שלומי)"
+				},
+				{
+					"name": "אמר קרן אור"
+				},
+				{
+					"name": "שמיה נסים"
+				},
+				{
+					"name": "אבוטבול מורן"
+				},
+				{
+					"name": "לירון יעקב"
+				},
+				{
+					"name": "סדון אביתר"
+				},
+				{
+					"name": "חסון סעיד"
+				},
+				{
+					"name": "נסראלדין יואל"
+				},
+				{
+					"name": "אדנייב - עדי צבי"
+				},
+				{
+					"name": "חלבי סאמר"
+				},
+				{
+					"name": "חסון חכמת"
+				},
+				{
+					"name": "אילגייב ריגורי גרשון"
+				}
+			]
+		},
+		"30": {
+			"name": "חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)",
+			"members": [
+				{
+					"name": "ברכה מוחמד",
+					"id": "107",
+					"image": "http://www.knesset.gov.il/mk/images/members/baraka_mohamed-s.jpg"
+				},
+				{
+					"name": "סויד חנא",
+					"id": "789"
+				},
+				{
+					"name": "חנין דב בוריס",
+					"id": "780"
+				},
+				{
+					"name": "אגבאריה עפו",
+					"id": "842"
+				},
+				{
+					"name": "אספניולי נבילה"
+				},
+				{
+					"name": "עודה איימן"
+				},
+				{
+					"name": "אבו מערוף עבדאללה"
+				},
+				{
+					"name": "רענן יעלה"
+				},
+				{
+					"name": "סקסק עומר"
+				},
+				{
+					"name": "סטולר מור"
+				},
+				{
+					"name": "נסאר עומר"
+				},
+				{
+					"name": "ג`לג`ולי מייסם"
+				},
+				{
+					"name": "כנאנה עמראן"
+				},
+				{
+					"name": "היבי עלי"
+				},
+				{
+					"name": "אבו אלהיג`א עאדל"
+				},
+				{
+					"name": "ג`בארין יוסף"
+				},
+				{
+					"name": "זרצקי עדנה"
+				},
+				{
+					"name": "סנעאללה נסר"
+				},
+				{
+					"name": "ניקולה עיסא"
+				},
+				{
+					"name": "ברגותי כמאל"
+				},
+				{
+					"name": "גולדפרב פדרו"
+				},
+				{
+					"name": "בסול רינאוי הישאם"
+				},
+				{
+					"name": "חמדי אחמד"
+				},
+				{
+					"name": "מוסא נעים"
+				},
+				{
+					"name": "גולדרינג יואב"
+				},
+				{
+					"name": "מורקוס זריק אמל"
+				},
+				{
+					"name": "כורי ח`ליל"
+				},
+				{
+					"name": "עואד סמיר"
+				},
+				{
+					"name": "עודה אחמד"
+				},
+				{
+					"name": "ואכד ח`יתאם"
+				},
+				{
+					"name": "מרזוק סלמאן"
+				},
+				{
+					"name": "גהשאן שפיק"
+				},
+				{
+					"name": "שריף ג`מאל"
+				},
+				{
+					"name": "אמורי אדם ישי"
+				},
+				{
+					"name": "אלנקיב מהא"
+				},
+				{
+					"name": "דאוד (תורכי) ח`אלד"
+				},
+				{
+					"name": "אבו דבאי-נערה פידאא"
+				},
+				{
+					"name": "בסל ג`בר"
+				},
+				{
+					"name": "ראס עאידה"
+				},
+				{
+					"name": "אבו אלזולוף פואז"
+				},
+				{
+					"name": "וולטמן אורי"
+				},
+				{
+					"name": "חמוד חמוד"
+				},
+				{
+					"name": "חג`אג` נורית"
+				},
+				{
+					"name": "שביטה אמג`ד"
+				},
+				{
+					"name": "עאמר שדא"
+				},
+				{
+					"name": "חמודה מוניר"
+				},
+				{
+					"name": "חמאיסה אמין"
+				},
+				{
+					"name": "דרייר שילה יובל"
+				},
+				{
+					"name": "סלימאן לילא"
+				},
+				{
+					"name": "תאיה ג`מאל"
+				},
+				{
+					"name": "קאדרי עלי"
+				},
+				{
+					"name": "טנדלר יואל"
+				},
+				{
+					"name": "ברתנא הגר"
+				},
+				{
+					"name": "דיאב סוהיל"
+				},
+				{
+					"name": "גזאוי עבד אלרחים"
+				},
+				{
+					"name": "בישארה נסים"
+				},
+				{
+					"name": "עיראקי אחמד"
+				},
+				{
+					"name": "שנאווי אניס"
+				},
+				{
+					"name": "יאסין סאמי"
+				},
+				{
+					"name": "נסרה חוריה"
+				},
+				{
+					"name": "בדווי עבדאללה"
+				},
+				{
+					"name": "שביטה פתחי"
+				},
+				{
+					"name": "ח`לף עבד אלפתאח"
+				},
+				{
+					"name": "ראבי דרויש"
+				},
+				{
+					"name": "מחאמיד זיאד"
+				},
+				{
+					"name": "גרין אלון לי"
+				},
+				{
+					"name": "אבו ליל סעיד"
+				},
+				{
+					"name": "סלאמה עבד אלרחמן"
+				},
+				{
+					"name": "חסאן שרף"
+				},
+				{
+					"name": "אחמד האלה"
+				},
+				{
+					"name": "כסיף עופר"
+				},
+				{
+					"name": "ח`טיב אבראהים"
+				},
+				{
+					"name": "טאהא סעיד"
+				},
+				{
+					"name": "ימפולר אריה"
+				},
+				{
+					"name": "חאג` כמאל"
+				},
+				{
+					"name": "חידר יוסף"
+				},
+				{
+					"name": "אבו ראס בות`ינה"
+				},
+				{
+					"name": "ח`שיבון אסעד"
+				},
+				{
+					"name": "אבו ראס עבד אלסלאם"
+				},
+				{
+					"name": "גטאס פאתן"
+				},
+				{
+					"name": "נכד נכד"
+				},
+				{
+					"name": "זין אלדין עיסאם"
+				},
+				{
+					"name": "מחאמיד ראידה"
+				},
+				{
+					"name": "צדוק צדוק"
+				},
+				{
+					"name": "סמעאן אסעד"
+				},
+				{
+					"name": "חאג` אחמד"
+				},
+				{
+					"name": "חמדי עומר"
+				},
+				{
+					"name": "אבו יונס מאג`ד"
+				},
+				{
+					"name": "קאסם גאזי"
+				},
+				{
+					"name": "עאמר עאדל"
+				},
+				{
+					"name": "חריכי עלי"
+				},
+				{
+					"name": "אבו זיד דח`יל"
+				},
+				{
+					"name": "בקר דליה"
+				},
+				{
+					"name": "שאואר נועה"
+				},
+				{
+					"name": "מנסור מוחמד"
+				},
+				{
+					"name": "זיאד נאילה"
+				},
+				{
+					"name": "דוידי אפרים"
+				},
+				{
+					"name": "תומא-סלימאן עאידה"
+				},
+				{
+					"name": "עיראקי סאמח"
+				},
+				{
+					"name": "טיבי זוהיר"
+				},
+				{
+					"name": "דהאמשה מנסור"
+				},
+				{
+					"name": "גנאס כמאל"
+				},
+				{
+					"name": "כנאענה תאופיק"
+				},
+				{
+					"name": "אבו ראס ג`מיל"
+				},
+				{
+					"name": "ג`ראיסי רודינה"
+				},
+				{
+					"name": "סעדי עומר"
+				},
+				{
+					"name": "כנאנה אסעד"
+				},
+				{
+					"name": "בורשטיין דוד (עוזי)"
+				},
+				{
+					"name": "סגיר פתחיה"
+				},
+				{
+					"name": "גונן בנימין"
+				},
+				{
+					"name": "אלעטאונה יוסף"
+				},
+				{
+					"name": "אבו רחמון אדיב"
+				},
+				{
+					"name": "ח`ורי סמירה"
+				},
+				{
+					"name": "ח`טיב שאוקי"
+				},
+				{
+					"name": "מח`ול עסאם"
+				},
+				{
+					"name": "טאהא מוחמד"
+				},
+				{
+					"name": "גוז`נסקי תמר"
+				},
+				{
+					"name": "ג`ראיסי ראמז"
+				},
+				{
+					"name": "אלקאסם סמיח"
+				},
+				{
+					"name": "נפאע מוחמד"
+				}
+			]
+		},
+		"31": {
+			"name": "רע”מ - תע”ל - מד”ע",
+			"members": [
+				{
+					"name": "צרצור אברהים",
+					"id": "800",
+					"image": "http://www.knesset.gov.il/mk/images/members/sarsur_ibrahim-s.jpg"
+				},
+				{
+					"name": "טיבי אחמד",
+					"id": "208"
+				},
+				{
+					"name": "גנאים מסעוד",
+					"id": "844"
+				},
+				{
+					"name": "אבו עראר טלב"
+				},
+				{
+					"name": "סאנע טלב",
+					"id": "13"
+				},
+				{
+					"name": "כנעאן מוחמד"
+				},
+				{
+					"name": "בדראן ;זידאן"
+				},
+				{
+					"name": "עבדאללה גסאן"
+				},
+				{
+					"name": "פדילה יוסף"
+				},
+				{
+					"name": "זובידאת פארוק"
+				},
+				{
+					"name": "עדווי חוסאם"
+				},
+				{
+					"name": "עלי סעאבנה"
+				},
+				{
+					"name": "סלאמה פאיז"
+				},
+				{
+					"name": "פדילה עאידה"
+				},
+				{
+					"name": "גנאים זכי"
+				},
+				{
+					"name": "אבו פנה עא לרחים"
+				},
+				{
+					"name": "מנסור דאווד"
+				},
+				{
+					"name": "עיראקי תמים"
+				},
+				{
+					"name": "בדיר כמאל"
+				},
+				{
+					"name": "סלאימה חסין"
+				},
+				{
+					"name": "ואכד רים"
+				},
+				{
+					"name": "חיאדרי אמאני"
+				},
+				{
+					"name": "דראושה אמאני"
+				},
+				{
+					"name": "אבו מדיגם עטא"
+				},
+				{
+					"name": "עכאשה עלי"
+				},
+				{
+					"name": "חטיב הבא"
+				},
+				{
+					"name": "יוסף מדיין"
+				},
+				{
+					"name": "דראושה באסל"
+				},
+				{
+					"name": "מכלוף חוסאם"
+				},
+				{
+					"name": "חטיב אסמה"
+				},
+				{
+					"name": "פדילה מוהנד"
+				},
+				{
+					"name": "בדוויה גמיל"
+				},
+				{
+					"name": "אכתילאת אברהים"
+				},
+				{
+					"name": "אלקרם יוסף"
+				},
+				{
+					"name": "עתאמנס נאיף"
+				},
+				{
+					"name": "נאסר מוסא"
+				},
+				{
+					"name": "זעבי דעאא"
+				},
+				{
+					"name": "מיעארי מנאר"
+				},
+				{
+					"name": "קאסם עלי"
+				},
+				{
+					"name": "גרה חסאם"
+				},
+				{
+					"name": "שהאב מוסטפא"
+				},
+				{
+					"name": "טהה חסן"
+				},
+				{
+					"name": "עתאמנה ספא"
+				},
+				{
+					"name": "כיואן עלי"
+				},
+				{
+					"name": "סמארה יזיד"
+				},
+				{
+					"name": "גנאים מוחמד"
+				},
+				{
+					"name": "אבו יאסין בסאם"
+				},
+				{
+					"name": "קשקוש מוחמד"
+				},
+				{
+					"name": "מחאגנה עלי"
+				},
+				{
+					"name": "מוהנא מוחמד"
+				},
+				{
+					"name": "גאבר אחמד"
+				},
+				{
+					"name": "אגבארייה עלאם"
+				},
+				{
+					"name": "מחאמיד מוחמד"
+				},
+				{
+					"name": "גבארין מוחמד"
+				},
+				{
+					"name": "מחאגנה אחמד"
+				},
+				{
+					"name": "עיראקי אסלאם"
+				},
+				{
+					"name": "עיראקי עדנאן"
+				},
+				{
+					"name": "עאזם אחמד"
+				},
+				{
+					"name": "זרקאווי מהדי"
+				},
+				{
+					"name": "מנאע אחמד"
+				},
+				{
+					"name": "עזאיזה אכראם"
+				},
+				{
+					"name": "דראושה היתם"
+				},
+				{
+					"name": "מסארייה ראיף"
+				},
+				{
+					"name": "יעקב זאיד"
+				},
+				{
+					"name": "דלאשה אחמד"
+				},
+				{
+					"name": "עתאמוה מוחמד"
+				},
+				{
+					"name": "חידר איאד"
+				},
+				{
+					"name": "אבו חיר אחמד"
+				},
+				{
+					"name": "מרעי חסן"
+				},
+				{
+					"name": "ושאחי מאג`ד"
+				},
+				{
+					"name": "שקרא ג`מאל"
+				},
+				{
+					"name": "שלבי עמר"
+				},
+				{
+					"name": "מסרי עבד אלכרים"
+				},
+				{
+					"name": "קשקוש ראשד"
+				},
+				{
+					"name": "פדילה מוחמד"
+				},
+				{
+					"name": "מסרי אמין"
+				},
+				{
+					"name": "זמירו פואד"
+				},
+				{
+					"name": "סולטאן רביע"
+				},
+				{
+					"name": "עומרי נאיף"
+				},
+				{
+					"name": "סעדי גסאן"
+				},
+				{
+					"name": "קשקוש עאדל"
+				},
+				{
+					"name": "סלאמה גמיל"
+				},
+				{
+					"name": "זועבי אמיר"
+				},
+				{
+					"name": "קוודר אסמעיל"
+				},
+				{
+					"name": "נעים יחיא"
+				},
+				{
+					"name": "חג`לה חסן"
+				},
+				{
+					"name": "סטל מוחמד"
+				},
+				{
+					"name": "אבו ליל פח`רי"
+				},
+				{
+					"name": "ותד עבד"
+				},
+				{
+					"name": "אמארה נביל"
+				},
+				{
+					"name": "אבו גאנם עאמר"
+				},
+				{
+					"name": "אבו ליל אחמד"
+				},
+				{
+					"name": "חסינייה חאלד"
+				},
+				{
+					"name": "עבאס שאדי"
+				},
+				{
+					"name": "עכרי אשרף"
+				},
+				{
+					"name": "בלחה אחמד"
+				},
+				{
+					"name": "טורי חמיס"
+				},
+				{
+					"name": "טורה חאלד"
+				},
+				{
+					"name": "אלעמור יוסף"
+				},
+				{
+					"name": "מלחם רביע"
+				},
+				{
+					"name": "קרם עלי"
+				},
+				{
+					"name": "אבו אחמד סלימאן"
+				},
+				{
+					"name": "עבדאלחלים טאהה"
+				},
+				{
+					"name": "אלעמור סמיר"
+				},
+				{
+					"name": "חאג` יחיא עבד אחכים"
+				},
+				{
+					"name": "קעדאן אעתמאד"
+				},
+				{
+					"name": "טיבי מואיד"
+				},
+				{
+					"name": "עכרייה מחמד"
+				},
+				{
+					"name": "עכרי מאהר"
+				},
+				{
+					"name": "חאג יחיא מטאוע"
+				},
+				{
+					"name": "מוהנא אחמד"
+				},
+				{
+					"name": "חג יחיא מטאוע"
+				},
+				{
+					"name": "עוידה זיאד"
+				},
+				{
+					"name": "עזאזמה יוסף"
+				},
+				{
+					"name": "חודר עלי"
+				},
+				{
+					"name": "חגאזי אברהים"
+				},
+				{
+					"name": "דיאב סלימאן"
+				},
+				{
+					"name": "שאהין יוסף"
+				},
+				{
+					"name": "דראושה עבד אלוהאב"
+				},
+				{
+					"name": "דהאמשה עאלמאלכ"
+				}
+			]
+		},
+		"32": {
+			"name": "חיים בכבוד",
+			"members": [
+				{
+					"name": "דנינו רות",
+					"image": "http://sphotos-d.ak.fbcdn.net/hphotos-ak-snc6/9213_439426046112011_1532009301_n.jpg"
+				},
+				{
+					"name": "למבז  יניב"
+				},
+				{
+					"name": "עמית סער שלום"
+				},
+				{
+					"name": "אלהב אליהו"
+				},
+				{
+					"name": "קזדו יוסף"
+				},
+				{
+					"name": "שורץ צבי"
+				},
+				{
+					"name": "כהן מרדכי"
+				},
+				{
+					"name": "בן נון חפציבה"
+				},
+				{
+					"name": "רוזנברג פבל"
+				},
+				{
+					"name": "לידני חיים"
+				},
+				{
+					"name": "אטיאס נפתלי"
+				},
+				{
+					"name": "סולם פרץ"
+				},
+				{
+					"name": "פרץ אברהם"
+				},
+				{
+					"name": "ויצמן גאולה"
+				},
+				{
+					"name": "ריס גאולה"
+				},
+				{
+					"name": "קריצבסקי יצחק"
+				}
+			]
+		},
+		"33": {
+			"name": "שס התאחדות הספרדית העולמית שומרי תורה",
+			"members": [
+				{
+					"name": "ישי, אליהו",
+					"id": "63",
+					"image": "http://www.knesset.gov.il/mk/images/members/yishai_eli-s.jpg"
+				},
+				{
+					"name": "דרעי אריה מכלוף"
+				},
+				{
+					"name": "אטיאס אריאל",
+					"id": "791"
+				},
+				{
+					"name": "כהן יצחק",
+					"id": "65"
+				},
+				{
+					"name": "נהרי משולם",
+					"id": "222"
+				},
+				{
+					"name": "כהן אמנון",
+					"id": "210"
+				},
+				{
+					"name": "מרגי יעקב",
+					"id": "751"
+				},
+				{
+					"name": "אזולאי דוד",
+					"id": "7"
+				},
+				{
+					"name": "ועקנין יצחק",
+					"id": "50"
+				},
+				{
+					"name": "זאב ניסים",
+					"id": "206"
+				},
+				{
+					"name": "מיכאלי אברהם",
+					"id": "784"
+				},
+				{
+					"name": "בן צור יואב"
+				},
+				{
+					"name": "אדרי ליאור"
+				},
+				{
+					"name": "אילוז עמי"
+				},
+				{
+					"name": "דדון אלי"
+				},
+				{
+					"name": "לוי גרשון"
+				},
+				{
+					"name": "ביטון עמי"
+				},
+				{
+					"name": "אלחרר בנימין"
+				},
+				{
+					"name": "מלכה אורן"
+				},
+				{
+					"name": "נחום נתנאל"
+				},
+				{
+					"name": "רואש חיים אליהו"
+				},
+				{
+					"name": "כהן אמנון"
+				},
+				{
+					"name": "הללויה עזרא"
+				},
+				{
+					"name": "סולטן יצחק"
+				},
+				{
+					"name": "מישאלי אשר חי גבריאל"
+				},
+				{
+					"name": "אסולין צבי"
+				},
+				{
+					"name": "כרדי עופר"
+				},
+				{
+					"name": "כהן רפאל"
+				},
+				{
+					"name": "ביטון אברהם"
+				},
+				{
+					"name": "רחמים גבריאל"
+				},
+				{
+					"name": "אהרון עוזי"
+				},
+				{
+					"name": "אוחנונה דוד"
+				},
+				{
+					"name": "בוסו אוריאל"
+				},
+				{
+					"name": "בן אברהם אבי"
+				},
+				{
+					"name": "העצני אסף"
+				},
+				{
+					"name": "גבאי דוד"
+				},
+				{
+					"name": "כהן רפאל"
+				},
+				{
+					"name": "חררי דב"
+				},
+				{
+					"name": "בן זקרי משה"
+				},
+				{
+					"name": "בן שלמה יעקב"
+				},
+				{
+					"name": "בוסקילה אברהם"
+				},
+				{
+					"name": "זיגדון אליהו"
+				},
+				{
+					"name": "זעפראני שלמה"
+				},
+				{
+					"name": "בהיינה מזור"
+				},
+				{
+					"name": "בוחבוט שרלי שלום"
+				},
+				{
+					"name": "טפירו מישל"
+				},
+				{
+					"name": "אביטן שמעון"
+				},
+				{
+					"name": "אדוארד נרקיס"
+				},
+				{
+					"name": "אדמוני יעקב"
+				},
+				{
+					"name": "אמסלם נתנאל"
+				},
+				{
+					"name": "אקוע אבנר"
+				},
+				{
+					"name": "אשול רחמים"
+				},
+				{
+					"name": "אתירם עמיקם"
+				},
+				{
+					"name": "אבידני יצחק"
+				},
+				{
+					"name": "טייב דניאל"
+				},
+				{
+					"name": "דוד בצלאל"
+				},
+				{
+					"name": "גארלה יהודה"
+				},
+				{
+					"name": "גדניאן חנוך"
+				},
+				{
+					"name": "גדסי אלדד פנחס"
+				},
+				{
+					"name": "גואטה עופר"
+				},
+				{
+					"name": "דוד מנחם"
+				},
+				{
+					"name": "זוהר שמעון"
+				},
+				{
+					"name": "טולדנו אשר"
+				},
+				{
+					"name": "סדון יוסף"
+				},
+				{
+					"name": "כהן נוריאל"
+				},
+				{
+					"name": "לוי שמואל"
+				},
+				{
+					"name": "לוי אליהו"
+				},
+				{
+					"name": "לוי מאיר"
+				},
+				{
+					"name": "צברי פיני"
+				},
+				{
+					"name": "מלכה יצחק"
+				},
+				{
+					"name": "מלכה אוריאל"
+				},
+				{
+					"name": "ממן שלמה"
+				},
+				{
+					"name": "ממן אליהו"
+				},
+				{
+					"name": "עדני בנימין"
+				},
+				{
+					"name": "כהן מאור"
+				},
+				{
+					"name": "עמר שמעון"
+				},
+				{
+					"name": "עמרם ששון"
+				},
+				{
+					"name": "עמרן חיים"
+				},
+				{
+					"name": "פרטוש משה"
+				},
+				{
+					"name": "פרץ שמעון"
+				},
+				{
+					"name": "קריספל אמיר"
+				},
+				{
+					"name": "בן אברהם חיים"
+				},
+				{
+					"name": "בן שלמה שלמה"
+				},
+				{
+					"name": "חדד חגי"
+				},
+				{
+					"name": "פנחסי רפאל"
+				}
+			]
+		},
+		"34": {
+			"name": "התנועה בראשות ציפי לבני",
+			"members": [
+				{
+					"name": "לבני, ציפי",
+					"id": "213",
+					"image": "http://www.knesset.gov.il/mk/images/members/livnee_zipi-s.jpg"
+				},
+				{
+					"name": "מצנע עמרם"
+				},
+				{
+					"name": "פרץ עמיר",
+					"id": "105"
+				},
+				{
+					"name": "שטרן אלעזר"
+				},
+				{
+					"name": "שטרית מאיר",
+					"id": "119"
+				},
+				{
+					"name": "צור דוד"
+				},
+				{
+					"name": "חסון יואל",
+					"id": "772"
+				},
+				{
+					"name": "מולה שלמה",
+					"id": "810"
+				},
+				{
+					"name": "כהן מירב"
+				},
+				{
+					"name": "זוארץ אורית",
+					"id": "822"
+				},
+				{
+					"name": "ולנסי הנרי אהרון"
+				},
+				{
+					"name": "ווהבה מגלי",
+					"id": "727"
+				},
+				{
+					"name": "טל אלון"
+				},
+				{
+					"name": "טיבייב רוברט",
+					"id": "819"
+				},
+				{
+					"name": "בן-זקן אבנר"
+				},
+				{
+					"name": "אדטו רחל",
+					"id": "820"
+				},
+				{
+					"name": "מרגולין-ליבסטר דינה"
+				},
+				{
+					"name": "שק דניאל"
+				},
+				{
+					"name": "נול בועז"
+				},
+				{
+					"name": "בריזון רוני"
+				},
+				{
+					"name": "שוחט ליאת"
+				},
+				{
+					"name": "מילר עידן"
+				},
+				{
+					"name": "גרינפילד יהודה"
+				},
+				{
+					"name": "גל מירלה"
+				},
+				{
+					"name": "גריפאת קאסם"
+				},
+				{
+					"name": "מורן סיגל"
+				},
+				{
+					"name": "שגיא משה"
+				},
+				{
+					"name": "גולן אראלה"
+				},
+				{
+					"name": "אורון ישראלה"
+				},
+				{
+					"name": "עמאר נדים"
+				},
+				{
+					"name": "זונדר-כסלו רומי"
+				},
+				{
+					"name": "חלבי קופטאן"
+				},
+				{
+					"name": "רוזגוביץ` אלעד"
+				},
+				{
+					"name": "מרגלית רון"
+				},
+				{
+					"name": "אמנו דורון"
+				},
+				{
+					"name": "עמר פלג"
+				},
+				{
+					"name": "לבשטיין אופיר"
+				},
+				{
+					"name": "עבאדי רועי"
+				},
+				{
+					"name": "ישראל מורן"
+				},
+				{
+					"name": "לסרי אופיר"
+				},
+				{
+					"name": "הירש גדעון"
+				},
+				{
+					"name": "קופצ`יק יקטרינה"
+				},
+				{
+					"name": "תורן תאליר שרית"
+				},
+				{
+					"name": "ז`נה רפי"
+				},
+				{
+					"name": "הולנדר אריאל מנחם"
+				},
+				{
+					"name": "שכנאי הדס"
+				},
+				{
+					"name": "ורטהיימר סטף"
+				}
+			]
+		}
 	}
-]
-;
-
-election.members = 
-[
-	{
-		"name": "ידען ירון",
-		"party": "אור",
-		"image": "http://www.orr.org.il/images/stories/or_members/yaron.jpg"
-	},
-	{
-		"name": "קרמן תומר",
-		"party": "אור"
-	},
-	{
-		"name": "יחזקאל שרית",
-		"party": "אור"
-	},
-	{
-		"name": "ורובל דניאל",
-		"party": "אור"
-	},
-	{
-		"name": "אלון לביאה",
-		"party": "אור"
-	},
-	{
-		"name": "בליזובסקי אברהם",
-		"party": "אור"
-	},
-	{
-		"name": "דרזי דוד",
-		"party": "אור"
-	},
-	{
-		"name": "קרבצ`יק זאב",
-		"party": "אור"
-	},
-	{
-		"name": "שני אורנה",
-		"party": "אור"
-	},
-	{
-		"name": "סורוג`ון קובי יעקב",
-		"party": "אור"
-	},
-	{
-		"name": "ליצמן יעקב",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה",
-		"image": "http://www.knesset.gov.il/mk/images/members/lizman_yaakov-s.jpg",
-		"id": "216"
-	},
-	{
-		"name": "גפני משה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה",
-		"id": "35"
-	},
-	{
-		"name": "פרוש מאיר",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה",
-		"id": "103"
-	},
-	{
-		"name": "מקלב אורי",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה",
-		"id": "814"
-	},
-	{
-		"name": "מוזס מנחם אליעזר",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה",
-		"id": "839"
-	},
-	{
-		"name": "אייכלר ישראל יצחק",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה",
-		"id": "754"
-	},
-	{
-		"name": "אשר יעקב",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "גוטרמן יעקב אשר",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ברוידא יצחק",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "חדד שמעון",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "פולק יהושע מנחם",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "רייך יצחק",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "טסלר יעקב",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "בוימל אריה צבי",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "קליין מנחם",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "קרליץ אליהו מרדכי",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "פיק יצחק",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "פינדרוס יצחק זאב",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "שוורץ אברהם",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "פראנק משה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "רודיק יצחק",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ויז`בינסקי יעקב",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "זייברט חנוך",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "שפירא מנחם",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "דייטש יוסף",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "וידיסלבסקי שלמה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "גולדנטל שלמה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "אוחנה דוד",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "אייזנברג מנחם מנדל",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "פרידמן ישראל משה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "אוברלנדר משה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "אורלנסקי זליג",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "סלומיאנסקי אליעזר",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "רייסנר ישראל מאיר",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ציינווירט פנחס",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "דייטש אברהם",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "רוזנר חיים",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ויינמן משה אליהו",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "גרטנהויז מרדכי",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "מישקובסקי אברהם צבי",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "אדלר דוד",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "בדוש פנחס",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ליפשיץ בנימין",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "יברוב יהודה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ולצר גדליה דוד",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "בלוי מרדכי זאב",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "רושגולד אברהם צבי",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "שטרית יוסף שאול",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "קוסטליץ שלמה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "גרינברג שמואל",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "כץ חיים מאיר",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ולנשטיין יעקב",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ברנשטיין חיים שלמה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "מושקוביץ יונה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "קלוגמן אלתר בן ציון",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "בוכניק יהושע",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "שיינין גדליה דוד",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ברונר אליהו יוסף",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ויזל חיים מאיר",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ברוכי אליהו",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "וובר אפרים",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "סירוקה פנחס דוד",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "טרויבע אברהם מרדכי",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "רייך יהודה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "דייטש שלמה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "גרשי משה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "זיידה יקותיאל דוד",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "גולד מנחם מנדל",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "רוטנר דוד נחמן",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "גולדברג מרדכי",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "הרשטיין דוד",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "מונטג בנימין משה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "שוורץ מנחם",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ברנר יצחק דוד",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "טסלר יצחק",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "מקלב אברהם",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ברנדוויין ברוך",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "נורדמן בן ציון",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ברסלר ברהם אלכסנדר",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "אלפר מרדכי מיכאל",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "הומינר פנחס דוד",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "גולומב ישראל יצחק",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "מורגנשטרן משה דוד",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ויכלדר חיים ברוך",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "אביטן גבריאל מאיר",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "זיידמן חנוך דוד",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "קלרמן ישראל",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ויינר דוד",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "שטרן שלמה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "רוזן יהודה אריה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "הומינר שלמה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ויינברגר יהושע",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "וייס אפרים",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "מאיר ישראל",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "לוינשטיין בנימין טוביה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "קליין אברהם",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "פולק יהודה אריה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "הורביץ פנחס",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "גורא משה יעקב",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "וירניק נפתלי",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "וייס נתן",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "כהן משה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "סגל אוריאל",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ברייש ראובן",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "מונק אריה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "רוזנבוים יעקב דוד",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ארנטרוי אלחנן",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ליברמן מרדכי",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "מן משה",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "קריבוס שמואל",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "קארפ משה שלום",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "קלוגמן מנחם",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "ברויאר דוד",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "שיינפלד שבתי",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "רוזנטל אברהם אהרן",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "רובינשטיין מאיר",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "אברמוביץ אברהם חנוך",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "אבו יוסף",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "אירנשטיין משה אליהו",
-		"party": "יהדות התורה והשבת אגודת ישראל - דגל התורה"
-	},
-	{
-		"name": "אבבה דוד",
-		"party": "אחים אנחנו",
-		"image": "http://sphotos-f.ak.fbcdn.net/hphotos-ak-ash4/297738_120976104731619_705711375_n.jpg"
-	},
-	{
-		"name": "יהודה דורון",
-		"party": "אחים אנחנו"
-	},
-	{
-		"name": "יתמנו גרמא שמואל",
-		"party": "אחים אנחנו"
-	},
-	{
-		"name": "טלקר דניאל",
-		"party": "אחים אנחנו"
-	},
-	{
-		"name": "טסמה נאווה",
-		"party": "אחים אנחנו"
-	},
-	{
-		"name": "רצון שאלתיאל",
-		"party": "אחים אנחנו"
-	},
-	{
-		"name": "זוארץ מאיר",
-		"party": "אחים אנחנו"
-	},
-	{
-		"name": "בצון יצחק",
-		"party": "אחים אנחנו"
-	},
-	{
-		"name": "שמשון יגאל",
-		"party": "אחים אנחנו"
-	},
-	{
-		"name": "סולומון ברה דרור",
-		"party": "אחים אנחנו"
-	},
-	{
-		"name": "טלקר נתנאל מאיר",
-		"party": "אחים אנחנו"
-	},
-	{
-		"name": "ברכה אליהו חיים",
-		"party": "אחים אנחנו"
-	},
-	{
-		"name": "גרמאי אסרסי אסתר",
-		"party": "אחים אנחנו"
-	},
-	{
-		"name": "לפיד יאיר",
-		"party": "יש עתיד בראשות יאיר לפיד",
-		"image": "http://yeshatid.org.il/wp-content/uploads/2012/11/y1.jpg"
-	},
-	{
-		"name": "פירון שי משה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "גרמן יעל",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "כהן מאיר",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "פרי יעקב",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "שלח עפר",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "לביא עליזה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "רזבוגוב יואל",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "קול עדי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "אלהרר הרטשטיין קארין",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "לוי מיקי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "סולומון יאסו שמעון",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "קלדרון רות",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "תמנו-שטה פנינה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "פרנקל רינה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "קריב יפעת",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "ליפמן דב",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "טופורובסקי בועז",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "הופמן רונן",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "אל-על טל",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "בבוט מרק",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "שולץ נעמה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "קדור סלים",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "בנישתי איציק יצחק",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "מאירי גדי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "סטדלר לריסה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "מגן עמי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "מנייב בוריס",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "פלד-חיון תמי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "שוייצר הדר",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "שריר גלעד",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "כהן יובל",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "קרול ילנה חיה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "מזאוי אוהם",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "ביטון דבורה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "בר -תור שמואל",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "הרטמן אביבה-יוליה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "סבויסקי מיכאל",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "בז”ה רמי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "יאסו אקליל",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "קוזין אנטון",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "בלוגובסקי חנה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "שפושניק יוסף",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "גרבינר כרמלה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "שטיינר רוברט",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "אהרוני ארז",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "שומרוני יצחק",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "מיאון שחר",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "גרינברגר אורי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "פדהצור דורון",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "דרורי דלית",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "וולף אלון",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "לוי ירון עמוס",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "ברזילי יעל",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "דיאמנט חנית חנה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "מולכו דרור",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "בוחבוט-לוין יצחק",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "קורץ יעקב",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "שור עידו",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "בלום זוהר זוגברד",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "דוידי דניאל",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "פינקלשטיין עופרה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "סטורוזנקו תמרה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "אלפסי סמי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "אבוטבול אלי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "בן אבי חיים",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "דניאלי ישראל",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "בל עופרה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "שבלת ארנון",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "סלומון ברק אברהם",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "כץ רון",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "נדב יוסף",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "פיינה איתי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "מזרחי אפרת חיה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "להט אור-לי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "סקס-פרידמן יסמין",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "שחורי-ג`יג`י דן",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "פישר תומי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "קמפלר דורון",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "בלייכר רן",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "אסרף אורי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "שריפי יצחק",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "הרפז מאיר",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "עמרם אהובה (יצחק)",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "ששון חנה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "טבת חגי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "שושן יהודה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "בן צבי קוברנסקי אורלי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "כהן אבשלום",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "אלראי נוי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "רוזנפלד אביעד",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "אבוחצירה שי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "סגל איילת",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "האושנר גיל",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "פלד עמרי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "קלדרון אילן",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "פישמן ליטל",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "גורדון מעיין",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "פיפרברג טל",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "דוידזון סימון",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "קוברינסקי יצחק",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "ברעם אבישי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "עזורי אביבה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "הרפז שי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "פלדמן גד",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "קדם אלי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "ששון יואל אברהם",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "לוי ערן",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "יאני מעיין",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "כהן אביעד",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "שינדלר בוריס",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "בן אברהם גוליאנה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "חסיד טליה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "רוכברג נועה-שרה",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "זגורסקי ליטל",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "איל גל",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "ירקוני יורם (ג`רי)",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "פרי לירן אמילי",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "גמזטוב מורד",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "סומק רוני",
-		"party": "יש עתיד בראשות יאיר לפיד"
-	},
-	{
-		"name": "יניב אלדד",
-		"party": "ארץ חדשה - החזית להפלת שלטון ההון",
-		"image": "http://eretzchadasha.com/images/the-faces/eldad-yaniv.jpg"
-	},
-	{
-		"name": "דוד מרב",
-		"party": "ארץ חדשה - החזית להפלת שלטון ההון"
-	},
-	{
-		"name": "בלייר רן",
-		"party": "ארץ חדשה - החזית להפלת שלטון ההון"
-	},
-	{
-		"name": "ששון לינדה",
-		"party": "ארץ חדשה - החזית להפלת שלטון ההון"
-	},
-	{
-		"name": "סגל ברק",
-		"party": "ארץ חדשה - החזית להפלת שלטון ההון"
-	},
-	{
-		"name": "רבינוביץ` אלכסנדרה",
-		"party": "ארץ חדשה - החזית להפלת שלטון ההון"
-	},
-	{
-		"name": "עוזר דקל-דוד",
-		"party": "ארץ חדשה - החזית להפלת שלטון ההון"
-	},
-	{
-		"name": "ספיר לילך",
-		"party": "ארץ חדשה - החזית להפלת שלטון ההון"
-	},
-	{
-		"name": "מוסינזון גילי-משה",
-		"party": "ארץ חדשה - החזית להפלת שלטון ההון"
-	},
-	{
-		"name": "קנאפו שרון",
-		"party": "כולנו חברים - ננח",
-		"image": "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-ash3/559047_459270254108436_1870515845_n.jpg"
-	},
-	{
-		"name": "שי ליאור צפריר",
-		"party": "כולנו חברים - ננח"
-	},
-	{
-		"name": "אופיר ערן",
-		"party": "כולנו חברים - ננח"
-	},
-	{
-		"name": "בן שלום שחר ישראל",
-		"party": "כולנו חברים - ננח"
-	},
-	{
-		"name": "ינאי משה",
-		"party": "כולנו חברים - ננח"
-	},
-	{
-		"name": "אברהם תומר",
-		"party": "כולנו חברים - ננח"
-	},
-	{
-		"name": "שואשו נס חי",
-		"party": "כולנו חברים - ננח"
-	},
-	{
-		"name": "אופיר משה",
-		"party": "כולנו חברים - ננח"
-	},
-	{
-		"name": "ג`מילי ננח שגיא יוסף",
-		"party": "כולנו חברים - ננח"
-	},
-	{
-		"name": "אריאל אהוד",
-		"party": "כולנו חברים - ננח"
-	},
-	{
-		"name": "דגני ברק עמוס",
-		"party": "כולנו חברים - ננח"
-	},
-	{
-		"name": "דלויה דניאל",
-		"party": "כולנו חברים - ננח"
-	},
-	{
-		"name": "ג`מאל זחאלקה",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי",
-		"image": "http://www.knesset.gov.il/mk/images/members/zahalka_jamal-s.jpg",
-		"id": "756"
-	},
-	{
-		"name": "זועבי חנין",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי",
-		"id": "846"
-	},
-	{
-		"name": "ג`טאס באסל",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אזברגה ג`ומעה",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "פוקרא עבדאל רחים",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "יזבק היבא",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "מהנא סאמי",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "דקב פתחי",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "פרח מרים",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "שלחת אנטאין",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "קיס מחאסן",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "לירר יעל",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "נחאדה מטאנס",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "מנסור נורא",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ח`מיס ווליד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "טאהא לולו",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "עבאס טאהר",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "חלבי חאתם",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אבו שחאדה סאמי",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "צמל-ורשבסקי לאה",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אבו רחמין ניבין",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "עאמר אחמד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ח`לאילה איאד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "מרעי אמין",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אילני יהודית",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אבו בצר אברהים",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אבו אחמד ח`לוד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "חאג` ווליאם",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "חוש דועא",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "חאג` יחיא מוחמד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "חיידר ראמי",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ג`ורבאן סאמי",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "עבאס וסים",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "טנוס נח`לה",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ח`לף ג`מיל",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "קובטי מירי",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ערבוש מועין",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "הנדאוי רבים",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "עודה-חאג` אינאס",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "עתאמנה מופיצ",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ג`מטוס וופא",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "סאדר מייסלון",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "טאהה נביט",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "חמדאן אלהאם",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "שעבאן פרידה",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אלעתאייקה עבדאל כרים",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "עיאשה מועתכם",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אבו הלאל מוסטפא",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "מסרי אחמד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "דיאב מוסא",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ג`נטוס כרים",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "חורני חנא",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אבו אלעסל ג`האד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אבו סייף ח`ליל",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "שקור אילייא",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "דקוור נסרי",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "נח`אש יוסף",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "טאהא דימא",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "נעאמנה מוחמד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "מחאג`נר מוחמד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "סאדר כמיל",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ח`טיב חנאן",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "בולוס ג`רים",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "סולטאני חוסני",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ח`טיב קאסם",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "עטייה כאיד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "סובח מייסאן",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "סעיד יוסף",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "שקור בסאם",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "סבסג ג`רים",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "מטר עדנאן",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ג`אליב כאמל",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אג`בריה ריאד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "דכוור ג`ואד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "חמאד באסם",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אגברייה חנין",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ראבי איאד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ח`טיב מוחמד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אלשאער האדיה",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "עבד אלחלים חסן",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "חדאד מוראד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "טאטור מחמוד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "מזלבט עמאד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ליום אנטון",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אבו זקיקה מוחמד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אגברביה ספאא",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "מראענה מוחמד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "עלי סאלח ויסאם",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "פרח אכרם",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "חוסין פתחיה",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "עראר ערב",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "סואעד מחמוד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ענבתאוו אמאני",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "בלעום ויאאם",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ונתד נידאל",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ח`ליליה מאהר",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ג`סאר חסאן",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "בדראן עז אלדין",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "בנא עאוני",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "קורטאם אשרף",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אגבריה ויסאם",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "חוסן יוסף",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אברהים נביל",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "מסארווה כסאם",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ג`טאס ראיד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "שחאדה אדמונד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "הווארי ערין",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "ורשבסקי מיכאל",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "עבד אמיל",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "מחטמיד ריאד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "סולטאני פואד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אבו פול מוחמד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "זריק סולימאן",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "מנסור ג`וני",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "אגבריה אפנאן",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "יונס מוחמד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "עאטללה אליאס",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "מוחארב מחמוד",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "מחאמיד האשם",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "טאהא ואסל",
-		"party": "בל”ד - אלתג`מוע אלווטני אלדמוקרטי"
-	},
-	{
-		"name": "סאמרלי אריה",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק",
-		"image": "http://sphotos-a.ak.fbcdn.net/hphotos-ak-snc6/224064_283190351783652_678376640_n.png"
-	},
-	{
-		"name": "שיפר אליהו",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "בן משה משה",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "פרטקוב ליעד",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "לוי רונן",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "כהן עימנואל אמיר",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "צוברי יהונתן",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "כלפא יונה",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "בניזרי אליהו",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "פז אלון",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "סקריצקי מיכאל",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "שאולוב רונן",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "ולורד דרור ברוך",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "יצחק אליהו",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "יצחק שפריר",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "חורש יניב",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "והב מרדכי",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "לסרי אורן",
-		"party": "כח להשפיע בהנחייה / בהכוונת הרב אמנון יצחק"
-	},
-	{
-		"name": "ליפשיץ עופר פינחס",
-		"party": "ברית עולם לגאולת ישראל",
-		"image": "http://www.britolam.org.il/image/users/187853/ftp/my_files/%D7%A2%D7%95%D7%A4%D7%A8.gif?id=8533299"
-	},
-	{
-		"name": "בלייש חיים",
-		"party": "ברית עולם לגאולת ישראל"
-	},
-	{
-		"name": "סבאג איילה",
-		"party": "ברית עולם לגאולת ישראל"
-	},
-	{
-		"name": "אביזהר משה מרדכי",
-		"party": "ברית עולם לגאולת ישראל"
-	},
-	{
-		"name": "דדון ניסים מקסים",
-		"party": "ברית עולם לגאולת ישראל"
-	},
-	{
-		"name": "צלמון מרים",
-		"party": "ברית עולם לגאולת ישראל"
-	},
-	{
-		"name": "שטראוס נתן",
-		"party": "ברית עולם לגאולת ישראל"
-	},
-	{
-		"name": "ביטון אבנר",
-		"party": "ברית עולם לגאולת ישראל"
-	},
-	{
-		"name": "יר-זנבר אילן משיחא",
-		"party": "מורשת אבות",
-		"image": "http://sphotos-a.ak.fbcdn.net/hphotos-ak-ash4/767_561266043887530_435713194_n.jpg"
-	},
-	{
-		"name": "שפיצר אמיר",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "מוזס משה",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "סלע חי משה",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "עשור מכלוף מיכאל",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "בונפיס משה",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "לבנוני שלמה",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "רוטנברג טליה",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "יפרח אילן מיכאל",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "צרפתי שמעון",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "הרשיש סילביה",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "כהן יוסף חיים",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "ביטון אלישי",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "מורי יוסף עומרי",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "תני משה",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "בן עמי שמעון",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "פדידה ימין",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "קרני יאיר",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "מזרחי אליהו",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "אביסרור שי",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "צירניש אנטון משה",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "כהן רחמים",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "בן חמו יוגב",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "זלצר קהת",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "דבוש מור",
-		"party": "מורשת אבות"
-	},
-	{
-		"name": "לפיד אפרים",
-		"party": "דור בוני הארץ בראשות אפרים לפיד",
-		"image": "http://www.gimlaim.org.il/BRPortalStorage/b/78/46/86-zJ4aZEsRXO.jpg"
-	},
-	{
-		"name": "גיסין מידד",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "קליינר יורם",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "נקר דליה",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "גרנות הלל",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "אלדור גרא",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "פרידמן משה",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "נעים גראר ניסים",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "ספאדיה פרחה",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "יפעת יצחק",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "טרסר אהרון",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "מיתר צבי",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "זקס דניאל",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "כהן בנימין",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "פלד אבשלום",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "אור אדיבה",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "כהנא ויקטור",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "מוזר ראובן",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "רפוביץ אוליביה",
-		"party": "דור בוני הארץ בראשות אפרים לפיד"
-	},
-	{
-		"name": "שמאלוב ברקוביץ יוליה",
-		"party": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ",
-		"image": "http://www.knesset.gov.il/mk/images/members/Shamalov_Berkovich_Yulia-s.jpg",
-		"id": "848"
-	},
-	{
-		"name": "גולדשטיין דניאל",
-		"party": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ"
-	},
-	{
-		"name": "גולדשטיין בן ציון",
-		"party": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ"
-	},
-	{
-		"name": "מנגל יפית",
-		"party": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ"
-	},
-	{
-		"name": "אלוני אודי",
-		"party": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ"
-	},
-	{
-		"name": "צעירי דרור",
-		"party": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ"
-	},
-	{
-		"name": "דריימר יצחק",
-		"party": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ"
-	},
-	{
-		"name": "דובלינסקי אדם",
-		"party": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ"
-	},
-	{
-		"name": "קורזינר גרגורי",
-		"party": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ"
-	},
-	{
-		"name": "נבות זהר",
-		"party": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ"
-	},
-	{
-		"name": "דור דניאל",
-		"party": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ"
-	},
-	{
-		"name": "בן ישי מרדכי",
-		"party": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ"
-	},
-	{
-		"name": "מיכאל יאיר",
-		"party": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ"
-	},
-	{
-		"name": "בן עזרי ניר",
-		"party": "מפלגת כלכלה בראשות יוליה שמאלוב ברקוביץ"
-	},
-	{
-		"name": "אגבארייה זחאלקה אסמא",
-		"party": 'דע"ם - מפלגת פועלים',
-		"image": "http://upload.wikimedia.org/wikipedia/he/thumb/5/59/Asmaagbariyazachalka_72.jpg/200px-Asmaagbariyazachalka_72.jpg"
-	},
-	{
-		"name": "נאדר ניר",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "בן שמחון דני",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "טיארה ופא",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "פלדהיים אורלי",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "זועבי חנאן",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "עקאד אורנה",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "הלוי להב",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "לבארי נעמי",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "קעואר מוניר",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "איצקוביץ גסטון צבי",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "שורר דן",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "טחאן ראניה",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "בריל ערן",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "מישורי אפרת",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "בראל נוית",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "טל פנינה",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "מגנס אליזבט",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "הוס רבקה",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "טיר צביה",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "ענבל שושנה",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "בלאו בנימין",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "אלוני גיא",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "להב תומר",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "פרידמן מיכל",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "הראל מיקי",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "סודרי אורית",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "וגנר ארז",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "קלגסברון טלי",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "לביא תומר",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "פאהום אחמד",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "בלומנטל אפרת",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "כהן בכור טל",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "רוזן נחמני דניאל אברהם",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "להב אדיב הדס",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "כיתאני סמיר",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "לנגפור סטפן",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "פרמינגר יונתן",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "קדושים כוכבית",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "טמיר יואב",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "מהל עידו",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "פרידמן ציפורה פניה",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "חנוכה שאול",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "בן אפרת יעקב יוסף",
-		"party": 'דע"ם - מפלגת פועלים'
-	},
-	{
-		"name": "גלאון זהבה",
-		"party": "מרצ - השמאל של ישראל",
-		"image": "http://www.knesset.gov.il/mk/images/members/galon_zahava-s.jpg",
-		"id": "201"
-	},
-	{
-		"name": "גיל און אילן",
-		"party": "מרצ - השמאל של ישראל",
-		"id": "200"
-	},
-	{
-		"name": "הורוביץ ניצן",
-		"party": "מרצ - השמאל של ישראל",
-		"id": "843"
-	},
-	{
-		"name": "רוזין מיכל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "פריג` עיסווי",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "זנדברג תמר",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "וילן אבשלום",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "רז מוסי",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "סולל יפעת",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "זכי אורי",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "ורטון לורה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "דרומי חכים תום",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "בנדל אהוד",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "עמוס אורנה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "שירן איל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "רגב מיכאל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "צויזנר יצחק",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "מורג דרור",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "אבקסיס דינה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "למדן עידן",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "אורון אייל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "אורשלימי שרון",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "אדמי יעל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "אללו יוסף פפה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "ארז חנן",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "בדיר אחמד",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "בכר סוזן לינדה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "ברוך אילן",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "ברלב נוגה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "ברנע נמרוד",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "גולן גילד גליה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "וסר רחלה מיכל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "דיאמנט עדית",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "כהן חמוטל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "הרסגור הנדין עילאי",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "וולפסון ויויאנה לאה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "טריינין רני",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "לבנון מורדוך אסתר",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "לוי מרק",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "צור שושנה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "לסקי שוץ גבריאלה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "מזרחי דרור",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "מרציאנו יוסף",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "נימן חנה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "נעמן אייל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "סטרקובסקי שילון שרה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "עדן מיכל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "פילק דניאל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "פינקל ליאור",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "צרפתי דניאל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "קרבטרי מאיה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "רבין עזרא",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "רזניק תומר",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "רייז אייל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "שאינסקי אלה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "שמיר גדעון",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "ליטבק מאשה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "איזנר יעל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "חאג` יחיא ג`מיל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "אבן ג`מיל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "הרצוג חנה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "דורי לטיף",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "עופרן חגית",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "ברניב ארן",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "חורש ראובן",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "רייז אמציה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "וינטראוב רונית",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "עזור גבריאל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "מסארוה סאלח",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "מטאנס אליאס",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "זהר רקפת",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "יעקבסון דניאל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "יסעור יהונתן",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "בורדון גבריאל",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "אופיר אורי",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "ברנבויים גריגורי",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "זועבי עבד אלחלים",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "אברמסון זיוית",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "אושרוב נילי",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "זמבוני בכר אליזבטה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "סל נחמיה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "ציון נעמי",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "זועבי עבד אלכרים",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "זהר עמיר עליזה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "חלבי בשיר",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "זרטל עדית",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "גולדבלום עמירם",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "אשדות יזהר",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "רציסטר קמחי אלונה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "הופנונג מנחם",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "פרוסט יוסי",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "דיין רות",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "זקהיים אסתר",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "קלדרון נסים",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "ביזאוי צביה סלביה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "רדאי פרנסס",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "ברינקר מנחם",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "וייץ יחיעם",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "בובר אגסי יהודית",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "ליבק אלכס",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "מטלון רונית",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "שביט דן",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "נאמן יהודה גאד",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "טפרסון עידית",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "קנז יהושע",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "רזניק רות",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "סובול יהושע",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "שלוי אליס הילדגרד",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "יהושע א.ב",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "בר-און מרדכי",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "סרטני אמירה",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "מאור ענת",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "פארס חוסיין",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "חזן נעמי",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "שם טוב ויקטור",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "צבן יאיר",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "כהן רן",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "ביילין יוסי",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "אורון חיים",
-		"party": "מרצ - השמאל של ישראל",
-		"id": "5"
-	},
-	{
-		"name": "אלוני שולמית",
-		"party": "מרצ - השמאל של ישראל"
-	},
-	{
-		"name": "בנט נפתלי",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה",
-		"image": "http://www.israelim.org.il/wp-content/uploads/2012/12/Naftali-Bennett.jpg"
-	},
-	{
-		"name": "אריאל אורי יהודה",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה",
-		"id": "713"
-	},
-	{
-		"name": "סלומינסקי ניסן",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "בן דהן אליהו",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "שקד איילת",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "אורבך אורי שרגא",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה",
-		"id": "845"
-	},
-	{
-		"name": "קלפה זבולון",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "וורצמן אברהם",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "יוגב מרדכי",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "סטרוק אורית מלכה",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "שטבון יונתן",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "מועלם-רפאלי שולי",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "הורוביץ הלל אילן",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "גימפל ירמיהו",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "אייל נחמן",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "נסימי רחמים",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "כהן יצחק אמיתי",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "פינקלשטיין גילה",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "בנק אורי",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "דנינו משה דורון",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "איפראימוב מרק",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "טאוב עמיעד דוד",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "טרבלסי שמעון מכלוף",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "גימאני אהרן",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "שושן יצחק",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "בן אריה יצחק",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "זרגרי יצחק",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "דוד יהודה",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "זפרן זאב",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "רפל נחמיה",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "ידין דוד",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "יחזקאל הרצל",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "מלמד חנן חיים",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "גרינוולד גאל",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "ריפקין אפרים יהודה",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "וסרמן יחיאל מאיר",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "בן דוד איתן",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "בשארי דניאל",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "הררי הושעיה יפת",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "בלומנטל שי",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "חרל”פ מיכאל צבי",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "בן-דוד עמרם",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "גולדברג אברהם יוסף",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "אדרי ג`קי",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "און נריה",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "קיל רז",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "חזיזה מרדכי",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "רצון אורי",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "גרנק איתי",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "גולדמן חיים יהודה",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "עציון אליעזר",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "סיבוני עמיחי",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "פלד גל",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "אלמגור שלום",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "אייזן משה דורון",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "קפלן רפאל אברהם",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "פורת דוד",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "מאירוביץ שמואל",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "מאיר רפאל",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "אדרי אריאל",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "בן שושן לירן",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "רוזנפלד יהודה",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "סלטן ג`רמי",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "מאזוז הודיה",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "חודפי דביר",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "וקנין מרדכי",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "טבק אביחי",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "לוזון מאיר",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "גור אריה ראובן",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "פרידמן אריה",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "הכהן אלישיב",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "קליגר עמוס",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "אהרונסון אלעזר אהרון",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "לוי שלמה",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "קעניג צבי מאיר",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "בוק טומי יהודה",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "שפר אליעזר",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "אליאש שרה",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "דרוקמן חיים מאיר",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "צוקרמן אברהם",
-		"party": "הבית היהודי בראשות נפתלי בנט - מיסודם של האיחוד הלאומי מפד”ל החדשה"
-	},
-	{
-		"name": "רדקו אלכסנדר",
-		"party": "מתקדמת ליברלית - דמוקרטית",
-		"image": "http://blog.tapuz.co.il/declaration48/images/3569783_91.jpg"
-	},
-	{
-		"name": "רסין יבגני",
-		"party": "מתקדמת ליברלית - דמוקרטית"
-	},
-	{
-		"name": "איבשקין ולרי",
-		"party": "מתקדמת ליברלית - דמוקרטית"
-	},
-	{
-		"name": "פלג אלכסנדר",
-		"party": "מתקדמת ליברלית - דמוקרטית"
-	},
-	{
-		"name": "פדורצ`נקו אנטולי",
-		"party": "מתקדמת ליברלית - דמוקרטית"
-	},
-	{
-		"name": "לרין נינה",
-		"party": "מתקדמת ליברלית - דמוקרטית"
-	},
-	{
-		"name": "משטקוב פולינה",
-		"party": "מתקדמת ליברלית - דמוקרטית"
-	},
-	{
-		"name": "לרין מיכאל",
-		"party": "מתקדמת ליברלית - דמוקרטית"
-	},
-	{
-		"name": "פקר פאינה",
-		"party": "מתקדמת ליברלית - דמוקרטית"
-	},
-	{
-		"name": "מלצר עמיר",
-		"party": "הירוקים והצעירים לעתיד ירוק בישראל",
-		"image": "http://www.green-party.co.il/Election2013/wp-content/uploads/2009/01/mekzer_face.jpg"
-	},
-	{
-		"name": "עזרא דרור",
-		"party": "הירוקים והצעירים לעתיד ירוק בישראל"
-	},
-	{
-		"name": "קינסטליך רז",
-		"party": "הירוקים והצעירים לעתיד ירוק בישראל"
-	},
-	{
-		"name": "פרייס סיטון רם",
-		"party": "הירוקים והצעירים לעתיד ירוק בישראל"
-	},
-	{
-		"name": "פוליצר קוסובר, לירון",
-		"party": "הירוקים והצעירים לעתיד ירוק בישראל"
-	},
-	{
-		"name": "יגאנה אורן",
-		"party": "הירוקים והצעירים לעתיד ירוק בישראל"
-	},
-	{
-		"name": "קירשנר שרגא",
-		"party": "הירוקים והצעירים לעתיד ירוק בישראל"
-	},
-	{
-		"name": "אורן שרה",
-		"party": "הירוקים והצעירים לעתיד ירוק בישראל"
-	},
-	{
-		"name": "רועה מיכאל",
-		"party": "הירוקים והצעירים לעתיד ירוק בישראל"
-	},
-	{
-		"name": "יריב  ניר",
-		"party": "הירוקים והצעירים לעתיד ירוק בישראל"
-	},
-	{
-		"name": "אפשטיין חיים",
-		"party": "נצח",
-		"image": "http://s1.kikar.net/th/data/auto/nadm/gh/rc34idic__w300h180q85.jpg"
-	},
-	{
-		"name": "אלמליח משה",
-		"party": "נצח"
-	},
-	{
-		"name": "בידרמן דוד צבי שלמה",
-		"party": "נצח"
-	},
-	{
-		"name": "רוחמקין חיים מנחם",
-		"party": "נצח"
-	},
-	{
-		"name": "גולדשמיד שמואל דוב",
-		"party": "נצח"
-	},
-	{
-		"name": "וין ישעיהו",
-		"party": "נצח"
-	},
-	{
-		"name": "פרידמן יעקב",
-		"party": "נצח"
-	},
-	{
-		"name": "שם טוב יהודה",
-		"party": "נצח"
-	},
-	{
-		"name": "ברגמן אברהם ישעיהו",
-		"party": "נצח"
-	},
-	{
-		"name": "קצבורג דוד צבי",
-		"party": "נצח"
-	},
-	{
-		"name": "קון דוד",
-		"party": "הישראלים",
-		"image": "http://blog.tapuz.co.il/declaration48/images/3569783_85.jpg"
-	},
-	{
-		"name": "שורר מרינה סול",
-		"party": "הישראלים"
-	},
-	{
-		"name": "וקסלר אלכסנדר",
-		"party": "הישראלים"
-	},
-	{
-		"name": "בודיאנסקי ולדימיר",
-		"party": "הישראלים"
-	},
-	{
-		"name": "אלפנדרי עינת",
-		"party": "הישראלים"
-	},
-	{
-		"name": "קורזינר עמירה דיאנה",
-		"party": "הישראלים"
-	},
-	{
-		"name": "אלקון בנון",
-		"party": "הישראלים"
-	},
-	{
-		"name": "אריה אלדד",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי",
-		"image": "http://www.knesset.gov.il/mk/images/members/eldad_aryeh-s.jpg",
-		"id": "752"
-	},
-	{
-		"name": "בן ארי מיכאל",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי",
-		"id": "841"
-	},
-	{
-		"name": "מרזל ברוך",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "קינג אריה יצחק",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "בן גביר איתמר",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "כהן אלעד",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "ליינסקי שלמה",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "שריון נילי",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "אוחיון יעקב אבי",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "גולן מאי",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "בן מאיר עתליה",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "תורגמן מאיר",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "שליסל גדליה",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "בן זיקרי משה",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "סבלדי דניאל",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "רבינוביץ יוסף",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "חכמון מרדכי",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "פבלוב מיכאל",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "לבני ענת",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "בן חיון מאיר חנן",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "פרייז תומר בן",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "שלוש שלמה",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "איתן טניה",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "נסים אליהו",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "ויינשטיין אליהו אדוארד",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "סטורץ זרחיה",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "ספירשטיין משה",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "גוזלן דוד",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "בנימין עמנואל",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "אוביץ מיכאל",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "פרידמן רחל",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "ברזאני יהודה",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "תוריק איגור",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "כהן יהודה",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "גולדברגר יוסף יצחק",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "מיוחס פנחס יעקב",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "קומש אבי אברהם",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "קוגן בנימין",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "ויצמן ניצן",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "צצ`יק שמעון דב",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "לנקרי אלירן",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "יופה עתידי",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "הופמן מנחם",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "זהביאן מתן",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "סמדגה שלום דורון",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "מעוז רפאל",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "גולן עופר",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "קלמיקוביץ אולג יצהר",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "טבצניק יעל",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "פיגנבאום ישראל דב",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "אלבום נחמיה",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "ברוקס שמחה",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "פפקין שרון",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "גרוני הילה אורלי",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "בן אהרן יוסף חיים",
-		"party": "עוצמה לישראל בראשות אריה אלדד ומיכאל בן ארי"
-	},
-	{
-		"name": "נתניהו בנימין",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"image": "http://www.knesset.gov.il/mk/images/members/netanyahu_bibi-s.jpg",
-		"id": "90"
-	},
-	{
-		"name": "ליברמן אביגדור",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "214"
-	},
-	{
-		"name": "סער גדעון משה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "725"
-	},
-	{
-		"name": "שמיר יאיר",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "ארדן גלעד מנשה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "734"
-	},
-	{
-		"name": "שלום סילבן",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "122"
-	},
-	{
-		"name": "לנדאו עוזי",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "77"
-	},
-	{
-		"name": "כ”ץ ישראל",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "69"
-	},
-	{
-		"name": "דנון דני",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "828"
-	},
-	{
-		"name": "לנדבר סופיה סוניה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "78"
-	},
-	{
-		"name": "ריבלין ראובן רובי",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "114"
-	},
-	{
-		"name": "יעלון משה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "823"
-	},
-	{
-		"name": "אהרונוביץ יצחק",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "790"
-	},
-	{
-		"name": "אלקין זאב",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "768"
-	},
-	{
-		"name": "חוטובלי ציפי",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "825"
-	},
-	{
-		"name": "לוי אבקסיס אורלי",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "832"
-	},
-	{
-		"name": "לוין יריב גדעון",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "826"
-	},
-	{
-		"name": "אדלשטיין יולי יואל",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "1"
-	},
-	{
-		"name": "קירשנבאום פניה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "835"
-	},
-	{
-		"name": "כץ חיים",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "212"
-	},
-	{
-		"name": "רגב מירי מרים",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "831"
-	},
-	{
-		"name": "רותם דוד",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "805"
-	},
-	{
-		"name": "פייגלין משה זלמן",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "שטייניץ יובל",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "695"
-	},
-	{
-		"name": "אילטוב רוברט",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "793"
-	},
-	{
-		"name": "הנגבי צחי",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "45"
-	},
-	{
-		"name": "לבנת לימור אהבה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "70"
-	},
-	{
-		"name": "עמאר חמד",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "837"
-	},
-	{
-		"name": "אקוניס אופיר",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "830"
-	},
-	{
-		"name": "גמליאל דמרי גילה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "723"
-	},
-	{
-		"name": "אוחיון שמעון",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "שאמה הכהן כרמל",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "829"
-	},
-	{
-		"name": "מילר אלכס",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "785"
-	},
-	{
-		"name": "ליטינצקי ליאון",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "ביטן דוד",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "פרג` אורי",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "מלינובסקי יוליה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "שטרית קטי קטרין",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "קרא איוב",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "230"
-	},
-	{
-		"name": "לויטן סמדר בת אדם",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "אוחנה שוקי",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "אמסלם דוד",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "פורר עודד",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "אפריימוב ויקטור",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "דנינו יצחק",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "מטלון משה מוץ",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "838"
-	},
-	{
-		"name": "ברק קרן",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "נגוסה אברהם",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "שמטוב ליה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "802"
-	},
-	{
-		"name": "אבן צור דוד",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "קינן שי",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "סלבין יצחק",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "שמחון אברהם",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "קורן נורית",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "בן זקן משה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "גליק יהודה יהושע",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "גרוסברג דוד",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "נודלמן אריאל",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "דיכטר אברהם משה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "771"
-	},
-	{
-		"name": "נס לאה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "738"
-	},
-	{
-		"name": "פומרנץ ארקדי",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "תואבה אסמרה אמיר",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "ביבי אריה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "821"
-	},
-	{
-		"name": "מנור בוריס",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "פיניאן ציון",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
-		"id": "827"
-	},
-	{
-		"name": "אליעזר ישי יוליאנה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "אברבוך טליה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "וייס מתן דמטרי",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "אביטל גבריאל",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "שובל זלמן",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "עבד עפיף",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "אדמסו אללי",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "הרשטל דניאל משה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "תלמי אתי אסתר",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "נבון עמנואל יוסף",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "בולשטיין אריאל",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "רבינוביץ אליהו אלונה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "סימנה מלסה שחר",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "מוסטפא ג`יהאד",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "וידר יעקב",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "שראל נתן שמעון",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "בני דיוויס אורלי מזל",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "טאובר דניאל משה בן אר",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "מורלי אריאל",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "רג`ואן סנדרה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "דמתי ניר אל",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "בן שושן מאיר",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "טיאצ`או עומר",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "ג`ורג`י אילן",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "גורדין ציפי ציפורה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "שלמון לזרוביץ אסתר שושנה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "מזרחי סילבה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "איש שלום דוד",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "הרמלין דוד",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "ואטורי ניסים",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "איפרגן משה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "אשד אמנון",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "בר משה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "ברדוגו רמי",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "בשארי גדי",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "גמרסני מרק אברהם",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "גרינולד עמיחי",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "דיין נורית",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "דרעי אפרים אפי",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "כהן צדוק",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "כהן רוני",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "לסרי ליאור",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "מזור משה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "מלכה מאיר",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "מעוז שלמה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "צוף צוריאל שמחה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "קהת סיני שאול",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "קיש יואב",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "שטגמן איילה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "שטרן רוני",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "שרעבי עמוס",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "דולגין משה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "כהן אורגד יגאל",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "אולקניצקי שרה",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "קדישאי יחיאל",
-		"party": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה"
-	},
-	{
-		"name": "לרמן ירון",
-		"party": "עלה ירוק - הרשימה הליברלית",
-		"image": "http://aleyarok.org.il/wp-content/uploads/2012/11/196238_10151164969922717_352169413_n1.jpg"
-	},
-	{
-		"name": "מסיכה שמרי",
-		"party": "עלה ירוק - הרשימה הליברלית"
-	},
-	{
-		"name": "צויג צבי",
-		"party": "עלה ירוק - הרשימה הליברלית"
-	},
-	{
-		"name": "קני כרמל",
-		"party": "עלה ירוק - הרשימה הליברלית"
-	},
-	{
-		"name": "ליבוביץ` אורן",
-		"party": "עלה ירוק - הרשימה הליברלית"
-	},
-	{
-		"name": "גולן מיכאל",
-		"party": "עלה ירוק - הרשימה הליברלית"
-	},
-	{
-		"name": "מולד ליבי",
-		"party": "עלה ירוק - הרשימה הליברלית"
-	},
-	{
-		"name": "עידן רועי",
-		"party": "עלה ירוק - הרשימה הליברלית"
-	},
-	{
-		"name": "קלישר אחיעד",
-		"party": "עלה ירוק - הרשימה הליברלית"
-	},
-	{
-		"name": "היינריך טל",
-		"party": "עלה ירוק - הרשימה הליברלית"
-	},
-	{
-		"name": "סוטו עמיעד",
-		"party": "עלה ירוק - הרשימה הליברלית"
-	},
-	{
-		"name": "דברת אורן",
-		"party": "עלה ירוק - הרשימה הליברלית"
-	},
-	{
-		"name": "קלישר עידית",
-		"party": "עלה ירוק - הרשימה הליברלית"
-	},
-	{
-		"name": "פטישמן יבגני",
-		"party": "עלה ירוק - הרשימה הליברלית"
-	},
-	{
-		"name": "יחימוביץ רחל שלי",
-		"party": "העבודה בראשות שלי יחימוביץ",
-		"image": "http://sphotos-f.ak.fbcdn.net/hphotos-ak-prn1/16232_162322619217_462074_n.jpg",
-		"id": "782"
-	},
-	{
-		"name": "הרצוג יצחק",
-		"party": "העבודה בראשות שלי יחימוביץ",
-		"id": "740"
-	},
-	{
-		"name": "כבל איתן",
-		"party": "העבודה בראשות שלי יחימוביץ",
-		"id": "236"
-	},
-	{
-		"name": "מיכאלי מירב",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "בן אליעזר פואד בנימין",
-		"party": "העבודה בראשות שלי יחימוביץ",
-		"id": "20"
-	},
-	{
-		"name": "בר יחיאל",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "בר לב ישראל עמר",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "שפיר סתיו",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "ברורמן אבישי",
-		"party": "העבודה בראשות שלי יחימוביץ",
-		"id": "797"
-	},
-	{
-		"name": "מרגלית נחום אראל",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "שמולי יצחק",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "רוזנטל משה מיכאל",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "בירן מיכל",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "שי נחמן",
-		"party": "העבודה בראשות שלי יחימוביץ",
-		"id": "818"
-	},
-	{
-		"name": "מזרחי משה",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "עטר דניאל",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "מגדלה גאלב",
-		"party": "העבודה בראשות שלי יחימוביץ",
-		"id": "758"
-	},
-	{
-		"name": "חילו נאדיה",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "אבסדזה נינו",
-		"party": "העבודה בראשות שלי יחימוביץ",
-		"id": "850"
-	},
-	{
-		"name": "יונה יוסף",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "בן סימון דניאל",
-		"party": "העבודה בראשות שלי יחימוביץ",
-		"id": "836"
-	},
-	{
-		"name": "קורנפלד עפר",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "טרופר משה יחיאל",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "פריטל יונה",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "סעד סאלח",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "אופנהיימר יריב",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "קריב גלעד",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "קירמאיר אסתר",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "זלץ ברוך",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "חרמוני ערן",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "פדידה בן שיטרית לאה",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "שושן שלמה סמי",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "צור נורית",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "חופרי נחום",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "נחמיאס ורבין איילת",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "סהלו שולמית",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "שליט נועם",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "שוורץ אריאל איתן",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "בראון שמעון",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "אורן ינאי דנה",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "ורטמן אור",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "בן עמי לילי",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "עטייה יוסף",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "אמארה פתחי",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "בדר מאלכ",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "אבו פארס סמיר",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "ינאי שאול",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "גולדמן פלורנטינה אליס",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "קלינגר יוסף יהונתן",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "קליין גילה",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "צברי יורם",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "נתנזון גולדשטרום רוברטו",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "פסטרנק ליאון אורן",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "ונונו יוסף",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "נאטור אחמד",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "אדירי ציון",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "סטופאי שוורץ נירה",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "שחף עמנואל",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "קננגיסר דב",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "עווד אמיר",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "הרשקוביץ עמית",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "שקד אריה",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "שחם יוסף",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "שתיל אבלין",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "אובלס אבי",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "מרום צבי",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "אברהם אביבה",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "סטרולוב עמירם",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "גלעדי אלון",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "נחום שלום",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "כתר יעקב איתן",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "שמש ירון",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "מלמד למואל",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "בצלאלי שמואל",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "מריומה יעקב",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "פרדס אברהם",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "סרגובי אוריאל עמיחי",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "גוטלר איתי",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "דורון בוסתן",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "אזולאי דניאל",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "גרינולד הדס",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "מנשה לביא ארז",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "בן נשר בנימין",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "אוחיון אשר",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "פינק יאיר",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "פרס ריצ`רד",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "קבלו פנחס פיני",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "גבעוני אהרן זליג",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "מרשק יואל",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "אלקסלסי הנרי",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "מזרחי שמואל",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "אורן אלי אליהו",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "גבע לאה",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "בילקר דן",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "בן ישראל גדעון",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "איצקוביץ` חיה שרה",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "דלמן לואיס",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "זילברברג מיכל",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "בוקאעי מחמוד",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "דהמן מרדכי",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "כהן שולמית שולה",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "ריטוב עמיר",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "תיתי עבאס",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "ביטון מיכאל מרדכי",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "פכטר אריה",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "ימיני יצחק",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "חדד אריה אריק",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "אריאלי דוד",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "אוחיון יצחק",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "אלפסי סימון",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "שוסטר אלון נתן",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "דולה יוסף",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "דיין יעל",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "כהן רענן",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "שחל משה",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "ליבאי דוד",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "וייס שבח",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "ידלין אהרון",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "הלל שלמה",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "נבון יצחק",
-		"party": "העבודה בראשות שלי יחימוביץ"
-	},
-	{
-		"name": "אמסלם חיים",
-		"party": "עם שלם - בראשות הרב חיים אמסלם",
-		"image": "http://www.knesset.gov.il/mk/images/members/amsalem_haim-s.jpg",
-		"id": "795"
-	},
-	{
-		"name": "צרפתי משה",
-		"party": "עם שלם - בראשות הרב חיים אמסלם"
-	},
-	{
-		"name": "אגסי ראובן",
-		"party": "עם שלם - בראשות הרב חיים אמסלם"
-	},
-	{
-		"name": "יקירה דניאלה",
-		"party": "עם שלם - בראשות הרב חיים אמסלם"
-	},
-	{
-		"name": "אוקנין מקסים",
-		"party": "עם שלם - בראשות הרב חיים אמסלם"
-	},
-	{
-		"name": "בן דוד מרב",
-		"party": "עם שלם - בראשות הרב חיים אמסלם"
-	},
-	{
-		"name": "בן חיים מאיר",
-		"party": "עם שלם - בראשות הרב חיים אמסלם"
-	},
-	{
-		"name": "קונסטנטין אריאל ברוך",
-		"party": "עם שלם - בראשות הרב חיים אמסלם"
-	},
-	{
-		"name": "אבסירה תמר",
-		"party": "עם שלם - בראשות הרב חיים אמסלם"
-	},
-	{
-		"name": "ניישטדט ולדימיר",
-		"party": "עם שלם - בראשות הרב חיים אמסלם"
-	},
-	{
-		"name": "אסולין שמואל",
-		"party": "עם שלם - בראשות הרב חיים אמסלם"
-	},
-	{
-		"name": "זאוש אסתר",
-		"party": "עם שלם - בראשות הרב חיים אמסלם"
-	},
-	{
-		"name": "סבן אלי",
-		"party": "עם שלם - בראשות הרב חיים אמסלם"
-	},
-	{
-		"name": "פרץ שלומי",
-		"party": "עם שלם - בראשות הרב חיים אמסלם"
-	},
-	{
-		"name": "אבוהב עידן ישראל",
-		"party": "עם שלם - בראשות הרב חיים אמסלם"
-	},
-	{
-		"name": "שם טוב אוהד יעקב",
-		"party": "הפיראטים",
-		"image": "http://blog.tapuz.co.il/declaration48/images/3569783_86.jpg"
-	},
-	{
-		"name": "כוזר נועם",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "בירון דן",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "מלטין לידיה",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "חדד רפרם",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "פלנקר הסקלברג דניאל",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "ליברמן לאו",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "גוטמן מורן קטרין שמופ",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "שועלי חפציבה איטה",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "סקטון עבריה",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "מלטין איוון",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "קלנר יותם",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "שטדלר טל",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "גולדשטיין קיט לורנס",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "חזן שלי",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "בנאי איתמר גדעון",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "סטו ריינהרד",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "יוספשוילי ארין",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "עופר קרן",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "אלון יונתן עמנואל",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "מילינבסקי יאנה",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "גרדשטיין שרון",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "שוסטק אלעד",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "אברהם רות",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "פטרושקה נתנאל",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "כוזר יוסף",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "גולני עופר",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "צוקרמן יעל",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "ווילר דינה",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "זהר זאב אל אשר עדין",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "בן מנחם נחמן",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "שטיננבאום אמנואל",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "וינטר מאירה",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "פרנק ליעד",
-		"party": "הפיראטים"
-	},
-	{
-		"name": "שטלצר יחזקאל",
-		"party": "עתיד אחד – נלחמים בסם החדש",
-		"image": "http://blog.tapuz.co.il/declaration48/images/3569783_93.jpg"
-	},
-	{
-		"name": "לבני, ציפי",
-		"party": "התנועה בראשות ציפי לבני",
-		"image": "http://www.knesset.gov.il/mk/images/members/livnee_zipi-s.jpg",
-		"id": "213"
-	},
-	{
-		"name": "מצנע עמרם",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "פרץ עמיר",
-		"party": "התנועה בראשות ציפי לבני",
-		"id": "105"
-	},
-	{
-		"name": "שטרן אלעזר",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "שטרית מאיר",
-		"party": "התנועה בראשות ציפי לבני",
-		"id": "119"
-	},
-	{
-		"name": "צור דוד",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "חסון יואל",
-		"party": "התנועה בראשות ציפי לבני",
-		"id": "772"
-	},
-	{
-		"name": "מולה שלמה",
-		"party": "התנועה בראשות ציפי לבני",
-		"id": "810"
-	},
-	{
-		"name": "כהן מירב",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "זוארץ אורית",
-		"party": "התנועה בראשות ציפי לבני",
-		"id": "822"
-	},
-	{
-		"name": "ולנסי הנרי אהרון",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "ווהבה מגלי",
-		"party": "התנועה בראשות ציפי לבני",
-		"id": "727"
-	},
-	{
-		"name": "טל אלון",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "טיבייב רוברט",
-		"party": "התנועה בראשות ציפי לבני",
-		"id": "819"
-	},
-	{
-		"name": "בן-זקן אבנר",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "אדטו רחל",
-		"party": "התנועה בראשות ציפי לבני",
-		"id": "820"
-	},
-	{
-		"name": "מרגולין-ליבסטר דינה",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "שק דניאל",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "נול בועז",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "בריזון רוני",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "שוחט ליאת",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "מילר עידן",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "גרינפילד יהודה",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "גל מירלה",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "גריפאת קאסם",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "מורן סיגל",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "שגיא משה",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "גולן אראלה",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "אורון ישראלה",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "עמאר נדים",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "זונדר-כסלו רומי",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "חלבי קופטאן",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "רוזגוביץ` אלעד",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "מרגלית רון",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "אמנו דורון",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "עמר פלג",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "לבשטיין אופיר",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "עבאדי רועי",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "ישראל מורן",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "לסרי אופיר",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "הירש גדעון",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "קופצ`יק יקטרינה",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "תורן תאליר שרית",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "ז`נה רפי",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "הולנדר אריאל מנחם",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "שכנאי הדס",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "ורטהיימר סטף",
-		"party": "התנועה בראשות ציפי לבני"
-	},
-	{
-		"name": "הרן גד",
-		"party": "צדק חברתי בראשות גד הרן",
-		"image": "http://mscwbe.walla.co.il/archive/1131597-54.jpg"
-	},
-	{
-		"name": "סושרד עודד יהודה",
-		"party": "צדק חברתי בראשות גד הרן"
-	},
-	{
-		"name": "סתוי אלי שלום",
-		"party": "צדק חברתי בראשות גד הרן"
-	},
-	{
-		"name": "מוואסי אדריס",
-		"party": "צדק חברתי בראשות גד הרן"
-	},
-	{
-		"name": "ואנונו ויקי",
-		"party": "צדק חברתי בראשות גד הרן"
-	},
-	{
-		"name": "רומנו דוד",
-		"party": "צדק חברתי בראשות גד הרן"
-	},
-	{
-		"name": "רובין צבי",
-		"party": "צדק חברתי בראשות גד הרן"
-	},
-	{
-		"name": "כהן סימי",
-		"party": "צדק חברתי בראשות גד הרן"
-	},
-	{
-		"name": "גנוסר ניר גד",
-		"party": "צדק חברתי בראשות גד הרן"
-	},
-	{
-		"name": "יגנה רואי",
-		"party": "צדק חברתי בראשות גד הרן"
-	},
-	{
-		"name": "שורץ יעקב",
-		"party": "צדק חברתי בראשות גד הרן"
-	},
-	{
-		"name": "פרדה אדמסי אדיר",
-		"party": "צדק חברתי בראשות גד הרן"
-	},
-	{
-		"name": "בלומנטל יוסף אילן",
-		"party": "צדק חברתי בראשות גד הרן"
-	},
-	{
-		"name": "קריואוי עאטף",
-		"party": "אלאמל לתג`ייר - התקווה לשינוי",
-		"image": "http://blog.tapuz.co.il/declaration48/images/3569783_87.jpg"
-	},
-	{
-		"name": "בדראן\tסעיד",
-		"party": "אלאמל לתג`ייר - התקווה לשינוי"
-	},
-	{
-		"name": "סלימאן\tמרתא",
-		"party": "אלאמל לתג`ייר - התקווה לשינוי"
-	},
-	{
-		"name": "אבו אלהיג`א מוחמד",
-		"party": "אלאמל לתג`ייר - התקווה לשינוי"
-	},
-	{
-		"name": "אבו רביעה מחמד",
-		"party": "אלאמל לתג`ייר - התקווה לשינוי"
-	},
-	{
-		"name": "עבאס אמנה",
-		"party": "אלאמל לתג`ייר - התקווה לשינוי"
-	},
-	{
-		"name": "ח`ורי ג`מאל",
-		"party": "אלאמל לתג`ייר - התקווה לשינוי"
-	},
-	{
-		"name": "טהה בינאן",
-		"party": "אלאמל לתג`ייר - התקווה לשינוי"
-	},
-	{
-		"name": "סאלח עבד אלרחמאן",
-		"party": "אלאמל לתג`ייר - התקווה לשינוי"
-	},
-	{
-		"name": "אבו זלאם סעיד",
-		"party": "אלאמל לתג`ייר - התקווה לשינוי"
-	},
-	{
-		"name": "אבו ליל יוסף",
-		"party": "אלאמל לתג`ייר - התקווה לשינוי"
-	},
-	{
-		"name": "מופז שאול",
-		"party": "קדימה בראשות שאול מופז",
-		"image": "http://blog.tapuz.co.il/declaration48/images/3569783_78.jpg",
-		"id": "720"
-	},
-	{
-		"name": "חסון ישראל",
-		"party": "קדימה בראשות שאול מופז",
-		"id": "781"
-	},
-	{
-		"name": "פלסנר יוחנן",
-		"party": "קדימה בראשות שאול מופז",
-		"id": "809"
-	},
-	{
-		"name": "תירוש רונית",
-		"party": "קדימה בראשות שאול מופז",
-		"id": "774"
-	},
-	{
-		"name": "חרמש שי שכנאי",
-		"party": "קדימה בראשות שאול מופז",
-		"id": "804"
-	},
-	{
-		"name": "צלנר יובל",
-		"party": "קדימה בראשות שאול מופז",
-		"id": "853"
-	},
-	{
-		"name": "אביטל דורון",
-		"party": "קדימה בראשות שאול מופז",
-		"id": "851"
-	},
-	{
-		"name": "חסון אכרם",
-		"party": "קדימה בראשות שאול מופז",
-		"id": "854"
-	},
-	{
-		"name": "דבאח אחמד",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "לבני אתי אסתר",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "יוגב מטי (מרטין)",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "וייצמן אהוד",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "רייבי נחמיה",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "טנצר אלכסנדר",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "אלפריח מוטי מרדכי",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "אזולאי אירית",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "דרמן דנילו",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "טבאש יאסר",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "טריף סלמאן",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "אחרק רזיאל",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "קסנטיני איתן",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "גלזר אלחנן",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "טל ויקטור",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "ברקאי צביקה",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "מורד בהזד",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "גולן ניר",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "עומרד אבי",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "מסרי חוסאם",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "פלג מירה",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "גבאי יהודה",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "חוא לואי",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "רוטשילד יעקב",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "ביבר ענת",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "מוסט ראובן",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "נחמן עודד",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "רייבי אביתר",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "מנחם אשר",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "אסולין יואב",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "וינברגר עופרית",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "וידרמן אברהם",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "בניטה שמעון (סימו)",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "אמר חנוך",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "טוריס שירלי",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "ברזילי יוסף",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "אטרי דרור",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "סיבק יחזקאל",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "קצנלבוגן עמירם",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "אלגרבלי מקסים",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "קאשי מירי (מרים)",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "בנדר אהוד (אדי)",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "קזז יניב",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "שרגא רפאל",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "בן מנחם אליהו אלי",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "שחר דביר",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "ראמוס רחל",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "יצחק מרדכי מוקי",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "רוזנשטיין אפרים",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "בר אילן טובה",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "שרם ניסים",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "קורקוס ניסים",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "בלאל עאסי",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "שיף דבורה",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "שמיר בלאט ריאל",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "סדון אדם",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "אליאס עדי",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "עמר מאיר",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "צבי אורלי",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "חולי אברהם",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "יגודה יעקב",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "פיש יובל",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "מויאל יניב",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "יראל אלון",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "רוטשטיין עקיבא יוסף",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "טריף אנסי",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "נחמן משה",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "הרץ שרגא",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "מלכה נורית",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "עאסי חאזם",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "לקסמן יעקב",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "עאסי זאהר",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "סיטרוק מרקו",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "ניסימפור משה",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "אמר שלמה (שלומי)",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "אמר קרן אור",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "שמיה נסים",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "אבוטבול מורן",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "לירון יעקב",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "סדון אביתר",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "חסון סעיד",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "נסראלדין יואל",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "אדנייב - עדי צבי",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "חלבי סאמר",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "חסון חכמת",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "אילגייב ריגורי גרשון",
-		"party": "קדימה בראשות שאול מופז"
-	},
-	{
-		"name": "ברכה מוחמד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)',
-		"image": "http://www.knesset.gov.il/mk/images/members/baraka_mohamed-s.jpg",
-		"id": "107"
-	},
-	{
-		"name": "סויד חנא",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)',
-		"id": "789"
-	},
-	{
-		"name": "חנין דב בוריס",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)',
-		"id": "780"
-	},
-	{
-		"name": "אגבאריה עפו",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)',
-		"id": "842"
-	},
-	{
-		"name": "אספניולי נבילה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "עודה איימן",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "אבו מערוף עבדאללה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "רענן יעלה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "סקסק עומר",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "סטולר מור",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "נסאר עומר",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "ג`לג`ולי מייסם",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "כנאנה עמראן",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "היבי עלי",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "אבו אלהיג`א עאדל",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "ג`בארין יוסף",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "זרצקי עדנה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "סנעאללה נסר",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "ניקולה עיסא",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "ברגותי כמאל",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "גולדפרב פדרו",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "בסול רינאוי הישאם",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "חמדי אחמד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "מוסא נעים",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "גולדרינג יואב",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "מורקוס זריק אמל",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "כורי ח`ליל",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "עואד סמיר",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "עודה אחמד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "ואכד ח`יתאם",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "מרזוק סלמאן",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "גהשאן שפיק",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "שריף ג`מאל",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "אמורי אדם ישי",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "אלנקיב מהא",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "דאוד (תורכי) ח`אלד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "אבו דבאי-נערה פידאא",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "בסל ג`בר",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "ראס עאידה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "אבו אלזולוף פואז",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "וולטמן אורי",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "חמוד חמוד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "חג`אג` נורית",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "שביטה אמג`ד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "עאמר שדא",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "חמודה מוניר",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "חמאיסה אמין",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "דרייר שילה יובל",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "סלימאן לילא",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "תאיה ג`מאל",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "קאדרי עלי",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "טנדלר יואל",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "ברתנא הגר",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "דיאב סוהיל",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "גזאוי עבד אלרחים",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "בישארה נסים",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "עיראקי אחמד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "שנאווי אניס",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "יאסין סאמי",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "נסרה חוריה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "בדווי עבדאללה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "שביטה פתחי",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "ח`לף עבד אלפתאח",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "ראבי דרויש",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "מחאמיד זיאד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "גרין אלון לי",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "אבו ליל סעיד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "סלאמה עבד אלרחמן",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "חסאן שרף",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "אחמד האלה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "כסיף עופר",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "ח`טיב אבראהים",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "טאהא סעיד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "ימפולר אריה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "חאג` כמאל",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "חידר יוסף",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "אבו ראס בות`ינה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "ח`שיבון אסעד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "אבו ראס עבד אלסלאם",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "גטאס פאתן",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "נכד נכד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "זין אלדין עיסאם",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "מחאמיד ראידה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "צדוק צדוק",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "סמעאן אסעד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "חאג` אחמד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "חמדי עומר",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "אבו יונס מאג`ד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "קאסם גאזי",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "עאמר עאדל",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "חריכי עלי",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "אבו זיד דח`יל",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "בקר דליה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "שאואר נועה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "מנסור מוחמד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "זיאד נאילה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "דוידי אפרים",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "תומא-סלימאן עאידה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "עיראקי סאמח",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "טיבי זוהיר",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "דהאמשה מנסור",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "גנאס כמאל",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "כנאענה תאופיק",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "אבו ראס ג`מיל",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "ג`ראיסי רודינה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "סעדי עומר",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "כנאנה אסעד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "בורשטיין דוד (עוזי)",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "סגיר פתחיה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "גונן בנימין",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "אלעטאונה יוסף",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "אבו רחמון אדיב",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "ח`ורי סמירה",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "ח`טיב שאוקי",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "מח`ול עסאם",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "טאהא מוחמד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "גוז`נסקי תמר",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "ג`ראיסי ראמז",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "אלקאסם סמיח",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "נפאע מוחמד",
-		"party": 'חד”ש – חזית דמוקרטית לשלום ושוויון (המפלגה הקומוניסטית הישראלית – תראבוט וחוגי ציבור ערבים ויהודים)'
-	},
-	{
-		"name": "צרצור אברהים",
-		"party": "רע”מ - תע”ל - מד”ע",
-		"image": "http://www.knesset.gov.il/mk/images/members/sarsur_ibrahim-s.jpg",
-		"id": "800"
-	},
-	{
-		"name": "טיבי אחמד",
-		"party": "רע”מ - תע”ל - מד”ע",
-		"id": "208"
-	},
-	{
-		"name": "גנאים מסעוד",
-		"party": "רע”מ - תע”ל - מד”ע",
-		"id": "844"
-	},
-	{
-		"name": "אבו עראר טלב",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "סאנע טלב",
-		"party": "רע”מ - תע”ל - מד”ע",
-		"id": "13"
-	},
-	{
-		"name": "כנעאן מוחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "בדראן ;זידאן",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עבדאללה גסאן",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "פדילה יוסף",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "זובידאת פארוק",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עדווי חוסאם",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עלי סעאבנה",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "סלאמה פאיז",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "פדילה עאידה",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "גנאים זכי",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "אבו פנה עא לרחים",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "מנסור דאווד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עיראקי תמים",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "בדיר כמאל",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "סלאימה חסין",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "ואכד רים",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "חיאדרי אמאני",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "דראושה אמאני",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "אבו מדיגם עטא",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עכאשה עלי",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "חטיב הבא",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "יוסף מדיין",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "דראושה באסל",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "מכלוף חוסאם",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "חטיב אסמה",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "פדילה מוהנד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "בדוויה גמיל",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "אכתילאת אברהים",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "אלקרם יוסף",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עתאמנס נאיף",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "נאסר מוסא",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "זעבי דעאא",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "מיעארי מנאר",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "קאסם עלי",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "גרה חסאם",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "שהאב מוסטפא",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "טהה חסן",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עתאמנה ספא",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "כיואן עלי",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "סמארה יזיד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "גנאים מוחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "אבו יאסין בסאם",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "קשקוש מוחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "מחאגנה עלי",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "מוהנא מוחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "גאבר אחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "אגבארייה עלאם",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "מחאמיד מוחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "גבארין מוחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "מחאגנה אחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עיראקי אסלאם",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עיראקי עדנאן",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עאזם אחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "זרקאווי מהדי",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "מנאע אחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עזאיזה אכראם",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "דראושה היתם",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "מסארייה ראיף",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "יעקב זאיד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "דלאשה אחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עתאמוה מוחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "חידר איאד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "אבו חיר אחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "מרעי חסן",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "ושאחי מאג`ד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "שקרא ג`מאל",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "שלבי עמר",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "מסרי עבד אלכרים",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "קשקוש ראשד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "פדילה מוחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "מסרי אמין",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "זמירו פואד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "סולטאן רביע",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עומרי נאיף",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "סעדי גסאן",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "קשקוש עאדל",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "סלאמה גמיל",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "זועבי אמיר",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "קוודר אסמעיל",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "נעים יחיא",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "חג`לה חסן",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "סטל מוחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "אבו ליל פח`רי",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "ותד עבד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "אמארה נביל",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "אבו גאנם עאמר",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "אבו ליל אחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "חסינייה חאלד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עבאס שאדי",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עכרי אשרף",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "בלחה אחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "טורי חמיס",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "טורה חאלד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "אלעמור יוסף",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "מלחם רביע",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "קרם עלי",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "אבו אחמד סלימאן",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עבדאלחלים טאהה",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "אלעמור סמיר",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "חאג` יחיא עבד אחכים",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "קעדאן אעתמאד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "טיבי מואיד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עכרייה מחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עכרי מאהר",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "חאג יחיא מטאוע",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "מוהנא אחמד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "חג יחיא מטאוע",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עוידה זיאד",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "עזאזמה יוסף",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "חודר עלי",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "חגאזי אברהים",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "דיאב סלימאן",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "שאהין יוסף",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "דראושה עבד אלוהאב",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "דהאמשה עאלמאלכ",
-		"party": "רע”מ - תע”ל - מד”ע"
-	},
-	{
-		"name": "דנינו רות",
-		"party": "חיים בכבוד",
-		"image": "http://sphotos-d.ak.fbcdn.net/hphotos-ak-snc6/9213_439426046112011_1532009301_n.jpg"
-	},
-	{
-		"name": "למבז  יניב",
-		"party": "חיים בכבוד"
-	},
-	{
-		"name": "עמית סער שלום",
-		"party": "חיים בכבוד"
-	},
-	{
-		"name": "אלהב אליהו",
-		"party": "חיים בכבוד"
-	},
-	{
-		"name": "קזדו יוסף",
-		"party": "חיים בכבוד"
-	},
-	{
-		"name": "שורץ צבי",
-		"party": "חיים בכבוד"
-	},
-	{
-		"name": "כהן מרדכי",
-		"party": "חיים בכבוד"
-	},
-	{
-		"name": "בן נון חפציבה",
-		"party": "חיים בכבוד"
-	},
-	{
-		"name": "רוזנברג פבל",
-		"party": "חיים בכבוד"
-	},
-	{
-		"name": "לידני חיים",
-		"party": "חיים בכבוד"
-	},
-	{
-		"name": "אטיאס נפתלי",
-		"party": "חיים בכבוד"
-	},
-	{
-		"name": "סולם פרץ",
-		"party": "חיים בכבוד"
-	},
-	{
-		"name": "פרץ אברהם",
-		"party": "חיים בכבוד"
-	},
-	{
-		"name": "ויצמן גאולה",
-		"party": "חיים בכבוד"
-	},
-	{
-		"name": "ריס גאולה",
-		"party": "חיים בכבוד"
-	},
-	{
-		"name": "קריצבסקי יצחק",
-		"party": "חיים בכבוד"
-	},
-	{
-		"name": "ישי, אליהו",
-		"party": "שס התאחדות הספרדית העולמית שומרי תורה",
-		"image": "http://www.knesset.gov.il/mk/images/members/yishai_eli-s.jpg",
-		"id": "63"
-	},
-	{
-		"name": "דרעי אריה מכלוף",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "אטיאס אריאל",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה",
-		"id": "791"
-	},
-	{
-		"name": "כהן יצחק",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה",
-		"id": "65"
-	},
-	{
-		"name": "נהרי משולם",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה",
-		"id": "222"
-	},
-	{
-		"name": "כהן אמנון",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה",
-		"id": "210"
-	},
-	{
-		"name": "מרגי יעקב",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה",
-		"id": "751"
-	},
-	{
-		"name": "אזולאי דוד",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה",
-		"id": "7"
-	},
-	{
-		"name": "ועקנין יצחק",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה",
-		"id": "50"
-	},
-	{
-		"name": "זאב ניסים",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה",
-		"id": "206"
-	},
-	{
-		"name": "מיכאלי אברהם",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה",
-		"id": "784"
-	},
-	{
-		"name": "בן צור יואב",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "אדרי ליאור",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "אילוז עמי",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "דדון אלי",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "לוי גרשון",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "ביטון עמי",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "אלחרר בנימין",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "מלכה אורן",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "נחום נתנאל",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "רואש חיים אליהו",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "כהן אמנון",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "הללויה עזרא",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "סולטן יצחק",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "מישאלי אשר חי גבריאל",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "אסולין צבי",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "כרדי עופר",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "כהן רפאל",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "ביטון אברהם",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "רחמים גבריאל",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "אהרון עוזי",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "אוחנונה דוד",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "בוסו אוריאל",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "בן אברהם אבי",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "העצני אסף",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "גבאי דוד",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "כהן רפאל",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "חררי דב",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "בן זקרי משה",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "בן שלמה יעקב",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "בוסקילה אברהם",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "זיגדון אליהו",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "זעפראני שלמה",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "בהיינה מזור",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "בוחבוט שרלי שלום",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "טפירו מישל",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "אביטן שמעון",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "אדוארד נרקיס",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "אדמוני יעקב",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "אמסלם נתנאל",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "אקוע אבנר",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "אשול רחמים",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "אתירם עמיקם",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "אבידני יצחק",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "טייב דניאל",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "דוד בצלאל",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "גארלה יהודה",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "גדניאן חנוך",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "גדסי אלדד פנחס",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "גואטה עופר",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "דוד מנחם",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "זוהר שמעון",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "טולדנו אשר",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "סדון יוסף",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "כהן נוריאל",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "לוי שמואל",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "לוי אליהו",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "לוי מאיר",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "צברי פיני",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "מלכה יצחק",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "מלכה אוריאל",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "ממן שלמה",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "ממן אליהו",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "עדני בנימין",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "כהן מאור",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "עמר שמעון",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "עמרם ששון",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "עמרן חיים",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "פרטוש משה",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "פרץ שמעון",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "קריספל אמיר",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "בן אברהם חיים",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "בן שלמה שלמה",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "חדד חגי",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	},
-	{
-		"name": "פנחסי רפאל",
-		"party": "ש”ס התאחדות הספרדית העולמית שומרי תורה"
-	}
-]
-;
+};
