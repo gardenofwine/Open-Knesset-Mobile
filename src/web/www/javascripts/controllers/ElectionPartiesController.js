@@ -21,22 +21,13 @@ Ext.regController('Election', {
 		that.partyList.disable();
 
 		getAPIData({
-			apiKey:'elections',
-            bundledData : election,
+			apiKey:'candidateParties',
+            bundledData : election.parties,
 			success: function (data){
-				if (isPhoneGap() || data) {
-					if (typeof data === 'string'){
-						// data received via ajax form the server is of type 'string'
-						eval(data);
-					} else {
-						// bundle data is o ftype 'object'
-						election = data;						
-					}
-					OKnesset.ElectionPartyStore.loadData(election.parties);
-					OKnesset.electionMembersStore.loadData(election.members);
-					that.partyList.enable();
-					that.partyList.refresh();
-				} 
+				OKnesset.ElectionPartyStore.clearFilter();
+				OKnesset.ElectionPartyStore.loadData(data);
+				that.partyList.enable();
+				that.partyList.refresh();
 			},
 			failure: function (result){
 				OKnesset.onError('SERVER', ["error receiving members data.", result]);
