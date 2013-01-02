@@ -12,7 +12,6 @@ Ext.util.JSONP.callback({
 		},
 		{
 			"name": "פרוש מאיר",
-			"id": "103"
 		},
 		{
 			"name": "מקלב אורי",

@@ -3,7 +3,6 @@ Ext.util.JSONP = {
 	queue : [],
 	current : null,
 	request : function(o) {
-		this.queue = null;
 		o = o || {};
 		if (!o.url) {
 			return;
