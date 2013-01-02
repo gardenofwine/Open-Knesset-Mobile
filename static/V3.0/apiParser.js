@@ -525,14 +525,27 @@ window.OKnessetAPIMapping = {
 		}
 	},
 
-	elections : {
+	candidateParties : {
 		url : function(){
-			return 'http://open-knesset-mobile.appspot.com/static/V3.0/electionData.js';
+			return 'http://open-knesset-mobile.appspot.com/static/V3.0/elections/electionData.js';
 		},
-		ajax : true,
 		parameters : {},
+		expectedObject: 'array',
+		callbackKey : "callback",
+		parser: OKnessetParser.parsers.trivialParser,
+	},
+
+	candidateParty : {
+		url : function(id){
+			return 'http://open-knesset-mobile.appspot.com/static/V3.0/elections/candidateParty' + id + '.js';
+		},
+		parameters : {},
+		expectedObject: {},
 		callbackKey : "callback",
 		parser: OKnessetParser.parsers.trivialParser,
 	}
 
 };
+
+
+
