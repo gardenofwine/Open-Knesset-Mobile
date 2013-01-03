@@ -142,7 +142,7 @@
         <exclude name="**/time.js"/>
         <exclude name="**/*.txt"/>
 
-        <exclude name="phonegap-1.0.0*.js"/>
+        <exclude name="cordova*.js"/>
         <exclude name="sencha-touch/sencha-touch.js"/>
         <exclude name="sencha-touch/sencha-touch-debug-w-comments.js"/>
         <exclude name="sencha-touch/sencha-touch-fixes.js"/>
@@ -175,7 +175,7 @@
     </patternset>
 
     <filelist id="essentialConcatFiles" dir="${concat.dir}/javascripts">
-        <file name="phonegap-1.0.0.js"/>
+        <file name="cordova-2.0.0.js"/>
 <!--        <file name="sencha-touch/sencha-touch-debug-w-comments.js"/> -->
         <file name="sencha-touch/sencha-touch.js"/>
         <file name="sencha-touch/sencha-touch-fixes.js"/>
