@@ -150,7 +150,7 @@ Ext.util.JSONP.callback([
 		"name": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
 		"letters": "מחל",
 		"website": "https://www.likud.org.il/",
-		"manifest_url": "המצע של הליכוד עדיין בתהליך כתיבה (http://www.ynet.co.il/articles/0,7340,L-4319455,00.html). המצע של ישראל ביתנו: http://www.beytenu.org.il/category/%D7%9E%D7%A6%D7%A2/"
+		"manifest_url": ""
 	},
 	{
 		"id": 22,
