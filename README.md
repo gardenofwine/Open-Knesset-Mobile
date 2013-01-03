@@ -53,7 +53,7 @@ For those who want a more hugging development environment (although a bit slow),
 I use the Egit plugin for git integration within eclipse:
 
 - Install the latest version of [eclipse](http://www.eclipse.org/downloads/?osType=win32)
-- Install the [Aptana plugin](http://update1.aptana.org/studio/3.2/024747/index.html). (detailed instructions [here](http://www.aptana.com/docs/index.php/Plugging_Aptana_into_an_existing_Eclipse_configuration#Eclipse_3.2.2C_3.3_Instructions))
+- Install the [Aptana plugin](http://www.aptana.com/downloads/start).
 - Install the [Egit plugin](http://www.eclipse.org/egit/). (Video instructions [here](http://www.youtube.com/watch?v=I7fbCE5nWPU))
 - [Import](http://help.eclipse.org/helios/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Ftasks%2Ftasks-importproject.htm) the Open-Knesset-Mobile project directly under the 'Open-Knesset-Mobile' directory. ([video instructions](http://www.youtube.com/watch?v=IkYngHQTx7Y))
 - Build the project (Project ==> Build Project)
