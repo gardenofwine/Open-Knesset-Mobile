@@ -21,6 +21,15 @@ OKnesset.app.views.CandidatePartyView = new Ext.extend(OKnesset.Panel, {
 					cls : 'read-more-btn',
 					text: OKnesset.strings.GotoPartyPanel
 				});
+				// only for likud beiteno
+				this.partyButton2 = new Ext.Button({                                                       
+					id  : 'partyButton2',
+					margin: "10 10 10 10",
+					hidden : true,
+					flex : 1,
+					cls : 'read-more-btn',
+					text: OKnesset.strings.GotoPartyPanel
+				});
 				this.websiteButton = new Ext.Button({                                                       
 					id  : 'websiteButton',
 					margin: "10 10 10 10",
@@ -35,7 +44,7 @@ OKnesset.app.views.CandidatePartyView = new Ext.extend(OKnesset.Panel, {
 					cls : 'read-more-btn',
 					text: OKnesset.strings.GotoPartyManifest
 				});
-				this.items = [this.info, this.partyButton, this.websiteButton, this.manifestButton, this.memberList];
+				this.items = [this.info, this.partyButton, this.partyButton2, this.websiteButton, this.manifestButton, this.memberList];
 				OKnesset.app.views.CandidatePartyView.superclass.initComponent.apply(this, arguments);
 			}
 		});

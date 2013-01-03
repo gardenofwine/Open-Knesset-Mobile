@@ -105,6 +105,8 @@ OKnesset.strings = {
 	HomepageCommitteesBtnTxt : "ועדות הכנסת, החברים בהן ופרוטוקולי ישיבות",
 	HomepageMembersBtnTxt    : "רשימת כל חברי הכנסת לפי הא\x22ב",
 	ElcetionTitle			 : "הבחירות לכנסת ה 19",
+	ElectionLikudPanel		 : "למסך מפלגת הליכוד",
+	ElectionLibermanPanel	 : "למסך מפלגת ישראל בינתו",
 	generalError             : "חלה תקלה אנא בדוק את החיבור לאינטרנט ונסה שוב",
 	GotoPartyWebsite		 : "לאתר המפלגה",
 	GotoPartyManifest		 : "למצע המפלגה",

@@ -22,6 +22,12 @@ OKnesset.app.controllers.CandidateParty = Ext.regController('CandidateParty', {
 					OKnesset.MemberStore.sort([OKnesset.MemberStoreSorters.partyOrdinal]);
 					OKnesset.app.controllers.navigation.dispatchPanel('Party/Index/' + that.party_id, options.historyUrl);
 			});
+			this.partyPanelButton2 = this.partyView.query('#partyButton2')[0];
+			this.partyPanelButton2.addListener('tap',
+				function(that, index, item, e) {
+					OKnesset.MemberStore.sort([OKnesset.MemberStoreSorters.partyOrdinal]);
+					OKnesset.app.controllers.navigation.dispatchPanel('Party/Index/' + that.party_id, options.historyUrl);
+			});
 
 			this.partyView.query('#websiteButton')[0].addListener('tap',
 				function(that, index, item, e) {
@@ -88,11 +94,33 @@ OKnesset.app.controllers.CandidateParty = Ext.regController('CandidateParty', {
 		this.partyView.query('#MiniInfo')[0].update({ letters: party.letters,
 													  size: lettersSize.toString() + 'px'
 													 });
+
 		if (party.party_id){
+			var partyId1 = null
+			var partyId2 = null;
+			if (party.party_id.push){
+				// party.party_id is an array. special case for likud party
+				partyId1 = party.party_id[0];
+				partyId2 = party.party_id[1];
+			} else {
+				partyId1 = party.party_id;
+			}
+
 			this.partyPanelButton.show(); 
-			this.partyPanelButton.party_id = party.party_id;
+			this.partyPanelButton.party_id = partyId1;
+			this.partyPanelButton.setText(OKnesset.strings.GotoPartyPanel);
+
+			if (partyId2 !== null){
+				this.partyPanelButton2.show(); 
+				this.partyPanelButton2.party_id = partyId2;
+				this.partyPanelButton.setText(OKnesset.strings.ElectionLikudPanel);
+				this.partyPanelButton2.setText(OKnesset.strings.ElectionLibermanPanel);
+			} else {
+				this.partyPanelButton2.hide(); 
+			}
 		} else {
 			this.partyPanelButton.hide(); 
+			this.partyPanelButton2.hide(); 
 		}
 
 		this.partyView.query('#websiteButton')[0].url = party.website;

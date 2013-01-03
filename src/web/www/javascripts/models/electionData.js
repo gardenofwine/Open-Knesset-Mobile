@@ -147,7 +147,7 @@ var election = {
 		},
 		{
 			"id": 21,
-			"party_id": 2,
+			"party_id": [2,5],
 			"name": "הליכוד ישראל ביתנו בהנהגת בנימין נתניהו לראשות הממשלה",
 			"letters": "מחל",
 			"website": "https://www.likud.org.il/",
