@@ -96,7 +96,6 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 					url: 'mailto:' + recipient + '?body=' + encodeURI(OKnesset.strings.emailBody),
 				}, function() {
 					// success callback
-					OKnesset.app.controllers.navigation.dispatchBack();
 				}, function() {
 					alert(OKnesset.strings.errorAndroidEmail);
 				});

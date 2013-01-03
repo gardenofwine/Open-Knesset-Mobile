@@ -115,7 +115,7 @@ function secondaryLaunch() {
 	if (isAndroid()) {
 		// For Android, override the back button functionality
 		document.addEventListener("backbutton", OKnesset.app.onBackKey, false);
-	}
+	} 
 
 	if (OKnesset.debug){
 		time.stop('Secondary Launch');

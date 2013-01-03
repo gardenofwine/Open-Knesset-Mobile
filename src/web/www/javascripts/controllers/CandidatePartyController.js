@@ -25,13 +25,12 @@ OKnesset.app.controllers.CandidateParty = Ext.regController('CandidateParty', {
 
 			this.partyView.query('#websiteButton')[0].addListener('tap',
 				function(that, index, item, e) {
-					window.open(that.url, "_blank");
+					loadUrl(that.url);
 			});
 			this.manifestButton = this.partyView.query('#manifestButton')[0];
 			this.manifestButton.addListener('tap',
 				function(that, index, item, e) {
-					window.open(that.url, "_blank");
-					
+					loadUrl(that.url);
 			});
 		}
 

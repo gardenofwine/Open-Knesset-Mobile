@@ -65,7 +65,6 @@ Ext.regController('Info', {
 					url: 'mailto:' + OKnesset.strings.feedbackEmailAddress + '?subject=' + encodeURI(subject),
                 }, function() {
                     // success callback
-                    OKnesset.app.controllers.navigation.dispatchBack();
                 }, function() {
                     alert(OKnesset.strings.errorAndroidEmail);
                 });

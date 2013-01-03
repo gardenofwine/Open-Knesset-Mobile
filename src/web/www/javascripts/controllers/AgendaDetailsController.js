@@ -95,9 +95,9 @@ Ext.regController('AgendaDetails', {
 		exp = /(([\s\w])((www).[\-A-Z0-9+&@#\/%?=~_|!:,.;]*[\-A-Z0-9+&@#\/%=~_|]))/ig;
 		text = text.replace(exp,"http://$3");
 		exp = /(([\s\w])(http):\/\/[\-A-Z0-9+&@#\/%?=~_|!:,.;]*[\-A-Z0-9+&@#\/%=~_|])/ig;
-		text = text.replace(exp,"<a href='$1'>$1</a>");
+		text = text.replace(exp,"<a href='javascript:loadUrl(\x22$1\x22)'>$1</a>");
 		exp = /(([\s\w])(https):\/\/[\-A-Z0-9+&@#\/%?=~_|!:,.;]*[\-A-Z0-9+&@#\/%=~_|])/ig;
-		text = text.replace(exp,"<a href='$1'>$1</a>");
+		text = text.replace(exp,"<a href='javascript:loadUrl(\x22$1\x22)'>$1</a>");
 		return text;
 	}
 

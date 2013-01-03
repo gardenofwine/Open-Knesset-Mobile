@@ -71,6 +71,23 @@ function GATrackEvent(category, action, label) {
  * End of google analytics
  */
 
+/**
+ * navigation to external websites
+ */
+
+if (isAndroid()) {
+	window.loadUrl = function(url){
+		navigator.app.loadUrl(url, {openExternal: true});
+	}
+} else {
+	window.loadUrl = function(url){
+		window.open(url, "_blank");
+	}
+} 
+
+/**
+ * end of navigation to external websites
+ */
 
 /**
  * Bills
