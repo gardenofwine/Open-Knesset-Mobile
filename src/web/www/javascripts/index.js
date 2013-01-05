@@ -54,10 +54,6 @@ Ext.regApplication({
 			OKnesset.app.controllers.navigation.dispatchBack();
 		});
 
-		if (isPhoneGap()) {
-			// hide the native splash screen
-			navigator.splashscreen.hide();
-		}
 
 		if (OKnesset.debug) {
 			time.stop('Main Launch');
@@ -75,6 +71,11 @@ Ext.regApplication({
 function secondaryLaunch() {
 	if (OKnesset.debug){
 		time.start('Secondary Launch');
+	}
+
+	if (isPhoneGap()) {
+		// hide the native splash screen
+		navigator.splashscreen.hide();
 	}
 
 	localStorage.setItem('version', OKnesset.appVersion);
@@ -161,7 +162,16 @@ OKnesset.app.onBackKey = function () {
 
 };
 
-document.addEventListener("deviceready", OKnesset.mainLaunch, false);
+document.addEventListener("deviceready", function(){
+	if (OKnesset.mainLaunch) {
+		OKnesset.mainLaunch();
+	} else {
+		// this means PhoneGap is ready, but Sencha Touch hasn't completed loading yet. 
+		// If this is the case we need no do anything, the 'launch' function 
+		// will call 'mainLaunch' and mainLaunch will not need to abort, because PhoneGap 
+		// is already loaded.
+	}
+}, false);
 
 function appUpdate(){
 	var previosVersion = localStorage.getItem('version');

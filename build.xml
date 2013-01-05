@@ -57,12 +57,12 @@
             <fileset refid="concatFilesViews"/>
             <fileset refid="concatFilesControllers"/>
         </concat>
-
 		<echo message="Minifying ${channel.dir}"/>
         <!-- minify concatenated file -->
         <java jar="${GoogleClosureDir}/compiler.jar" fork="true">
             <arg line="--js ${concat.dir}/concat.js --compilation_level WHITESPACE_ONLY --jscomp_off=internetExplorerChecks --js_output_file target_prod/${channel.dir}/www/javascripts/concat.min.js"/>
         </java>
+
 
         <!-- delete temp directory 
         <delete dir="${concat.dir}"/> -->
@@ -137,12 +137,13 @@
     </target>
 
     <patternset id="appFilesExclustion">
+        <exclude name="**/cordova-2.2.0.js"/>
         <exclude name="**/apiParser.js"/>
         <exclude name="**/debug.js"/>
         <exclude name="**/time.js"/>
         <exclude name="**/*.txt"/>
+        <exclude name="apiParserTest.js"/>
 
-        <exclude name="cordova*.js"/>
         <exclude name="sencha-touch/sencha-touch.js"/>
         <exclude name="sencha-touch/sencha-touch-debug-w-comments.js"/>
         <exclude name="sencha-touch/sencha-touch-fixes.js"/>
@@ -175,7 +176,7 @@
     </patternset>
 
     <filelist id="essentialConcatFiles" dir="${concat.dir}/javascripts">
-        <file name="cordova-2.0.0.js"/>
+        <file name="cordova-2.2.0.js"/>
 <!--        <file name="sencha-touch/sencha-touch-debug-w-comments.js"/> -->
         <file name="sencha-touch/sencha-touch.js"/>
         <file name="sencha-touch/sencha-touch-fixes.js"/>
@@ -186,6 +187,7 @@
         <file name="routes.js"/>
         <file name="models/slimData.js"/>
         <file name="models/partyInfoData.js"/>
+        <file name="models/electionData.js"/>
         <file name="views/disclaimer.js"/>
         <file name="views/credits.js"/>
         <file name="models/strings.js"/>
