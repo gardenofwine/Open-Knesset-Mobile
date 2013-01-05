@@ -37,7 +37,6 @@ Ext.regController('memberVotes', {
 					OKnesset.MemberVotesStore.add(data);
 					memberVotesController._refresh(hideWhileLoading);
 					memberVotesController.memberVotesList.refresh();
-					//memberVotesController.refresh();
 				},
 				failure: function (result){
 					OKnesset.onError('SERVER', ["error receiving member favor votes data.", result]);
@@ -55,7 +54,6 @@ Ext.regController('memberVotes', {
 					OKnesset.MemberVotesStore.add(data);
 					memberVotesController._refresh(hideWhileLoading);
 					memberVotesController.memberVotesList.refresh();
-					// memberVotesController.refresh();
 				},
 				failure: function (result){
 					OKnesset.onError('SERVER', ["error receiving member against votes data.", result]);
@@ -66,7 +64,13 @@ Ext.regController('memberVotes', {
 		var member = getMembersById(options.id)[0];
 		
 		//Change toolbar title
-		this.application.viewport.query('#toolbar')[0].setTitle(member.name);
+		var votesTitle;
+		if (member){
+			votesTitle = member.name;
+		} else {
+			votesTitle = OKnesset.strings.votes;
+		}
+		this.application.viewport.query('#toolbar')[0].setTitle(votesTitle);
 
 		if (options.pushed) {
 			if (this.memberVotesList.scroller) {
@@ -79,7 +83,9 @@ Ext.regController('memberVotes', {
 
 		// don't track if the panal was reached by pressing 'back'
 		if (options.pushed){
-			GATrackPage('memberVotesView', member.name);
+			if (member){
+				GATrackPage('memberVotesView', member.name);
+			}
 		}
 
 		this.application.viewport.setActiveItem(this.memberVotesView, options.animation);

@@ -17,7 +17,9 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 
 		// don't track if the panal was reached by pressing 'back'
 		if (options.pushed){
-			GATrackPage('MemberView', member.name);
+			if (member) {
+				GATrackPage('MemberView', member.name);
+			}
 		}
 
 		// load the extra member data
@@ -68,12 +70,12 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 		OKnesset.app.controllers.navigation.dispatchPanel('memberVotes/Index/' + this.id, this.historyUrl);
 	},
 
-	getEmailButtonText: function(){
-		return Ext.util.Format.format(OKnesset.strings.writeTo, this.currentMember.name);
+	getEmailButtonText: function(member){
+		return Ext.util.Format.format(OKnesset.strings.writeTo, member.name);
 	},
 
-	getPhoneCallButtonText: function(){
-		return Ext.util.Format.format(OKnesset.strings.phoneTo, this.currentMember.name);
+	getPhoneCallButtonText: function(member){
+		return Ext.util.Format.format(OKnesset.strings.phoneTo, member.name);
 	},
 
 	sendEmail : function() {
@@ -128,9 +130,9 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 		this.memberView.query('#MemberImage')[0].update(member);
 		this.memberView.query('#MemberInfo')[0].update(member);
 		this.application.viewport.query('#toolbar')[0].setTitle(member.name);
-		this.memberView.query('#memberEmailBtn')[0].setText(this.getEmailButtonText());
+		this.memberView.query('#memberEmailBtn')[0].setText(this.getEmailButtonText(member));
 		this.memberView.query('#memberEmailBtn')[0].setHandler(this.sendEmail,member);
-		this.memberView.query('#memberCallBtn')[0].setText(this.getPhoneCallButtonText());
+		this.memberView.query('#memberCallBtn')[0].setText(this.getPhoneCallButtonText(member));
 		this.memberView.query('#memberCallBtn')[0].setHandler(this.phoneMember,member);
 
 
@@ -156,14 +158,14 @@ OKnesset.app.controllers.Member = Ext.regController('Member', {
 		return sub1.substr(0,sub1.indexOf('/'));
 	},
 
-	refresh: function(){
-		// get current member data from Party store, which is updated
-		var party = getPartyFromPartyStoreByName(this.currentMember.party);
-		Ext.iterate(party.data.members, function(value, index){
-			if (value.data.id === this.currentMember.id) {
-				this.updateData(value.data);
-				return false;
-			}
-		}, this);
-	}
+	// refresh: function(){
+	// 	// get current member data from Party store, which is updated
+	// 	var party = getPartyFromPartyStoreByName(this.currentMember.party);
+	// 	Ext.iterate(party.data.members, function(value, index){
+	// 		if (value.data.id === this.currentMember.id) {
+	// 			this.updateData(value.data);
+	// 			return false;
+	// 		}
+	// 	}, this);
+	// }
 });
