@@ -10,6 +10,7 @@
 		1325004A168F3E700091DEDF /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13250049168F3E700091DEDF /* libGoogleAnalytics.a */; };
 		1328FB16168F31E80012E741 /* EmailComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1328FB14168F31E80012E741 /* EmailComposer.m */; };
 		1328FB21168F31FD0012E741 /* GoogleAnalyticsPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 1328FB1A168F31FD0012E741 /* GoogleAnalyticsPlugin.m */; };
+		1348427D1698FDA60062E079 /* icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1348427C1698FDA60062E079 /* icon-72@2x.png */; };
 		13E7C05C168F27F300A3F032 /* Default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 13E7C054168F27F300A3F032 /* Default.jpg */; };
 		13E7C05D168F27F300A3F032 /* Default@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 13E7C055168F27F300A3F032 /* Default@2x.jpg */; };
 		13E7C05E168F27F300A3F032 /* oknesset-splash.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 13E7C056168F27F300A3F032 /* oknesset-splash.mp4 */; };
@@ -75,6 +76,7 @@
 		1328FB14168F31E80012E741 /* EmailComposer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailComposer.m; sourceTree = "<group>"; };
 		1328FB19168F31FD0012E741 /* GoogleAnalyticsPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAnalyticsPlugin.h; sourceTree = "<group>"; };
 		1328FB1A168F31FD0012E741 /* GoogleAnalyticsPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleAnalyticsPlugin.m; sourceTree = "<group>"; };
+		1348427C1698FDA60062E079 /* icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72@2x.png"; sourceTree = "<group>"; };
 		13E7C054168F27F300A3F032 /* Default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Default.jpg; sourceTree = "<group>"; };
 		13E7C055168F27F300A3F032 /* Default@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Default@2x.jpg"; sourceTree = "<group>"; };
 		13E7C056168F27F300A3F032 /* oknesset-splash.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "oknesset-splash.mp4"; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				308D052E1370CCF300D202BF /* icon-72.png */,
+				1348427C1698FDA60062E079 /* icon-72@2x.png */,
 				308D052F1370CCF300D202BF /* icon.png */,
 				308D05301370CCF300D202BF /* icon@2x.png */,
 			);
@@ -432,6 +435,7 @@
 				13E7C061168F27F300A3F032 /* Animation-End@2x.png in Resources */,
 				13E7C062168F27F300A3F032 /* Default.png in Resources */,
 				13E7C063168F27F300A3F032 /* Default@2x.png in Resources */,
+				1348427D1698FDA60062E079 /* icon-72@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +517,64 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1348427A1698F7800062E079 /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Benjamin Weingarten";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(TARGET_BUILD_DIR)/usr/local/lib/include\"",
+					"\"$(OBJROOT)/UninstalledProducts/include\"",
+					"\"$(BUILT_PRODUCTS_DIR)\"",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					CoreFoundation,
+					"-weak_framework",
+					UIKit,
+					"-weak_framework",
+					AVFoundation,
+					"-weak_framework",
+					CoreMedia,
+					"-weak-lSystem",
+					"-all_load",
+					"-Obj-C",
+				);
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DF0F1D98-8404-4D43-AF6E-59C278F4362F";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = AppStore;
+		};
+		1348427B1698F7800062E079 /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "OKnesset/OKnesset-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "OKnesset/OKnesset-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/OKnesset/Plugins/GoogleAnalytics/GoogSDK v1.5\"",
+				);
+				PRODUCT_NAME = "כנסת פתוחה";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = AppStore;
+		};
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -533,7 +595,7 @@
 					"\"$(SRCROOT)/OKnesset/Plugins/GoogleAnalytics/GoogSDK v1.5\"",
 				);
 				PRODUCT_NAME = "כנסת פתוחה";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -555,7 +617,7 @@
 					"\"$(SRCROOT)/OKnesset/Plugins/GoogleAnalytics/GoogSDK v1.5\"",
 				);
 				PRODUCT_NAME = "כנסת פתוחה";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -637,6 +699,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				1348427B1698F7800062E079 /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -646,6 +709,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				1348427A1698F7800062E079 /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
