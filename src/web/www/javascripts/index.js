@@ -94,7 +94,7 @@ function secondaryLaunch() {
 		Ext.Ajax.request({
 			url: 'http://open-knesset-mobile.appspot.com/static/V3.0/apiParser.js',
 			failure : function(results){
-				OKnesset.onError('SERVER', ["Error loding apiParser.js from server.", result]);
+				OKnesset.onError('SERVER', ["Error loding apiParser.js from server.", results]);
 			},
 			success: function(results){
 				eval(results.responseText);

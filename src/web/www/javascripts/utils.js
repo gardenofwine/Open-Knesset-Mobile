@@ -344,10 +344,17 @@ function getAPIData(options) {
 	            data : value
 	        }));
 
-	        var cachedKeyList = JSON.parse(localStorage.getItem("cacheKeysList")) || [];
+	        var cacheKeyListString = localStorage.getItem("cacheKeysList");
+	        var cachedKeyList;
+	        if (cacheKeyListString == null) {
+	        	cachedKeyList = []
+	        } else {
+	        	cachedKeyList = JSON.parse(cacheKeyListString);
+	        }
 	        cachedKeyList.push(key);
 	        localStorage.setItem("cacheKeysList",JSON.stringify(cachedKeyList))
 	    } catch (ignored){
+	    	// happens when the cache is full
 	        var cachedKeyListC = JSON.parse(localStorage.getItem("cacheKeysList"));
 	        if (!cachedKeyListC) return; // weird situation, should never happen
 
