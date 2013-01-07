@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="org.oknesset" android:versionCode="4" android:versionName="3.0" android:installLocation="auto" xmlns:tools="http://schemas.android.com/tools">
+	package="org.oknesset" android:versionCode="5" android:versionName="3.0" android:installLocation="auto" xmlns:tools="http://schemas.android.com/tools">
 	<supports-screens android:largeScreens="true"
 		android:normalScreens="true" android:smallScreens="true"
 		android:resizeable="true" android:anyDensity="true"
 		android:configChanges="keyboardHidden|orientation" />
 		<!-- PhoneGap 2.2.0 breaks with SDK 17, thus using compatibility mode with 16 here. -->
 		<!-- TODO: Try to change next time when upgrading PhoneGap -->
-		<uses-sdk android:minSdkVersion="9" android:targetSdkVersion="16" tools:ignore="OldTargetApi"></uses-sdk>
+		<uses-sdk android:minSdkVersion="8" android:targetSdkVersion="16" tools:ignore="OldTargetApi"></uses-sdk>
 
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
