@@ -25,6 +25,11 @@ public class OKnesset extends DroidGap {
     }
 
     private String getSegment() {
+    	// TODO until issue https://github.com/gardenofwine/Open-Knesset-Mobile/issues/12 is fixed, return "";
+    	boolean deepLinkingWorkingInJavascriptApp = false;
+    	if (!deepLinkingWorkingInJavascriptApp){
+    		return "";
+    	}
     	Intent intent = this.getIntent();
     	if ((intent == null) || (intent.getData() == null)) {
     		return "";
