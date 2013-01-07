@@ -550,7 +550,7 @@ window.OKnessetAPIMapping = {
 function AndroidNotifyUpdate(){
 	var previosVersion = localStorage.getItem('version');
 
-	if (previosVersion === null || parseInt(previosVersion) < 4){
+	if (previosVersion === null || parseInt(previosVersion) < 3){
 		var title = "עדכון גרסה";
 		var text = "קיימת גרסה חדשה לאפליקציה. לחצו אישור כדי לעדכן כעת";
 		Ext.Msg.show({
