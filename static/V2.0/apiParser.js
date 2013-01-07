@@ -328,4 +328,11 @@ function AndroidNotifyUpdate(){
 		});
 	}
 }
-AndroidNotifyUpdate();
+
+function notifyUpdate(){
+	if (isAndroid()){
+		AndroidNotifyUpdate();
+	}	
+}
+
+notifyUpdate();
