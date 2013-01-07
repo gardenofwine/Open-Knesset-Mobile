@@ -59,7 +59,7 @@ Ext.regController('Info', {
                 };
                 window.plugins.emailComposer.showEmailComposerWithCB(emailCallback,
                         subject, "", OKnesset.strings.feedbackEmailAddress);
-            } else if (isAndroid) {
+            } else if (isAndroid()) {
                 window.plugins.webintent.startActivity({
                     action : WebIntent.ACTION_SENDTO,
 					url: 'mailto:' + OKnesset.strings.feedbackEmailAddress + '?subject=' + encodeURI(subject),
