@@ -187,7 +187,7 @@ var election = {
 			"name": "עתיד אחד – נלחמים בסם החדש",
 			"letters": "זה",
 			"website": "http://www.atid1.org.il/",
-			"manifest_url": ""
+			"manifest_url": "http://www.atid1.org.il/about"
 		},
 		{
 			"id": 34,
