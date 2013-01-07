@@ -550,14 +550,13 @@ window.OKnessetAPIMapping = {
 function AndroidNotifyUpdate(){
 	var previosVersion = localStorage.getItem('version');
 
-	console.log("++++++ version== " + previosVersion);
 	if (previosVersion === null || parseInt(previosVersion) < 4){
 		var title = "עדכון גרסה";
 		var text = "קיימת גרסה חדשה לאפליקציה. לחצו אישור כדי לעדכן כעת";
 		Ext.Msg.show({
 			buttons: [
 				{
-					text : "עדכון",
+					text : "אישור",
 					itemId:'ok'
 				},
 				{
@@ -566,7 +565,6 @@ function AndroidNotifyUpdate(){
 				}
 			],
 			fn : function(itemId){
-				console.log("+++++++++++ update");
 				if (itemId === 'ok'){
 					loadUrl('market://details?id=org.oknesset');
 				}
