@@ -547,5 +547,34 @@ window.OKnessetAPIMapping = {
 
 };
 
+function AndroidNotifyUpdate(){
+	var previosVersion = localStorage.getItem('version');
+
+	if (previosVersion === null || parseInt(previosVersion) < 4){
+		var title = "עדכון גרסה";
+		var text = "קיימת גרסה חדשה לאפליקציה. לחצו אישור כדי לעדכן כעת";
+		Ext.Msg.show({
+			buttons: [
+				{
+					text : "עדכון",
+					itemId:'ok'
+				},
+				{
+					text : "ביטול",
+					itemId:'cancel'
+				}
+			],
+			fn : function(itemId){
+				if (itemId === 'ok'){
+					loadUrl('market://details?id=org.oknesset');
+				}
+			},
+			msg: text,
+			title: title,
+			icon  : Ext.MessageBox.QUESTION,
+		});
+	}
+}
+
 
 
