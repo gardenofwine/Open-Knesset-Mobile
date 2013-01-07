@@ -319,7 +319,7 @@ function AndroidNotifyUpdate(){
 			],
 			fn : function(itemId){
 				if (itemId === 'ok'){
-					loadUrl('market://details?id=org.oknesset');
+					window.open('market://details?id=org.oknesset', "_blank");
 				}
 			},
 			msg: text,
