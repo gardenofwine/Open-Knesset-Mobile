@@ -527,7 +527,7 @@ window.OKnessetAPIMapping = {
 
 	candidateParties : {
 		url : function(){
-			return 'http://open-knesset-mobile.appspot.com/static/V3.0/elections/electionData.js';
+			return 'https://raw.github.com/gardenofwine/Open-Knesset-Mobile/elections/static/V3.0/elections/electionData.js';
 		},
 		parameters : {},
 		expectedObject: 'array',
@@ -537,7 +537,7 @@ window.OKnessetAPIMapping = {
 
 	candidateParty : {
 		url : function(id){
-			return 'http://open-knesset-mobile.appspot.com/static/V3.0/elections/candidateParty' + id + '.js';
+			return 'https://raw.github.com/gardenofwine/Open-Knesset-Mobile/elections/static/V3.0/elections/candidateParty' + id + '.js';
 		},
 		parameters : {},
 		expectedObject: {},
