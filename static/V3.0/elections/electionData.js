@@ -182,13 +182,6 @@ Ext.util.JSONP.callback([
 		"manifest_url": "http://www.piratim.org/wiki/doku.php?id=%D7%9E%D7%A6%D7%A2"
 	},
 	{
-		"id": 26,
-		"name": "עתיד אחד – נלחמים בסם החדש",
-		"letters": "זה",
-		"website": "http://www.atid1.org.il/",
-		"manifest_url": "http://www.atid1.org.il/about"
-	},
-	{
 		"id": 34,
 		"name": "התנועה בראשות ציפי לבני",
 		"letters": "צפ",
