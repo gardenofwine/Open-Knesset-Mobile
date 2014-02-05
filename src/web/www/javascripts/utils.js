@@ -44,7 +44,8 @@ GApageMapping = {
 	InfoView                    : "/app/info/",
 	DisclaimerView              : "/app/disclaimer/",
 	CreditsView                 : "/app/disclaimer/credits",
-	ElectionView				: "/app/elections/"
+	ElectionView				: "/app/elections/",
+	MarketReviewView			: "/app/marketview/"
 };
 
 function GATrackPage(page, extra) {

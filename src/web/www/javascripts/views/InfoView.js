@@ -40,6 +40,13 @@ OKnesset.app.views.InfoView = new Ext.extend(Ext.Panel, {
 		        text: OKnesset.strings.emailButtonLabel,
 			},
 			{
+		        xtype: 'button',
+		        id: 'marketReview',
+				width : "90%",
+				margin : "0 10 10 10",
+		        text: OKnesset.strings.marketReviewButtonLabel,
+			},
+			{
 				xtype : 'button',
 				id : 'cancelInfoBtn',
 				ui : 'confirm',

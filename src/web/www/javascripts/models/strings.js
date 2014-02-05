@@ -21,6 +21,7 @@ OKnesset.strings = {
 	ministerIndicator        : "שר",
 	knessetChairman          : "יושב ראש הכנסת",
 	emailButtonLabel         : "שלחו לנו משוב",
+	marketReviewButtonLabel	 : "דרגו אותנו",
 	emailBody                : "\n\n\nנשלח מאפליקציית כנסת פתוחה",
 	feedbackEmailAddress     : 'oknesset.mobile@gmail.com',
 	errorAndroidEmail        : 'כשלון בשליחת מייל',
@@ -112,6 +113,9 @@ OKnesset.strings = {
 	GotoPartyManifest		 : "למצע המפלגה",
 	GotoPartyPanel			 : "למסך המפלגה בכנסת פתוחה",
 	ManifestNA				 : "מצע אינו זמין ברשת",
+	letsGoButtonLabel		 : "דרג עכשיו!",
+	notNowButtonLabel		 : "פעם אחרת",
+	dontShowAgainButtonLabel : "אל תציג שוב",
 	infoDialog: {
 		Default: {
 			title:"אופס...",
@@ -201,6 +205,10 @@ OKnesset.strings = {
 		CandidatePartyView: {
 			title: "רשימה מועמדת לכנסת",
 			text: "המסך מציג את האות המייצגת, ורשימת המועמדים, מסודרים לפי מיקומם וכפי שאושרו על ידי ועדת הבחירות המרכזית. עבור רשימות שיש להן אתר בית ומצע יש קישור.<br/>ייתכן וחלק מהקישורים אינם נכונים - נשמח אם תעירו לנו על ידי שליחת משוב בכפתור למטה."
-		},	
+		},
+		MarketReviewView: {
+			title: "דרגו אותנו",
+			text: "נשמח אם תקדישו לנו מספר רגעים ותדרגו אותנו בחנות האפליקציות."
+		},
 	}
 };

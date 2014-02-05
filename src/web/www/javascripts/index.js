@@ -111,6 +111,17 @@ function secondaryLaunch() {
 		OKnesset.app.controllers.navigation.dispatchDialog('Disclaimer/Index');
 	}
 
+	var marketReviewCounter = parseInt(localStorage.getItem("marketReviewCounter"));
+
+	if (marketReviewCounter != -1) // -1 stand for don't show it again
+	{
+		if (marketReviewCounter == 1) // show on second use 
+			OKnesset.app.controllers.navigation.dispatchDialog('MarketReview/Index');
+	
+		marketReviewCounter = (marketReviewCounter + 1) % 5;
+		localStorage.setItem("marketReviewCounter", marketReviewCounter);
+	}
+	
 	googleAnalytics();
 
 	if (isAndroid()) {
@@ -181,6 +192,7 @@ function appUpdate(){
 		localStorage.removeItem('PartyData');
 		localStorage.removeItem('PartyDataDate');
 		localStorage.setItem("disclaimerDismissed", false);
+		localStorage.setItem("marketReviewCounter", 0);
 	} else {
 		// new installation
 	}

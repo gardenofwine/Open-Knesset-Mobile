@@ -17,6 +17,10 @@ Ext.regController('Info', {
                 this.sendEmail(this.emailSubject);
             }, this);
 
+            this.view.dockedItems.getAt(1).items.getByKey('marketReview').setHandler(function(){
+                this.openMarket();
+            }, this);
+            
             this.view.dockedItems.getAt(1).items.getByKey('displayDisclaimerBtn').setHandler(function(){
             	OKnesset.app.controllers.navigation.dispatchBack();
             	OKnesset.app.controllers.navigation.dispatchDialog('Disclaimer/Index');
@@ -71,5 +75,24 @@ Ext.regController('Info', {
             }
         }
         // TODO - for web, implement a "send email" link
-    }    
+    },
+    
+    openMarket : function() {
+        OKnesset.log("Open market for review");
+        if (isPhoneGap()) {
+            // TODO: add GATrackEvent
+            if (isiOS()) {
+                // TODO: open app store
+            } else if (isAndroid()) {
+                window.plugins.webintent.startActivity({
+                    action : WebIntent.ACTION_VIEW,
+					url: 'market://details?id=org.oknesset',
+                }, function() {
+                    // success callback
+                }, function() {
+                    OKnesset.log("Failed to open market for review");
+                });
+            }
+        }
+    }  
 });
